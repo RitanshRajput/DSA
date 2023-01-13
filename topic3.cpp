@@ -239,3 +239,557 @@
 //         cout<<endl ;
 //       }
 //    }
+
+//9️⃣ Pattern question :
+//  1 2 3 4
+//  1 2 3 4 
+//  1 2 3 4
+//  1 2 3 4
+
+//  #include <iostream>
+//  using namespace std ;
+
+//  int main() {
+
+//     int n = 1;
+
+//     while(n <= 4){
+//        int i = 1;
+
+//         while(i <= 4){
+//         cout<< " "<< i << " " ;
+//         i = i + 1;
+//         }
+//      cout<< endl ;
+//      n = n + 1;
+//     }
+//  }
+
+//🔟 Pattern questions:
+//  3 2 1
+//  3 2 1 
+//  3 2 1
+
+//   #include <iostream>
+//   using namespace std ;
+
+//   int main() {
+//    int n = 1 ;
+     
+//     while(n<=3 ){
+//       int i = 3 ;
+//        while(i>=1){
+//         cout<<" "<< i << " " ;
+//         i = i - 1 ;
+//        }
+//        cout<<endl ;
+//        n = n + 1 ;
+//     }
+// }
+
+//1️⃣1️⃣ Pattern question
+//  1 2 3 
+//  4 5 6
+//  7 8 9
+
+// #include <iostream>
+// using namespace std ;
+
+// int main() {
+   
+//    int n = 1 ;
+//    int i = 1 ;
+//    int j = 3 ;
+
+//     while(n <= 3){
+            
+//         while(i <= j){
+//             cout<<" "<<i<< " ";
+//             i = i + 1;
+//         }
+//         j = j + 3;
+//         cout<< endl;
+//         n = n + 1; 
+//     }
+// }
+
+//1️⃣2️⃣ Pattern question;
+//   *
+//   * *
+//   * * *
+//   * * * *
+
+// #include <iostream>
+// using namespace std;
+
+// int main() {
+//     int n = 1;
+//     int j;
+//     cin>>j;
+//     while(n <=j){
+//             int i = 1;
+//         while(i <= n){
+//           cout<<"*" ;
+//           i = i + 1;
+//         }
+//         cout<<endl;
+//         n = n + 1;
+//     }
+// }
+
+//1️⃣3️⃣ Pattern Question:
+//    1
+//    2 2
+//    3 3 3
+//    4 4 4 4
+ 
+//  #include <iostream>
+//  using namespace std;
+
+//  int main() {
+//     int n = 1;
+//     int j ;
+//     cout<<"Enter nUmber"<<endl ;
+//     cin>>j ;
+  
+//      while(n<=j){
+           
+//            int i = 1;
+//         while(i<=n){
+//               cout<< n ;
+//               i = i + 1;
+//         }
+//         cout<<endl ;
+//         n = n + 1;
+//      }
+//  }
+
+//1️⃣4️⃣ pattern question:
+//   1
+//   2 3
+//   4 5 6
+//   7 8 9 10
+
+//  #include <iostream>
+//  using namespace std;
+
+//  int main() {
+//     int n = 1;
+//     int i = 1;
+//     int m ;
+//     cout<<"Enter a number \n";
+//     cin>>m ;
+
+//     while(n<=m){
+//          int j = 1 ;
+//        while(j<=n){
+//          cout<<" "<<i<<" ";
+//          i = i + 1;
+//          j = j + 1;
+//        }
+//        cout<<endl;
+//        n = n + 1;
+//     }
+//  }
+
+//1️⃣5️⃣ Pattern Question;
+//   1
+//   2 3
+//   3 4 5
+//   4 5 6 7
+//   5 6 7 8 9
+
+// #include <iostream>
+// using namespace std;
+
+//  int main(){
+//     int n = 1;
+//     int k;
+//     cout<<"ENter a number\n";
+//     cin>>k;
+//     while(n<=k){
+//          int j = n;
+//          int i = 1;
+//          while(i<=n){
+//          cout<<j;
+//          j = j + 1;
+//          i = i + 1;
+//          }
+//         cout<<endl;
+//         n = n + 1;
+//     }
+// }
+
+//OR
+
+// #include <iostream>
+// using namespace std;
+
+//  int main(){
+//    int n;
+//     cout<<"Enter a number" ;
+//     cin>>n;
+
+//       int i = 1;
+//       while(i<=n){
+//         int j = i;
+//         while(j < 2 * i){
+//             cout<<j<< "" ;
+//             j = j + 1;
+//         }
+//         cout<<endl;
+//         i = i + 1;
+//     }
+//  }
+
+
+//1️⃣6️⃣ Pattern Question;
+//  1
+//  2 1
+//  3 2 1
+//  4 3 2 1
+
+// #include <iostream>
+// using namespace std;
+//  int main(){
+
+//     int n ;
+//     cout<<"enter a number";
+//     cin>>n;
+    
+//     int i = 1;
+//     while(i<=n){
+//      int k = 1;
+//      int j = i;
+//      while(k <= i){
+//         cout<<j ;
+//         j = j - 1;
+//         k = k + 1;
+//      }
+//     cout<<endl;
+//     i = i + 1;
+//     }
+//  }
+
+// OR
+
+// #include <iostream>
+// using namespace std;
+//  int main(){
+
+//     int n ;
+//     cout<<"enter a number";
+//     cin>>n;
+    
+//     int i = 1;
+//     while(i<=n){
+//      int j = 1;
+
+//      while(j <= i){
+//         cout<<(i - j + 1) ;
+//         j = j + 1;
+       
+//      }
+//     cout<<endl;
+//     i = i + 1;
+//     }
+//  }
+
+//1️⃣7️⃣ Pattern question:
+//  A A A
+//  B B B 
+//  C C C
+
+// #include <iostream>
+// using namespace std;
+
+// int main(){
+//    int  n ;
+//    cout<<"ENter number\n";
+//    cin>>n ;
+
+//    int i = 1;
+//    while(i<=n){
+//        int j = 1;
+//         while(j<=n){
+//          char ab = 'A' + i - 1 ;
+//          cout<<ab;
+//          j = j +  1;
+//       }
+//     cout<<endl ;
+//     i = i + 1;
+//    }
+// }
+
+//1️⃣8️⃣ Pattern question:
+//   A B C 
+//   A B C 
+//   A B C
+
+// #include <iostream>
+// using namespace std;
+//  int main(){
+
+//     int n ;
+//     cout<<"enter number\n" ;
+//     cin>>n ;
+
+//     int i = 1;
+//     while(i<=n) {
+//         int j = 1;
+//         while(j<=n){
+//           char ab = 'A' + j - 1;
+//           cout<<ab ;
+//           j = j + 1;
+//         }
+//         cout<<endl ;
+//         i = i + 1;
+//     }
+//  }
+
+//1️⃣9️⃣ Pattern Question:
+//  A B C 
+//  D E F 
+//  G H I 
+
+// #include <iostream>
+// using namespace std;
+// int main() {
+//    int n ;
+//    cout<<"enter a number\n" ;
+//    cin>>n; 
+
+//   char ab = 'A' ;
+//    int i = 1;
+
+//    while(i<=n){
+//      int j = 1;
+//      while(j<=n){
+//        cout<<ab  ;
+//        ab = ab + 1;
+//        j = j + 1;
+//      }
+//      cout<<endl;
+//      i = i + 1;
+//    }
+// }
+
+//2️⃣0️⃣ Pattern questions:
+//  A B C 
+//  B C D 
+//  C D E
+
+// #include <iostream>
+// using namespace std;
+// int main(){
+//     int n;
+//     cout<<"enter a number\n" ;
+//     cin>>n ;
+    
+//     int i = 1;
+//     while(i<=n){
+//        int j = 1;
+//        while(j<=n){
+//         char ab = 'A' + i + j - 2 ;
+//         cout<<ab ;
+//         j = j + 1;
+//        }
+     
+//         cout<<endl;
+//         i = i + 1;
+//     }
+// }
+
+//2️⃣1️⃣ Pattern questions:
+//  A 
+//  B B 
+//  C C C
+
+// #include <iostream>
+// using namespace std;
+
+// int main() {
+//     int n;
+//     cout<<"enter a number\n" ;
+//     cin>>n ;
+//     int i = 1;
+//     while(i<=n){
+//         int j = 1;
+//         while(j<=i){
+//         char ab = 'A'+ i -1 ;
+//         cout<<ab<< " ";
+//         j = j + 1;
+//         }
+//       cout<<endl;
+//       i = i + 1;
+//     }
+// }
+
+//2️⃣2️⃣ Pattern Question:
+//  A 
+//  B C 
+//  D E F 
+//  G H I J
+
+// #include <iostream>
+// using namespace std;
+// int main(){
+//     int n;
+//     cout<<"enter a number\n" ;
+//     cin>>n ;
+
+//     char ab = 'A';
+//     int i = 1 ;
+//     while(i<=n){
+//         int j = 1;
+//         while(j<=i){
+//             cout<<ab<<" " ;
+//            ab = ab + 1;
+//             j = j + 1;
+//         }
+//         cout<<endl;
+//         i = i + 1;
+//     }
+// }
+
+//2️⃣3️⃣ Pattern Question:
+//  A 
+//  B C 
+//  C D E 
+//  D E F G 
+
+//  #include <iostream>
+//  using namespace std;
+//  int main(){
+//     int n ;
+//     cout<<"enter a number\n" ;
+//     cin>>n ;
+
+//     int i = 1;
+//     while(i<=n){
+//         int j = 1;
+//         while(j <= i){        
+//            char ab = 'A' + i + j -2 ;
+//             cout<<ab;
+//             j = j + 1 ;
+//         }
+//         cout<<endl ;
+//         i = i + 1;
+//     }
+//  }
+
+//2️⃣4️⃣ pattern question:
+//   D 
+//   C D 
+//   B C D 
+//   A B C D
+
+// #include <iostream>
+// using namespace std;
+// int main(){
+//     int n;
+//     cout<<"enter a number\n" ;
+//     cin>>n;
+    
+//     int i = 1;
+//     while(i <= n) {
+//         int j = 1;
+//         while(j<=i) {        
+//            char ab = 'D' + j - i   ;
+//            cout<<ab<<" " ;
+//             j = j + 1 ;
+//         }
+//         cout<<endl;
+//         i = i + 1;
+//     }
+// }
+
+//2️⃣5️⃣ Pattern question:
+//       *    
+//     * *    
+//   * * *    
+// * * * *   
+
+// #include <iostream>
+// using namespace std;
+// int main(){
+//     int n;
+//     cout<<"enter a number\n" ;
+//     cin>>n;
+    
+//     int i = 1;
+//     while(i<=n){
+//          int j = 1;
+//          int b = n - i;
+//        while( j<=b){
+//          cout<<" ";
+//         j = j + 1;
+//        }
+//        int k = 1;
+//        while(k<=i){
+//         cout<<"*";
+//         k = k + 1;
+//        }      
+//     cout<<endl;
+//     i = i + 1;
+//     }
+// }
+
+//2️⃣6️⃣ Pattern question:
+//  * * * * 
+//  * * *
+//  * *
+//  * 
+
+// #include <iostream>
+// using namespace std;
+// int main(){
+//     int n;
+//     cout<<"enter a number\n" ;
+//     cin>>n;
+    
+//     int i = 1;
+//     while(i<=n){
+//          int j = 1;
+//          int b = n - i;
+//        while( j<=b){
+//          cout<<"*";
+//         j = j + 1;
+//        }        
+//     cout<<endl;
+//     i = i + 1;
+//     }
+// }
+
+//2️⃣7️⃣ Patterns Questions:
+//  * * * * 
+//    * * *
+//      * *
+//        * 
+
+// #include <iostream>
+// using namespace std;
+// int main(){
+//     int n;
+//     cout<<"enter a number\n" ;
+//     cin>>n;
+    
+//     int i = 1;
+//     while(i<=n){
+//          int k = ;
+//         while(k <){
+//           cout<<" " ;
+//           k = k + 1;
+//         }
+//          int j = 1;
+//          int b = n - i;
+//        while( j<=b){
+//          cout<<"*";
+//         j = j + 1;
+//        }        
+//     cout<<endl;
+//     i = i + 1;
+//     }
+// }
+
+// 53: 06 4th video
