@@ -775,21 +775,268 @@
 //     cin>>n;
     
 //     int i = 1;
+//    while(i<=n){
+//       int space = i - 1;
+//         while(space){               //when space becomes Zero condition becomes falsy and loop stop.
+//          cout<<" ";
+//           space = space - 1;
+//        }
+//         int star = n - i + 1;
+//           while(star){             //when star becomes Zero condition becomes falsy and loop stop
+//            cout<<"*";
+//          star = star - 1;
+//       }
+//     cout<<endl ;
+//     i = i + 1 ;
+//     }
+// }    
+
+//2️⃣8️⃣ Patterns Questions:
+//  1 1 1 1
+//    2 2 2
+//      3 3
+//        4
+
+// #include <iostream>
+// using namespace std;
+
+// int main(){
+//  int n ;
+//  cout<<"enter number\n" ;
+//  cin>>n;
+
+//  int i = 1;
+//  while(i<=n){
+//     int space = i - 1 ;
+//    while(space > 0){
+//     cout<<" ";
+//     space = space - 1;
+//    }
+//    int num = n - i + 1 ;
+//    while(num > 0){
+//      cout<<i ;
+//      num = num - 1;
+//    }
+//   cout<<endl ;
+//   i = i + 1 ;
+
+//  }
+// }
+
+//2️⃣9️⃣ Patterns Questions:
+//       1
+//     2 2
+//   3 3 3
+// 4 4 4 4
+
+// #include <iostream>
+// using namespace std;
+// int main(){
+//     int n ;
+//     cout<<"enter number\n";
+//     cin>>n ;
+
+//     int i = 1 ;
 //     while(i<=n){
-//          int k = ;
-//         while(k <){
-//           cout<<" " ;
-//           k = k + 1;
-//         }
-//          int j = 1;
-//          int b = n - i;
-//        while( j<=b){
-//          cout<<"*";
-//         j = j + 1;
-//        }        
-//     cout<<endl;
-//     i = i + 1;
+//        int space = n - i;
+//        while(space > 0){
+//         cout<<" ";
+//         space = space -1 ;
+//        }
+//        int num = i ;
+//        while(num > 0){
+//         cout<< i ;
+//         num = num -1 ;
+//        }
+//      cout<<endl ;
+//      i = i + 1;
 //     }
 // }
 
-// 53: 06 4th video
+//3️⃣0️⃣ Patterns Questions:
+//   1 2 3 4
+//     2 3 4
+//       3 4
+//         4
+
+//  #include <iostream>
+//  using namespace std;
+//  int main(){
+//     int n;
+//     cout<<"enter number\n" ;
+//     cin>>n ;
+
+//     int i = 1 ;
+//     while(i<=n){
+//      int space = i + 1;
+//      while(space > 0) {
+//         cout<<" ";
+//         space = space - 1;
+//      }
+//      int num = n - i + 1;
+//      int k = i ;
+//      while(num > 0){
+//        cout<<k ;
+//        num = num - 1;
+//        k = k + 1;
+//      }
+//      cout<<endl ;
+//      i =i + 1;
+
+//     }
+//  }
+
+//3️⃣1️⃣ Pattern Question ;
+//       1
+//     2 3
+//   4 5 6
+// 7 8 9 10
+
+// #include <iostream>
+// using namespace std ;
+
+// int main() {
+//     int n;
+//     cout<<"enter number\n" ;
+//     cin>>n;
+
+//     int i = 1 ;
+//     int k = 1; 
+//     while(i<=n){
+//        int space = n - i;
+//        while(space > 0){
+//         cout<<" ";
+//         space = space - 1 ;
+//        }
+//        int num = i ;
+//        while(num > 0){
+//           cout<<k ;
+//           k = k + 1;
+//           num = num - 1;
+//        }
+
+//         cout<<endl;
+//         i  = i + 1;
+//     }
+// }
+
+//3️⃣2️⃣ Pattern Question ;
+//       1
+//     1 2 1
+//   1 2 3 2 1
+// 1 2 3 4 3 2 1
+
+// #include <iostream>
+// using namespace std;
+// int main(){
+//     int n;
+//     cout<<"enter number\n" ;
+//     cin>>n ;
+   
+//    int i = 1;
+//    while(i<=n){
+//      int space = n - i ;
+//      while(space > 0 ){        //print space
+//         cout<<" ";
+//         space = space -1 ;
+//      }
+//       int num = i;
+//       int k = 1;
+//       int j = k ;
+//       while(num > 0){          //print left triangle 
+//         j = k ;
+//         cout<<k;
+//         k = k + 1;
+//         num = num - 1;
+//       }
+//        while(j > 0){          //print right triangle
+//         j = j - 1;
+//         if(j > 0){
+//         cout<<j ;
+//         }
+//        }
+
+//     cout<<endl;
+//     i = i + 1;
+//    }
+// }
+
+//🔸 2nd way :
+// #include <iostream>
+// using namespace std;
+// int main(){
+//     int n;
+//     cout<<"enter number\n" ;
+//     cin>>n ;
+   
+//    int i = 1;
+//    while(i<=n){
+//      int space = n - i ;
+//      while(space > 0 ){        //print space
+//         cout<<" ";
+//         space = space -1 ;
+//      }
+//       int k = 1;
+//       while(k <= i){          //print left triangle 
+//         cout<<k;
+//         k = k + 1;
+//       }
+//       int j = i -1 ;
+//        while(j > 0){          //print right triangle
+//         cout<< j ;
+//         j = j - 1;
+//        }
+
+//     cout<<endl;
+//     i = i + 1;
+//    }
+// }
+
+//3️⃣3️⃣ Dabangg Pattern Question ;
+//    1 2 3 4 5 5 4 3 2 1
+//    1 2 3 4 * * 4 3 2 1
+//    1 2 3 * * * * 3 2 1
+//    1 2 * * * * * * 2 1
+//    1 * * * * * * * * 1
+
+// #include <iostream>
+// using namespace std;
+// int main(){
+//   int n;
+//   cout<<"enter number\n" ;
+//   cin>>n ;
+
+//   int i = 1;
+//   while(i<=n){
+
+//      int k = n - i + 1;
+//      int j = 1;
+//      while(j<=k){           //print 1st triangle
+//         cout<<j;
+//         j = j + 1;
+//      }
+
+//      int star = i - 1;
+//      while(star > 0){      //print 1st star traingle
+//         cout<<"*" ;        
+//         star = star - 1;
+//      }
+
+//      int star2 = i - 1;
+//      int l = 1;
+//      while(star2 > 0){       //print 2nd star
+//           cout<<"*";
+//           star2 = star2 - 1;
+//      }
+ 
+//      int num = n - i + 1;
+//      while(num > 0 ){       //print 2nd triangle
+//       cout<<num;
+//       num = num - 1;
+//      }
+
+//     cout<<endl;
+//     i = i + 1;
+//   }
+
+// }
