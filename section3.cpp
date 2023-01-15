@@ -451,8 +451,8 @@
 //     }
 //     n = n>>1 ;               //Right shifting every digit till last bit
 // }
-//  cout<<count ;
-// }
+//  cout<<count ;               //output: 4    (there are four 1)
+// }  
 
 
 // 6 / 149 
