@@ -455,4 +455,129 @@
 // }  
 
 
-// 6 / 149 
+//🔴🔴 Decimals and Binary :
+
+//   Decimal    |     Binary
+//   ----------------------
+//     0       |     00
+//     1        |     01        
+//     2        |     10
+//     3        |     11
+//     4        |     100
+//     5        |     101
+//     6        |     110
+//     7        |     111
+//     8        |     1000
+//     9        |     1001
+//     10       |     1010
+//     11       |     1011
+//     12       |     1100
+//     13       |     1101
+//     14       |     1110
+//     15       |     1111
+
+
+//🔸 Conversion from to decimal to binary:
+//🔸 APPROACH 1:
+// Step 1:  Divide the decimal number by 2
+// Step 2:  Store the remainder 
+// Step 3:  Then again divide the Quotient by 2
+// Step 4:  Store the remainder.
+// Step 5: repeat
+
+// ANSWER: Reversed the stored remainder and that will be the answer.
+
+//❓ Convert n = 10 into binary :
+// => 
+//     DIVISION  | QOUTIENT  |  REMAINDER
+//    ---------------------------------
+//     10 / 2    |    5      |    0
+//     5  / 2    |    2      |    1
+//     2  / 2    |    1      |    0
+//     1  / 2    |    0      |    1
+
+//ANSWER :=>    1010       (DOWN to Up ⬆️ )
+
+
+//🔸 APPROACH 2 :
+//❓ Decimal to Binary approach 2:
+
+// #include <iostream>
+// #include <math.h>                // Maths library consist, mathematical function(sqrt, pow, etc)
+// using namespace std;
+//  int main(){
+//    int n;
+//    cout<<"enter number\n";
+//    cin>>n ;
+//   float answer = 0 ;                        //Using float bcoz pow works well with float.else it will some unexpected answer.
+//   int i = 0 ;
+
+//    while(n != 0){                             //Step1 : loop till n is not equal to zero 
+//       int bit = n & 1 ;                       //Step2 : Store the remainder of every single digit(by using AND operator)(if 0 & 1 => 0) (if 1 & 1 => 1)
+//       answer = (bit * pow(10, i)) + answer ;  //Step3 : reverse the numbers that is store in bit (formula = (number * 10^i) + Bit) the i will be increased by each iteration
+
+//       n = n >> 1 ;                            //Step4: Right shift each digit on every iteration so we can move to next digit( 1010 => n>>1  => 101 => 10 => 1)
+//      i++ ;                                    // Step5:  increment i for the reversed formula
+//    }
+
+//      cout<<"answer is: "<<answer<<endl;
+//  }
+
+
+ //🔘 Formula to store value in Normal flow and reverse flow:
+ //1> Normal flow :  float answer = 0 ;
+ //                   answer = (answer * 10) + digit;
+
+ //2> Reverse flow :  float answer = 0 ;
+//                   answer = (answer * (10^i)) + digit;
+//                      i++ ; (10^0, 10^1, 10^2, 10^3, ....) increment with each iteration
+
+
+
+//🔘🔘 Binary to decimal conversion :
+
+//🔸 for every digit from right to left ⬅️ we raise 2s power and then add them, ignore if binary is 0.
+//     1   0   1   0   1
+//    2^4 2^3 2^2 2^1 2^0   
+
+//=>   2^4 + 2^2 + 2^0          //Zero are ignored ;
+//=>     16 + 4 + 1
+//=>        21 
+
+//     DIVISION  | QOUTIENT  |  REMAINDER
+//    ---------------------------------
+//     21 / 2    |    10     |    1
+//     10 / 2    |    5      |    0
+//     5  / 2    |    2      |    1
+//     2  / 2    |    1      |    0
+//     1  / 2    |    0      |    1
+
+//Answer :=>  10101 (down to up)  === 21
+
+//🔸 APPROACH :
+//❓ Convert Binary to decimal :
+
+// #include<iostream>
+// #include<math.h>
+// using namespace std;
+// int main(){
+
+//       int n;
+//       cout<<"enter number\n" ;
+//       cin>>n ;
+//       int i = 0 ;
+//       int ans = 0 ;
+
+//       while(n != 0){               //Step1: run loop till n == 0
+//       int digit = n % 10 ;         //Step2: pass every binary digit one by one so use( n % 10  =>  101 % 10 => 1 ) (10 % 10 => 0)
+
+//       if(digit == 1){               //Step3: check if the digit is 1
+//         ans = ans + pow(2, i) ;     //Step4:  increase power of 2 at every 1s and add them  
+//       }
+//        n = n/10 ;                   //Step5: decrement every single digit by dividing it with 10 (101 / 10 => 10) (10 / 10=> 1)
+//        i++ ;                        //Step6: increment i for the power to be updated
+//       }
+//       cout<<"answer milgaya :" <<ans ;       //Step7: print the stored answer 
+// }
+
+// 7/149
