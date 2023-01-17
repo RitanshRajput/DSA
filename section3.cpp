@@ -39,7 +39,7 @@
 //   INPUT    | OUTPUT
 //    X    Y  |  Z
 //   _________|_____        
-//   0     1  | 0
+//   0     0  | 0
 //   0     1  | 1
 //   1     0  | 1
 //   1     1  | 1
@@ -430,7 +430,7 @@
 // }
 
 
-//❓ Question leetcode easy;
+//❓ Question 1️⃣ leetcode easy;
 // write a function that takes am unsigned integer and returns the number of '1' bits it has also known as the hamming weight
 // n = 0000 0000 0000 0000 1011
 // the input binary string has total of three '1' bits ;
@@ -580,4 +580,144 @@
 //       cout<<"answer milgaya :" <<ans ;       //Step7: print the stored answer 
 // }
 
-// 7/149
+
+
+//❓ Question leetcode easy 2️⃣ ;
+// Given a signed 32-bit integer x, 
+// return x with its digit reversed x causes the value to go outside the signed 32-bit integer range [-2^31, 2^31 - 1], then return 0.
+// Example 1:
+
+// Input: x = 123
+// Output: 321
+// Example 2:
+
+// Input: x = -123
+// Output: -321
+// Example 3:
+
+// Input: x = 120
+// Output: 21
+
+// #include<iostream>
+// #include<limits.h>                     // Header library for INT_MAX and INT-MIN
+// using namespace std;
+// int main() {
+// int x ;
+//   cout<<"enter number\n" ;
+//   cin>>x;
+// int ans = 0 ;
+//    while(x!=0){
+//         int digit = x % 10 ;
+//        if ((ans > INT_MAX/10) || (ans < INT_MIN/10)){          //INT_MAX/INT_MIN == tells the maximum int range and minimum int range.  
+//        cout<<0;                                              //when using signed integer as a input sometime it excceds its range 
+//       }                                                     //bcoz we are using (ans*10) *10 makes the integer larger so it fails the test result .
+//    ans = (ans * 10) + digit;                               // if answer exceeds the range then return 0 .
+
+//   x = x / 10;
+//   }
+//     cout<<ans ;
+// }
+
+
+
+//❓ Question leetcode easy 3️⃣ ;
+//The complement of an integer is the integer you get when you flip all the 0's to 1's and all the 1's to 0's in its binary representation.
+// For example, The integer 5 is "101" in binary and its complement is "010" which is the integer 2.
+// Given an integer n, return its complement.
+
+// Example 1:
+
+// Input: n = 5
+// Output: 2
+// Explanation: 5 is "101" in binary, with complement "010" in binary, which is 2 in base-10.
+// Example 2:
+
+// Input: n = 7
+// Output: 0
+// Explanation: 7 is "111" in binary, with complement "000" in binary, which is 0 in base-10.
+// Example 3:
+
+// Input: n = 10
+// Output: 5
+// Explanation: 10 is "1010" in binary, with complement "0101" in binary, which is 5 in base
+
+
+// #include<iostream>
+// using namespace std;
+// int main() {
+// int n ;
+//   cout<<"enter number\n" ;
+//   cin>>n;
+
+//   int m = n;
+//   int mask = 0;
+
+//         if(n == 0)              //for edge case : if n = 00000000000 then return 1
+//          cout<< 1 ;
+
+//         while( m!=0 ) {                 //loop till m is equal to zero
+//             mask = (mask << 1) | 1;     // OR(|) operator says if either is 1 then make it 1,  elseif both are zero then make it zero (basically mask will always be one)
+//             m = m >> 1;                 // left shift m till its zero
+//         }
+//                                         //n = 0000 1011  , mask = 1111 1111, (~n)negation means if 0 then make it 1, or vice-versa
+//         int ans = (~n) & mask ;        // ex: ans = (1111 0100) & (1111 1111)  => 1111 0100 => last digit after 0 are 100 that is 4. 
+ 
+//         cout<< ans;
+// }
+
+//❓ Question leetcode easy 4️⃣ ;
+// Given an integer n, return true if it is a power of two. Otherwise, return false.
+// An integer n is a power of two, if there exists an integer x such that n == 2x.
+
+// Example 1:
+
+// Input: n = 1
+// Output: true
+// Explanation: 20 = 1
+// Example 2:
+
+// Input: n = 16
+// Output: true
+// Explanation: 24 = 16
+// Example 3:
+
+// Input: n = 3
+// Output: false
+
+// Constraints:
+// -231^30 <= n <= 231^30 - 1
+
+// #include<iostream>
+// #include<math.h>
+// using namespace std;
+// int main() {
+// int n ;
+//   cout<<"enter number\n" ;
+//   cin>>n;
+//  for(int i = 0; i <= 30; i++){            //for till 30 bcoz thats the constraint
+
+//             int ans = pow(2,i);          //get power of 2 from 0 to 30
+//             if(ans == n)                 //check is answer is equal to input value if matches then true else false.
+//             {
+//             cout<<true;
+//             }
+//         }
+//         cout<<false;
+// }
+
+//❓ Question leetcode easy 5️⃣ ;
+
+
+// #include<iostream>
+// #include<math.h>
+// using namespace std;
+// int main() {
+// int n ;
+//   cout<<"enter number\n" ;
+//   cin>>n;
+
+
+
+// }
+
+// 8/149
