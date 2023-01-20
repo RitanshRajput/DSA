@@ -328,8 +328,18 @@
 // #include<iostream>
 // using namespace std; 
 
-// void swapped(int arr[], int size){
-//    int i = 1 ;
+// void swappedanother(int arr[], int size){           //Another way to swapping alternate elements :
+
+//     for(int i=0; i<size; i= i+2){
+//            if(arr[i] < size) {
+//             swap(arr[i], arr[i+1])  ;
+//            }
+//      } 
+// }
+
+
+// void swapped(int arr[], int size){                // One way to swapp alternate element ;
+//    int i = 1 ; 
 
 //     while(i<size){
 //      int temp = arr[i] ;
@@ -352,8 +362,11 @@
 //  int even[6] ={1,2,3,4,5,6}  ;
 //  int odd[5] ={1,2,3,4,5} ;
 
-//   swapped(even , 6) ;
-//   swapped(odd , 5) ;
+// //   swapped(even , 6) ;
+// //   swapped(odd , 5) ;
+
+//   swappedanother(even , 6) ;
+//   swappedanother(odd , 5) ;
 
 //   printArray(even, 6) ;
 //   printArray(odd, 5) ;
@@ -361,6 +374,9 @@
 //     return 0;
 // }
 
+
+//🔘 XOR (^) = has a property which says if two numbers are same then output will be 0 ;
+// Ex:    0^0 = 0 ,  1^1=0,  2^2=0 , ...
 
 // ❓ Question
 // Find unique in an array ;
@@ -376,24 +392,87 @@
 // }
 
 // int main() {
-//  int arr[6] ={2,2,1,2,2,9}  ;
- 
-//    for(int i=0; i<6; i++){
-//     int count = 0 ;
+//  int arr[6] ={2,2,1,2,3,3,}  ;
 
-//      for(int j=0; j<6; j++){
+//    for(int i=0; i<6; i++){              // without using XOR bitwise operator :
+//         int count = 0 ;
+
+//       for(int j=0; j<6; j++){
 //         if(arr[i] != arr[j]){
 //             count++ ;
 //         }
 //      }
-
 //        if(count == 5) {
 //         cout<<arr[i]<<" Is unique "<<endl ;
 //        }
-
 //    }
+
 //     return 0 ;
 // }
+
+
+
+
+//🔘 size() = size() tells the size of vector/array ( arrayName.size() )
+
+//❓Question Leetcode easy 5️⃣ ;
+// Given an array of integers arr, return true if the number of occurrences of each value in the array is unique or false otherwise.
+
+// Example 1:
+
+// Input: arr = [1,2,2,1,1,3]
+// Output: true
+// Explanation: The value 1 has 3 occurrences, 2 has 2 and 3 has 1. No two values have the same number of occurrences.
+// Example 2:
+
+// Input: arr = [1,2]
+// Output: false
+// Example 3:
+
+// Input: arr = [-3,0,1,-3,1,1,1,-3,10,0]
+// Output: true
+
+// #include <iostream>
+// using namespace std;
+// int main(){
+
+//     return 0;
+// }
+
+//🔴 Unsolved ;
+
+
+
+//❓ Question leetcode medium 6️⃣ ;
+// Given an integer array nums of length n where all the integers of nums are in the range [1, n] and each integer appears once or twice, return an array of all the integers that appears twice.
+
+// You must write an algorithm that runs in O(n) time and uses only constant extra space.
+
+// Example 1:
+// Input: nums = [4,3,2,7,8,2,3,1]
+// Output: [2,3]
+
+// Example 2:
+// Input: nums = [1,1,2]
+// Output: [1]
+
+// Example 3:
+// Input: nums = [1]
+// Output: []
+
+
+// #include <iostream>
+// using namespace std;
+// int main(){
+
+
+//     return 0 ;
+// }
+
+//🔴 Unsolved ;
+
+
+
 
 
 //❓ Question ;
@@ -402,24 +481,37 @@
 // #include<iostream>
 // using namespace std;
 
+// int duplicate(int arr[], int size){        //using XOR operator:
+//     int ans = 0 ;
+//     for(int i=0; i<size ; i++){
+//         ans = ans^arr[i] ;
+//     }
+
+//     for(int i = 1; i<size; i++){
+//         ans = ans^i ;
+//     }
+//     cout<<ans<<endl ;
+// }
+
+
 // int main(){
-//  int arr[8] = {1,1,2,3,4,4,4,6} ;
+//  int arr[6] = {5,1,2,3,4,2} ;
+//  int arr1[9] ={8, 7, 2,5,4,7,1,3,6} ;
  
-//  for(int i=0; i<8; i++) {
+//  duplicate(arr, 6) ;
+//  duplicate(arr1, 9) ;
+
+//  for(int i=0; i<9; i++) {               // (brute force approach) without using XOR bitwise operator 
 //      int count = 0 ;
      
-//      for(int j=i; j<8; j++){
-          
-//           if(arr[i] == arr[j]){
+//      for(int j=i; j<9; j++){
+//           if(arr1[i] == arr1[j]){
 //             count++ ;
 //           }
 //      }
-
-     
 //      if(count > 1){
-//         cout<<arr[i]<<" is duplicate "<<endl ;
+//         cout<<arr1[i]<<" is duplicate "<<endl ;
 //      }
-
 //  }
 //     return 0;
 // }
@@ -442,6 +534,7 @@
 //         if(arr1[i] == arr2[j]){
 //             cout<<arr1[i]<<" ";
 //         }
+       
 //     }
 //   }
 
@@ -525,4 +618,40 @@
 // }
 
 
-// 10/149
+
+// ❓ Question :
+// Sort 0s and 1s :
+// input : {0, 1, 0, 1, 1, 1, 0, 0};
+//output : {0, 0, 0, 0, 1, 1, 1, 1} ;
+
+// #include <iostream>
+// using namespace std;
+
+// int main(){
+
+// int arr[8]= {1,1,1,1,0,0,0,0} ;
+// int count = 0 ;
+
+// for(int i=0; i<8; i++){      //count increase if 0
+//     if(arr[i] == 0){
+//         count++ ;
+//     }
+// }
+
+// for(int i=0; i<count; i++){   // loop for 0
+//     arr[i] = 0 ;
+// }
+
+// for(int i=count; i<8; i++){      //loop for 1
+//     arr[i] = 1 ;
+// }
+
+
+// for(int i=0; i<8; i++){    //loop to print ;
+//     cout<<arr[i]<<" ";
+// }
+
+// return 0 ;
+// }
+
+// 10/149 : 1:05:10
