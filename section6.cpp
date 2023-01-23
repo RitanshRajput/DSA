@@ -367,3 +367,233 @@
 
 //    return 0;
 // }
+
+
+
+//❓ Question :
+//2> Find Pivot element in moutain or rotated sorted array : (using binary search O(log n) ) ;
+//  Here Pivot means minimum element in array :
+// Ex:
+// input : {7,9, 1, 2, 3} ;
+// Graph representation :
+//             |          .(9)
+//             |          
+//             |    .(7)
+//             |                      .(3)
+//             |                 .(2)
+//             |            .(1)  =============>  Pivot element (minimum)
+//             |_______________________
+
+//output :  index[2] (value = 1)
+
+
+// #include<iostream>
+// using namespace std;
+
+// int pivot(int arr[], int size){
+//     int start = 0; 
+//     int end =  size - 1;
+//     int mid = start + (end - start)/2 ;
+
+//     while(start< end){
+//         if(arr[mid] >= arr[0]){              // check if mid is greater than or equal to arr[0]
+//             start = mid +1 ;                 // if greater then start = mid + 1
+//         }
+//         else{                                // if mid is not greater than equal to arr[0] then
+//             end = mid ;                      // end = mid ;
+//         }  
+//         mid = start + (end - start)/2 ;
+//     }
+//     return start ;                            //return start or end both will give right asnwer .
+// }
+
+// int main() {
+//     // int arr[5] = {3, 5, 1, 3, 6} ;
+//     int arr[5] = {3, 8, 10, 17, 1} ;
+//     int result = pivot(arr, 5) ;
+
+//     cout<<" pivot is at index :"<<result<<endl ;
+//     return 0;
+// }
+
+
+
+//❓ Question :
+// Find key in sorted rotating array ?
+//Ex:
+//input = {7, 8, 1, 2, 3} ;
+//key = 2 ;
+// output = true  // 2 exist in array
+
+
+// #include<iostream>
+// using namespace std ;
+
+//  int pivot(int arr[], int size){                    // code to find pivot (minimum element) in the array
+//        int start = 0 ;
+//        int end = size -1 ;
+//        int mid = start + (end - start)/2 ;
+
+//        while(start < end){
+//         if(arr[mid] >= arr[0]){
+//           start = mid + 1;
+//         }
+//         else{
+//           end = mid ;
+//         }
+//        mid = start + (end - start)/2 ; 
+//        }
+//        return start ;
+//  }
+
+//  int binarySearch(int arr[], int s, int e , int key){          // Binary search to find the key element in the array 
+//         int start = s ;
+//         int end = e ;
+//         int mid = start + (end - start)/2 ;
+
+//         while(start<=end){
+//           if(arr[mid] == key){
+//              return mid ;
+//           }
+//           else if(key < arr[mid]){
+//             end = mid - 1;
+//           }
+//           else if(key > arr[mid]) {
+//             start = mid + 1 ;
+//           }
+//           mid = start + (end - start)/2 ;
+//         }
+//           return -1 ;
+//  }
+
+//  int findPosition(int arr[], int size, int key) {              // function to find the position of the key in rotated sorted array using pivot and binary search together
+        
+//         int PivotResult = pivot(arr, size) ;                       // store pivot result (min element in the arrray)
+
+//         if( key >=arr[PivotResult] && key <= arr[size - 1] ) {          // if the key is greater then equal to min element and key is smaller than equal to size -1 
+//            return binarySearch(arr, PivotResult,  size -1 , key ) ;     // then do binary search on the right side ➡️ of the mid element
+//         }
+//         else{
+//           return binarySearch( arr, 0 , PivotResult-1 , key ) ;         // else do binary search on the left side of the mid element of the arra
+//         }
+//  }
+
+// int main(){
+//   int arr[5] = {7, 8, 1, 2, 3} ;
+//   int key = 3 ;
+
+//   cout<< " Pivot : "<<pivot(arr, 5)<<endl ;                          //testing pivot 
+//   cout<< " Binary search : "<<binarySearch(arr, 0, 4, key)<<endl ;   // testing binary
+//   cout<< " Key element is at index : "<<findPosition(arr, 5, key)<<endl ;  //main answer
+//   return 0 ;
+// }
+
+
+
+//❓ Question :
+// Square root Using Binary search ?
+//Ex:
+// input : 36
+// output : 6  (square root of 36 == 6) ;
+// 
+ 
+//  #include<iostream>
+// using namespace std;
+
+// long long sqrt(int n) {                    // we use long long int because when we use same code in leetcode the integer range is 2^31 (and mid*mid might exceed that , thats why we use long long )
+      
+//       int start = 0 ;                      
+//       int end = n - 1;
+//       long long int mid = start + (end - start)/2 ;
+//       int ans = -1 ;
+
+//       while(start <= end){
+
+//          if((mid*mid) > n)
+//          {
+//           end = mid - 1;
+//          }
+//          else if((mid*mid) < n)
+//          {
+//           start = mid + 1;
+//          }
+//          else if((mid*mid) == n)
+//          {
+//           return  mid ;
+//          }
+
+//          mid = start + (end - start)/ 2;
+//       }
+
+//       return ans ;
+// }
+
+// int main(){
+  
+//   int input = 144 ;
+ 
+//  cout<< " square root of "<<input<<" is "<<sqrt(input)<<endl ;
+
+//   return 0 ;
+// }
+
+
+
+//OR🔴 above code with decimal answer : (Not working properly )
+
+//  #include<iostream>
+// using namespace std;
+
+// long long int sqrt(int n) {                    
+      
+//       int start = 0 ;                      
+//       int end = n - 1;
+//       long long int mid = start + (end - start)/2 ;
+//       int ans = -1 ;
+
+//       while(start <= end){
+
+//          if((mid*mid) > n)
+//          {
+//           end = mid - 1;
+//          }
+//          else if((mid*mid) < n)
+//          {
+//           start = mid + 1;
+//          }
+//          else if((mid*mid) == n)
+//          {
+//           return  mid ;
+//          }
+
+//          mid = start + (end - start)/ 2;
+//       }
+//       return ans ;
+// }
+
+// // double decimal(int n, int precision, int tempSol) {
+// //      double factor = 1 ;
+// //      double answer = tempSol ;
+
+// //      for(int i=0; i<precision; i++){
+// //         factor = factor / 10 ;
+// //         for(int j=answer; j*j<n; j=j+factor) {
+// //             cout<<factor<<endl ;
+// //                answer = j ;
+// //                cout<<answer<<endl ;
+// //         }
+// //      }
+// //          return answer ;
+// // }
+
+
+// int main(){
+  
+//   int input = 36 ;
+//  cout<< " square root of "<<input<<" is "<<sqrt(input)<<endl ;
+
+//  int temp = sqrt(input) ;
+//   cout<<" decimal = "<<decimal(input, 2, temp)<<endl ;
+ 
+//   return 0 ;
+// }
