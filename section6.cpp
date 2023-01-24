@@ -544,11 +544,11 @@
 //  #include<iostream>
 // using namespace std;
 
-// long long int sqrt(int n) {                    
+//     int sqrt(int n) {                    
       
 //       int start = 0 ;                      
 //       int end = n - 1;
-//       long long int mid = start + (end - start)/2 ;
+//       int mid = start + (end - start)/2 ;
 //       int ans = -1 ;
 
 //       while(start <= end){
@@ -569,31 +569,138 @@
 //          mid = start + (end - start)/ 2;
 //       }
 //       return ans ;
-// }
+//  }
 
-// // double decimal(int n, int precision, int tempSol) {
-// //      double factor = 1 ;
-// //      double answer = tempSol ;
+//  double morePrecision(int n, int precision, int tempSol){
 
-// //      for(int i=0; i<precision; i++){
-// //         factor = factor / 10 ;
-// //         for(int j=answer; j*j<n; j=j+factor) {
-// //             cout<<factor<<endl ;
-// //                answer = j ;
-// //                cout<<answer<<endl ;
-// //         }
-// //      }
-// //          return answer ;
-// // }
+//     double factor = 1;
+//     double ans = tempSol;
+    
+//     for(int i=0; i<precision; i++){
+//         factor = factor/10 ;
+        
+
+//         for(double j=ans; (j*j)<n; j += factor){
+//             ans = j;
+//         }
+//     }
+//     return ans ;
+//  }
 
 
 // int main(){
   
-//   int input = 36 ;
-//  cout<< " square root of "<<input<<" is "<<sqrt(input)<<endl ;
+//   int n = 36 ;
+//   int precision = 2 ;
+//   int tempSol = sqrt(n) ;
+//  cout<< " square root of "<< n <<" is "<< tempSol <<endl ;
 
-//  int temp = sqrt(input) ;
-//   cout<<" decimal = "<<decimal(input, 2, temp)<<endl ;
- 
+//  int tempSol = sqrt(n) ;
+//  cout<<" sqrt with precision : "<<morePrecision(n, precision, tempSol)<< endl ;
 //   return 0 ;
 // }
+
+
+
+
+////❓ QUestion : (Google, Amazon, facebook) 
+// 🔴Book Allocation Problem :
+//  Given an array 'arr' of integer numbers. where 'arr[i]' represents the number of pages in the 'i-th' book .
+//  there are 'm' number of students and the task is to allocate all the books to their students. allocate boooks in such a way that :
+
+//   1. Each student gets at least one book.
+//   2. Each book should be allocated to a student.
+//   3. book allocation should be in a contigous manner.   //contigous means we cannot allocated books from between like if we array={10, 20, 30, 40} then here contigous manner means straight sequnence wise like 10,20 = to student 1, and 30,40= to student 2, etc
+
+// you have to allocate the book to 'm' students such that the maximum number of pages assigned to a student is minimum.
+
+//Ex:
+// array of book = [10, 20, 30, 40] 
+// no. of student m = 2
+// total no. of books n = 4  
+// number of pages in array of books = value => 10(pages in 1st book), 20(pages in 2nd book), 30, 40 
+
+//🔸ways :   [10, 20, 30, 40]      
+//  1st  :    10 | 20 30 40         // student 1 = 10, student 2 = 20,30,40 
+//  2nd  :    10 20 | 30 40         // student 1 = 10,20 student 2 = 30,40 
+//  2nd  :    10 20 30 | 40         // student 1 = 10,20,30  student 2 = 40 
+
+//🔸you have to allocate the book to 'm' students such that the maximum number of pages assigned to a student is minimum.
+//The above line means  : 
+
+//  10 | 20,30,40 = sum of all pages of books which allocated to student-1 is '10 = 10' and student-2 is '20+30+40  = 90'  so maximum is max(10, 90) = 90  
+//  10,20 | 30,40 = sum of all pages of books which allocated to student-1 is '10+20 = 30' and student-2 is '30+40  = 70'  so maximum is max(30, 70) = 70  
+//  10,20,30 | 40 = sum of all pages of books which allocated to student-1 is '10+20+30 = 60' and student-2 is '40  = 40'  so maximum is max(60, 40) = 60  
+
+//🔸Now we have to return minimum of the all max, So minimum of min (90, 70, 60) = 60  output ANSWER = 60
+
+
+// #include<iostream>
+// using namespace std;
+
+// bool isPossible(int arr[], int n, int m, int mid){
+
+//     int studentCount = 1;
+//     int pageSum = 0;
+
+//     for(int i=0; i<n ; i++){
+
+//         if( pageSum + arr[i] <= mid ){
+//             pageSum += arr[i] ;
+//             cout<<" PageSum : "<<pageSum<<endl ;
+//         }
+//         else {
+//             studentCount++ ;
+//             if( studentCount > m || arr[i] > mid) {
+//                 return false ;
+//             }
+//             pageSum = arr[i] ;
+//             cout<<" pageSum else : "<<pageSum<<endl ;
+//         }
+//     }
+//     return true ;
+// }
+
+// int allocateBooks( int arr[], int n, int m){
+
+//               int s = 0 ;
+//               int sum = 0;
+
+//             for(int i=0; i<n ; i++){
+//                 sum += arr[i] ;
+//             }    
+//             cout<<" Sum : "<<sum<<endl ;
+//             int e = sum ;
+//             int ans = -1;
+//             int mid = s + (e-s)/2 ;
+//             cout<<" e , ans, mid : "<<e<<" , "<<ans<<" , "<<mid<<" , "<<endl ;
+
+//             while(s<=e){
+//                 if( isPossible(arr, n, m, mid) ){
+//                      ans = mid ;
+//                      e = mid - 1;
+//                      cout<<" inside while ans, e : "<<ans<<" , "<<e<<" , "<<endl ;
+//                 }                
+//                 else {
+//                     s = mid + 1 ;
+//                     cout<<" else in while s : "<<s<<endl ;
+//                 }
+//                 mid = s + (e-s)/2 ;
+//                 cout<<" mid atlast : "<<mid <<endl ;
+//             }
+
+//          return ans; 
+// }
+
+// int main(){
+
+// int arr[4] = {10, 20, 30, 40} ;
+
+// int result = allocateBooks(arr, 4, 2) ;
+
+// cout<<" Answer is : "<<result <<endl ;
+
+//     return 0;
+// }
+
+// 15/149  36:20
