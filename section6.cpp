@@ -642,9 +642,9 @@
 
 //     int studentCount = 1;
 //     int pageSum = 0;
-
+//           cout<<" mid in ispossible  : "<<mid<<endl ;
 //     for(int i=0; i<n ; i++){
-
+//               cout<<" arr[i] : "<<arr[i]<<endl ;
 //         if( pageSum + arr[i] <= mid ){
 //             pageSum += arr[i] ;
 //             cout<<" PageSum : "<<pageSum<<endl ;
@@ -652,12 +652,14 @@
 //         else {
 //             studentCount++ ;
 //             if( studentCount > m || arr[i] > mid) {
+//                 cout<<" false studentcount , arr[i]>mid : "<<studentCount<<" , "<<arr[i]<<endl ;
 //                 return false ;
 //             }
 //             pageSum = arr[i] ;
-//             cout<<" pageSum else : "<<pageSum<<endl ;
+//             cout<<" studentcount, pageSum else : "<<studentCount<<" , "<<pageSum<<endl ;
 //         }
 //     }
+//     cout<<" true  : "<<endl ;
 //     return true ;
 // }
 
@@ -686,7 +688,7 @@
 //                     cout<<" else in while s : "<<s<<endl ;
 //                 }
 //                 mid = s + (e-s)/2 ;
-//                 cout<<" mid atlast : "<<mid <<endl ;
+//                 cout<<" start and end mid atlast : "<<s<<" , "<<e<<" , "<<mid <<endl ;
 //             }
 
 //          return ans; 
@@ -703,4 +705,260 @@
 //     return 0;
 // }
 
-// 15/149  36:20
+
+//🔴 Again solved the above book allocation problem by me :
+
+// #include<iostream>
+// using namespace std ;
+
+// int isPossible(int arr[], int n, int m, int mid) {
+             
+//              int studentCount = 1 ;
+//              int pageSum = 0 ;
+
+//              for(int i=0; i<n; i++){
+
+//                 if(pageSum + arr[i] <=mid){
+//                     pageSum += arr[i] ;
+//                }
+//                else{
+//                   studentCount++ ;
+
+//                   if(studentCount > m || arr[i] > mid){
+//                     return false ;
+//                   }
+//                   pageSum = arr[i] ;
+//                } 
+//           }
+//        return true ;
+// }
+
+// int allocateBooks(int arr[], int n, int m){
+             
+//              int start = 0;
+//              int sum = 0;
+//              for(int i=0; i<n; i++){
+//                 sum += arr[i] ;
+//              }
+            
+//             int end = sum ;
+//             int ans = -1 ;
+//             int mid = start + (end - start)/2 ;
+
+//             while(start<=end){
+
+//                 if( isPossible(arr, n, m, mid)){
+//                     end = mid - 1;
+//                     ans = mid ;
+//                 }
+//                 else{
+//                     start = mid + 1;
+//                 }
+//                 mid = start + (end - start) / 2;
+//             }
+//             return ans ;
+// }
+
+// int main(){
+
+// int arr[4] = {10, 20, 30, 40} ;
+
+// int result = allocateBooks(arr, 4, 2) ;
+
+// cout<<" Answer is : "<<result <<endl ;
+
+//     return 0;
+// }
+
+
+
+//❓ Question (google, amazon, facebook):
+//🔴Painter's Partition Problem :
+
+// Given an arrayList of length 'N'. where the arrayList represents the boards and each element of the given arraylist represents the length of each board . 
+// Some 'K' numbers of painters are available to paint these boards.consider that each unit of a board takes 1 unit of time to paint.  
+
+// You are supposed to return the area of the minimum time to get this job done of painting all the 'N' boards under a contraint that any painter will only paint the continous section of boards .
+
+// In the below figure where array/list elements are {2, 1, 5, 6, 2, 3}
+// A painter can paint blocks {5, 6} or {1, 5, 6, 2} together but not {2, 5, 6} or {5,6,3}        // Means allotment will be in contingous manner just like book allocation problem
+
+// Input : {5, 5, 5, 5}
+// no. of pianter 'k' = 2; 
+//output : 10 ;
+
+// Input : {10,20, 30, 40}
+// no. of pianter 'k' = 2; 
+//output : 60 ;
+
+
+// #include<iostream>
+// using namespace std ;
+
+// int isPossible(int arr[], int k, int n, int mid){
+              
+//               int painterCount = 1;
+//               int blockSum = 0;
+
+//               for(int i=0; i<n; i++){
+
+//                 if(blockSum + arr[i] <= mid){
+//                     blockSum += arr[i] ;
+//                 }
+//                 else{
+//                     painterCount++ ;
+
+//                     if(painterCount > k || arr[i] > mid) {
+//                         return false ;
+//                     }
+//                     blockSum = arr[i] ;
+//                 }
+//               }
+//               return true ;
+// }
+
+
+// int partition(int arr[], int k, int n){
+
+//              int start = 0;
+//              int sum = 0 ;
+
+//              for(int i=0; i<n; i++){
+//                 sum +=arr[i];
+//              }
+//          int end = sum ;
+//          int ans = -1 ;
+//          int mid = start + (end - start)/2 ;
+
+//          while(start<=end){
+//             if( isPossible(arr, k, n, mid)){
+//                 end = mid - 1 ;
+//                 ans = mid ;
+//             }
+//             else{
+//                 start = mid + 1;
+//             }
+//             mid = start + (end - start)/2 ;
+//          }
+//       return ans ;
+// }
+
+// int main(){
+
+//     int arr[4] = {5,5,5,5} ;
+//     int n = 4 ;                //no of blocks
+//     int k = 2 ;                // no. of painters; 
+
+//     cout<<" Answer of painter parition problem : "<<partition(arr, k, n)<<endl ;
+
+//     return 0 ;
+// }
+
+
+
+//❓ Questions (google, amazon, facebook) :
+//🔴 Aggresive Cows :
+
+// Given an array of length 'N', where each elements denotes the position of a arr. now you have 'N' stalls and
+// an integer 'K' which denotes the number of cows that are aggresive. to prevent the cows from hurting each other, 
+// you need to assign the cows to the stalls such that the minimun distance between any two of them is as large as possible. 
+// return the largest minimum distance.
+
+// input : {4, 2, 1, 3, 6} ;  //stalls positions
+// no. of stalls N = 5 ;
+// no. of cows  k = 2 ;
+
+// output: 5             // because in this case we need to obtain maximum distance between two cows placed in the stalls
+
+// explaination :
+
+// stalls     4    2    1    3     6
+//              |    |    |    |  
+//case1.    k1  | k2 |    |    |             // distance between k1 - k2 => 4 - 2 =>  2
+//case1.    k1  |    | k2 |    |             // distance between k1 - k2 => 4 - 1 =>  3  
+//case1.    k1  |    |    | k2 |             // distance between k1 - k2 => 4 - 3 =>  1  
+//case1.    k1  |    |    |    |  k2         // distance between k1 - k2 => 4 - 6 =>  2
+
+//case2.        | k1 |k2  |    |             // distance between k1 - k2 => 2 - 1 =>  1  
+//case2.        | k1 |    | k2 |             // distance between k1 - k2 => 2 - 3 =>  1  
+//case2.        | k1 |    |    |k2           // distance between k1 - k2 => 2 - 6 =>  4  
+
+//case3.        |    | k1 | k2 |             // distance between k1 - k2 => 1 - 3 =>  2  
+//case3.        |    | k1 |    | k2          // distance between k1 - k2 => 1 - 6 =>  5    // Found the largest distance between two aggresive cow
+
+//case4         |    |    | k1 |k2           // distance between k1 - k2 => 3 - 6 =>  3
+
+
+// MAximum distance  =>  5 
+
+
+// #include<iostream>
+// #include<algorithm>                    // library for sort
+// #include <vector>                      // library for max
+// using namespace std ;
+
+// int isPossible(int arr[], int k, int n, int mid) {
+            
+//             int cowCount = 1;
+//             int lastPosition = arr[0] ;
+
+//             for(int i=0; i<n; i++){
+
+//                 if(arr[i] - lastPosition >= mid){
+//                      cowCount++ ;
+
+//                      if(cowCount == k){
+//                         return true ;
+//                      }
+//                      lastPosition = arr[i] ;
+//                 }
+//             }
+//             return false; 
+// }
+
+// int aggressiveCows(int arr[], int k, int n){
+ 
+//        int start = 0;
+//        int maxi = -1 ;
+
+//        for(int i=0; i<n; i++){                           // loop to find maximum value in the array
+//           maxi = max(maxi, arr[i]) ;                   // store the max number in maxi 
+//        }
+
+//        int end = maxi ;
+//        int ans = -1 ;
+//        int mid = start + (end - start)/2; 
+
+//        while(start<=end){
+
+//            if( isPossible(arr, k, n, mid)){
+//              ans = mid ;
+//              start = mid + 1;
+//            }
+//            else{
+//               end = mid - 1;
+//            }
+//         mid = start + (end - start)/2 ;
+//        }
+//    return ans ;
+// }
+
+
+// int main(){
+ 
+//  int arr[5] = {4, 2, 1, 3, 6} ;
+//  int n = 5 ;
+//  int k = 2 ;
+
+//   int arraySize = sizeof(arr) / sizeof(arr[0]) ;             // getting size of original array  
+//   sort(arr, arr + arraySize) ;                              // sort the original array 
+
+       
+// cout<<" Answer of aggresive cow : "<<aggressiveCows(arr, k, n)<<endl ;
+
+
+//     return 0;
+// }
+
+
+// 16/149 
