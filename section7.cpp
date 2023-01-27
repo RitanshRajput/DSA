@@ -171,12 +171,15 @@
 // }
 
 // int bubbleSort(int arr[], int n){
-//       for(int i=1; i<n; i++){       // for round 1 to n-1  (1, 2, 3, 4, 5 )
+//     int count = 0 ;
+//       for(int i=1; i<n; i++){       // we consider 0th index to be sorted so we start from 1th index to < nth index
 
 //         for(int j=0; j<n-i; j++){   // process element from  0 to n-i th index  (0, 1, 2, 3, 4) (0, 1, 2, 3) (0, 1, 2) (0,1) (0)
            
 //             if(arr[j] > arr[j+1]){
 //                    swap(arr[j], arr[j+1]) ;
+//                    count++ ;
+//          cout<<"count : "<<count<<endl ;
 //             }
 //          }
 //       }
@@ -185,8 +188,8 @@
 
 // int main(){
 
-// int arr[6] = {10 , 1 ,  7 , 6 , 14,  9} ;
-// int n = 6 ;
+// int arr[7] = {8, 22, 7, 9, 31, 5, 13} ;
+// int n = 7 ;
 
 // cout<<endl<<" Bubble sorted array no. of element  : "<<bubbleSort(arr, n)<<endl ;
 
@@ -247,3 +250,79 @@
 
 //🔴 Is a bubble sort an in-place algorithm? 
 // 🔸 A bubble sort is an in-place algorithm because it doesn't need an extra space and produces an output of the same size by manipulating the input in one place.
+
+
+
+                            //🔴🔴 INSERTION SORTING :
+
+//🔸In insertion sort we compare each element with its elements to check whether they are smaller or greater 
+//  If the element on the left side is greater then we will insert our element before that greater element else we will give it on the same place.
+
+//🔸Approach :
+
+// Input :   {6, 5, 4, 3, 2, 1}
+
+//comparing 1st element 6 :    [6]                    // no element on the left side to compare to hence it will stay as it is.
+//comparing 2nd element 5 :    [5, 6]                 // 5 is smaller than element on its left side so, we insert it before 1st element (before 6)
+//comparing 3rd element 4 :    [4, 5, 6]              // 4 is compare with 6 which is greater then we insert it before 6 then again compare with left element(5, 4, 6)  now 5 is greater then 4 so inserted before 5
+//comparing 4th element 3 :    [3, 4, 5, 6]           // 3 is 1st compare with 6 inserted before 6 (4,5, 3, 6), compare with 5 inserted before 5 (4, 3, 5, 6),  compare with 4 inserted before 4(3, 4, 5, 6)
+//comparing 5th element 2 :    [2, 3, 4, 5, 6]        // 2 is 1st compare with 6 inserted before 6(3,4, 5, 2, 6), compare with 5 inserted before 5 (3, 4, 2, 5, 6), compare with 4 inserted before 4(3, 2, 4, 5, 6), compare with 3 inserted before 3 (2, 3, 4, 5, 6)
+//comparing 6th element 1 :    [1, 2, 3, 4, 5, 6]     // after same process its been compare and inserted in its right position (before the greater element), hence the array is sorted.
+
+
+//🔸 In insertion sort we dont swap but shift the elements
+
+//🔴Time complexity : O(n²)
+// Best case  :  O(n) 
+// worst case :  O(n²)
+
+//🔴Space complexity :
+//  O(1)
+
+
+
+//❓ Question :
+// Sort the given array using Insertion sort:
+
+
+// #include<iostream>
+// using namespace std ;
+
+// int insertionSort(int arr[], int n){
+        
+//       for(int i=1; i<n; i++){          // loop start from 1th to < nth index (bcoz we consider 0th index sorted)
+//         int temp = arr[i] ;           
+//         int j = i-1;                  
+
+//         for(  ; j >=0; j--) {           
+
+//             if(arr[j] > temp ){          
+//                 arr[j+1] = arr[j] ;      
+//             }
+//             else{
+//                 break ;                 
+//            }
+//          }
+//         arr[j+1] = temp ;               
+//       }
+   
+//     for(int i=0; i<n; i++){               // loop to print sorted array
+//         cout<<arr[i]<<" " ;
+//     }
+//     cout<<endl ;
+//  return n ;
+// }
+
+// int main(){
+
+// int arr[6] = {6, 4, 3, 5, 2, 1} ;
+// int n = 6 ;
+
+// int answer = insertionSort(arr, n) ;
+// cout<<"Insertion Sort with total element : "<<answer<<endl ;
+
+//     return 0;
+// }
+
+
+
