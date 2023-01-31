@@ -314,3 +314,206 @@
 
 //     return 0;
 // }
+
+
+
+//❓ Question :
+//🔸 Rotate array w.r.t given index k :
+//ex:
+// Input = {1, 3, 5, 7} ;
+// k = 2 ;
+// output : {5, 7, 1, 3} ;         // each element is rotated 2 index from its original index
+
+//input = {11, 12, 13, 14, 15};
+// k = 3 ;
+//output = {13, 14, 15, 11, 12}    // each element is rotated 3 index from its original index
+
+
+// #include<iostream>
+// using namespace std ;
+
+// int rotateArray(int arr[], int k, int n){
+//          int temp[n] ;                      // creating temporary array
+
+//          for(int i=0; i<n; i++){
+//              temp[(i+k) % n] = arr[i] ;            //ex: for i=0 : temp[ (0+3) % 5 ] = [3%5] = 3, for i=1 : temp[ (1+3) % 5 ] = [4%5] = 4;  for i=2 : temp[ (2+3) % 5 ] = [5%5] = 0;
+//          }
+        
+//         for(int i=0; i<n; i++){               // loop to copy temp into arr and print it ;
+//             arr[i] = temp[i] ;
+//             cout<<arr[i]<<" ";
+//         }
+// }
+
+
+// int main(){
+
+// int arr[5] = {11, 12, 13, 14, 15} ;
+// int k = 3;               // index to shift/rotate 
+// int n = 5 ;             // size of array
+
+// cout<<" After Rotating array : " ;
+// rotateArray(arr, k, n) ;           // output : 13 14 15 11 12 
+      
+//     return 0 ;
+// }
+
+//🔸Time complexity : O(n)
+//🔸Space complexity: O(n)
+
+
+
+
+//❓ Question :
+// check if array is sorted and rotated :
+//ex:
+// input : {3, 4, 5, 1, 2} ;
+// output :  true (sorted and rotated)
+
+// input : {2, 1, 3, 4} ;
+// output :  false (not sorted array once rotated)
+
+// input : {1, 1, 1} ;
+// output :  true (sorted and rotated)
+
+
+// #include<iostream>
+// using namespace std ;
+
+// int check(int arr[], int n) {
+//     int count = 0 ;
+
+//     for(int i=1; i<n; i++){
+//         if( arr[i-1] > arr[i]) {          // loop to check if (i-1th index > ith index)  if true then count++ ;
+//             count++ ;
+//         }
+//     }
+
+//     if(arr[n-1] > arr[0]) {
+//         count++ ;                        // also if (n-1th index > 0th index) then count++ ;
+//     }
+    
+//     if(count<=1) {
+//       cout<<" True " ;                   // if count==1 return true , else false ;
+//     }
+//     else{ 
+//        cout<<" false " ; 
+//     }
+
+// }
+
+// int main(){
+
+// int arr[5] = {3, 4, 5, 1, 2} ;
+// int n = 5 ;
+// check(arr,n) ;
+
+// return 0;
+// }
+//🔸Time complexity : O(n)
+//🔸Space complexity: O(1)
+
+
+
+
+//❓ Question :
+// Sum of Two array : sum should be done normally as we do in books
+//ex:
+// input : arr1[4] = [1, 2, 3, 4]
+// input : arr2[1] =          [6]
+
+// output :           1, 2, 4, 0          // 4+6 = 0 (1 carry) , 3+1 = 4,  2,  1  =  [1, 2, 4, 0]
+
+
+// input : arr1[3] = [1, 2, 3]
+// input : arr2[2] =    [9, 9]
+
+//output :         =     2,2,2          // 3+9 = 2 (1carry),  (2+1carry) = 3 + 9 = 2(1carry) ,  1+1carry = 2,   = [2, 2, 2]
+
+
+// #include<iostream>
+// #include<algorithm>
+// using namespace std;
+
+// int sum(int arr1[], int n, int arr2[], int m){
+//     int i = n-1;
+//     int j = m-1;
+//     int ans[n+m] ;
+//     int k = 0 ;
+//     int carry = 0 ;
+
+//      while( i>=0 && j>=0 ){
+//         int val1 = arr1[i] ;
+//         int val2 = arr2[j] ;
+
+//         int sum = val1 + val2 + carry ;
+
+//         carry = sum /10 ;
+//         sum  = sum % 10 ;
+
+//         ans[k] = sum ;
+         
+//          k++ ;
+//          i-- ;
+//          j-- ;
+//      }
+
+//     // for case 1 :  where 1st array has more element than 2nd array
+//      while(i>=0) {
+//         int sum = arr1[i] + carry ;
+//         carry = sum /10 ;
+//         sum = sum % 10 ;
+//         ans[k] = sum ;
+//         k++ ;
+//         i-- ;
+//      }
+
+//     //for case 2 : where 2nd array has more element than 1st array 
+//      while( j>=0){
+//         int sum = arr2[j] + carry ;
+//         carry = sum /10 ;
+//         sum = sum %10; 
+//         ans[k] = sum ;
+//         k++ ;
+//         j-- ;
+//      }
+
+//     //for case 3 : where both array are same but there carry remains to be added in result array 
+//      while( carry != 0) {
+//         int sum = carry ;
+//         carry = sum /10 ;
+//         sum = sum % 10;
+//         ans[k] = sum ;
+//         k++ ;
+//      }
+
+//     // The answer stored is in reverse mannner we need to reverse it again so it makes sense :
+//     // reversing the final ans[] ;
+//     int start = 0 ;
+//     int end = k - 1 ;
+//     while(start <= end) {
+//         swap(ans[start], ans[end]) ;
+//         start++ ;
+//         end-- ;
+//     }
+
+//     // print result :
+//     for(int i=0; i<k; i++){
+//         cout<<ans[i]<<" ";
+//     }
+// }
+
+// int main(){
+
+// int arr1[3] = {1, 2, 3};
+// int n = 3;
+// int arr2[2] = {9, 9};
+// int m = 2;
+
+// sum(arr1, n, arr2, m) ;
+
+//     return 0;
+// }
+
+//🔸Time complexity : O(max(n+m))
+//🔸Space complexity: O(max(n+m))
