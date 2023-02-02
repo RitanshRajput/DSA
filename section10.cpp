@@ -540,4 +540,566 @@
 //     return 0 ;
 // }
 
-//  55:05  24/149
+
+
+//❓ Question leetcode medium :
+//Reverse words in string II 
+// A word is defined as a sequence of non-spaces character.the words in s will be separated by a single space
+// your code must solve the problem in-place, i.e, without allocating extra space 
+
+//ex:
+// input : { 't','h','e','','s','k','y',' ','i','s','','b','l','u','e' } 
+//output:  {'b','l','u','e','','i','s','','s','k','y','','t','h','e'}
+
+//input: {'a'}
+//output: {'a'} 
+
+
+// #include<iostream>
+// using namespace std;
+
+// void reverseWords(char s[], int n){
+
+//     //Reverse the entire string 
+//     int start = 0;
+//     int end = n - 1;
+
+//     while(start<end){
+//         swap(s[start], s[end]); 
+//         start++;
+//         end-- ;
+//     }
+
+//     // Reverse each word in the string using 'whitespaces' as a stopper between every word
+//     start = 0;
+//     for(int j=0; j<n; j++){
+
+//         if(s[j] == ' '){
+//             continue;
+//         }
+//         start = j ;
+//         while(s[j] != ' ' && j < n) {
+//             j++ ;
+//         }
+
+//         end = j - 1;
+//         while(start<end){
+//             swap(s[start],s[end]) ;
+//             start++;
+//             end-- ;
+//         }
+//     }
+// }
+
+// int length(char s[]){
+//     int count= 0;
+//     for(int i=0; s[i]!='\0'; i++){
+//         count++ ;
+//     }
+//     return count ;
+// }
+
+// int main(){
+
+// char s[20] = "my name is juned" ;
+// int n = length(s) ;
+// cout<<"length of character is : "<<n<<endl ;
+// reverseWords(s, n) ;
+// cout<<s ;
+
+
+//     return 0;
+// }
+
+
+//❓ Question :
+// Return maximum occuring character in an input string 
+//ex:
+// input : {terrorist} 
+// r = 3
+// t = 2
+// e = 1
+// o = 1
+// i = 1
+// s = 1
+
+// output :  r ( character 'r' occur maximum time in the input string)
+
+
+// #include<iostream>
+// using namespace std;
+
+// char maxOccured(string s){
+
+//     int arr[26] = {0} ;   // array of 26 index (for 26 alphabet (a,b,c, .., z))
+
+//     //create an array of count character
+//     for(int i=0; i<s.length(); i++){
+//         char ch = s[i] ;
+//         int number = 0;
+
+//         if(ch >='a' && ch <='z') {    // for Lowercase character
+//             number = ch - 'a' ;                   // number = character - 'a'(97)
+//         }
+//         else{                        // for Uppercase character 
+//             number = ch - 'A' ;                   //number = character - 'A'(65)
+//         }
+//         arr[number]++ ;                           //assign the number in arr[index] if number = 4, then make arr[4] = 1 from(0++) if the number repeats then again arr[4]= 2 (1++)
+//     }
+
+//    // find maximum occured character and store that index in answer, the index which is max among all index will be our answer
+//     int maxi = -1 ;
+//     int ans = 0 ;
+
+//     for(int i=0; i<26; i++){
+//         if(maxi < arr[i]){
+//             ans = i ;
+//             maxi = arr[i] ;
+//         }
+//     }
+
+//     char result = 'a' + ans;            // ans + 'a'(116) to get our original answer
+
+//     return result ;
+// }
+
+// int main(){
+
+// string s = "tent" ;
+
+// cout<<" Max occured character in the input : "<<maxOccured(s)<<endl ;
+//     return 0;
+// }
+
+//🔸Time-complexity : O(n) 
+//🔸 Space-complexity: O(1)
+
+
+
+//🔴 When we use cin to get character in char type of variable,
+//  the cin stops the execution after space "", tab "\t", newline "\n" ,
+// but what if we want to get a long sentence with space in it ?
+//🔸 Answer :  we use cin.getline(charName, charlength) ;
+//   cin.getline() helps us to get multiple words with spaces 
+
+//Ex: 
+// #include<iostream>
+// using namespace std ;
+// int main(){
+//     char name[20] ;
+    
+//     cout<<"Enter words with spaces"<<endl;
+//     cin.getline(name, 20) ;                      // entered : Some example
+
+//     cout<<"You entered : "<<name<<endl;          //output : Some example
+
+//     return 0;
+// }
+
+
+//🔴 Delimeter in cpp ;
+//🔸 A delimiter is a unique character or series of characters that indicates the beginning or end of a specific statement, string or function body set.
+// Delimiters are used in programming languages to specify code set characters or data strings, 
+// serve as data and code boundaries and facilitate the interpretation of code and the segmentation of various implemented data sets and functions.
+
+//🔸Software programs include multiple data streams, functions and conditions. 
+//Programming languages use delimiters in different coding scenarios to determine specific type and instruction boundaries. 
+//Because delimiters - such as commas and full stops - define different condition types, the delimiter concept is very similar to the English language.
+
+//🔸Delimiter examples include:
+
+//🔸Round brackets or parentheses: ( )
+//🔸Curly brackets: { }
+//🔸Escape sequence or comments: /*
+//🔸Double quotes for defining string literals: " "
+
+//ex:
+// string x=”A B C”;
+// string y=”A*B*C”;
+
+// Separate x into [‘A’,’B’,’C’] with delimiter ‘ ‘
+// Separate y into [‘A’,’B’,’C’] with delimiter ‘*’
+
+
+                      //🔴 Char in-build function :
+
+//🔸 to get Length of char array :
+//   char name[20] = {hello, motabhai!} ;
+//   int len = str(name)     //output: 16
+
+//🔸 to compare to char array :
+//   char s1[10] = {hello} ;
+//   char s2[15] = {hello} ;
+//   int ans = strcmp(s1,s2) ;       //output: 1 = equal  ,   o = not-equal
+
+//🔸 to copy char array :
+//   char s1[10] = {hello} ;
+//   char s2[15] = {} ;
+//   int copy = strcpy(destination , source) ;
+//   int copy = strcpy(s2, s1) ;  
+
+
+
+//❓ Question :
+// Replace spaces :
+// you have been given a string 'String' of words. 
+//you need to replace all the spaces between words with "@40"
+
+//ex:
+//input : "Bolo Bam Bam" ;
+//output: "Bolo@40Bam@40Bam" ;
+
+// #include<iostream>
+// using namespace std;
+
+// string ReplaceSpaces(string s){
+//     string temp = "";
+
+//     for(int i=0; i<s.length(); i++){
+
+//         if(s[i] == ' '){
+//            temp.push_back('@') ;
+//            temp.push_back('4') ;
+//            temp.push_back('0') ;
+//         }
+//         else{
+//             temp.push_back(s[i]) ;
+//         }
+//     }
+//     return temp;
+// }
+
+// int main(){
+// string s = "Bolo Bam Bam" ;
+
+// cout<<"Answer is : "<<ReplaceSpaces(s) <<endl ;
+
+//     return 0;
+// }
+
+//❓ Question :
+// Replace spaces :
+// you have been given a string 'String' of words. 
+//you need to replace all the spaces between words with "@40"
+
+//contraints : without taking extra spaces : 
+//            in above example we solve the problem by taking temp new string which is taking extra space
+//            So in this case we cannot use extra spaces
+
+// #include<iostream>
+// #include<algorithm>
+// using namespace std;
+
+// string replaceSpaces(string str){
+//     int l = str.length();
+//     int i = 0;
+
+//     while(str[i] != '\0')
+//     {
+//         if(str[i] == ' ')
+//         {
+//            str = str.substr(0,i)+"@40"+str.substr(i+1,str.length()-1);       //  str = (from 0th index, to ith index) + "@40" + (from i+1th index, to .length()-1 ) 
+//         }
+//         i++;
+//     }
+//     return str;
+// }
+
+// int main(){
+//     string s = "Bolo Bam Bam" ;
+
+//     cout<<"Answer without taking extra spaces : "<<replaceSpaces(s) <<endl ;
+
+//     return 0;
+// }
+
+
+                                 //🔴 .find() in cpp :
+//🔸find() in C++ is a function that helps to search an element and returns the first occurrence of the element searched inside a specified range.
+//  It starts the search from the first element of the range and goes till the last one, 
+//  if the element is not found after all possible comparisons then it returns the last element of the specified range. 
+//  The find() function in C++ is defined in the <algorithm.h> header file. If any unessential action is performed by the find() function then it throws an exception that is not required by the programmer. 
+//  find() function in C++ uses ==(Comparison operator) for every individual comparison between elements and values which is being searched.
+
+
+//🔸There is a total of three parameters that we use inside the find() function in C++ to search an element. They are as follows:
+// first:- It is an argument that specifies the first element of the range(first, last) inside which we want to perform the search for an element.
+// last:- It is an argument that points to the last element of the range(first, last) inside which we want to perform the search for an element.
+// value:- It is an argument that we want to search inside a given range(first, last).
+
+//ex:
+// template <class InputIterator, class T>  
+// InputIterator find (InputIterator first, InputIterator last, const T& value)
+
+
+
+
+
+//❓ Question leeetcode Medium:
+//🔸Remove all occurences of a string :
+// Given two string s and part perform the following operations on s unit all occurences of the substring part are removed.
+// . find the leftmost occurences of the substring part and remove it from s.
+//   return s after removing all occurences of part.
+// A substring is a contiguous sequence of character in a string.
+
+// ex:
+// input: s = "daabcbaabcbc"  
+//  part = "abc"
+
+//after 1st removal = "dabaabcbc"        // "abc" removed from the main string
+//after 2nd removal = "dababc"           //"abc" again removed
+//after 3rd removal = "dab"              // "abc" again removed
+// output :  "dab"
+
+
+// input: s = "axxxyyyb"
+// part = "xy"
+
+// after 1st removal = "axxyyb"
+// after 2nd removal = "axyb"
+// after 3rd removal = "axyb"
+// after 4th removal = "ab"
+//output : "ab"
+
+
+// #include<iostream>
+// using namespace std;
+
+// string removeOcc(string s, string part){
+//     // if string length is equal to 0  and size of part is less than s.length (ex: part = "abc" = 3,  after iteration s.length() = 2   here 3<2)
+//        while( s.length() != 0 && s.find(part)< s.length() )  {        // .find() is use to find the first iteration of given argument .find()
+//            s.erase( s.find(part), part.length()) ;         // 
+//        }  
+//        return s;
+// }
+
+// int main(){
+// string s = "axxxxyyyyyb" ;
+// string part = "xy";
+// // string s = "daabcbaabcbc"; 
+// // string part = "abc" ;
+
+// cout<<" after removing all occurences of part: "<<removeOcc(s, part) <<endl ;
+
+//     return 0;
+// }
+
+
+
+
+//❓ Question leetcode medium :
+// Permutation in string :
+// given two string s1 and s2, return true if s2 contains a permutation of s1, or false otherwise.
+// In other words return true if one of s1's permutation is the substring of s2.
+
+//Ex:
+// input: s1 = "ab"
+// input: s2 = "eidaooo"
+// output: true   (s2 contains one permutation of s1 "ba") 
+
+// input: s1 = "ab"
+// input: s2 = "eidoaoo"
+// output: false   (s2 contains one permutation of s1 "ba") 
+
+
+// #include<iostream>
+// using namespace std;
+
+// // function to check both string are equal or not
+// bool checkEqual(int a[26], int b[26]){
+//     for(int i=0; i<26; i++) {
+//         if(a[i] != b[i])
+//         return 0;
+//     }
+//     return 1;
+// }
+
+//     //Main function 
+//  bool permutExist(string s1, string s2){
+        
+//         //character count array 
+//         int count[26] = {0} ;
+
+//         for(int i=0; i<s1.length(); i++){
+//             int index = s1[i] - 'a' ;
+//             count[index]++ ;
+//         }
+
+//         //traversing s2 string in window of size s1 length and compare
+//         int i=0 ;
+//         int windowSize = s1.length() ;
+//         int count2[26]= {0} ;
+
+//         //running loop for 1st window
+//         while( i < windowSize && i<s2.length() ){
+//             int index = s2[i] - 'a' ;
+//             count2[index]++; 
+//             i++ ;
+//         }
+
+//         //checking whether count1 and count2 are equal or not
+//         if( checkEqual(count, count2) )
+//          return 1;
+
+//        // aage window process karo
+//        while( i < s2.length() ){
+//         char newChar = s2[i] ;
+//         int index = newChar - 'a';
+//         count2[index]++ ;
+
+//         char oldChar = s2[i - windowSize];
+//         index = oldChar - 'a' ;
+//         count2[index]-- ;
+
+//         i++ ;
+
+//         if(checkEqual(count,count2) )
+//         return 1 ;
+//        }
+//        return 0 ;
+// }
+
+// int main(){
+//  string s1 = "ab" ;
+//  string s2 = "eidbaoo" ;
+
+//  cout<<"Permutation exist or not : "<<permutExist(s1,s2) <<endl ;
+
+// return 0;
+// }
+
+
+
+//❓ Question leetcode easy:
+// Remove all adjacent duplicates in string
+// You are given a string s consisting of lowercase English letters. A duplicate removal consists of choosing two adjacent and equal letters and removing them.
+// We repeatedly make duplicate removals on s until we no longer can.
+// Return the final string after all such duplicate removals have been made. It can be proven that the answer is unique. 
+
+//ex:
+// Input: s = "abbaca"
+// after 1st removal : "aaca"
+// after 2nd removal : "ca"
+// Output: "ca"
+// Explanation: 
+// For example, in "abbaca" we could remove "bb" since the letters are adjacent and equal, and this is the only possible move. 
+// The result of this move is that the string is "aaca", of which only "aa" is possible, so the final string is "ca".
+
+// Input: s = "azxxzy"
+// after 1st removal : "azzy"
+// after 2nd removal : "ay"
+// Output: "ay"
+
+
+// #include<iostream>
+// using namespace std;
+
+// string removeDup(string s){
+//     string ans ;
+//     ans.push_back(s[0]) ;
+
+//     for(int i=1; i<s.length(); i++){
+
+//         if(s[i] == ans.back()){
+//             ans.pop_back() ;
+//         }
+//         else{
+//             ans.push_back(s[i]) ;
+//         }
+//     }
+//     return ans;
+// }
+
+// int main(){
+// string s = "abbaca";
+
+// cout<<"After removing all duplicates: "<<removeDup(s) <<endl ;
+
+//     return 0;
+// }
+
+
+///🔴🔴🔴Very Important question :
+//❓ Question leetcode medium 
+//String Compression 
+
+//Given an array of characters chars, compress it using the following algorithm:
+// Begin with an empty string s. For each group of consecutive repeating characters in chars:
+// If the group's length is 1, append the character to s.
+// Otherwise, append the character followed by the group's length.
+// The compressed string s should not be returned separately, but instead, be stored in the input character array chars. Note that group lengths that are 10 or longer will be split into multiple characters in chars.
+// After you are done modifying the input array, return the new length of the array.
+// You must write an algorithm that uses only constant extra space.
+
+//ex:
+// Input: chars = ["a","a","b","b","c","c","c"]
+// Output: Return 6, and the first 6 characters of the input array should be:
+//  Output :  ["a","2","b","2","c","3"]
+// Explanation: The groups are "aa", "bb", and "ccc". This compresses to "a2b2c3".
+
+// Input: chars = ["a"]
+// Output: Return 1, and the first character of the input array should be: 
+// output : ["a"]
+// Explanation: The only group is "a", which remains uncompressed since it's a single character.
+
+// Input: chars = ["a","b","b","b","b","b","b","b","b","b","b","b","b"]
+// Output: Return 4, and the first 4 characters of the input array should be:
+// output :  ["a","b","1","2"].
+// Explanation: The groups are "a" and "bbbbbbbbbbbb". This compresses to "ab12".
+
+// #include<iostream>
+// #include<vector>
+// #include<bitset>
+// using namespace std;
+ 
+//  int compress(vector<char> chars){
+//       int i= 0;
+//       int ansIndex = 0;
+//       int n = chars.size() ;
+
+//       while(i<n){
+//         int j= i+1;
+
+//         while( j<n && chars[i]==chars[j]){
+//             j++ ;
+//         }
+
+//         //yaha kab ayga ?
+//         // ya toh vector poora traverse kardiya
+//         // ya fir new/defferent character encounter kia hai
+
+//         // oldchar store karlo
+//         chars[ansIndex++] = chars[i] ;
+
+//         int count = j-i ;
+
+//         if(count > 1){       
+//             // converting counting into single digit and saving in answer
+//             string cnt = to_string(count);
+//             for(char ch: cnt){
+//                 chars[ansIndex++] = ch;
+//             }
+//         }
+         
+//          i = j ;
+//       }
+//       return ansIndex ;
+//  }
+
+// int main(){
+// vector<char> ab;
+// ab.push_back('a') ;
+// ab.push_back('a') ;
+// ab.push_back('b') ;
+// ab.push_back('b') ;
+// ab.push_back('c') ;
+// ab.push_back('c') ;
+// ab.push_back('c') ;
+// cout<<" Answer : "<<compress(ab) <<endl ;
+
+//     return 0;
+// }
+
+
+//🔸Time-complexity : O(n) 
+//🔸Space-complexity: O(1) 

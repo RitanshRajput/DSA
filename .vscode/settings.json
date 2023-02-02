@@ -8,6 +8,7 @@
         "utility": "cpp",
         "algorithm": "cpp",
         "*.tcc": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "string": "cpp"
     }
 }
