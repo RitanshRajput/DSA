@@ -1033,18 +1033,18 @@
 
 //ex:
 // Input: chars = ["a","a","b","b","c","c","c"]
-// Output: Return 6, and the first 6 characters of the input array should be:
-//  Output :  ["a","2","b","2","c","3"]
+// Output: Return 6 (size of array), and the first 6 characters of the input array should be:
+//  Output :  ["a","2","b","2","c","3"]  , size of array 6
 // Explanation: The groups are "aa", "bb", and "ccc". This compresses to "a2b2c3".
 
 // Input: chars = ["a"]
 // Output: Return 1, and the first character of the input array should be: 
-// output : ["a"]
+// output : ["a"] , size of array 1
 // Explanation: The only group is "a", which remains uncompressed since it's a single character.
 
 // Input: chars = ["a","b","b","b","b","b","b","b","b","b","b","b","b"]
 // Output: Return 4, and the first 4 characters of the input array should be:
-// output :  ["a","b","1","2"].
+// output :  ["a","b","1","2"]. , size of array 4
 // Explanation: The groups are "a" and "bbbbbbbbbbbb". This compresses to "ab12".
 
 // #include<iostream>
@@ -1059,29 +1059,31 @@
 
 //       while(i<n){
 //         int j= i+1;
-
+ 
 //         while( j<n && chars[i]==chars[j]){
-//             j++ ;
+//             j++ ;                   // jabtak chars[i] same hai chars[j] tabtak j++ karo
 //         }
 
-//         //yaha kab ayga ?
-//         // ya toh vector poora traverse kardiya
-//         // ya fir new/defferent character encounter kia hai
+//         // Bahar kab ayga ?
+//         // ya toh vector poora traverse kardiya , 
+//         // ya fir new/different character encounter kia hai
 
 //         // oldchar store karlo
-//         chars[ansIndex++] = chars[i] ;
+//         chars[ansIndex++] = chars[i] ;        // chars array me jo purana first character tha usko store karlo , ya fir change kardo uss index ke character ko chars[i] se
+//         // chars["a"] iss taraf purana character insert hojayga
 
-//         int count = j-i ;
-
+//         int count = j-i ;                    // count kardo j-i  matalab new character milne se pehle wali value 
+        
 //         if(count > 1){       
-//             // converting counting into single digit and saving in answer
-//             string cnt = to_string(count);
+//         // count ki value ko character me convert kardo agar vo 1 se badi hai
+//             string cnt = to_string(count);          // using to_string() in-build function to convert count numbers into strings
+
 //             for(char ch: cnt){
-//                 chars[ansIndex++] = ch;
+//                 chars[ansIndex++] = ch;           // ab chars[] array ke new index index par uske pichle index wale character ke count ko insert kardo ex: ["a"] = isme count= 2 ko insert kardo as a character = ["a", "2"]
 //             }
 //         }
          
-//          i = j ;
+//          i = j ;     // i ki value j ke barabar kardo kyuki j par new character hai 
 //       }
 //       return ansIndex ;
 //  }
@@ -1103,3 +1105,5 @@
 
 //🔸Time-complexity : O(n) 
 //🔸Space-complexity: O(1) 
+
+
