@@ -360,5 +360,118 @@
 // }
 
 
+//🔸everytime we are traversing n*mtimes up and n*m time down therefor :
+//🔸 Time-complexity = O(n*m) 
+//🔸 Space-complexity = O(n*m)
 
-// 46:00  25/149
+
+
+
+//❓ Quesstion AMAZON:
+// SPIRAL PRINT :
+// Return output in the spiral form
+//   1  2  3           
+//   4  5  6           
+//   7  8  9           
+
+// output :  1 2 3 6 9 8 7 4 5
+
+
+// #include<iostream>
+// using namespace std;
+
+// int main(){
+
+// int arr[3][3] = {{1,2,3}, {4,5,6},{7,8,9}} ;
+
+// // to print in matrix form :
+// for(int i=0; i<3; i++){
+//     for(int j=0; j<3; j++){
+//         cout<<arr[i][j]<<" | " ;
+//     }
+//     cout<<endl;
+// }
+
+// // // Main answer :
+//         int row = 3;
+//         int col = 3;
+
+//         int total = row*col;
+//         int count = 0;
+
+//         int StrCol = 0;
+//         int StrRow = 0;
+//         int EndCol = col-1;
+//         int EndRow = row-1;
+
+//         while(count < total){
+//             /* print first row */
+//         for(int index = StrCol; index <= EndCol && count < total; index++){
+//             cout<<arr [StrRow][index] <<" "; // 1 2 3 
+//             count++;
+//         }
+//         StrRow++;  //  strrow =  1
+
+//         /* print last column */
+//         for(int index = StrRow; index <= EndRow && count < total; index++){
+//             cout<< arr[index][EndCol] <<" " ; // 3 6 9 --> 6 9 
+//             count++;
+//         }
+//         EndCol--; // endcol = 
+
+//         /* print last row-backwards */
+//         for(int index = EndCol; index >= StrCol && count < total; index--){
+//             cout<< arr[EndRow][index]  <<" " ; // 7 8 9 -->  8 7 
+//             count++;
+//         }
+//         EndRow--;
+
+//         /* print first Col-backwards */
+//         for(int index = EndRow; index >= StrRow && count < total; index--){
+//             cout<< arr[index][StrCol] <<" " ;     // 4 5 6 ---> 4
+//             count++;
+//         }
+//         StrCol++;
+//     }
+       
+//     return 0;
+// }
+
+//🔸 Time-complexity : O(n*m)
+//🔸 space-complexity: O(n*m)
+
+
+
+//❓ Question :
+// Rotate matrix by 90  degree :
+//  input        output
+//  1 2 3        7 4 1
+//  4 5 6   ==>  8 5 2
+//  7 8 9        9 6 3
+
+
+#include<iostream>
+#include<algorithm>
+using namespace std ;
+
+int main() {
+
+int arr[3][3] = {{1,2,3}, {4,5,6},{7,8,9}} ;
+
+// to print
+for(int i=0; i<3; i++){
+    for(int j=0; j<3; j++){
+        cout<<arr[i][j] <<" " ;
+    }
+    cout<<endl ;
+}
+cout<<endl;
+
+// main answer :
+ 
+  
+  return 0;
+}
+
+
+// 1:01:00 25/149s
