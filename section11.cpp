@@ -517,22 +517,141 @@
 //output : true :       // 3 is present
 
 
-#include<iostream>
-using namespace std;
+// #include<iostream>
+// using namespace std;
 
-int main(){
+// int main(){
 
-int arr[3][4] = {{1,3,5,7}, {10,11,16,20}, {23,30,34,60}} ;
-
-//to print original array
-for(int i=0; i<3; i++){
-  for(int j=0; j<4; j++){
-     cout<<arr[i][j] <<" | ";
-  }
-  cout<<endl ;
-}
+// int arr[3][4] = {{1,3,5,7}, {10,11,16,20}, {23,30,34,60}} ;
 
 
+// //to print original array in linear form
+// for(int i=0; i<3; i++){
+//   for(int j=0; j<4; j++){
+//      cout<<arr[i][j] <<" ";
+//   }
+// }
 
-  return 0;
-}
+// cout<<endl ;
+// //output : 1 3 5 7 10 11 16 20 23 30 34 60   
+// // In linear form we can see that its in sorted order so we can easily analyze and apply Binary search in 2d array
+
+// // Main Answer :
+
+// int target = 16 ;
+// int count = 0;
+// int row = 3 ;
+// int col = 4 ;
+// int start = 0 ;
+// int end = row*col - 1; 
+// int mid = start + (end - start) /2 ;
+
+//   while(start <= end){
+
+//     int result = arr[mid / col][mid % col] ;      // to get index number of that element
+
+//     if(result == target){                             // below this line is same code for binary search 
+//      cout<<"target "<<target<<" is found " ;
+//     }
+//     if( result <  target ){
+//       start = mid + 1 ;
+//     }
+//     else{
+//       end = mid - 1 ;
+//     }
+//     mid = start + (end - start)/2 ;
+//   }
+
+//   return 0;
+// }
+
+
+//🔴Time complexity :
+// Binary search = O(log n)
+// In 2d array n = row * col
+
+// Therefore Time-complexity for binary search in 2d array is :
+//🔸 O(log (row*col)) 
+//🔸 O(log (m*n))           // m = row, n = col
+
+
+
+
+//❓ Question Leetcode medium :
+// Search a 2D matrix II :
+// write an efficient algorithm that searched for a value (target) in an (m*n) integer matrix.
+// this matrix has the following properties 
+// Integers in each row are sorted in ascending from left to right.
+// Integers in each column are sorted in ascending from top to bottom.
+
+// Input : (5*5) = 25
+//         1  4  7  11 15
+//         2  5  8  12 19
+//         3  6  9  16 22
+//         10 13 14 17 24
+//         18 21 23 26 30
+
+// Linear :
+//     1 4 7 11 15 2 5 8 12 19 3 6 9 16 22 10 13 14 17 24 18 21 23 26 30
+
+
+// #include<iostream>
+// using namespace std;
+
+// int main(){
+
+// int arr[5][5] = {
+//               {1,4,7,11,15},
+//               {2,5,8,12,19},
+//               {3,6,9,16,22},
+//               {10,13,14,17,24},
+//               {18,21,23,26,30}
+// } ;
+
+// // to print 2d array in linear 
+//  for(int i=0; i<3; i++){
+//   for(int j=0; j<4; j++){
+//      cout<<arr[i][j] <<" ";
+//   }
+// }
+
+// cout<<endl ;
+
+// // to print 2d array in matrix form 
+// for(int i=0; i<3; i++){
+//   for(int j=0; j<4; j++){
+//      cout<<arr[i][j] <<" | ";
+//   }
+//   cout<<endl ;
+// }
+
+// cout<<endl ;
+
+// // Main answer 
+
+// int target = 1 ;
+// int row = 5 ;
+// int col = 5 ;
+// int rowIndex = 0 ;              // starting row index
+// int colIndex = col - 1;         // ending column index
+
+// while( rowIndex < row && colIndex >= 0){
+ 
+//  int result = arr[rowIndex][colIndex] ;
+ 
+//  if( result == target){
+//   cout<<" Target "<<target <<" Is found !" ;
+//  }
+//  if(result < target){
+//      rowIndex++ ;
+//  }
+//  else{
+//   colIndex-- ;
+//  }
+
+// }
+
+//  return 0;
+// }
+
+// 26/149
