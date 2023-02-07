@@ -442,7 +442,7 @@
 
 
 
-//❓ Question :
+//❓ Question leetcode medium:
 // Rotate matrix by 90  degree :
 //  input        output
 //  1 2 3        7 4 1
@@ -450,28 +450,89 @@
 //  7 8 9        9 6 3
 
 
+// #include<iostream>
+// #include<algorithm>
+// using namespace std ;
+
+// int main() {
+
+// int arr[3][3] = {{1,2,3}, {4,5,6}, {7,8,9} } ;
+
+// // to print
+// for(int i=0; i<3; i++){
+//     for(int j=0; j<3; j++){
+//         cout<<arr[i][j] <<" " ;
+//     }
+//     cout<<endl ;
+// }
+// cout<<endl;
+
+// // main answer :
+//  int n = 3 ;              // size of array
+
+//  for(int i=0; i<n; i++){
+//   for(int j=i+1; j<n; j++){
+//    swap(arr[i][j], arr[j][i]) ;
+//   }
+//  }
+
+// for(int i=0,k=n-1; i<k; i++,k--){
+//   for(int j=0; j<n; j++){
+//     swap(arr[j][i], arr[j][k]) ;
+//   }
+// }
+
+// //to print 90 degree 2d array
+// for(int i=0; i<3; i++){
+//     for(int j=0; j<3; j++){
+//         cout<<arr[i][j] <<" " ;
+//     }
+//     cout<<endl ;
+// }
+// cout<<endl;
+
+
+//   return 0;
+// }
+
+
+
+
+//🔴 Binary search in 2d array :
+
+//❓Question leetcode medium :
+//Search 2d matrix :
+// write an efficient algorithm that searches for a value in an m*n matrix.
+// this matrix has the following property:
+// Each row is sorted in non-decreasing order.
+// The first integer of each row is greater than the last integer of the previous row.
+// Given an integer target, return true if target is in matrix or false otherwise.
+
+//ex: 
+//input :    1  3  5  7
+//           10 11 16 20
+//           23 30 34 60
+//target = 3 ;           // search 3 in 2d array
+
+//output : true :       // 3 is present
+
+
 #include<iostream>
-#include<algorithm>
-using namespace std ;
+using namespace std;
 
-int main() {
+int main(){
 
-int arr[3][3] = {{1,2,3}, {4,5,6},{7,8,9}} ;
+int arr[3][4] = {{1,3,5,7}, {10,11,16,20}, {23,30,34,60}} ;
 
-// to print
+//to print original array
 for(int i=0; i<3; i++){
-    for(int j=0; j<3; j++){
-        cout<<arr[i][j] <<" " ;
-    }
-    cout<<endl ;
+  for(int j=0; j<4; j++){
+     cout<<arr[i][j] <<" | ";
+  }
+  cout<<endl ;
 }
-cout<<endl;
 
-// main answer :
- 
-  
+
+
   return 0;
 }
-
-
-// 1:01:00 25/149s
