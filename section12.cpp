@@ -463,13 +463,16 @@
 
 //🔘🔘 Fast exponentiation :
 
-//🔸  a^b 
-// i.  (a^b/2)^2         = if b is even
-// ii.  ((a^b/2)^2) * a  = if b is odd
+//🔸  a^b                   // a power b
+// if b is even =  (a^b / 2)^2       
+// if b is odd  =  ((a^b / 2)^2) * a  
 
 //ex :
-// i.  2^10 ==>  (2^5)^2   ==> 2^10
-// ii. 2^11 ==>  ((2^5)^2) * 2  ==> 2^10 * 2  ==>  2^10+1  ==>  2^11
+// if power is even :
+//   2^10 ==>  (2^5)^2   ==> 2^10              
+
+//if power is odd :
+//  2^11 ==>  ((2^5)^2) * 2  ==> 2^10 * 2  ==>  2^10+1  ==>  2^11
 
 
 
@@ -484,7 +487,6 @@
 
 //OUtput format:
 // for each test case, return a single line containing the value of ("X" ^ "N") % "M"
-
 //input given x , n , m .  we need to give output for (x^n) % m.
 
 // #include<iostream>
@@ -519,13 +521,126 @@
 // }
 
 
-//🔸Homework :
-//i.  pigeonHole principle
-//ii. catalon number
-//iii. inclusive-exclusive principle
+
+//❓ question :
+// return a power b
+//🔸  a^b                                // a power b
+// if b is even =  (a^b / 2)^2           // use this formula
+// if b is odd  =  ((a^b / 2)^2) * a     // use this formula
+
+//ex :
+// if power is even :
+//   2^10 ==>  (2^5)^2   ==> 2^10              
+
+//if power is odd :
+//  2^11 ==>  ((2^5)^2) * 2  ==> 2^10 * 2  ==>  2^10+1  ==>  2^11
+
+
+// #include<iostream>
+// using namespace std;
+
+// long fastPower(int a, int b) {
+//     long res = 1; 
+
+//     while( b > 0 ){              // loop till b is not zero
+//       cout<<"b :: "<<b<<endl ;
+    //     if( b % 2 != 0){         // if b is odd  (if ((b&1) != 0) ) or (if (b&1) ) another way to find if b is odd or not)
+    //       cout<<"odd b : "<<b<<endl ;
+    //        res = res * a;  
+    //        cout<<"res : "<<res<<endl ;
+    //     }
+                  
+    //     a = a*a ;
+    //     cout<<"a : "<<a<<endl ;
+    //     b = b/2 ;               // also b = b >> 1  (if right shift 1 then b divide by 2) (if left shift then b multiply by 2)
+    //     cout<<"b/2 : "<<b<<endl ;
+      
+    // }
+
+//     return res ;
+
+// }
+
+// int main() {
+
+// int a = 3 ;
+// int b = 5 ;
+
+// int ans = fastPower(a, b) ;
+// cout<<"ans : "<<ans<<endl ;
+
+//     return 0;
+// }
+
+
 
 // ❓ Homework question :
 // factorial of no:
 // (212!) % m , where m = 10^9 + 7 
 
-// 27/149 
+//🔸  a^b                                // a power b
+// if b is even =  (a^b / 2)^2           // use this formula
+// if b is odd  =  ((a^b / 2)^2) * a     // use this formula
+
+//ex :
+// if power is even :
+//   2^10 ==>  (2^5)^2   ==> 2^10              
+
+//if power is odd :
+//  2^11 ==>  ((2^5)^2) * 2  ==> 2^10 * 2  ==>  2^10+1  ==>  2^11
+
+//🔸 Below ans is working fine in online compiler solution is correct
+// #include<iostream>
+// #include<math.h>
+// using namespace std ;
+
+// long factorial(int a) {
+//   long res = 1 ;
+//   int m = 1000000007 ;
+      
+//     while( a > 0){
+//     res = (res* (a%m)) %m ;
+//     a-- ;
+//     }
+//     return res ;
+// }
+
+// int main() {
+// int a = 212;
+
+// long ans = factorial(a) ;
+// cout<<"ans : "<<ans<<endl ;
+
+//     return 0 ;    // 616613957 = 212 fact
+// }
+
+
+//🔸Another approach for above question : this is also write but not working properly in vscode 
+// #include<iostream> 
+// #include<math.h>
+// using namespace std;
+  
+// long long fact(int n, int m){
+//     long factorial=1;
+  
+//     for(int i=1;i<=n;i++){
+//       factorial= (factorial* i)%m ;
+//     }
+//     return factorial;
+// }
+
+// int main(){
+// int m = pow (10, 9)+7;            // given m = 10^9 + 7  == 1000000007
+
+// cout<<fact(212,m) <<endl ;
+// return 0;
+// }
+
+
+
+//🔸Homework :
+//i. pigeonHole principle
+//ii. catalon number
+//iii. inclusive-exclusive principle
+
+
