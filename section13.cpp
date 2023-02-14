@@ -271,4 +271,284 @@
 // }
 
 
-// 29/149
+
+
+//🔴🔴 Pointer in array :
+
+// int arr[10] ;   [0|1||2|3|4|5|6|7|8|9]
+//🔸So the address of first block of array is the name of that array :
+//ex:
+// print address of first block of above array :
+// ans : arr
+
+//🔸Implementation :
+
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// int arr[10] ;
+
+// cout<<" address of first memory block is : "<<arr<<endl ;    //output: 0x61fee8
+//     return 0;
+// }
+
+
+//🔸 Can we use & ampersand to print address of array memory block : yes we can
+//🔸Implementation :
+
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// int arr[10] = {0} ;
+
+// cout<<" address of array memory using & ampersand : "<< &arr[0] <<endl ;   //output : 0x61fee8
+// cout<<" address of array memory using & ampersand : "<< &arr[1] <<endl ;   //output : 0x61feec
+// cout<<" address of array memory using & ampersand : "<< &arr[2] <<endl ;   //output : 0x61fef0
+
+
+// cout<<" printing value of array : "<<arr[0]<<endl ;                       //output : value = 0
+// cout<<" printing address of 1st index of array : "<<arr<<endl ;           //output : address of first index =  0x61fed8
+// cout<<" address of array memory using & ampersand : "<< &arr[0] <<endl ;  //output : address using ampersand & = 0x61fee8
+
+//     return 0;
+// }
+
+
+
+//🔸More practice :  how to print value in array using *pointer 
+//🔸Implementation :
+
+// #include<iostream>
+// using namespace std;
+// int main() {
+
+// int arr[5] = {1, 2, 3, 4 , 5} ;
+
+// // cout<<" printing value using *arr[1] : "<< *arr[1] <<endl ;      //output : error not valid 
+
+// cout<<" printing value using * estrisk pointer of 1st index : "<< *arr <<endl ;  //output : 1 
+// cout<<" printing value using *arr + 1 to print 2nd index : "<< *arr + 1 <<endl ;  //output : 2 
+
+// cout<<" printing value using *(arr + 1) : "<< *(arr + 1) <<endl ;    //output : 2
+// cout<<" printing value using *(arr + 2) : "<< *(arr + 2) <<endl ;    //output : 3
+
+// cout<<" printing value using *(arr) + 3 : "<< *(arr) + 3 <<endl ;    //output : 4
+// cout<<" printing value using *(arr) + 4 : "<< *(arr) + 4 <<endl ;    //output : 5
+
+//     return 0;
+// }
+
+
+//🔸More practice : when we write arr[2] = prints value at index 3, also *(arr + 2) = prints value at index at 3
+//  arr[3] = {1, 2, 3}     = suppose address of 1 = 101, 2 = 105, 3 = 109  
+//  arr = 101
+// *arr = 1
+// *(arr + 2) => (101 + 2)   // 2 means 8 bytes  , 1 = 4 byte
+//            => (101 + 8byte)  
+//            => (109)       
+// value at 109 is =>  3
+
+
+//🔴🔴formula 
+//    arr[i] = *(arr + i)
+//OR
+//    i[arr] = *(i + arr)
+
+// #include<iostream>
+// using namespace std;
+// int main() {
+// int arr[5] = {11, 12, 13, 14, 15} ;
+// int i = 3 ;
+
+// cout<<"Using  arr[i] : "<< arr[i] <<endl ;   //output: 14
+// cout<<"Using  i[arr] : "<< i[arr] <<endl ;   //output: 14
+
+// cout<<"Using  arr[i] = *(arr + i) : "<< *(arr + 3) <<endl ;   //output: 14
+// cout<<"Using  i[arr] = *(i + arr) : "<< *(i + arr) <<endl ;   //output: 14
+
+//     return 0;
+// }
+
+
+//🔘 Differences in pointer/ Arrays :
+
+// size of array block : arr[10]    => 4byte each x 10 memory block =>  size =  40
+// size of pointer : *ptr = &arr[0] => 4byte + 4byte  => size =  8 
+
+// #include<iostream>
+// using namespace std;
+// int main() {
+
+// int arr[10] ;
+// cout<<" size of arr  in byte : "<< sizeof(arr) <<endl;      //output : 40     (4byte * 10)
+// cout<<" size of *arr  in byte : "<< sizeof(*arr) <<endl;    //output : 4     
+// cout<<" size of &arr  in byte : "<< sizeof(&arr) <<endl;    //output : 8      (address stored)      
+
+// int *ptr = &arr[0] ;
+// cout<<" size of ptr  in byte : "<< sizeof(ptr) <<endl;    //output : 8      (address stored)
+// cout<<" size of *ptr in byte : "<< sizeof(*ptr) <<endl;   //output : 4 
+// cout<<" size of &ptr in byte : "<< sizeof(&ptr) <<endl;   //output : 8       (address stored)
+
+//     return 0 ;
+// }
+
+
+//🔸More practice : & ampersand gives address of that variable
+
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// int arr[20]= {1,2,3,4,5} ;
+// cout<<" Printing &arr[0] : "<< &arr[0] <<endl ;   //output : 0x61feb0  (adddress of arr[0])
+// cout<<" Printing &arr    : "<< &arr <<endl ;      //output : 0x61feb0  (address of arr[0th])
+// cout<<" Printing arr     : "<< arr <<endl ;       //output : 0x61feb0  (address of arr[0th])
+
+// int *ptr = &arr[0] ;
+// cout<<" Printing ptr  : "<< ptr <<endl ;         //output : 0x61feb0 (address of arr[0th index])
+// cout<<" Printing *ptr : "<< *ptr <<endl ;         //output : 1       (value at 0th index)
+// cout<<" Printing &ptr : "<< &ptr <<endl ;         //output : 0x61feac (address of ptr)
+
+//     return 0 ;
+// }
+
+//🔸More practice : symbol table content cannot be changed :
+//ex:  int arr[10] ;
+//  arr = arr + 1;   //output : error arr[10] is not assignable
+
+// we can do that with pointer
+
+// #include<iostream>
+// using namespace std;
+// int main() {
+
+// int arr[10] ;
+// //ERROR
+// // arr = arr+1 ;   //output : error: incompatible types in assignment of 'int*' to 'int [10]'
+
+// int *ptr = &arr[10] ;
+// cout<<" ptr : "<< ptr <<endl ;        //output :  0x61ff0c  (address of arr[0th index])
+
+// ptr = ptr + 1 ;
+// cout<<" ptr + 1 : "<< ptr <<endl ;    //output : 0x61ff10  (address of arr[1th index])
+
+//     return 0;
+// }
+
+
+//🔴🔴Pointer in character array :
+
+//🔸cout function for interger array and char array is differently implemented .
+//  arr  = cout return address of 0th index
+//  char = cout return entire string
+
+// #include<iostream>
+// using namespace std;
+// int main() {
+
+// int arr[5] = {1,2,3,4,5} ;
+// char ch[5] = "abcd" ;
+
+// cout<<" arr : "<< arr <<endl ;        //output :  0x61fefc
+// cout<<" ch  : "<< ch <<endl ;        //output :  abcd
+
+// char *ctr = &ch[0] ;
+// cout<<" pointer ctr  : "<< ctr <<endl ;     //output : abcd    (entire string)
+// cout<<" pointer *ctr : "<< *ctr <<endl ;    //output : 1        (value at ch[0th index])
+// cout<<" pointer &ctr : "<< &ctr <<endl ;    //output : 0x61fef0  (address of pointer ctr)
+
+// char temp = 'z' ;
+// char *p = &temp ;
+// cout<<"  p  : "<< p <<endl ;        //output : z<?a      (bcoz here p couldn't find '\0' null character so it move forward till it found '\0' null character)
+
+// char cha[6] = "abdce" ;
+// // char *ptr = "asbke" ;         // Bad practice / Risky / Do not attempt
+
+//     return 0;
+// }
+
+
+
+//🔴🔴Pointer in function :
+
+// #include<iostream>
+// using namespace std;
+
+// void print (int *p) {
+
+//     cout<<"printing value through function using pointer : "<< *p <<endl ;
+// }
+
+// void update(int *ptr) {
+//     //🔸address updating :
+//     // ptr = ptr + 1 ;
+//     // cout<<" updating inside update function : "<< ptr <<endl ;  //output :  0x61ff0c  
+//     // // only updating the address of update function ptr not the real ptr address
+
+//    //🔸value updating  :
+//    *ptr = *ptr + 1 ;
+//    cout<< " updating value of *ptr : "<< *ptr <<endl ;  //output : 7
+//    // but when we update the value of *ptr in function it reflect in main function too
+//    // bcoz we are passing by value
+
+// }
+
+// int main() {
+
+// int value = 5 ;
+// int *ptr = &value ;
+
+// print(ptr) ;          //output : 5
+
+// cout<<" before updating adddress of ptr : "<< ptr <<endl ;    //output : 0x61ff08
+// update(ptr) ;
+// cout<<" after updating adddress of ptr  : "<< ptr <<endl;      //output : 0x61ff08
+// // bcoz we are passing by value in void update function and when it is updating 
+// // ptr = ptr+1 it is changing address of ptr of that update function not the address of  main function ptr
+// // hence after updating it is returning the original ptr address not the update function ptr
+
+// cout<<" before updating value of *ptr : "<< *ptr <<endl ;   //output : 6
+// update(ptr) ;
+// cout<<" after updating value of *ptr : "<< *ptr <<endl ;   //output : 7
+// // When we try to update the *ptr value it updating the value in update function as well as main function .
+// // 
+
+//     return 0;
+// }
+
+
+//🔸more practice :
+// Benefit of using pointer in function :
+// we can send a part of array in function from pointer :
+// int arr[5] = {1,2,3,4,5}
+// getSum(arr+2, 3)   // here we are sending only (3 , 4, 5) in function as argument
+
+// #include<iostream>
+// using namespace std;
+
+// int getSum(int *arr, int n) {
+ 
+//    cout<<" size of paramter arr in function : "<< sizeof(arr) <<endl ;   // output : 4 
+//    // bcoz here arr[] is not the showing arr[] in main function it is actually
+//    // acting like *arr, so we can write int *arr as a parameter instead of int arr[]
+
+//     int sum = 0;
+//     for(int i=0; i<n; i++) {
+//         // sum = sum + arr[i]  ;         //output : 65   
+//         sum = sum + i[arr]  ;           //output: 65
+//     }
+//     return sum ;
+// }
+
+// int main() {
+
+// int arr[5] = {11, 12, 13, 14, 15} ;
+// cout<<"printing sum of all no. in array : "<< getSum(arr, 5) <<endl ;   //output : 65
+// cout<<"printing sum of all no. in array : "<< getSum(arr+2, 3) <<endl ;   //output : 42  {13 + 14 + 15}
+// cout<<"printing sum of all no. in array : "<< getSum(arr+3, 2) <<endl ;   //output : 29  {14 + 15}
+
+
+//     return 0;
+// }
