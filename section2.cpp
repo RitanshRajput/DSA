@@ -100,20 +100,20 @@
 // using namespace std ;
 
 //     int main() {
-//       char a ;
-//       cin>> a ;
+//       char ch ;
+//       cin>> ch ;
       
-//      if(a >= 97 && a <= 122)
+//      if(ch >= 97 && ch <= 122)
 //      {
-//         cout<<" is lowercase" ;
+//         cout<< ch <<" is lowercase" ;
 //      }
-//      else if (a >= 65 && a <= 90)
+//      else if (ch >= 65 && ch <= 90)
 //      {
-//         cout<< a << " is uppercase" ;
+//         cout<< ch << " is uppercase" ;
 //      }
-//      else if(a >= 48 && a <= 57)
+//      else if(ch >= 48 && ch <= 57)
 //      {
-//         cout<< a << " is numeric value" ;
+//         cout<< ch << " is numeric value" ;
 //      }
 //    }
 
@@ -326,8 +326,9 @@
 //     int n = 1;
 //     int j;
 //     cin>>j;
-//     while(n <=j){
-//             int i = 1;
+
+//     while(n <= j){
+//        int i = 1;
 //         while(i <= n){
 //           cout<<"*" ;
 //           i = i + 1;
@@ -407,6 +408,7 @@
 //     int k;
 //     cout<<"ENter a number\n";
 //     cin>>k;
+
 //     while(n<=k){
 //          int j = n;
 //          int i = 1;
@@ -507,8 +509,8 @@
 //    int  n ;
 //    cout<<"ENter number\n";
 //    cin>>n ;
-
 //    int i = 1;
+
 //    while(i<=n){
 //        int j = 1;
 //         while(j<=n){
@@ -687,11 +689,9 @@
 // #include <iostream>
 // using namespace std;
 // int main(){
-//     int n;
-//     cout<<"enter a number\n" ;
-//     cin>>n;
-    
+//     int n = 4 ;
 //     int i = 1;
+
 //     while(i <= n) {
 //         int j = 1;
 //         while(j<=i) {        
@@ -859,32 +859,32 @@
 //       3 4
 //         4
 
-//  #include <iostream>
-//  using namespace std;
-//  int main(){
-//     int n;
-//     cout<<"enter number\n" ;
-//     cin>>n ;
+ #include <iostream>
+ using namespace std;
+ int main(){
+    int n;
+    cout<<"enter number\n" ;
+    cin>>n ;
 
-//     int i = 1 ;
-//     while(i<=n){
-//      int space = i + 1;
-//      while(space > 0) {
-//         cout<<" ";
-//         space = space - 1;
-//      }
-//      int num = n - i + 1;
-//      int k = i ;
-//      while(num > 0){
-//        cout<<k ;
-//        num = num - 1;
-//        k = k + 1;
-//      }
-//      cout<<endl ;
-//      i =i + 1;
+    int i = 1 ;
+    while(i<=n){
+     int space = i + 1;
+     while(space > 0) {
+        cout<<" ";
+        space = space - 1;
+     }
+     int num = n - i + 1;
+     int k = i ;
+     while(num > 0){
+       cout<<k ;
+       num = num - 1;
+       k = k + 1;
+     }
+     cout<<endl ;
+     i =i + 1;
 
-//     }
-//  }
+    }
+ }
 
 //3️⃣1️⃣ Pattern Question ;
 //       1

@@ -11,7 +11,7 @@
 //🔸EX:  (AND) & operator 
 //  a=2 , b=3  
 //  a & b
-//  => 10         (2 = 10, 3 = 11) on binary level
+//  => 10 binary value        (2 = 10, 3 = 11) on binary level see below input/output table 
 
 
 
@@ -95,13 +95,13 @@
 // using namespace std ;
 // int main(){
    
-//    int a = 4;
-//    int b = 6;
+//    int a = 4;     binary = 100
+//    int b = 6;     binary = 110
 
-//    cout<<" a & b : "<<( a & b )<<endl ;     //output :     4
-//    cout<<" a | b : "<< (a | b) <<endl ;     //output :     6
-//    cout<<"  ~ a  : "<<   ~a    <<endl ;     //output :    -5
-//    cout<<" a ^ b : "<<( a ^ b) <<endl ;     //output :     2
+//    cout<<" a & b : "<<( a & b )<<endl ;     //output :     4        (100 & 110) = 100
+//    cout<<" a | b : "<< (a | b) <<endl ;     //output :     6        (100 | 110) = 110 
+//    cout<<"  ~ a  : "<<   ~a    <<endl ;     //output :    -5        ( ~100)     = 011
+//    cout<<" a ^ b : "<<( a ^ b) <<endl ;     //output :     2        (100 ^ 110) = 010
 // }
 
 //🔸 AND a&b :
@@ -116,12 +116,12 @@
 //           -----
 //  output => 110
 
-//🔸 AND a&b :
+//🔸 ~a :
 //   a = 4 => 100      //1) It will convert it by 1s complement(invert the bit if 1=0, if 0=1)  (for 4=>  0000 0000 0000 0100) (1sComplement => 1111 1111 1111 1011)
 //           -----     //2) Then while printing it for -ve no., It will then convert above 1s complement by 2s complement()    (2scomplement first covert above 1s into again 1s => 0000 0000 0000 0100)
 //  output => 101      // 2s complement(first convert the above 1scomplement into again 1scomplement and then for 2scomplement add+ 1 )  (2scomplement now add+1 in above 1s => 0000 0000 0000 0101)
 
-//🔸 AND a&b :
+//🔸 XOR a^b:
 //   a = 4 => 100
 //   b = 6 => 110
 //           -----
@@ -129,17 +129,18 @@
 
 
 
-// 🔘🔘 Left Shift and Right Shift operator:
+                             //🔴🔴 Left Shift and Right Shift operator:
 
-//1️⃣ Left Shift ( << ) :   this means shift the bit, number of times to the left side
+
+//1️⃣ Left Shift ( << ) :   this means shift the bit, number of times to the left side 
 //Ex:
 //  5 << 1  :                      //This means shift every bit of 5, 1 times to the left side.
-//  5    => 0000 0000 0000 0101    // for 4bytes
+//  5    => 0000 0000 0000 0101    // for 4bytes , 5 = 101
 //output => 0000 0000 0000 1010    // output:   1010 => 10
 
 //Ex:
 //   3 << 2 :                      //This means shift every bit of 3, 2 times to the left
-//  3     => 0000 0000 0000 0011  
+//  3     => 0000 0000 0000 0011   // 3 = 11
 // output => 0000 0000 0000 1100    //output:  1100 => 12
 
 
@@ -147,17 +148,17 @@
 //2️⃣ Right Shift ( >> )  : this means shift the bit, number of times to the Right side
 //Ex:
 //  5 >> 2  :                      //This means shift every bit of 5, 2 times to the Right side.
-//  5    => 0000 0000 0000 0101    // for 4bytes
-//output => 0000 0000 0000 0001    // output:   01 => 1
+//  5    => 0000 0000 0000 0101    // for 4bytes, 5 = 101
+//output => 0000 0000 0000 0001    // output:   1 => 1
 
 //Ex:
 //  3 >> 2 :                      //This means shift every bit of 3, 2 times to the Right
 //  3     => 0000 0000 0000 0011  
-// output => 0000 0000 0000 0000   //output:  00 => 0
+// output => 0000 0000 0000 0000   //output:  0 => 0
 
 
-//🔸when small number are left shifted then it basically multiplies that number with 2 with for right side number of times (if 19 << 3  => it will multiply 19*2*2*2)
-//🔸when small number are right shifted then it basically divides that number with 2 for right side number of times (if 17 >> 2  => it will divide 17/2*2  )
+//🔸when small number are left shifted then it basically multiplies that number with 2 for right side number of times (if 19 << 3  => it will multiply 19*2*2*2)
+//🔸when small number are right shifted then it basically divides that number with 2 for right side number of times (if 17 >> 2  => it will divide 17/2/2  )
 
 //🔸 When we left shifting or Right shifting the padding will always be Zero(0)  IN CASE OF +VE NUMBER ONLY:
 // means when we shift a bit then to fulfill its place 0 will be there :
@@ -172,11 +173,11 @@
 //    int a = 4;
 //    int b = 6;
 
-//    cout<<(17 >> 1)<<endl ;          //output : 8
-//    cout<<(17 >> 2)<<endl ;          //output : 4
-//    cout<<(19 << 1)<<endl ;          //output : 38
-//    cout<<(19 << 3)<<endl ;          //output : 152
-//    cout<<(21 << 2)<<endl ;          //output : 84
+//    cout<<(17 >> 1)<<endl ;          //output : 8  right  17/2
+//    cout<<(17 >> 2)<<endl ;          //output : 4  right  17/2/2
+//    cout<<(19 << 1)<<endl ;          //output : 38  left  19*2
+//    cout<<(19 << 3)<<endl ;          //output : 152 left  19*2*2
+//    cout<<(21 << 2)<<endl ;          //output : 84  left  21*2
 // }
 
 
@@ -199,7 +200,7 @@
 //     int a , b =1;      
 //     a = 10 ;
 //     if (++a)              // if(not 0, True)
-//     cout<< b ;           //output : 1     
+//     cout<< b ;           //output : b = 1     
 //     else
 //     cout<< ++b ;         
 // }
@@ -214,11 +215,12 @@
 //     int b = 2;
 
 //     if(a-- > 0 && ++b >2) {              // if(a= 1 which is > 0 and b=3 >2) (a-- execute then increment, ++b increment then execute)
-//         cout << "Stage1 = Inside if ";
+//         cout << "Stage1 = Inside if " <<endl ;
+//         cout<<"stage 1 a , b : " <<a<<" , "<<b<<endl;   //output : 0 3  // in case of && operator both side increment decrement will execute
 //      }else {
 //         cout<<"Stage2 = Inside else" ;
 //      }           
-//     cout<< a << " " << b <<endl ;        // a-- executed above now decreased while printing,  ++b incremented above now executing while printing.
+//     cout<<"outsie :"<< a << " , " << b <<endl ;        // a-- executed above now decreased while printing,  ++b incremented above now executing while printing.
 //                                         //output : stage1 = Insside If 0 3
 // }
 
@@ -231,10 +233,11 @@
 //     int a = 1;
 //     int b = 2;
 
-//     if(a-- > 0 || ++b >2) {              // if(a= 1 which is > 0 or b=3 >2) (a-- execute then increment, ++b increment then execute)
-//         cout << "Stage1 = Inside if ";
+//     if(++b >2 || a-- > 0  ) {              // if(a= 1 which is > 0 OR b=3 >2) (a-- execute then increment, ++b increment then execute)
+//         cout << "Stage1 = Inside if : " <<endl ;
+//         cout<<"stage1 a, b : "<<a <<","<<b <<endl ;   // in case of || operator first (left side) increment or decrement will execute and second inc dec will be ignored
 //      }else {
-//         cout<<"Stage2 = Inside else" ;
+//         cout<<"Stage2 = Inside else" << endl ;
 //      }           
 //     cout<< a << " " << b <<endl ;        // a-- executed above now decreased while printing,  ++b incremented above now executing while printing.
 //                                         //output : stage1 = Insside If 0 2
@@ -258,9 +261,9 @@
 // int main(){
  
 //  int a = 1;             // a = 1
-//  int b = a++;           // b = 1
-//  int c = ++a;           // c = 2 
-//  cout<< b;              // output: b = 1  (b = a++ executed above)
+//  int b = a++;           // b = 1 , then incremented a++ => a = 2
+//  int c = ++a;           // c = 3 , incremented above a = 2 , and ++a means a = 3
+//  cout<< b <<endl;       // output: b = 1  (b = a++ executed above)
 //  cout<< c;              // output: c = 3  (c = ++a incremented above now executing while printing)
 //  }
 
@@ -364,7 +367,7 @@
 
 // for(int i=0; i<=15; i+=2){
 //      cout<< i << " ";
-//      if(i&1){
+//      if(i&1){             // if ( 0 & 1 ) == 0 false then continue and skip i++ and iteration
 //         continue;
 //      }
 //       i++ ;                   //output: 0 3 5 7 9 11 13 15 
@@ -511,26 +514,25 @@
 //    int n;
 //    cout<<"enter number\n";
 //    cin>>n ;
-//   float answer = 0 ;                        //Using float bcoz pow works well with float.else it will some unexpected answer.
-//   int i = 0 ;
+//    float answer = 0 ;                        //Using float bcoz pow works well with float.else it will some unexpected answer.
+//    int i = 0 ;
 
 //    while(n != 0){                             //Step1 : loop till n is not equal to zero 
-//       int bit = n & 1 ;                       //Step2 : Store the remainder of every single digit(by using AND operator)(if 0 & 1 => 0) (if 1 & 1 => 1)
-//       answer = (bit * pow(10, i)) + answer ;  //Step3 : reverse the numbers that is store in bit (formula = (number * 10^i) + Bit) the i will be increased by each iteration
+//     int bit = n & 1 ;                         //Step2 : Store the remainder of every single digit(by using AND operator)(if 0 & 1 => 0) (if 1 & 1 => 1)
+//     answer = (bit * pow(10, i)) + answer ;    //Step3 : reverse the numbers that is store in bit (formula = (bit * pow(10, i)) + answer ) the i will be increased by each iteration
 
-//       n = n >> 1 ;                            //Step4: Right shift each digit on every iteration so we can move to next digit( 1010 => n>>1  => 101 => 10 => 1)
-//      i++ ;                                    // Step5:  increment i for the reversed formula
+//     n = n >> 1 ;                              //Step4: Right shift each digit on every iteration so we can move to next digit( 110  => n>>1  => 110 => 11 => 1)
+//     i++ ;                                     //Step5:  increment i for the reversed formula
 //    }
-
 //      cout<<"answer is: "<<answer<<endl;
 //  }
 
 
- //🔘 Formula to store value in Normal flow and reverse flow:
- //1> Normal flow :  float answer = 0 ;
- //                   answer = (answer * 10) + digit;
+//🔘 Formula to store value in Normal flow and reverse flow:
+//  1> Normal flow :  float answer = 0 ;
+//                   answer = (answer * 10) + digit;
 
- //2> Reverse flow :  float answer = 0 ;
+//  2> Reverse flow :  float answer = 0 ;
 //                   answer = (answer * (10^i)) + digit;
 //                      i++ ; (10^0, 10^1, 10^2, 10^3, ....) increment with each iteration
 
@@ -580,7 +582,7 @@
 //        i++ ;                        //Step6: increment i for the power to be updated
 //       }
 //       cout<<"answer milgaya :" <<ans ;       //Step7: print the stored answer 
-// }
+//  }
 
 
 
@@ -654,7 +656,7 @@
 //   int m = n;
 //   int mask = 0;
 
-//         if(n == 0)              //for edge case : if n = 00000000000 then return 1
+//         if(n == 0)                  //for edge case : if n = 00000000000 then return 1
 //          cout<< 1 ;
 
 //         while( m!=0 ) {                 //loop till m is equal to zero
@@ -863,20 +865,20 @@
 //   switch (1){
 //       case 1 :{
 //             n100 = total / 100;
-//             cout<<"100 notes : "<<n100<<endl ;
+//             cout<<"100 notes : "<< n100 <<endl ;
 //             remain = total % 100 ;
 //             cout<<"remain :"<<remain<<endl ;
            
 //            n50 = remain / 50 ;
-//            cout<<"50 notes : "<<n50<<endl ;
+//            cout<<"50 notes : "<< n50 <<endl ;
 //            remain = remain % 50 ;
           
 //            n20 = remain / 20 ;
-//            cout<<"20 notes : "<<n20<<endl ;
+//            cout<<"20 notes : "<< n20 <<endl ;
 //            remain = remain % 20 ;
 
-//             n1 = remain / 1 ;
-//            cout<<"1 notes : "<<n1<<endl ;
+//            n1 = remain / 1 ;
+//            cout<<"1 notes : "<< n1 <<endl ;
 //            remain = remain % 1 ;
 //       }
 //       break ;
@@ -884,7 +886,8 @@
 // }
 
 
-                   //🔴🔴 FUNCTIONS :
+                            //🔴🔴 FUNCTIONS :
+
 //🔸when we want to use a collection of code to do a task again and again , we cannot do it again and again
 //  it will become bulky , take much space, make the program slow, and cause of bug
 //🔸Thats why we Use function : 
@@ -904,7 +907,7 @@
 //             ans = ans * a;
 //       }
 //       return ans;
-// }
+//  }
 
 //  int main(){
 //       int a , b ;
@@ -916,9 +919,9 @@
 //       return 0;
 //  }
 
-//🔸 FUnction cannot a variable declare in main function(int main(){ }) 
+//🔸 FUnction cannot a declare variable in main function(int main(){ }) 
 
-//🔸❓ function decribes is no is even or odd .
+//🔸❓ function decribes if no is even or odd .
 // #include<iostream>
 // #include<math.h>
 // using namespace std;

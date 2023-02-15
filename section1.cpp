@@ -61,9 +61,10 @@
 //🔘 Variable :
 //🔸 integer   = int    = a, b, name, age ; takes generally 4byte = 32bit , but also varies could be 2bytes depends on the memory.
 //🔸 character = char   = 'a', 'b', 'c'   ; takes 1byte = 8bit of spaces in memory.
-//🔸 Boolean   = bool   = true, false     ; takes 1 byte = 8bit .
+//🔸 Boolean   = bool   = true, false     ; takes 1byte = 8bit .
 //🔸 float     = float  = 1.4, 22.44      ; takes 8byte = 64bit
 //🔸 double    = double = 232.3454        ; takes 8byte = 64bit
+//🔸 String    = String = "welcome here"  ; takes 8byte = 64bit
 
 
 //🔘 Naming conventions:
@@ -107,7 +108,7 @@
 //  11 = 1011
 
 // if we declare int a = 5 ; then the compiler will give integer a 4byte of space 
-// inside which the it will store 5 as 101 in binary code
+// inside which it will store 5 as 101 in binary code
 //🔸 What if there is a character ?
 // in programming language every character is assign with a number which is called ASCII value. 
 // ASCII stands for American Standard Code for Information Interchange.
@@ -136,7 +137,7 @@
 
 //    }
 
-//🔸 When we try to assign a higher variable to lower it will not work or the value will be garbage value:
+//🔸 When we try to assign a value of higher variable to lower variable it will not work or the value will be garbage value:
 //ex: char d = 12345                //output: 0 
 
 //🔘How negative nnumbers are store?
@@ -159,7 +160,7 @@
 
 
 // To print we again use 1's compliment add +1 :
-//  1's compliment above value :   0000 0000 0000 0010
+//  1's compliment above value :   1111 1111 1111 1010
 //  2's compliment add 1       :   0000 0000 0000 0101    => 101 to print becomes 5
 
 
