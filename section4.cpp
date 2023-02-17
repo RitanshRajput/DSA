@@ -98,7 +98,7 @@
 // }
 
 // 🔘 INT_MIN => stores lowest integer value which is -2^31   (^ power)
-// 🔘 INT_MAX => stores highedt integer value which is 2^31   (^ power)
+// 🔘 INT_MAX => stores highest integer value which is 2^31   (^ power)
 // 🔸 to use this method use library => #include<limits.h>
 
 // 🔘 max() => this is predefined function compares two value and tells max , it takes 2 paramter max(value1, value2) ;
@@ -178,6 +178,7 @@
 //     cout<<"Inside the Void function "<<endl ;
 
 //           arr[0] =120 ;            // updating 0th index by 120   (now the original value 2 will be updated by 120)
+//           cout<<"updating in void function : "<<endl;
 //            for(int i=0; i<3; i++){
 //                cout<<" "<<arr[i];
 //            }
@@ -192,6 +193,7 @@
 
 // update(arr, 3) ;
 
+//  cout<<"updating in main function : "<<endl;
 // for(int i=0; i<3; i++){
 //     cout<<" "<<arr[i];
 // }
@@ -398,7 +400,8 @@
 // 🔘 size() = size() tells the size of vector/array ( arrayName.size() )
 
 // ❓Question Leetcode easy 5️⃣ ;
-//  Given an array of integers arr, return true if the number of occurrences of each value in the array is unique or false otherwise.
+//  Given an array of integers arr, return true if the number of occurrences of each value in 
+//  the array is unique or false otherwise.
 
 // Example 1:
 
@@ -424,7 +427,8 @@
 // 🔴 Unsolved ;
 
 // ❓ Question leetcode medium 6️⃣ ;
-//  Given an integer array nums of length n where all the integers of nums are in the range [1, n] and each integer appears once or twice, return an array of all the integers that appears twice.
+//  Given an integer array nums of length n where all the integers of nums are in the range [1, n] 
+//  and each integer appears once or twice, return an array of all the integers that appears twice.
 
 // You must write an algorithm that runs in O(n) time and uses only constant extra space.
 
@@ -442,12 +446,29 @@
 
 // #include <iostream>
 // using namespace std;
+
+// int duplicate(int arr[], int size){
+      
+//       int ans = 0 ;
+//       for(int i=0; i<size; i++){
+//          ans = ans^arr[i] ;
+//          cout<<ans <<endl ;
+//       }
+
+// }
+
 // int main(){
+
+//     int num[8] = {4,3,2,7,8,2,3,1} ;
+//     int size = 8 ;
+
+//     duplicate(num, size) ;
 
 //     return 0 ;
 // }
 
 // 🔴 Unsolved ;
+
 
 // ❓ Question ;
 //  find  duplicate in an array ;
@@ -458,21 +479,23 @@
 // int duplicate(int arr[], int size){        //using XOR operator:
 //     int ans = 0 ;
 //     for(int i=0; i<size ; i++){
-//         ans = ans^arr[i] ;
+//         // if xor ^ xor = 0, if xor ^ 0 = xor
+//         // Xor ing all the array element from 0 to n-1  5^1^10^3^4^10 
+//         ans = ans^arr[i] ;               
 //     }
-
 //     for(int i = 1; i<size; i++){
+//         // again xor ing all element from 1 to n-1   1^2^3^4^5
 //         ans = ans^i ;
 //     }
-//     cout<<ans<<endl ;
+//     cout<<"answer :" <<ans<<endl ;
 // }
 
 // int main(){
-//  int arr[6] = {5,1,2,3,4,2} ;
-//  int arr1[9] ={8, 7, 2,5,4,7,1,3,6} ;
+//  int arr[6] = {3,1,21,21,4,3} ;
+//  int arr1[9] ={8,21, 2,5,4,7,21,3,6} ;
 
-//  duplicate(arr, 6) ;
-//  duplicate(arr1, 9) ;
+// //  duplicate(arr, 6) ;
+// //  duplicate(arr1, 9) ;
 
 //  for(int i=0; i<9; i++) {               // (brute force approach) without using XOR bitwise operator
 //      int count = 0 ;

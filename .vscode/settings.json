@@ -9,6 +9,8 @@
         "algorithm": "cpp",
         "*.tcc": "cpp",
         "typeinfo": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "ratio": "cpp",
+        "type_traits": "cpp"
     }
 }
