@@ -980,4 +980,551 @@
 // }
 
 
-///🔴 30/149 decription practice pointer questions :
+//🔴 Coding Ninja : pointer practice question :
+
+//❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+// float f = 10.5 ;
+// float p = 2.5 ;
+// float* ptr = &f ;          // p = address of f , *p = 10.5
+// (*ptr)++ ;                // (*ptr)++ = post-increment execute and then increment fo *ptr = 10.5 = 11.5 , f = 11.5
+// *ptr = p ;                // *ptr = 11.5 , *ptr = p , *ptr = 2.5 , f = 2.5
+
+// cout<< *ptr <<endl ;   //output : 2.5
+// cout<< f << endl ;     //output : 2.5 
+// cout<< p <<endl ;      //output : 2.5
+
+//     return 0;
+// }
+
+//❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// int a = 7 ;
+// int b = 17 ;
+// int* c = &b ;        // c = address of b , *c = 17
+// *c = 7 ;            // *c = 7 ;  b = 7
+
+// cout<< a <<endl ;    //output : 7
+// cout<< b <<endl ;    // output: 7
+
+//     return 0;
+// }
+
+//❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// int *ptr = 0 ;        //pointer initialise with 0
+// int a = 10 ;
+// *ptr = a ;           // if pointer is first initialise with 0 then if again initialise with another variable it must use & ampersand operator
+ 
+// cout<< *ptr <<endl ;    //output:  error
+
+//     return 0;
+// }
+
+
+//❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// int b = 10 ;
+// int *a = &b ;
+
+// // which of the following gives the memory address of variable 'b' pointed by pointer 'a' 
+// //1.  a             // a = address of b
+// //2.  *a            // *a = value at b
+// //3.  &a            // &a = address of itself
+// //4. address(a)     // error
+//     return 0;
+// }
+
+
+//❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// char ch = 'a' ;
+// char* ptr = &ch ;       // ptr = address of ch but prints whole char arr , *ptr = value at ch
+// ch++ ;                  // ch++ = postincrement execute first then increment ch ='b'
+
+// cout<< *ptr <<endl ;   //output : 
+
+//     return 0;
+// }
+
+
+//❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// int a = 7 ;
+// int *c = &a ;      // c = address of a , *c = value at a
+// c = c + 1 ;        // c = c+1 , address of a + 1 , 
+//                    // now pointing to another another variable suppose address of a = 100 , then c = c + 1 => 100 + 1 => 101
+
+// cout<< a <<endl ;      //output : 7
+// cout<< *c <<endl ;     // garbage value
+
+//     return 0;
+// }
+
+// //❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// //Assume the memory address of variable 'a' is 400 (and an integer takes 4 bytes), what will be the output?
+// int a = 7;          // integers takes 4 byte for address, example says address of a = 400
+//                     // 400 401 402 403
+// int *c = &a;
+// c = c + 3;         // c = c + 3  ( 3 * 4bytes = 12bytes ==> 400 + 12 ) , 4bytes = 400 401 402 403 , 4bytes= 404 405 406 407, 4bytes = 408 409 410 411, 4bytes = 412 413 414 415
+// cout<< c << endl;   // assume output: 412
+
+//     return 0;
+// }
+
+// //❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// //Assume memory adddress of variable 'a' is 200 and a double variable is of size 8 bytes
+// // what will be the output :
+
+// double a = 10.54;       //double = 8byte for address , given 200 as address of a = 200 201 202 203 204 205 206 207 8bytes
+// double *d = &a;         // d = address of a , *d = value of a = 10.54
+// d = d + 1;              // d = d + 1 , (200 + 8bytes , 1 * 8bytes = 8bytes)  
+//                         // d = 200 201 202 203 204 205 206 207
+//                         // d = 208 209 210 211 212 213 214 215
+
+// cout  << d << endl;    // output: 208
+
+//     return 0;
+// }
+
+
+
+//❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// //asssume integer takes 4 bytes and integer pointer 8bytes
+// int a[5] ;      // int = 4bytes , arr[5] = means each value takes 4bytes = (5 * 4bytes = 20)
+// int *c ;        // integer pointer = 8bytes
+// cout<< sizeof(a) <<endl ;  //output : 20
+// cout<< sizeof(c) <<endl ;  //outout : 8
+
+//     return 0;
+// }
+
+
+// //❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// int a[] = {1,2,3,4} ;       // array name itself always point to the address of 0th = first index
+// cout<< *(a) << endl ;       // *a = value at 0th index     == 1
+// cout<< *(a+1) <<endl ;      // *(a+1) = value (0 + 1)index == 2
+
+//     return 0;
+// }
+
+
+//❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// // assume that address of 0th index of array 'a' is 200, what is the output?
+// int a[3] = {1,2,3} ;    // array name itself always point to the address of 0th = first index  
+// cout<< *(a+2) <<endl ;  // *(a+2) = value at (0 + 2)index == 3
+
+//     return 0;
+// }
+
+
+//❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// int a[] = {1,2,3,4} ;
+// int *p = a++ ;          // a++ cannot be done since it is trying to manipulate symbol table
+//                        // means array a = address of 0th index , a++ = here we are trying to change the address itself which is already assign
+// cout<< *p <<endl ;  //output : error
+
+//     return 0;
+// }
+
+
+
+//❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// int arr[] = {4,5,6,7} ;
+// int *p = (arr + 1) ;      //arr = pointing to address of 0th index , so arr + 1 = 0th index  + 1 = 1st index
+// cout<< *arr + 9 ;        // *arr = value of 0th index, *arr + 9 = 4 + 9 = 13
+
+//     return 0;
+// }
+
+
+
+// //❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// //Assume address of 0th index 'b' is 200, what is the output :
+// char b[] = "xyz" ;
+// char* c = &b[0] ;        //c = address of b but in char arrray pointer c print whole string , *c = value at ch (whole string)
+// cout<< c <<endl ;       // output : xyz
+
+// // c stores the address of start of array 'b' (and not of its value) . so the entire array is printed when c is printed
+//     return 0;
+// }
+
+
+
+//❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// char s[] = "hello" ;
+// char* p = s ;        // p = s , s is char array which means s is pointing to the 0th index address
+// cout<< s[0] << endl ;  //output : h
+// cout<< p[0] <<endl ;   //output : h
+
+
+// // In C++, when you use only the name of a character array, 
+// // the compiler automatically converts it into a pointer to the first element of the array.
+// // When you pass this pointer to an input/output function, such as cout or printf,
+// // it assumes that the pointer represents a null-terminated string and prints the characters starting from the pointer until it encounters a null character (\0).
+//     return 0;
+// }
+
+
+
+// //❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// char arr[20] ;
+// int i ;
+
+// for( i=0 ; i<10; i++) {
+//     *(arr +i) = 65 + i ;      // arr = address of 0th index , *arr = value at 0th index, *(arr + i) = (0th + i)
+//                               // Uppercase => 65 = 'A' , 89 = 'Z' , Lowercase => 97 = 'a' , 112 = 'z'
+//                               // i will iterate from 0 to 10 , and stop at i = 11
+// }
+
+// *(arr + i) = '\0' ;       // i = 11 
+// cout<< arr <<endl ;
+
+//    return 0;
+// }
+
+
+
+// //❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// char *ptr ;       // null pointer
+// char Str[] = "abcdefg" ;
+// ptr = Str ;       // ptr = str , ptr = address of str , str = 'abcdefg'
+// ptr += 5 ;       // ptr += 5 , ptr = ptr + 5 , print from 5th index
+
+// cout<< ptr ;     //output: fg
+
+//     return 0;
+// }
+
+
+//❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// int numbers[5] ;      //array of int numbers[5] with 5 space
+// int *p ;              // null pointer
+
+//  p = numbers ;        // p = address of numbers = 0th index
+// *p = 10 ;             // *p = 10 at 0th index
+//  p = &numbers[2] ;    // p = address of number[2] 3rd index
+// *p = 20 ;             // *p = 20 at 2nd index
+//  p-- ;                // p-- , postdecrement , p = numbers[2] -- , p = numbers[1] , p = address of number 1st index 
+// *p = 30;              // *p = 30 at 1st index
+//  p = numbers + 3 ;    // p = address of numbers[1] + 3 , p = address of number[4] , 4th index
+// *p = 40 ;             // *p = 40 at 3rd index
+//  p = numbers ;        // p = address of numbers[0]
+//  *(p+4) = 50 ;        // *(p+4) = value number[0] + 4 , p = number[4] 4th index = 50
+
+//  for( int n=0; n<5; n++) {
+//     cout<< numbers[n] <<" , " ;    //output : 10 30 20 40 50
+//  } 
+
+//     return 0;
+// }
+
+
+//❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// char st[] ="ABCD" ;
+
+// for(int i=0; st[i] != '\0'; i++) {
+//     cout<< st[i] << *(st)+i << *(i + st) <<i[st] ;    //output : A65AAB66BBC67CCD68DD
+// }
+
+// // learning purpose :
+// // cout<<endl; 
+// // for(int i=0; st[i] != '\0'; i++) {
+// //      cout<< st[i]    << endl ;   // st = address of 0th index ,  st[i] = st[0] st[1] st[2] st[3] = ABCD 
+// //      cout<<*(st)+i   << endl ;   //*st = value of st = 0th index , *(st)+i = *(A)+0 *(A)+1 *(A)+2 *(A)+3 = 65 66 67 68
+// //      cout<<*(i + st) <<endl ;    // *(i+st) = value of st+i ,  *(i + st) = *(0 + st) *(1+st) *(2+st) *(3+st) = ABCD
+// //      cout<<i[st]     <<endl ;    // i[st] = st[i] , therefore 0[st] 1[st] 2[st] 3[st] = ABCD
+// // }
+
+//     return 0;
+// }
+
+
+
+// //❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// float arr[5] = {12.5 , 10.0, 13.5, 90.5, 0.5} ;
+// float *ptr1 = &arr[0] ;   // ptr1 = address of arr[0] , *ptr = arr[0]
+// float *ptr2 = ptr1 + 3 ;  // ptr2 = ptr +3 , address of address of arr[0] + 3 , *ptr2 = arr[4] 
+
+// cout<< *ptr2 << "," ;   // output : 90.5 
+// cout<< ptr2 - ptr1  ;   // output : ptr2 - ptr1 , index 3 - index 0 ==> index 3
+
+//     return 0;
+// }
+
+//❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+
+// void changeSign(int *p) {
+//     *p = (*p) * -1 ;          // a = p , *a = (*a) * -1,  *a = (10) * -1 ==> -10
+// }
+
+// int main() {
+
+// int a = 10 ;
+// changeSign(&a) ;         // passing address of a , pass by reference(means changes will reflect in main variable)
+// cout<< a <<endl ;  //output:  -10
+
+//     return 0;
+// }
+
+
+//❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+
+// void fun(int a[]){
+//     cout<< a[0] << " " ;   //output 2
+// }
+
+// int main() {
+
+// int a[] = {1,2,3,4} ;
+// fun(a + 1) ;   // passing value of a+1 , 0+1, 1st index == 2 (pass by value) changes will not reflect in main variable
+// cout<< a[0] ;  // output: 1
+//     return 0;
+// }
+
+
+//❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+
+// void square(int *p) {
+//     int a = 10 ;        // another variable a inside void function 
+//     p = &a ;            // *p again assign with variable a of void function not the main function
+//    *p = (*p) * (*p) ;   //changes happen in variable a inside void function not in main function due to another variable with same name inside void function
+// }
+
+// int main() {
+
+// int a = 10 ;
+// square(&a) ;          //passing address of a , pass by reference
+// cout<< a <<endl ;   //output : 10
+//     return 0;
+// }
+
+
+
+//❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+
+// void swap(char *x, char *y) {           // function to swap two pointer
+//     char *t = x ;                       // pass by value no effect in main variable
+//       x = y ;
+//       y = t ;
+//  }
+
+// int main() {
+
+// char *x = "ninjasquiz" ;        //*x = value = "ninjasquiz"
+// char *y = "codingninjas" ;      //*y = value = "codingninjas"
+// char *t ;             // null pointer
+// swap(x,y) ;      //swapping x and y (pass by value ) , now *x = "ninjasquiz" ,  *y = "codingninjas"
+// cout<< x << " , "<< y <<endl ;  //output : "ninjasquiz" , "codingninjas" 
+
+// t = x ;    // t = address of x "ninjasquiz" 
+// x = y ;    // x = address of y  "codingninjas"
+// y = t ;    // y = address of t "ninjasquiz"
+// cout<< x << " , "<< y <<endl ;  //output : "codingninjas" , "ninjasquiz" 
+
+//     return 0;
+// }
+
+
+
+//❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+
+// void Q(int z) {    // passed by value (no effect in x of void p)
+//     z += z ;       // x = z , x = x + x , x = 7 + 7 =14
+//     cout<<"Z :" << z <<endl ;  //output : 14
+// }
+
+// void p(int *y) {  // passed by reference 
+//      int x = *y + 2 ;   //x = 5 + 2 = 7  // another variable x , so no effect on main function variable x, main func x = 5
+//      Q(x) ;             // passing value of x , (pass by value)
+//      *y = x - 1 ;       // *y still pointing to the value of x in main function , so *y = x - 1 , means *y = 7 - 1 == 6 , x in main function x = 6
+//      cout<<"x :" << x << endl ;   //output : 7
+//  }
+
+// int main() {
+
+// int x = 5 ;
+// p(&x) ;          // passing address (pass by reference)
+// cout<<"main x :"<< x ;  //output : 6
+
+//     return 0;
+// }
+
+
+
+//❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// int a = 10 ;
+// int *p = &a ;    // p = address of a , *p = value at a
+// int **q = &p ;   // q = address of p , *q = value at p = address of a
+// int b = 20 ;     
+// *q = &b ;        // *q = value at p (Address of a) is changed to (address of b) ,
+//                  // which means *p = value at b instead of a, 
+// (*p)++ ;         //(*p)++  hence (*p)++  , *p = *p + 1 ==> *p = 20 + 1 ==> 21
+
+// cout<< a <<" , "<< b <<endl ;    //output : 10 , 21
+
+
+// p points to a.
+// q points to p directly and a through p (double pointer).
+//*q = value stored in p is changes to address of b instead of that of a .
+//(*P)++ = valuee that p points to, which now is of b , is incremented by 1 (b becomes 21).
+// value of a remains unchanged
+
+//     return 0;
+// }
+
+
+
+//❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+
+// int f(int x, int *py, int **ppz){
+//     int y, z ;       //initialise int y and int z
+
+//     **ppz += 1 ;      // **ppz = **a ,  **ppz += 1 ==> **ppz = 4 + 1 => 5
+//     z = **ppz ;       // z = **ppz , z = 5
+
+//     *py +=2 ;         // *py = *b , *py +=2 ==> *py = (4 before now) 5 + 2 ==> 7
+//     y = *py ;         //  y = *py , y = 7
+
+//     x += 3 ;           // x = c , x += 3, x = 4 + 3 ==> 7 (no effect on value of c still 4)
+
+//     return x + y + z;   // x + y + z ==> 5 + 7 + 7
+// }
+
+// int main() {
+
+// int c , *b, **a ;       //initialise int c = null integer, int *b = null pointer, int **a = null double pointer
+// c = 4 ;                 // c = 4 
+// b = &c ;                // b = address of c , *b = value of c = 4
+// a = &b ;                // a = address of b , *a = value of b = address of c
+
+// cout<< f(c , b, a) ;   // (pass by value) //output: 19  (5 +7 +7)
+
+//     return 0;
+// }
+
+
+
+// //❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+// int ***r , **q, *p, i = 8 ;  //initialise ***r level 3 null pointer, **q null double pointer, *p  null pointer , int i = 8
+// p = &i;         // p = address of i , *p = value of i = 8
+// (*p)++ ;        // (*p)++ = value of i +1 , (*p)++ = 8 + 1 , *p = 9  , i = 9
+// q = &p ;        // q = address of p , *q = value at p , address of i
+// (**q)++ ;       // (**q)++ = value at p , value at i = 9 + 1 , (**q) = 10 therefore *p = 10 and i = 10
+// r = &q ;        // r = address of q , *r = value at q, **r = value at p, ***r = value at i = 10
+
+// cout<< *p << endl ;   //output : 10       
+// cout<< **q << endl ;  //output : 10
+// cout<< ***r << endl ; //output : 10
+//     return 0;
+// }
+
+
+//❓ what will be the output ?
+// #include<iostream>
+// using namespace std ;
+
+// void increment(int **p){  //pass by reference
+//     (**p)++ ;         //(**p)++ = num + 1 ==> 10 + 1 ==> 11
+// }
+// int main() {
+
+// int num = 10 ;
+// int *ptr = &num ;  // p = addresss of num, *ptr = value at num = 10
+// increment(&ptr) ;  //pass by reference , passing address of num
+// cout<< num <<endl ;
+//     return 0;
+// }
