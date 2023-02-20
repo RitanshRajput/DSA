@@ -348,9 +348,18 @@
 
 // int main(){
 
-// int arr[5] = {11, 12, 13, 14, 15} ;
-// int k = 3;               // index to shift/rotate 
-// int n = 5 ;             // size of array
+// int k ;               // index to shift/rotate 
+// cout<<"enter step to rotate element :"<<endl ;
+// cin>> k;
+// int n ;             // size of array
+// cout<<"enter size of array :"<<endl ;
+// cin>> n;
+
+// int arr[n] ;
+// cout<<"enter array element :"<<endl ;
+// for(int i=0; i<n; i++){
+//     cin>>arr[i]; 
+// }
 
 // cout<<" After Rotating array : " ;
 // rotateArray(arr, k, n) ;           // output : 13 14 15 11 12 
@@ -362,7 +371,46 @@
 //🔸Space complexity: O(n)
 
 
+//🔴Another approach to rotate an array :
+// #include<iostream>
+// using namespace std ;
 
+// int rotateArray(int arr[],int N,int K){
+
+//     for(int i=K;i<N;i++){
+
+//         cout<<arr[i]<<" ";         // print array from index = K, to less than N
+
+//     }
+
+//     for(int i=0;i<K;i++){
+
+//         cout<<arr[i]<<" ";      // print remaining from index = 0, to less than K
+
+//     }
+
+// }
+
+// int main(){
+
+//    int N, K, i ;
+//    cout<<"enter size N :" <<endl ;
+//    cin>>N ;
+//    cout<<"enter steps to rotate K :"<<endl ;
+//    cin>>K ;
+
+//     int arr[N];
+//   cout<<"enter array element : "<<endl ;
+//     for(i=0;i<N;i++){
+
+//         cin>>arr[i];
+
+//     }
+//     rotateArray(arr,N,K);
+
+//     return 0;
+
+// }
 
 //❓ Question :
 // check if array is sorted and rotated :

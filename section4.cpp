@@ -448,12 +448,35 @@
 // using namespace std;
 
 // int duplicate(int arr[], int size){
-      
-//       int ans = 0 ;
-//       for(int i=0; i<size; i++){
-//          ans = ans^arr[i] ;
-//          cout<<ans <<endl ;
-//       }
+//        int temp[ size ];
+//        int k = 0;
+//        int count = 0;
+//        for(int i=0; i<size; i++){
+//         for(int j=i+1; j<size; j++){
+//         if(arr[i] == arr[j] ) {
+//             temp[k] = arr[i] ;
+//                k++ ;
+//                count++ ;
+//          }
+//        }
+//     }
+
+//    // sorting array using selection sort :
+//     for(int i=0; i<count; i++){
+//       int minIndex = i;
+//         for(int j=i+1; j<count; j++){
+//             if( arr[j] > minIndex){
+//                minIndex = j;
+//             }
+//             swap(arr[minIndex], arr[i]) ;
+//         }
+//         cout<<arr[i]<< ",";
+//     }
+//     cout<<endl; 
+//       for(int i=0; i<count; i++){
+//         cout<<temp[i] <<" ";
+//     }
+//     cout<<endl; 
 
 // }
 
