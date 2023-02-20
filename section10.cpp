@@ -1107,3 +1107,110 @@
 //🔸Space-complexity: O(1) 
 
 
+//❓ Coding Ninjas practice Question :
+
+// #include<iostream>
+// using namespace std;
+// int main() {
+
+// int a[] = {5, 1, 15, 20, 25} ;
+// int i, j, k ;
+
+// i = ++a[1] ;  // i = 2  , ++a[1] preincrement increment then execute, so ++a[1] => increment = 1 + 1 => 2 incremented then executed 2
+// j = a[1]++ ;  // j = 2  , a[1]++ postincrement execute then increment,so a[1]++ => execute a[1] = 2  => increment 2 + 1 ==> 3 , also value of a[1] therefore now i = 3
+// k = a[i++] ;  // k = 15 , a[i++] postincrement execute then increment, so a[i++] => execute a[3] => 15 , increment a[1++] => a[4]  
+
+// cout<< "i : "<< i <<endl ;   //output : i = 3
+// cout<< "j :"<< j <<endl ;    //output : j = 2
+// cout<< "k :"<< k <<endl ;    //output : k = 15
+//     return 0;
+// }
+
+
+// //❓ Coding Ninjas practice Question :
+
+// #include<iostream>
+// using namespace std;
+// int main() {
+
+// int a[10] = {1, 2, 3, 4, 5, 6, 7, 8} ;
+// int p = (a + 1)[5] ;
+
+// cout<< p ;   //output : 7
+
+// // a[i] is equivalent tp *(a+i), so(a+1)[5] is equivalent to *(a+1+5), i.e a[6]
+//     return 0;    
+// }
+
+
+//❓ Coding Ninjas practice Question :
+
+// #include<iostream>
+// using namespace std;
+// int main() {
+
+// int c = 100 ;
+// int arr[3][2] = { {1,2}, {3, 4}, {5, 6}} ;
+// int temp = 0;
+
+// for(int i=0; i<3; i++) {
+//     for(int j=0; j<2; j++) {
+//         cout<< arr[i][j] <<" , " ;
+//     }
+// }
+// cout<<endl ;
+
+// for(int i=0; i<3; i++) {
+//     for(int j=0; j<2; j++) {
+//         temp = arr[i][j] + c ;
+//         arr[i][j] = arr[j][i] ;
+//         arr[j][i] = temp - c ;
+//     }
+// }
+
+// for(int i=0; i<3; i++) {
+//     for(int j=0; j<2; j++) {
+//         cout<< arr[i][j] <<" , " ;
+//     }
+// }
+
+//    return 0;    
+// }
+
+
+
+//❓ Question :
+// reverse an array :
+// #include <iostream>
+// #include<algorithm>
+// using namespace std;
+
+// int main() {
+//     //Write your code here
+//  int n;
+//  cout<<"enter n :"<<endl ;
+//  cin>> n ;
+
+//  int arr[n] ;
+//  for(int i=0; i<n; i++){
+//     cin>> arr[i] ;
+//  }
+
+// for(int i=0; i<n; i++){
+//     cout<< arr[i] ;
+//  }
+
+//  int s = 0;
+//  int e = n-1; 
+//  while(s<=e){
+//     swap(arr[s], arr[e]) ;
+//     s++ ;
+//     e-- ;
+//  }
+//  for(int i=0; i<n; i++){
+//     cout<< arr[i] ;
+//  }
+//     return 0;
+// }
+
+
