@@ -288,3 +288,207 @@
 //🔴 CodeStudio Dynamic Memory Reference: https://bit.ly/3ewm1TF
 ///🔴H/w : void pointer  
 ///🔴H/w : address typecasting
+
+
+
+
+
+                     //🔴🔴Dynamic Memory Allocation In 2D ARRAY :
+
+// when we wanted to create a 1D array we use to create it like this:
+// int* arr = new int[n] ;     // n is size of the array which is created in Heap
+
+// so now we know to create a single row array with n size , 
+// we implement like above int* arr = new int[n];
+
+// So for 2D array which has [rows][column] will we need to create to create
+// rows number of array, with column number of size arr[row][column]
+//ex:
+// int arr[3][3] ;
+
+//          column
+//        [1][2][3]        // so for each row we will use int *arr = new int[column] ;
+//  row   [1][2][3]        // so for each row we will use int *arr = new int[column] ;
+//        [1][2][3]        // so for each row we will use int *arr = new int[column] ;
+
+//🔸therefore we will use double pointer :
+
+// int** arr = new int*[n] ;       // n is size of array / column ;
+// and to access it we will use for loop
+//ex: 
+// int**arr = new int*[n];
+// for(condition){
+//   arr[i] = new int[n] ;
+// }
+
+//🔸Visualisation of above code:
+
+//     HEAP
+//  ____________
+// | int* arr   |
+// | int* arr   |
+// | int* arr   |
+// | .          |
+// | .          |
+// | int* arr   |
+// |____________|
+
+
+
+
+//🔸Implementation :
+// #include<iostream>
+// using namespace std ;
+// int main(){
+
+//  int size ;         // this will act as both row and column [row]*[column]
+//  cout<< "enter size of 2d array  : "<< endl ;
+//  cin>> size ;                      // taking input for column this will become size of each row 
+
+// // creating a 2D array :
+//  int** arr = new int*[size] ;      // size = size of rows
+//   for( int i=0; i<size; i++){     // size = size of rows:   creating new rows no. of arr in HEAP(Dynamically)
+//   arr[i] = new int[size] ;        // size = size of column
+//   }
+
+
+// // taking input for each index ;
+// cout<<" enter element for 2d arr: "<<endl ;
+// for(int i=0; i<size; i++){
+//     for(int j=0; j<size; j++){
+//         cin>> arr[i][j] ;
+//     }
+// }
+
+// // printing each index in 2D array  ;
+// for(int i=0; i<size; i++){
+//     for(int j=0; j<size; j++){
+//         cout<< arr[i][j] <<" " ;
+//     }
+//     cout<< endl ;
+// }
+
+// //🔸 Always delete your code after execution in HEAP:
+// // releasing memory 2d array in Heap dynamically :
+// for(int i=0; i<size; i++){
+//     delete [] arr[i] ;
+// }
+
+// delete []arr ;
+
+
+//     return 0;
+// }
+
+
+//🔸Implementation for different rows and column:
+// #include<iostream>
+// using namespace std ;
+// int main() {
+
+//  int row ;        //taking row size
+//  cout<<" enter row size : "<<endl ;
+//  cin >> row ;
+
+// int col;         //taking col size
+//  cout<<" enter column size : "<<endl ;
+//  cin >> col ;
+
+// //creating  2d array in Heap dynamically :
+// int** arr = new int*[row] ;
+// for(int i=0; i<row; i++){
+//     arr[i] = new int[col] ;
+// }
+
+// //taking input for 2d array :
+// cout<< "enter elemennt in 2d array :" <<endl ;
+// for(int i=0; i<row; i++){
+//     for(int j=0; j<col; j++){
+//         cin>> arr[i][j] ;
+//     }
+// }
+
+// //printing element for 2d array :
+// cout<< "output  :" <<endl ;
+// for(int i=0; i<row; i++){
+//     for(int j=0; j<col; j++){
+//        cout<< arr[i][j] <<" " ;
+//     }
+//     cout<<endl ;
+// }
+
+// //🔸 Always delete your code after execution in HEAP:
+// // releasing memory 2d array in Heap dynamically :
+// for(int i=0; i<row; i++){
+//     delete [] arr[i] ;
+// }
+
+// delete []arr ;
+
+//     return 0;
+// }
+
+
+//🔸Coding Ninja 2D array dynamic memory allocation doc. :
+// CodeStudio Dynamic Memory Reference: https://bit.ly/3ewm1TF
+
+
+//❓Question jagged array using dynamic memory allocation :
+// Jagged array is array of arrays such that member arrays can be of different sizes,
+//  i.e., we can create a 2-D array but with a variable number of columns in each row. 
+// These type of arrays are also known as Jagged arrays.
+// Example:
+
+// arr[][] = { {0, 1, 2},
+//             {6, 4},
+//             {1, 7, 6, 8, 9},
+//             {5} 
+//           };
+
+
+//🔸Below are the methods to implement the jagged array in C:
+// Using array and a pointer (Static Jagged Array)
+// First declare 1-D arrays with the number of rows you will need,
+// The size of each array (array for the elements in the row) will be the number of columns (or elements) in the row,
+// Then declare a 1-D array of pointers that will hold the addresses of the rows,
+// The size of the 1-D array is the number of rows you want in the jagged array.
+// Below is the implementation of the above approach:
+// Example:
+
+//🔸 Implementation :
+// #include<iostream>
+// using namespace std ;
+// int main()
+// {
+  
+//     int row0[4] = { 1, 2, 3, 4 };
+//     int row1[2] = { 5, 6 };
+  
+//     int* jagged[2] = { row0, row1 };
+  
+//     // Array to hold the size of each row
+//     int Size[2] = { 4, 2 }, k = 0;
+  
+//     // To display elements of Jagged array
+//     for (int i = 0; i < 2; i++) {
+  
+//         // pointer to hold the address of the row
+//         int* ptr = jagged[i];
+  
+//         for (int j = 0; j < Size[k]; j++) {
+//               cout<< ("%d ", *ptr); 
+  
+//             // move the pointer to the
+//             // next element in the row
+//             ptr++;
+//         }
+  
+//         cout<< endl ;
+//         k++;
+  
+//         // move the pointer to the next row
+//         jagged[i]++;
+//     }
+  
+//     return 0;
+// }
