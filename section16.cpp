@@ -230,4 +230,227 @@
 //            \
 //             (1)  => print 1 ⬆️
 //               \
-//                (0)  => return ⬆️
+//   base case    (0)  => return ⬆️
+
+
+
+//🔸Understanding Recursive :
+// #include<iostream>
+// using namespace std;
+
+// void Home(int src, int dest){
+   
+//    cout<< "src :"<<src <<" destiny :"<<dest <<endl ;
+//     // base case 
+//     if( src == dest){
+//         cout<< " src === destiny "<<endl ;
+//         return ;
+//     }
+
+//     // processing 
+//     src++ ;
+
+//     //recursive relation 
+//     Home(src, dest) ;
+// }
+
+// int main(){
+
+// int source = 0;
+// int destiny = 10;
+
+// Home(source, destiny) ;
+
+//     return 0;
+// }
+
+
+//❓ Question : Leetcode Easy:
+//  Fibonacci Series => 0 1 1 2 3 5 8 13 21 ....
+// The Fibonacci numbers, commonly denoted F(n) form a sequence, called the Fibonacci sequence, 
+// such that each number is the sum of the two preceding ones, starting from 0 and 1. That is,
+//F(0) = 0, F(1) = 1
+// F(n) = F(n - 1) + F(n - 2), for n > 1.
+
+// Example 1:
+
+// Input: n = 2
+// Output: 1
+// Explanation: F(2) = F(1) + F(0) = 1 + 0 = 1.
+
+// Example 2:
+
+// Input: n = 3
+// Output: 2
+// Explanation: F(3) = F(2) + F(1) = 1 + 1 = 2.
+
+// Example 3:
+
+// Input: n = 4
+// Output: 3
+// Explanation: F(4) = F(3) + F(2) = 2 + 1 = 3.
+
+// #include<iostream>
+// using namespace std ;
+
+// int Fibo(int n){
+
+//     //base case 
+//     if( n==0){
+//         return 0;
+//     }
+//     if(n==1){
+//         return 1;
+//     }
+
+//     int ans = Fibo( n-1 ) + Fibo( n-2 ) ;
+//     return ans ;
+// }
+
+// int main(){
+  
+//   int n ;
+//   cout<<" enter num till you want fibonacci number :"<<endl ;
+//   cin>> n; 
+
+//   int result = Fibo(n) ;
+//   cout<<" ans : "<< result <<endl ;
+
+//     return 0;
+// }
+
+
+
+//❓Question : coding ninjas : Medium
+// Count ways to Reach the N-th Stairs  
+// you have been given a number of stairs. initially you are at the 0th stairs and you need to reach the 
+// Nth stair. each climb one step or two steps you are supposed to return the number of distinct
+// ways in which you can climb from the 0th step to Nth step
+
+// example:
+// input n = 3 ;
+
+// ways 1      4️⃣ __                       
+//          3️⃣ __|                      
+//        2️⃣__|                            
+//     1️⃣__|                                 
+
+// way 2      3️⃣__                       
+//        2️⃣ __|                      
+//        __|                            
+//   1️⃣__|                                 
+
+// ways 3     3️⃣__                       
+//           __|                      
+//      2️⃣__|                            
+//   1️⃣__|                                 
+
+//output : ans = 3 ( means there are three ways to climb the stairs)
+
+
+//🔸 THinking recursive relation :
+// question says either we can climb one step or Two step at a time
+// means we reach nth stairs by a stair before nth stair( n - 1 )
+// or two stairs before nth stairs (n - 2)
+
+/// formula:  f(n) = f(n-1) + f(n-2) 
+
+//🔸Base case :
+// if we are standing at stair below the 0th stair we will return 0
+// if we are standing at the 0th stair we will return 1 , bcoz we consider 0th stairs as 1st stair
+
+// if( n < 0) return 0
+// if( n == 0 ) return 1
+
+
+
+// #include<iostream>
+// using namespace std;
+
+// int CountDistinctWay(int n) {
+//     //base case 
+//     if( n<0 ){
+//         return 0;
+//     }
+//     if( n==0){
+//         return 1 ;
+//     }
+
+//     // recursive relation 
+//     long long ans = CountDistinctWay( n-1 ) + CountDistinctWay( n-2 ) ;
+
+//     return ans ;
+// }
+
+// int main(){
+
+// int n ;
+// cout<< "enter total number of stairs :"<<endl;
+// cin >> n ;
+
+// long long ans = CountDistinctWay(n) ;
+
+// cout<<" There are total "<< ans << " ways to climb " << n << " stairs "<<endl ;
+
+//     return 0;
+// }
+
+
+//🔸Recursion Tree :  for above problem statement
+ 
+//                                5    +    3 ==> 8 ans  
+
+//            1step back (4 return 5) (5)  2step back(3 return 3)
+//                                  3 /  2  == 3+2 => 5
+//           1step back(3 return 3) (4)  2step back(2 return 2)
+//                               2  /  1  == 2+1 => 3
+//        1step back(2 return 2)  (3)  2step back(1 return 1)
+//                            1   /   1 == 1+1 => 2
+//       1step back(1 return 1) (2) 2step back(0 return 1)
+//                         1    /   0   == 1+0 => 1 
+//      1step back(0 return 1) (1)  2step back(-1 return 1)
+
+
+
+//❓Question :
+// Say Digits :
+
+// input: 4 1 2 
+// output : four one two
+
+// #include<iostream>
+// using namespace std ;
+
+// void SayDigit( int n , string arr[]){
+
+//     //base case
+//     if( n==0){
+//         return ;
+//     }
+
+//     //processing part
+//     int digit = n % 10 ;
+//     n = n / 10 ;
+
+//     // recursive relation
+//     SayDigit(n, arr) ;
+
+//     cout<< arr[digit] <<" " ;
+// }
+
+// int main(){
+
+// int n ;
+// cout<<" enter any digit number eX:1 21 321 4321 12345 : "<<endl ;
+// cin>>n ;
+
+// string arr[10] = {"Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven","Eight", "Nine"} ;
+
+//  SayDigit(n, arr) ;
+ 
+//     return 0;
+// }
+
+//🔸H/w = recursion tree of above code
+
+//36/149
