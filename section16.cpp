@@ -429,13 +429,13 @@
 //     }
 
 //     //processing part
-//     int digit = n % 10 ;
-//     n = n / 10 ;
+//     int digit = n % 10 ;                 // output : ex = 412,  digit : 4 1 2
+//     n = n / 10 ;                         // output : ex = 412 , n :412 41 4 
 
 //     // recursive relation
 //     SayDigit(n, arr) ;
 
-//     cout<< arr[digit] <<" " ;
+//     cout<< arr[digit] <<" " ;         //output: ex = 412 ,  Four One Two
 // }
 
 // int main(){
@@ -451,6 +451,277 @@
 //     return 0;
 // }
 
-//🔸H/w = recursion tree of above code
+//🔸Recursion tree of above code :
 
-//36/149
+// input : 412 
+//                          n = 412
+//
+//                       (4) return n = 41 , digit = 2    ==> arr[10] = Two
+//                         \
+//                          (1)  return  n = 4 , digit = 1   ==> arr[10] = One
+//                            \ 
+//                             (2)  return  n = 0 ,  digit = 4  ==> arr[10] = Four
+//                               \
+//                                (0) return 0 
+
+
+
+
+                     //🔴Recursion and Binary Search
+
+//❓ Question :
+// Array sorted or not using Recursion and Binary search
+//ex:
+// input : [2, 4, 21, 33, 512] 
+// output: true sorted
+
+// input: [4, 33, 1, 53, 2]
+// output : false Not Sorted
+
+
+// #include<iostream>
+// using namespace std;
+
+// bool isSorted(int arr[], int size){
+
+//     //base case 
+//     if( size == 0 || size == 1){
+//         return true;
+//     }
+
+//     //recursive relation
+//     if(arr[0] > arr[1]) {
+//     return false ;
+//     }
+//     else {
+//         bool remainingPart = isSorted( arr+1 , size-1) ;
+//         return remainingPart ;
+//     }
+// }
+
+// int main(){
+
+//   int arrS[5] = { 2, 4, 15, 31, 232} ;
+//   int arrN[5] = { 2, 4, 15, 21, 1} ;
+//   int size = 5 ;
+
+//   bool ans = isSorted(arrS , size) ;
+
+//   if( ans ){
+//     cout<< " array is sorted ";
+//   }
+//   else {
+//     cout<<" array is Not sorted ";
+//   }
+  
+//     return 0;
+// }
+
+
+
+//❓ Question 
+// sum of array element : Solve using recursion
+// input = [3, 2, 5, 1, 6]
+// output = sum of array is 17  (3 + 2 + 5 + 1 + 6)
+
+// #include<iostream>
+// using namespace std;
+
+// int sumOfArray( int* arr , int size){
+//     // base case
+//     if( size == 0){
+//         return 0;
+//     }
+//     else if( size == 1){
+//         return arr[0] ;
+//     }
+
+//     // recursive relation 
+//     int remainingPart = sumOfArray( arr + 1, size - 1) ;
+//      int sum = arr[0] + remainingPart ;
+
+//      return sum ;
+// }
+
+// int main() {
+
+//  int arr[5] = {3, 2, 5, 1, 6} ;
+//  int size = 5 ;
+
+//   int ans = sumOfArray(arr, size) ;
+//   cout<< " sum : "<<ans <<endl ;
+
+//     return 0;
+// }
+
+
+//🔸Recursive Tree for summ of array element above question
+// input :
+// arr[5] = {3, 2, 5, 1, 6} 
+// size = 5 
+
+//                          (arr, size)         sum = arr[0] + remainingPart
+//                                0 \ 
+//                arr+1, size-1  ([3, 2, 5, 1, 6], 5)   return 3, sum = 3 + 14 => 17
+//                                  0  \
+//                  arr+1, size-1  ([2, 5, 1, 6], 4)    return 2, sum = 2 + 12 => 14
+//                                    0  \ 
+///                   arr+1, size-1  ([5, 1, 6], 3)     return 5 , sum = 5 +  7 => 12
+//                                       0 \  
+///                    arr+1, size-1   ([1, 6], 2)      return 1 ,  sum = 1 + 6 => 7
+//                                         0 \ 
+//                        arr+1, size-1   ([6], 1)      return 6 , sum = 6 + 0 ==> 6
+//                                             \ 
+//                                         ([], 0)      return 0
+
+
+// ❓Question :
+// Linear Search using recursion
+//ex:
+// input : [1, 2, 3, 4, 5]
+// key : 3
+// output: key found  ( at index 2 element is equal to key)
+
+// input : [1, 2, 3, 4, 5]
+// key : 12
+// output: key Not found  ( key is not in array)
+
+// #include<iostream>
+// using namespace std ;
+
+// bool keyPresent(int arr[], int size, int key){
+
+//     //base case 
+//     if(size == 0){
+//         return false;
+//     }
+
+//     //recursive realtion 
+//     if( arr[0] == key ){
+//         return true ;
+//     }
+//     else {
+//          bool remainingPart = keyPresent( arr+1, size-1, key) ;
+//          return remainingPart;
+//     }
+// }
+
+// int main() {
+
+//   int arr[7] = { 11, 21, 31, 41, 51, 123, 443} ;
+//   int size = 7 ;
+//   int key = 126 ;
+
+// bool ans = keyPresent(arr, size, key) ;
+
+// if(ans){
+//     cout<<" key is present in array : "<<endl;
+// }
+// else{
+//     cout<<" key is Not present in array : "<<endl;
+// }
+
+//     return 0;
+// }
+
+
+//🔸Recursion Tree for linear search using recursion
+//ex:
+// input arr[6] = {1 ,2, 3, 4, 5, 6} 
+// size = 6 
+// key = 5
+
+//                     (arr, size, key)
+//                                \  
+//     arr-1, size+1, key=5, ([1,2,3,4,5,6], 6, 5)  arr[0] = 6, key = 5 return false
+//                                    \
+//       arr-1, size+1, key=5,  ([2,3,4,5,6], 5, 5)  arr[0] = 6, key = 5 return false
+//                                       \ 
+//          arr-1, size+1, key=5,  ([3,4,5,6], 4, 5)   arr[0] = 6, key = 5 return false
+//                                          \ 
+///            arr-1, size+1, key=5,  ([4,5,6], 3, 5)    arr[0] = 6, key = 5 return false
+//                                             \ 
+//                 arr-1, size+1, key=5,  ([5,6], 2, 5)    arr[0] = 5 , key = 5, return true
+//                                                \
+//                     arr-1, size+1, key=5,   ([6], 1, 5)   arr[0] = 6, key = 5 return false
+//                                                   \ 
+//                         arr-1, size+1, key=5,   ([], 0, 5)  return 0 
+
+
+
+//❓ Question 
+// Binary Search using Recursion
+//ex:
+// input arr[5] = {1, 2, 3, 4, 5}
+// key = 4 
+
+//🔸psuedo code for basic binary search :
+// start = 0 ;
+// end = size -1;
+// mid = start + end / 2
+
+//while loop (start <= end)
+// if( key > mid ){
+//  search in right side
+//   start = mid + 1
+// }
+
+// if( key < mid){
+// search in left side
+//  end = mid - 1
+//}
+
+// mid = start+end /2 
+
+//🔸Implementation for binary search in recursion
+
+// #include<iostream>
+// using namespace std;
+
+// bool binarySearch(int* arr, int start, int end, int key){
+           
+//         //base case 
+//         if( start > end){
+//             return false ;
+//         }
+
+//         //recursive relation
+//         int mid = start + ( end - start) / 2;
+
+//         //element found 
+//         if( arr[mid] == key)
+//         return true ;
+        
+
+//         if( arr[mid] < key ){
+//             return binarySearch(arr, mid+1, end, key) ;
+//         }
+//         else {
+//             return binarySearch(arr, start, mid - 1, key) ;
+//         }
+
+// }
+
+// int main() {
+
+// int arr[5] = {12, 13, 14, 15, 16} ;
+// int size = 5 ;
+// int key = 15 ;
+// int start = 0;
+// int end = size - 1 ;
+
+// bool ans = binarySearch(arr, start, end , key) ;
+
+// if( ans ){
+//     cout<< " key present "<<endl ;
+// }
+// else{
+//     cout<< " key not present "<<endl ;
+// }
+
+//     return 0;
+// }
+
+//🔸H/w : solve all previous binary search questions using recursion
+
+// 37/149
