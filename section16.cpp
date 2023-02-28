@@ -724,4 +724,220 @@
 
 //🔸H/w : solve all previous binary search questions using recursion
 
-// 37/149
+
+
+
+//🔴🔴RECURSION WITH STRING
+
+//❓ Question :
+// Reverse a string using recursion
+// ex:
+// input: "abcde"
+// output: "edcba"
+
+// #include<iostream>
+// using namespace std ;
+
+// void reverse(string& str, int i, int j) {          // pass by reference string&
+
+//     //base case 
+//     if( i > j){
+//         return ;
+//     }
+
+//     // recursive relation
+//     swap(str[i], str[j]) ;
+//     i++ ;
+//     j-- ;
+
+//     //recursive call
+//     reverse(str, i, j) ;
+// }
+
+// int main() {
+
+// string str = "abcde" ;
+// int i = 0;
+// int j = str.length() - 1 ;
+// reverse(str, i, j) ;
+
+// cout<<" reverse string : "<< str <<endl ;
+
+//     return 0;
+// }
+
+
+//🔸Recursive tree for above reverse string question :
+
+// str = "abcde" 
+// i =0 ; j = 5
+//reverse( str, i, j) 
+
+//                    reverse( "abcde" , 0 , 4 )
+//                                  |
+//                           ("ebcda", 2, 2) 
+//                                  |
+//                           ("edcba", 3, 2)      // i > j  return
+
+
+//❓Question :
+// check Palindrome
+// ex:
+// input :  "abba"
+// output:  true  ( palindrome mean if we reverse the string and its still the same then its a palindrome)
+
+// #include<iostream>
+// using namespace std;
+
+// bool palindrome(string str, int i, int j){
+
+//     //base case 
+//     if( i > j){
+//         return true;
+//     }
+ 
+//     if(str[i] != str[j]){
+//       return false ;
+//     }
+//     else {
+//         return palindrome(str, i+1 , j-1) ;
+//     }
+// }
+
+// int main() {
+ 
+// string str = "abbccbba" ;
+// int i = 0;
+// int j = str.length() - 1 ;
+// bool ans = palindrome( str, i , j) ;
+
+// if( ans ){
+// cout<< " It is a palindrome " << endl ;
+// }
+// else{
+// cout<< " It is Not palindrome " << endl ;
+// }
+//     return 0;
+// }
+
+
+
+//❓ Question :
+// A power B
+//ex:
+// input: a = 3, b = 2 
+// output: 9 ( 3^2 )
+
+
+//explaination :
+// a^b = if b is even ==>  a^ b/2 * a^ b/2
+// a^b = if b is odd  ==> a * ( a^ b/2  * a^ b/2)
+
+// #include<iostream>
+// using namespace std ;
+
+// int power(int a, int b) {
+
+//     if(b == 0){
+//         return 1 ;
+//     }
+
+//     if( b == 1){
+//         return a ;
+//     }
+ 
+//    //recursion relation 
+//    int ans = power( a, b/2);
+     
+//    //if b is even ==>  a^ b/2 * a^ b/2
+//      if( b%2 == 0){
+//         return ans * ans;
+//      }
+//      else{
+//     //if b is odd  ==> a * ( a^ b/2  * a^ b/2)
+//      return a * ans * ans ;
+//      }
+
+
+// }
+
+// int main() {
+
+// int a = 3 ;
+// int b = 2 ;
+
+// int ans = power(a, b) ;
+// cout<< " a power b : "<< ans <<endl ;
+
+//     return 0;
+// }
+
+//🔸 Recursion tree : a power b
+//ex:
+// a = 3, b = 11 ;
+
+//                (a, b)
+//                  |  ans ==> 177147
+//     ans =     (3, 11/2) // b == 11 , odd == return a* ans*ans ==> 3*243*243 => 177147
+//                  |243
+//               (3, 5/2) // b == 5, odd == return a * ans*ans  ==> 3*9*9 = 3*81 = 243 
+//                  | 9
+//               (3, 2/2) // b == 2, even == return ans * ans  ==>  3*3 = 9
+//                  | 3 
+//               (3, 1)  // b == 1 , return a ==> 3
+ 
+
+//🔴 ❓ Question :
+// Bubble sort using recursion :
+//ex :
+// input: { 3, 2, 1, 5, 4}
+// output: { 1, 2, 3, 4, 5}
+
+//working of bubble sort :
+// round 1 : { 3, 2, 1, 4, 5}   // largest elemeent sorted
+// round 2 : { 3, 2, 1, 4, 5}   // 2nd largest element sorted
+// round 3 : { 2, 1, 3, 4, 5}   // 3rd largest element sorted
+// round 4 : { 1, 2, 3, 4, 5}   // all element sorted
+
+// #include<iostream>
+// using namespace std;
+
+// void bubble(int *arr, int size) {
+
+//     //base case 
+//     if( size == 0 || size == 1){
+//         return ;
+//     }
+    
+//     // solve 1 case => sort largest element to the nth index (last index)
+//     for( int i=0; i<size-1;  i++ ){
+//          if(arr[i] > arr[i+1]){
+//             swap(arr[i], arr[i+1]) ;
+//          }
+//     }
+
+//     bubble(arr, size-1) ;
+
+// }
+
+// int main() {
+
+// int arr[5] = { 3, 2, 1, 5, 4} ;
+// int size = 5 ;
+
+// bubble(arr, size) ;
+
+// cout<<" Bubble sorted array : "<<endl ;
+
+// for(int i=0; i<size; i++)  {
+//     cout<< arr[i] << " " ;
+// }
+
+//     return 0;
+// }
+
+
+//🔴 homework : selection sort using recursion
+//🔴 homework : Insertion sort using recursion
+
+//38/149
