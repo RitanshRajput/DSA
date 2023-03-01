@@ -820,6 +820,41 @@
 //     return 0;
 // }
 
+// // 🔴❓Question :
+// // check Palindrome using single pointer and string  in recursion (without using j )
+
+// #include<iostream>
+// using namespace std;
+
+// bool palindrome(string str, int i){
+//     //base case 
+//     if( i > (str.length() - i - 1)){
+//         return true;
+//     }
+//     if(str[i] != str[str.length() - i -1]){
+//       return false ;
+//     }
+//     else {
+//         return palindrome(str, i+1 ) ;
+//     }
+// }
+
+// int main() {
+ 
+// string str = "abbccbba" ;
+// int i = 0;
+// bool ans = palindrome( str, i ) ;
+
+// if( ans ){
+// cout<< " It is a palindrome " << endl ;
+// }
+// else{
+// cout<< " It is Not palindrome " << endl ;
+// }
+//     return 0;
+// }
+
+
 
 
 //❓ Question :
@@ -937,7 +972,73 @@
 // }
 
 
-//🔴 homework : selection sort using recursion
+//🔴 ❓Question : 
+// selection sort using recursion
+//ex:
+//input: {65, 25, 12 , 22, 11} 
+//output : {11, 12, 22, 25, 65}
+
+//explaination : 
+//round 1 : {[65], 25, 12, 22, [11]}  // 0th index and nth index replaced
+//round 2 : {11, [25], [12], 22, 65}  // 1th index and and smaller index from 1st index replaced
+//round 3 : {[65], 12, [25], 22, 65}  // 2th index and smalller index from 2nd index replaced
+//round 4 : {11, 12, 22, 25, 65}  // sorted array
+
+// #include <iostream>
+// using namespace std;
+
+// //recursive funciton to find minIndex
+// int findMin(int arr[], int i, int j){
+//    int minpos;
+//    //base case if i = size of array return ith index 
+//    if (i == j){
+//       return i;
+//    }
+//    //recursive relation to check every index from i onwards
+//    minpos = findMin(arr, i + 1, j);
+
+//    //processing part   if arr[i] is smaller then minposition becomes arr[i]
+//    if(arr[i]<arr[minpos]){
+//       minpos=i;
+//    }
+//    return (minpos);  //return the found smaller element 
+// }
+
+// //Main recursion selection sort function
+// void SelectSort(int arr1[], int size, int i){
+//    int temp;    // temp to swap
+//    int minpos1;  // minposition 
+
+//    //base case
+//    if (i == size){
+//       return;
+//    }
+
+//    //recursion relation (head recursion)
+//    minpos1 = findMin(arr1, i, size-1);
+
+//    //processing part
+//    if (minpos1 != i){    // if minposition is not equal i then swap arr[minposition] and arr[i]
+//       temp = arr1[i];
+//       arr1[i] = arr1[minpos1];
+//       arr1[minpos1] = temp;
+//    }
+//    SelectSort(arr1, size, i + 1);
+// }
+
+
+// int main(){
+//    int arr[7] = {78, 12, 45, 10, 4, 90, 33 };
+//    int size = 7 ;
+
+//    SelectSort(arr,size ,0);
+//    cout<<"Sorted Array using recursive Selection sort: "<<endl;
+//    for (int i = 0; i<size ; i++){
+//       cout << arr[i] << " ";
+//    }
+//    return 0;
+// }
+
 //🔴 homework : Insertion sort using recursion
 
 //38/149
