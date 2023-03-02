@@ -261,7 +261,7 @@
 
 // Input :   {6, 5, 4, 3, 2, 1}
 
-//comparing 1st element 6 :    [6]                    // no element on the left side to compare to hence it will stay as it is.
+//comparing 1st element 6 :    [6]                    // no element on the left side to compare ,hence it will stay as it is.
 //comparing 2nd element 5 :    [5, 6]                 // 5 is smaller than element on its left side so, we insert it before 1st element (before 6)
 //comparing 3rd element 4 :    [4, 5, 6]              // 4 is compare with 6 which is greater then we insert it before 6 then again compare with left element(5, 4, 6)  now 5 is greater then 4 so inserted before 5
 //comparing 4th element 3 :    [3, 4, 5, 6]           // 3 is 1st compare with 6 inserted before 6 (4,5, 3, 6), compare with 5 inserted before 5 (4, 3, 5, 6),  compare with 4 inserted before 4(3, 4, 5, 6)
@@ -289,22 +289,26 @@
 
 // int insertionSort(int arr[], int n){
         
+//     // assign ex: j (i-1) = 0th index , temp (arr[i]) = 1st index, j+1 (0th + 1) = 1st index
+    
 //       for(int i=1; i<n; i++){          // loop start from 1th to < nth index (bcoz we consider 0th index sorted)
-//         int temp = arr[i] ;           
-//         int j = i-1;                  
+//         int temp = arr[i] ;            // temporary array
+//         int j = i-1 ;                  // declaring j outside the loop to use its value outside the scope
 
-//         for(  ; j >=0; j--) {           
+//         // value of j will be i - 1 , ex: j = i-1 == 2- 1 => 1
+//         for( ; j >=0; j--) {           
 
-//             if(arr[j] > temp ){          
-//                 arr[j+1] = arr[j] ;      
-//             }
-//             else{
-//                 break ;                 
-//            }
+//          if(arr[j] > temp ){          // ex: if 0th index  > than 1st index
+//             arr[j+1] = arr[j] ;       // then shift 0th index right side ex: {10, 1, 4} shift right side {10, 10, 4}
+//           }
+//          else{
+//            break ;                    //else break the loop if left element is smaller means all other element on the left side will be smaller as well
 //          }
-//         arr[j+1] = temp ;               
+//         }
+//        //  value of j will be according to loop ex: j-- , j = 0
+//         arr[j+1] = temp ;             // after assigning the value on the left side ex: {10, 10, 4} assign rigth value stored in temp to the left (1, 10, 4)
 //       }
-   
+ 
 //     for(int i=0; i<n; i++){               // loop to print sorted array
 //         cout<<arr[i]<<" " ;
 //     }
@@ -314,11 +318,11 @@
 
 // int main(){
 
-// int arr[6] = {6, 4, 3, 5, 2, 1} ;
-// int n = 6 ;
+// int arr[5] = {5, 4, 3, 2, 1} ;
+// int n = 5 ;
 
-// int answer = insertionSort(arr, n) ;
-// cout<<"Insertion Sort with total element : "<<answer<<endl ;
+// cout<<"Insertion Sort : "<<endl ;
+// insertionSort(arr, n) ;
 
 //     return 0;
 // }

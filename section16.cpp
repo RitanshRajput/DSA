@@ -972,73 +972,199 @@
 // }
 
 
-//🔴 ❓Question : 
-// selection sort using recursion
-//ex:
-//input: {65, 25, 12 , 22, 11} 
-//output : {11, 12, 22, 25, 65}
+//🔴 ❓Question :  selection sort using recursion
 
-//explaination : 
-//round 1 : {[65], 25, 12, 22, [11]}  // 0th index and nth index replaced
-//round 2 : {11, [25], [12], 22, 65}  // 1th index and and smaller index from 1st index replaced
-//round 3 : {[65], 12, [25], 22, 65}  // 2th index and smalller index from 2nd index replaced
-//round 4 : {11, 12, 22, 25, 65}  // sorted array
 
-// #include <iostream>
-// using namespace std;
+//❓ Selection sort without recursion to understand ;
+// #include<iostream>
+// using namespace std ;
 
-// //recursive funciton to find minIndex
-// int findMin(int arr[], int i, int j){
-//    int minpos;
-//    //base case if i = size of array return ith index 
-//    if (i == j){
-//       return i;
-//    }
-//    //recursive relation to check every index from i onwards
-//    minpos = findMin(arr, i + 1, j);
-
-//    //processing part   if arr[i] is smaller then minposition becomes arr[i]
-//    if(arr[i]<arr[minpos]){
-//       minpos=i;
-//    }
-//    return (minpos);  //return the found smaller element 
+// int printArray(int arr[], int n){
+//       for(int i=0; i<n; i++){
+//         cout<<arr[i]<<" ";
+//       }
 // }
 
-// //Main recursion selection sort function
-// void SelectSort(int arr1[], int size, int i){
-//    int temp;    // temp to swap
-//    int minpos1;  // minposition 
+// void selectionSort(int* arr, int n){
 
-//    //base case
-//    if (i == size){
-//       return;
-//    }
-
-//    //recursion relation (head recursion)
-//    minpos1 = findMin(arr1, i, size-1);
-
-//    //processing part
-//    if (minpos1 != i){    // if minposition is not equal i then swap arr[minposition] and arr[i]
-//       temp = arr1[i];
-//       arr1[i] = arr1[minpos1];
-//       arr1[minpos1] = temp;
-//    }
-//    SelectSort(arr1, size, i + 1);
+//     for(int i=0; i<n ; i++){
+//         int minIndex = i;
+//         for(int j=i+1; j<n; j++ ){ 
+//              if( arr[j] < arr[minIndex])
+//                 minIndex = j;
+//         }
+//         swap(arr[minIndex], arr[i]) ;
+//     }
+    
+//     printArray(arr, n) ;
 // }
-
 
 // int main(){
-//    int arr[7] = {78, 12, 45, 10, 4, 90, 33 };
-//    int size = 7 ;
+// int arr[5] =  {64, 25, 32, 22, 11};
+// int n = 5 ;
 
-//    SelectSort(arr,size ,0);
-//    cout<<"Sorted Array using recursive Selection sort: "<<endl;
-//    for (int i = 0; i<size ; i++){
-//       cout << arr[i] << " ";
-//    }
-//    return 0;
+//  selectionSort(arr, n) ;
+//     return 0 ;
 // }
 
-//🔴 homework : Insertion sort using recursion
+
+//❓ selection sort with recursion :
+// #include<iostream>
+// using namespace std;
+
+// int findMin(int arr[], int i, int j){
+//       int mini ;
+
+//     // base case
+//      if( i==j ){       // i = index 0 , j = index nth - 1;
+//         return i;
+//      }
+
+//     // recursive relation
+//     mini = findMin(arr, i+1, j) ;    // value of mini = will compared to other next elements value
+    
+//     //processing part
+//     if( arr[mini] > arr[i]){       // if arr[min] > arr[i] then mini = i ;
+//         mini = i ;
+//     }
+//    return mini ;                 // return the minimum index element
+// }
+
+// void selectionSort(int arr[], int i, int size){
+//     int temp ;
+//     int minPos ;
+
+//     //base case
+//     if( i == size){
+//         return ;
+//     }
+      
+//     //recursive relation 
+//     minPos = findMin(arr, i, size-1) ;    // find minimum index element recursively for each index
+
+//     //processing part 
+//     if(minPos != i) {                  //swap value of arr[i] and arr[miniposition]
+//         temp = arr[i] ;
+//         arr[i] =arr[minPos] ;
+//         arr[minPos] = temp ;
+//     }
+//     selectionSort(arr, i+1, size) ;     
+// }
+
+// int main(){
+ 
+// int arr[5] = {63, 45, 32, 11, 6} ;
+// int size = 5 ;
+
+// selectionSort(arr, 0, size) ;
+// cout<< "sorted array using recursive selection Sort :"<<endl ;
+//  for(int i=0; i<size; i++){
+//     cout<< arr[i] << " " ;
+//  }
+ 
+//     return 0;
+// }
+
+
+
+
+//🔴 ❓ Question : Insertion sort using recursion
+
+//❓ Insertion sort without recursion to understand:
+// #include<iostream>
+// using namespace std;
+
+// int insertionSort(int arr[], int size) {
+ 
+//      int i = 1;
+//      while(i < size) {
+    
+//        int temp = arr[i] ;
+//        int j = i - 1 ;
+
+//        while(j >= 0) {
+         
+//         if( arr[j] > temp) {
+//             arr[j+1] = arr[j] ;
+//         } 
+//         else {
+//             break ;
+//         }
+//         j-- ;
+//        }
+      
+//       arr[j+1] = temp ;
+
+//         i++ ;
+//      }
+
+//      for(int i=0; i<size; i++){
+//         cout<< arr[i] <<" " ;
+//      }
+// }
+
+// int main() {
+
+// int arr[6] = {10, 32, 1, 4, 22, 7} ;
+// int size = 6 ;
+
+// insertionSort(arr, size) ;
+//     return 0;
+// }
+
+
+
+//❓ Insertion Sort using Recursion :
+
+// #include<iostream>
+// using namespace std ;
+
+// void recurseInsertion(int arr[], int size) {
+
+//     //base case  
+//     // if size <= 1 then return means loop will run from nth index to 1th index
+//     if( size <= 1 ){
+//        return ;
+//     }
+
+//     // Recursive relation , to iterate all the index of array from nth to 1 (not 0)
+//     recurseInsertion(arr, size-1) ;
+   
+//    //processing part where  :
+//    //  here temp is temporary variable to store value of nth index - 1
+//    //  j is declare outside to use outside of its scope which has nth index - 2 as value
+//    //  while loop runs when j >=0 && if arr[j] > temp , j--
+//    // arr[j+1] = arr[j]  inside bigger value is shift to right side => 
+//    //  atlast arr[j+1] = temp , means after shifting previously the remaining index will now have the value of right side which used to be smaller value <=
+
+//    int temp = arr[size - 1] ;
+//    int j = size - 2 ;
+   
+//    while( j >=0 && arr[j] > temp ){
+      
+//       arr[j+1] = arr[j] ;
+//       j-- ;
+//    }
+//    arr[j+1] = temp ;
+
+// }
+
+
+// int main() {
+
+// int arr[6] =  {0, 1, 25, 33, 81, 15} ;
+// int size = 6 ;
+
+// recurseInsertion(arr, size) ;
+
+// cout<< " Answer of recursive Insertion sort :"<<endl ;
+// for( int i=0; i<size; i++){
+//     cout<< arr[i] << " " ;
+// }
+ 
+//     return 0;
+// }
+
+
 
 //38/149
