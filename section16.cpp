@@ -951,6 +951,7 @@
 //          }
 //     }
 
+//     //recursive call 
 //     bubble(arr, size-1) ;
 
 // }
@@ -1167,4 +1168,217 @@
 
 
 
-//38/149
+           //🔴🔴 Merge Sort In Recursion :
+
+//🔸Merge sort is a sorting algorithm that works by dividing an array into smaller subarrays,
+// sorting each subarray, and then merging the sorted subarrays back together to form the final sorted array.
+
+// In simple terms, we can say that the process of merge sort is to divide the array into two halves,
+// sort each half, and then merge the sorted halves back together. 
+// This process is repeated until the entire array is sorted.
+
+// One thing that you might wonder is what is the specialty of this algorithm. 
+// We already have a number of sorting algorithms then why do we need this algorithm?
+// One of the main advantages of merge sort is that it has a time complexity of O(n log n), 
+// which means it can sort large arrays relatively quickly. It is also a stable sort, 
+// which means that the order of elements with equal values is preserved during the sort.
+
+
+//ex :
+//🔸 dividing array :
+//               [38, 27, 43, 3, 9, 82, 10]        // main array,  size = 7,  mid = (start +end ) / 2 = 3
+//                     /             \
+//              [38, 27, 43, 3]  [ 9, 82, 10]      // divided in 2 part
+//                   /    \         /    \
+//             [38, 27] [43, 3]   [9, 82] [10]     // further divided in 4 part
+//                / \      / \       /\     \  
+//            [38] [27] [43] [3]  [9] [82] [10]    // atlast divided in each individual parts
+
+//🔸Now sorting and merging array :
+//           [38] [27] [43] [3]  [9] [82] [10]  
+//             \   /     \  /      \  /    |
+//           [27, 38]   [3, 43]   [9, 82] [10]      // array are merge in sorted order
+//                \        /         \     /
+//             [3, 27, 38, 43]    [9, 10, 82]
+//                   \             /
+//               [3, 9, 10, 27, 38, 43, 82]         // Merge Sorted Array
+
+
+//🔸Implement Using recursion:
+//1. divide the array
+//2. sort the array
+//3. merge the sorted array
+
+// #include<iostream>
+// using namespace std;
+
+// void merge(int *arr, int start , int end){
+
+//        //mid index
+//        int mid = (start + end) /2 ;
+//        //length of divided array left part :
+//        int left = mid - start + 1 ;
+//        //length of divided array right part :
+//        int right = end - mid;
+
+//       //pointer to hold value of divided array left and right:
+//        int *first = new int[left] ;
+//        int *second = new int[right] ;
+
+//        // Copy values of left array in *first ,
+//        // k = Main array index
+//        int k = start ;
+//        for(int i=0; i<left; i++){
+//         first[i] = arr[k++] ;
+//        }
+
+//         // Copy values of rigth array in *second,
+//         // k = Main array index
+//         k = mid + 1 ;
+//        for(int i=0; i<right; i++){
+//         second[i] = arr[k++] ;
+//        }
+
+
+//        //merge 2 sorted array :
+//        int index1 = 0 ;
+//        int index2 = 0 ;
+//        k = start ;
+
+//        while( index1 < left && index2 < right) {
+//         // if element of first[index1] is less than second[index2] then arr[k] = first[index1] then k++ , index1++
+//            if( first[index1] < second[index2] ){
+//               arr[k++] = first[index1++] ;
+//            }
+//         // if element of first[index1] is greater than second[index2] then arr[k] = second[index2] then k++ , index2++
+//            else{
+//             arr[k++] = second[index2++] ;
+//            }
+//        }
+ 
+//      // If there are some element which are remaining from above loop then compare them and add them to the sorted array
+//        while( index1 < left ){
+//         arr[k++] = first[index1++];
+//        }
+
+//        while( index2 < right ){
+//         arr[k++] = second[index2++] ;
+//        }
+
+//        // deleting new int heap memory ( first and second)
+//        delete []first ;
+//        delete []second ;
+     
+// }
+
+// void recursiveMerge(int *arr, int start, int end) {
+
+//     //base case
+//     if( start >= end) {
+//         return ;
+//     }
+     
+//      //Mid index
+//     int mid = (start + end)/2 ;
+
+//     //Sort left part <= 
+//    recursiveMerge(arr, start, mid) ;
+
+//     //Sort right part => 
+//    recursiveMerge(arr, mid+1, end) ;
+
+//     //Merge 
+//     merge(arr, start, end) ;
+// }
+
+// int main() {
+
+// int arr[8] = {12, 32, 1, 55, 3, 2, 44, 9} ;
+// int size = 8 ;
+// int start = 0;
+// int end = size -1 ;
+
+// recursiveMerge(arr,start, end) ;
+
+// for(int i=0; i<size; i++){
+//     cout<< arr[i] << " " ;
+// }
+//     return 0;
+// }
+
+//🔸space complexity :  O(n)    auxilliary space
+// after dividing the main array the extra array
+// to store value of divided array takes O(n/2) space 
+// Therefore O(n) is space complexity
+
+//🔸 Time Complexity : O(n log n)
+//Merge Sort is a recursive algorithm and time complexity can be expressed as
+// following recurrence relation. T(n) = 2T(n/2) + O(n) The solution of 
+// the above recurrence is O(nLogn). The list of size N is divided into a max of Logn parts, 
+// and the merging of all sublists into a single list takes O(N) time,
+// the worst-case run time of this algorithm is O(nLogn) 
+// Best Case Time Complexity:  O(n*log n)
+// Worst Case Time Complexity: O(n*log n) 
+// Average Time Complexity:    O(n*log n)
+// The time complexity of MergeSort is O(n*Log n) in all the 3 cases (worst, average and best) 
+// as the mergesort always divides the array into two halves and takes linear time to merge two halves
+
+
+
+                            
+                            //🔴Inversion Count:
+// Inversion Count for an array indicates – how far (or close) the array is from being sorted. 
+// If the array is already sorted, then the inversion count is 0, 
+// but if the array is sorted in reverse order, the inversion count is the maximum. 
+
+// Given an array a[]. The task is to find the inversion count of a[]. 
+// Where two elements a[i] and a[j] form an inversion if a[i] > a[j] and i < j.
+
+// Examples: 
+
+// Input: arr[] = {8, 4, 2, 1}
+// Output: 6
+// Explanation: 
+// Given array has six inversions: (8, 4), (4, 2), (8, 2), (8, 1), (4, 1), (2, 1).
+
+// Input: arr[] = {1, 20, 6, 4, 5}
+// Output: 5
+// Explanation: 
+// Given array has five inversions: (20, 6), (20, 4), (20, 5), (6, 4), (6, 5). 
+
+
+//🔸Implementation :
+// #include<iostream>
+// using namespace std ;
+
+// int InversionCount(int *arr, int size) {
+    
+//     int invCount = 0;
+     
+//      for(int i=0;i < size ;i++){
+//         for(int j=i+1; j <size ; j++){
+//                if( arr[i] > arr[j]){
+//                 invCount++ ;
+//                }
+//            }
+//      }
+       
+//        return invCount; 
+// }
+
+// int main() {
+
+// int arr[5] = {1, 20, 6, 4, 5} ;
+// int size = 5 ;
+
+// cout<< " Number of Inversion are : "<< InversionCount(arr, size) <<endl ;
+
+//     return 0;
+// }
+
+//🔸Space complexity : O(1)   auxilliary space
+//🔸Time complexity : O(n^2)
+// Two nested loops are needed to traverse the array from start to end.
+
+
+//39/149 
