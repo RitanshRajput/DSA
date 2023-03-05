@@ -1078,28 +1078,30 @@
 // int insertionSort(int arr[], int size) {
  
 //      int i = 1;
+
 //      while(i < size) {
     
-//        int temp = arr[i] ;
-//        int j = i - 1 ;
+//        int temp = arr[i] ;           // temporary array holds value of i
+//        int j = i - 1 ;               // j holds value of arr[i+1] ;
 
-//        while(j >= 0) {
-         
-//         if( arr[j] > temp) {
-//             arr[j+1] = arr[j] ;
-//         } 
+//         while(j >= 0) {             
+          
+//          if( arr[j] > temp) {          // if j or lower indexes than j is greater than temp
+//             arr[j+1] = arr[j] ;        // then assign arr[j]  in arr[j+1] means in array[temp] which holds current value of i
+//          } 
 //         else {
-//             break ;
+//             break ;                    
 //         }
-//         j-- ;
-//        }
-      
-//       arr[j+1] = temp ;
 
-//         i++ ;
+//          j-- ;                      // decrement j 
+//      }
+      
+//       arr[j+1] = temp ;             // atlast assign temperary array value in arr[j+1]
+
+//         i++ ;                       // increment i
 //      }
 
-//      for(int i=0; i<size; i++){
+//      for(int i=0; i<size; i++){        //loop to print new arrays
 //         cout<< arr[i] <<" " ;
 //      }
 // }
@@ -1124,19 +1126,21 @@
 
 //     //base case  
 //     // if size <= 1 then return means loop will run from nth index to 1th index
+
 //     if( size <= 1 ){
 //        return ;
 //     }
 
 //     // Recursive relation , to iterate all the index of array from nth to 1 (not 0)
+
 //     recurseInsertion(arr, size-1) ;
    
 //    //processing part where  :
-//    //  here temp is temporary variable to store value of nth index - 1
-//    //  j is declare outside to use outside of its scope which has nth index - 2 as value
-//    //  while loop runs when j >=0 && if arr[j] > temp , j--
+//    // here temp is temporary variable to store value of nth index - 1
+//    // j is declare outside to use outside of its scope which has nth index - 2 as value
+//    // while loop runs when j >=0 && if arr[j] > temp , j--
 //    // arr[j+1] = arr[j]  inside bigger value is shift to right side => 
-//    //  atlast arr[j+1] = temp , means after shifting previously the remaining index will now have the value of right side which used to be smaller value <=
+//    // atlast arr[j+1] = temp , means after shifting previously the remaining index will now have the value of right side which used to be smaller value <=
 
 //    int temp = arr[size - 1] ;
 //    int j = size - 2 ;
@@ -1216,8 +1220,10 @@
 
 //        //mid index
 //        int mid = (start + end) /2 ;
+
 //        //length of divided array left part :
 //        int left = mid - start + 1 ;
+
 //        //length of divided array right part :
 //        int right = end - mid;
 
@@ -1314,7 +1320,7 @@
 //🔸 Time Complexity : O(n log n)
 //Merge Sort is a recursive algorithm and time complexity can be expressed as
 // following recurrence relation. T(n) = 2T(n/2) + O(n) The solution of 
-// the above recurrence is O(nLogn). The list of size N is divided into a max of Logn parts, 
+// the above recurrence is O(nLogn). The list of size N is divided into a max of Log n parts, 
 // and the merging of all sublists into a single list takes O(N) time,
 // the worst-case run time of this algorithm is O(nLogn) 
 // Best Case Time Complexity:  O(n*log n)
@@ -1322,7 +1328,6 @@
 // Average Time Complexity:    O(n*log n)
 // The time complexity of MergeSort is O(n*Log n) in all the 3 cases (worst, average and best) 
 // as the mergesort always divides the array into two halves and takes linear time to merge two halves
-
 
 
                             
@@ -1381,4 +1386,37 @@
 // Two nested loops are needed to traverse the array from start to end.
 
 
-//39/149 
+
+
+                //🔴🔴 Quick Sort Using Recursion :
+
+//🔸Like Merge Sort, QuickSort is a Divide and Conquer algorithm. 
+// It picks an element as a pivot and partitions the given array around the picked pivot. 
+// There are many different versions of quickSort that pick pivot in different ways. 
+
+//1. Always pick the first element as a pivot.
+//2. Always pick the last element as a pivot (implemented below)
+//3. Pick a random element as a pivot.
+//4. Pick median as the pivot.
+
+//🔸The key process in quickSort is a partition(). 
+//   The target of partitions is, given an array and an element x of an array as the pivot, 
+//   put x at its correct position in a sorted array and put all smaller elements (smaller than x) before x,
+//   and put all greater elements (greater than x) after x. All this should be done in linear time.
+
+//🔸 Psuedo code :
+//  void quicksort(int arr[], int start, int end){
+//     //base case
+//     if( start >= end){
+//         return ;
+//     }
+
+//     //partition point
+//     p = partition(arr, start, end)
+
+//     //recursive call to sort left and right part of array
+//     quicksort(arr, start, p - 1);
+//     quicksort(arr, p+1, end) ;
+//  }
+
+//10:01 40/149
