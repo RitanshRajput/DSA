@@ -11,6 +11,7 @@
         "typeinfo": "cpp",
         "string": "cpp",
         "ratio": "cpp",
-        "type_traits": "cpp"
+        "type_traits": "cpp",
+        "functional": "cpp"
     }
 }
