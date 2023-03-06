@@ -1419,4 +1419,255 @@
 //     quicksort(arr, p+1, end) ;
 //  }
 
-//10:01 40/149
+//🔸Pivot Method :
+
+//       [(3), 4, 1, 5, 2] 
+
+// Take  a pivot  (we are taking first element in this case)
+// Count = all element < pivot 
+// Put pivot element on = start + count
+// condition:      a< | a | > a
+
+//          : [4, 1, 3, 5, 2]
+// Pointer :    i           j         // to compare if the pivot is on the right position or not means all the element on its left side should be less than pivot
+//            [2, 1, 3, 5, 4]         // 4 and 2 swapped because 2 is less than 3 pivot 
+
+//sort left and right part of pivot : [1 ,2, 3, 4, 5]
+
+//🔸Implementation :
+
+// #include<iostream>
+// using namespace std;
+
+// int partition(int arr[], int start, int end) {
+
+//     int pivot = arr[start] ;
+//     int count = 0 ;
+
+//     //Inversion count to find lower element on the right side of pivot element
+//     for(int i = start+1; i<= end; i++ ){
+//          if(arr[i] < pivot){
+//             count++ ;
+//          }
+//     }
+    
+//     // place pivot on it right index
+//     int pivotCorrectIndex = start + count ;
+//     swap( arr[pivotCorrectIndex] , arr[start]) ;
+
+//     // sort left and right array from pivot
+//     int i = start , j = end ;
+
+//     while( i < pivotCorrectIndex && j > pivotCorrectIndex) {
+
+//         while( arr[i] < pivot){
+//             i++ ;
+//         }
+//         while( arr[j] > pivot){
+//             j-- ;
+//         }
+
+//         if( i < pivotCorrectIndex && j > pivotCorrectIndex){
+//             swap(arr[i++], arr[j--]) ;
+//         }
+//     }
+
+//     return pivotCorrectIndex ;
+
+// }
+
+// void quickSort(int arr[], int start, int end) {
+
+//     //base case
+//     if(start >= end) {
+//         return ;
+//     }
+     
+//      // find pivot and work on it
+//     int pivot = partition(arr, start, end) ;
+
+//    // recursive call sort Left array :
+//     quickSort(arr,start, pivot - 1) ;
+
+//     // recursive call sort right array :
+//     quickSort(arr, pivot + 1, end) ; 
+
+// }
+
+// int main() {
+
+// int arr[7] = {7, 6, 5, 4, 3, 2, 1};
+// int size = 7 ;
+// int start = 0;
+// int end = size - 1;
+
+//  quickSort(arr, start, end ) ;
+
+//  for(int i=0; i<size; i++){
+//     cout<< arr[i] << " " ;
+//  }
+
+//     return 0;
+// }
+
+
+//🔸Space COmplexity: O(n)
+//🔸Time complexity : 
+// Best case  : O(n Log n)
+// Avg case   : O(n Log n)
+// Worst case : O(n^2)
+
+//🔴 Stable or Unstable algo :
+// Some sorting algorithms are stable by nature like Insertion sort, Merge Sort, Bubble Sort, etc. 
+// And some sorting algorithms are not, like Heap Sort, Quick Sort, etc. 
+//🔸QuickSort is an unstable algorithm because we do swapping of elements 
+// according to pivot’s position (without considering their original positions).
+
+//🔴 In-place or Not :
+//In the sense that it doesn't create partial or whole copies of the data being sorted,
+// QuickSort is in-place and doesn't require additional heap space.
+// This does not imply that it uses no additional memory, though. 
+// Recursion is a common way to implement it, and it uses O(logN) stack space (not heap space).
+
+// #include<iostream>
+// using namespace std ;
+
+// int partition( int arr[], int start, int end) {
+//    cout<< "partition pivot = arr[start]:  "<< arr[start] <<endl ;
+//     int pivot = arr[start] ;
+//     int count = 0 ;
+
+//     for(int i= start+1 ; i<=end; i++){
+//         if(pivot > arr[i]) {
+//             count++ ;
+//         }
+//     }
+
+//     int pivotPlace = start + count ;
+//     cout<<"partition pivotplacce : "<<pivotPlace <<endl ;
+//     swap (arr[pivotPlace], arr[start] ) ;
+//     cout<<"partition arr[pivotplace], arr[start] : "<<arr[pivotPlace] <<","<<arr[start] <<endl ;
+//     int i = start, j = end ;
+//       cout<< "partition while loop "<<endl ;
+//       cout<< "i, j, pivot, pivotPlcae : "<< i <<" "<<j <<" "<<pivot << " "<<pivotPlace <<endl ;
+
+//     while( i < pivotPlace && j > pivotPlace){
+//         cout<< "inside while loop"<<endl ;
+//         while(arr[i] < pivot) {
+//             i++ ;
+//         }
+//         while(arr[j] > pivot) {
+//             j-- ;
+//         }
+
+//         if( i < pivotPlace && j > pivotPlace){
+//             swap( arr[i++], arr[j--]) ;
+//         }
+//     }
+//     cout<<pivotPlace << "!!" <<endl ;
+//     return pivotPlace ;
+// }
+
+// void quick(int arr[], int start, int end) {
+// cout<< "quicksort :"<< endl ;
+// for(int i=start; i<=end; i++){
+//     cout<< arr[i] << " " ;
+// }
+// cout<<endl ;
+//     //base case
+//     if(start >= end){
+//         cout<<"true"<<endl ;
+//         return ;
+//     }
+//  cout<< "quicksort pivot start, end : "<< start <<" "<< end <<endl ;
+//     // pivot 
+//     int pivot = partition(arr, start, end) ;
+
+//     //left element from pivot
+//     cout<<"quicksort left start, pivot - 1: "<<start << " " <<pivot-1 <<endl ;
+//     quick( arr, start, pivot - 1) ; 
+//     //right element from pivot
+//     cout<<"quicksort right pivot + 1 , end: "<< pivot+1 << " " <<end <<endl ;
+//     quick( arr, pivot + 1, end) ;
+
+// }
+
+// int main() {
+
+// int arr[5] = {5, 4, 3, 2, 1} ;
+// int size = 5 ;
+// quick(arr, 0, size -1 ) ;
+
+// for(int i=0; i<size; i++){
+//     cout<< arr[i] << " " ;
+// }
+
+//     return 0;
+// }
+
+
+//🔸Above code without comment
+// #include<iostream>
+// using namespace std ;
+
+// int partition(int arr[] ,int start, int end){
+//     int pivot = arr[start] ;
+//     int count = 0;
+
+//     //total number of smaller element after pivot 
+//     for(int i=start+1; i<=end ;i++){
+//         if(arr[i] < pivot){
+//             count++ ;
+//         }
+//     }
+
+//     int corrPosition = start + count ;
+//     swap(arr[corrPosition] , arr[start]) ;
+
+//    int i = start , j = end ;
+//     while( i < corrPosition && j > corrPosition) {
+//         while( arr[i] < pivot){
+//             i++ ;
+//         }
+//         while( arr[j] > pivot){
+//             j-- ;
+//         }
+
+//         if( i < corrPosition && j > corrPosition){
+//             swap(arr[i++], arr[j--]) ;
+//         }
+//     }
+
+//     return corrPosition ;
+// }
+
+// void quickSort( int arr[], int start, int end){
+
+//     //base case
+//     if( start >= end) {
+//         return ;
+//     }
+
+//     int pivot = partition(arr, start, end) ;
+
+//     //left and right array of pivot point using recursive call
+//     quickSort(arr, start, pivot - 1); 
+//     quickSort(arr, pivot+1, end) ;
+// }
+
+// int main() {
+
+// int arr[8] = {8, 4, 1, 1, 2, 5, 3, 6} ;
+// int size = 8 ;
+// int start  = 0;
+// int end = size - 1;
+
+// quickSort(arr, start, end) ;
+
+// for(int i=0; i<size; i++){
+//     cout<< arr[i] <<" " ;
+// }
+//     return 0;
+// }
+
+//41/149
