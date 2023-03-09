@@ -1673,6 +1673,7 @@
 
 
 //❓ Question : Leetcode Medium
+// Subsets
 // Given an integer array nums of unique elements, return all possible subsets (the power set).
 // The solution set must not contain duplicate subsets. Return the solution in any order.
 
@@ -1696,7 +1697,7 @@
 // #include<vector>
 // using namespace std ;
 
-// void solve(vector<int> nums, vector<int> output, int index, vector<vector<int>> &ans){
+// void solve(vector<int> nums, vector<int> output, int index, vector<vector<int>>& ans){
     
 //     //base case
 //     if(index >= nums.size()){
@@ -1714,20 +1715,97 @@
 
 // }
 
+// vector<vector<int>> subsets(vector<int>& nums) {
+
+//        vector<vector<int>> ans ;     // to store main answer
+//        vector<int> output ;          // to store current output that we will pass in ans
+//        int index = 0 ;               // index to iterate
+
+//        solve(nums, output, index, ans) ;
+
+//        return ans ;
+// }
+
 // int main()
 // {
 //     vector<int> nums ;
 //     nums.push_back(1) ;
 //     nums.push_back(2) ;
 //     nums.push_back(3) ;
-//     vector<vector<int>> ans ;
-//     vector<int> output ;
-//     int index = 0 ;
 
-//     solve(nums, output, index, ans) ;
+//    vector<vector<int>> res =  subsets(nums) ;
+
+// //loop to print answer vector
+//     for(auto i:res){
+//         cout<< "[" ;
+//         for(auto j:i){
+//         cout<< j <<"";
+//         }
+//         cout<< "] , " ;
+//     }
     
 //     return 0 ;
 // }
+
+
+//❓ Question : medium coding ninjas
+// Subsequences of string
+//You are given a string 'str' containing lowercase english letter from a to z inclusive .
+// your task is to find all non-empty possible subsequences of 'str'
+
+//example 1:
+// input : str = 'abc'
+// output : 'a' 'ab' 'abc' 'ac' 'b' 'bc' 'c'
+
+// exmaple 2:
+// input : 'str' = 'bbb'
+// output : 'b' 'b' 'b' 'bb' 'bb' 'bb' 'bbb'
+
+
+// #include<iostream>
+// #include<vector>
+// using namespace std ;
+
+// void solve(string str, string output, int index, vector<string>& ans) {
+
+//       //base case
+//       if( index >= str.length()){
+//          if( output.length() > 0){          // if condition if dont want to return an empty string as an answers
+//            ans.push_back(output) ;
+//          }
+//         return ;
+//       }
+
+//       //exclude
+//       solve(str, output, index+1, ans) ;
+
+//       //include
+//       char element = str[index] ;
+//       output.push_back(element) ;
+
+//       solve(str, output, index+1, ans) ;
+// }
+
+// vector<string> subseq( string str) {
+//     vector<string> ans ;
+//     string output = "" ;
+//     int index = 0 ;
+//     solve(str, output, index, ans) ;
+     
+//      return ans ;
+// }
+
+// int main() {
+//    string str = {"abc"} ;
+
+//     vector<string> res = subseq(str) ;
+//     for(auto i:res){
+//         cout<<"'"<< i <<"'"<<" " ;
+//     }
+
+//     return 0;
+// }
+
 
                                         //🔴Basic Backtracking question
 
