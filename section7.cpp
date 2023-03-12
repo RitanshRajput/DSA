@@ -26,8 +26,7 @@
 //  = O(n²)            // Time complexity 
 
 // Time complexity :
-// Best case ==>  O(n²)
-// Worst case ==> O(n²)
+ 
 
 //🔴 Space complexity :
 // no extra variable is created so : O(1) 
@@ -164,21 +163,19 @@
 // using namespace std;
 
 // int printArray(int arr[], int n){
+//     cout<<"Bubble sort : "<<endl ;
 //     for(int i=0; i<n; i++){
 //         cout<<arr[i]<<" " ;
 //     }
 // }
 
 // int bubbleSort(int arr[], int n){
-//     int count = 0 ;
+
 //       for(int i=1; i<n; i++){       // we consider 0th index to be sorted so we start from 1th index to < nth index
 
 //         for(int j=0; j<n-i; j++){   // process element from  0 to n-i th index  (0, 1, 2, 3, 4) (0, 1, 2, 3) (0, 1, 2) (0,1) (0)
-           
 //             if(arr[j] > arr[j+1]){
-//                    swap(arr[j], arr[j+1]) ;
-//                    count++ ;
-//          cout<<"count : "<<count<<endl ;
+//                 swap(arr[j], arr[j+1]) ;
 //             }
 //          }
 //       }
@@ -190,7 +187,7 @@
 // int arr[7] = {8, 22, 7, 9, 31, 5, 13} ;
 // int n = 7 ;
 
-// cout<<endl<<" Bubble sorted array no. of element  : "<<bubbleSort(arr, n)<<endl ;
+// bubbleSort(arr, n);
 
 //     return 0;
 // }
@@ -292,18 +289,16 @@
 //     // assign ex: j (i-1) = 0th index , temp (arr[i]) = 1st index, j+1 (0th + 1) = 1st index
     
 //       for(int i=1; i<n; i++){          // loop start from 1th to < nth index (bcoz we consider 0th index sorted)
-//         int temp = arr[i] ;            // temporary array
+//         int temp = arr[i] ;           
 //         int j = i-1 ;                  // declaring j outside the loop to use its value outside the scope
+//          for( ; j >=0; j--) {           
 
-//         // value of j will be i - 1 , ex: j = i-1 == 2- 1 => 1
-//         for( ; j >=0; j--) {           
-
-//          if(arr[j] > temp ){          // ex: if 0th index  > than 1st index
+//           if(arr[j] > temp ){          // ex: if 0th index  > than 1st index
 //             arr[j+1] = arr[j] ;       // then shift 0th index right side ex: {10, 1, 4} shift right side {10, 10, 4}
-//           }
+//            }
 //          else{
-//            break ;                    //else break the loop if left element is smaller means all other element on the left side will be smaller as well
-//          }
+//             break ;                    //else break the loop if left element is smaller means all other element on the left side will be smaller as well
+//           }
 //         }
 //        //  value of j will be according to loop ex: j-- , j = 0
 //         arr[j+1] = temp ;             // after assigning the value on the left side ex: {10, 10, 4} assign rigth value stored in temp to the left (1, 10, 4)
@@ -312,7 +307,6 @@
 //     for(int i=0; i<n; i++){               // loop to print sorted array
 //         cout<<arr[i]<<" " ;
 //     }
-//     cout<<endl ;
 //  return n ;
 // }
 
