@@ -1,4 +1,4 @@
-// Find min and max sum ;
+//🔸Find min and max sum ;
 // #include<iostream>
 // #include<algorithm>
 // using namespace std ;
@@ -30,8 +30,7 @@
 // }
 
 
-// find kth element 
-
+//🔸find kth element :
 // #include<iostream>
 // using namespace std ;
 // int findK(int arr[], int s ,int e, int k) {
@@ -69,7 +68,7 @@
 // }
 
 
-// sort 0s 1s 2s 
+//🔸 sort 0s 1s 2s 
 // #include<iostream>
 // using namespace std ;
 
@@ -114,4 +113,34 @@
 //     sortNumber(arr, n) ;
 
 //     return 0;
+// }
+
+
+// //🔸 Move all the negative elements to one side of the array
+// #include<iostream>
+// using namespace std ;
+// void sortNegative( int arr[], int size) {
+
+//     for(int i=0; i<size; i++){
+//         int minIndex = i ;
+
+//         for(int j=i+1; j<size; j++){
+//             if(arr[minIndex] > arr[j]){
+//                 minIndex = j;
+//             }
+//         }
+//         swap(arr[minIndex], arr[i]) ;
+//     }
+
+//     //loop to print sorted array
+//      for(int i=0; i< size; i++) {
+//         cout<<"["<< arr[i] <<"] " ;
+//      }
+// }
+
+// int main() {
+//   int arr[7] = {-12, 2, 5, -16, -3 , 1, 0} ;
+//   int size = 7 ;
+//   sortNegative(arr,size) ;
+//   return 0 ;
 // }

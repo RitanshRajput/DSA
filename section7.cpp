@@ -25,7 +25,7 @@
 //  = n² - n / 2
 //  = O(n²)            // Time complexity 
 
-// Time complexity :
+// Time complexity :   O(n²)            
  
 
 //🔴 Space complexity :

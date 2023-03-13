@@ -455,7 +455,7 @@
 //     }
 //     n = n>>1 ;               //Right shifting every digit till last bit
 // }
-//  cout<<count ;               //output: 4    (there are four 1)
+//  cout<<count ;               //output: 3   (there are three 1)
 // }  
 
 
@@ -464,7 +464,7 @@
 
 //   Decimal    |     Binary
 //   ----------------------
-//     0       |     00
+//     0        |     00
 //     1        |     01        
 //     2        |     10
 //     3        |     11
@@ -505,7 +505,7 @@
 
 
 //🔸 APPROACH 2 :
-//❓ Decimal to Binary approach 2:
+// ❓ Decimal to Binary approach 2:
 
 // #include <iostream>
 // #include <math.h>                // Maths library consist, mathematical function(sqrt, pow, etc)
@@ -520,7 +520,7 @@
 //    while(n != 0){                             //Step1 : loop till n is not equal to zero 
 //     int bit = n & 1 ;                         //Step2 : Store the remainder of every single digit(by using AND operator)(if 0 & 1 => 0) (if 1 & 1 => 1)
 //     answer = (bit * pow(10, i)) + answer ;    //Step3 : reverse the numbers that is store in bit (formula = (bit * pow(10, i)) + answer ) the i will be increased by each iteration
-
+//    
 //     n = n >> 1 ;                              //Step4: Right shift each digit on every iteration so we can move to next digit( 110  => n>>1  => 110 => 11 => 1)
 //     i++ ;                                     //Step5:  increment i for the reversed formula
 //    }
@@ -530,11 +530,11 @@
 
 //🔘 Formula to store value in Normal flow and reverse flow:
 //  1> Normal flow :  float answer = 0 ;
-//                   answer = (answer * 10) + digit;
+//                    answer = (answer * 10) + digit;
 
 //  2> Reverse flow :  float answer = 0 ;
-//                   answer = (answer * (10^i)) + digit;
-//                      i++ ; (10^0, 10^1, 10^2, 10^3, ....) increment with each iteration
+//                     answer = (answer * (10^i)) + digit;
+//                     i++ ; (10^0, 10^1, 10^2, 10^3, ....) increment with each iteration
 
 
 
@@ -574,9 +574,10 @@
 
 //       while(n != 0){               //Step1: run loop till n == 0
 //       int digit = n % 10 ;         //Step2: pass every binary digit one by one so use( n % 10  =>  101 % 10 => 1 ) (10 % 10 => 0)
-
+//       cout<<"digit :"<<digit<<endl ;
 //       if(digit == 1){               //Step3: check if the digit is 1
 //         ans = ans + pow(2, i) ;     //Step4:  increase power of 2 at every 1s and add them  
+//         cout<<"ans :"<<ans<<endl ;
 //       }
 //        n = n/10 ;                   //Step5: decrement every single digit by dividing it with 10 (101 / 10 => 10) (10 / 10=> 1)
 //        i++ ;                        //Step6: increment i for the power to be updated
@@ -663,7 +664,7 @@
 //             mask = (mask << 1) | 1;     // OR(|) operator says if either is 1 then make it 1,  elseif both are zero then make it zero (basically mask will always be one)
 //             m = m >> 1;                 // left shift m till its zero
 //         }
-//                                         //n = 0000 1011  , mask = 1111 1111, (~n)negation means if 0 then make it 1, or vice-versa
+//                                          //n = 0000 1011  , mask = 1111 1111, (~n)negation means if 0 then make it 1, or vice-versa
 //         int ans = (~n) & mask ;        // ex: ans = (1111 0100) & (1111 1111)  => 1111 0100 => last digit after 0 are 100 that is 4. 
  
 //         cout<< ans;
@@ -674,19 +675,18 @@
 // An integer n is a power of two, if there exists an integer x such that n == 2x.
 
 // Example 1:
-
 // Input: n = 1
 // Output: true
-// Explanation: 20 = 1
-// Example 2:
+// Explanation: 2^0 = 1
 
+// Example 2:
 // Input: n = 16
 // Output: true
-// Explanation: 24 = 16
-// Example 3:
+// Explanation: 2^4 = 16
 
+// Example 3:
 // Input: n = 3
-// Output: false
+// Output: false : 3 is not power of 2
 
 // Constraints:
 // -231^30 <= n <= 231^30 - 1
