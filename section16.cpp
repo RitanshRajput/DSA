@@ -1900,5 +1900,148 @@
 
 
 
+//🔴❓ Question : Company interview
+// PERMUTATION OF STRING
+// you are given a string 'str' consisting of lowercase english letters.
+// your task is to return all permutation of the given string in lexicographically 
+// increasing order.
 
-// 43/149
+// String A is lexicographically less than string B.
+// if either A is a prefix of B (ans A != B).
+// or there exists such  i (1 <= i <= min([A],[B])), that A[i] < B[i] 
+// and for any j ( 1 <= j <= i) A[i] = B[i] .
+// here [A] denotes the length of the string A
+
+// Sample Input 1:
+// 3
+// abc
+// bc
+// c
+
+// Output 1:
+// abc acb bac bca cab cba    // if n = 3 then answer becomes 3! means str.length = 3, output are 6
+// bc cb
+// c
+
+// Explanation For Sample Input 1:
+// In the 1st test case, there are 6 permutations of the given string.
+// In the 2nd test case, there are 2 permutations of the given string.
+// In the 3rd test case, there is only 1 permutation of the given string.
+
+// Sample Input 2:
+// 1
+// xyz
+
+// Output 2:
+// xyz xzy yxz yzx zxy zyx 
+
+// #include<iostream>
+// #include<vector>
+// using namespace std ;
+
+// void solve(string str, vector<string>& ans, int index) {
+//       //base case
+//       if( index >=str.length()){
+//         ans.push_back(str) ;
+//         return ;
+//       }
+//       //processing
+//       for(int i=index; i<str.length(); i++){
+//           swap(str[index], str[i]) ;
+//           //recursive call
+//           solve(str, ans, index+1) ;
+//           //backtracking
+//           swap(str[index], str[i]) ;
+//       }
+// }
+
+// vector<string> generatePermutation(string& str) {
+//      vector<string> ans ;
+//      int index = 0 ;
+//      solve(str, ans, index) ;
+//      return ans ;
+// }
+
+// int main() {
+//   string str = "abc" ;
+
+//   vector<string> ans = generatePermutation(str) ;
+
+// for(auto i:ans){
+//     cout<< i  <<" ";
+// }
+
+//     return 0;
+// }
+
+//🔴 ❓Question : Leetcode Medium
+// Permutations :
+// Given an array nums of distinct integers, 
+// return all the possible permutations. You can return the answer in any order.
+
+// Example 1:
+// Input: nums = [1,2,3]
+// Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+
+// Example 2:
+// Input: nums = [0,1]
+// Output: [[0,1],[1,0]]
+
+// Example 3:
+// Input: nums = [1]
+// Output: [[1]]
+ 
+// Constraints:
+// 1 <= nums.length <= 6
+// -10 <= nums[i] <= 10
+// All the integers of nums are unique.
+
+
+// #include<iostream>
+// #include<vector>
+// using namespace std ;
+
+// void solve(vector<int> nums, vector<vector<int>>& ans, int index) {
+//     //base case 
+//     if( index >= nums.size()){
+//         ans.push_back(nums) ;
+//         return ;
+//     }
+
+//     for(int j=index; j<nums.size(); j++){
+//         swap(nums[index], nums[j]) ;
+//         //recursive call
+//         solve(nums, ans, index+1); 
+//         //backtracking
+//         swap(nums[index], nums[j]);          // to learn again in future check 43/149 
+//     }
+// }
+
+// vector<vector<int>> permutation(vector<int>& nums){
+       
+//        vector<vector<int>> ans ;
+//        int index = 0 ;
+//        solve(nums, ans, index) ;
+
+//        return ans ;
+// }
+
+// int main() {
+// vector<int> nums ;
+
+// nums.push_back(1) ;
+// nums.push_back(2) ;
+// nums.push_back(3) ;
+
+// vector<vector<int>> res = permutation(nums) ;
+
+// for(auto i:res){
+//     cout<<"[" ;
+//     for(auto j:i){
+//     cout<< j ;
+//     }
+//     cout<< "] " ;
+// }
+
+//     return 0;
+// }
