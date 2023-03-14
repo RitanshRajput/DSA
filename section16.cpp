@@ -2046,4 +2046,235 @@
 //     return 0;
 // }
 
-// 44/149
+
+
+//🔴🔴❓ Question :  Medium GfG 
+// RAT IN A MAZE PROBLEM
+// Consider a rat placed at (0, 0) in a square matrix of order N * N.
+// It has to reach the destination at (N - 1, N - 1). 
+// Find all possible paths that the rat can take to reach from source to destination. 
+// The directions in which the rat can move are 'U'(up), 'D'(down), 'L' (left), 'R' (right).
+// Value 0 at a cell in the matrix represents that it is blocked and 
+// rat cannot move to it while value 1 at a cell in the matrix represents that rat can be travel through it.
+
+// Note: In a path, no cell can be visited more than one time. 
+// If the source cell is 0, the rat cannot move to any other cell.
+
+// Example 1:
+
+// Input:
+// N = 4
+// m[][] = {{1, 0, 0, 0},
+//          {1, 1, 0, 1}, 
+//          {1, 1, 0, 0},
+//          {0, 1, 1, 1}}
+// Output:
+// DDRDRR DRDDRR       (Down => D, Right => R)
+// Explanation:
+// The rat can reach the destination at 
+// (3, 3) from (0, 0) by two paths - DRDDRR 
+// and DDRDRR, when printed in sorted order 
+// we get DDRDRR DRDDRR.
+
+// Example 2:
+// Input:
+// N = 2
+// m[][] = {{1, 0},
+//          {1, 0}}
+// Output:
+// -1
+// Explanation:
+// No path exists and destination cell is 
+// blocked.
+
+// Expected Time Complexity: O((3N^2)).
+// Expected Auxiliary Space: O(L * X), L = length of the path, X = number of paths.
+
+// Constraints:
+// 2 ≤ N ≤ 5
+// 0 ≤ m[i][j] ≤ 1
+
+//🔴Explanation :
+// given 2d array Maze :
+
+//        col=0 | col=1 | col=2 | col=3
+//       _____________________________
+// row=0 |s=[1] |  [0]  |  [0]  |  [0]
+//       ------------------------------
+// row=1 |  [1] |  [1]  |  [0]  |  [1]
+//       ------------------------------
+// row=2 |  [1] |  [1]  |  [0]  |  [0] 
+//       ------------------------------
+// row=3 |  [0] |  [1]  |  [1]  |  [1] =>Destination
+
+//  1 => Open path (Allowed)
+//  2 => Blocked Path (Not Allowed)
+//  Rat can moved in four direction  Up , Down, Left, Right
+//  Source => (0, 0)
+//  Destination => (N-1, N-1)
+
+// 🔸Approach :
+// Moves :
+// Up    => (row-1 , col)
+// Down  => (row+1 , col)
+// Left  => (row   , col-1)
+// Right => (row   , col+1)
+
+//🔸 We will create a another array named as Visited array :
+// so that if we iterate through our original array and if an index is already 
+// visited then we will not go to that same index and stuck in the loop.
+
+//🔸 Everytime we move to new index in our original array , then we will first
+// check if the same index in visited array is marked or not, 
+// if marked then look for other index
+// if not marked then visit that index in original array, and mark that index in visited array
+
+//🔸 Conditions: safe to move
+// (i , j) => visited array
+// (k , l) => original array
+
+// 1. Matrix should be within k
+// 2. original [k][l] = 1         // if 1 then we go to that index /direction
+// 3. visited  [k][l] = 0         // index in visited array should be = 0 then we go else dont go 
+
+// 🔸 move :
+// visited [k][l] = true         // true = 1  if visited mark 1
+// when function call returns marked visited [k][l] = false (backtracking)
+// for another route  (there could we another routes so after we find our solution we will make 1s = 0s for another routes)
+
+
+// #include<iostream>
+// #include<vector>
+// #include<algorithm>
+// using namespace std ;
+
+// bool isSafe(int newX, int newY, int n, vector<vector<int>> visited, vector<vector<int>>& m){
+
+//     // conditions to safely move into next index :
+//     // (row , col) => original array
+//     // 1. Matrix should be within k
+//     // 2. original [row][col] = 1         // if 1 then we go to that index /direction
+//     // 3. visited  [row][col] = 0         // index in visited array should be = 0 then we go else dont go 
+
+//     if((newX>=0 && newX<n) && (newY>=0 && newY<n) && (visited[newX][newY] == 0) && (m[newX][newY] == 1)) {
+//            return true ;
+//     }
+//     else{
+//         return false ;
+//     }
+// }
+
+// void solve(vector<vector<int>>& m, int n, int sourceX, int sourceY, vector<vector<int>> visited, string path,  vector<string>& ans ) {
+     
+//      //base case 
+//      if( sourceX == n-1 && sourceY == n-1) {     //if reach the destination src(n-1, n-1) then return 
+//           ans.push_back(path) ;
+//           return ;
+//      }
+    
+//     // if visited the index then mark as One
+//     visited[sourceX][sourceY] = 1 ;
+    
+//     // we have 4 moves :
+//     //  Up    => (row-1 , col)    = (sourceX - 1, sourceY)
+//     //  Down  => (row+1 , col)    = (sourceX +1, sourceY)
+//     //  Left  => (row   , col-1)  = (sourceX , sourceY-1)
+//     //  Right => (row   , col+1)  = (sourceX , sourceY+1)
+
+//     // Down
+//     int newX = sourceX + 1;
+//     int newY = sourceY ;
+     
+//     // check is safe or not in isSafe function
+//      if( isSafe(newX, newY, n, visited, m)) {
+//            path.push_back('D') ;    // if safe then push_back 'D' in path
+          
+//           // recursive call
+//           solve(m, n, newX, newY, visited, path, ans) ;
+
+//           //backtracking  , after finding one route clear the path string to store another routes if any
+//           path.pop_back() ;
+//      }
+
+//      //Left 
+//         newX = sourceX ;
+//         newY = sourceY - 1 ;
+//         if( isSafe(newX, newY, n, visited, m)) {
+//            path.push_back('L') ;   
+//            solve(m, n, newX, newY, visited, path, ans) ;
+//            path.pop_back() ;
+//      }
+
+//      // Right 
+//         newX = sourceX ;
+//         newY = sourceY + 1 ;
+//         if( isSafe(newX, newY, n, visited, m)) {
+//            path.push_back('R') ;   
+//            solve(m, n, newX, newY, visited, path, ans) ;
+//            path.pop_back() ;
+//      }
+
+//      // Up
+//         newX = sourceX - 1;
+//         newY = sourceY  ;
+//         if( isSafe(newX, newY, n, visited, m)) {
+//            path.push_back('U') ;   
+//            solve(m, n, newX, newY, visited, path, ans) ;
+//            path.pop_back() ;
+//      }
+
+
+//     // backtracking , after reaching the answer make all indexes again 0 , to find another route
+//     visited[sourceX][sourceY] = 0;
+// }
+
+// vector<string> findPath(vector<vector<int>>& m , int n) {
+
+//     vector<string> ans;             //create a string vector to store ans
+    
+//     if( m[0][0] == 0 ){
+//         return ans ;           // if element on 1st index src=(0,0) = 0 then rat will not be able to enter then simply return empty array. 
+//     }
+
+//     int sourceX = 0 ;                // row = 0
+//     int sourceY = 0 ;                // col = 0 
+
+//     vector<vector<int>> visited = m ;    // create a visited array to keep log of visited index
+
+//     for( int i=0; i<n ; i++){            // initialise all visited array index as 0
+//         for(int j=0; j<n; j++){
+//              visited[i][j] = 0 ;
+//         }
+//     }
+
+//     string path = "" ;              // string to store correct path to destination
+//     solve( m, n, sourceX, sourceY, visited, path, ans) ;       // recursion function
+//     sort(ans.begin(), ans.end()) ;        //sorting final answer using inbuild sort function
+
+//     return ans ;
+
+// }
+
+// int main() {
+
+// vector<vector<int>> m {{ 1, 0, 0, 0},
+//                        { 1, 1, 0, 1},
+//                        { 1, 1, 0, 0},
+//                        { 0, 1, 1, 1} } ;
+
+// int n = 4 ;
+
+// vector<string> res = findPath( m, n) ; 
+
+// cout<<" Route for Rat to react destination : "<<endl ;
+// for(auto i:res) {
+//     cout<< "[" ;
+//     cout<< i ;
+//     cout<< "] " ;
+// }
+
+//     return 0;
+// }
+
+
+//45 /149
