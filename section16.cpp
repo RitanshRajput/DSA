@@ -2277,4 +2277,388 @@
 // }
 
 
-//45 /149
+                 //🔴🔴 Recursive Algorithm Time and Space complexity :
+                 
+//🔴🔴 Time Complexity:
+
+//🔸Time complexity : It is basically time required by a function of inputs f(n)  
+
+//❓Factorial function psuedo code :
+// int fact(int n){
+//     // base case
+//     if(n == 0){
+//         return 1 ;
+//     }
+//     //recursive call
+//     return n * fact(n-1) ;
+// }
+
+//🔸Try : to figure the recurrence solution 
+//eg : f(n) = n * f(n-1)                  // for recursive factorial function
+
+//🔸Time taken by different section :
+// k1  =   time taken by base case let say k1
+// k2  =   time taken by n * let say k2
+// T(n-1) = time taken by fact(n-1) say T(n-1)  
+                             
+//    T(n) = k1 + k2 + T(n-1) 
+//                             __ 
+//     T(n) = k + T(n-1)         |    // k1 + k2 = k
+//     T(n-1) = k + T(n-2)       |     // t(n) = t(n-1)  then t(n-1) = t(n-2)
+//     T(n-2) = k + T(n-3)       |
+//     .                         |
+//     .                         |=> add up all the equations
+//     .                         |
+//     T(1) = k + T(0)           |
+//     T(0) = k1               __|    // T(0) = base case return 1 = k1
+//     ________________________
+// =>  T(n) = n*k + k1                // after sum means :
+//                                    // T(n-1) cancel each other, T(n-2) cancel each other, same T(n-3) , T(n-4) ... T(0)
+//                                    // atlast we are left with T(n) , n number of K and single k1 , so it becomes T(n) = n*k + k1
+// => T(n) = kn + k1                  // n*k = kn ;
+// => T(n) = kn                       // k1 is constant so its neglected
+// => T(n) = n                        // k is constant so its neglected
+
+//🔸Time complexity = O(n)  for recursive Factorial program
+
+
+//🔴❓ Recursive Binary search :
+// psuedo code
+//     bool binarySearch(int* arr, int start, int end, int key){ 
+//         //base case 
+//         if( start > end){
+//             return false ;
+//         }
+
+//         //recursive relation
+//         int mid = start + ( end - start) / 2;
+
+//         //element found 
+//         if( arr[mid] == key)
+//         return true ;        
+
+           //processing part
+//         if( arr[mid] < key ){
+//             return binarySearch(arr, mid+1, end, key) ;
+//         }
+//         else {
+//             return binarySearch(arr, start, mid - 1, key) ;
+//       }
+// }
+
+//🔸 Reccurence happening :
+// f(n)    = main function 
+// xyz     = if else constant processing
+// f(n/2)  = we are dividing the array in half ( int mid = start+(end-start)/2; )
+
+// f(n) = xyz + f(n/2) 
+// f(n) = k +  f(n/2)            // let say xyz = k constant
+
+//for time complexity :
+// T(n)   = main function time
+//  k1    = base case return 1
+//  k2    = recursive relation and element found 
+// T(n/2) = procssing part
+
+//     T(n) = k1 + k2 + T(n/2)           
+//                           __
+//     T(n)   = k + T(n/2)     |     // k1+k2  = breaking constant into K
+//     T(n/2) = k + T(n/4)     |     // if T(n) = T(n/2) , then T(n/2) = T(n/4)
+//     T(n/4) = k + T(n/8)     |
+//     .                       |
+//     .                       |=> add up all the equations  
+//     .                       |
+//     T(2) = k + T(1)         |
+//     T(1) = k              __|       
+//    _________________________
+//  => T(n) =  a * k           // atlast k will remain 'a' times lets say
+//                             // value of 'a' will be a = log n ,
+//                             // (n) => (n/2) => (n/4) => (n/6) => (n/8)... ==> (n/2^a = 1) ==> a = log n
+//  => T(n) = k * log n        // a = log n , therefore a*k = log n * k ==> k * log n
+//  => T(n) = log n            // here k is constant so neglected 
+
+//🔸Time complexity = O(log n)  for recursive binary search
+
+
+//🔴❓ recursive merge sort
+// Psuedo code
+// void merge(int *arr, int start , int end){
+
+//        //mid index
+//        int mid = (start + end) /2 ;
+
+//        //length of divided array left part :
+//        int left = mid - start + 1 ;
+
+//        //length of divided array right part :
+//        int right = end - mid;
+
+//       //pointer to hold value of divided array left and right:
+//        int *first = new int[left] ;
+//        int *second = new int[right] ;
+
+//        // Copy values of left array in *first ,
+//        // k = Main array index
+//        int k = start ;
+//        for(int i=0; i<left; i++){
+//         first[i] = arr[k++] ;
+//        }
+
+//         // Copy values of rigth array in *second,
+//         // k = Main array index
+//         k = mid + 1 ;
+//        for(int i=0; i<right; i++){
+//         second[i] = arr[k++] ;
+//        }
+
+
+//        //merge 2 sorted array :
+//        int index1 = 0 ;
+//        int index2 = 0 ;
+//        k = start ;
+
+//        while( index1 < left && index2 < right) {
+//         // if element of first[index1] is less than second[index2] then arr[k] = first[index1] then k++ , index1++
+//            if( first[index1] < second[index2] ){
+//               arr[k++] = first[index1++] ;
+//            }
+//         // if element of first[index1] is greater than second[index2] then arr[k] = second[index2] then k++ , index2++
+//            else{
+//             arr[k++] = second[index2++] ;
+//            }
+//        }
+ 
+//      // If there are some element which are remaining from above loop then compare them and add them to the sorted array
+//        while( index1 < left ){
+//         arr[k++] = first[index1++];
+//        }
+
+//        while( index2 < right ){
+//         arr[k++] = second[index2++] ;
+//        }
+
+//        // deleting new int heap memory ( first and second)
+//        delete []first ;
+//        delete []second ;
+     
+// }
+
+// void recursiveMerge(int *arr, int start, int end) {
+
+//     //base case
+//     if( start >= end) {
+//         return ;
+//     }
+     
+//      //Mid index
+//     int mid = (start + end)/2 ;
+
+//     //Sort left part <= 
+//    recursiveMerge(arr, start, mid) ;
+
+//     //Sort right part => 
+//    recursiveMerge(arr, mid+1, end) ;
+
+//     //Merge 
+//     merge(arr, start, end) ;
+// }
+
+
+//🔸Step for merge sort recursively:
+// 1. break 2 arrray left and right 
+// 2. recursively sort (left n right)
+// 3. merge new array
+// 4. copy new array content into original array
+
+//Time complexity function :
+// T(n)    =  main function time taken
+// k1      =  base case constant time let say k1
+// k2      =  mid index constant time let say k2
+// T(n/2)  = sort left part of array , if full array is n , half will be n/2
+// T(n/2)  = sort right part of array , if full array is n, half will be n/2
+// k3n     =  merge left and right array let say k3n , bcoz merging n size array
+// k4n     =  copying new array content into original array , so we are copying entire array which is n size array therefore k4n
+
+//   T(n) = k1 + k2 + T(n/2) + T(n/2) + k3n + k4n
+//   T(n) = k  + 2T(n/2) + n(k3 + k4)              // k1+k2 = k , t(n/2)+t(n/2) = 2t(n/2) , k3n+k4n = n(k3+k4)
+//   T(n) = k  + 2T(n/2) + n(k5)             // (k3+k4) = k5 taking constant
+//   T(n) = 2T(n/2) + nk5                    // ignoring k as k is nothing if we compare it with the n*k5 at end
+//   T(n) = 2T(n/2) + nk                    // k5 is constant we change its name for further calculation to make it easier to understand
+//                           __
+//   T(n)   = 2T(n/2) + nk     |
+//   T(n/2) = 2T(n/4) + nk /2  |    // multiply 2T(n/2) and T(n/2) with 2 becomes 4T(n/4) + nk 
+//   T(n/4) = 2T(n/8) + nk /4  |    // multiply 2T(n/4) and T(n/4) with 4 becomes 8T(n/8) + nk
+//   T(n/8) = 2T(n/16) + nk /8 |    // multiply 2T(n/8) and T(n/8) with 8 becomes 16T(n/16) + nk
+//   .                         |
+//   .                         |=> adding up all the equation
+//   .                         |
+//   T(1) = k                __|      // n = 1, therfore nk = 1k
+//   _________________________  
+//=> T(n) = a * nk           // nk comes 'a' times after solving above equation
+
+//=> T(n) = a*n             // k is constant so neglected
+//=> T(n) = log n * n       // a = log n
+//=> T(n) = n * log n
+
+//🔸Time complexity : O(n log n) for merge sort
+
+
+
+//🔴🔴❓ recursive fibonacci series
+// psuedo code :
+// int Fibo(int n){
+//     //base case 
+//     if( n==0){
+//         return 0;
+//     }
+//     if(n==1){
+//         return 1;
+//     }
+
+//     // recursive call
+//     int ans = Fibo( n-1 ) + Fibo( n-2 ) ;
+//     return ans ;
+// }
+
+//time taken:
+// T(n)   = main function time
+// k1     = base case 
+// k2     = ans = fibo(n-1) + fibo(n-2)
+// T(n-1) = fibo(n-1) 
+// T(n-2) = fibo(n-2) 
+
+// T(n) = k1 + k2 + T(n-1) + T(n-2)
+// T(n) = k  + T(n-1) + T(n-2)          // k1+k2 = k  let say bcoz both are constant
+
+//                                 __
+//    T(n)   = k + T(n-1) + T(n-2)   |
+//    T(n-1) = k + T(n-2) + T(n-3)   |
+//    T(n-2) = k + T(n-3) + T(n-4)   |
+//    T(n-3) = k + T(n-4) + T(n-5)   |
+//    .                              |
+//    .                              |
+//    .                              |
+//    T(1) = k1                      |   // base case n==1 return 1 = k1
+//    T(0) = k1                    __|   // base case n==1 return 0 = k1 let take this also k1 doesn't matter both are constant
+//  __________________________________
+// => T(n) = k * (2^n+1 - 1)           // total node = 1 + 2^1 + 2^2 + .... 2^n
+// => T(n) = k * 2^n+1                 // 1 is ignored as it is constant
+// => T(n) = k * 2 * 2^n               // 2^n+1 = 2* 2^n
+// => T(n) = k * 2^n                   // 2 is ignored as its constant
+// => T(n) = 2^n                       // k is constant hence ignored
+
+//🔸Time complexity :  O(2^n) : exponential(worst of worst) : for fibonacci series
+
+
+
+//🔴🔴 Space complexity :
+// space required by function as f(n)
+// sometiems it get difficult as compared to finding Time complexity
+// like in graph form ,wave form it will be very hard
+// so we say that maximum space require at any instant of time will be shown as space complexity.
+
+//❓ recursive factorial question:
+//psuedo code :
+// int fact(int n){
+//     //base case
+//     if(n==0)
+//     return 1;
+
+       //recursive call
+//     int smallerProblem = fact(n-1) ;
+
+//     //processing part
+//     int biggerProblem = n * smallerProblem ;
+
+//     return biggerProblem ;
+// }
+
+//space taken :         
+//            (5)                 |_________|             
+//            /               n-1 | fact(1) | => k              
+//          (4)               n-1 | fact(2) | => k         
+//          /                 n-1 | fact(4) | => k            
+//        (3)                 n-1 | fact(3) | => k               
+//        /                   n-1 | fact(5) | => k       
+//      (2)                 _____ |_________| _______       
+//      /                      n  | main()  |    k      
+//    (1)                         |_________|           
+
+//  => k * n
+//  => n       // k is constant hence ignored
+//🔸 Space complexity: O(n) for recursive factorial 
+
+
+//❓Recursive binary search:
+
+//space taken :                   __
+//             (n)               |   | B.S(1)  | => k  
+//             /                 |   |  .      | => k          
+//           (n/2)               |   |  .      | => k 
+//            /       a times  <=|   | B.S(n/4)| => k   
+//         (n/4)                 |   | B.S(n/2)| => k      
+//          /                    |   | B.S(n)  | => k       
+//        (n/8)                  |__ |_________| => k      
+//        /               _______    |  main() |  ______
+//      (1)              a = log n   |_________|     k
+//______________        
+// n/2^a = 1
+// n = 2^a
+// a = log n
+
+
+// => k  * log n
+// => log n          // k is constant so ignored
+
+//🔸Space complexity : O(log n)  : for recursive binary search
+
+
+
+//🔴❓ Recrusive merge sort :
+
+//     [ .................]     // original array
+//    [........]   [........]   // break in two and sort
+//     [..................]     // merge sorted array
+
+//               __
+//              |  (n)   => extra space in heap created (n) then destroyed after completing its work
+//              |   |
+//              |  (n/2) => extra space in heap created (n/2) then destroyed after completing its work
+//              |   |
+//   a times <= |  (n/4) => extra space in heap created (n/4) then destroyed after completing its work
+//              |   |
+//              |  (n/8) => extra space in heap created (n/8) then destroyed after completing its work
+//              |   |
+//              |__(1) 
+//  __________                  ___________________
+// => a = log n                 =>  n      // heap space created should also be counted
+
+// => k logn + n
+// => logn + n    // k is constant hence ignored
+// =>  n          // n >>> log n   (n is very bigger than log n) so log n not taken (ex: n = 1024 >>> then log n = 10)
+
+//🔸Space complexity : O(n)   :for recursive merge sort
+
+
+
+//🔴❓ Recursive fibonacci series :
+//recrusive depth:
+//        |            (5)                |       |       
+//        |            / \                |  (1)  |  => k       
+//        |         (4)   (3)             |  (2)  |  => k      
+// max  <=|         /\     / \            |  (3)  |  => k       
+// length |      (3) (2)  (2) (1)         |  (4)  |  => k       
+//  =n    |      /\  /\    /\             |  (5)  |  => k          
+//        |   (2)(1)(1)(0) (1)(0)         |_______|  => k             
+//        |   /\                          |main() |      
+//        | (1)(0)                        |______ |          
+// _______                                           _________
+//    n calls                                           k spacce
+
+//=> n * k
+//=> n    // k is ignored bcoz constant
+
+//🔸Space complexity : O(n)  :for recursive fibonnaci series
+
+
+// 46 / 149
