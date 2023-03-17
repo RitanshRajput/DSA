@@ -76,7 +76,7 @@
 //     int zero = 0;
 //     int one = 0;
 //     int two = 0;
-
+// //dutch national flag algorithm
 //     for(int i=0; i<n; i++){
 //         if( arr[i] == 0) zero++ ;
 //         if( arr[i] == 1) one++ ;
@@ -143,4 +143,206 @@
 //   int size = 7 ;
 //   sortNegative(arr,size) ;
 //   return 0 ;
+// }
+
+
+//❓ Union of two arrays
+
+// ex:
+// input : a ={1,2,3,4}
+//         b = {6,7,2}
+// output:  {1,2,3,4,6,7}
+
+//🔸 correct brute force solution but TLE:
+// #include<iostream>
+// using namespace std;
+
+// int Union(int a[], int n, int b[], int m){
+//     int i = 0 ;
+//     int j = 0 ;
+//     int count  = 0;
+
+//     while(i<n) {
+//         j = 0;
+//         while(j< m){
+//           if(a[i] == b[j]) {
+//             count++ ;
+//           }
+//           j++ ;
+//         }
+//         i++;
+//     }
+
+//     return i+j - count ;   
+// }
+
+// int main() {
+
+// int a[6] = {85, 25, 1, 32, 54, 6}  ;
+// int b[2] = {85, 2} ;
+
+// int n = 6;
+// int m = 2;
+
+// int ans = Union(a,n,b,m) ;
+// cout<<" ans :"<<ans <<endl ;
+//     return 0;
+// }
+
+//🔸 approach 2 brute force but no TLE works fine :
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// int Union(int a[], int n, int b[], int m){
+
+//     //create a vector of size 10^5 = contraint and assign all index with element 0
+//    vector<int> t(100001,0);
+
+//         int count=0;            //count to check total number of element
+
+// //for loop for 1st array a[]
+// // here in vector t we have already define all element as 0;
+// // so we say if on index i  the element is 0 then make it 1 and increaase the count
+//         for(int i=0;i<n;i++){
+//             if(t[a[i]]==0){
+//                 t[a[i]]=1;
+//                 count++;
+//             }
+//         }
+
+// // same for loop for other array[] b[] but with some change in vector
+// // as we have already assign 1 on the some index i in the above for loop
+// // here if the element is different then only vector t will accept the element else wont accept
+// // if element = 0 then assign 1 at that place and count++ 
+//         for(int j=0;j<m;j++){
+
+//             if(t[b[j]]==0){
+//                 t[b[j]]=1;
+//                 count++;
+//             }
+//         }
+// // atlast return count
+
+// return count;
+// }
+
+// int main() {
+
+// int a[6] = {85, 25, 1, 32, 54, 6}  ;
+// int b[2] = {85, 2} ;
+
+// int n = 6;
+// int m = 2;
+
+// int ans = Union(a,n,b,m) ;
+// cout<<" ans :"<<ans <<endl ;
+//     return 0;
+// }
+
+
+//❓Intersection of two array
+
+// Input:
+// n = 5, m = 3
+// a[] = {89, 24, 75, 11, 23}
+// b[] = {89, 2, 4}
+
+// Output: 1
+
+// Explanation: 
+// 89 is the only element 
+// in the intersection of two arrays.
+
+
+// 🔸Appraoch 1: but not passing all test cases 50/90 
+// after 50 testcases its showing wrong answer
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// int intersection(int a[], int n, int b[], int m){
+//           int count = 0;
+//         vector<int> t(100001, 0) ;
+        
+//         for(int i=0; i<n; i++){
+//             if(t[a[i]] == 0) {
+//                 t[a[i]] = 1;
+//             }
+//         }
+        
+//         for(int j=0 ; j <m; j++){
+//             if(t[b[j]] != 0){
+//                 count++ ;
+//             }
+//         }
+        
+//         return count ;
+      
+//     }
+
+// int main() {
+
+// int a[5] = {89, 24, 75, 11, 23} ;
+// int b[3] = {89, 23, 4} ;
+// int n = 5 ; 
+// int m = 3;
+
+// int ans = intersection(a, n, b, m) ;
+
+// cout<< "total similar element : "<< ans <<endl ;
+
+//     return 0;
+// }
+
+
+//🔸Approach 2 : brute force but working very well :
+// #include<iostream>
+// #include<algorithm>
+// using namespace std;
+
+// int intersection(int a[], int n, int b[], int m){
+//     //initialising count i j as 0
+//       int count = 0;
+//       int i = 0 ;
+//       int j = 0 ;
+      
+//       // sorting both array using in-build function 
+//       sort(a, a+n) ;
+//       sort(b, b+m) ;
+      
+//       //main loop till both i and j are less than n and m
+//       while( i<n && j<m) {
+          
+//           // if element are same then count++ i++ j++ 
+//           if( a[i] == b[j]) {
+//               count++ ;
+//               j++ ;
+//               i++ ;
+               
+//             // also we need to make sure if there is similar element in the same array 
+//               while( a[i] == a[i-1]) i++ ;
+//               while( b[j] == b[j-1]) j++ ;
+//           }
+//           // if a[i] is greater than b[j] then increase j to position both of them on equal index
+//           else if ( a[i] > b[j] ) j++ ;
+//           // if a[i] is less than b[j] then increase i to posiiton both of them on equal index
+//           else if ( a[i] < b[j] ) i++ ;
+//       }
+      
+//       return count; 
+//     }
+
+// int main() {
+
+// int a[5] = {89, 24, 75, 11, 23} ;
+// int b[3] = {89, 23, 4} ;
+// int n = 5 ; 
+// int m = 3;
+
+// int ans = intersection(a, n, b, m) ;
+
+// cout<<"ans : "<< ans <<endl ;
+
+//     return 0;
 // }
