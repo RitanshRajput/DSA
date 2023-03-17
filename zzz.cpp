@@ -374,4 +374,245 @@
 // instead of 4+1, it gave 4 x 4 = 8bytes
 
 
-// 46/ 149 29:20
+//🔴 Static and Dynamic Allocation :
+
+// #include<iostream>
+// using namespace std;
+
+// class Hero{
+    
+//     private: 
+//     int health ;
+
+//     public:
+//     char level;
+
+// //creating Getter to access private data members /properties
+//   int getHealth() {
+//     return health ;
+//   }
+
+//   char getLevel() {
+//     return level ;
+//   }
+
+// //creating Setter to set value to a private data member/ property
+//  void setHealth(int h) {
+//     health = h;
+//  }
+
+//  void setLevel(char ch) {
+//     level = ch ;
+//  }
+// };
+
+// int main() {
+
+// //🔸static allocation of Object
+// Hero a ;
+
+// a.setHealth(80);  //assigning some value in health 
+// a.setLevel('B');  //assigning some value in level
+
+// cout<<"public level using static allocation : "<< a.level <<endl ;   //output: B
+// cout<<"private health using static allocation : "<< a.getHealth() <<endl ;   //output: 80
+
+// //🔸Dynamic allocation of Object
+// Hero* b = new Hero ;        
+// // here we are using new keyword to create a space in Heap memory
+// // And using pointer to use the space assign in Heap
+
+// b->setHealth(55) ;   //assigning some value in health
+// b->setLevel('A') ;   //assigning some value in level
+
+// //printing properties (or accessing data) using deference operator(*b) 
+// cout<<"public level using Dynamic allocation : "<< (*b).level <<endl ;  //output: A
+// cout<<"private health using Dynamic allocation : "<< (*b).getHealth() <<endl ;  //output: 55
+
+// //printing properties (or accessing data) using -> arrow 
+// cout<<"public level using Dynamic allocation : "<< b->level <<endl ;  //output: A
+// cout<<"private health using Dynamic allocation : "<< b->getHealth() <<endl ;  //output: 55
+                   
+
+//     return 0;
+// }
+
+
+//🔴Behind the scene of Hero a object creation :
+
+// Hero a;        // when we declare object then a constructor is called and created ( Hero.her() ) by default but isn't visible. we can also create it.
+
+//🔘Constructor :
+// Constructor in C++ is a special method that is invoked automatically at the time of object creation. 
+// It is used to initialize the data members of new objects generally. 
+// The constructor in C++ has the same name as the class or structure.
+// Constructor is invoked at the time of object creation. 
+// It constructs the values i.e. provides data for the object which is why it is known as constructors.
+
+// • Constructor is a member function of a class, whose name is same as the class name.
+// • Constructor is a special type of member function that is used to initialize 
+//   the data members for an object of a class automatically, when an object of the same class is created.
+// • Constructor is invoked at the time of object creation. 
+//   It constructs the values i.e. provides data for the object that is why it is known as constructor.
+// • Constructor do not return value, hence they do not have a return type.
+
+//🔴 Characteristics of constructor
+
+// • The name of the constructor is same as its class name.
+// • Constructors are mostly declared in the public section of the class though it can be declared in the private section of the class.
+// • Constructors do not return values; hence they do not have a return type.
+// • A constructor gets called automatically when we create the object of the class.
+// • Constructors can be overloaded.
+// • Constructor can not be declared virtual.
+
+//🔸Types of constructor
+
+// • Default constructor
+// • Parameterized constructor
+// • Overloaded constructor
+// • Constructor with default value
+// • Copy constructor
+// • Inline constructor
+// Constructor does not have a return value, hence they do not have a return type.
+
+
+
+//🔴 Creating default constructor.
+
+// #include<iostream>
+// using namespace std;
+
+// class Hero {
+//     private:
+//     int health;
+
+//     public:
+//     char level;
+
+//   // creating default constructor manually
+//   // so when we create a defualt constructor then auto created by compiler default constructor gets deleted
+//   // now only this exist which we have created
+//     Hero(){
+//       cout<<" Constructor called inside class : "<<endl ;  // print evertime Object created
+//     }
+// };
+
+// int main() {
+
+// //Object creation statically
+// cout<<" cout before hero ramesh ."<<endl ;     // 1st print 
+// Hero ramesh;                                   // 2nd : Constructor called inside class
+// cout<<" cout after hero ramesh ."<<endl ;      // 3rd print
+
+// //Object creation dynamically
+// Hero *h = new Hero;                 //4th : Constructor called inside class
+
+// //also we write as
+// Hero *k = new Hero() ;             //4th : Constructor called inside class
+
+//     return 0;
+// }
+
+
+//🔴creating  Parameterised Constructor :
+#include<iostream>
+using namespace std;
+
+class Hero {
+    private:
+    int health;
+
+    public:
+    char level;
+
+//🔸 creating parameterised Constructor
+
+//    Hero( int health ){              // taking int parameter with name health
+//      health = health;               // trying to assign value of health in health itself
+//    }
+//🔸In this above code we tried to assign value of health in health itself but compiler
+//  got confused about which health are we talking about
+//  So to make things clear we use🔸 This keyword 
+//  'this' is a pointer to the current object
+
+//🔸Using 'this' to create a parameterised constructor
+  
+  Hero(int health){
+    cout<<"Value of this : "<< this <<endl ;   //output: 0x61ff08
+    this->health = health ;
+    cout<<"Value of this : "<< this <<endl ;   //output: 0x61ff08
+  }
+
+// another constructor :
+  Hero(int health, char level){
+    this-> level = level ;           //this-> level ==>(class level main level below private) , = level ==> (paramter level which is pass in constructor(char level))
+    this-> health = health ;         //this-> health ==>(class health main health below public) , = health ==> (paramter health which is pass in constructor(int health))
+  }
+
+
+// print function 
+void print() {
+    cout<< level <<endl ;
+}
+
+//getter
+  int getHealth() {
+    return health ;
+  }
+
+  char getLevel() {
+    return level ;
+  }
+//setter
+ void setHealth(int h) {
+    health = h;
+ }
+
+ void setLevel(char ch) {
+    level = ch ;
+ }
+
+};
+
+int main() {
+
+//🔸Object creation statically
+Hero ramesh(10);                // parameterised object so we need to pass a argument
+cout<<"Address of ramesh : "<< &ramesh <<endl ;                //output: 0x61ff08
+cout<<"Value as ramesh health : "<<ramesh.getHealth() <<endl ; //output: 10
+
+//calling print function :
+ramesh.print() ;               //output: garbage value bcoz nothing pass for level print func only prints level
+
+//🔸Object creation dynamically
+Hero* h = new Hero(12);              // parameterised object so we need to pass a argument
+
+//calling print function :
+h -> print() ;           //output: garbage value bcoz nothing pass for level  print func only prints level
+ 
+//🔸Object with 2 parameter
+ Hero temp( 23, 'D'); 
+
+//calling print function :
+ temp.print() ;         //output: D bcoz pass as argument  print func only prints level
+
+
+    return 0;
+}
+
+//🔴 'this'  keyword
+// To understand ‘this’ pointer, it is important to know how objects look at functions and data members of a class.
+
+// 1. Each object gets its own copy of the data member.
+// 2. All-access the same function definition as present in the code segment.
+// Meaning each object gets its own copy of data members and all objects share a single copy of member functions.
+// Then now question is that if only one copy of each member function exists and 
+//  is used by multiple objects, how are the proper data members are accessed and updated?
+// The compiler supplies an implicit pointer along with the names of the functions as ‘this’.
+// The ‘this’ pointer is passed as a hidden argument to all nonstatic member function 
+// calls and is available as a local variable within the body of all nonstatic functions. 
+// ‘this’ pointer is not available in static member functions as static member functions can be called without any object (with class name).
+// For a class X, the type of this pointer is ‘X* ‘. Also, if a member function of X is declared as const, then the type of this pointer is ‘const X *’ 
+
+
+//46 / 149       49:00
