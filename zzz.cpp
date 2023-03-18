@@ -477,7 +477,7 @@
 
 
 
-//🔴 Creating default constructor.
+//🔘 Creating default constructor.
 
 // #include<iostream>
 // using namespace std;
@@ -514,16 +514,16 @@
 // }
 
 
-//🔴creating  Parameterised Constructor :
-#include<iostream>
-using namespace std;
+//🔘 Creating  Parameterised Constructor :
+// #include<iostream>
+// using namespace std;
 
-class Hero {
-    private:
-    int health;
+// class Hero {
+//     private:
+//     int health;
 
-    public:
-    char level;
+//     public:
+//     char level;
 
 //🔸 creating parameterised Constructor
 
@@ -537,70 +537,70 @@ class Hero {
 
 //🔸Using 'this' to create a parameterised constructor
   
-  Hero(int health){
-    cout<<"Value of this : "<< this <<endl ;   //output: 0x61ff08
-    this->health = health ;
-    cout<<"Value of this : "<< this <<endl ;   //output: 0x61ff08
-  }
+//   Hero(int health){
+//     cout<<"Value of this : "<< this <<endl ;   //output: 0x61ff08
+//     this->health = health ;
+//     cout<<"Value of this : "<< this <<endl ;   //output: 0x61ff08
+//   }
 
-// another constructor :
-  Hero(int health, char level){
-    this-> level = level ;           //this-> level ==>(class level main level below private) , = level ==> (paramter level which is pass in constructor(char level))
-    this-> health = health ;         //this-> health ==>(class health main health below public) , = health ==> (paramter health which is pass in constructor(int health))
-  }
+// // another constructor :
+//   Hero(int health, char level){
+//     this-> level = level ;           //this-> level ==>(class level main level below private) , = level ==> (paramter level which is pass in constructor(char level))
+//     this-> health = health ;         //this-> health ==>(class health main health below public) , = health ==> (paramter health which is pass in constructor(int health))
+//   }
 
 
-// print function 
-void print() {
-    cout<< level <<endl ;
-}
+// // print function 
+// void print() {
+//     cout<< level <<endl ;
+// }
 
-//getter
-  int getHealth() {
-    return health ;
-  }
+// //getter
+//   int getHealth() {
+//     return health ;
+//   }
 
-  char getLevel() {
-    return level ;
-  }
-//setter
- void setHealth(int h) {
-    health = h;
- }
+//   char getLevel() {
+//     return level ;
+//   }
+// //setter
+//  void setHealth(int h) {
+//     health = h;
+//  }
 
- void setLevel(char ch) {
-    level = ch ;
- }
+//  void setLevel(char ch) {
+//     level = ch ;
+//  }
 
-};
+// };
 
-int main() {
+// int main() {
 
-//🔸Object creation statically
-Hero ramesh(10);                // parameterised object so we need to pass a argument
-cout<<"Address of ramesh : "<< &ramesh <<endl ;                //output: 0x61ff08
-cout<<"Value as ramesh health : "<<ramesh.getHealth() <<endl ; //output: 10
+// //🔸Object creation statically
+// Hero ramesh(10);                // parameterised object so we need to pass a argument
+// cout<<"Address of ramesh : "<< &ramesh <<endl ;                //output: 0x61ff08
+// cout<<"Value as ramesh health : "<<ramesh.getHealth() <<endl ; //output: 10
 
-//calling print function :
-ramesh.print() ;               //output: garbage value bcoz nothing pass for level print func only prints level
+// //calling print function :
+// ramesh.print() ;               //output: garbage value bcoz nothing pass for level print func only prints level
 
-//🔸Object creation dynamically
-Hero* h = new Hero(12);              // parameterised object so we need to pass a argument
+// //🔸Object creation dynamically
+// Hero* h = new Hero(12);              // parameterised object so we need to pass a argument
 
-//calling print function :
-h -> print() ;           //output: garbage value bcoz nothing pass for level  print func only prints level
+// //calling print function :
+// h -> print() ;           //output: garbage value bcoz nothing pass for level  print func only prints level
  
-//🔸Object with 2 parameter
- Hero temp( 23, 'D'); 
+// //🔸Object with 2 parameter
+//  Hero temp( 23, 'D'); 
 
-//calling print function :
- temp.print() ;         //output: D bcoz pass as argument  print func only prints level
+// //calling print function :
+//  temp.print() ;         //output: D bcoz pass as argument  print func only prints level
 
 
-    return 0;
-}
+//     return 0;
+// }
 
-//🔴 'this'  keyword
+//🔘 'this'  keyword
 // To understand ‘this’ pointer, it is important to know how objects look at functions and data members of a class.
 
 // 1. Each object gets its own copy of the data member.
@@ -615,4 +615,153 @@ h -> print() ;           //output: garbage value bcoz nothing pass for level  pr
 // For a class X, the type of this pointer is ‘X* ‘. Also, if a member function of X is declared as const, then the type of this pointer is ‘const X *’ 
 
 
-//46 / 149       49:00
+
+//🔘 Creating a Copy Constructor: 
+
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+class Hero{
+   
+  private:
+  int health ;
+
+  public:
+  char *name ;
+  char level ;
+
+   Hero() {
+    cout << "Default constructor called : "<<endl ;
+    name = new char[100] ;
+   }
+
+Hero(int health) {
+  this -> health = health ;
+}
+
+Hero(int health , char level) {
+  this -> health = health ;
+  this -> level = level ;
+}
+
+//🔸Creating copy constructor :
+// Hero( Hero& temp){           //if we remove & it gives error but works fine when & applied
+// //                             bcoz when we are calling Hero ritesh(suresh) here suresh passes as value(means copy) and suresh calling temp is calling Hero( 
+// //                             then Hero( again calling (Hero temp) and it goes into infinite loop
+// //                             hence we use & to pass by reference then it will use the original parameter
+// //                             when we implement copy constructor manually then default copy constructor gets removed automatically
+//   cout<<"Copy constructor called : "<<endl ;
+//   this -> health = temp.health ;
+//   this -> level  = temp.level ;
+// }
+
+//🔸copy constructor for Deep copy;
+Hero( Hero& temp){     
+  char *ch = new char[strlen(temp.name)+1] ;       // [strlen(temp.name)+1] = character array
+  strcpy(ch, temp.name) ;          //copy temp ka name in ch
+  this -> name = ch ;              // update this ka name
+  cout<<"Copy constructor called : "<<endl ;
+  this -> health = temp.health ;
+  this -> level  = temp.level ;
+}
+
+//printing function
+void print() {
+    cout<< endl ;
+    cout<<"Name is  : "<< this -> name<<endl ;
+    cout<<"Health is : "<< this -> level <<endl ;
+    cout<<"level is  : "<< this -> health <<endl ;
+}
+//getter
+int getHealth() {
+  return health ;
+}
+
+char getLevel() {
+  return level ;
+}
+//setter
+void setHealth(int h) {
+  health = h ;
+}
+
+void setLevel(char ch){
+  level = ch ;
+}
+
+void setName(char name[]) {
+  strcpy(this -> name, name) ;  //The strcpy() function in C++ copies a character string from source to destination. It is defined in the cstring header file
+}
+
+};
+int main() {
+
+//copy constructor portion:
+// Hero suresh( 69, 'B') ;   //setting inline value inside the bracket
+// suresh.print() ;          //printing suresh value
+//                           //output : health : B , level : 69
+
+// Hero ritesh(suresh) ;    // copying value of suresh in ritesh 
+//                          // like ritesh.health = suresh.health ;
+//                          //      ritesh.level  = suresh.level ;
+
+// ritesh.print() ;         // printing ritesh value
+//                          // output : health : B , level : 69
+
+
+
+//🔸shallow and Deep copy portion :
+Hero hero1;
+hero1.setHealth(12) ;
+hero1.setLevel('D') ;
+char name[7] = "Babbar" ;
+hero1.setName(name) ;
+
+hero1.print() ;           //printing value of hero1
+//outupt: Name is  : Babbar , Health is : D, level is  : 12
+
+//🔸Use default copy constructor  : to show how Shallow copy works
+// make sure when we want to use default copy constructo then remove
+// the manually created copy constructor in class
+
+Hero hero2(hero1);            //created hero2 and copied hero1
+// Hero hero2 = hero1 ;
+
+hero1.name[0] = 'G';
+hero1.print() ;
+//outupt for shallow copy : Name is  : Gabbar , Health is : D, level is  : 12
+
+hero2.print() ;
+//outupt for shallow copy : Name is  : Gabbar , Health is : D, level is  : 12
+//Here we made changes in Hero1 but hero2 is also affected by the changes made with hero1
+//outupt for Deep copy : Name is  : Babbar , Health is : D, level is  : 12
+
+  return 0;
+}
+
+
+//🔴 Shallow and Deep Copy :
+//🔸Creating a copy of an object by copying data of all member variables 
+//  as it is, is called shallow copy 
+//🔸while creating an object by copying data of another object along with 
+// the values of memory resources that reside outside the object but handled by that object, 
+// is called deep copy.
+
+
+//🔸 Defualt copy constructor = uses Shallow Copy
+// In above code we are using   
+// public:
+// char *name ;
+//  pointer to access name, When we made changes to the name
+//  then both hero1 and hero2 where we using the address of name not another copy
+//  hence shallow copy means all object access same memory of data members
+
+//🔸 manually created copy constructor = using Deep copy
+// In Deep copy when we copy a object paramater in another object
+// then any changes made in object one wont reflect in object two
+// as in deep copy a copy of data member are created and updated for different objects
+
+//for more details : https://www.codingninjas.com/codestudio/auth?redirect=%2Fcodestudio%2Fguided-paths%2Fbasics-of-c%2Fcontent%2F118817%2Foffering%2F1382190%3F
+
+// 46 / 149   1:09:30

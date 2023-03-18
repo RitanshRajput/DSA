@@ -121,6 +121,7 @@
 // using namespace std ;
 // void sortNegative( int arr[], int size) {
 
+//     // selection sort
 //     for(int i=0; i<size; i++){
 //         int minIndex = i ;
 
@@ -262,12 +263,15 @@
 // using namespace std;
 
 // int intersection(int a[], int n, int b[], int m){
-//           int count = 0;
+//         int count = 0;
+//         int total = (n)+(m) ;
+//         cout<<"total :"<<total <<endl ;
 //         vector<int> t(100001, 0) ;
         
 //         for(int i=0; i<n; i++){
 //             if(t[a[i]] == 0) {
 //                 t[a[i]] = 1;
+//                 count++ ;
 //             }
 //         }
         
@@ -276,8 +280,12 @@
 //                 count++ ;
 //             }
 //         }
+//         cout<<"count :"<<count <<endl ;
+
+//         long Final = total - count ;
+//         cout<<"final :"<<Final <<endl ;
         
-//         return count ;
+//         return Final ;
       
 //     }
 
@@ -344,5 +352,144 @@
 
 // cout<<"ans : "<< ans <<endl ;
 
+//     return 0;
+// }
+
+//❓Rotate an array cyclically 
+//input: [1,2,3,4,5] 
+//output: [5,1,2,3,4]
+
+// #include<iostream>
+// using namespace std;
+
+// void rotate(int arr[], int n) {
+//     int temp[n] ;
+//     temp[0] = arr[n-1] ;
+     
+//     int i = 1;
+//     while( i < n) {
+//         temp[i] = arr[i-1] ;
+//         i++ ;
+//     }
+     
+//      // copying rotated element from temp to arr and printing them
+//     cout<<" rotated array : "<<endl ;
+//     int j=0;
+//     while(j<n){
+//         arr[j] = temp[j] ;
+//         cout<< arr[j] << " ";
+//         j++ ;
+//     }
+// }
+
+// int main() {
+//     int arr[5] = {1, 2, 3, 4, 5} ;
+//     int n = 5 ;
+    
+//     //printing original array
+//     cout<<" original array : "<<endl ;
+//     for(int i=0; i<n; i++){
+//         cout<< arr[i] << " ";
+//     }
+//     cout<<endl ;
+
+//     rotate(arr, n) ;
+//     return 0;
+// }
+
+
+//❓❓ Kadane's algorithm  = (Max sum of contigous sub-array)
+
+//Given an array Arr[] of N integers. Find the contiguous sub-array(containing at least one number) 
+// which has the maximum sum and return its sum.
+
+// Example 1:
+// Input:
+// N = 5
+// Arr[] = {1,2,3,-2,5}
+// Output:
+// 9
+
+// Explanation:
+// Max subarray sum is 9
+// of elements (1, 2, 3, -2, 5) which 
+// is a contiguous subarray.
+
+// Example 2:
+// Input:
+// N = 4
+// Arr[] = {-1,-2,-3,-4}
+// Output:
+// -1
+
+// Explanation:
+// Max subarray sum is -1 
+// of element (-1)
+
+//🔸Brute force approach (TLE) O(n^2) time complexity
+// #include<iostream>
+// #include<limits.h>
+// using namespace std;
+
+// long long kadane(int arr[], int n) {
+   
+//  int globalSum = INT_MIN ;
+//  int localSum ;
+
+//  for(int i=0; i<n; i++){
+//     localSum = 0;
+
+//     for(int j=i; j<n; j++){
+//         localSum = localSum + arr[j] ;
+
+//         if( localSum > globalSum){
+//             globalSum = localSum ;
+//         }
+//     }
+//  }
+
+//  return globalSum ;
+// }
+
+// int main() {
+//     int arr[5] = {1, 2, 3, -2, 5} ;
+//     int n = 5 ;
+
+//  long long ans =  kadane(arr, n) ;
+
+//  cout<<" sum of max sub-array : "<< ans <<endl ;
+//     return 0;
+// }
+
+
+
+//🔴 Optimised kadane's algorithm O(n) time complexity
+// #include<iostream>
+// #include<limits.h>
+// using namespace std;
+
+// long long kadane(int arr[], int n) {
+   
+//  int globalSum = INT_MIN ;
+//  int localSum = 0 ;
+
+//  for(int i=0; i<n; i++){
+//     localSum = max(arr[i], (arr[i] + localSum)) ;
+
+//     if(localSum > globalSum){
+//         globalSum = localSum ;
+//     }
+//  }
+
+//  return globalSum ;
+// }
+
+// int main() {
+//     int arr[5] = {1, 2, 3, -2, 5} ;
+//     int n = 5 ;
+
+//  long long ans =  kadane(arr, n) ;
+
+//  cout<<" sum of max sub-array : "<< ans <<endl ;
 //     return 0;
 // }
