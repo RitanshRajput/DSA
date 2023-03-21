@@ -1,4 +1,76 @@
-//🔸Find min and max sum ;
+//                                      //❓ Reverse the array :
+// #include<iostream>
+// using namespace std;
+
+// void reverse(int arr[], int size){
+//     int start = 0;
+//     int end = size-1;
+//     // int temp = 0;
+
+//     while(start<=end) {
+//         // swap(arr[start], arr[end]) ;          //using in build swap function
+  
+//         // temp = arr[start] ;                      // using functional swapping
+//         // arr[start] = arr[end] ;
+//         // arr[end] = temp ;
+        
+//         start++ ;
+//         end-- ;
+//     }
+
+//     //print reverse array ;
+//     for(int i=0; i<size; i++) {
+//         cout<< arr[i] << " " ;
+//     }
+// }
+
+// int main() {
+// int arr[12] = {23, 22, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1} ;
+// int size = sizeof(arr) / sizeof(arr[0]) ;                    // way to get size of array
+
+// reverse(arr,size) ;
+
+// cout<<size ;
+
+//     return 0;
+// }
+
+//                                        // ❓Find min and max sum ;
+
+//🔸Correct approach With TLE
+// #include<iostream>
+// using namespace std;
+
+// int minmaxsum(int arr[], int size) {
+//         int start = 0;
+//         int mini = arr[0];
+//         int maxi = arr[0]; 
+
+//         while(start < size) {
+//             cout<<mini <<" , "<<maxi <<endl ;
+//             if(arr[start] < mini){
+//                 mini = arr[start] ;
+//             }
+//             if( arr[start] > maxi) {
+//                 maxi = arr[start] ;
+//             }
+//             start++ ;
+//         }
+
+//         int sum = maxi + mini ;
+//         return sum ;
+// }
+
+// int main() {
+//      int arr[5] = {-1 ,-2, -3, -4 ,-5} ;
+//     int size = sizeof(arr) / sizeof(arr[0]) ;
+
+//    int ans =  minmaxsum(arr, size) ;
+//    cout<<" min max sum = "<<ans <<endl ;
+//     return 0 ;
+// }
+
+//🔴Optimise approach (without TLE)
 // #include<iostream>
 // #include<algorithm>
 // using namespace std ;
@@ -8,11 +80,9 @@
 //     	int maxi = A[start];
 //     	int mini = A[start] ;
 //     	while(start < N){ 
-//             cout<<" A[start] , A[start+1] : "<<A[start] <<" , "<<A[start] <<endl;
 //             if(start+1 < N){
 //           maxi = max(maxi, A[start+1]) ;
 //           mini = min(mini, A[start+1]) ;
-//           cout<<" maxi , mini : "<< maxi <<" , "<<mini <<endl ;
 //         }
 //           start++ ;
 //     	}
@@ -27,10 +97,11 @@
 
 //     int ans = findMinMax(arr, n) ;
 //     cout<< "ans : "<<ans <<endl ;
+//     return 0 ;
 // }
 
 
-//🔸find kth element :
+//                              //❓ find kth element :
 // #include<iostream>
 // using namespace std ;
 // int findK(int arr[], int s ,int e, int k) {
@@ -68,7 +139,7 @@
 // }
 
 
-//🔸 sort 0s 1s 2s 
+//                             //❓sort 0s 1s 2s 
 // #include<iostream>
 // using namespace std ;
 
@@ -116,7 +187,7 @@
 // }
 
 
-// //🔸 Move all the negative elements to one side of the array
+//                           //❓ Move all the negative elements to one side of the array
 // #include<iostream>
 // using namespace std ;
 // void sortNegative( int arr[], int size) {
@@ -147,7 +218,7 @@
 // }
 
 
-//❓ Union of two arrays
+//                            //❓ Union of two arrays
 
 // ex:
 // input : a ={1,2,3,4}
@@ -242,7 +313,7 @@
 // }
 
 
-//❓Intersection of two array
+//                         //❓Intersection of two array
 
 // Input:
 // n = 5, m = 3
@@ -355,7 +426,7 @@
 //     return 0;
 // }
 
-//❓Rotate an array cyclically 
+//                            //❓Rotate an array cyclically 
 //input: [1,2,3,4,5] 
 //output: [5,1,2,3,4]
 
@@ -398,7 +469,7 @@
 // }
 
 
-//❓❓ Kadane's algorithm  = (Max sum of contigous sub-array)
+//                      //❓❓ Find (Max sum of contigous sub-array)
 
 //Given an array Arr[] of N integers. Find the contiguous sub-array(containing at least one number) 
 // which has the maximum sum and return its sum.
@@ -493,3 +564,4 @@
 //  cout<<" sum of max sub-array : "<< ans <<endl ;
 //     return 0;
 // }
+
