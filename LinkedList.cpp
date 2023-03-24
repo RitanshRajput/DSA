@@ -106,7 +106,7 @@
 //         this -> next = NULL ;
 //     }
 
-//    //destructor 
+//    //destructor for deletions
 //    ~Node() {
 //      int value = this -> data ;
 
@@ -301,4 +301,259 @@
 //                   Head                                                             tail
 
 
-//1:00:09  48/149
+//🔸Implementation
+//🔸Insertion, traversal in Doubly linkedlist :
+// #include<iostream>
+// using namespace std;
+
+// // main node
+// class Node{
+
+//    public:
+//    int data;
+//    Node* prevAdd ;
+//    Node* nextAdd ;
+
+//    //constructor
+//    Node(int d) {
+//     this -> data = d;
+//     this -> prevAdd = NULL ;
+//     this -> nextAdd = NULL ;
+//    }
+
+//    //destructor for deletion
+//    ~Node() {
+//     int val = this -> data ;
+//     if( nextAdd != NULL) {
+//         delete nextAdd ;
+//         nextAdd = NULL ;
+//     }
+//     cout<<" Memory released of node with data : "<< val <<endl ;
+//    }
+// };
+
+
+// //🔸function to Insertion in Doubly linkedlist (from head)
+// int insertAtHead(Node* &head, Node* &tail, int d){
+     
+//     //if there is no node 
+//     if( head == NULL) {
+//         Node* temp = new Node(d) ;
+//         head = temp ;
+//         tail = temp ;
+//     }
+//     else{
+//     Node* temp = new Node(d)  ;
+//     temp -> nextAdd = head ;
+//     head -> prevAdd = temp ;
+//     head = temp ;
+//     }
+// }
+
+// //🔸function to Insertion in doubly linkedList (from tail)
+// int insertAtTail(Node* &tail, Node* &head,  int d) {
+
+//    //if there is no node present
+//     if( tail == NULL) {
+//         Node* temp = new Node(d) ;
+//         tail = temp ;
+//         head = temp ;
+//     }
+//     else{
+//     Node* temp = new Node(d) ;
+//     tail -> nextAdd = temp ;
+//     temp -> prevAdd = tail ;
+//     tail = temp;
+//     }
+// }
+
+// //🔸function to Insert element in any position :
+// void insertAtPosition(Node* &head, Node* &tail, int position, int d){
+        
+//         //if inserting at 1st position
+//         if(position == 1) {
+//             insertAtHead(head, tail, d) ;
+//             return ;
+//         }
+
+//        //creating temp pointing to head and count to find the position where we want to insert
+//        Node* temp = head ;
+//        int count = 1;
+
+//        while( count < position - 1){
+//         temp = temp -> nextAdd ;
+//         count++ ;
+//        }
+
+//        //inserting at last position
+//        if( temp -> nextAdd == NULL){
+//         insertAtTail(tail, head, d) ;
+//         return ;
+//        }
+        
+//       //insertion at given position
+//       Node* nodeToInsert = new Node(d) ;         //create a node
+//       nodeToInsert -> nextAdd = temp -> nextAdd ;  // newNode ka nextadd = pointing to temp ka nextadd
+//       temp -> nextAdd -> prevAdd  = nodeToInsert ; // temp ke next node ka prevadd = pointing to newNode
+//       temp -> nextAdd = nodeToInsert ; //temp ka nextadd = pointing to newNode
+//       nodeToInsert -> prevAdd = temp ; // newNode ka prevadd = pointing to temp
+
+// }
+
+// //🔸function to Delete any node from Doubly Linkedlist
+// void deleteNode (Node* &head, Node* &tail, int position) {
+    
+//     //if we want to delete 1st node (or head) 
+//     if( position == 1){
+//         Node* temp = head ;
+//         temp -> nextAdd -> prevAdd = NULL ;
+//         head = temp -> nextAdd ;
+//         temp -> nextAdd = NULL ;
+
+//         delete temp ;
+//     }
+//     else {
+//    //creating a current pointing to head and previous pointing to null and count to find that position which we want to delete
+//     Node* current = head ;
+//     Node* previous = NULL ;
+
+//     int count = 1 ;
+//     while( count < position ){
+//         previous = current ;
+//         current = current -> nextAdd ;
+//         count++ ;
+//     }
+     
+//     //for deleting tail
+//     if(current  ==  tail) {
+//        previous -> nextAdd = current -> nextAdd ;
+//        tail = previous ;
+//        current -> prevAdd = NULL ;
+//        delete current ; 
+//     return ;
+//     }
+    
+//     previous -> nextAdd = current -> nextAdd ;
+//     current -> nextAdd -> prevAdd = current -> prevAdd ;
+//     current -> nextAdd = NULL ;
+//     current -> prevAdd = NULL ;
+//     delete current; 
+
+//     }
+// }
+
+
+// //🔸function to print (get) length of a Doubly linkedList
+// int getLength(Node* head){
+
+//     int len = 0;
+//     Node* temp = head; 
+
+//     while( temp != NULL){
+//         len++ ;
+//         temp = temp -> nextAdd ;
+//     }
+//     return len;
+// }
+
+// //🔸function to (print) Traverse Doubly linkedList data
+// void print(Node* head) {
+
+//     Node* temp = head; 
+
+//     while( temp != NULL){
+//         cout<< temp -> data <<" " ;
+//         temp = temp -> nextAdd ;
+//     }
+//     cout<<endl ;
+// }
+
+// int main() {
+
+// // Node* node1 = new Node(10) ;
+// // Node* head = node1 ;
+// // Node* tail = node1 ;
+
+// // condition where no node is present
+// Node* head = NULL;
+// Node* tail = NULL;
+
+// print(head) ;                   //output: 10   (data)
+// cout<< getLength(head) <<endl ; //output : 1   (length)
+
+// //🔸insert in head
+// // insertAtHead(head,tail, 11) ;
+// // print(head);                   //output: 11 10  (insertion)
+
+// // insertAtHead(head, tail, 12) ;
+// // print(head);                   //output: 12 11 10  (insertion)
+
+// // insertAtHead(head, tail, 13) ;
+// // print(head);                   //output: 13 12 11 10  (insertion)
+
+// // insertAtHead(head, tail, 14) ;
+// // print(head);                   //output: 14 13 12 11 10  (insertion)
+
+
+// //🔸insertion in tail
+
+// insertAtTail(tail, head, 22);
+// print(head) ;              //output: 10 22 (insertion from tail)
+
+// insertAtTail(tail, head, 23);
+// print(head) ;              //output: 10 22 23 (insertion from tail)
+
+// insertAtTail(tail, head, 24);
+// print(head) ;              //output: 10 22 23 24 (insertion from tail)
+
+// insertAtTail(tail, head, 27);
+// print(head) ;              //output: 10 22 23 24 25 (insertion from tail)
+
+// cout<<" Head : "<< head -> data <<endl ;
+// cout<<" tail : "<< tail -> data <<endl ;
+
+// //🔸Insertion at any position :
+// insertAtPosition(head, tail, 5, 99);
+// print(head) ;
+
+// cout<<" Head : "<< head -> data <<endl ;
+// cout<<" tail : "<< tail -> data <<endl ;
+
+// insertAtPosition(head, tail, 1, 100);
+// print(head) ;
+
+// cout<<" Head : "<< head -> data <<endl ;
+// cout<<" tail : "<< tail -> data <<endl ;
+
+
+// //🔸 Delete any node
+// deleteNode(head, tail, 4) ;
+
+// print(head) ;
+// cout<<" Head : "<< head -> data <<endl ;
+// cout<<" tail : "<< tail -> data <<endl ;
+
+//     return 0;
+// }
+
+
+
+
+//                 //🔘🔘Circular LinkedList
+
+//🔸 The circular linked list is a linked list where all nodes are connected to form a circle. 
+// In a circular linked list, the first node and the last node are connected to each other which 
+// forms a circle. There is no NULL at the end.
+
+//🔸There are generally two types of circular linked lists:
+
+//🔘Circular singly linked list: 
+//  In a circular Singly linked list, the last node of the list contains 
+//  a pointer to the first node of the list. We traverse the circular singly linked list 
+//  until we reach the same node where we started. The circular singly linked list has no beginning or end.
+//  No null value is present in the next part of any of the nodes.
+
+//ex:  
+// add :         
+
+//1:39:45  48/149
