@@ -565,3 +565,151 @@
 //     return 0;
 // }
 
+
+
+//                   //❓ Minimize the heights I
+//Given an array arr[] denoting heights of N towers and a positive integer K, 
+//you have to modify the height of each tower either by increasing or decreasing them by K only once.
+// Find out what could be the possible minimum difference of 
+// the height of shortest and longest towers after you have modified each tower.
+
+//🔸Note: Assume that height of the tower can be negative.
+
+
+// Example 1:
+// Input:
+// K = 2, N = 4
+// Arr[] = {1, 5, 8, 10}
+
+// Output:
+// 5
+
+// Explanation:
+// The array can be modified as 
+// {3, 3, 6, 8}. The difference between 
+// the largest and the smallest is 8-3 = 5.
+
+// Example 2:
+// Input:
+// K = 3, N = 5
+// Arr[] = {3, 9, 12, 16, 20}
+
+// Output:
+// 11
+
+// Explanation:
+// The array can be modified as
+// {6, 12, 9, 13, 17}. The difference between 
+// the largest and the smallest is 17-6 = 11. 
+
+//🔸To simply put The question it says that
+// add and substract every element in the array by K
+// and find the minimum difference after updating every element 
+
+// #include<iostream>
+// #include<algorithm>
+// using namespace std;
+
+// int miniDiff(int arr[], int size, int k) {
+//     sort(arr, arr+size) ;   //sort array using inbuild function
+
+//     int mini = arr[0] ; // minimum elem
+//     int maxi = arr[size -1] ; //maximum elem
+
+//     int result = maxi - mini ;  //result storing mini diff
+
+//     for(int i=1; i<size; i++) {
+//         mini = min(arr[0]+k , arr[i]-k) ;
+//         maxi = max(arr[size-1]-k , arr[i-1]+k) ;
+
+//         result = min(result, maxi - mini) ;
+//     }
+//     return result ;
+   
+// }
+
+// int main() {
+//     int arr[10] = {2, 6, 3, 4, 7, 2, 10, 3, 2, 1} ;
+//     int size = sizeof(arr) / sizeof(arr[0]) ;
+//     int k = 5 ;
+
+//     int answer = miniDiff(arr, size, k) ;
+//     cout<<" minimum difference of the height of shortest and longest towers after you have modified each tower: " <<endl ;
+//     cout<<answer <<endl ;
+// }
+
+
+
+//                   //❓ Minimize the heights II
+//Given an array arr[] denoting heights of N towers and a positive integer K.
+// For each tower, you must perform exactly one of the following operations exactly once.
+// Increase the height of the tower by K
+// Decrease the height of the tower by K
+// Find out the minimum possible difference between the height of the shortest and tallest towers after you have modified each tower.
+
+//🔸 Note:
+// It is compulsory to increase or decrease the height by K for each tower. 
+//After the operation, the resultant array should not contain any negative integers.
+
+// Example 1:
+// Input:
+// K = 2, N = 4
+// Arr[] = {1, 5, 8, 10}
+
+// Output:
+// 5
+
+// Explanation:
+// The array can be modified as 
+// {3, 3, 6, 8}. The difference between 
+// the largest and the smallest is 8-3 = 5.
+
+// Example 2:
+// Input:
+// K = 3, N = 5
+// Arr[] = {3, 9, 12, 16, 20}
+
+// Output:
+// 11
+
+// Explanation:
+// The array can be modified as
+// {6, 12, 9, 13, 17}. The difference between 
+// the largest and the smallest is 17-6 = 11. 
+
+// #include<iostream>
+// #include<algorithm>
+// using namespace std;
+
+// int minDiff(int arr[], int size, int k){
+//     sort(arr, arr+size) ;
+
+//     int mini = arr[0] ;
+//     int maxi = arr[size - 1] ;
+//     int result = maxi - mini ;
+
+//     for(int i=0; i<size; i++) {
+       
+//        if(arr[i]-k < 0){
+//         continue ;
+//        }
+
+//        mini = min(arr[0]+k, arr[i]-k) ;
+//        maxi = max(arr[size-1]-k, arr[i-1]+k) ;
+
+//        result = min(result, maxi - mini);
+//     }
+
+//    return result ;
+// }
+
+// int main() {
+//     int arr[5] = {3, 12, 20, 9, 16} ;
+//     int size = sizeof(arr)/sizeof(arr[0]) ;
+//     int k = 3 ;
+
+//     int ans = minDiff(arr, size, k) ;
+//     cout<<" mini diff : "<<ans <<endl ;
+
+//     return 0;
+// }
