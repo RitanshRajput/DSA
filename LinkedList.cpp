@@ -1,4 +1,4 @@
-//                  //🔴🔴🔴 LINKED LIST 
+//                             //🔴🔴🔴 LINKED LIST 
 
 //🔸A Linked List is a linear data structure which looks like a chain of nodes, 
 //  where each node is a different element. Unlike Arrays, Linked List elements 
@@ -31,18 +31,18 @@
 // If no node is present then pointer points to NULL
 
 //ex:
-// address:     100              104              108              112
-//            ____________      ___________      ___________      ___________
-//           [data |  104 ] == [data | 108 ] == [data | 112 ] == [data | NULL]
-//            ------------      -----------      -----------      -----------
+// address:      100              104              108              112
+//            ___________      ___________      ___________      ___________
+//           [data | 104 ] == [data | 108 ] == [data | 112 ] == [data | NULL]
+//            ------------      -----------     -----------      -----------
 
 //   🔴 Types of linked lists: 
 // There are mainly three types of linked lists:
 
 //🔘Single-linked list
-//🔘Double linked list
-//🔘Circular linked list
-//🔘Circular Doubly linked list
+//🔘Double-linked list
+//🔘Circular-linked list
+//🔘Circular-Doubly-linked list
 
 
 //                      🔘Singly-linked list
@@ -63,12 +63,12 @@
 
 // //creating a node
 // class Node {
- 
+
 //    public:
 //     int data;         // data
 //     Node* nextNode;   // pointer to next node
 
-//  //function to make nxext node null and show output from argument
+// //function to make nxext node null and show output from argument
 //     Node(int data){
 //        this -> data = data ;
 //        this -> nextNode = NULL ;
@@ -78,8 +78,8 @@
 // int main() {
 
 // Node* node1 = new Node(28) ;
-// cout << node1 -> data << endl ;         // output: 28
-// cout << node1 -> nextNode << endl ;     // output: 0
+// cout << node1 -> data << endl ;         // output: 28 data
+// cout << node1 -> nextNode << endl ;     // output: 0  address to next node
 
 //     return 0;
 // }
@@ -112,8 +112,8 @@
 
 //      //freeing memory 
 //      if( this -> next != NULL ){
-//         delete next ;
-//         this -> next = NULL; 
+//         delete next ;                    // if next not == null , then delete
+//         this -> next = NULL;             // and makes current next == null 
 //      }
 //      cout<< "memory is free for node with data : "<< value << endl ;
 //    }
@@ -554,6 +554,160 @@
 //  No null value is present in the next part of any of the nodes.
 
 //ex:  
-// add :         
+// address:      100              104              108              112
+//            ____________      ___________      ___________      ___________
+//      ==>  [data |  104 ] == [data | 108 ] == [data | 112 ] == [data | 100] ==> 
+//     ||     ------------      -----------      -----------      -----------    ||
+//     ||________________________________________________________________________||
+//                         Last Node pointing to the first Node
 
-//1:39:45  48/149
+
+//🔸Implementation of circular linkedlist:
+//🔴 Insertion
+//🔴 deletion
+//🔴 traversal
+
+// #include<iostream>
+// using namespace std;
+
+// class Node {
+//    public :
+//     int data ;
+//     Node* next ;
+
+//     //constructor
+//     Node(int d) {
+//         this->data = d ;
+//         this->next = NULL ;
+//     }
+
+//     //destructor
+//     ~Node() {
+//         int value = this->data ;
+//         if(this->next != NULL) {
+//             delete next ;
+//             next =  NULL ;
+//         }
+//         cout << "Memory is free for node with data !" << value <<endl ;
+//     }
+// } ;
+
+// //🔴insertion code
+// void insertNode( Node* &tail, int element, int d ) {
+
+//    // if list is empty(no element present)
+//    if(tail == NULL) {
+//     Node* nayaNode = new Node(d) ;
+//     tail = nayaNode ;
+//     nayaNode -> next = nayaNode ;             //circular linkedlist hence last node pointing to first node
+//    }
+//    else{
+//       // if list is non-empty
+//       //assuming that the element is present in the list
+//       Node* current = tail ;
+
+//       while(current -> data != element) {
+//         current = current -> next ;
+//       }
+
+//       // element found -> current is representing element wala node
+//       Node* temp = new Node(d) ;
+//       temp -> next = current -> next ;
+//       current -> next = temp ;
+//    }
+
+// } 
+
+// //🔴deletion code
+// void deleteNode(Node* &tail, int value){
+
+//     //if empty list
+//     if(tail == NULL) {
+//         cout<< " list is empty, please check again" <<endl; 
+//         return ;
+//     }
+//     else {
+//         //non-empty
+//         //assuming that "value" is present in the list
+//         Node* previous = tail ;
+//         Node* current = previous -> next ;
+
+//         while( current -> data != value) {
+//             previous = current ;
+//             current = current -> next ;
+//         }
+
+//         previous -> next = current -> next ;
+
+//         // 1 Node linked list
+//         if(current == previous){
+//             tail = NULL; 
+//         }
+//         // >=2 node linked list
+//         else if(tail == current) {
+//             tail = previous ;
+//         }
+//         current -> next = NULL ;
+//         delete current ;
+//     }
+
+// }
+
+// //🔴traversal / print code
+// void print(Node* tail) {
+     
+//     Node* temp = tail ;
+
+//     if(tail == NULL) {
+//         cout<< "list is empty" <<endl ;
+//     }
+    
+//    do{
+//     cout<< tail-> data <<" " ;
+//     tail = tail -> next ;
+//    }
+//    while(tail != temp) ;
+//    cout<<endl ;
+// }
+
+
+// int main() { 
+
+// Node* tail = NULL ;
+
+// //inserting in empty list
+// insertNode(tail, 5, 3) ;  
+// print(tail) ;          //output: 3
+
+// //inserting at last of list
+// insertNode(tail, 3, 5) ;
+// print(tail) ;          //output: 3 5
+
+// insertNode(tail, 5, 7) ;
+// print(tail) ;          //output: 3 5 7
+
+// insertNode(tail, 7, 9) ;
+// print(tail) ;          //output: 3 5 7 9
+
+// //inserting in middle of list
+// insertNode(tail, 5, 6) ;
+// print(tail) ;          //output: 3 5 6 7 9
+
+// insertNode(tail, 3, 4) ;
+// print(tail) ;          //output: 3 4 5 6 7 9
+
+
+// //deletion node 
+// deleteNode( tail, 9) ;
+// print(tail) ;          //output: 3 4 5 6 7
+
+// deleteNode( tail, 3) ;
+// print(tail) ;          //output: 7 4 5 6 
+
+// deleteNode( tail, 5) ;
+// print(tail) ;          //output: 7 4 6 
+
+//  return 0;
+// }
+
+//49/149; 
