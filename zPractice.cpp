@@ -101,7 +101,7 @@
 // }
 
 
-//                              //❓ find kth element :
+//                              //❓ find kth smallest element :
 // #include<iostream>
 // using namespace std ;
 // int findK(int arr[], int s ,int e, int k) {
@@ -147,6 +147,7 @@
 //     int zero = 0;
 //     int one = 0;
 //     int two = 0;
+
 // //dutch national flag algorithm
 //     for(int i=0; i<n; i++){
 //         if( arr[i] == 0) zero++ ;
