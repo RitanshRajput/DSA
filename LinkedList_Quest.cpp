@@ -1,8 +1,7 @@
 
 //                     🔴🔴 Question on LinkedList 
 
-//❓ Question:
-// 🔸Reverse an Linked list :
+//                  ❓ Question🔸Reverse an Linked list :
 
 // the given linked list is 1-> 2-> 3-> 4-> NULL.
 // then the reverse linked list is 4-> 3-> 2-> 1-> NULL
@@ -107,7 +106,7 @@
 //🔴 space complexity : O(N)
 
 
-//🔸 Recursive approach 3 :
+//                  //🔸 Recursive approach 3 :
 // #include<iostream>
 // using namespace std;
 
@@ -155,8 +154,7 @@
 
 
 
-//❓Question :
-//Middle of Linked list
+//                          //❓Question Middle of Linked list
 //ex:
 // input:   [1]->[2]->[3]->[4]->NULL
 //outut:  2
@@ -254,7 +252,7 @@
 
 
 
-//🔴🔴Optimised code :
+//                   //🔴🔴Optimised code :
 // #include<iostream>
 // using namespace std;
 
@@ -341,6 +339,84 @@
 //🔴Space complexity: O(1) 
 
 
-//🔴🔴Homework reverse Doubly LinkedLis
+//🔴🔴Homework reverse Doubly LinkedList
 
-//50/149
+
+//                      //❓Question Reverse LinkedList in "K groups" 
+
+//You are given a linked list of 'N' nodes and an integer 'K’. 
+//You have to reverse the given linked list in groups of
+// size K i.e if the list contains x nodes numbered from 1 to x, 
+// then you need to reverse each of the groups (1,K), (K+1,2*K), and so on.
+
+// For example, if the list is [1, 2, 3, 4, 5, 6] and K = 2, 
+// then the new list will be [2, 1, 4, 3, 6, 5].
+
+//Notes:
+// 1. In case the number of elements in the last cannot be evenly divided into groups of size
+// k, then just reverse the last group(with any size). For example if the list is 1 2 3 4 5
+// and K = 3, then the answer would be 3 2 1 5 4.
+// 2. All the node values will be distinct.
+
+//          ______        ______        _______
+//ex:      |      |      |      |      |       |
+// Input: [3] => [2] => [7] => [8] => [9] => [11] => NULL
+// k = 2 
+
+//output: [2] => [3] => [8] => [7] => [11] => [9] => NULL
+
+//          _____________        _____________ 
+//ex:      |             |      |             |
+// Input: [3] => [2] => [7] => [8] => [9] => [11] => NULL
+// k = 3 
+
+//output: [7] => [2] => [3] => [11] => [9] => [8] => NULL
+
+
+//🔴Recursive Approach :
+
+#include<iostream>
+using namespace std ;
+
+class Node{
+    public:
+    int data ;
+    Node* next ;
+
+    Node(int data) {
+        this-> data = data ;
+        this-> next = NULL ;
+    }
+};
+
+//🔸Recursive solution :
+Node* kReverse(Node* head, int k) {
+    //base case
+    if(head == NULL){
+      return NULL ;
+    }
+
+    //step1 : reverse first k nodes
+    Node* next = NULL ;
+    Node* curr = head ;
+    Node* prev = NULL ;
+    int count  = 0    ;
+
+    while( curr != NULL && count < k){
+        next = curr -> next ;
+        curr -> next = prev ;
+        prev = curr ;
+        curr = next ;
+    }
+
+    //step2: recursion we see other
+    
+}
+
+int main() {
+
+
+    return 0;
+}
+
+//14:45 51/149
