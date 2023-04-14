@@ -663,21 +663,185 @@
 
 //🔸Approach 3 : Using Map 
 
-// bool hasCycle(Node *head) {
-//         unordered_map<Node*,bool> map;
-//         Node* temp = head;
-        
-//         while(temp!=NULL){
-//         if( map.find(temp) != map.end() )         //temp present
-//             return true;
-//             map[temp]=true;
-//             temp = temp->next;
-//         }
-//         return false;
+// bool circularOrNot(Node* head) {
+      
+//     if(head == NULL) {
+//         return false ;
 //     }
+
+//     map<Node*, bool> visited; 
+
+//     Node* temp = head ;
+
+//     while(temp != NULL) {
+
+//         //cycle present
+//         if(visited[temp] == true){
+//             return 1;            
+//         }
+
+//         visited[temp] = true;
+//         temp = temp -> next ;
+//     }
+//     return false ;
+// }
 
 
 //🔴 Homework Floyd's cycle detection algorithm:
 
 
-//52/ 149:
+//                    //❓ Question: Detect and Remove Loop
+
+// Given a singly linked list, you have to detect the loop and remove the loop from the linked list, if present. 
+// You have to make changes in the given linked list itself and return the updated linked list.
+// Expected Complexity: Try doing it in O(n) time complexity and O(1) space complexity. 
+// Here, n is the number of nodes in the linked list.
+
+// Sample Input:
+// 6 2
+// 1 2 3 4 5 6 
+// Picture:  [1]=>[2]=>[3]=>[4]=>[5]=>[6]=> 
+//                ⬆️---------------------⬇️ 
+
+// Sample Output:
+// 1 2 3 4 5 6
+// updated :  [1]=>[2]=>[3]=>[4]=>[5]=>[6]=> NULL
+
+//🔴There are many questions made by this Question: some ex are
+//1: Detect cycle in Linked list
+//2: Remove Cycle from Linked list 
+//3: Beginning/Start node of loop in Linked list
+
+
+// #include<iostream>
+// #include<map>
+// using namespace std ;
+
+// class Node{
+//     public:
+//     int data ;
+//     Node* next ;
+
+//     Node(int data){
+//         this-> data = data ;
+//         this-> next = NULL ;
+//     }
+// };
+
+// //🔴 Normal Code to detect loop:
+// bool detectLoop(Node* head) {
+      
+//     if(head == NULL) {
+//         return false ;
+//     }
+
+//     map<Node*, bool> visited; 
+
+//     Node* temp = head ;
+
+//     while(temp != NULL) {
+
+//         //cycle present
+//         if(visited[temp] == true){
+//             return 1;            
+//         }
+
+//         visited[temp] = true;
+//         temp = temp -> next ;
+//     }
+//     return false ;
+// }
+// //🔸space complexity: o(N)       //using map extra space
+// //🔸Time complexity: o(N)
+
+// //🔴Flyods Loop Detection Code:
+// Node* flyodDetectLoop(Node* head){
+
+//     if(head == NULL){
+//         return NULL;
+//     }
+
+//     Node* slow = head;
+//     Node* fast = head ;
+
+//     while(slow != NULL && fast != NULL) {
+
+//         fast = fast -> next ;
+//         if(fast != NULL){
+//             fast = fast -> next ;
+//         }
+
+//         slow = slow -> next ;
+//         if(slow == fast) {
+//             return slow;
+//         }
+//     }
+//     return NULL;
+// }
+// //🔸space complexity: o(1)       //no extra spaces
+// //🔸Time complexity: o(N)
+
+
+// //🔴 Code to find Start/beginning node of loop
+//   Node* getStartingNode(Node* head) {
+
+//     if(head == NULL){
+//         return NULL ;
+//     }
+
+//     Node* intersection = flyodDetectLoop(head) ;
+
+//     if(intersection == NULL){
+//         return NULL ;
+//     }
+//     Node* slow = head ;
+
+//     while(slow != intersection){
+//         slow = slow -> next;
+//         intersection = intersection -> next ;
+//     }
+
+//     return slow ;
+// }
+
+// //🔴Remove loop from linkedlist Code
+// Node *removeLoop(Node *head)
+// {
+//     if(head == NULL){
+//         return NULL;
+//     }
+
+//     Node* startOfLoop = getStartingNode(head) ;
+
+//     if(startOfLoop == NULL){
+//         return head ;
+//     }
+    
+//     Node* temp = startOfLoop;
+
+//     while(temp -> next != startOfLoop){
+//         temp = temp -> next;
+//     }
+
+//     temp -> next = NULL ;
+    
+//     return head;
+
+// }
+// //🔸space complexity: o(1)       //no extra spaces
+// //🔸Time complexity: o(N)
+
+
+// int main() {
+
+//     return 0;
+// }
+
+
+//🔴Homework
+// learn remove loop it has 5 diff ways
+// learn detect cycle it has 3 diff ways
+
+
+
+//53/ 149 
