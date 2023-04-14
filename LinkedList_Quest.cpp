@@ -339,9 +339,27 @@
 //🔴Space complexity: O(1) 
 
 
-//🔴🔴Homework reverse Doubly LinkedList
+
+//                     🔴🔴Homework reverse Doubly LinkedList
+//solution code:
+////🔴 doubly linked list reverse
+// Node* reverseDLL(Node * head)
+// {
+//    Node* curr=head;
+//    Node* pre=NULL;
+//    Node* forward=NULL;
+//    while(curr!=NULL){
+//        forward=curr->next;
+//        curr->prev=curr->next;
+//        curr->next=pre;
+//        pre=curr;
+//        curr=forward;
+//    }
+//    return pre;
+// }
 
 
+ 
 //                      //❓Question Reverse LinkedList in "K groups" 
 
 //You are given a linked list of 'N' nodes and an integer 'K’. 
@@ -375,48 +393,291 @@
 
 //🔴Recursive Approach :
 
-#include<iostream>
-using namespace std ;
+// #include<iostream>
+// using namespace std ;
 
-class Node{
-    public:
-    int data ;
-    Node* next ;
+// class Node{
+//     public:
+//     int data ;
+//     Node* next ;
 
-    Node(int data) {
-        this-> data = data ;
-        this-> next = NULL ;
-    }
-};
+//     Node(int data) {
+//         this-> data = data ;
+//         this-> next = NULL ;
+//     }
+// };
 
-//🔸Recursive solution :
-Node* kReverse(Node* head, int k) {
-    //base case
-    if(head == NULL){
-      return NULL ;
-    }
+// //🔸Recursive solution :
+// Node* kReverse(Node* head, int k) {
+//     //base case
+//     if(head == NULL){
+//       return NULL ;
+//     }
 
-    //step1 : reverse first k nodes
-    Node* next = NULL ;
-    Node* curr = head ;
-    Node* prev = NULL ;
-    int count  = 0    ;
+//     //step1 : reverse first k nodes
+//     Node* next = NULL ;
+//     Node* curr = head ;
+//     Node* prev = NULL ;
+//     int count  = 0    ;
 
-    while( curr != NULL && count < k){
-        next = curr -> next ;
-        curr -> next = prev ;
-        prev = curr ;
-        curr = next ;
-    }
+//     while(curr != NULL && count < k){
+//         next = curr -> next ;
+//         curr -> next = prev ;
+//         prev = curr ;
+//         curr = next ;
+//         count++ ;
+//     }
+      
+//     //step for when N=size of linked list is Not divisible by K.
+//     // everytime it checks the temp is not null and there are k elements next to null 
+//     // so we can perform the operation
+//      ListNode* temp = curr;
+//      count = 0;
+//      while(temp != NULL && count < k){
+//          temp = temp->next;
+//          count++;
+//      }
 
-    //step2: recursion we see other
+//     //step2: recursion we see other
+//     if(next != NULL && count == k) {
+//       head -> next = kReverse(next,k) ; 
+//     }
+//     else{
+//        head -> next = curr
+//      }
+
+//     //step3: return head of reversed list
+//     return prev ;
+// }
+
+// //insertion code from tail
+// void insertElement(Node* &tail, int d) {
+
+//     //new node creating at tail
+//     Node* temp = new Node(d) ;
+//     tail -> next = temp ; 
+//     tail  = temp ;
+
+// }
+// //traverse code
+// void print(Node* head) {
+//     Node* temp = head ;
+//     while(temp != NULL) {
+//         cout<< temp -> data << " ";
+//         temp = temp -> next ;
+//     }
+//     cout<<endl ;
+// }
+
+// int main() {
+
+// Node* elem = new Node(11) ;
+// Node* head = elem ;
+// Node* tail = elem ;
+
+// insertElement(tail, 12) ;
+// insertElement(tail, 13) ;
+// insertElement(tail, 14) ;
+// insertElement(tail, 15) ;
+// print(head);
+
+// kReverse(head, 2) ;
+
+//     return 0;
+// }
+//🔴Time complexity: O(N)        //bcoz we are visiting every node only once
+//🔴space complexity: O(N)      
+// if we see in stack we are reversing every kth node
+// so space its taking will be (N/K)  K is constant so we ignore
+// so remaining N ==> O(N)
+
+
+
+//                     ❓Question Circular Linked list or not
+
+//you are given the head of a linked list containing integers,you need to find out whether the
+// the given linked list is circular or not.
+
+//1. A linked list id said to be circular if it has no node having its next pointer equal to NULL
+//   and all the nodes form a circle i.e: the next pointer of last node points to the first node.
+//2. An empty linked will also be considered as circular.
+//3. All the integers in the linked list are unique.
+//4. In the input, the next pointer of a node with i'th integer is linked to the node with
+//   data (i+1)'th integer (if(i+1)'th node exists). if there is no such (i+1)'th integer then 
+//   the next pointer of such node is set to NULL.
+
+// Sample Input 1 :
+// ex: input 
+// 1 2 3 4 1
+
+// Sample Output 1 :
+// True
+
+// Sample Input 2 :
+// input :
+// 1 2 3 4 5 6 7
+
+// Sample Output 2 :
+// False
+
+//🔸APproach 1 : TLE
+// #include<iostream>
+// using namespace std;
+
+// class Node{
+
+//     public:
+//     int data ;
+//     Node* next = NULL ;
+
+//     Node(int data){
+//         this -> data = data ;
+//         this -> next = NULL ;
+//     }
+// };
+
+// //🔸 if linked list is circular or not
+// bool isCircularList(Node* head) {
+//     //empty list 
+//     if(head == NULL) {
+//       return true ;
+//     }
+
+//     Node* temp = head -> next ;
+//     while(temp != NULL && temp != head) {
+//         temp = temp -> next ;
+//     }
+
+//     if(temp == head) {
+//       return true ;
+//     }
+
+//     return false ;
+// }
+
+// //🔸Insertion from Head (function)
+// void insertElement(Node* &head, int d) {
+
+//     //new node creating at Head
+//     Node* temp = new Node(d) ;
+//     temp -> next = head ;
+//     head = temp ;
+// }
+
+// //traverse code
+// void print(Node* head) {
+//     Node* temp = head ;
+//     while(temp != NULL) {
+//         cout<< temp -> data << " ";
+//         temp = temp -> next ;
+//     }
+//     cout<<endl ;
+// }
+// int main() {
+
+// Node* elem = new Node(12) ;
+// Node* head = elem ;
+
+// insertElement(head, 13) ;
+// insertElement(head, 14) ;
+// insertElement(head, 15) ;
+// print(head) ;
+
+//     return 0;
+// }
+
+
+
+//🔴 Approach 2: better for understanding  
+// bool isCircular(Node* head){
+//  //fast ptr is ahead of slow pointer  
+//    Node* slow=head; 
+//    Node* fast=head->next;
+
+//   //if linked list is empty it returns true as its entirely null.
+//    if(head==NULL)
+//     return true;
+
+//    while(true) { 
+//     //fast ptr traverses quickly so If its not circular then it reaches or points to null.
+//     if(fast == NULL || fast->next == NULL){
+//     return false;
+//     }
+
+//     //when circular fast meets or points to slow pointer while traversing
+//     else if(slow == fast || fast->next == slow){
+//     return true;
+//     }
     
-}
+//     // for moving forward through linked list.
+//     else {
+//       slow = slow->next;
+//       // fast traverses way ahead so it distinguishes loops out of circular
+//       // list.
+//       fast = fast->next->next;
+//     }
+//   }
+// }
 
-int main() {
+
+//                              🔴 MAP:
+//Maps are associative containers that store elements in a mapped fashion. 
+//Each element has a key value and a mapped value.
+// No two mapped values can have the same key values.
+
+//🔸Some basic functions associated with Map: 
+// begin() – Returns an iterator to the first element in the map.
+// end() – Returns an iterator to the theoretical element that follows the last element in the map.
+// size() – Returns the number of elements in the map.
+// max_size() – Returns the maximum number of elements that the map can hold.
+// empty() – Returns whether the map is empty.
+// pair insert(keyvalue, mapvalue) – Adds a new element to the map.
+// erase(iterator position) – Removes the element at the position pointed by the iterator.
+// erase(const g)– Removes the key-value ‘g’ from the map.
+// clear() – Removes all the elements from the map.
 
 
-    return 0;
-}
+//🔴Let us see the differences between Map and Unordered_Map -:
 
-//14:45 51/149
+//              map	                              unordered_map
+// 1.  map is define in               |1.  unordered_map is defined in 
+//     #include <map> header file     |    #include <unordered_map> header file
+// 2.  It is implemented by           |2.  It is implemented using hash table.
+//     red-black tree.                | 
+// 3.  It is slow.	                  |3.  It is fast.
+// 4.  Time complexity for            |4.  Time complexity for operations is O(1)
+//     operations is O(log N)         |    O(n) -> Worst Case
+// 5.  map is used to store elements  |5.  unordered_map is used to store elements 
+//     as key,value pairs in order    |   as key,value pairs in non-sorted order.
+//     sorted by key                  |
+
+
+//🔴 Use std::map when :
+// You need ordered data.
+// You would have to print/access the data (in sorted order).
+// You need predecessor/successor of elements.
+
+//🔴 Use std::unordered_map when 
+// You need to keep count of some data (Example – strings) and no ordering is required.
+// You need single element access i.e. no traversal.
+
+//🔸Approach 3 : Using Map 
+
+// bool hasCycle(Node *head) {
+//         unordered_map<Node*,bool> map;
+//         Node* temp = head;
+        
+//         while(temp!=NULL){
+//         if( map.find(temp) != map.end() )         //temp present
+//             return true;
+//             map[temp]=true;
+//             temp = temp->next;
+//         }
+//         return false;
+//     }
+
+
+//🔴 Homework Floyd's cycle detection algorithm:
+
+
+//52/ 149:
