@@ -977,4 +977,294 @@
 // ⬆️-----------⬇️              ⬆️-----------⬇️
 
 
-// 54/149
+
+//                   //❓Question: Sort 0s, 1s, 2s in Linked list
+
+// You are given a linked list having N number of nodes and each node will have an integer which
+// can be 0,1 or 2 . you have to sort the given linked list in ascending order
+
+// Sample Input 1:
+// 2
+// 1 0 2 1 2 -1
+// 0 0 1 2 -1
+// Sample Output 1:
+// 0 1 1 2 2 -1
+// 0 0 1 2 -1
+
+// Sample Input 2:
+// 2
+// 2 2 1 0 0 0 -1
+// 1 1 1 1 -1
+// Sample Output 2:
+// 0 0 0 1 2 2 -1
+// 1 1 1 1 -1
+
+//🔴Approach 1: Dutch national flag algorithm
+// #include<iostream>
+// using namespace std;
+
+// class Node{
+//     public:
+//     int data ;
+//     Node* next ;
+
+//     Node(int data){
+//         this->data = data ;
+//         this->next = NULL ;
+//     }
+// };
+
+// Node* sortList(Node* head) {
+
+//     int zeroCount = 0;
+//     int oneCount = 0;
+//     int twoCount = 0;
+
+//     Node* temp = head; 
+
+//     while(temp != NULL){
+
+//         if(temp-> data == 0){
+//             zeroCount++ ;
+//         }
+//         else if(temp->data == 1){
+//             oneCount++ ;
+//         }
+//         else if(temp-> data == 2){
+//             twoCount++ ;
+//         }
+
+//         temp = temp-> next ;
+//     }
+
+//     temp = head;
+
+//     while(temp != NULL) {
+//         if(zeroCount != 0){
+//             temp-> data = 0 ;
+//             zeroCount-- ;
+//         }
+//         else if(oneCount != 0){
+//             temp->data = 1 ;
+//             oneCount-- ;
+//         }
+//         else if(twoCount != 0){
+//             temp-> data = 2;
+//             twoCount-- ;
+//         }
+//         temp = temp-> next;
+//     } 
+//  return head ;
+// }
+// //🔴time complexity: O(N)     [ O(N) + O(N)  = 2(N) ]
+// //🔴space complexity: O(1) ;
+
+
+// int main() {
+//     return 0;
+// }
+
+
+//🔴Approach 2:  dummy node (TLE)
+
+// #include<iostream>
+// using namespace std;
+
+// class Node{
+//     public:
+
+
+//     int data; 
+//     Node* next ;
+
+//     Node(int data){
+//         this-> data = data ;
+//         this-> next = NULL ;
+//     }
+// };
+
+// void insertAtTail(Node* tail, Node* curr){
+//     tail -> next = curr ;
+//     tail = curr ;
+// }
+
+// //Main function: 
+// Node* sortList(Node* head){
+
+//     //creating dummy node
+//     Node* zeroHead = new Node(-1) ;
+//     Node* zeroTail = new Node(-1) ;
+
+//     Node* oneHead = new Node(-1) ;
+//     Node* oneTail = new Node(-1) ;
+
+//     Node* twoHead = new Node(-1) ;
+//     Node* twoTail = new Node(-1) ;
+
+//     Node* curr = head ;
+
+//     //create separate list 0s, 1s, and 2s:
+//     while(curr != NULL){
+
+//         int value = curr -> data ;
+
+//         if(value == 0){
+//             insertAtTail(zeroTail, curr);
+//         }
+//         else if(value == 1){
+//             insertAtTail(oneTail, curr) ;
+//         }
+//         else if(value == 2){
+//             insertAtTail(twoTail, curr) ;
+//         }
+//         curr = curr-> next ;
+//     }
+
+//     //merge 3 sublist :
+//     if(oneHead -> next != NULL) {
+//         zeroTail-> next = oneHead -> next -> next ;
+//     }
+//     else{
+//         zeroTail-> next = twoHead -> next -> next ;
+//     }
+
+//     oneTail -> next = twoHead ->  next ;
+//     twoTail -> next = NULL ;
+
+//     //setup head:
+//     head = zeroHead -> next ;
+
+//     //delete dummy nodes
+//     delete zeroHead ;
+//     delete oneHead ;
+//     delete twoHead ;
+
+//     return head ;
+//  }
+// //🔴Time complexity: O(N)       [ O(N) + O(1) + O(1) + O(1) ] = O(N)
+// //🔴space complexity: O(1)
+
+
+// int main(){
+//     return 0;
+// }
+
+
+
+//                     //❓ QUestion: Merge 2 sorted Linked list
+
+//you are given two sorted linked list. you have to merge them to produce a combines sorted linked list
+// you need to return the head of the final linked list
+
+//the given linked list may or may not be null
+
+// Sample Input 1:
+// 2
+// 1 4 5 -1
+// 2 3 5 -1
+// 7 8 -1
+// 1 3 4 6 -1
+// Sample Output 1:
+// 1 2 3 4 5 5 -1
+// 1 3 4 6 7 8 -1
+
+// Sample Input 2:
+// 2
+// 5 -1
+// 1 3 6 10 -1
+// 1 1 1 -1
+// 1 1 1 -1
+// Sample Output 2
+// 1 3 5 6 10 -1
+// 1 1 1 1 1 1 -1
+
+
+// #include<iostream>
+// using namespace std;
+
+// template <typename T>         // like a macro, use to avoid using same thing again and again
+// class Node{
+//     public:
+//     T data ;
+//     Node* next ;
+
+//     Node(T data){
+//         this->data = data ;
+//         this->next = NULL ;
+//     }
+
+//     ~Node(){
+//         if(next != NULL){
+//             delete next ;
+//         }
+//     }
+// };
+
+// Node<int>* solve( Node<int>* first, Node<int>* second) {
+
+//      //if only one node present in first list
+//      if(first -> next == NULL){
+//         first -> next = second;
+//         return first;
+//     }
+     
+//      //if more than one node present
+//     Node<int>* curr1 = first ;
+//     Node<int>* next1 = curr1 -> next ;
+//     Node<int>* curr2 = second ;
+//     Node<int>* next2 = NULL ; 
+
+//     while( next1 != NULL && curr2 != NULL){
+
+//       if((curr2 -> data >= curr1 -> data) && (curr2 -> data <= next1 -> data)) {
+            
+//             //add nodes in between the first list
+//             curr1 -> next = curr2 ;
+//             next2 = curr2 -> next ;
+//             curr2 -> next = next1 ;
+
+//            //update pointer
+//             curr1 = curr2 ;
+//             curr2 = next2 ;
+//         }
+//         else{
+//             //curr1 and next1 ko agge badhana padega
+//             curr1 = next1 ;
+//             next1 = next1 -> next ;
+
+//             //if first list is finished then point curr1 to second list's remaining node
+//             if(next1 == NULL){
+//                 curr1 -> next = curr2 ;
+//                 return first ;
+//             }
+//         }
+//     }
+//     return first;
+// }
+
+// //main function :
+// Node<int>* sortTwoLists(Node<int>* first, Node<int>* second){
+       
+//     if(first == NULL){
+//        return second ;
+//     }
+//     if(second == NULL){
+//         return first;
+//     }
+
+//     if(first -> data <= second -> data){
+//         return solve(first, second) ;
+//     }
+//     else{
+//         return solve(second, first) ;
+//     }
+// };
+// //🔴Time complexity: O(N)
+// //🔴space complexity: O(1)
+
+// int main() {
+//     return 0;
+// }
+
+
+// 55/149
