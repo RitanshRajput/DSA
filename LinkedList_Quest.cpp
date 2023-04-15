@@ -844,4 +844,137 @@
 
 
 
-//53/ 149 
+//                      //❓Question Remove Duplicates from a Sorted/Unsorted Linked list
+
+//              🔸For SOrted linkedlist:
+// You want to play with your friend, but your friend has pending homework, help him complete that.
+//  You are given a 'Head' of a sorted linked list. You can remove some values from the linked list. In the end, you
+//  must return a sorted linked list that contains no adjacent values that are equal.
+
+// Sample Input 1 :
+// 2
+// 1 2 2 3 -1
+// 1 2 3 4 -1
+// Sample Output 1 :
+// 1 2 3 -1
+// 1 2 3 4 -1
+
+// Sample Input 2 :
+// 2
+// 1 -1
+// 2 5 5 5 5 -1 
+// Sample Output 2 :
+// 1 -1
+// 2 5 -1
+
+
+// #include<iostream>
+// using namespace std;
+
+// class Node{
+//     public:
+//     int data;
+//     Node* next;
+
+//     Node(int data){
+//         this-> data = data;
+//         this-> next = NULL;
+//     }
+// };
+
+
+// Node* uniqueSortedList(Node* head){
+
+//     //empty list
+//     if(head == NULL){
+//         return NULL;
+//     }
+
+//     //non-empty list
+//     Node* curr = head ;
+
+//     while(curr != NULL){
+
+//         if( (curr -> next != NULL) && curr -> data == curr -> next -> data){
+//             Node* nextKaNext = curr -> next -> next ;
+//             Node* nodeToDelete = curr -> next ;
+//             delete(nodeToDelete);
+//             curr -> next = nextKaNext ;
+//         }
+//         else{
+//             //not equal
+//             curr = curr -> next ;
+//         }
+//     }
+//     return head; 
+// }
+// //🔴time complexity: O(N)
+// //🔴space complexity: O(1)        // constant space taken 
+
+// int main() {
+//   return 0;
+// }
+
+
+
+//              🔸For UNsorted linkedlist:
+
+// You are given a linked list of N nodes. Your task is to remove the duplicate nodes from the linked list such that
+//  every element in the linked list occurs only once i.e. in case an element occurs more than once, only keep its
+//  first occurrence in the list.
+
+// Sample Input 1 :
+// 2
+// 4 2 5 4 2 2 -1
+// 1 2 1 2 2 2 7 7 -1
+// Sample Output 1 :
+// 4 2 5 -1
+// 1 2 7 -1
+
+// Sample Input 2 :
+// 2
+// 3 3 3 3 3 -1
+// 10 20 10 20 30 10 20 30 -1
+// Sample Output 2 :
+// 3 -1
+// 10 20 30 -1
+
+//Homework
+//🔴there are 3 approaches to solve above unsorted remove duplicate problem
+//1. using 2 while loop just like when we solve array
+//2. first sort the linkedlist and then do previous solution(sorted ll)
+//3. using map 
+
+
+// #include<iostream>
+// using namespace std;
+
+// class Node{
+//     public:
+//     int data;
+//     Node* next;
+
+//     Node(int data){
+//         this->data = data;
+//         this->next = NULL;
+//     }
+// };
+
+
+
+// int main(){
+//     return 0;
+// }
+
+
+//🔴Homework question: Split circular LL in two halve (each ll must be circular)
+//input: 
+//  [1]=>[2]=>[3]=>[4]=>[5]=[6]=> 
+//  ⬆️-----------------------⬇️ 
+
+//output: 
+// [1]=>[2]=>[3]=>               [4]=>[5]=[6]=> 
+// ⬆️-----------⬇️              ⬆️-----------⬇️
+
+
+// 54/149
