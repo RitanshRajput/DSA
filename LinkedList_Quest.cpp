@@ -941,9 +941,9 @@
 
 //Homework
 //🔴there are 3 approaches to solve above unsorted remove duplicate problem
-//1. using 2 while loop just like when we solve array
-//2. first sort the linkedlist and then do previous solution(sorted ll)
-//3. using map 
+//1. using 2 while loop just like when we solve array  (T.C o(N^2))
+//2. first sort the linkedlist and then do previous solution(sorted ll)  (T.C  O(nlogn))
+//3. using map  (T.c  0(n))
 
 
 // #include<iostream>
