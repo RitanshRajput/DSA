@@ -1439,4 +1439,284 @@
 //     return 0;
 // }
 
-//56/149:
+
+
+//                     //❓Question: Add 2 Numbers represented by linked lists
+
+// Given two decimal numbers represented by two linked lists of size N and M respectively. 
+// The task is to return a linked list that represents the sum of these two numbers.
+
+// For example, the number 190 will be represented by the linked list, 1->9->0->null, 
+// similarly 25 by 2->5->null. Sum of these two numbers is 190 + 25 = 215, 
+// which will be represented by 2->1->5->null. You are required to return the head of the linked list 2->1->5->null.
+
+// Example 1:
+// Input:
+// N = 2
+// valueN[] = {4,5}
+// M = 3
+// valueM[] = {3,4,5}
+
+// Output: 3 9 0
+// Explanation: For the given two linked        
+// list (4 5) and (3 4 5), after adding
+// the two linked list resultant linked
+// list will be (3 9 0).
+
+// Example 2:
+// Input:
+// N = 2
+// valueN[] = {6,3}
+// M = 1
+// valueM[] = {7}
+
+// Output: 7 0
+// Explanation: For the given two linked
+// list (6 3) and (7), after adding the
+// two linked list resultant linked list
+// will be (7 0).
+
+// Expected Time Complexity: O(N+M)
+// Expected Auxiliary Space: O(Max(N,M)) for the resultant list.
+
+//🔸appraoch 1: reverse both list and add 
+// #include<iostream>
+// using namespace std; 
+
+// class Node{
+//     public:
+//     int data;
+//     Node* next; 
+
+//     Node(int data){
+//         this->data = data;
+//         this->next = NULL;
+//     }
+
+//     ~Node(){
+//         if(next != NULL){
+//             delete next;
+//         }
+//     }
+// };
+
+// //reverse code:
+// Node* reverse(Node* head){
+//     Node* curr = head; 
+//     Node* prev = NULL;
+//     Node* next = NULL;
+
+//     while(curr != NULL){
+//         next = curr -> next ;
+//         curr -> next = prev ;
+//         prev = curr ;
+//         curr = next ;
+//     }
+//   return prev;       //return head
+// }
+
+// // insert At tail code:
+// void insertAtTail(Node* &head, Node* &tail, int val){
+
+//     Node* temp = new Node(val) ;
+
+//     if(head == NULL){
+//        head = temp ;
+//        tail = temp ;
+//        return ;
+//     }
+//     else{
+//        tail -> next = temp ;
+//        tail = temp ;
+//     }
+// }
+
+// //addition code:
+// Node* addition(Node* first, Node* second){
+    
+//     int carry = 0;
+//     Node* ansHead = NULL ;
+//     Node* ansTail = NULL;
+
+//     while(first != NULL && second != NULL){
+
+//         int sum = carry + first->data + second->data ;
+//         int digit = sum % 10 ;
+
+//         //create node and add in answer linkedlist
+//         insertAtTail(ansHead, ansTail, digit) ;
+
+//         carry = sum / 10; 
+//         first = first -> next ;
+//         second = second -> next ;
+//     }
+
+//    // for remaining Node of first list
+//     while(first != NULL){
+//         int sum = carry + first -> data;
+//         int digit = sum % 10 ;
+//         //create node and add  remaining answer in linkedlist
+//         insertAtTail(ansHead, ansTail, digit) ;
+//         carry = sum / 10; 
+//         first = first -> next;
+//     }
+
+//     // for remaining Node of second list
+//     while(second != NULL){
+//         int sum = carry + first -> data;
+//         int digit = sum % 10 ;
+//         //create node and add  remaining answer in linkedlist
+//         insertAtTail(ansHead, ansTail, digit) ;
+//         carry = sum / 10; 
+//         second = second-> next;
+//     }
+
+//     // if carry is remained
+//     while( carry != 0){
+//         int sum = carry ;
+//         int digit = sum % 10 ;
+//        //create node and add remaining answer in linked list
+//        insertAtTail(ansHead, ansTail, digit) ;
+//        carry = sum / 10;
+//     }
+//     return ansHead;
+// }
+
+// //🔸Main code:
+// Node* addTwoLists(Node* first, Node* second){
+
+//     //step 1: reverse input linkedlist
+//     first = reverse(first);
+//     second = reverse(second) ;
+
+//     //step2: add 2 linkedlist
+//     Node* ans = addition(first, second) ;
+
+//     //step3: reverse back the ans list
+//     ans = reverse(ans) ;
+
+//     return ans;
+// }
+
+// int main(){
+//     return 0;
+// }
+
+
+// //🔸appraoch2:  optimising above code to make it short
+// #include<iostream>
+// using namespace std; 
+
+// class Node{
+//     public:
+//     int data;
+//     Node* next; 
+
+//     Node(int data){
+//         this->data = data;
+//         this->next = NULL;
+//     }
+
+//     ~Node(){
+//         if(next != NULL){
+//             delete next;
+//         }
+//     }
+// };
+
+// //reverse code:
+// Node* reverse(Node* head){
+//     Node* curr = head; 
+//     Node* prev = NULL;
+//     Node* next = NULL;
+
+//     while(curr != NULL){
+//         next = curr -> next ;
+//         curr -> next = prev ;
+//         prev = curr ;
+//         curr = next ;
+//     }
+//   return prev;       //return head
+// }
+
+// // insert At tail code:
+// void insertAtTail(Node* &head, Node* &tail, int val){
+
+//     Node* temp = new Node(val) ;
+
+//     if(head == NULL){
+//        head = temp ;
+//        tail = temp ;
+//        return ;
+//     }
+//     else{
+//        tail -> next = temp ;
+//        tail = temp ;
+//     }
+// }
+
+// //addition code:
+// Node* addition(Node* first, Node* second){
+    
+//     int carry = 0;
+//     Node* ansHead = NULL ;
+//     Node* ansTail = NULL;
+
+//     while(first != NULL || second != NULL || carry != 0){
+
+//         int val1 = 0 ;
+//          if(first != NULL) 
+//          val1 = first -> data ;
+        
+//         int val2 = 0 ;
+//          if(second != NULL) 
+//          val2 = second -> data;
+
+//         int sum = carry + val1 + val2 ;
+//         int digit = sum % 10 ;
+
+//         //create node and add in answer linkedlist
+//         insertAtTail(ansHead, ansTail, digit) ;
+//         carry = sum / 10; 
+
+//         if(first != NULL)
+//           first = first -> next ;
+        
+//         if(second != NULL)
+//           second = second -> next ;
+//     }
+//     return ansHead;
+// }
+
+// //🔸Main code:
+// Node* addTwoLists(Node* first, Node* second){
+
+//     //step 1: reverse input linkedlist
+//     first = reverse(first);
+//     second = reverse(second) ;
+
+//     //step2: add 2 linkedlist
+//     Node* ans = addition(first, second) ;
+
+//     //step3: reverse back the ans list
+//     ans = reverse(ans) ;
+
+//     return ans;
+// }
+// //🔴Time complexity:  O(M+N)
+// // first = reverse(first);                   // O(M)
+// // second = reverse(second) ;                // o(N)
+// // Node* ans = addition(first, second) ⬇️ 
+// // while(first != NULL || second != NULL)    // O(max(M, N))       // will till the max list whether M or N
+// // ans = reverse(ans) ;                      // O(M+N)
+// //                                      ___________________
+// // final complexity:                            O(M+N)
+
+// //🔴space complexity:  O(max(M,N))
+// // insertAtTail(ansHead, ansTail, digit) ;     //O(max(M,N))       //creating ans list
+// //                                             _____________
+// // final space complexity:                       O(max(M,N))
+
+// int main(){
+//     return 0;
+// }
