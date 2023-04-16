@@ -1267,4 +1267,176 @@
 // }
 
 
-// 55/149
+
+//                    //❓Question: Check if Linked List is Palindrome
+
+//Given a singly linked list of size N of integers. The task is to check if the given linked list is palindrome or not.
+
+// Example 1:
+// Input:
+// N = 3
+// value[] = {1,2,1}
+// Output: 1
+// Explanation: The given linked list is
+// 1 2 1 , which is a palindrome and
+// Hence, the output is 1.
+
+// Example 2:
+// Input:
+// N = 4
+// value[] = {1,2,3,4}
+// Output: 0
+// Explanation: The given linked list
+// is 1 2 3 4 , which is not a palindrome
+// and Hence, the output is 0.
+
+
+//🔴approach 1: copy node data into array and find if palindrome or not
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// class Node{
+//     public:
+//     int data;
+//     Node* next ;
+     
+//     Node(int data) {
+//         this-> data = data;
+//         this-> next = NULL;
+//     }
+
+//     ~Node(){
+//         if(next != NULL){
+//             delete next;
+//         }
+//     }
+// };
+
+// //checkpalindrome in arr
+// bool checkPalindrome(vector<int> arr){
+
+//     int size = arr.size() ;
+//     int start = 0;
+//     int end = size -1;
+
+//     while(start<=end){
+//         if(arr[start] != arr[end]) {
+//             return 0;
+//         }
+//         start++ ;
+//         end-- ;
+//     }
+//     return 1;
+// }
+
+// //main solution
+// bool isPalindrome(Node* head){
+      
+//     vector<int> arr ;
+
+//     Node* temp = head ;
+//     while( temp != NULL){
+//         arr.push_back(temp-> data);
+//         temp = temp->next;
+//     }
+
+//     return checkPalindrome(arr);
+// }
+// //🔴Time complexity: O(N) ;
+// //🔴space complexity: O(N);   (additional space vector<int> arr)
+
+// int main(){
+//     return 0;
+// }
+
+
+//🔴Approach 2(Optimised): without additional space (divide , reverse and compare)
+
+// #include<iostream>
+// using namespace std;
+
+// class Node{
+//     public: 
+//     int data;
+//     Node* next;
+
+//     Node(int data) {
+//         this->data = data;
+//         this->next = NULL ;
+//     }
+
+//     ~Node() {
+//         if(next != NULL) {
+//             delete next ;
+//         }
+//     }
+// };
+// //program to find middle node
+// Node* getMid(Node* head) {
+    
+//     Node* slow = head ;
+//     Node* fast = head -> next ;
+
+//     while( fast != NULL && fast -> next != NULL) {
+//       fast = fast->next->next ;
+//       slow = slow ->next ;
+//     } 
+//     return slow;                //middle node
+// }
+
+// //program to reverse half list
+// Node* reverse(Node* head){
+//     Node* curr = head;
+//     Node* prev = NULL;
+//     Node* next = NULL ;
+
+//     while(curr != NULL) {
+//         next = curr->next ;
+//         curr->next = prev ;
+//         prev = curr ;
+//         curr = next ;
+//     }
+//     return prev;           //head of reverse list
+// }
+
+// bool isPalindrome(Node* head) {
+
+//     //single node   
+//     if(head->next == NULL){
+//         return true;
+//     }
+     
+//     //step 1: find middle node
+//     Node* middle = getMid(head) ;
+
+//     //step2: reverse list after middle
+//     Node* temp = middle -> next ;
+//     middle -> next = reverse(temp);
+
+//     //step3: compare both half of list
+//     Node* head1 = head ;
+//     Node* head2 = middle -> next ;
+
+//     while(head2 != NULL) {
+//         if(head1 ->data != head2 ->data){
+//             return false ;
+//         }
+//         head1 = head1 ->next ;
+//         head2 = head2->next ;
+//     }
+
+//     //step4:  again reverse the previously reversed list to make it original list
+//     temp = middle -> next ;
+//     middle -> next = reverse(temp) ;
+
+//     return true ;
+// }
+// //🔴Time complexity: O(N)
+// //🔴Space complexity: O(1)      // no additional space (only auxilliary space)
+
+// int main() {
+//     return 0;
+// }
+
+//56/149:
