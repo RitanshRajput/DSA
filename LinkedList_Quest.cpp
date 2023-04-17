@@ -1415,15 +1415,15 @@
 //     middle -> next = reverse(temp);
 
 //     //step3: compare both half of list
-//     Node* head1 = head ;
-//     Node* head2 = middle -> next ;
+//     Node* down = head ;
+//     Node* right = middle -> next ;
 
-//     while(head2 != NULL) {
-//         if(head1 ->data != head2 ->data){
+//     while(right != NULL) {
+//         if(down ->data != right ->data){
 //             return false ;
 //         }
-//         head1 = head1 ->next ;
-//         head2 = head2->next ;
+//         down = down ->next ;
+//         right = right->next ;
 //     }
 
 //     //step4:  again reverse the previously reversed list to make it original list
@@ -1953,4 +1953,388 @@
 //🔴Time complexity: O(N)       // (O(n) + o(n) + o(n) + O(n)) ==> ( 4O(4n)) ==>O O(N)
 //🔴space complexity: O(1)     //constant space
 
-//58 /149
+
+
+//                      //❓Question:  Merge sort in Linked list 
+
+// For a given singly linked list of integers, sort the list using the 'Merge Sort' algorithm
+
+// Input 1 :  1 4 5 2 -1
+// Output 1 :   1 2 4 5
+
+// Input 2 : 10 9 8 7 6 5 4 -1
+// Output 2 : 4 5 6 7 8 9 10
+
+//No data replacement
+//change links
+
+// #include<iostream>
+// using namespace std ;
+
+// class Node{
+//     public:
+//     int data;
+//     Node* next ;
+
+//     Node(int data) {
+//         this-> data = data ;
+//         this-> next = NULL ;
+//     }
+// };
+
+// //find mid code:
+// Node* findMid(Node* head) {
+//     //below approach is calles Tortoise and hare(mammal rabbit) algorithm
+//     Node* slow = head; 
+//     Node* fast = head -> next ;
+
+//     while(fast != NULL && fast -> next != NULL){
+//         slow = slow -> next ;
+//         fast = fast -> next -> next ;
+//     }
+//     return slow ;
+// }
+
+// //merge code:
+// Node* merge(Node* left, Node* right) {
+
+//     if(left == NULL) {
+//         return right ;
+//     }
+
+//     if(right == NULL){
+//         return left ;
+//     }
+
+//     Node* ans = new Node(-1) ;       //dummy node
+//     Node* temp = ans; 
+     
+//     //merging 2 sorted linked list
+//     while(left != NULL && right != NULL) {
+//         if(left -> data < right -> data) {
+//             temp -> next = left ;
+//             temp = left ;
+//             left = left -> next ;
+//         }
+//         else{
+//             temp -> next = right ;
+//             temp = right ;
+//             right = right -> next ;
+//         }
+//     }
+//     // if left is remaining (!= NULL)
+//     while(left != NULL) {
+//         temp -> next = left ;
+//         temp = left ;
+//         left = left -> next ;
+//     }
+//     // if right is remaining  (!= NULL)
+//     while(right != NULL){
+//         temp -> next = right ;
+//         temp = right ;
+//         right = right -> next ;
+//     }
+
+//     ans = ans -> next ;      // ans == -1 (dummy node)  , ans -> next == sorted list head
+// }
+
+// //Main code:
+// Node* mergeSort(Node* head) {
+
+//     //base case
+//     if(head == NULL || head -> next == NULL){
+//         return head ;
+//     }
+
+//     //finding Mid of list 
+//     Node* mid = findMid(head) ;
+    
+//     Node* left = head ;
+//     Node* right = mid -> next ;
+//     mid -> next = NULL ;
+     
+//     //recursive call to sort both halves
+//     left = mergeSort(left) ;
+//     right = mergeSort(right) ;
+
+//     //merge both left and right sorted halves
+//     Node* result = merge(left, right) ;
+    
+//     return result ;
+// }
+// //🔴Time complexity: O(N log N) 
+// //🔴space complexitY: O(log n)
+
+
+
+//🔴🔴 Question : Why we prefer merge sort in linked list and quick sort in array
+
+//❓why is Quick sort preferred for Arrays ?
+
+// Quick Sort in its general form is an in-place sort (i.e. it doesn’t require any extra storage)
+// whereas merge sort requires O(N) extra storage, 
+// N denoting the array size which may be quite expensive. 
+// Allocating and de-allocating the extra space used for merge sort increases the running time of the algorithm.
+
+// Comparing average complexity we find that both type of sorts have O(NlogN) average complexity 
+// but the constants differ. For arrays, merge sort loses due to the use of extra O(N) storage space.
+
+// Most practical implementations of Quick Sort use randomized version. 
+// The randomized version has expected time complexity of O(nLogn). 
+// The worst case is possible in randomized version also, 
+// but worst case doesn’t occur for a particular pattern (like sorted array) and randomized Quick Sort works well in practice.
+
+// Quick Sort is also a cache friendly sorting algorithm as it has good locality of reference when used for arrays.
+
+// Quick Sort is also tail recursive, therefore tail call optimizations is done.
+
+
+//❓ Why is Merge Sort preferred for Linked Lists?
+
+// In case of linked lists the case is different mainly due to difference in memory allocation of arrays and linked lists.
+//  Unlike arrays, linked list nodes may not be adjacent in memory.
+
+// Unlike array, in linked list, we can insert items in the middle in O(1) extra space and O(1) time 
+// if we are given reference/pointer to the previous node. 
+// Therefore merge operation of merge sort can be implemented without extra space for linked lists.
+
+// In arrays, we can do random access as elements are continuous in memory.
+//  Let us say we have an integer (4-byte) array A and let the address of A[0] be x then to access A[i],
+//   we can directly access the memory at (x + i*4). Unlike arrays, we can not do random access in linked list.
+
+// Quick Sort requires a lot of this kind of access. In linked list to access i’th index, 
+// we have to travel each and every node from the head to i’th node as we don’t have continuous block of memory.
+//  Therefore, the overhead increases for quick sort. Merge sort accesses data sequentially and the need of random access is low.
+
+
+// 🔴Quick Sort Advantages:
+// Fast and efficient for arrays, especially for large datasets.
+// In-place sorting which means it doesn’t require any extra memory space beyond the original array.
+// Good cache locality which minimizes the number of cache misses.
+// Easy to implement and widely used in practice.
+
+// 🔴Quick Sort Disadvantages:
+// Not stable, which means it may change the relative order of equal elements in the sorted array.
+// Worst-case time complexity is O(n^2), which occurs when the pivot is not chosen properly and the partitioning process doesn’t divide the array evenly.
+// Not suitable for linked lists, as it requires random access to elements.
+
+// 🔴Merge Sort Advantages:
+// Suitable for sorting large datasets and linked lists.
+// Stable sort which means it maintains the relative order of equal elements in the sorted list.
+// Guaranteed worst-case time complexity of O(n*log(n)).
+// Memory efficient because it doesn’t require any extra memory space beyond the original data structure.
+
+// 🔴Merge Sort Disadvantages:
+// Requires extra memory space for the merge step, which can be a disadvantage in some cases.
+// Not as efficient as Quick Sort for small datasets.
+// Not in-place sorting, which means it requires extra memory space for temporary arrays during the merging process.
+
+
+
+//                         //❓Question: Flatten a linked list
+
+// you are given a linked list containing N nodees, where every node in the linked list contains
+// two pointers , first one is 'NEXT' which points to the next node in the list and the second one is 'CHILD' pointer
+// to a lined list where the head is this node. and each of there child lineked list is in sorted order
+// your task is to flatten this linked such that all nodes appear in a single layer or level while the nodes should maintain
+// the sorted order
+
+// Sample Input 1 :
+// 2
+// 5
+// 3 4 6  -1
+// 5 11 14 -1
+// 22 25 -1
+// 26 28 -1
+// 39  -1
+// 4
+// 1 2 3 -1
+// 8 10 15 -1
+// 18 22 -1
+// 29 -1
+
+// Sample Output 1 :
+// 3 4 5 6 11 14 22 25 26 28 39
+// 1 2 3 4 6 8 10 15 18 22 29
+
+// Sample Input 2 :
+// 3
+// 5
+// 4 6 -1
+// 5 71 -1
+// 7 8 9 -1
+// 11 12 19 -1
+// 14 15 17 -1
+// 2
+// 3 4 -1
+// 5 6 7 8 -1
+// 1
+// 3 -1 
+
+// Sample Output 2 :
+// 4 5 6 7 8 9 11 12 14 15 17 19 71
+// 3 4 5 6 7 8
+// 3
+
+// 🔸example: 
+//        head➡️  
+//          ⬇️   [1] -> [8] -> [18] -> [29] -> NULL
+//                ⬆️     ⬆️     ⬆️ 
+//                [2]    [10]    [22]
+//                ⬆️     ⬆️ 
+//                [3]    [15]
+
+//flattening : [1]-> [2]->  [3]->  [4]-> [6]-> [8]-> [10] -> [15] -> [18] -> [22] -> [29] ->null
+
+//🔴appraoch 1:
+// #include<iostream>
+// using namespace std;
+
+// class Node{
+//    public :
+//    int data ;
+//    Node* next ;
+//    Node* child ;
+
+//    Node(int data) {
+//     this-> data = data ;
+//     this-> next = NULL ;
+//     this-> child = NULL ;
+//    }
+// };
+
+
+// // main program:
+// Node* merge(Node* down , Node* right)
+// {
+//     Node* head = NULL;
+//     Node* tail = NULL;
+//     //sorting data
+//     if(down -> data  <= right -> data) {
+//         head = down;
+//         tail = down;
+//         down = down -> child;
+//         tail -> child = NULL;
+//     }
+//     else{
+//         head = right;
+//         tail = right;
+//         right = right -> child;
+//         tail -> child = NULL;
+//     }
+    
+//     while(down != NULL && right != NULL){
+
+//         if(down -> data <= right -> data) {
+//             tail -> child = down ;
+//             tail = tail -> child ;
+//             down = down -> child ;
+//             tail -> child = NULL;
+//         }
+//         else{
+//             tail -> child = right ;
+//             tail = tail -> child ;
+//             right = right -> child ;
+//             tail -> child = NULL;   
+//         }           
+//     }
+
+//      if(down){
+//         tail->child  = down;
+//     }
+//     if(right){
+//         tail->child = right;
+//     }
+        
+//     return head;
+// }
+    
+// //main code:   
+// Node *flattenLinkedList(Node* head)
+// {    
+//     //base case
+//     if(head -> next ==  NULL){
+//         return head;
+//     }
+    
+//     Node* down = head ;
+//     Node* right = flattenLinkedList(head -> next);
+    
+//   return  merge(down , right);
+  
+// }
+
+
+//🔴approach 2:
+
+// #include<iostream>
+// using namespace std;
+
+// class Node{
+//    public:
+//    int data ;
+//    Node* next ;
+//    Node* child ;
+
+//    Node(int data){
+//     this-> data = data ;
+//     this-> next = NULL ;
+//     this-> child = NULL ;
+//    }
+// };
+
+// //merge code
+// Node* merge(Node* left, Node* right){
+//        if(left == NULL) return right;
+//        if(right == NULL) return left;
+       
+//        //Make a new node 
+//        Node* ans = new Node(-1);
+
+//        Node* temp = ans;
+
+//        while(left != NULL && right != NULL){
+//          if(left -> data <= right -> data){
+//            temp -> child = left;
+//            temp = left;
+//            left = left -> child;
+//          }
+//          else{
+//            temp -> child = right;
+//            temp = right;
+//            right = right -> child;
+//          }
+//        }
+
+//        if(left){
+//          temp -> child = left;
+//          temp = left;
+//         left = left -> child;
+
+//          }
+
+//          if(right){
+//            temp -> child = right;
+//            temp = right;
+//            right = right -> child;
+//          }
+
+//          return ans -> child;
+//      }
+
+// //main code :
+// Node *flattenLinkedList(Node *head)
+// {
+// 	Node* left=head;
+// 	Node* right=head->next;
+
+// 	while(right!=NULL) {
+// 	  left = merge(left,right);
+
+// 	    if(right!=NULL)
+// 	        right = right->next;
+// 	}
+// 	    return left;
+// }
+
+
