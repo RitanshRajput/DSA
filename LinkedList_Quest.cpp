@@ -1720,3 +1720,237 @@
 // int main(){
 //     return 0;
 // }
+
+
+
+//                     //❓Question: Clone a linked list with next and random pointer
+
+// You are given a special linked list with N nodes where each node has a next pointer pointing to its next node. 
+// You are also given M random pointers, where you will be given M number of pairs denoting two nodes a and b  
+// i.e. a->arb = b (arb is pointer to random node).
+
+// Construct a copy of the given list. 
+// The copy should consist of exactly N new nodes,
+// where each new node has its value set to the value of its corresponding original node. 
+// Both the next and random pointer of the new nodes should point to new nodes in the copied list 
+// such that the pointers in the original list and copied list represent the same list state. 
+// None of the pointers in the new list should point to nodes in the original list.
+
+// For example, if there are two nodes X and Y in the original list,
+// where X.arb --> Y, then for the corresponding two nodes x and y in the copied list, x.arb --> y.
+// Return the head of the copied linked list.
+//                       _____________  ______
+//                      |            ⬇️|    ⬇️ 
+//diagram ex:          [3] -> [5] -> [7] -> [9] -> NULL
+//                      ⬆️____|⬆️___________|   
+// 
+// Note :- The diagram isn't part of any example, it just depicts an example of how the linked list may look like.
+
+// Example 1:
+// Input:
+// N = 4, M = 2
+// value = {1,2,3,4}
+// pairs = {{1,2},{2,4}}
+
+// Output: 1
+// Explanation: In this test case, there
+// are 4 nodes in linked list.  Among these
+// 4 nodes,  2 nodes have arbitrary pointer
+// set, rest two nodes have arbitrary pointer
+// as NULL. Second line tells us the value
+// of four nodes. The third line gives the
+// information about arbitrary pointers.
+// The first node arbitrary pointer is set to
+// node 2.  The second node arbitrary pointer
+// is set to node 4.
+
+// Example 2:
+// Input:
+// N = 4, M = 2
+// value[] = {1,3,5,9}
+// pairs[] = {{1,1},{3,4}}
+
+// Output: 1
+// Explanation: In the given testcase ,
+// applying the method as stated in the
+// above example, the output will be 1.
+
+// NOTE : 
+// 1. If there is any node whose arbitrary pointer is not given then it's by default NULL. 
+// 2. Your solution return an output 1 if your clone linked list is correct, else it returns 0.
+// 3. Don't make any changes to the original linked list
+
+//🔴basically we have to clone the original linkedlist and 
+// then also clone the random pointer which are pointing to random node
+// in original node into clone node as well
+
+//🔴Appraoch 1: using map 
+// #include<iostream>
+// #include<unordered_map>
+// using namespace std;
+
+// class Node{
+//    public:
+//    int data ;
+//    Node* next;
+//    Node* random ;        ///random pointer (which will be pointing to random node)
+
+//    Node(int data){
+//     this-> data = data;
+//     this-> next = NULL ;
+//     this-> random = NULL ;
+//    }
+
+//    ~Node() {
+//     if(next != NULL){
+//         delete next ;
+//     }
+//    }
+// };
+
+// //insert At Tail code:
+// void insertAtTail(Node* &head ,Node* &tail, int data) {
+       
+//     Node* newNode = new Node(data) ;
+//     if(head == NULL) {
+//         head = newNode;
+//         tail = newNode;
+//         return ;
+//     }
+//     else{
+//         tail -> next = newNode ;
+//         tail = newNode ;
+//     }
+// }
+
+// //Main code:
+// Node* copyList(Node* head) {
+
+//     //step1: create a clone list
+//     Node* cloneHead = NULL; 
+//     Node* cloneTail = NULL ;
+//     Node* temp = head; 
+
+//     while(temp != NULL) {
+//        insertAtTail(cloneHead, cloneTail, temp -> data) ;
+//        temp = temp -> next ;
+//     }
+   
+//    //step2: creating a Map to keep track of both original and clone list together
+//     unordered_map<Node*, Node*> oldToNewNode ;     // unordered_map used when we want to store in unsorted order
+    
+//     Node* originalNode = head ;   //head of original list
+//     Node* cloneNode = cloneHead ;     //head of clone list
+
+//     while(originalNode != NULL && cloneNode != NULL) {
+//         oldToNewNode[originalNode] = cloneNode ;
+//         originalNode = originalNode -> next ;
+//         cloneNode = cloneNode -> next ;
+//     }
+
+//     originalNode = head ;
+//     cloneNode = cloneHead ;
+
+//     while(originalNode != NULL) {
+//         cloneNode -> random = oldToNewNode[originalNode -> random] ;
+//         originalNode = originalNode -> next ;
+//         cloneNode = cloneNode -> next ;
+//     }
+//    return cloneHead ;
+// }
+// //🔴time complexity: O(N) 
+// //🔴Space complexity: O(N)
+
+
+//🔴Approach2:  without using map
+#include<iostream>
+using namespace std;
+
+class Node{
+    public:
+    int data ;
+    Node* next ;
+    Node* random ;
+
+    Node(int data) {
+        this-> data = data ;
+        this-> next = NULL ;
+        this-> random = NULL;
+    }
+};
+
+//insert at tail code:
+void insertAtTail(Node* &head, Node* &tail, int data) {
+
+    Node* newNode = new Node(data) ;
+    if(head == NULL) {
+       head = newNode ;
+       tail = newNode ;
+       return ;
+    }
+    else{
+        tail -> next = newNode ;
+        tail = newNode ;
+    }
+}
+
+//main program:
+Node* copyList(Node* head) {
+
+    //step1: create a clone list
+    Node* cloneHead = NULL ;
+    Node* cloneTail = NULL ;
+    Node* temp = head ;
+        
+    while(temp != NULL){
+        insertAtTail(cloneHead, cloneTail, temp -> data) ;
+        temp = temp -> next ; 
+    }
+
+    //step2:  cloneHead add in between original list
+    Node* originalNode = head ;
+    Node* cloneNode = cloneHead ;
+        
+    while(originalNode != NULL && cloneNode != NULL){
+        Node* next = originalNode -> next ;
+        originalNode -> next = cloneNode ;
+        originalNode = next ;
+            
+        next = cloneNode -> next ;
+        cloneNode -> next = originalNode ;
+        cloneNode = next ;
+    }
+
+    //step3: random pointer copy from original to clone Node
+    temp = head ;
+        
+        while(temp != NULL){
+            if(temp -> next != NULL) {
+                temp -> next -> random = temp -> random
+                ? temp -> random -> next : temp -> random  ;
+            }
+            temp = temp -> next -> next ;
+        }
+
+    //step4: revert changes done in step 2 (where we are keeping track of orginal->next using clone->next)
+    originalNode = head ;
+    cloneNode = cloneHead ;
+        
+    while(originalNode != NULL && cloneNode != NULL){
+        originalNode -> next = cloneNode -> next ;
+        originalNode = originalNode -> next ;
+            
+        if(originalNode != NULL){
+            cloneNode -> next = originalNode -> next ;
+        }
+            
+        cloneNode = cloneNode -> next ;
+    }
+
+    //step5: return ans
+   return cloneHead ;
+}
+//🔴Time complexity: O(N)       // (O(n) + o(n) + o(n) + O(n)) ==> ( 4O(4n)) ==>O O(N)
+//🔴space complexity: O(1)     //constant space
+
+//58 /149
