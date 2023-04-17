@@ -1863,93 +1863,93 @@
 
 
 //🔴Approach2:  without using map
-#include<iostream>
-using namespace std;
+// #include<iostream>
+// using namespace std;
 
-class Node{
-    public:
-    int data ;
-    Node* next ;
-    Node* random ;
+// class Node{
+//     public:
+//     int data ;
+//     Node* next ;
+//     Node* random ;
 
-    Node(int data) {
-        this-> data = data ;
-        this-> next = NULL ;
-        this-> random = NULL;
-    }
-};
+//     Node(int data) {
+//         this-> data = data ;
+//         this-> next = NULL ;
+//         this-> random = NULL;
+//     }
+// };
 
-//insert at tail code:
-void insertAtTail(Node* &head, Node* &tail, int data) {
+// //insert at tail code:
+// void insertAtTail(Node* &head, Node* &tail, int data) {
 
-    Node* newNode = new Node(data) ;
-    if(head == NULL) {
-       head = newNode ;
-       tail = newNode ;
-       return ;
-    }
-    else{
-        tail -> next = newNode ;
-        tail = newNode ;
-    }
-}
+//     Node* newNode = new Node(data) ;
+//     if(head == NULL) {
+//        head = newNode ;
+//        tail = newNode ;
+//        return ;
+//     }
+//     else{
+//         tail -> next = newNode ;
+//         tail = newNode ;
+//     }
+// }
 
-//main program:
-Node* copyList(Node* head) {
+// //main program:
+// Node* copyList(Node* head) {
 
-    //step1: create a clone list
-    Node* cloneHead = NULL ;
-    Node* cloneTail = NULL ;
-    Node* temp = head ;
+//     //step1: create a clone list
+//     Node* cloneHead = NULL ;
+//     Node* cloneTail = NULL ;
+//     Node* temp = head ;
         
-    while(temp != NULL){
-        insertAtTail(cloneHead, cloneTail, temp -> data) ;
-        temp = temp -> next ; 
-    }
+//     while(temp != NULL){
+//         insertAtTail(cloneHead, cloneTail, temp -> data) ;
+//         temp = temp -> next ; 
+//     }
 
-    //step2:  cloneHead add in between original list
-    Node* originalNode = head ;
-    Node* cloneNode = cloneHead ;
+//     //step2:  cloneHead add in between original list
+//     Node* originalNode = head ;
+//     Node* cloneNode = cloneHead ;
         
-    while(originalNode != NULL && cloneNode != NULL){
-        Node* next = originalNode -> next ;
-        originalNode -> next = cloneNode ;
-        originalNode = next ;
+//     while(originalNode != NULL && cloneNode != NULL){
+//         Node* next = originalNode -> next ;
+//         originalNode -> next = cloneNode ;
+//         originalNode = next ;
             
-        next = cloneNode -> next ;
-        cloneNode -> next = originalNode ;
-        cloneNode = next ;
-    }
+//         next = cloneNode -> next ;
+//         cloneNode -> next = originalNode ;
+//         cloneNode = next ;
+//     }
 
-    //step3: random pointer copy from original to clone Node
-    temp = head ;
+//     //step3: random pointer copy from original to clone Node
+//     temp = head ;
         
-        while(temp != NULL){
-            if(temp -> next != NULL) {
-                temp -> next -> random = temp -> random
-                ? temp -> random -> next : temp -> random  ;
-            }
-            temp = temp -> next -> next ;
-        }
+//         while(temp != NULL){
+//             if(temp -> next != NULL) {
+//                 temp -> next -> random = temp -> random
+//                 ? temp -> random -> next : temp -> random  ;
+//             }
+//             temp = temp -> next -> next ;
+//         }
 
-    //step4: revert changes done in step 2 (where we are keeping track of orginal->next using clone->next)
-    originalNode = head ;
-    cloneNode = cloneHead ;
+//     //step4: revert changes done in step 2 (where we are keeping track of orginal->next using clone->next)
+//     originalNode = head ;
+//     cloneNode = cloneHead ;
         
-    while(originalNode != NULL && cloneNode != NULL){
-        originalNode -> next = cloneNode -> next ;
-        originalNode = originalNode -> next ;
+//     while(originalNode != NULL && cloneNode != NULL){
+//         originalNode -> next = cloneNode -> next ;
+//         originalNode = originalNode -> next ;
             
-        if(originalNode != NULL){
-            cloneNode -> next = originalNode -> next ;
-        }
+//         if(originalNode != NULL){
+//             cloneNode -> next = originalNode -> next ;
+//         }
             
-        cloneNode = cloneNode -> next ;
-    }
+//         cloneNode = cloneNode -> next ;
+//     }
 
-    //step5: return ans
-   return cloneHead ;
-}
+//     //step5: return ans
+//    return cloneHead ;
+// }
 //🔴Time complexity: O(N)       // (O(n) + o(n) + o(n) + O(n)) ==> ( 4O(4n)) ==>O O(N)
 //🔴space complexity: O(1)     //constant space
 
