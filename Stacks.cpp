@@ -1175,4 +1175,192 @@
 //🔴Time complexity: O(N)
 //🔴space complexity: O(N)
 
-// 61/149
+
+
+//                    //❓Question:  Next Smaller Element
+
+// You are given an array 'ARR' of integers of length N. Your task is to find the next smaller element for each of the array elements.
+//  Next Smaller Element for an array element is the first element to the right of that element which has a value strictly smaller than that
+//  element.
+//  If for any array element the next smaller element does not exist, you should print -1 for that array element.
+
+//  For Example:
+//    If the given array is [ 2, 3, 1], we need to return [1, 1, -1].
+//    Because for 2, 1 is the Next Smaller element. For
+//    3,
+
+// Sample Input 1:
+// 2
+// 4
+// 2 1 4 3
+// 3
+// 1 3 2
+// Sample Output 1:
+// 1 -1 3 -1
+// -1 2 -1
+
+// Explanation For Sample Input 1:
+// For the first test case : 
+// 1) For ARR [1] = 2 ,  the next smaller element is 1. 
+// 2) For ARR [2] = 1 ,  the next smaller element is -1 as no element in the array has value smaller than 1.
+// 3) For ARR [3] = 4 ,  the next smaller element is 3.
+// 4) For ARR [4] = 3 ,  the next smaller element is -1 as no element exists in the right of it.
+// Hence, we will return the array [ 1, -1, 3, -1] in this case.
+
+// For the second test case :
+// 1) For ARR [1] = 1 ,  the next smaller element is -1 as no element in the array has value smaller than 1.
+// 2) For ARR [2] = 3 ,  the next smaller element is 2.
+// 3) For ARR [3] = 2 ,  the next smaller element is -1 as no element exists in the right of it.
+// Hence we will return the array [ -1, 2, -1 ] in this case.
+
+// Sample Input 2:
+// 2
+// 4
+// 1 2 3 4
+// 2
+// 5 0
+// Sample Output 2:
+// -1 -1 -1 -1
+//  0 -1
+
+
+// #include<iostream>
+// #include<vector>
+// #include<stack>
+// using namespace std ;
+
+// vector<int> nextSmallerElement(vector<int> &arr, int n) {
+      
+//     stack<int> s ;
+//     s.push(-1) ;          //kyuki hum arr ke piche se traverse karenge is stack me -1 push kardenge kyuki searching element ke right side me hogi
+//     vector<int> ans(n) ;
+
+
+//     for(int i=n-1; i>=0; i--) {
+//         int curr = arr[i] ;
+//         //agar element greater than equal hai curr ke toh pop karo
+//         while(s.top() >= curr) {
+//             s.pop() ;
+//         }
+//         //agar element smaller hai toh answer milgaya vector me add karo 
+//         //ans is stack ka top
+//         ans[i] = s.top() ;
+//         s.push(curr) ;
+//     }
+//     return ans;
+
+// } 
+
+// int main() {
+
+// vector<int> arr ;
+
+// arr.push_back(1) ;
+// arr.push_back(2) ;
+// arr.push_back(3) ;
+// arr.push_back(4) ;
+
+// int n = arr.size() ;
+// vector<int> ans  = nextSmallerElement(arr, n ) ;
+
+//     return 0;
+// }
+
+
+
+//🔴🔴                   //❓Question: largest Rectangle in Histogram (HARD)
+
+// Given an array of integers heights representing the histogram's bar height 
+// where the width of each bar is 1, return the area of the largest rectangle in the histogram.
+
+//                                        | 10 |
+//             |6|                        |    | 
+//         |5| | |     |3|                |    |     |3|
+// |2|     | | | | |2| | |        |2|     |    | |2| | |
+// | | |1| | | | | | | | |        | | |1| |    | | | | |
+
+// Input: heights = [2,1,5,6,2,3]
+// Output: 10
+// Explanation: The above is a histogram where width of each bar is 1.
+// The largest rectangle is shown in the red area, which has an area = 10 units.
+
+// Input: heights = [2,4]
+// Output: 4
+
+
+
+// #include<bits/stdc++.h>
+// using namespace std;
+
+// //next smaller elem code:
+// vector<int> nextSmallerElement(vector<int> arr, int n) {
+//     stack<int> s ;
+//     s.push(-1) ;        
+//     vector<int> ans(n) ;
+
+
+//     for(int i=n-1; i>=0; i--) {
+//         int curr = arr[i] ;
+       
+//         while( (s.top() != -1) && (arr[s.top()] >= curr)) {
+//             s.pop() ;
+//         }
+      
+//         ans[i] = s.top() ;
+//         s.push(i) ;
+//     }
+//     return ans;
+// }
+
+// //prev smaller elem code:
+// vector<int> prevSmallerElement(vector<int> arr, int n) {
+//     stack<int> s ;
+//     s.push(-1) ;        
+//     vector<int> ans(n) ;
+
+
+//     for(int i=0; i<n; i++) {
+//         int curr = arr[i] ;
+       
+//         while( (s.top() != -1) && (arr[s.top()] >= curr)) {
+//             s.pop() ;
+//         }
+      
+//         ans[i] = s.top() ;
+//         s.push(i) ;
+//     }
+//     return ans;
+// }
+
+// //main code
+// int largestRectangleArea(vector<int> & heights ){
+
+//     int n = heights.size() ;
+//     vector<int> next(n) ;
+//     next = nextSmallerElement(heights, n) ;
+
+//     vector<int> prev(n) ;
+//     prev = prevSmallerElement(heights, n) ;
+
+//     int area = INT_MIN; 
+//     for(int i=0; i<n; i++) {
+//         int length = heights[i] ;
+         
+//         if(next[i] == -1){
+//             next[i] = n ;
+//         }
+
+//         int breadth = next[i] - prev[i] - 1 ;
+
+//         int newArea = length * breadth ;
+//         area = max(area, newArea) ;
+//     }
+//    return area ;
+// }
+
+// int main() {
+
+// }
+
+//🔴Time complexity: o(N)       ==> o(n) + o(n) + o(n) ==>  3o(3N) => O(N)
+//🔴space complexity: o(N)
