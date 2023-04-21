@@ -12,6 +12,8 @@
         "string": "cpp",
         "ratio": "cpp",
         "type_traits": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "sstream": "cpp",
+        "regex": "cpp"
     }
 }

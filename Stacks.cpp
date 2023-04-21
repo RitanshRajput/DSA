@@ -833,7 +833,7 @@
 
 
 
-//                        //❓Question: Sort A stack
+//                        //❓Question: Sort A stack using recursion
 
 
 // You're given a stack consisting of 'N' integers. Your task is to sort this stack in descending order using recursion.
@@ -926,5 +926,253 @@
 //🔴 space complexity: O(n)
 
 
-//54:33 
-// 60//149 
+
+//                     //❓Question: Redundant Brackets
+
+// Given valid mathematical expressions in the form of a string. You are supposed to return true if the given expression
+// contains a pair of redundant brackets, else return false. The given string only contains T.T. '+', - ** */ and lowercase
+// English letters.
+
+// Note:
+// A pair of brackets is said to be redundant when a subexpression is surrounded by needless/ useless brackets.
+
+// For Example:
+//    ((a+b)) has a pair of redundant brackets. The pair of brackets on the first and last index is
+//    needless.
+//    While (a + (b*c)) does not have any pair of redundant brackets.
+
+// Sample Input 1 :
+// 2
+// (a+b)
+// (a+c*b)+(c))
+// Sample Output 1 :
+// No
+// Yes
+// Explanation Of Sample Input 1 :
+// In the first test case, there are no redundant brackets. 
+// Hence, the output is “No”. 
+// In the second test case, the brackets around the alphabet ‘c’( index 8 and index 10) are redundant.
+// Hence the output is “Yes”.
+
+// Sample Input 2 :
+// 2
+// (a*b+(c/d))
+// ((a/b))
+// Sample Output 2 :
+// No
+// Yes
+// Explanation Of Sample Input 2 :
+// In the first test case, there are no redundant brackets. 
+// Hence, the output is “No”. 
+// In the second test case, the brackets around the subexpression “(a+b)” ( index 0 and index 6) are redundant. 
+// Hence the output is “Yes”.
+
+
+//🔴approach 1:  
+// #include<iostream>
+// #include<stack>
+// using namespace std;
+
+// bool findRedundantBrackets(string &s) {
+//     stack<char> st ;
+
+//     for(int i=0; i< s.length(); i++) {
+//         char ch = s[i] ;
+//         if( ch == '(' || ch == '+' || ch == '-' || ch == '*' || ch == '/') {
+//             st.push(ch) ;
+//         }
+//         else{
+//         //ch ya toh ')' hai or lowercase letter hai
+//             if(ch == ')'){
+//                 bool isRedundant = true ;
+
+//                 while( st.top() != '(' ) {
+//                     char top = st.top() ;
+//                     if( top == '+' || top == '-' || top == '*' || top == '/' ){
+//                        isRedundant = false ;
+//                     }
+//                     st.pop() ;
+//                 }
+
+//                 if(isRedundant == true) 
+//                 return true ;
+//                 st.pop() ;
+//             } 
+//         }
+//     }
+//     return false ;
+// }
+
+// int main() {
+//     string s = "(a*b+(c/d))" ;
+//     // string s = "((a/b))" ;
+
+//     findRedundantBrackets(s) ;
+//     return 0;
+// }
+//🔴Time complexity: O(N)
+//🔴Space complexity: o(N)
+
+
+
+// // 🔴Approach2 : No TLE /
+// #include<iostream>
+// #include<stack>
+// using namespace std;
+
+// bool findRedundantBrackets(string &s)
+// {
+//     stack<char> st ;
+    
+//     for(int i=0; i<s.length(); i++){
+
+//         char ch = s[i] ;
+//         if(ch == '(' || ch == '+' || ch == '-' || ch == '*' || ch == '/'){
+//             st.push(ch) ;
+//         }
+//         else{
+//             //ch is ')' or lowercase letter
+//             if(ch == ')'){
+//                 int count = 0 ;
+                
+//                 while( st.top() == '+' || st.top() == '-' || st.top() == '*' || st.top() == '/'){
+//                     st.pop() ;
+//                     count++ ;
+//                 }
+//                 st.pop() ;
+//                 if(count == 0) {
+//                     return true;
+//                 }
+//             }
+//         }
+//     }
+//     return false;
+// }
+
+// int main() {
+//     string s = "(a*b+(c/d))" ;
+//     // string s = "((a/b))" ;
+
+//     findRedundantBrackets(s) ;
+//     return 0;
+// }
+
+//🔴Time complexity: O(N)
+//🔴Space complexity: o(N)
+
+
+//                          //❓Question: Minimum Cost to make string valid
+
+// Ninja has been given a string 'STR' containing either '{' or '}'. 
+// 'STR' is called valid if all the brackets are balanced. Formally for each opening
+// bracket, there must be a closing bracket right to it.
+
+// For Example:
+// "{}{}", "{{}}" "{{}{}}" are valid strings while "}{}", "{}}{{}", are not valid strings.
+                                                        
+// Ninja wants to make 'STR' valid by performing some operations on it. 
+// In one operation, he can convert '{' into '}' or vice versa, and the cost
+// of one such operation is 1.
+// Your task is to help Ninja determine the minimum cost to make 'STR' valid.
+
+// For Example:
+// Minimum operations to make 'STR' = "{{" valid is 1.
+
+// In one operation, we can convert '{' at index '1' (0-based indexing) to '}'. The 'STR' now becomes "{}" which is a valid string.
+// Note:
+//    Return 1- if it is impossible to make 'STR' valid.
+
+
+// Sample Input 1:
+// 2
+// {{{}
+// {{}{}}
+// Sample Output 1:
+// 1
+// 0
+// Explanation For Sample Input 1:
+// For the first test case:
+// The two valid strings that can be obtained from  ‘STR’ using minimum operations “{{}}”   and “{}{}”. Ninja can transform ‘STR’ to “{{}}” by performing the following operations:
+// Convert ‘{’ at index 2 to ‘}’.
+
+// Ninja can transform ‘STR’ to “{}{}” by performing the following operations:
+// Convert ‘{‘ at index 1 to ‘}’.
+// The minimum number of operations in transforming ‘STR’ to either of the two valid strings is 1.So, the total cost is 1.
+
+// For the second test case:
+// Given ‘STR’ is already valid so the minimum number of 
+// operations required is 0.
+// So, the total cost is 0.
+
+
+// Sample Input 2:
+// 3
+// {}}{}}
+// {{{{
+// {{{}}
+// Sample Output 2:
+// 1
+// 2
+// -1
+
+
+// #include<iostream>
+// #include<stack>
+// using namespace std;
+
+// int findMinimumCost(string str) {
+    
+//     //odd condition  {}}
+//     if( str.length() % 2 == 1) {
+//         return -1 ;
+//     }
+
+//     //valid expresssion  {{}{}}
+//     stack<char> s ;
+//     for(int i=0; i<str.length(); i++) {
+//         char ch = str[i] ;
+
+//         if(ch == '{') {
+//             s.push(ch) ;
+//         }
+//         else{
+//             //ch is closed brace
+//             if( !s.empty() && s.top() == '{') {
+//                 s.pop() ;
+//             }
+//             else{
+//                 s.push(ch) ;
+//             }
+//         }
+//     }
+//         //stack  contains invalid experssion  }}}{{{ , }}}}{{{{ 
+//         int a = 0 , b = 0 ;
+//         while( !s.empty() ) {
+//             if( s.top() == '{'){
+//                 b++ ;
+//             }
+//             else{
+//                 a++ ;
+//             }
+//             s.pop() ;
+//         }
+
+//         int ans = (a+1)/2 + (b+1)/2 ;
+
+//         return ans ;
+// }
+
+// int main() {
+//     string str = "{}}{}}" ;
+//     // string str = "{{{{" ;
+//     // string str = "{{{}}" ;
+//     // string str = "{{}{}}" ;
+
+//     int ans = findMinimumCost(str) ;
+
+//     return 0;
+// }
+//🔴Time complexity: O(N)
+//🔴space complexity: O(N)
+
+// 61/149
