@@ -1366,4 +1366,305 @@
 //🔴space complexity: o(N)
 
 
-//62/149
+
+//                          //❓Question: The Celebrity Problem
+
+// A celebrity is a person who is known to all but does not know anyone at a party. 
+// If you go to a party of N people, find if there is a celebrity in the party or not.
+// A square NxN matrix M[][] is used to represent people at the party such that 
+// if an element of row i and column j  is set to 1 it means ith person knows jth person. 
+// Here M[i][i] will always be 0.
+// Note: Follow 0 based indexing.
+
+// Example 1:
+// Input:
+// N = 3
+// M[][] = {{0 1 0},
+//          {0 0 0}, 
+//          {0 1 0}}
+// Output: 1
+// Explanation: 0th and 2nd person both
+// know 1. Therefore, 1 is the celebrity. 
+
+
+// Example 2:
+
+// Input:
+// N = 2
+// M[][] = {{0 1},
+//          {1 0}}
+// Output: -1
+// Explanation: The two people at the party both
+// know each other. None of them is a celebrity.
+
+//🔴Given:
+//conditions:
+//1. Everyone knows celebrity
+//2.celebrity knows no one
+
+//to find :
+// find if there are any celebrity in a party with N number of people
+
+//ignores:
+// given we have a matrix: where we will ignore diagonal 
+// bcoz diagonal means people themselve , means 00 = same person, 11 = same person, 22 = same person (0, 1, 2  == row,col)
+
+//              0   1   2
+// given :   0 |0   1   0|
+//           1 |0   0   0|
+//           2 |0   1   0|
+//             
+//above ignore diagonal:   00, 11, 22 
+// people everyone know:   01, 21  (11 already knows himself) so Ans: 1  (everyone knows 1)
+
+//🔴Approach 1: brute force:
+// celebrity -> rows -> all 0s   (bcoz celebrity knows no one therefore row of celebrity will be 0)
+// celebrity -> col  -> all 1s except diagonal element  (column of celeb will be all 1 except diagonal 00,11,22,  bcoz they know themselves)
+
+// psuedo code: 
+// for(i=0, i<n)  check rows
+// inside above loop another for loop(i=0 i<n) check columns
+// if condition (check celebrity (1) or not) 
+//   int celebrity(vector<vector<int> >& M, int n) {
+//         // code here 
+//         for(int i=0;i<n;i++) {
+
+//             int rowcheck=0;
+//             for(int j=0;j<n;j++)
+//             {
+//                 if(M[i][j]==0)
+//                 {
+//                     rowcheck++;
+//                 }
+//             }
+//             int colcheck=0;
+//             for(int j=0;j<n;j++)
+//             {
+//                 if(M[j][i]==1)
+//                 {
+//                     colcheck++;
+//                 }
+//             }
+//             if(rowcheck==n && colcheck==n-1)
+//             {
+//                 return i;
+//             }
+//         }
+//         return -1;
+//     }
+//🔸Time complex = O(N^2)
+
+//🔴Approach 2: optimal code
+//algo:
+// create a stack
+// put all element in stack
+// while( stack.size() != 1) 
+//  a => s.top() => s.pop()
+//  b => s.top() => s.pop()
+
+//  if( A knows B)  {discard A, push B in stack}
+//  if( B knows A)  {discard B, push A in stack}
+
+// remaining single element in stack is a potential celebrity so verify
+// celeb knows no one ==> check rows ==> all 0s
+// ervyone knows celeb ==> check column ==> all 1s (except diagonal 00, 11, 22)
+
+// #include<iostream>
+// #include<vector>
+// #include<stack>
+// using namespace std;
+
+// bool knows(vector<vector<int>> &M, int a, int b){
+//     if(M[a][b] == 1) {
+//         return true ;
+//     }
+//     else{
+//         return false;
+//     }
+// }
+
+// int celebrity(vector<vector<int>> &M, int n ){
+//     //create a stack
+//         stack<int> s ;
+//     //step1:  push every element in stack
+//         for(int i=0; i<n; i++) {
+//             s.push(i) ;
+//         }
+
+//     //step2: bring 2 top element of stack a, b  and check
+//     //  if( A knows B)  {discard A, push B in stack}
+//     //  if( B knows A)  {discard B, push A in stack}
+//      while( s.size() > 1) {
+//         int a = s.top() ;
+//         s.pop() ;
+
+//         int b = s.top() ;
+//         s.pop() ;
+
+//         if(knows(M,a,b)) {            
+//             s.push(b) ;
+//         }
+//         else{
+//             s.push(a) ;
+//         }
+//      }
+    
+//     //step 3: single last element potential celebrity so verify it
+//     int ans = s.top() ;
+//     int zeroCount = 0 ;
+
+//     for(int i=0; i<n; i++) {
+//         if(M[ans][i] == 0) 
+//         zeroCount++ ;
+//     }
+
+//     //if all Zeros 
+//     if(zeroCount != n) {
+//         return -1;
+//     }
+    
+//     //column check
+//     int oneCount = 0;
+
+//     for(int i=0; i<n; i++) {
+//         if(M[i][ans] == 1)
+//         oneCount++ ;
+//     }
+    
+//     if(oneCount != n-1) {
+//         return -1 ;
+//     }
+   
+//  return ans ;
+// }
+
+// int main() {
+
+// }
+//🔴Time complexity: O(N)        ==> O(n)+O(n)+O(n) ==> 3O(3n) => O(N)
+//🔴space complexity: O(N)
+
+
+//                      //❓Question: Max Rectangle in Binary Matrix with all 1's
+
+// Given a binary matrix M of size n X m. Find the maximum area of a rectangle formed only of 1s in the given matrix.
+// Example 1:
+// Input:
+// n = 4, m = 4
+// M[][] = {{0 1 1 0},
+//          {1 1 1 1},
+//          {1 1 1 1},
+//          {1 1 0 0}}
+// Output: 8
+// Explanation: For the above test case the
+// matrix will look like
+// 0 1 1 0
+// 1 1 1 1
+// 1 1 1 1
+// 1 1 0 0
+// the max size rectangle is 
+// 1 1 1 1
+// 1 1 1 1
+// and area is 4 *2 = 8.
+
+//🔴approach:
+// compute max-area for 1st row
+// for every remaining row  (add elem of above row)
+// compute area 
+// here we are also using concept from (Largest Rectangle in Histogram) problem
+
+// #include<bits/stdc++.h>
+// using namespace std;
+
+// //next smaller elem code:
+// vector<int> nextSmallerElement(int* arr, int n) {
+//     stack<int> s ;
+//     s.push(-1) ;        
+//     vector<int> ans(n) ;
+
+
+//     for(int i=n-1; i>=0; i--) {
+//         int curr = arr[i] ;
+       
+//         while( (s.top() != -1) && (arr[s.top()] >= curr)) {
+//             s.pop() ;
+//         }
+      
+//         ans[i] = s.top() ;
+//         s.push(i) ;
+//     }
+//     return ans;
+// }
+
+// //prev smaller elem code:
+// vector<int> prevSmallerElement(int* arr, int n) {
+//     stack<int> s ;
+//     s.push(-1) ;        
+//     vector<int> ans(n) ;
+
+
+//     for(int i=0; i<n; i++) {
+//         int curr = arr[i] ;
+       
+//         while( (s.top() != -1) && (arr[s.top()] >= curr)) {
+//             s.pop() ;
+//         }
+      
+//         ans[i] = s.top() ;
+//         s.push(i) ;
+//     }
+//     return ans;
+// }
+
+// //largest histogram  main code:
+// int largestRectangleArea(int* heights, int n ){
+
+//     vector<int> next(n) ;
+//     next = nextSmallerElement(heights, n) ;
+
+//     vector<int> prev(n) ;
+//     prev = prevSmallerElement(heights, n) ;
+
+//     int area = INT_MIN; 
+//     for(int i=0; i<n; i++) {
+//         int length = heights[i] ;
+         
+//         if(next[i] == -1){
+//             next[i] = n ;
+//         }
+
+//         int breadth = next[i] - prev[i] - 1 ;
+
+//         int newArea = length * breadth ;
+//         area = max(area, newArea) ;
+//     }  
+//    return area ;
+// }
+
+// //main code:
+// int maxArea(int M[MAX][MAX], int n, int m) {
+//     //compute area for first row
+//     int area = largestRectangleArea(M[0], m) ;
+
+//    //for every remaining rows
+//     for(int i=1; i<n; i++) {
+//         for(int j=0; j<m; j++) {
+//             //update row by adding previous rows value
+//             if(M[i][j] != 0)
+//             M[i][j] = M[i][j] + M[i-1][j] ;
+//             else
+//             M[i][j] = 0 ;
+//         }
+//         //entire row is updated now
+//         int newArea = largestRectangleArea(M[i], m) ;
+//         area = max(area, newArea) ;
+//     }
+//     return area;
+//  }
+//  int main() {}
+ //🔴Time complexity: O(N x M)     (n=rows, m=column)
+ //🔴space complexity: o(M)        (m=columns)
+
+
+
+//63/149
