@@ -1667,4 +1667,173 @@
 
 
 
-//63/149
+//🔴🔴🔴                   //❓Question: N Stacks in an array 
+
+// Design a data structure to implement 'N' stacks using a single array of size 'S'. 
+// It should support the following operations:
+
+//push(X, M): Pushes an element x into the Mth stack.
+// Returns true if the element is pushed into the stack, otherwise false.
+//pop(M): Pops the top element from Mth Stack.
+//  Returns 1- if the stack is empty, otherwise, returns the popped element.
+
+// Two types of queries denote these operations :
+//    Type 1: for push(X, M) operation.
+//    Type 2: for pop(M) operation.
+
+// Sample Input 1 :
+// 3 6 5
+// 1 10 1
+// 1 20 1
+// 1 30 2
+// 2 1
+// 2 2
+// Sample Output 1 :
+// True 
+// True
+// True
+// 20
+// 30
+// Explanation 1 :
+// For the given input, we have the number of stacks, N = 3, size of the array, S = 6 and number of queries, Q = 5.
+// Operations performed on the stack are as follows:
+// push(10, 1): Push element ‘10’ into the 1st stack. This returns true.
+// push(20, 1): Push element ‘20’ into the 1st stack. This returns true.
+// push(30, 2): Push element ‘30’ into the 2nd stack. This returns true.
+// pop(1): Pop the top element from the 1st stack. This returns 20.
+// pop(2): Pop the top element from the 2nd stack. This returns 30.
+
+//🔸Basically this is a hard variation of TWO STACK question:
+// In TWO STACK question we implemented 2 stack in single array
+// but in this question we need to implement N stacks in a single array
+
+//🔴 Approach 1: 
+// K stack 
+// divide array into k parts,  (every stack will take N/k space)
+// push and pop operation on every stack
+//🔸Drawback: space not optimised
+// because when we assign some part of array, and we want to add an element in 
+// array on that stack but if that stack is already full then we wont we able to 
+// push that element in any other empty space too. even though there are empty spaces left.
+
+//🔴Approach 2: 
+// we will create 2 additional array, 
+//1.Top[] (of k size) which represent index of top element (last element) (initialize every top as -1)
+//2.next[] : this array can do 2 type of things
+// i.point to next element after stack top      ( if(arr[i] => stored an element))
+// ii.point to next free space/block            ( if(arr[i] => nothing stored (free space))
+//3.freeSpot => will tell about free spot available in array (initially pointing to 0th index)
+
+//psuedo code:
+// step1:  find index    (empty available space to store element)
+// int index = freespot ;
+// step2:  update freespot
+// freespot = next[index] ;
+// step3:  insert element in array
+// arr[index] = x ;
+// step4: update next[]    (point to next element after stack top)
+// next[index] = top[m - 1]  (purana wala top)  (zero indexing, therefore m-1)
+// step5:  update top
+// top[m-1] = index ;
+
+// N-> no.of stacks
+// M-> stack number
+// S-> size of arrays
+// Q-> no of queries
+// P-> type of operation
+// X-> represent element
+// #include<iostream>
+// using namespace std;
+
+// //class creation
+// class NStack {
+//     public :
+//     int *arr ;
+//     int *top ;
+//     int *next ;
+
+//     int n, s ;
+//     int freespot ;
+
+
+
+// // Initialize your data structure.
+// NStack(int N, int S) {
+//     n = N ;          //no. of stack
+//     s = S ;          //size of array
+//     arr = new int[s] ;
+//     top = new int[n] ;
+//     next = new int[s] ;
+
+//     //top initialise
+//     for(int i=0; i<n; i++) {
+//         top[i] = -1 ;
+//     }
+
+//     //next initialsie
+//     for(int i=0; i<s; i++) {
+//         next[i] = i+1 ;
+//     }
+
+//     //update last index to -1
+//     next[s-1] = -1; 
+
+//     //initialise freespot with 0
+//     freespot =  0;
+
+// }
+
+// //// Pushes 'X' into the Mth stack. Returns true if it gets pushed into the stack, and false otherwise.
+// bool push(int x, int m) {
+//    //check if stack is overflow or not
+//    if(freespot == -1) {
+//     return false;
+//    }
+
+//    //find index 
+//    int index = freespot ;
+
+//    //update freespot 
+//    freespot = next[index] ;
+
+//    //insert element into array
+//    arr[index] = x ;
+
+//    //update next ;
+//    next[index] = top[m-1] ;
+
+//    //update top 
+//    top[m-1] = index ;
+
+//    return true ;
+// }
+
+// //// Pops top element from Mth Stack. Returns -1 if the stack is empty, otherwise returns the popped element.
+// int pop(int m) {
+//    //check underflow
+//    if(top[m-1] == -1) {
+//     return -1 ;
+//    }
+//  // below code is just opposite of push code, from bottom to top
+//  // reverse update top
+//    int index = top[m-1] ;
+
+// //reverse update next
+//    top[m-1] = next[index] ;
+
+// //reverse update freespot
+//    next[index] = freespot ;
+
+// //reverse find index
+//    freespot = index ;
+
+//    return arr[index] ;
+// }
+// }
+
+// int main() {}
+
+//🔴Time complexity: O(1)
+//🔴space complexity: o(s+n)       ==> s+n+s  ==> 2s+n ==> s+n  (s= size of arr, n= no.of stack)
+
+//64/149
