@@ -1836,4 +1836,140 @@
 //🔴Time complexity: O(1)
 //🔴space complexity: o(s+n)       ==> s+n+s  ==> 2s+n ==> s+n  (s= size of arr, n= no.of stack)
 
-//64/149
+
+
+
+//                 //❓Question: Design a stack that supports getMin() in O(1) time and O(!) extra space
+
+
+// Implement a specialStack data structure that supports getMin() in O(1) time and O(1) extra space along with
+// push() , pop(), top() ,isEmpty(), isFull() in O(1). To implement SpecialStack, you should only use inbuilt Stack data structure.
+
+// Implement The Following Public Functions:
+//    1. push(data) :
+//    This function should take one argument of type integer. It pushes the element into the stack and returns nothing
+//    2. pop() :
+//    It pops the element from the top of the stack and, in turn, returns the element being popped or deleted. In case
+//    the stack is empty, it returns -1.
+//    3. top():
+//    It returns the element being kept at the top of the stack. In case the stack is empty, it return -1.
+//    4. isEmpty() :
+//    It returns a boolean value indicating whether the stack is empty or not.
+//    5. getMin() :
+//    It returns the smallest element present in the stack. In case the stack is empty, it returns -1.
+
+// perations Performed On The Stack:
+// Query-1 (Denoted by an integer 1): Pushes integer data to the stack. (push function)
+// Query-2(Denoted by an integer 2): Pops the data kept at the top of the stack and returns it to the caller. (popfunction)
+// Query-3(Denoted by an integer 3): Fetches and returns the data being kept at the top of the stack but doesn't remove it, unlike
+// Query-4(Denoted by an integer 4): Returns a boolean value denoting whether the stack is empty or not. (isEmpty function)
+// Query-5(Denoted by an integer 5): Returns the smallest element present in the stack. (getMin() function)
+
+// Sample Input 1:
+// 6
+// 1 13
+// 1 47
+// 5
+// 4
+// 2
+// 3
+// Sample Output 1:
+// 13
+// false
+// 47
+// 13
+// Explanation Of Input 1:
+// Here we have six queries in total.
+
+// Query 1: Integer 1 represents the push function. Hence we push element ‘13’ onto the stack.
+// Query 2: Integer 1 represents the push function. Hence we push element ‘47’ onto the stack.
+// Query 3: Integer 5 represents the getMin function. Hence we print the minimum element present in the stack that is 13.
+// Query 4: Integer 4 represents the isEmpty function. Hence here, we print false because the stack is not empty.
+// Query 5: Integer 2 represents the pop function. The stack contains element ‘47’ at the top. We remove/pop ‘47’ from the stack and print ‘47’ on the new line.
+// Query 6: Integer 3 represents the top function. Because we have element ‘13’ at the top of the stack, we print ‘13’ on the new line.
+
+//🔸Approach: 
+
+// #include<iostream>
+// #include<stack>
+// using namespace std;
+
+// class SpecialStack{
+
+//     //defining stack or data members
+//     stack<int> s;            //creating stack to store data
+//     int mini ;               //will store the current minimum element
+
+//     public:
+// //implementing push() operation
+//     void push(int data) {
+//        //for 1st element
+//        if(s.empty()){
+//         s.push(data) ;
+//         mini = data;
+//        }
+//        else{
+//           if(data < mini) {
+//             s.push(2*data - mini) ;
+//             mini = data ;
+//           }
+//           else{
+//             s.push(data) ;
+//           }
+//        }
+//     }
+
+// // implementing pop() operation
+//     int pop() {
+
+//        if(s.empty()) {
+//         return -1 ;
+//        }
+
+//        int curr = s.top() ;
+//        s.pop() ;
+//        if(curr > mini) {
+//         return curr ;
+//        }
+//        else{
+//         int prevMini = mini ;
+//         int val = 2*mini - curr ;
+//         mini = val ;
+//         return prevMini ;
+//        }
+//     }
+
+// //implementing top() operation
+//     int top() {
+//        if(s.empty()) {
+//         return -1 ;
+//        }
+
+//        int curr = s.top() ;
+//        if(curr < mini) {
+//           return mini ;
+//        }
+//        else{
+//         return curr ;
+//        }
+//     }
+
+// //implementing isEmpty() operation
+//     bool isEmpty() {
+//         return s.empty() ;
+//     }
+
+// //implementing GetMin() operation
+//     int getMin() {
+//        if(s.empty()) {
+//         return -1 ;
+//        }
+
+//        return mini ;
+//     }
+
+// } ;
+
+//🔴Time complexity: O(1)
+//🔴Space complexity: O(1)
+
