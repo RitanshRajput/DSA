@@ -668,4 +668,570 @@
 //🔴time complexity: O(N)
 
 
-//68/149
+//                    //❓Question: Height of Binary Tree
+
+// Given a binary tree, find its height
+
+// Example 1:
+
+// Input:
+//      1
+//     /  \
+//    2    3
+// Output: 2
+
+// Example 2:
+// Input:
+//   2
+//    \
+//     1
+//    /
+//  3
+// Output: 3   
+
+// Example:
+//Input: 
+//        []
+//       /  \
+//     []    []
+//    / \    /\ 
+///  [] []  [] []
+//              \ 
+//              []
+//Outpu: 4
+
+//🔸Height == Longest path between Root node and a leaf node
+
+// #include<iostream>
+// using namespace std ;
+
+// class Node {
+//     public:
+//     int data ;
+//     Node* left ;
+//     Node* right ;
+
+//     Node(int d) {
+//         this -> data = d ;
+//         this -> left = NULL; 
+//         this -> right = NULL; 
+//     }
+// } ;
+
+// int height(Node* node) {
+//     //base case 
+//     if(node == NULL){
+//         return 0 ;
+//     }
+
+//     int left = height(node -> left) ;
+//     int right = height(node -> right) ;
+
+//     int ans = max(left, right) +1 ;         //+1 is for root node
+
+//     return ans ;
+// }
+//Binary tree: refer 69/149 Lecture 63: Binary Tree FAANG Interview Questions || Part-1
+
+//🔴Time complexity: O(n)       //traversing every node only ones
+//🔴Space complexity: o(height)  == O(n) for worst case(like only left or only right is given)
+
+
+
+//                   //❓Question: Diameter of a Binary Tree
+
+// The diameter of a tree (sometimes called the width) is the number of nodes on the longest path between two end nodes.
+// The diagram below shows two trees each with diameter nine, the leaves that form the ends of the longest path are shaded
+// (note that there is more than one path in each tree of length nine, but no path longer than nine nodes)
+
+// Example 1:
+// Input:
+//        1
+//      /  \
+//     2    3
+// Output: 3
+
+// Example 2:
+// Input:
+//          10
+//         /   \
+//       20    30
+//     /   \ 
+//    40   60
+// Output: 4
+
+// Your Task:
+// You need to complete the function diameter() that takes root as parameter and returns the diameter.
+
+//🔸Approach:
+        
+//                         Diameter
+//             /              |                  \ 
+// ans =   (left subtree)  (right subtree)    (combination of left and right)
+
+// option 1 : diameter(root -> left) 
+// option 2 : diameter(root -> right) 
+// option 1 : height(root -> left) + 1 + height(root-> right) ;       //+1 is root node
+
+// max of above three option is our ans
+
+// #include<iostream>
+// using namespace std ;
+
+// class Node {
+//     public: 
+//       int data ;
+//       Node* left ;
+//       Node* right ;
+
+//       Node(int x) {
+//         this -> data = x ;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//       }
+// };
+// //longest height
+// int height(Node* root) {
+//     //base case
+//     if(root == NULL) {
+//         return 0 ;
+//     }
+
+//     int left = height(root -> left) ;
+//     int right = height(root -> right) ;
+    
+//     int ans = max(left, right) + 1;
+    
+//     return ans ;
+// }
+
+// int diameter(Node* root) {
+//     //base case
+//     if(root == NULL){
+//         return 0 ;
+//     }
+
+//     int option1 = diameter(root -> left) ;
+//     int option2 = diameter(root -> right) ;
+//     int option3 = height(root -> left) + 1 + height(root -> right) ;
+
+//     int ans = max(option1, max(option2, option3)) ;
+
+//     return ans ;
+// }
+//🔴Time complexity: O(n^2)     ==> int height = O(N) , int diameter = O(N) * O(N)
+//🔴space complexity: O(Height)  // O(n) if only left or only right
+
+
+//                🔴Optimised Diameter of binary tree:
+
+// #include<iostream>
+// using namespace std ;
+
+// class Node {
+//     public: 
+//       int data ;
+//       Node* left ;
+//       Node* right ;
+
+//       Node(int x) {
+//         this -> data = x ;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//       }
+// };
+
+// pair<int,int> diameterFast(Node* root) {
+//     //base case
+//     if(root == NULL){
+//         pair<int,int> p = make_pair(0,0) ;
+//         return p ;
+//     }
+    
+//     pair<int,int> left = diameterFast(root -> left) ;
+//     pair<int,int> right = diameterFast(root -> right) ;
+   
+//     int option1 =  left.first ;       //first = diameter
+//     int option2 =  right.first ;     
+//     int option3 =  left.second + right.second + 1 ;  //second = height
+
+//     pair<int, int> ans ;
+//     ans.first = max(option1, max(option2, option3)) ;
+//     ans.second = max(left.second , right.second) + 1 ;
+    
+//     return ans ;
+// }
+
+// int diameter(Node* root) {
+//     return diameterFast(root).first ;
+// }
+//🔴Time complexity: O(N)
+//🔴space complexity: O(Height)   //O(N) for worst case if only left or only right
+
+
+//                              🔸Pair in c++ :
+
+// Pair is used to combine together two values that may be of different data types. 
+// Pair provides a way to store two heterogeneous objects as a single unit. 
+// It is basically used if we want to store tuples.
+// The pair container is a simple container defined in <utility> header consisting of two data elements or objects. 
+
+// The first element is referenced as ‘first’ and the second element as ‘second’ and the order is fixed (first, second).
+// Pair can be assigned, copied, and compared. 
+// The array of objects allocated in a map or hash_map is of type ‘pair’ by default in which 
+// all the ‘first’ elements are unique keys associated with their ‘second’ value objects.
+// To access the elements, we use variable name followed by dot operator followed by the keyword first or second.
+
+// Syntax: 
+// pair <data_type1, data_type2> Pair_name
+
+// #include <iostream>
+// #include <utility>
+// using namespace std;
+  
+// int main()
+// {
+//     // defining a pair
+//     pair<int, char> PAIR1;
+  
+//     // first part of the pair
+//     PAIR1.first = 100;
+//     // second part of the pair
+//     PAIR1.second = 'G';
+  
+//     cout << PAIR1.first << " ";
+//     cout << PAIR1.second << endl;
+  
+//     return 0;
+// }
+// Output
+// 100 G
+
+
+// 🔸If we want to use more varaible in single pair then
+// simply create a class , and use it anywhere
+
+// class ManyVariable {
+//       int a ;
+//       int b ;
+//       char c ;
+//       string d; 
+// }
+
+
+//                    //❓Question : Check for balanced Tree
+
+// Given a binary tree, find if it is height balanced or not. 
+// A tree is height balanced if difference between heights of left and right subtrees is not more than one for all nodes of tree. 
+
+//given: balance height = [Height(left) - height(right)] <= 1     (for all nodes)
+
+// A height balanced tree
+//         1
+//      /     \
+//    10      39
+//   /
+// 5
+
+// An unbalanced tree
+//         1
+//      /    
+//    10   
+//   /
+// 5
+
+// Example 1:
+// Input:
+//       1
+//     /
+//    2
+//     \
+//      3 
+// Output: 0
+// Explanation: The max difference in height
+// of left subtree and right subtree is 2,
+// which is greater than 1. Hence unbalanced
+
+// Example 2:
+// Input:
+//        10
+//      /   \
+//     20   30 
+//   /   \
+//  40   60
+// Output: 1
+// Explanation: The max difference in height
+// of left subtree and right subtree is 1.
+// Hence balanced.
+
+
+// #include<iostream>
+// using namespace std;
+
+// class Node{
+//     public:
+//      int data ;
+//      Node* left ;
+//      Node* right ;
+
+//      Node(int x) {
+//         this -> data = x ;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//      }
+// };
+
+// //height function
+// int height(Node* root) {
+//     //base case
+//     if(root == NULL){
+//         return 0 ;
+//     }
+
+//     int left = height(root -> left) ;
+//     int right = height(root -> right) ;
+
+//     int ans = max(left, right) + 1 ;
+
+//     return ans ;
+// }
+
+// bool isBalance(Node* root) {
+//     //base case 
+//     if(root == NULL){
+//         return true ;
+//     }
+
+//     bool left = isBalance(root -> left) ;
+//     bool right = isBalance(root -> right) ;
+    
+//     // The abs() function in C++ returns the absolute value of an integer number. 
+//     bool diff = abs (height(root -> left) - height(root -> right)) <= 1 ;
+     
+//     if(left && right && diff) {
+//         return 1 ;
+//     }
+//     else{
+//         return false ;
+//     }
+// }
+//🔴Time complexity: O(n^2)        //bcoz also calling height function whose TC is also O(N)
+
+
+//               🔴Optimised Check for balanced tree
+
+// #include<iostream>
+// using namespace std;
+
+// class Node{
+//     public:
+//      int data ;
+//      Node* left ;
+//      Node* right ;
+
+//      Node(int x) {
+//         this -> data = x ;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//      }
+// };
+
+// pair<bool,int> isBalancedFast(Node* root) {
+//     //base case
+//     if(root == NULL){
+//         pair<bool, int> p = make_pair(true,0) ;
+//         return p ;
+//     }
+
+//     pair<int, int> left  = isBalancedFast(root -> left) ;
+//     pair<int, int> right = isBalancedFast(root -> right) ;
+
+//     bool leftAns = left.first ;        // first = isBalancedFast
+//     bool rightAns = right.first ;
+
+//     bool diff = abs (left.second - right.second) <= 1 ;   //second = height
+
+//     pair<bool, int> ans ;
+//     ans.second = max(left.second, right.second) + 1 ;
+
+//     if(leftAns && rightAns && diff) {
+//         ans.first =  true ;
+//     }
+//     else{
+//         ans.first =  false ;
+//     }
+// }
+
+// bool isBalance(Node* root) {
+//     return isBalancedFast(root).first ;
+// }
+//🔴Time complexity: O(N)          //bcoz we are traversing every node only onces
+//🔴Space complexity: O(height, height)   // O(N,N)  if only left or only right
+
+
+//                  //❓Question: Determine if Two Trees are Identical
+
+//Given two binary tree ,the task is to fiind if both of them are identical or not
+
+// Example 2:
+// Input:
+//      1          1
+//    /   \      /   \
+//   2     3    2     3
+// Output: Yes
+// Explanation: There are two trees both
+// having 3 nodes and 2 edges, both trees
+// are identical having the root as 1,
+// left child of 1 is 2 and right child
+// of 1 is 3.
+
+// Example 2:
+// Input:
+//     1       1
+//   /  \     /  \
+//  2    3   3    2
+// Output: No
+// Explanation: There are two trees both
+// having 3 nodes and 2 edges, but both
+// trees are not identical.
+
+// #include<iostream>
+// using namespace std;
+
+// class Node{
+//    public :
+//    int data ;
+//    Node* left ;
+//    Node* right ;
+
+//    Node(int x) {
+//     this -> data = x ;
+//     this -> left = NULL ;
+//     this -> right = NULL ;
+//    }
+// } ;
+
+// bool isIdentical(Node* r1, Node* r2) {
+//     //base case 
+//     if(r1 == NULL && r2 == NULL){
+//         return true ;
+//     }
+
+//     if(r1 == NULL && r2 != NULL) {
+//         return false ;
+//     }
+
+//     if(r1 != NULL && r2 == NULL) {
+//         return false ;
+//     }
+
+//     bool left = isIdentical(r1 -> left , r2 -> left) ;
+//     bool right = isIdentical(r1 -> right , r2 -> left) ;
+
+//     bool value = r1 -> data == r2 -> data ;
+
+//     if(left && right && value) {
+//         return true ;
+//     }
+//     else{
+//         return false ;
+//     }
+// }
+//🔴Time complexity: O(N)          // left = O(N)+right = O(N) ==> O(N)+O(N) ==> 2O(N) ==> O(N)
+//🔴space complexity: O(H)         // left = O(H) + right =  O(H) ==> O(H)+O(H) => 2O(H) ==> O(H)
+
+
+//                   //❓Question: Sum TREE
+
+// Given a Binary Tree. Return true if, for every node X in the tree other than the leaves, 
+// its value is equal to the sum of its left subtree's value and its right subtree's value. 
+// Else return false.
+
+// An empty tree is also a Sum Tree as the sum of an empty tree can be considered to be 0. 
+// A leaf node is also considered a Sum Tree.
+
+// Example 1:
+// Input:
+//     3
+//   /   \    
+//  1     2
+
+// Output: 1
+// Explanation:
+// The sum of left subtree and right subtree is
+// 1 + 2 = 3, which is the value of the root node.
+// Therefore,the given binary tree is a sum tree.
+
+// Example 2:
+// Input:
+
+//           10
+//         /    \
+//       20      30
+//     /   \ 
+//    10    10
+
+// Output: 0
+// Explanation:
+// The given tree is not a sum tree.
+// For the root node, sum of elements
+// in left subtree is 40 and sum of elements
+// in right subtree is 30. Root element = 10
+// which is not equal to 30+40.
+
+// #include<iostream>
+// using namespace std ;
+
+// class Node{
+//     public:
+//      int data ;
+//      Node* left ;
+//      Node* right ;
+
+//      Node(int x) {
+//        this -> data = x ;
+//        this -> left = NULL ;
+//        this -> right = NULL ;
+//     }
+// } ;
+
+// pair<bool,int> isSumTreeFast(Node* root) {
+//     //base case
+//     if(root == NULL){
+//         pair<bool, int> p = make_pair(true, 0) ;
+//         return p ;
+//     }
+//     //another base case
+//     if(root -> left == NULL && root -> right == NULL){
+//         pair<bool, int> p = make_pair(true, root -> data) ;
+//         return p ;
+//     }
+
+//     pair<bool, int> leftAns = isSumTreeFast(root -> left) ;
+//     pair<bool, int> rightAns = isSumTreeFast(root -> right) ;
+
+//     bool left = leftAns.first ;
+//     bool right = rightAns.first ;
+
+//     bool condition = root -> data == leftAns.second + rightAns.second ;  
+
+//     pair<bool, int> ans ; 
+
+//     if(left && right && condition) {
+//         ans.first = true;
+//         ans.second = 2 * root -> data;     // root->data + leftAns.second + rightAns.second ==>  2* root-> data
+//     }
+//     else{
+//         ans.first = false ;
+//     }
+
+//     return ans ;
+// }
+
+// bool isSumTree(Node* root) {
+//     return isSumTreeFast(root).first ;
+// }
+//🔴Time complexity: O(N)
+//🔴space complexity: O(Height)
+
+//  70 /149
