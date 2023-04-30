@@ -554,7 +554,7 @@
 ///                             /
 //                            [13]
 
-// 20
+//  20
 //  10 35
 //  5 15 30 42
 //  1- 13 -1-1-1-1-1
@@ -1234,4 +1234,229 @@
 //🔴Time complexity: O(N)
 //🔴space complexity: O(Height)
 
-//  70 /149
+
+
+//                    //❓Question: ZigXag Traversal
+
+// Given a Binary Tree. Find the Zig-Zag Level Order Traversal of the Binary Tree.
+
+// Example 1:
+// Input:
+//         1
+//       /   \
+//      2     3
+//     / \   /  \
+//    4   5 6    7
+// Output:
+// 1 3 2 4 5 6 7
+
+// Example 2:
+// Input:
+//            7
+//         /     \
+//        9       7
+//      /  \     /   
+//     8    8   6     
+//    /  \
+//   10   9 
+// Output:
+// 7 7 9 8 8 6 9 10 
+
+
+// #include<iostream>
+// #include<vector>
+// #include<queue>
+// using namespace std ;
+
+// class Node{
+//    public:
+//    int data ;
+//    Node* left ;
+//    Node* right ;
+
+//    Node(int d) {
+//     this-> data = d;
+//     this ->left = NULL;
+//     this ->right =  NULL;
+//    }
+// };
+
+// vector<int> zigZagTraversal(Node* root) {
+
+//     vector<int> result ;
+//     if(root == NULL){
+//         return result ;
+//     }
+
+//     queue<Node*> q ;
+//     q.push(root) ;
+
+//     bool leftToRight = true ;
+
+//     while(!q.empty()) {
+
+//         int size = q.size() ;
+//         vector<int> ans(size) ;
+
+//         //process every level
+//         for(int i=0; i<size; i++) {
+//             Node* frontNode = q.front() ;
+//             q.pop() ;
+            
+//             //normal insert or reverse insert
+//             int index = leftToRight ? i : size - i - 1 ;
+//             ans[index] = frontNode -> data ;
+
+//             if(frontNode -> left){
+//                 q.push(frontNode -> left) ;
+//             }
+
+//             if(frontNode -> right){
+//                 q.push(frontNode -> right) ;
+//             }
+//         }
+//         //direction change
+//         leftToRight = !leftToRight;
+
+//         for(auto i:ans) {
+//             result.push_back(i) ;
+//         }
+//     }
+//    return result ;
+// }
+//🔴time complexity: O(N)
+//🔴space complexity: O(N)
+
+
+//                       //❓Question:  Broundary Traversal of Binary Tree
+
+// Given a Binary Tree, find its Boundary Traversal. The traversal should be in the following order: 
+
+//Left boundary nodes: defined as the path from the root to the left-most node ie- the leaf node you could reach 
+//when you always travel preferring the left subtree over the right subtree. 
+
+//Leaf nodes: All the leaf nodes except for the ones that are part of left or right boundary.
+
+// Reverse right boundary nodes: defined as the path from the right-most node to the root. 
+// The right-most node is the leaf node you could reach when you always travel preferring the right subtree over the left subtree. 
+// Exclude the root from this as it was already included in the traversal of left boundary nodes.
+
+// Note: If the root doesn't have a left subtree or right subtree, then the root itself is the left or right boundary. 
+
+// Example 1:
+// Input:
+//         1 
+//       /   \
+//      2     3  
+//     / \   / \ 
+//    4   5 6   7
+//       / \
+//      8   9
+   
+// Output: 1 2 4 8 9 6 7 3
+
+// Example 2:
+// Input:
+//             1
+//            /
+//           2
+//         /  \
+//        4    9
+//      /  \    \
+//     6    5    3
+//              /  \
+//             7     8
+
+// Output: 1 2 4 6 5 7 8
+
+//🔸algo approach:
+// print left part  (exclusive leaf node)
+// print all leaf node  (front left to right)
+// print right part (that in reverse order) (exclusive leaf node) 
+
+
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// class Node{
+//    public:
+//    int data ;
+//    Node* left; 
+//    Node* right;
+
+//    Node(int d) {
+//     this -> data = d ;
+//     this -> left = NULL ;
+//     this -> right = NULL ;
+//    }
+// };
+// //left node traversal
+//  void traverseLeft(Node *root, vector<int> &ans)
+//     {
+//         if((root == NULL) || (root->left == NULL && root->right == NULL))
+//             return;
+        
+//         ans.push_back(root->data);
+        
+//         if(root->left)
+//             traverseLeft(root->left, ans);
+//         else
+//             traverseLeft(root->right, ans);
+        
+//  }
+
+// //leaf node traversal    
+//     void traverseLeaf(Node *root, vector<int> &ans)
+//     {
+//         if(root == NULL)
+//             return;
+            
+//         if(root->left == NULL && root->right == NULL){
+//             ans.push_back(root->data);
+//             return;
+//         }
+            
+//         traverseLeaf(root->left, ans);
+//         traverseLeaf(root->right, ans);
+//     }
+    
+// //right node traversal
+//     void traverseRight(Node *root,  vector<int> &ans)
+//     {
+//         if((root == NULL) || (root->left == NULL && root->right == NULL))
+//             return;
+            
+//         if(root->right)
+//             traverseRight(root->right, ans);
+//         else
+//             traverseRight(root->left,ans);
+        
+//         ans.push_back(root->data);
+//     }
+
+// //main function
+// vector <int> boundary(Node *root)
+//     {
+//         vector<int> ans;
+        
+//         if(root->left == NULL && root->right == NULL){
+//             ans.push_back(root->data);
+//             return ans;
+//         }
+        
+//         ans.push_back(root->data);
+//         //step1: left nodes (excluding root noode)
+//         traverseLeft(root->left, ans);
+        
+//         //step2: leaf nodes 
+//         traverseLeaf(root->left, ans);
+//         traverseLeaf(root->right, ans);
+        
+//         //step3: right node (excluding rootnode, and in reverse order(bottom to up))
+//         traverseRight(root->right, ans);
+        
+//         return ans;
+//     }
+//🔴time complexity: O(N)      (N = (size/height) of node)
+//🔴space complexity: O(N)     (N = height of tree)
