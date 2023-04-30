@@ -1460,3 +1460,582 @@
 //     }
 //🔴time complexity: O(N)      (N = (size/height) of node)
 //🔴space complexity: O(N)     (N = height of tree)
+
+
+
+//                       //❓Question: Vertical Traversal of Binary Tree
+
+// Given a Binary Tree, find the vertical traversal of it starting from the leftmost level to the rightmost level.
+// If there are multiple nodes passing through a vertical line, 
+//then they should be printed as they appear in level order traversal of the tree.
+
+// Example 1:
+// Input:
+//            1
+//          /   \
+//        2       3
+//      /   \   /   \
+//    4      5 6      7
+//               \      \
+//                8      9           
+// Output: 
+// 4 2 1 5 6 3 8 7 9 
+
+
+// Example 2:
+// Input:
+//        1
+//     /     \
+//    2        3
+//  /    \       \
+// 4      5        6
+// Output: 4 2 1 5 3 6
+
+//approach: 
+//create a horizontal mapping for distance node  level wise
+
+//-2  -1   0   1  2
+// |   |   |   |  |
+// |   |   1   |  |
+// |   | / | \ |  | 
+// |   2   |   3  |
+// | /    \|     \| 
+// 4       5      6
+
+// 2 = 6 
+// 1 = 3 
+// 0 = 1, 5
+// -1 = 2 
+// -2 = 4 
+
+// 4 2 1 5 3 6 
+// Output: 4 2 1 5 3 6
+
+//create a data structure for mapping of horizontal distance = > levelwise nodes
+
+// map<int, map<int, vector<int>>> nodes ;
+//      |       |         |
+// horizontal  level     list of nodes
+// distance   
+
+
+
+// #include<iostream>
+// #include<vector>
+// #include<queue>
+// #include<map>
+// using namespace std;
+
+// class Node{
+//    public:
+//    int data ;
+//    Node* left ;
+//    Node* right ;
+
+//    Node(int data) {
+//     this -> data = data ;
+//     this -> left = NULL ;
+//     this -> right = NULL ;
+//    }
+// };
+
+// vector<int> verticalOrder(Node* root) {
+
+//     map<int, map<int, vector<int>> >  nodes ;
+//     queue<pair< Node* , pair<int, int>> > q ;
+//     vector<int> ans ;
+
+//     if(root == NULL){
+//         return ans ;
+//     }
+
+//     q.push(make_pair(root, make_pair(0,0))) ;
+
+//     while( !q.empty()) {
+//         pair<Node*, pair<int, int>> temp = q.front() ;
+//         q.pop() ;
+//         Node* frontNode = temp.first;
+//         int hd = temp.second.first ;            //hd = horizontal distance
+//         int lvl = temp.second.second ;         //lvl = level 
+
+//         nodes[hd][lvl].push_back(frontNode -> data) ;
+
+//         if(frontNode -> left)
+//          q.push(make_pair(frontNode-> left, make_pair(hd-1, lvl+1) )) ;
+
+//         if(frontNode -> right)
+//             q.push(make_pair(frontNode -> right, make_pair(hd+1, lvl+1) ));
+//     }
+
+//     for(auto i: nodes) {
+//         // i = <int, map<int, vector<int>> > 
+//         //      |    |
+//         // i.first  i.second
+
+//         for(auto j: i.second) {
+//             // j = <int, vector<int>> 
+//             //      |      |
+//             // j.first   j.second
+
+//             for(auto k:j.second) {
+//                 ans.push_back(k) ;
+//             }
+//         }
+//     }
+
+//     return ans ;
+// }
+
+
+
+//                         //❓Question: Top View of Binary Tree
+
+// Given below is a binary tree. The task is to print the top view of binary tree. 
+//Top view of a binary tree is the set of nodes visible when the tree is viewed from the top.
+// For the given below tree
+
+//        1
+//     /     \
+//    2       3
+//   /  \    /   \
+//  4    5  6     7
+
+// Top view will be: 4 2 1 3 7
+// Note: Return nodes from leftmost node to rightmost node. 
+// Also if 2 nodes are outside the shadow of the tree and are at same position 
+// then consider the extreme ones only(i.e. leftmost and rightmost). 
+
+// For ex - 1 2 3 N 4 5 N 6 N 7 N 8 N 9 N N N N N   will give 8 2 1 3 as answer. 
+// Here 8 and 9 are on the same position but 9 will get shadowed.
+
+// Example 1:
+
+// Input:
+//       1
+//    /    \
+//   2      3
+// Output: 2 1 3
+// Example 2:
+
+// Input:
+//         10
+//      /      \
+//    20        30
+//   /   \    /    \
+// 40    60  90    100
+// Output: 40 20 10 30 100
+
+// #include<iostream>
+// #include<vector>
+// #include<map>
+// #include<queue>
+// using namespace std;
+
+// class Node{
+//    public:
+//    int data ;
+//    Node* left ;
+//    Node* right ;
+
+//    Node(int d) {
+//     this -> data = d ;
+//     this -> left = NULL ;
+//     this -> right = NULL ;
+//    }
+// };
+
+// vector<int> topView(Node* root) {
+
+//     vector<int> ans;
+//     if(root == NULL){
+//         return ans ;
+//     }
+
+//     map<int, int> topNode ;  
+//     queue<pair<Node* , int> > q ;
+   
+//    q.push(make_pair(root, 0)) ;
+
+//    while( !q.empty()){ 
+//     pair<Node*, int> temp = q.front() ;
+//     q.pop();
+
+//     Node* frontNode = temp.first;
+//     int hd = temp.second ;
+
+//     //if one value is present for hd then do nothing
+//     if( topNode.find(hd) == topNode.end())
+//         topNode[hd]  = frontNode -> data ;
+
+//     if(frontNode ->left)
+//         q.push(make_pair(frontNode ->left, hd-1)) ;
+
+//     if(frontNode ->right)
+//         q.push(make_pair(frontNode ->right, hd+1)) ;
+//    }
+
+//    for(auto i:topNode){
+//     // i = <int, int>
+//     //       |    |
+//     //      HD   topNode
+//     ans.push_back(i.second) ;
+//    }
+
+//    return ans ;
+// }
+
+
+
+//                  //❓Question: Binay View Of Binary Tree
+
+
+// Given a binary tree, print the bottom view from left to right.
+// A node is included in bottom view if it can be seen when we look at the tree from bottom.
+
+//                       20
+//                     /    \
+//                   8       22
+//                 /   \        \
+//               5      3       25
+//                     /   \      
+//                   10    14
+
+// For the above tree, the bottom view is 5 10 3 14 25.
+// If there are multiple bottom-most nodes for a horizontal distance from root, 
+// then print the later one in level traversal. For example, 
+// in the below diagram, 3 and 4 are both the bottommost nodes at horizontal distance 0, we need to print 4.
+
+//                       20
+//                     /    \
+//                   8       22
+//                 /   \     /   \
+//               5      3   4     25
+//                     /     \      
+//                  10        14
+
+// For the above tree the output should be 5 10 4 14 25.
+
+// Note: The Input/Output format and Example given are used for the systems internal purpose, 
+// and should be used by a user for Expected Output only. As it is a function problem, 
+// hence a user should not read any input from the stdin/console. 
+// The task is to complete the function specified, and not to write the full code.
+
+// Example 1:
+// Input:
+//        1
+//      /   \
+//     3     2
+// Output: 3 1 2
+
+// Example 2:
+// Input:
+//          10
+//        /    \
+//       20    30
+//      /  \
+//     40   60
+// Output: 40 20 60 30
+
+//🔸approach:
+//same approach as top view question (written above)
+// only remove the condition  if( topNode.find(hd) == topNode.end())
+
+// #include<iostream>
+// #include<vector>
+// #include<map>
+// #include<queue>
+// using namespace std;
+
+// class Node{
+//    public:
+//    int data ;
+//    Node* left ;
+//    Node* right ;
+
+//    Node(int d) {
+//     this -> data = d ;
+//     this -> left = NULL ;
+//     this -> right = NULL ;
+//    }
+// };
+
+// vector<int> bottomView(Node* root) {
+
+//     vector<int> ans;
+//     if(root == NULL){
+//         return ans ;
+//     }
+
+//     map<int, int> topNode ;  
+//     queue<pair<Node* , int> > q ;
+   
+//    q.push(make_pair(root, 0)) ;
+
+//    while( !q.empty()){ 
+//     pair<Node*, int> temp = q.front() ;
+//     q.pop();
+
+//     Node* frontNode = temp.first;
+//     int hd = temp.second ;
+
+//     topNode[hd]  = frontNode -> data ;
+
+//     if(frontNode ->left)
+//         q.push(make_pair(frontNode ->left, hd-1)) ;
+
+//     if(frontNode ->right)
+//         q.push(make_pair(frontNode ->right, hd+1)) ;
+//    }
+
+//    for(auto i:topNode){
+//     // i = <int, int>
+//     //       |    |
+//     //      HD   topNode
+//     ans.push_back(i.second) ;
+//    }
+
+//    return ans ;
+// }
+
+
+//                  //❓Question: Left View of Binary Tree
+
+// Given a Binary Tree, return Left view of it. Left view of a Binary Tree is set of nodes visible 
+// when tree is visited from Left side. The task is to complete the function leftView(), 
+// which accepts root of the tree as argument.
+
+// Left view of following tree is 1 2 4 8.
+//           1
+//        /     \
+//      2        3
+//    /     \    /    \
+//   4     5   6    7
+//    \
+//      8   
+
+// Example 1:
+// Input:
+//    1
+//  /  \
+// 3    2
+// Output: 1 3
+
+// Example 2:
+// Input:
+//      1
+//    /  \
+//   3    2
+//  / \
+// 4   6
+// Output: 1 3 4
+
+// Example 3:
+// Input:
+//           1
+//         /  \
+//        3    2
+//       / \    \
+//     4    5    6 
+//           \    \    
+//            7    8 
+//                  \ 
+//                   9
+// Output: 1 3 4 7 9
+
+
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// class Node{
+//    public:
+//    int data ;
+//    Node* left ;
+//    Node* right ;
+
+//    Node(int d) {
+//     this -> data = d ;
+//     this -> left = NULL ;
+//     this -> right = NULL ;
+//    }
+// };
+
+// //solve function
+// void solve(Node* root, vector<int> &ans , int level) {
+//     //base case
+//     if(root == NULL){
+//         return;
+//     }
+
+// // we entered into a new level
+//     if( level == ans.size()) {
+//         ans.push_back(root -> data) ;
+//     }
+
+//     solve(root -> left, ans, level+1) ;
+//     solve(root -> right, ans, level+1) ;
+// }
+
+// //main function
+// vector<int> leftView(Node* root){
+//     vector<int> ans ;
+//     solve(root, ans, 0 ) ;
+//     return ans;
+// }
+
+
+//                  //❓Question: Right View of Binary Tree
+
+// Given a Binary Tree, return Right view of it. Right view of a Binary Tree is set of nodes visible 
+// when tree is visited from right side. 
+// The task is to complete the function rightView(), 
+// which accepts root of the tree as argument.
+
+// Left view of following tree is 1 3 7 8.
+//           1
+//        /     \
+//       2        3
+//    /     \    /   \
+//   4     5     6    7
+//    \
+//      8   
+
+// Example 1:
+// Input:
+//    1
+//  /  \
+// 3    2
+// Output: 1 2
+
+// Example 2:
+// Input:
+//      1
+//    /  \
+//   3    2
+//  / \
+// 4   6
+// Output: 1 2 6
+
+
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// class Node{
+//    public:
+//    int data ;
+//    Node* left ;
+//    Node* right ;
+
+//    Node(int d) {
+//     this -> data = d ;
+//     this -> left = NULL ;
+//     this -> right = NULL ;
+//    }
+// };
+
+// //solve function
+// void solve(Node* root, vector<int> &ans , int level) {
+//     //base case
+//     if(root == NULL){
+//         return;
+//     }
+
+// // we entered into a new level
+//     if( level == ans.size()) {
+//         ans.push_back(root -> data) ;
+//     }
+
+//     solve(root -> right, ans, level+1) ;       //This is only change made in rightView question from leftView question
+//     solve(root -> left, ans, level+1) ;
+// }
+
+// //main function
+// vector<int> rightView(Node* root){
+//     vector<int> ans ;
+//     solve(root, ans, 0 ) ;
+//     return ans;
+// }
+
+
+//                    //❓Question: Diagonal Traversal of Binary tree
+
+// Given a Binary Tree, print the diagonal traversal of the binary tree.
+
+// Consider lines of slope -1 passing between nodes. Given a Binary Tree, 
+//print all diagonal elements in a binary tree belonging to same line.
+// If the diagonal element are present in two different subtress then left subtree 
+//diagonal element should be taken first and then right subtree. 
+
+// Example 1:
+
+// Input :
+//             8
+//          /     \
+//         3      10
+//       /   \      \
+//      1     6     14
+//          /   \   /
+//         4     7 13
+// Output : 8 10 14 3 6 7 13 1 4
+// Explanation:
+
+// Diagonal Traversal of binary tree : 
+//  8 10 14 3 6 7 13 1 4
+
+// #include<iostream>
+// #include<vector>
+// #include<map>
+// using namespace std;
+
+// class Node{
+//    public:
+//    int data ;
+//    Node* left ;
+//    Node* right ;
+
+//    Node(int d) {
+//     this -> data = d ;
+//     this -> left = NULL ;
+//     this -> right = NULL ;
+//    }
+// };
+
+// //diagonal element function
+// void diagonalelement(Node* root,int level,map<int,vector<int>> &value){
+//     if(root==NULL)
+//         return;
+    
+//     value[level].push_back(root->data);
+    
+//     diagonalelement(root->left,level+1,value);
+//     diagonalelement(root->right,level, value);         //here only level+1
+// } 
+
+// //main function
+// vector<int> diagonal(Node *root)
+// {
+//    vector<int> ans;
+//    if(root==NULL)
+//         return ans;
+    
+//     map<int,vector<int>> value;
+//     diagonalelement(root,0,value);
+    
+//     for(auto i: value)
+//         for(auto j: i.second)
+//             ans.push_back(j);
+            
+//     return ans;
+// }
+
+//                🔴  why use Map and How it effect the time COmplexity:
+// Map is use for reduce the time complexity.
+// When we have to compare thing and for that
+// we use looping which have more complexity  (O(NXM)) 
+// so we replace it using map by which their complexity educe to O(N) .
+
+
+
+// 71/149
+
