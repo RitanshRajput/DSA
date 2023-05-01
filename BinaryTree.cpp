@@ -2037,5 +2037,551 @@
 
 
 
-// 71/149
+//                     //❓Question: Sun of the longest Bloodline of a tree(Sum of nodes on the longest path from root to leaf node)
 
+// Given a binary tree of size N. Your task is to complete the function sumOfLongRootToLeafPath(), 
+//that find the sum of all nodes on the longest path from root to leaf node.
+// If two or more paths compete for the longest path, then the path having maximum sum of nodes is being considered
+
+// Example 1:
+// Input: 
+//         4        
+//        / \       
+//       2   5      
+//      / \ / \     
+//     7  1 2  3    
+//       /
+//      6
+// Output: 13
+// Explanation:
+//         4        
+//        / \       
+//       2   5      
+//      / \ / \     
+//     7  1 2  3 
+//       /
+//      6
+
+// The highlighted nodes (4, 2, 1, 6) above are 
+// part of the longest root to leaf path having
+// sum = (4 + 2 + 1 + 6) = 13
+
+
+// Example 2:
+// Input: 
+//           1
+//         /   \
+//        2     3
+//       / \   / \
+//      4   5 6   7
+// Output: 11
+
+// #include<iostream>
+// #include<limits.h>
+// using namespace std;
+
+// class Node{
+//    public:
+//    int data ;
+//    Node* left; 
+//    Node* right; 
+
+
+//    Node(int d) {
+//     this -> data = d ;
+//     this -> left = NULL ;
+//     this -> right = NULL ;
+//    }
+// };
+
+// void solve(Node* root, int sum, int &maxSum, int length, int &maxLeng) {
+//     //base case
+//     if(root == NULL){
+//         if(length > maxLeng) {       //is current length is greater than maxLength
+//             maxLeng = length;
+//             maxSum = sum ;
+//         }
+//         else if(length == maxLeng) {    //if current length is equal to maxLength then store maximum of (sum, maxSum)
+//            maxSum = max(sum, maxSum) ;
+//         }
+//         return ;
+//     }
+
+//     sum = sum + root -> data ;          //adding node data for that particular bloodline(part)
+
+//     solve(root -> left, sum, maxSum, length + 1, maxLeng) ;
+//     solve(root -> right, sum, maxSum, length + 1, maxLeng) ;
+// }
+
+// //main function:
+// int sumOfLongRootToLeafPath(Node* root){
+//     int length = 0 ;
+//     int maxLeng = 0 ;
+//     int sum = 0 ;
+//     int maxSum = INT_MIN ;
+
+//     solve(root, sum, maxSum, length, maxLeng) ;
+
+//     return maxSum ;
+// }
+//🔴time complexity: O(N)
+//🔴space complexity: O(N)    // N == Height of Tree
+
+
+//            //❓Question: Lowest common Ancestor in a Binary Tree
+
+// Given a Binary Tree with all unique values and two nodes value, n1 and n2. 
+// The task is to find the lowest common ancestor of the given two nodes. 
+// We may assume that either both n1 and n2 are present in the tree or none of them are present.
+
+// LCA: It is the first common ancestor of both the nodes n1 and n2 from bottom of tree.
+
+// Example 1:
+// Input:
+// n1 = 2 , n2 = 3  
+//        1 
+//       / \ 
+//      2   3
+// Output: 1
+// Explanation:
+// LCA of 2 and 3 is 1.
+
+// Example 2:
+// Input:
+// n1 = 3 , n2 = 4
+//            5    
+//           /    
+//          2  
+//         / \  
+//        3   4
+// Output: 2
+// Explanation:
+// LCA of 3 and 4 is 2. 
+
+// #include<iostream>
+// using namespace std; 
+
+// class Node{
+//     public:
+//     int data ;
+//     Node* left ;
+//     Node* right ;
+
+//     Node(int d) {
+//         this -> data = d ;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//     }
+// };
+
+
+// //main function
+// Node* lca(Node* root, int n1, int n2) {
+//     //base case
+//     if(root == NULL){
+//         return NULL ;
+//     }
+
+//     if(root -> data == n1 || root -> data == n2) {
+//         return root;
+//     }
+//     Node* leftAns = lca(root -> left, n1 , n2);
+//     Node* rightAns = lca(root -> right, n1 , n2);
+
+//     if(leftAns != NULL && rightAns != NULL) {
+//         return root ;
+//     }
+//     else if(leftAns != NULL && rightAns == NULL) {
+//         return leftAns ;
+//     }
+//     else if(leftAns == NULL && rightAns != NULL){
+//         return rightAns ;
+//     }
+//     else{
+//         return NULL ;
+//     }
+// }
+//🔴Time complexity: O(N)
+//🔴space complexity: O(H)   //  height of tree
+
+
+//                  //❓Question: K Sum Paths
+
+// Given a binary tree and an integer K. Find the number of paths in the tree which have their sum equal to K.
+// A path may start from any node and end at any node in the downward direction.
+
+// Example 1:
+// Input:      
+// Tree = 
+//           1                               
+//         /   \                          
+//        2     3
+// K = 3
+// Output: 2
+// Explanation:
+// Path 1 : 1 + 2 = 3
+// Path 2 : only leaf node 3
+
+// Example 2:
+// Input: 
+// Tree = 
+//            1
+//         /     \
+//       3        -1
+//     /   \     /   \
+//    2     1   4     5                        
+//         /   / \     \                    
+//        1   1   2     6    
+// K = 5                    
+// Output: 8
+// Explanation:
+// The following paths sum to K.  
+// 3 2 
+// 3 1 1 
+// 1 3 1 
+// 4 1 
+// 1 -1 4 1 
+// -1 4 2 
+// 5 
+// 1 -1 5 
+
+//🔸giving TLE
+// #include<iostream>
+// #include<vector>
+// using namespace std; 
+
+// class Node{
+//     public:
+//     int data ;
+//     Node* left ;
+//     Node* right ;
+
+//     Node(int d) {
+//         this -> data = d ;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//     }
+// };
+
+// //solve function:
+// void solve(Node* root, int k, int &count, vector<int> path) {
+//     //base case
+//     if(root == NULL){
+//         return;
+//     }
+
+//     path.push_back(root -> data) ;
+
+//    //left call
+//     solve(root -> left, k, count, path) ;
+//     //right call
+//     solve(root -> right, k, count, path) ;
+
+//     //check for K sum 
+//     int size = path.size() ;
+//     int sum = 0;
+//     for(int i= size-1; i>=0; i--){
+//        sum += path[i] ;
+//        if(sum == k) {
+//         count++ ;
+//       }
+//       path.pop_back() ;             //here pop_back() is not needed because we are not passing path by reference (like &path) so it will automaticlly be removed
+//     }
+// }
+
+// //main function
+//  int sumK(Node *root,int k){
+//     vector<int> path ;
+//     int count = 0 ;
+//     solve(root, k , count, path) ;
+//     return count ;
+// }
+
+//a🔴pproach 2:
+
+// #include<iostream>
+// #include<unordered_map>
+// using namespace std; 
+
+// class Node{
+//     public:
+//     int data ;
+//     Node* left ;
+//     Node* right ;
+
+//     Node(int d) {
+//         this -> data = d ;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//     }
+// };
+
+// void check(Node *root, int k, int &count, int sum, unordered_map<int, int> &mp) {
+//         if(root == NULL) 
+//             return;
+        
+//         sum += root->data;
+
+//         count += mp[sum-k];
+//         if(sum == k)
+//             count++;
+            
+//         mp[sum]++;
+        
+//         check(root->left, k, count, sum, mp);
+//         check(root->right, k, count, sum, mp);
+        
+//         mp[sum]--;
+//     }
+    
+//     int sumK(Node *root,int k)
+//     {
+//         // code here 
+//         int count = 0;
+//         unordered_map<int, int> mp;
+//         check(root, k, count, 0, mp);
+//         return count;
+//     }
+
+
+
+//                    //❓Question: kth Ancestor in a Tree
+
+// Given a binary tree of size  N, a node, and a positive integer k., 
+//Your task is to complete the function kthAncestor(), 
+//the function should return the kth ancestor of the given node in the binary tree.
+// If there does not exist any such ancestor then return -1.
+// Note: It is guaranteed that the node exists in the tree.
+
+// Example 1:
+//        1 
+//       / \ 
+//      2   3
+//    /  \ 
+//   4    5
+// Input:
+//      K = 2
+//      Node = 4
+// Output: 1
+// Explanation:
+// Since, K is 2 and node is 4, so we
+// first need to locate the node and
+// look k times its ancestors.
+// Here in this Case node 4 has 1 as his
+// 2nd Ancestor aka the Root of the tree.
+             
+// Example 2:
+// Input:
+// k=1 
+// node=3
+//       1
+//     /   \
+//     2     3
+
+// Output:
+// 1
+// Explanation:
+// K=1 and node=3 ,Kth ancestor of node 3 is 1.
+
+//🔴approach 1:
+// traversing and checking
+
+// #include<iostream>
+// #include<vector>
+// using namespace std; 
+
+// class Node{
+//     public:
+//     int data ;
+//     Node* left ;
+//     Node* right ;
+
+//     Node(int d) {
+//         this -> data = d ;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//     }
+// };
+
+// //solve function
+// int solve(Node* root, int k, int node, vector<int> &path) {
+//     //base case
+//     if(root == NULL){
+//         return 0;
+//     }
+
+//     path.push_back(root -> data) ;
+    
+//     solve(root -> left, k, node, path) ;
+//     solve(root -> right, k, node, path) ;
+
+//     int size = path.size() ;
+//     for(int i=size-1; i>=0; i--) {
+//         if(path[i] == node){
+//             int index = i-k; 
+
+//         if(index<0){
+//             return -1 ;
+//         }
+//         else{
+//           return path[i-k] ;
+//         }
+//       }
+//     }
+//     path.pop_back() ;
+// }
+
+// //main function
+// int kthAncestor(Node *root, int k, int node){
+//      vector<int> path ;
+//      return solve(root, k, node, path) ;
+// }
+
+//🔴approach 2:
+
+// #include<iostream>
+// #include<vector>
+// #include<limits.h>
+// using namespace std; 
+
+// class Node{
+//     public:
+//     int data ;
+//     Node* left ;
+//     Node* right ;
+
+//     Node(int d) {
+//         this -> data = d ;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//     }
+// };
+
+// //solve function
+// Node* solve(Node* root, int &k, int node){
+//     //base case
+//     if(root == NULL)
+//       return NULL ;
+    
+//     if(root -> data == node) {
+//         return root ;
+//     }
+    
+//     Node* leftAns = solve(root -> left, k , node) ;
+//     Node* rightAns = solve(root -> right, k , node) ;
+
+//     //returing back
+//     if(leftAns != NULL && rightAns == NULL){
+//         k-- ;
+//         if(k<=0){
+//             k = INT_MIN; 
+//             return root ;
+//         }
+//         return leftAns ;
+//     }
+
+//     if(leftAns == NULL && rightAns != NULL){
+//         k-- ;
+//         if(k<=0){
+//             k = INT_MIN; 
+//             return root ;
+//         }
+//         return rightAns ;
+//     }
+//     return NULL ;
+// }
+
+// int kthAncestor(Node *root, int k, int node){
+//     Node* ans = solve(root, k, node) ;
+//     if(ans == NULL || ans->data == node){
+//         return -1;
+//     }
+//     else{
+//         return ans-> data;
+//     }
+// }
+//🔴Time complexity: O(N)
+//🔴space complexity: O(H)
+
+
+//                  //❓Question; Maximum sum of Non-adjacent nodes
+
+// Given a binary tree with a value associated with each node, 
+//we need to choose a subset of these nodes such that sum of chosen nodes is maximum 
+//under a constraint that no two chosen node in subset should be directly connected that is,
+// if we have taken a node in our sum then we can’t take its any children or parents in c
+// onsideration and vice versa.
+
+//            1                       1                                                               
+//           / \                     / \                                                            
+//          2   3                 [2]   3                                                          
+//         /   / \                 /   / \                                                          
+//        1   4   5               1  [4]  [5]                                                        
+//    Input Binary Tree        chosen nodes with maximum sum
+
+// Example 1:
+// Input:
+//      11
+//     /  \
+//    1    2
+// Output: 11
+// Explanation: The maximum sum is sum of
+// node 11.
+
+// Example 2:
+// Input:
+//         1
+//       /   \
+//      2     3
+//     /     /  \
+//    4     5    6
+// Output: 16
+// Explanation: The maximum sum is sum of
+// nodes 1 4 5 6 , i.e 16. These nodes are
+// non adjacent.
+
+
+// #include<iostream>
+// using namespace std; 
+
+// class Node{
+//     public:
+//     int data ;
+//     Node* left ;
+//     Node* right ;
+
+//     Node(int d) {
+//         this -> data = d ;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//     }
+// };
+// //solve function
+// pair<int, int> solve(Node* root){
+//     //base case
+//     if(root == NULL){
+//         pair<int, int> p = make_pair(0,0) ;
+//         return p ;
+//     }
+
+//     pair<int, int> left = solve(root -> left) ;
+//     pair<int, int> right = solve(root -> right) ;
+
+//     pair<int,int> result ;
+//     //when including root node, then neglecting its direct child but taking its descendents value
+//     result.first = root-> data + left.second + right.second ;
+//     //when excluding root node, then comparing among the nodes
+//     result.second = max(left.first , left.second) + max(right.first , right.second) ;
+
+//     return result ;
+// }
+
+// //main function
+// int getMaxSum(Node *root) {
+//     pair<int, int> ans = solve(root);
+//     return max(ans.first, ans.second) ;
+// }
+//🔴Time complexity: O(N)
+//🔴space complexity: O(H)
+
+//72/149
