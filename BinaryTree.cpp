@@ -2584,4 +2584,279 @@
 //🔴Time complexity: O(N)
 //🔴space complexity: O(H)
 
-//72/149
+
+
+//🔴🔴🔴              //❓Question: Construct a Tree ffrom INorder ans PREorder
+
+// Given 2 Arrays of Inorder and preorder traversal.
+//  The tree can contain duplicate elements. 
+//  Construct a tree and print the Postorder traversal. 
+
+// Example 1:
+// Input:
+// N = 4
+// inorder[] = {1 6 8 7}
+// preorder[] = {1 6 7 8}
+// Output: 8 7 6 1 
+//                                                     l    N   R
+//   preorder{1}            [1]           =  inorder { NULL, 1 , 6, 8, 7}
+//                         /    \                        l    N  R
+//   preorder{6}        NULL   [6]        =   inorder { NULL, 6, 8, 7}
+//                            /   \                      l   N   R
+//   preorder{7}           NULL  [7]      =   inorder { 8, 7, NULL}
+//                               / \                     l   N   R
+//   preorder{8}              [8]   NULL  =  inorder { NULL, 8 , NULL}
+
+//  postOrder: LRN ( 8, 7 , 6, 1)
+
+// Example 2:
+// Input:
+// N = 6
+// inorder[] = {3 1 4 0 5 2}
+// preorder[] = {0 1 3 4 2 5}  (NLR) first element is always root
+// Output: 3 4 1 5 2 0
+// Explanation: The tree will look like
+//                                                      L      N      R
+// preorder{0}                [0]         = inorder{ [3 1 4] , 0 ,  [5 2] }
+//                           /   \                   L  N  R
+// preorder{1}             [1]   {5,2}    = inorder { 3  1  4}
+//                        /  \                        L   N  R        L   N  R
+// preorder{3}          [3]  [4]          = inorder {NULL 3 NULL }  {NULL 4 NULL}
+//                     / \  /  \ 
+//                     Null  NULL
+//
+//                            [0]        
+//                          /     \                 L  N   R
+// preorder{2}            [1]      [2]        = inorder { 5  2  NULL}
+//                       /  \      /  \                    L   N  R     
+// preorder{5}        [3]  [4]   [5] NULL     = inorder { NULL 5 NULL}
+//                   / \  /  \   /\
+//                  Null  NULL  NULL
+//
+//POSTorder: (LRN)  : 3 4 1 5 2 0
+//
+
+//🔴Approach:
+//step1: take index element as root
+//step2: find root elemnt's position in INORDER
+//step3: root -> left (INorder start -> position-1)   
+//         start    p-1  root  p+1     end
+//         { 1   2   3   [4]    5   6   7 }
+//step4: root -> right (position+1 -> INorder End)
+
+//🔴code1:
+// #include<iostream>
+// using namespace std;
+
+// class Node{
+//    public:
+//    int data;
+//    Node* left ;
+//    Node* right;
+
+//    Node(int data){
+//     this -> data = data;
+//     this -> left = NULL;
+//     this -> right = NULL ;
+//    }
+// };
+
+// //find position , 
+// int findPosition(int in[], int Element, int inorderStart, int inorderEnd) {
+//     for(int i=inorderStart; i<=inorderEnd; i++) {
+//         if( in[i] == Element){
+//             return i;
+//         }
+//     }
+//     return -1;
+// }
+ 
+// //solve function:
+// Node* solve(int in[], int pre[], int &index, int inorderStart, int inorderEnd, int size) {
+//     //base case
+//     if(index >= size || inorderStart > inorderEnd) {
+//         return NULL ;
+//     }
+
+//     int Element = pre[index++] ;             
+//     Node* root = new Node(Element) ;       //create a new node
+//     int position = findPosition(in, Element, int inorderStart, int inorderEnd) ;
+
+//     //recursive call
+//     root -> left = solve(in, pre, index, inorderStart, position - 1, size) ;
+//     root -> right = solve(in, pre, index, position+1, inorderEnd, size) ;
+ 
+//    return root;
+// }
+
+// //main function
+// Node* buildTree(int in[], int pre[], int n){
+//     int preOrderIndex = 0 ;
+//     Node* ans = solve(in , pre, preOrderIndex, 0, n-1, n) ;         //0 =  inorder starting index , n-1 =  inorder last index
+//     return ans ;    
+// }
+
+
+//🔴code2: using mapping
+
+// #include<iostream>
+// #include<map>
+// using namespace std;
+
+// class Node{
+//    public:
+//    int data;
+//    Node* left ;
+//    Node* right;
+
+//    Node(int data){
+//     this -> data = data;
+//     this -> left = NULL;
+//     this -> right = NULL ;
+//    }
+// };
+
+// //find position using mapping 
+// void createMapping(int in[], map<int,int> nodeToIndex, int n) {
+//     for(int i=0; i<n; i++) {
+//         nodeToIndex[in[i]] = i ;
+//     }
+// }
+ 
+// //solve function:
+// Node* solve(int in[], int pre[], int &index, int inorderStart, int inorderEnd, int size, map<int,int> &nodeToIndex) {
+//     //base case
+//     if(index >= size || inorderStart > inorderEnd) {
+//         return NULL ;
+//     }
+
+//     int Element = pre[index++] ;             
+//     Node* root = new Node(Element) ;       //create a new node
+//     int position = nodeToIndex[Element] ;
+
+//     //recursive call
+//     root -> left = solve(in, pre, index, inorderStart, position - 1, size, nodeToIndex) ;
+//     root -> right = solve(in, pre, index, position+1, inorderEnd, size, nodeToIndex) ;
+ 
+//    return root;
+// }
+
+// //main function
+// Node* buildTree(int in[], int pre[], int n){
+//     int preOrderIndex = 0 ;
+//     map<int,int> nodeToIndex ;
+//     //create node to index map
+//     createMapping(in, nodeToIndex, n) ;
+//     Node* ans = solve(in , pre, preOrderIndex, 0, n-1, n, nodeToIndex) ;         //0 =  inorder starting index , n-1 =  inorder last index
+//     return ans ;    
+// }
+
+
+
+//🔴🔴🔴                  //❓Question: Tree from POSTorder and Inorder
+
+// Given inorder and postorder traversals of a Binary Tree in the arrays in[] and post[] respectively.
+// The task is to construct the binary tree from these traversals.
+
+// Example 1:
+// Input:
+// N = 8
+// in[] = 4 8 2 5 1 6 3 7
+// post[] =8 4 5 2 6 7 3 1
+// Output: 1 2 4 8 5 3 6 7
+// Explanation: For the given postorder and
+// inorder traversal of tree the  resultant
+// binary tree will be
+//                                                   l       N    R
+// postOrder{1}                [1]      = inorder{ [4 8 2 5] 1 [ 6 3 7]}
+//                            /   \ 
+//                    {4 8 2 5}  {6 3 7}
+//
+//
+//                    
+//                             [1]      
+//                            /   \                  l  N  R
+// postorder{3}       {4 8 2 5}   [3]    = inorder { 6  3  7}
+//                                 / \ 
+//                               [6]  [7] = inorder {NUll 6 NUll}  {NULLL 7 NULL}
+//                               /\    /\ 
+//                               NULL   NULLL
+//
+//                              [1]      
+//                            /     \                    l  N   R
+// preorder{8 4 5 2}        [2]      [3]       =inorder { 8  2  5}
+//                        /     \    /   \             
+// preorder{4}           [4]   [5]  [6]  [7]    =inorder{ NULL 4 8}
+//                      /  \    /\    /\    /\ 
+//                    NULL [8]  NULL NULL   NULLL
+
+// Example 2:
+// Input:
+// N = 5
+// in[] = 9 5 2 3 4
+// post[] = 5 9 3 4 2
+// Output: 2 9 5 4 3
+// Explanation:  
+// the  resultant binary tree will be
+//            2
+//         /     \
+//        9       4
+//         \     /
+//          5   3
+
+// #include<iostream>
+// #include<map>
+// using namespace std;
+
+// class Node{
+//    public:
+//    int data;
+//    Node* left ;
+//    Node* right;
+
+//    Node(int data){
+//     this -> data = data;
+//     this -> left = NULL;
+//     this -> right = NULL ;
+//    }
+// };
+
+// //find position 
+// int findPosition(int in[], int Element, int inorderStart, int inorderEnd) {
+//     for(int i=inorderStart; i<=inorderEnd; i++) {
+//         if( in[i] == Element){
+//             return i;
+//         }
+//     }
+//     return -1;
+// }
+ 
+// //solve function:
+// Node* solve(int in[], int post[], int &index, int inorderStart, int inorderEnd, int size) {
+//     //base case
+//     if(index < 0 || inorderStart > inorderEnd) {
+//         return NULL ;
+//     }
+
+//     int Element = post[index--] ;             
+//     Node* root = new Node(Element) ;       //create a new node
+//     int position = findPosition(in, Element,  inorderStart,  inorderEnd) ;
+
+//     //recursive call(in case of postorder we first build right subtree and then left subtree)
+//     root -> right = solve(in, post, index, position+1, inorderEnd, size) ;
+//     root -> left = solve(in, post, index, inorderStart, position - 1, size) ;
+ 
+//    return root;
+// }
+
+// //main function
+// Node* buildTree(int in[], int post[], int n){
+//     int postOrderIndex = n-1 ;   //last index for postorder
+//     Node* ans = solve(in , post, postOrderIndex, 0, n-1, n) ;         //0 =  inorder starting index , n-1 =  inorder last index
+//     return ans ;    
+// }
+
+//🔴Time complexity: O(N^2)
+//🔴space complexity: O(H)
+
+//73/149
