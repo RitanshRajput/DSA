@@ -3073,13 +3073,13 @@
 // Unlike Stack based traversal, no extra space is required for this traversal.
 
 //🔴Time complexity: O(N)
-//🔴space complexity: O(1)
+//🔴space complexity: O(1)       //auxilliary space
 
 
 //🔴Algo :
 
 // 1. current = root
-// 2. while(root != NULL)
+// 2. while(root != NULL &&)
 
 // 3.    if (left not exist)
 //        visit(current)
@@ -3097,3 +3097,178 @@
 //         visit(current)                     |  temporary link removal
 //         current = current -> right       __|
 
+
+// #include<iostream>
+// using namespace std;
+
+// class Node{
+//     public:
+//       int data ;
+//       Node* left ;
+//       Node* right ;
+
+//     Node(int data){
+//         this -> data = data;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//     }
+// };
+// /* Function to traverse the binary tree without recursion and without stack */
+// //main function
+// void MorrisTraversal(Node* root) {
+//     Node* current ;
+//     Node* predecessor;
+
+//     if(root == NULL){
+//         return ;
+//     }
+
+//     current = root ;
+
+//     while(current != NULL) {
+
+//         if(current -> left == NULL) {
+//             cout<< current -> data << " " ;           //if current-> left is null then print current -> data
+//             current = current -> right ;
+//         }
+//         else{
+//             /* Find the inorder predecessor of current */
+//             predecessor = current -> left ;
+//             while( predecessor -> right != NULL && predecessor -> right != current){
+//                 predecessor = predecessor -> right ;
+//             }
+//             /* Make current as the right child of its inorder predecessor */
+//             if(predecessor -> right == NULL){
+//                 predecessor -> right = current;
+//                 current = current -> left ;
+//             }
+//             else{
+//             /* Revert the changes made in the 'if' part to restore the original tree i.e., fix the right child of predecessor */
+//                 predecessor ->right = NULL ;
+//                 cout<< current -> data << " " ;
+//                 current = current -> right ;
+//             }
+
+//         }
+//     }
+// }
+
+
+//🔴🔴🔴                //❓Question: Flatten Binary tree to linked list
+
+// Given the root of a binary tree, flatten the tree into a "linked list":
+// The "linked list" should use the same Node class where the right child pointer points to the next 
+// node in the list and the left child pointer is always null.
+// The "linked list" should be in the same order as a pre-order traversal of the binary tree.
+
+// Example 1:
+// Input : 
+//           1
+//         /   \
+//        2     5
+//       / \     \
+//      3   4     6
+// Output :
+// 1 2 3 4 5 6 
+// Explanation: 
+// After flattening, the tree looks 
+// like this
+//     1
+//      \
+//       2
+//        \
+//         3
+//          \
+//           4
+//            \
+//             5
+//              \
+//               6 
+// Here, left of each node points 
+// to NULL and right contains the 
+// next node in preorder.The inorder 
+// traversal of this flattened tree 
+// is 1 2 3 4 5 6.
+
+// Example 2:
+// Input :
+//         1
+//        / \
+//       3   4
+//          /
+//         2
+//          \
+//           5 
+// Output : 
+// 1 3 4 2 5  
+// Explanation : 
+// After flattening, the tree looks 
+// like this 
+//      1
+//       \
+//        3
+//         \
+//          4
+//           \
+//            2
+//             \ 
+//              5 
+// Here, left of each node points 
+// to NULL and right contains the 
+// next node in preorder.The inorder 
+// traversal of this flattened tree 
+// is 1 3 4 2 5.
+
+// Expected Time Complexity: O(n)
+// Expected Auxiliary Space: O(1)
+
+//inorder,preorder,postorder :
+// time complexity: O(N)
+// space complexity: O(N)
+
+//morris traversal
+// time complexity: O(N)
+// space complexity: O(1)          //valid
+
+
+// #include<iostream>
+// using namespace std;
+
+// class Node{
+//     public:
+//      int data ;
+//      Node* left ;
+//      Node* right;
+
+//     Node(int data) {
+//         this -> data = data ;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//     } 
+// };
+
+// //main function Using Morris traversal
+// void flatten(Node* root) {
+      
+//     Node* current = root;
+
+//     while(current != NULL) {
+
+//         if(current -> left) {
+//             Node* predecessor = current -> left ;
+//             while(predecessor -> right){
+//                 predecessor = predecessor -> right ;
+//             }
+
+//             predecessor -> right = current -> right ;
+//             current -> right = current -> left ;
+//             current -> left = NULL ;                  // also keep making left part == NULL
+//         }
+
+//         current = current -> right ;
+//     }
+// }
+// 🔴 time complexity: O(N)
+// 🔴 space complexity: O(1)         
+
+// 75/149
