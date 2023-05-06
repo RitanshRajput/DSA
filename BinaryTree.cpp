@@ -62,8 +62,8 @@
 // Breadth-First Search (BFS) Algorithms
 
 // 🔸Tree Traversal using Depth-First Search (DFS) algorithm can be further classified into three categories:
-// Preorder Traversal (current-left-right): Visit the current node before visiting any nodes inside the left or right subtrees. Here, the traversal is root – left child – right child. It means that the root node is traversed first then its left child and finally the right child.
 // Inorder Traversal (left-current-right): Visit the current node after visiting all nodes inside the left subtree but before visiting any node within the right subtree. Here, the traversal is left child – root – right child.  It means that the left child is traversed first then its root node and finally the right child.
+// Preorder Traversal (current-left-right): Visit the current node before visiting any nodes inside the left or right subtrees. Here, the traversal is root – left child – right child. It means that the root node is traversed first then its left child and finally the right child.
 // Postorder Traversal (left-right-current): Visit the current node after visiting all the nodes of the left and right subtrees.  Here, the traversal is left child – right child – root.  It means that the left child has traversed first then the right child and finally its root node.
 
 // 🔸Tree Traversal using Breadth-First Search (BFS) algorithm can be further classified into one category:
@@ -3040,4 +3040,60 @@
 //🔴space complexity: O(N)
 
 
-//74/149
+
+//                        🔴🔴🔴  Morris Traversal :
+
+// Inorder Tree Traversal without recursion and without stack!
+
+// Using Morris Traversal, we can traverse the tree without using stack and recursion. 
+// The idea of Morris Traversal is based on Threaded Binary Tree. 
+// In this traversal, we first create links to Inorder successor and print the data using these links,
+// and finally revert the changes to restore original tree. 
+
+// 🔸 Psuedo code:
+// 1. Initialize current as root 
+// 2. While current is not NULL
+//    If the current does not have left child
+//       a) Print current’s data
+//       b) Go to the right, i.e., current = current->right
+//    Else
+//       a) Find rightmost node in current left subtree OR
+//               node whose right child == current.
+//          If we found right child == current
+//              a) Update the right child as NULL of that node whose right child is current
+//              b) Print current’s data
+//              c) Go to the right, i.e. current = current->right
+//          Else
+//              a) Make current as the right child of that rightmost 
+//                 node we found; and 
+//              b) Go to this left child, i.e., current = current->left
+
+// Although the tree is modified through the traversal, 
+// it is reverted back to its original shape after the completion. 
+// Unlike Stack based traversal, no extra space is required for this traversal.
+
+//🔴Time complexity: O(N)
+//🔴space complexity: O(1)
+
+
+//🔴Algo :
+
+// 1. current = root
+// 2. while(root != NULL)
+
+// 3.    if (left not exist)
+//        visit(current)
+//        current = current -> right 
+    
+// 4.    else 
+//        predecessor = find(current)
+//                                          __ 
+//       if(predecessor -> right == NULL)     |
+//          predecessor -> right = current    |  temporary link creation
+//          current = current -> left       __| 
+//                                     
+//        else                              __
+//         predecessor -> right = NULL        |
+//         visit(current)                     |  temporary link removal
+//         current = current -> right       __|
+
