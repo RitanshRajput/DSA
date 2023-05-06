@@ -3269,6 +3269,6 @@
 //     }
 // }
 // 🔴 time complexity: O(N)
-// 🔴 space complexity: O(1)         
+// 🔴 space complexity: O(1)     // auxilliary space    
 
 // 75/149
