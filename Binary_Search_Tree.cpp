@@ -393,22 +393,22 @@
 
 //                //❓Question: Find max and min node in BST
 
-#include<iostream>
-#include<queue>
-using namespace std;
+// #include<iostream>
+// #include<queue>
+// using namespace std;
 
-class Node{
-    public:
-    int data ;
-    Node* left ;
-    Node* right ;
+// class Node{
+//     public:
+//     int data ;
+//     Node* left ;
+//     Node* right ;
 
-    Node(int d) {
-        this -> data = d ;
-        this -> left = NULL ;
-        this -> right = NULL ;
-    }
-} ;
+//     Node(int d) {
+//         this -> data = d ;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//     }
+// } ;
 
 //🔸insert into BST function
 // Node* insertIntoBST(Node* root, int d) {
@@ -853,3 +853,235 @@ class Node{
 
 //                  //🔘Deletion in BST
 
+// #include<iostream>
+// #include<queue>
+// using namespace std;
+
+// class Node{
+//     public:
+//     int data ;
+//     Node* left ;
+//     Node* right;
+
+//     Node(int d) {
+//         this -> data = d ;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//     }
+// };
+
+
+// //🔸Inorder function: (LNR)
+// void inorder(Node* root) {
+//     //base case
+//     if(root == NULL) {
+//         return ;
+//     }
+
+//     inorder(root->left) ;
+//     cout<< root-> data <<" " ;
+//     inorder(root->right) ;
+// }
+
+// //🔸Pre-order function: (NLR)
+// void preorder(Node* root) {
+//     //base case
+//     if(root == NULL) {
+//         return ;
+//     }
+
+//     cout<< root-> data <<" " ;
+//     preorder(root->left) ;
+//     preorder(root->right) ;
+// }
+
+// //🔸Post-order function: (LRN)
+// void postorder(Node* root) {
+//     //base case
+//     if(root == NULL) {
+//         return ;
+//     }
+
+//     postorder(root->left) ;
+//     postorder(root->right) ;
+//     cout<< root-> data <<" " ;
+// }
+
+// //🔸level order traversal function:
+//  void levelOrderTraversal(Node* root) {
+
+//     queue<Node* > q ;
+//     q.push(root) ;
+//     q.push(NULL) ;             //for separator (separator is used to give us output in level format)
+    
+//     while( !q.empty()) {
+
+//        Node* temp = q.front() ;
+//        q.pop() ;
+     
+//     //if part is for adding a separator to give output in level format:
+//        if(temp == NULL) {           //means old level completed its traversal
+//           cout<< endl ;
+
+//           if(!q.empty()) {         // queue still has some child nodes remaining
+//             q.push(NULL) ;       // add another separator
+//           }
+//        }
+//        else{ 
+//     //else part is the main level order traversal part where it is traversing the binary tree:
+
+//         cout<< temp -> data << " " ;   //print data is temp is not nULL
+//         if(temp -> left) {           //if temp ->left NULL nahi hai toh q.push(temp->left) karo
+//            q.push(temp -> left) ;
+//         }
+
+//         if(temp -> right) {          //if temp ->right NULL nahi hai toh q.push(temp->right) karo
+//           q.push(temp -> right) ;
+//         }
+//       }  
+//     }
+//  }     
+
+
+// // 🔸insert into BST function
+// Node* insertIntoBST(Node* root, int d) {
+//     //base case
+//     if(root == NULL) {
+//         root = new Node(d) ;
+//         return root ;
+//     }
+
+//     if( d > root -> data) {
+//         //right part me insert karna hai
+//         root -> right = insertIntoBST(root -> right, d) ;
+//     }
+//     else {
+//         //left part me insert karna hai
+//         root -> left = insertIntoBST(root -> left, d) ;
+//     }
+// }
+
+
+// // 🔸Find minimum value in BST
+// Node* minVal(Node* root) {
+//     Node* temp = root;
+//     while(temp -> left != NULL){
+//         temp = temp -> left ;
+//     }
+//     return temp ;
+// }
+
+// // 🔸Find maximum value in BST
+// Node* maxVal(Node* root) {
+//     Node* temp = root;
+//     while(temp -> right != NULL){
+//         temp = temp -> right ;
+//     }
+//     return temp ;
+// }
+
+// //🔸taking input function
+// void takeInput(Node* &root) {                //🔴 &root == Imp
+//     int data ; 
+//     cin >> data ;
+
+//     while(data != -1) {
+//         root = insertIntoBST(root, data) ;
+//         cin >> data ;
+//     }
+// }
+
+
+// //🔴delete from BST main code 
+// Node* deleteFromBST(Node* root, int val) {
+//     // base case
+//     if(root == NULL){
+//         return root ;
+//     }
+
+//     if(root -> data == val) {
+//         // 0 child
+//         if(root -> left == NULL && root -> right == NULL) {
+//             delete root ;
+//             return NULL ;
+//         }
+
+//         // 1 child
+//         // 1 child me left child hai sirf
+//         if(root -> left != NULL && root-> right == NULL){
+//             Node* temp = root -> left ;
+//             delete root ;
+//             return temp ;
+//         }
+//         // 1 child me right child hai sirf
+//         if(root -> left == NULL && root -> right != NULL){
+//             Node* temp = root -> right ;
+//             delete root ;
+//             return temp ;
+//         }
+
+
+//         // 2 child
+//         if(root -> left != NULL && root -> right != NULL){
+//             int mini = minVal(root -> right) -> data ;   // find minimmum node using minVal function
+//             root -> data = mini ;                       // replace node we want to delete with the mini value node
+//             root -> right = deleteFromBST(root -> right, mini) ; // and delete the node we want to delete
+//         }
+
+//     }
+
+//     else if ( root -> data > val) {
+//         // left part me search karo agar value chota hai 
+//         root -> left = deleteFromBST(root -> left, val) ;
+//         return root ;
+//     }
+
+//     else{
+//         // right part me search karo agar value bada hai
+//         root -> right = deleteFromBST(root -> right, val) ;
+//         return root;
+//     }
+
+// }
+
+
+// //driver code
+// int main () {
+//     Node* root = NULL ;
+    
+//     cout<<"enter data to create a BST" <<endl ;
+//     takeInput(root) ;
+
+//     cout<<"printing lOT in BST" <<endl ;
+//     levelOrderTraversal(root) ;
+
+//     cout<<endl <<" INORDER traversal" << endl ;
+//     inorder(root);
+//     cout<<" PREORDER traversal" << endl ;
+//     preorder(root) ;
+//     cout<<" POSTORDERtraversal" << endl ;
+//     postorder(root) ;
+
+
+
+//     deleteFromBST(root, 20) ;
+
+
+//     cout<<"printing lOT in BST" <<endl ;
+//     levelOrderTraversal(root) ;
+
+//     cout<<endl <<" INORDER traversal" << endl ;
+//     inorder(root);
+//     cout<<" PREORDER traversal" << endl ;
+//     preorder(root) ;
+//     cout<<" POSTORDERtraversal" << endl ;
+//     postorder(root) ;
+
+   
+
+//    return 0;
+// }
+//🔴Time complexity: O(H)   :  worst case O(N)
+//🔴space complexity: O(1)
+
+// 76/ 149
