@@ -1084,4 +1084,440 @@
 //🔴Time complexity: O(H)   :  worst case O(N)
 //🔴space complexity: O(1)
 
-// 76/ 149
+
+
+
+//                //❓Question: Validate  BST
+
+// Given a binary tree with N number of nodes, check if that input tree is Partial BST (Binary Search Tree) or not. If yes, return true, return false otherwise.
+// A binary search tree (BST) is said to be a Partial BST if it follows the following properties.
+//       The left subtree of a node contains only nodes with data less than and equal to the node's data.
+//       The right subtree of a node contains only nodes with data greater than and equal to the node's data.
+//       Both the left and right subtrees must also be partial binary search trees.
+
+// ex:              
+//              [4]
+//             /   \
+//           [2]    [3]
+//          /   \ 
+//         [1]   [3]
+
+// Answer:
+//    Level 1:
+//    All the nodes in the left subtree of 4 (2, 1, 3) are smaller
+//    than 4, all the nodes in the right subtree of the 4 (5) are larger than 4.
+
+//    Level 2 :
+//    For node 2:
+//    All the nodes in the left subtree of 2 (1) are smaller than
+//    2, all the nodes in the right subtree of the 2 (3) are larger than 2.
+//    For node 5:
+//    The left and right subtree for node 5 is empty.
+
+//    Level 3:
+//    For node 1:
+//    The left and right subtree for node 1 are empty.
+//    For node 3:
+//    The
+
+
+// Sample Input 1:
+// 2
+// 3 1 5 -1 2 -1 -1 -1 -1
+// 3 2 5 1 4 -1 -1 -1 -1 -1 -1
+// Sample Output 1:
+//  true
+//  false
+// Explanation Of The Sample Input1:
+// Here we have 2 test cases, hence there are 2 binary trees
+
+// Test Case 1: 
+
+
+// #include<iostream>
+// #include<limits.h>
+// using namespace std;
+
+// class Node{
+//     public:
+//     int data ;
+//     Node* right ;
+//     Node* left;
+
+//     Node(int d) {
+//         this -> data = d ;
+//         this -> left = NULL;
+//         this -> right = NULL;
+//     }
+// } ;
+
+// bool isBST(Node* root, int min, int max) {
+//     //base case
+//     if(root == NULL){
+//         return true ;
+//     }
+
+//     if(root -> data >= min && root -> data <= max) {
+//         bool left = isBST(root -> left, min, root -> data) ;
+//         bool right = isBST(root -> right, root -> data, max ) ;
+//         return left && right ;
+//     }
+//     else{
+//       return false;
+//     }
+// }
+
+// //main func
+// bool validateBst(Node* root) {
+//     return isBST(root, INT_MIN, INT_MAX ) ;
+// }
+//🔴Time complexity: O(N)    
+//🔴space complexity: O(H)     : worst case O(N)
+
+
+//                     //❓Question: Find K-th smallest Element in BST
+
+// Given a binary search tree and an integer "K" Your task is to find the "K-th"
+// smallest element in the given BST( binary search tree).
+// BST (binary search tree) -
+// If all the smallest nodes on the left side and all the greater nodes on the right side of the node current node.
+
+// Order of elements in increasing order in the given BST Tis - (2.3,4.5.6.7.8.10)
+// Suppose given 'K=3' then 3rd smallest element is '4'.
+// Suppose given 'K = 8' then 8th smallest element is '10'.
+
+// Sample Input 1:
+// 2
+// 3
+// 3 1 4 -1 -1 -1 5 -1 -1
+// 4
+// 5 2 -1 -1 4 3 -1 -1 -1
+// Sample Output 1:
+// 4   
+// 5
+// Explanation Of Sample Input 1:
+// Test case 1:
+
+//     [3]
+//   /     \
+// [1]     [4] 
+//           \ 
+//            [5]
+
+// Order of elements in the increasing order in the given BST is - { 1, 3, 4, 5 }.
+// ‘K = 3’, so the 3’rd smallest element is ‘4’, return ‘4’.
+
+// Test case 2:
+
+//   [5]
+//   /
+// [2]
+//   \ 
+//    [4]
+//    /
+//   [3]
+
+// Order of elements in increasing order in the given BST is - { 2, 3, 4, 5 }.
+// ‘K=4’, so the 4’rd smallest element is ‘5’, return ‘5’.
+
+// Sample Input 2:
+// 2
+// 1
+// 3 2 -1 1 -1 -1 -1
+// 4
+// 3 1 4 -1 -1 -1 -1
+// Sample Output 2:
+// 1
+// -1
+
+
+// #include<iostream>
+// using namespace std;
+
+// class Node{
+//     public:
+//     int data ;
+//     Node* right ;
+//     Node* left;
+
+//     Node(int d) {
+//         this -> data = d ;
+//         this -> left = NULL;
+//         this -> right = NULL;
+//     }
+// } ;
+
+// int solve(Node* root, int &i, int k) {
+//     //base case
+//     if(root == NULL){
+//         return -1;
+//     }
+     
+//     // L
+//     int left = solve(root -> left , i, k) ;
+
+//     if(left != -1) {
+//         return left;
+//     }
+
+//     //N
+//     i++ ;
+//     if(i==k){
+//         return root -> data;
+//     }
+
+//     //R
+//     return solve(root -> right, i, k) ;
+// }
+
+// //main functiom
+// int kthSmallest(Node* root, int k){
+//     int i=0;
+//     int ans = solve(root, i , k) ;
+//     return ans ;
+// }
+
+//🔴Time complexity: O(N)
+//🔴Space complexity: O(H)  : worst case o(N)
+
+
+//🔴🔴Homework:  solve above question using morris traversal
+
+
+//                 //❓Question: Predecessor and Successor in BST
+
+// You have been given a binary search tree of integers with 'N' nodes. You are also given 'KEY' which represents data of a node of this tree.
+//  Your task is to find the predecessor and successor of the given node in the BST.
+//  Note:
+//    1. The predecessor of a node in BST is that node that will be visited just before the given node in the inorder
+//    traversal of the tree. If the given node is visited first in the inorder traversal, then its predecessor is NULL.
+//    2. The successor of a node in BST is that node that will be visited immediately after the given node in the inorder
+//      traversal of the tree. If the given node is visited last in the inorder traversal, then its successor is NULL.
+//    3. The node for which predecessor and successor are to be found will always be present in the given tree.
+//    4. A binary search tree (BST) is a binary tree data structure which has the following properties.
+//        The left subtree of  a node containsonly nodes with  data less than the node's data.
+//        The right subtree of a node contains only nodes with data greater than the node's data.
+//        Both the left and right subtrees must also be binary search trees.
+
+
+// Sample Input 1:
+// 1
+// 15 10 20 8 12 16 25 -1 -1 -1 -1 -1 -1 -1 -1
+// 10
+// Sample Output 1:
+// 8 12
+
+// ex:    
+    //          [15]
+    //         /   \
+    //     [10]     [20]
+    //    /    \    /   \
+    //  [8]   [12] [16]  [25]
+
+//     The inorder traversal of this tree will be 8 10 12 15 16 20 25.
+// Since the node with data 8 is on the immediate left of the node with data 10 in the inorder traversal, the node with data 8 is the predecessor.
+// Since the node with data 12 is on the immediate right of the node with data 10 in the inorder traversal, the node with data 12 is the successor.
+
+// Sample Input 2:
+// 2 
+// 10 5 -1 -1 -1 -1
+// 5
+// 20 -1 -1
+// 20
+// Sample Output 2:
+// -1 10
+// -1 -1
+
+// #include<iostream>
+// using namespace std;
+
+// class Node{
+//     public:
+//     int data ;
+//     Node* right ;
+//     Node* left;
+
+//     Node(int d) {
+//         this -> data = d ;
+//         this -> left = NULL;
+//         this -> right = NULL;
+//     }
+// } ;
+
+
+// pair<int,int> predecessororSuccessor(Node* root, int key) {
+
+//     Node* temp = root;
+
+//     int predecessor = -1 ;
+//     int succcessor = -1 ;
+
+// // find Node == key
+//     while(temp-> data != key) {
+//         if(temp -> data > key){
+//             succcessor = temp -> data ;
+//             temp = temp -> left ;
+//         }
+//         else{
+//             predecessor = temp -> data ;
+//             temp = temp -> right;
+//         }
+//     }
+
+//     //predecessor and successor
+
+//     //predecessor
+//     Node* leftSubTree = temp -> left ;
+//     while(leftSubTree != NULL) {
+//         predecessor = leftSubTree -> data ;
+//         leftSubTree = leftSubTree -> right ;
+//     }
+
+//     //successor
+//     Node* rightSubTree = temp -> right;
+//     while(rightSubTree != NULL){
+//         succcessor = rightSubTree -> data;
+//         rightSubTree = rightSubTree-> left ;
+//     }
+
+//    //2 ways to pass the answer
+
+//    //way 1:
+//     // pair<int,int> ans = make_pair(predecessor, succcessor) ;
+//     // return ans ;
+
+//     //way 2:
+//     return {predecessor, succcessor} ;
+// }
+
+//🔴Time complexity: O(N)
+//🔴space complexity: O(1)
+
+
+
+//                   //❓Question: LCA(lowest common ancestor) of TWO Nodes in a BST
+
+//You are given a binary search tree of integers with N nodes. You are also given references to two nodes P and Q from this BST.
+// Your task is to find the lowest common ancestor(LCA) of these two given nodes.
+// The lowest common ancestor for two nodes P and Q is defined as the lowest node that has both P and Q as descendants (where we
+// allow a node to be a descendant of itself)
+
+// A binary search tree (BST) is a binary tree data structure which has the following properties.
+//  The left subtree of a node contains only nodes with data less than the node's data.
+//  The right subtree of a node contains only nodes with data greater than the node's data.
+//  Both the left and right subtrees must also be binary search trees.
+
+// Sample Input 1 :
+// 2
+// 3 5
+// 2 1 3 -1 -1 -1 5 -1 -1
+// 1 3
+// 2 1 4 -1 -1 3 -1 -1 -1
+// Sample Output 1:
+// 3
+// 2
+// Explanation for Sample 1:
+// The BST corresponding to the first test case will be-
+
+//                  [2]
+//               /       \ 
+//             [1]        [3]
+//                          \ 
+//                          [5]
+
+// Here, we can clearly see that LCA of node 3 and node 5 is 3.
+// The BST corresponding to the second test case will be- 
+
+//                  [2]
+//                 /   \
+//               [1]    [4]
+//                      /
+//                    [3]
+
+//Here, we can clearly see that LCA of node 1 and node 3 is 2.
+
+// Sample Input 2 :
+// 1
+// 1 1
+// 3 2 -1 1 -1 -1 -1
+// Sample Output 2:
+// 1
+
+//🔴Approach 1: recursion
+// #include<iostream>
+// using namespace std;
+
+// class Node{
+//     public:
+//     int data ;
+//     Node* right ;
+//     Node* left;
+
+//     Node(int d) {
+//         this -> data = d ;
+//         this -> left = NULL;
+//         this -> right = NULL;
+//     }
+// } ;
+
+
+// Node*  LCAinBST(Node* root, Node* p, Node* q) {
+//     //base case
+//     if(root == NULL){
+//         return NULL; 
+//     }
+
+//     if( (root->data < p->data) && (root->data < q->data)) {
+//         return LCAinBST(root->right, p, q) ;
+//     }
+
+//     if((root->data > p->data) && (root->data > q->data )) {
+//         return LCAinBST(root->left, p, q) ;
+//     }
+
+//     return root;
+// }
+//🔴Time complexity: O(N)
+//🔴Space complexity: O(H)
+
+
+//🔴Approach 2: Iterative
+// #include<iostream>
+// using namespace std;
+
+// class Node{
+//     public:
+//     int data ;
+//     Node* right ;
+//     Node* left;
+
+//     Node(int d) {
+//         this -> data = d ;
+//         this -> left = NULL;
+//         this -> right = NULL;
+//     }
+// } ;
+
+
+// Node*  LCAinBST(Node* root, Node* p, Node* q) {
+
+//     while(root != NULL) {
+
+//        if( (root->data < p->data) && (root->data < q->data)) {
+//         root = root->right ;
+//       }
+
+//        if((root->data > p->data) && (root->data > q->data )) {
+//         root = root->left ;
+//       }
+//       else{
+//         return root;
+//       }
+//     }
+
+// }
+//🔴Time complexity: O(N)
+//🔴Space complexity: O(1)
+
+
+//  77 / 149
