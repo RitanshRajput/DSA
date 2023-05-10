@@ -1520,4 +1520,453 @@
 //🔴Space complexity: O(1)
 
 
-//  77 / 149
+
+//                //❓Question: Two Sum in BST
+
+// You have been given a Binary Search Tree and a target value. You need to find out whether there exists a pair of node values in the BST,
+//  such that their sum is equal to the target value.
+//  A binary search tree (BST), also called an ordered or sorted binary tree, is a rooted binary tree whose internal nodes each store a value
+//  greater than all the values keys in the node's left subtree and less than those in its right subtree.
+
+//  Follow Up:
+//  Can you solve this in O(N) time, and O(H) space complexity?
+
+// Sample Input 1:
+// 1
+// 10 6 12 2 8 11 15 -1 -1 -1 -1 -1 -1 -1 -1
+// 14
+// Sample Output 1:
+// True
+// Explanation For Sample 1:
+// For the first test case, the sum of the nodes with values 2 and 12 equals the target value.
+
+//       [10]
+//      /    \
+//   [6]     [12]
+//  /   \    /   \
+// [2]  [8] [11]  [15]
+                
+
+// Sample Input 2:
+// 1
+// 5 3 7 -1 -1 6 8 -1 -1 -1 -1
+// 20
+// Sample Output 2:
+// False
+// Explanation For Sample 2:
+// For the first test case, there is no such pair of nodes, the sum of which equals the target value.
+
+//       [5]
+//      /    \
+//   [3]     [7]
+//          /   \
+//         [6]  [8]
+
+
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// class Node{
+//     public:
+//     int data;
+//     Node* left;
+//     Node* right ;
+
+//     Node(int data){
+//         this -> data = data;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//     }
+// };
+
+// void inorder(Node* root, vector<int> &in){   
+//     if(root == NULL){
+//         return ;
+//     }
+
+//     inorder(root -> left, in) ;
+//     in.push_back(root -> data) ;
+//     inorder(root -> right, in) ;
+// }
+
+// //main function
+// bool twoSumInBST(Node* root, int target){
+
+//     vector<int> inorderValue ;
+//     //store inorder => sorted value in a vector
+//     inorder(root, inorderValue) ;
+
+//     //use 2 pointer approach to check if pair exist
+//     int i=0;
+//     int j = inorderValue.size()-1 ;
+
+//     while(i < j) {
+//         int sum = inorderValue[i] + inorderValue[j] ;
+//         if(sum == target) {
+//             return true ;
+//         }
+//         else if(sum > target){
+//             j-- ;
+//         }
+//         else{
+//             i++;
+//         }
+//     }
+//     return false;
+// }
+//🔴Time complexity: O(N)
+//🔴space complexity: O(N)
+
+
+//               //❓Question: Flatten a BST to a sorted list
+
+// You have been given a Binary Search Tree (BST). Your task is to flatten the given BST to a sorted list. More formally, you have to make a
+// right-skewed BST from the given BST, i.e., the left child of all the nodes must be NULL, and the value at the right child must be greater
+// han the current node.
+// A binary search tree (BST), also called an ordered or sorted binary tree, is a rooted binary tree whose internal nodes each store a value
+// greater than all the values in the node's left subtree and less than those in its right subtree
+
+// Follow Up:
+//    Can you solve this in O(N) time and O(H) space complexity?
+
+
+// Sample Input 1
+// 2
+// 10 6 12 2 8 11 15 -1 -1 -1 -1 -1 -1 -1 -1
+// 5 -5 8 -1 -1 -1 -1
+// Sample Output 1
+// 2 -1 6 -1 8 -1 10 -1 11 -1 12 -1 15 -1 -1
+// -5 -1 5 -1 8 -1 -1
+// Explanation For Sample Input 1
+// For the first test case, the given BST is depicted below.
+
+//       [10]
+//      /    \
+//   [6]     [12]
+//  /   \    /   \
+// [2]  [8] [11]  [15]
+
+//so after flattening the BST is transposed as the below figure.
+
+// [2]
+//   \
+//    [6] 
+//      \
+//       [8] 
+//         \ 
+//          [10]
+//            \
+//             [11] 
+//               \ 
+//                [12] 
+//                  \ 
+//                   [15]
+
+// For the second test case, the given BST is depicted below.
+
+//       [5]
+//      /    \
+//   [-5]     [8]
+
+// So, after flattening, the BST is transposed as the below figure.
+// [-5]
+//   \
+//    [5] 
+//      \
+//       [8] 
+
+// Sample Input 2
+// 2
+// 5 3 7 -1 -1 6 8 -1 -1 -1 -1
+// 2 1 -1 -1 -1
+// Sample Output 2
+// 3 -1 5 -1 6 -1 7 -1 8 -1 -1
+// 1 -1 2 -1 -1
+
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+
+// class Node{
+//     public:
+//     int data;
+//     Node* left;
+//     Node* right ;
+
+//     Node(int data){
+//         this -> data = data;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//     }
+// };
+
+// // inorder function
+// void inorder(Node* root, vector<int> &in) {
+//     //base case
+//     if(root == NULL) {
+//         return ;
+//     }
+
+//     inorder(root -> left, in) ;
+//     in.push_back(root ->data) ;
+//     inorder(root -> right, in) ;
+// }
+
+// //main function
+// Node* flatten(Node* root) {
+//    //step 1
+//     vector<int> inorderValue;          // create a vector to store inorder data (sorted data)
+//     inorder(root, inorderValue) ;      // call inorder function
+
+//     int n = inorderValue.size() ;      
+
+//     Node* newRoot = new Node(inorderValue[0]) ;     //create a new node(for flattening means for linkedlist initialise) and add first data of inorder 
+//     Node* current =  newRoot ; 
+
+//    //step 2:
+//     for(int i=1; i<n; i++) {           //because we already added [0] index data into linkedlist we start from [1] index
+//         Node* temp = new Node(inorderValue[i]) ;   //create linkedlist nodes
+
+//         current -> left = NULL ;           // after creating a new node make previous nodes left pointing to null
+//         current -> right = temp ;          // and right pointing to new node  (because in singly linked list only node-> right points to something )
+//         current =  temp ;                  // and then make new node as current node
+//     }
+  
+//   //step 3:
+//     current -> left = NULL ;
+//     current -> right = NULL ;
+
+//     return newRoot ;
+// }
+//🔴Time complexity:  O(N)
+//🔴space complexity: O(N)
+
+
+
+//                   //❓Question: Normal BST to balanced BST
+
+// You have been given a binary search tree of integers with 'N' nodes. Your task is to convert it into a balanced BST with the minimum
+//  height possible.
+//  A binary search tree (BST) is a binary tree data structure that has the following properties.
+//       The left subtree of a node contains only nodes with data less than the node's data.
+//       The right subtree of a node contains only nodes with data greater than the node's data.
+//       Both the left and right subtrees must also be binary search trees.
+
+// A Balanced BST is defined as a BST, in which the height of two subtrees of every node differs no more than 1.
+//  For Example:
+//    For the given BST:
+
+//        [10]
+//       /    \ 
+//      [8]   [12]
+//     /         \ 
+//    [4]        [16]
+//   /              \ 
+//  [2]              [20]
+
+// The modified BST will be:/
+
+//       [10]
+//      /    \
+//   [4]     [16]
+//  /   \    /   \
+// [2]  [8] [12]  [20]
+
+
+// Sample Input 1:
+// 1
+// 10 6 -1 4 -1 -1 -1
+// Sample Output 1:
+// 4 6 10
+// Explanation Of Sample Output 1:
+// The tree can be represented as follows:
+
+//        [10]
+//       /     
+//      [6]   
+//     /  
+//   [4]
+
+// After converting this tree to balanced BST. It will look like this:   
+
+//       [6]
+//      /    \
+//   [4]     [10]
+
+// Sample Input 2:
+// 2 
+// 10 5 -1 -1 -1
+// 20 -1 -1
+// Sample Output 2:
+// 5 10 
+// 20 
+
+
+// A Balanced BST is defined as a BST, in which the height of two subtrees of every node differs no more than 1.
+// means :  absoluteValue[H(left) - H(right)] <= 1
+
+
+//🔴approach : recursion 
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+
+// class Node{
+//     public:
+//     int data;
+//     Node* left;
+//     Node* right ;
+
+//     Node(int data){
+//         this -> data = data;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//     }
+// };
+
+// //inorder function
+// void inorder(Node* root, vector<int> &in) {
+//     //base case
+//     if(root == NULL){
+//         return;
+//     }
+
+//     inorder(root -> left, in) ;
+//     in.push_back(root -> data) ;
+//     inorder(root-> right , in) ;
+// }
+
+// // inorder to bst creation function
+// Node* inorderToBST(int start, int end, vector<int> &inorderValue) {
+//     //base case
+//     if(start > end) {
+//         return NULL ;
+//     }
+
+//     int mid = (start + end) / 2;
+//     Node* root = new Node(inorderValue[mid]) ;
+
+//     root -> left = inorderToBST(start, mid-1, inorderValue) ;
+//     root -> right = inorderToBST(mid+1, end, inorderValue) ;
+
+//     return root ;
+// }
+
+// //main function
+// Node* balancedBST(Node* root) {
+    
+//     vector<int> inorderValue ;
+//     inorder(root, inorderValue );
+    
+//     int start = 0;
+//     int end = inorderValue.size()-1 ;
+//     return inorderToBST( start, end, inorderValue) ;
+// }
+//🔴Time complexity: O(N)
+//🔴space complexity: O(N)
+
+
+
+//                 //❓Question: Preorder Traversal of a BST  (BST from preorder)
+
+// You have been given an array/list 'PREORDER' representing the preorder traversal of a BST with 'N' nodes. All the elements in the given
+//  array have distinct values.
+//  Your task is to construct a binary search tree that matches the given preorder traversal.
+//  A binary search tree (BST) is a binary tree data structure that has the following properties:
+//       The left subtree of a node contains only nodes with data less than the node's data.
+//       The right subtree of a node contains only nodes with data greater than the node's data.
+//       Both the left and right subtrees must also be binary
+
+// Note:
+//    It is guaranteed that a BST can be always constructed from the given preorder traversal. Hence, the answer will
+//    always exist.
+
+// Example:
+//    From PREORDER = [20, 10, 5, 15, 13, 35, 30, 42] و the following BST can be constructed:
+
+//                [20]
+//               /    \
+//           [10]      [35]
+//          /   \      /   \
+//       [5]   [15]   [30]  [42]
+//              /
+//           [13]  
+
+// Sample Input 1:
+// 1
+// 6
+// 10 4 3 7 40 55 
+// Sample Output 1:
+// 3 5 7 10 40 50
+// Explanation For Sample Output1:
+// From the given preorder traversal, the following BST can be constructed:
+
+//           [10]
+//          /     \ 
+//       [4]       [40]
+//      /   \        \
+//    [1]   [7]       [55]
+// The inorder traversal of the given BST is [1, 4, 7, 10, 40, 55].
+
+// Sample Input 2:
+// 2
+// 7
+// 15 10 7 13 21 20 25 
+// 3
+// 1 2 4
+// Sample Output 2:
+// 7 10 13 15 20 21 25
+// 1 2 4
+
+
+// #include<iostream>
+// #include<limits.h>
+// #include<vector>
+// using namespace std;
+
+
+// class Node{
+//     public:
+//     int data;
+//     Node* left;
+//     Node* right ;
+
+//     Node(int data){
+//         this -> data = data;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//     }
+// };
+
+// Node* solve(vector<int> &preorder, int mini, int maxi, int &i) {
+//     //base case
+//     if( i >= preorder.size()) {
+//         return NULL ;
+//     }
+//     //base case
+//     if(preorder[i] < mini || preorder[i] > maxi) {
+//         return NULL ;
+//     }
+
+//     Node* root = new Node(preorder[i++]) ;
+//     root -> left = solve(preorder, mini, root -> data, i) ;
+//     root -> right = solve(preorder, root -> data, maxi, i) ;
+    
+//     return root;
+// }
+
+// //main function
+// Node* preorderToBST(vector<int> &preorder) {
+    
+//     int mini = INT_MIN ;
+//     int maxi = INT_MAX ;
+//     int i = 0;
+//     return solve(preorder, mini, maxi, i) ;
+// }
+//🔴Time complexity: O(N)       => O(3N)== O(N)
+//🔴space complexity: O(H)
+
+//78 /149
