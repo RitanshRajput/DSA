@@ -1969,4 +1969,283 @@
 //🔴Time complexity: O(N)       => O(3N)== O(N)
 //🔴space complexity: O(H)
 
-//78 /149
+
+
+
+//                   //❓Question:  Merge Two BST
+
+//You are given two balanced binary search trees of integers having 'N' and 'M' nodes. You have to merge the two BSTs into a balanced
+//  binary search tree and return the root node to that balanced BST.
+//  A binary search tree (BST) is a binary tree data structure with the following properties.
+//   The left subtree of a node contains only nodes with data less than the node's data.
+//   The right subtree of a node contains only nodes with data greater than the node's data.
+//   Both the left and right subtrees must also be binary search trees.
+
+// Sample Input 1:
+// 1
+// 2 1 3 -1 -1 -1 -1
+// 4 -1 -1
+// Sample Output 1:
+// 1 2 3 4 
+// Explanation For Sample Output 1:
+//  The given BST are:-
+
+//        [2]
+//       /   \
+//      [1]  [3]  [4]
+
+// we can see that after merging tree1 and tree2, it will look like the following:
+//        [2]
+//       /   \
+//      [1]  [3]  
+//             \ 
+//             [4]
+// Hence the output will be 1 2 3 4
+
+// Sample Input 2:
+// 1
+// 4 2 7 -1 3 -1 -1 -1 -1  
+// 5 1 7 -1 -1 -1 -1
+// Sample Output 2:
+// 1 2 3 4 5 7 7 
+
+
+//🔴approach 1: 
+// step1: store inorder of both root1 root2 into a vector ( time : o(m) O(N), space : O(M) O(N))
+// step2: merge both sorted inorder into a array (time: O(m+n), space: o(m+n))
+// stpe3: using inorderToBST that we done in previous questions create a new merge BST tree
+
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// class Node{
+//     public:
+//     int data ;
+//     Node* left ;
+//     Node* right ;
+
+//     Node(int data) {
+//         this -> data = data;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//     }
+// } ;
+// //inorder function
+// void inorder(Node* root, vector<int> &in) {
+//     //base case
+//     if(root == NULL){
+//         return ;
+//     }
+
+//     inorder(root -> left, in) ;
+//     in.push_back(root -> data);
+//     inorder(root -> right, in) ;
+// }
+
+// //merge array function
+// vector<int> mergeArray(vector<int> &bst1, vector<int> &bst2) {
+
+//     vector<int> ans(bst1.size() + bst2.size()) ;
+
+//     int i = 0, j = 0 , k = 0;
+//     while(i < bst1.size() && j < bst2.size()) {
+//         if( bst1[i] < bst2[j] ) {
+//             ans[k++] = bst1[i] ;
+//             i++ ;
+//         }
+//         else{
+//             ans[k++] =  bst2[j] ;
+//             j++ ;
+//         }
+//     }
+
+//     while( i < bst1.size() ) {
+//         ans[k++] = bst1[i] ;
+//         i++ ;
+//     }
+
+//     while( j < bst2.size()) {
+//         ans[k++] = bst2[j] ;
+//         j++ ;
+//     }
+//    return ans ;
+// }
+
+// // inorderToBST function
+// Node* inorderToBST(int start, int end, vector<int> &in) {
+//     //base case
+//     if( start > end) {
+//         return NULL ;
+//     }
+
+//     int mid = (start+end) / 2;
+//     Node* root = new Node(in[mid]) ;
+//     root -> left = inorderToBST(start, mid-1, in) ;
+//     root -> right = inorderToBST(mid+1, end, in) ;
+
+//     return root ;
+// }
+
+// //main function
+// Node* mergeBST(Node* root1, Node* root2) {
+//     //step1: store inorder(sorted bst)
+//     vector<int> bst1, bst2 ;
+//     inorder(root1, bst1) ;
+//     inorder(root2, bst2) ;
+
+//    //step2: store ans sort merge array
+//     vector<int> mergeArrays = mergeArray(bst1, bst2) ;
+
+//     //step3: create a new merge tree using inorderToBST
+//     int start = 0;
+//     int end = mergeArrays.size() - 1;
+
+//     return inorderToBST(start, end, mergeArrays) ;
+// }
+//🔴Time complexity: O(m+n)
+//🔴space complexity: O(m+n) 
+
+
+//🔴approach 1: 
+// step1: convert root1 and root2 into sorted linkedlist (Time: O(M) O(N), space: O(h1) O(h2))
+// step2: merge both sorted linkedlist (Time: O(m+n), space : O(1))
+// stpe3: convert linkedlist into BST (time : O(m+n), space: o(h1+h2))
+
+#include<iostream>
+#include<vector>
+using namespace std;
+
+class Node{
+    public:
+    int data ;
+    Node* left ;
+    Node* right ;
+
+    Node(int data) {
+        this -> data = data;
+        this -> left = NULL ;
+        this -> right = NULL ;
+    }
+} ;
+
+// convert into doubly linkelist
+void convertIntoSortedDLL(Node* root, Node* &head) {
+    //base case
+    if(root == NULL){
+     return ;
+    }
+
+    convertIntoSortedDLL(root -> right, head) ;
+
+    root -> right = head ;
+    if(head != NULL){
+    head -> left = root;
+    }
+    head = root ;
+
+    convertIntoSortedDLL(root -> left, head) ;
+}
+
+//merge linkedlist
+Node* mergeLL(Node* head1, Node* head2) {
+
+    Node* head = NULL ;
+    Node* tail = NULL ;
+
+    while(head1 != NULL && head2 != NULL){
+
+        if(head1 -> data < head2 -> data) {
+            if(head == NULL){            //insert at head
+                head = head1 ;
+                tail = head1 ;
+                head1 = head1 -> right ;
+            }
+            else{                     //insert at tail
+                tail-> right = head1 ;
+                head1 -> left = tail ;
+                tail = head1 ;
+                head1 = head1-> right ;
+            }
+        }
+        else{
+            if(head == NULL){         //insert at head
+                head = head2 ;
+                tail = head2 ;
+                head2 = head2 -> right ;
+            }
+            else{                     //insert at tail
+                tail-> right = head2 ;
+                head2  -> left = tail ;
+                tail = head2 ;
+                head2 = head2-> right ;
+            }
+        }
+    }
+
+
+    while(head1 != NULL){
+        tail-> right = head1 ;
+        head1 -> left = tail ;
+        tail = head1 ;
+        head1 = head1-> right ;
+    }
+
+     while(head2 != NULL){
+        tail-> right = head2 ;
+        head2  -> left = tail ;
+        tail = head2 ;
+        head2 = head2-> right ;
+    }
+
+    return head ;
+}
+
+// create a new bst using sorted linkedlist
+// counting function which counts no. of nodess in linkedlist
+int countNodes(Node* head) {
+    int cnt = 0 ;
+    Node* temp = head;
+    while(temp != NULL) {
+        cnt++ ;
+        temp = temp -> right ;
+    }
+    return cnt ;
+}
+
+Node* sortedLLToBST(Node* &head, int n) {
+    //base case
+    if( n <= 0 || head == NULL){
+        return NULL ;
+    }
+     
+    Node* left = sortedLLToBST(head, n/2) ;
+    Node* root = head ;
+    root -> left = left ;
+    head = head -> right ;
+
+    root -> right = sortedLLToBST(head, n-n/2-1) ;
+    return root ;
+}
+
+//main function
+Node* mergeBST(Node* root1, Node* root2) {
+    
+    //step1: convert bst into sorted DLL
+    Node* head1 = NULL ;
+    convertIntoSortedDLL(root1, head1) ;
+    head1 -> left = NULL ;
+
+    Node* head2 = NULL ;
+    convertIntoSortedDLL(root2, head1) ;
+    head2 -> left = NULL ;
+
+    //step2: merge sorted linkedlist
+    Node* head = mergeLL(head1, head2) ;
+  
+   //step3: convert sortedLL into bst
+   return sortedLLToBST(head, countNodes(head)) ;
+
+}
+//🔴Time complexity: O(m+n)
+//🔴space complexity: O(h1 + h2) 
