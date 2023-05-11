@@ -2107,145 +2107,145 @@
 //🔴space complexity: O(m+n) 
 
 
-//🔴approach 1: 
+//🔴approach 2: 
 // step1: convert root1 and root2 into sorted linkedlist (Time: O(M) O(N), space: O(h1) O(h2))
 // step2: merge both sorted linkedlist (Time: O(m+n), space : O(1))
 // stpe3: convert linkedlist into BST (time : O(m+n), space: o(h1+h2))
 
-#include<iostream>
-#include<vector>
-using namespace std;
+// #include<iostream>
+// #include<vector>
+// using namespace std;
 
-class Node{
-    public:
-    int data ;
-    Node* left ;
-    Node* right ;
+// class Node{
+//     public:
+//     int data ;
+//     Node* left ;
+//     Node* right ;
 
-    Node(int data) {
-        this -> data = data;
-        this -> left = NULL ;
-        this -> right = NULL ;
-    }
-} ;
+//     Node(int data) {
+//         this -> data = data;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//     }
+// } ;
 
-// convert into doubly linkelist
-void convertIntoSortedDLL(Node* root, Node* &head) {
-    //base case
-    if(root == NULL){
-     return ;
-    }
+// // convert into doubly linkelist
+// void convertIntoSortedDLL(Node* root, Node* &head) {
+//     //base case
+//     if(root == NULL){
+//      return ;
+//     }
 
-    convertIntoSortedDLL(root -> right, head) ;
+//     convertIntoSortedDLL(root -> right, head) ;
 
-    root -> right = head ;
-    if(head != NULL){
-    head -> left = root;
-    }
-    head = root ;
+//     root -> right = head ;
+//     if(head != NULL){
+//     head -> left = root;
+//     }
+//     head = root ;
 
-    convertIntoSortedDLL(root -> left, head) ;
-}
+//     convertIntoSortedDLL(root -> left, head) ;
+// }
 
-//merge linkedlist
-Node* mergeLL(Node* head1, Node* head2) {
+// //merge linkedlist
+// Node* mergeLL(Node* head1, Node* head2) {
 
-    Node* head = NULL ;
-    Node* tail = NULL ;
+//     Node* head = NULL ;
+//     Node* tail = NULL ;
 
-    while(head1 != NULL && head2 != NULL){
+//     while(head1 != NULL && head2 != NULL){
 
-        if(head1 -> data < head2 -> data) {
-            if(head == NULL){            //insert at head
-                head = head1 ;
-                tail = head1 ;
-                head1 = head1 -> right ;
-            }
-            else{                     //insert at tail
-                tail-> right = head1 ;
-                head1 -> left = tail ;
-                tail = head1 ;
-                head1 = head1-> right ;
-            }
-        }
-        else{
-            if(head == NULL){         //insert at head
-                head = head2 ;
-                tail = head2 ;
-                head2 = head2 -> right ;
-            }
-            else{                     //insert at tail
-                tail-> right = head2 ;
-                head2  -> left = tail ;
-                tail = head2 ;
-                head2 = head2-> right ;
-            }
-        }
-    }
+//         if(head1 -> data < head2 -> data) {
+//             if(head == NULL){            //insert at head
+//                 head = head1 ;
+//                 tail = head1 ;
+//                 head1 = head1 -> right ;
+//             }
+//             else{                     //insert at tail
+//                 tail-> right = head1 ;
+//                 head1 -> left = tail ;
+//                 tail = head1 ;
+//                 head1 = head1-> right ;
+//             }
+//         }
+//         else{
+//             if(head == NULL){         //insert at head
+//                 head = head2 ;
+//                 tail = head2 ;
+//                 head2 = head2 -> right ;
+//             }
+//             else{                     //insert at tail
+//                 tail-> right = head2 ;
+//                 head2  -> left = tail ;
+//                 tail = head2 ;
+//                 head2 = head2-> right ;
+//             }
+//         }
+//     }
 
 
-    while(head1 != NULL){
-        tail-> right = head1 ;
-        head1 -> left = tail ;
-        tail = head1 ;
-        head1 = head1-> right ;
-    }
+//     while(head1 != NULL){
+//         tail-> right = head1 ;
+//         head1 -> left = tail ;
+//         tail = head1 ;
+//         head1 = head1-> right ;
+//     }
 
-     while(head2 != NULL){
-        tail-> right = head2 ;
-        head2  -> left = tail ;
-        tail = head2 ;
-        head2 = head2-> right ;
-    }
+//      while(head2 != NULL){
+//         tail-> right = head2 ;
+//         head2  -> left = tail ;
+//         tail = head2 ;
+//         head2 = head2-> right ;
+//     }
 
-    return head ;
-}
+//     return head ;
+// }
 
-// create a new bst using sorted linkedlist
-// counting function which counts no. of nodess in linkedlist
-int countNodes(Node* head) {
-    int cnt = 0 ;
-    Node* temp = head;
-    while(temp != NULL) {
-        cnt++ ;
-        temp = temp -> right ;
-    }
-    return cnt ;
-}
+// // create a new bst using sorted linkedlist
+// // counting function which counts no. of nodess in linkedlist
+// int countNodes(Node* head) {
+//     int cnt = 0 ;
+//     Node* temp = head;
+//     while(temp != NULL) {
+//         cnt++ ;
+//         temp = temp -> right ;
+//     }
+//     return cnt ;
+// }
 
-Node* sortedLLToBST(Node* &head, int n) {
-    //base case
-    if( n <= 0 || head == NULL){
-        return NULL ;
-    }
+// Node* sortedLLToBST(Node* &head, int n) {
+//     //base case
+//     if( n <= 0 || head == NULL){
+//         return NULL ;
+//     }
      
-    Node* left = sortedLLToBST(head, n/2) ;
-    Node* root = head ;
-    root -> left = left ;
-    head = head -> right ;
+//     Node* left = sortedLLToBST(head, n/2) ;
+//     Node* root = head ;
+//     root -> left = left ;
+//     head = head -> right ;
 
-    root -> right = sortedLLToBST(head, n-n/2-1) ;
-    return root ;
-}
+//     root -> right = sortedLLToBST(head, n-n/2-1) ;
+//     return root ;
+// }
 
-//main function
-Node* mergeBST(Node* root1, Node* root2) {
+// //main function
+// Node* mergeBST(Node* root1, Node* root2) {
     
-    //step1: convert bst into sorted DLL
-    Node* head1 = NULL ;
-    convertIntoSortedDLL(root1, head1) ;
-    head1 -> left = NULL ;
+//     //step1: convert bst into sorted DLL
+//     Node* head1 = NULL ;
+//     convertIntoSortedDLL(root1, head1) ;
+//     head1 -> left = NULL ;
 
-    Node* head2 = NULL ;
-    convertIntoSortedDLL(root2, head1) ;
-    head2 -> left = NULL ;
+//     Node* head2 = NULL ;
+//     convertIntoSortedDLL(root2, head1) ;
+//     head2 -> left = NULL ;
 
-    //step2: merge sorted linkedlist
-    Node* head = mergeLL(head1, head2) ;
+//     //step2: merge sorted linkedlist
+//     Node* head = mergeLL(head1, head2) ;
   
-   //step3: convert sortedLL into bst
-   return sortedLLToBST(head, countNodes(head)) ;
+//    //step3: convert sortedLL into bst
+//    return sortedLLToBST(head, countNodes(head)) ;
 
-}
+// }
 //🔴Time complexity: O(m+n)
 //🔴space complexity: O(h1 + h2) 
