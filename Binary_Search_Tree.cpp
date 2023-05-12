@@ -2295,6 +2295,7 @@
 
 
 
+<<<<<<< HEAD
 //🔴approach:
 // #include<iostream>
 // #include<limits.h>
@@ -2363,3 +2364,72 @@
 
 //🔴Time complexity: O(N)
 // 🔴space complexity: O(H)
+=======
+#include<iostream>
+#include<limits.h>
+using namespace std ;
+
+class Node{
+   public:
+   int data ;
+   Node* left ;
+   Node* right ;
+
+   Node(int data) {
+    this -> data = data;
+    this -> left = NULL ;
+    this -> right = NULL ;
+   }
+} ;
+
+// Information class 
+class info{
+   public:
+   int maxi ;
+   int mini ;
+   bool isBST ;
+   int size ;
+} ;
+
+//solve function
+info solve(Node* root, int &ans) {
+    //base case
+    if(root == NULL) {
+        return {INT_MIN, INT_MAX, true, 0} ;
+    }
+
+    info left = solve(root -> left, ans) ;
+    info right = solve(root -> right, ans) ;
+
+    info currentNode  ;
+
+    currentNode.size = left.size + right.size + 1 ;
+    currentNode.maxi = max(root -> data, right.maxi) ;
+    currentNode.mini = min(root -> data, left.mini) ;
+
+    if(left.isBST && right.isBST && (root -> data > left.maxi && root -> data < right.mini)) {
+        currentNode.isBST = true ;
+    }
+   else{
+        currentNode.isBST = false ;
+   }
+
+   //answer update
+   if(currentNode.isBST) {
+      ans = max(ans, currentNode.size) ;
+   }
+
+   return currentNode ;
+}
+
+//main function
+int largestBST(Node* root) {
+
+    int maxSize = 0 ;
+    info temp = solve(root, maxSize) ;
+    return maxSize;
+}
+
+//🔴Time complexity: O(N)
+//🔴space complexity: O(H)
+>>>>>>> 35b618fa8305b739784c6289a7152861338d94b6
