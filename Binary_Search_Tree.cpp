@@ -2249,3 +2249,117 @@
 // }
 //🔴Time complexity: O(m+n)
 //🔴space complexity: O(h1 + h2) 
+
+
+
+//🔴🔴🔴           //❓Question: Largest BST in a Binary Tree
+
+//You are given a binary tree with 'N' nodes. Your task is to return the size of the largest subtree of the binary tree which is also a BST.
+//  A binary search tree (BST) is a binary tree data structure which has the following properties.
+
+//  The left subtree of a node contains only nodes with data less than the node's data.
+//  The right subtree of a node contains only nodes with data greater than the node's data.
+//  Both the left and right subtrees must also be binary search trees.
+
+
+// Sample Input 1 :
+// 2
+// 5 2 4 1 3 -1 -1 -1 -1 -1 -1 
+// 2 1 3 -1 -1 -1 -1
+// Sample Output 1:
+// 3
+// 3
+// Explanation for Sample 1:
+// The BST corresponding to the first test case is-
+
+//              [5]
+//            /     \ 
+//           [2]     [4]
+//         /    \ 
+//        [1]   [3]
+
+// The subtree rooted at 2 is a BST and its size is 3.
+
+// The BST corresponding to the second test case is -
+
+//               [2]
+//              /   \
+//            [1]   [3]
+//The subtree rooted at 2 is a BST and its size is 3.
+
+// Sample Input 2 :
+// 1
+// 50 -1 20 -1 30 -1 40 -1 50 -1 -1
+// Sample Output 2:
+// 4
+
+
+
+//🔴approach:
+// #include<iostream>
+// #include<limits.h>
+// using namespace std ;
+
+// class Node{
+//    public:
+//    int data ;
+//    Node* left ;
+//    Node* right ;
+
+//    Node(int data) {
+//     this -> data = data;
+//     this -> left = NULL ;
+//     this -> right = NULL ;
+//    }
+// } ;
+
+// // Information class 
+// class info{
+//    public:
+//    int maxi ;
+//    int mini ;
+//    bool isBST ;
+//    int size ;
+// } ;
+
+// //solve function
+// info solve(Node* root, int &ans) {
+//     //base case
+//     if(root == NULL) {
+//         return {INT_MIN, INT_MAX, true, 0} ;
+//     }
+
+//     info left = solve(root -> left, ans) ;
+//     info right = solve(root -> right, ans) ;
+
+//     info currentNode  ;
+
+//     currentNode.size = left.size + right.size + 1 ;
+//     currentNode.maxi = max(root -> data, right.maxi) ;
+//     currentNode.mini = min(root -> data, left.mini) ;
+
+//     if(left.isBST && right.isBST && (root -> data > left.maxi && root -> data < right.mini)) {
+//         currentNode.isBST = true ;
+//     }
+//    else{
+//         currentNode.isBST = false ;
+//    }
+
+//    //answer update
+//    if(currentNode.isBST) {
+//       ans = max(ans, currentNode.size) ;
+//    }
+
+//    return currentNode ;
+// }
+
+// //main function
+// int largestBST(Node* root) {
+
+//     int maxSize = 0 ;
+//     info temp = solve(root, maxSize) ;
+//     return maxSize;
+// }
+
+//🔴Time complexity: O(N)
+//🔴space complexity: O(H)
