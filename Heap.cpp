@@ -201,8 +201,9 @@
 //         [x  | 60 | 50 | 40 | 30 | 20 ]
 //          0    1    2    3    4    5        
 
-// WE will not consider  0th Index.
+// WE will not consider  0th Index. in this 
 
+//🔴 For 0-based indexing :
 // For every Node on ith index there Left child will be found on 
 //  (2 * i) index
 
@@ -211,6 +212,16 @@
 
 // And parent Node will be found on
 //  ( i / 2) index
+
+//🔴 For 1-based indexing :
+// For every Node on ith index there Left child will be found on 
+//  (2 * i + 1) index
+
+// For every Node on ith index there right child will be found on 
+//  (2 * i + 2) index
+
+
+
 
 
 // 🔸steps:
@@ -510,6 +521,9 @@
 //🔸 Which means we can process from  1th ---> (n/2) index
 //    processed means to rearrange all the element to ther correct position
 
+//🔴 if 1-based indexing : (int i = n/2 ; i > 0; i--)
+//🔴 if 0-based indexing : (int i = n/2-1 ; i >=0; i--)
+
 //🔸heapify helps to rearrange a certain element in the heap to its correct position
 
 
@@ -607,15 +621,15 @@
 //  void heapify(int arr[], int n, int i) {
 
 //     int largest = i;
-//     int left = 2 * i ;
-//     int right = 2 * i + 1;
+// int left = 2 * i ;              //left = for 0-based indexing = 2* i + 1
+// int right = 2*i + 1 ;           //right= for 0-based indexing = 2* i + 2
 
-//     if( left <= n && arr[largest] < arr[left] ) {
-//         largest = left ;
-//     }
-//     if( right <= n && arr[largest] < arr[right]) {
-//         largest = right ;
-//     }
+// if(left <= n && arr[largest] < arr[left]) {  // for 0-based indexing == left < n
+//     largest = left ;
+// }
+// if(right <= n && arr[largest] < arr[right]) { // for 0-based indexing == right < n
+//     largest = right ;
+// }
 
 //     if(largest != i) {
 //         swap(arr[largest],arr[i]) ;
@@ -647,6 +661,8 @@
 // //    /    \ 
 // //   [52]  [50]
 // int n = 5 ;
+//🔴 if 1-based indexing : (int i = n/2 ; i > 0; i--)
+//🔴 if 0-based indexing : (int i = n/2-1 ; i >=0; i--)
 // for(int i=n/2; i>0; i--) {
 //     heapify(arr, n, i) ;
 // }
@@ -991,4 +1007,468 @@
 // }
 
 
-// 81/149
+
+
+//                //❓Question: Kth smallest Element 
+
+// Given an array arr[] and an integer K where K is smaller than size of array, 
+// the task is to find the Kth smallest element in the given array. 
+// It is given that all array elements are distinct.
+
+// Note :-  l and r denotes the starting and ending index of the array.
+
+// Example 1:
+
+// Input:
+// N = 6
+// arr[] = 7 10 4 3 20 15
+// K = 3
+// Output : 7
+// Explanation :
+// 3rd smallest element in the given 
+// array is 7.
+// Example 2:
+
+// Input:
+// N = 5
+// arr[] = 7 10 4 20 15
+// K = 4
+// Output : 15
+// Explanation :
+// 4th smallest element in the given 
+// array is 15.
+
+// arr : given array
+// l : starting index of the array i.e 0
+// r : ending index of the array i.e size-1
+// k : find kth smallest element and return using this function
+
+//🔴Appraoch 1:
+// sort the array
+// return arr[k - 1]
+
+// #include<iostream>
+// #include<algorithm>
+// using namespace std ;
+
+// int kthSmallest(int arr[], int l, int r, int k) {
+//    sort(arr, arr+r) ;         // time complexity: O(nlogN)
+//    return arr[k-1] ;          // time complexity: O(1)
+// }
+//🔸Time complexity: O(N log N)
+
+
+
+//🔴Approach 2: solve using Heap
+
+//step1:create a max-heap for the first K element
+//step2: for rest element ( k ---> n-1th)element, if element < heap.top() then
+//   heap.pop() (remove the top element == (maxelement))
+//   heap.push() and push the smaller element in the heap
+//step3: top of the heap will be our answer
+
+// #include<iostream>
+// #include<queue>
+// using namespace std;
+
+// int kthSmallest(int arr[], int s, int e, int k) {
+//     // create a max-heap === priority_queue 
+//     //push first k element in the max-heap
+//     priority_queue<int> pq ;
+
+//     for(int i=0; i<k; i++) {
+//         pq.push(arr[i]) ;
+//     }
+
+//     //step2: for rest element ( k ---> n-1th)element, if element < heap.top() then
+//     //   heap.pop() (remove the top element == (maxelement))
+//     //   heap.push() and push the smaller element in the heap
+//     for(int i=k; i<=e; i++) {
+//         if(arr[i] < pq.top()) {
+//           pq.pop() ;
+//           pq.push(arr[i]) ;
+//         }
+//     }
+
+//     //step3: return heap->top
+//     int ans = pq.top() ;
+    
+//     return ans;
+// }
+// in the first loop from 0 to k we are building the maxHeap by insertion which has T.C of O(log n) and for k ele it is O(klogk) .
+// In the second loop for rem elements i=k to i=(n-k) we are comparing and insertion will take  O((n-k)logk) .
+// Hence overall O(nlogk) .
+//🔴Time complexity: O(n log k)
+//🔴space complexity: O(K)
+
+
+
+//                    //❓Question: Is Binary Tree Heap
+
+// Given a binary tree. The task is to check whether the given tree follows the max heap property or not.
+// Note: Properties of a tree to be a max heap - Completeness and Value of node greater than or equal to its child.
+
+// Example 1:
+
+// Input:
+//       5
+//     /  \
+//    2    3
+// Output: 1
+// Explanation: The given tree follows max-heap property since 5,
+// is root and it is greater than both its children.
+
+// Example 2:
+
+// Input:
+//        10
+//      /   \
+//     20   30 
+//   /   \
+//  40   60
+// Output: 0
+
+
+// #include<iostream>
+// using namespace std;
+
+// class Node{
+//     public:
+//     int data ;
+//     Node* left ;
+//     Node* right ;
+
+//     Node(int d) {
+//         this -> data = d ;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//     }
+// } ;
+
+// // node count function
+// int countNode(Node* root) {
+//     if(root == NULL){
+//         return 0;
+//     }
+   
+//    int ans = 1 + countNode(root -> left) + countNode(root-> right) ;
+//    return ans;
+// }
+
+// // is complete binary tree function
+// bool isCBT(Node* root, int index, int total) {
+//     if(root == NULL)
+//       return true ;
+
+//     if( index >= total) {
+//         return false; 
+//     }
+//     else{
+//         bool left = isCBT(root -> left,  2*index + 1, total) ;
+//         bool right = isCBT(root -> right, 2*index+2, total) ;
+        
+//         return (left && right) ;
+//     }
+// }
+
+// // max order of the tree function
+// bool isMaxOrder(Node* root) {
+//     //base case
+//     // if leaf node
+//     if(root -> left == NULL && root -> right == NULL){
+//         return true; 
+//     }
+
+//     if(root -> right == NULL) {
+//         return (root->data  >  root->left->data) ;
+//     }
+//     else{
+//         bool left = isMaxOrder(root -> left) ;
+//         bool right = isMaxOrder(root -> right) ;
+
+//     return ( left && right && 
+//     ((root->data > root->left->data) && (root->data > root->right->data))) ;
+//     }
+
+// }
+
+
+// //main function
+// bool isHeap(Node* tree) {
+
+//     int index = 0 ;
+//     int totalCount = countNode(tree) ;
+
+//     if( isCBT(tree, index, totalCount) && isMaxOrder(tree) ) {
+//         return true ;
+//     }
+//     else{
+//         return false;
+//     }
+// }
+//🔴Time complexity: O(N)             // O(N)+O(N)+O(N)
+//🔴space complexity: O(N)
+
+
+
+//                 //❓Question: Merge Two Binary Max Heaps 
+
+// Given two binary max heaps as arrays, merge the given heaps to form a new max heap.
+
+// Example 1:
+
+// Input  : 
+// n = 4 m = 3
+// a[] = {10, 5, 6, 2}, 
+// b[] = {12, 7, 9}
+// Output : 
+// {12, 10, 9, 2, 5, 7, 6}
+// Explanation :
+
+//                  [10]
+//                /      \  
+//              [5]      [6]
+//             /
+//            [2]
+
+//                  [12]
+//                /      \  
+//              [7]      [9]
+
+
+//                  [12]
+//                /      \  
+//              [10]      [9]
+//             /    \    /   \
+//            [2]   [5] [7]   [6]
+
+
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// // heapify function ===>  for 1-based indexing algo
+// void heapify(vector<int> &arr, int n, int i) {
+//     int largest = i ;
+//     int left = 2 * i + 1  ;              //left = for 1-based indexing = 2* i 
+//     int right = 2* i + 2 ;           //right= for 1-based indexing = 2* i + 1
+
+//     if(left < n && arr[largest] < arr[left]) {  // for 1-based indexing == left <= n
+//         largest = left ;
+//     }
+//     if(right < n && arr[largest] < arr[right]) { // for 1-based indexing == right <= n
+//         largest = right ;
+//     }
+
+//     if(largest != i) {
+//         swap(arr[largest], arr[i]) ;
+//         heapify(arr, n, largest) ;
+//     }
+// }
+
+// //main function
+// vector<int> mergeHeaps(vector<int> &a, vector<int> &b, int n, int m) {
+//     //  merge both arrray
+//     vector<int> ans ;
+//     for(auto i:a) {
+//         ans.push_back(i) ;
+//     }
+//     for(auto i:b){
+//         ans.push_back(i) ;
+//     }
+
+//     // build heap using mergedn array
+//     // if 1-based indexing === n/2 -->  >0
+//     // if 0-based indexing === n/2-1 --> >=0
+//     int size = ans.size() ;
+//     for(int i= size/2 - 1; i>=0; i--){
+//         heapify(ans, size, i) ;
+//     }
+
+//     return ans ;
+// }
+//🔴Time complexity: O(n logn)
+//🔴space complexity: O(m+n)
+
+
+
+//                 //❓Question: Minimum Cost of ropes
+
+// There are given N ropes of different lengths, we need to connect these ropes into one rope. 
+// The cost to connect two ropes is equal to sum of their lengths. 
+// The task is to connect the ropes with minimum cost. 
+// Given N size array arr[] contains the lengths of the ropes. 
+
+// Example 1:
+
+// Input:
+// n = 4
+// arr[] = {4, 3, 2, 6}
+// Output: 
+// 29
+
+// Explanation:
+// We can connect the ropes in following ways.
+// 1) First connect ropes of lengths 2 and 3.
+// Which makes the array {4, 5, 6}. Cost of
+// this operation 2+3 = 5. 
+// 2) Now connect ropes of lengths 4 and 5.
+// Which makes the array {9, 6}. Cost of
+// this operation 4+5 = 9.
+// 3) Finally connect the two ropes and all
+// ropes have connected. Cost of this 
+// operation 9+6 =15
+// Total cost for connecting all ropes is 5
+// + 9 + 15 = 29. This is the optimized cost
+// for connecting ropes. 
+// Other ways of connecting ropes would always 
+// have same or more cost. For example, if we 
+// connect 4 and 6 first (we get three rope of 3,
+// 2 and 10), then connect 10 and 3 (we get
+// two rope of 13 and 2). Finally we
+// connect 13 and 2. Total cost in this way
+// is 10 + 13 + 15 = 38.
+
+// Example 2:
+// Input:
+// n = 5
+// arr[] = {4, 2, 7, 6, 9}
+// Output: 
+// 62 
+
+// Explanation:
+// First, connect ropes 4 and 2, which makes
+// the array {6,7,6,9}. Cost of
+// this operation 4+2 = 6. Next, add ropes 
+// 6 and 6, which results in {12,7,9}. 
+// Cost of this operation 6+6 = 12.
+// Then, add 7 and 9, which makes the array {12,16}. 
+// Cost of this operation 7+9 = 16. And
+// finally, add these two which gives {28}.
+// Hence, the total cost is 6 + 12 + 16 + 
+// 28 = 62.
+
+
+// #include<iostream>
+// #include<queue>
+// using namespace std ;
+
+// long long minCost(long long arr[], long long n){
+    
+//     //create a min-heap
+//     priority_queue<long long, vector<long long>, greater<long long> > pq ;
+   
+//    //insert element from array to min-heap
+//    for(int i=0; i<n; i++) {
+//     pq.push(arr[i]) ;
+//    }
+
+//     //calculate cost 
+//     long long cost = 0 ;
+
+//     while(pq.size() > 1) {
+//         long long a = pq.top() ;
+//         pq.pop() ;
+
+//         long long b = pq.top() ;
+//         pq.pop() ;
+
+//         long long sum = a + b ;
+//         cost += sum ;
+
+//         pq.push(sum) ;
+//     }
+
+//     return cost ;
+// }
+//🔴Time complexity: o(n.logn)
+//🔴space complexity:  O(N)
+
+
+//                   //❓Question: Convert BST to min heap
+
+// Given a binary search tree which is also a complete binary tree.
+// The problem is to convert the given BST into a Min Heap with the condition 
+// that all the values in the left subtree of a node should be less than 
+// all the values in the right subtree of the node.
+//  This condition is applied to all the nodes, in the resultant converted Min Heap. 
+
+// Examples: 
+
+// Input:            4
+//                 /   \
+//                2     6
+//              /  \   /  \
+//            1   3  5    7
+
+// Output:          1
+//                /   \
+//               2     5
+//             /  \   /  \
+//            3   4  6    7 
+// Explanation: The given BST has been transformed into a Min Heap. 
+// All the nodes in the Min Heap satisfies the given condition, that is,
+// values in the left subtree of a node should be less than the values in the right subtree of the node. 
+
+//🔴approach:
+// inorder(root, vector<int> in){
+//     //base case
+//       left call ;
+//       insert in vector ;
+//       right call ;
+// }
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// class Node{
+//     public:
+//     int data;
+//     Node* left ;
+//     Node* right; 
+
+//     Node(int d) {
+//         this -> data = d ;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//     }
+// } ;
+
+// // inorder 
+// void inorder(Node* root, vector<int> &in) {
+//     //base case
+//     if(root == NULL){
+//         return ;
+//     }
+
+//     inorder(root -> left, in) ;
+//     in.push_back(root -> data) ;
+//     inorder(root ->right, in) ;
+// }
+
+// // preorder 
+// void PreOrder(Node* root, vector<int> &ans, int &index, int n){
+//     //base case
+//     if(root == NULL || index >= n){
+//        return ;
+//     }
+   
+//    root -> data = ans[index++] ;
+//    PreOrder(root -> left, ans, index, n) ;
+//    PreOrder(root -> right, ans, index, n) ;
+   
+// }
+
+// Node* convertBST(Node* root) {
+//     vector<int> ans; 
+//     inorder(root, ans) ;
+
+//     int n = ans.size() ;
+//     int index = 0 ;
+//     preOrder(root, ans, index, n);
+//     return root;
+// }
+
+
+
+// 82/149
