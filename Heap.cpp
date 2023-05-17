@@ -1096,8 +1096,8 @@
 //     return ans;
 // }
 // in the first loop from 0 to k we are building the maxHeap by insertion which has T.C of O(log n) and for k ele it is O(klogk) .
-// In the second loop for rem elements i=k to i=(n-k) we are comparing and insertion will take  O((n-k)logk) .
-// Hence overall O(nlogk) .
+// In the second loop for rem elements i=k to i=(n-k) 
+//we are comparing and insertion will take  O((n-k)logk) .   Hence overall O(nlogk) .
 //🔴Time complexity: O(n log k)
 //🔴space complexity: O(K)
 
@@ -1497,7 +1497,7 @@
 // All sum of subarrays are {6, 5, 3, 3, 1, -2} where the third largest element is 3.
 
 // For the second test case, 
-// Sum of [0, 0] = 4
+// Sum of [0, 0] = 4 
 // Sum of [0, 1] = 5
 // Sum of [1, 1] = 1
 // All sum of subarrays are {5, 4, 1} where the second largest element is 4.
@@ -1590,3 +1590,276 @@
 // }
 //🔴time complexity: O(N^2 logK)
 //🔴space complexity: O(k)
+
+
+
+///                   //❓Question: Merge K sorted Arrays 
+
+// You have been given 'K' different arrays/lists, which are sorted individually (in ascending order). 
+// You need to merge all the given arrays/list
+//  such that the output array/list should be sorted in ascending order.
+
+// Constraints :
+//    1 <= T = = 5
+//    1 <= K <= 5
+//    1 < N <= 20
+//    -10^5 <= DATA <= 10^5
+//    Time Limit: 1 sec
+
+
+// Sample Input 1:
+// 1
+// 2
+// 3 
+// 3 5 9 
+// 4 
+// 1 2 3 8   
+// Sample Output 1:
+// 1 2 3 3 5 8 9 
+// Explanation Of Sample Input 1:
+// After merging the two given arrays/lists [3, 5, 9] and [ 1, 2, 3, 8], the output sorted array will be [1, 2, 3, 3, 5, 8, 9].
+// Sample Input 2:
+// 1
+// 4
+// 3
+// 1 5 9
+// 2
+// 45 90
+// 5
+// 2 6 78 100 234
+// 1
+// 0
+// Sample Output 2:
+// 0 1 2 5 6 9 45 78 90 100 234
+// Explanation Of Sample Input 2 :
+// After merging the given arrays/lists [1, 5, 9], [45, 90], [2, 6, 78, 100, 234] and [0], the output sorted array will be [0, 1, 2, 5, 6, 9, 45, 78, 90, 100, 234].
+
+
+//🔴approach 1:
+// create an array (Arr) =>  O(1) TC
+// Insert all element[n * k] into Arr array => O(N *k) TC
+// Sort Arr array  => O(N*k log(N*k)) TC
+
+//🔴Appraoch 2: 
+// create Minheap => consist each arrays first element
+// while( minheap.size() > 1 )
+// mini -> top :
+// put into answer array
+// insert next element of same array into heap, if present
+// #include<iostream> 
+// #include<queue> 
+// #include<vector> 
+// using namespace std;
+
+// // creating class node
+// class Node{
+//     public:
+//     int data ;
+//     int i ;
+//     int j ;
+
+//     Node(int data, int row, int col){
+//         this -> data = data ;
+//         i = row ;
+//         j = col ;
+//     }
+// };
+
+// class compare{
+//     public:
+//     bool operator()(Node* a, Node* b){
+//         return a->data > b->data ;
+//     }
+// };
+
+// vector<int> mergeKSortedArrays(vector<vector<int>>&kArrays, int k)
+// {
+//     priority_queue<Node*, vector<Node*>, compare> minHeap ;
+
+//     //step1: sare arrays k first element insert  : O(k log K)
+//     for(int i=0; i<k; i++) {
+//         Node* temp = new Node(kArrays[i][0], i, 0) ;
+//         minHeap.push(temp) ;
+//     }
+
+//     vector<int> ans ;
+
+//     //step2:  O(n*k log(k))         : where n*k are number of element in arrays  and log(k) for minheap insertion deletion
+//     while(minHeap.size() > 0) {
+//         Node* tmp = minHeap.top() ;
+
+//         ans.push_back(tmp->data) ;
+//         minHeap.pop() ;
+
+//         int i = tmp -> i ;
+//         int j = tmp -> j ;
+
+//         if( j+1 < kArrays[i].size()) {
+//             Node* next = new Node( kArrays[i][j+1], i, j+1) ;
+//             minHeap.push(next) ;
+//         }
+//     }
+//     return ans ;
+// }
+
+//🔴Time complexity:  O(n*k log(k))  
+//🔴space complexity: O(n*k)           : O(k) =  minheap and O(N*k) = ans
+
+
+
+//                 //❓Question: Merge K sorted lists
+
+// Given 'K' sorted linked lists, each list is sorted in increasing order. 
+// You need to merge all these lists into one single sorted list. You need to
+// return the head of the final linked list.
+
+// Constraints:
+//    1 <= T <= 10
+//    0 <= K <= 10 ٨ 3
+//    0 <= length of lists <= 100
+//    (-10 ٨ 9) <= value of list elements <= (10 ٨ 9) && value of list elements != -1.
+//    Time limit: 1 sec.
+
+// Sample Input 1:
+//  2
+//  3
+//  4 6 8 -1
+//  2 5 7 -1
+//  1 9 -1
+//  2
+//  2 6 -1
+//  -5 7 -1
+// Sample Output 1:
+//  1 2 4 5 6 7 8 9 -1
+//  -5 2 6 7 -1
+// Explanation For Input 1:
+// For first test case:
+// First list is: 4 -> 6 -> 8 -> NULL
+// Second list is: 2 -> 5 -> 7 -> NULL
+// Third list is: 1 -> 9 -> NULL
+// The final list would be: 1 -> 2 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> NULL
+
+// For second test case:
+// First list is: 2 -> 6 -> NULL
+// Second list is: -5 -> 7 -> NULL
+// The final list would be: -5 -> 2 -> 6 -> 7 -> NULL
+
+// Sample Input 2:
+//  2
+//  3
+//  8 9 11 -1
+//  1 2 -1 
+//  -1 
+//  1
+//  1 5 6 8 10 -1
+// Sample Output 2:
+// 1 2 8 9 11 -1
+// 1 5 6 8 10 -1
+
+//🔴approach 1: 
+// create a ans vector  and insert all the array element into that vector => O(N*k) TC
+// sort that ans vector  => O(N*k log(n*k))
+// join all linked list  => O(N*K)
+// replace linkedlist node data with vector data  => O(N*K)
+///🔴 time complexity: O(N*k log(n*k))
+
+
+//🔴approach 2:  using minheap
+//create a minheap consist of first element of k linkedlist
+// while ( !minheap.empty()) 
+//  if(head == NULL){
+//   head = tail = minHeap.top()     //insertion in linkedlist
+//   minHeap.pop()
+// }
+//   if(head -> next != NULL){
+//    minheap insert  
+//   }
+// else{
+//      tail-> next = minHeap.top() ;        //add new node after tail
+//      minHeap.pop() 
+//      tail = tail -> next ;
+//
+//     if(tail -> next != NULL){
+//       minheap insert
+//    } 
+// }
+//return head ;
+
+// #include<iostream>
+// #include<queue>
+// #include<vector>
+// using namespace std ;
+
+// class Node{
+//     public:
+//     int data ;
+//     Node* next ;
+
+//     Node(int data) {
+//        this -> next = NULL ;
+//        this -> data = data ;
+//     }
+
+//     ~Node() {
+//         if(next != NULL){
+//             delete next ;
+//         }
+//     }
+// } ;
+
+// //compare class
+// class compare{
+//    public:
+//    bool operator()(Node* a, Node* b) {
+//     return a->data > b->data ;
+//    }
+// } ;
+
+// Node* mergeKLists(vector<Node*> &listArray)
+// {
+//     priority_queue<Node*, vector<Node*>, compare> minHeap ;
+
+//     int k = listArray.size() ;
+
+//     if(k == 0){
+//         return NULL ;
+//     }
+
+//     //step1:
+//     for(int i=0; i<k; i++){          //tc: O(k logk)
+//         if(listArray[i] != NULL){
+//             minHeap.push(listArray[i]) ;
+//         }
+//     }
+
+//     Node* head = NULL ;
+//     Node* tail = NULL ;
+
+//    while(minHeap.size() > 0) {          //tc : n*k-k  ==> O(n*k)
+//      Node* top = minHeap.top() ;
+//      minHeap.pop() ;
+
+//     if(top -> next != NULL) {
+//         minHeap.push(top -> next) ;      //tc: heap insertion : O(n*k log k)
+//     }
+
+//      if(head == NULL){
+//         //answer ll is empty
+//         head = top ;
+//         tail = top ;
+//      }
+//      else{
+//         // insert at ll
+//         tail -> next = top ;
+//         tail = top ;
+//      }
+//    }
+
+//    return head ;
+// }
+//🔴Time complexity: O(N*k Logk)         : N = no.of node in LL
+//🔴space complexity: O(k)
+
+
+
+// 84/149
