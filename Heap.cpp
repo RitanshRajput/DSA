@@ -7,7 +7,7 @@
 //              /      \                          /       \ 
 //           [15]      [30]                    [40]       [50]
 //         /     \    /     \                /     \     /    \   
-//      [40]   [50]  [100]  [40]           [10]   [15]  [50]  [40]
+//      [40]   [50]  [100]  [40]           [10]   [15]  [30]  [40]
 //
 //           Min Heap                             Max Heap
 
@@ -1417,6 +1417,7 @@
 //       insert in vector ;
 //       right call ;
 // }
+
 // #include<iostream>
 // #include<vector>
 // using namespace std;
@@ -1471,4 +1472,121 @@
 
 
 
-// 82/149
+//                    //❓Question : Kth largest sum subarrray
+
+//You have been given an array/list of 'N' integers. Now you are supposed to find the K-th largest sum of the subarray.
+//  Please note that a subarray is the sequence of consecutive elements of the array.
+
+// Sample Input 1 :
+// 2
+// 3 3
+// 3 -2 5
+// 2 2
+// 4 1
+// Sample output 1 :
+// 3
+// 4
+// Explanation of Sample output 1 :
+// For the first test case, 
+// Sum of [0, 0] = 3
+// Sum of [0, 1] = 1
+// Sum of [0, 2] = 6
+// Sum of [1, 1] = -2
+// Sum of [1, 2] = 3
+// Sum of [2, 2] = 5
+// All sum of subarrays are {6, 5, 3, 3, 1, -2} where the third largest element is 3.
+
+// For the second test case, 
+// Sum of [0, 0] = 4
+// Sum of [0, 1] = 5
+// Sum of [1, 1] = 1
+// All sum of subarrays are {5, 4, 1} where the second largest element is 4.
+ 
+// Sample Input 2 :
+// 2
+// 4 10
+// 5 4 -8 6
+// 3 1
+// 1 2 3
+// Sample output 2 :
+// -8
+// 6
+// Explanation of Sample output 2 :
+// For the first test case, among the sum of all the subarray, the tenth-largest sum will be -8.
+
+// For the second test case, among the sum of all the subarray, the largest sum will be 6.
+
+//constraints
+// 1 <= T <= 50
+// 1 <= N <= 100
+// 1 <= K <= (N F (N + 1) ) / 2
+//  -1000 <= ARR[i] <= 1000
+// Where 'T' is the number of test cases, 'N' is the length of the given array/list, 
+//'K' is the given integer and
+// ARR[i] denotes the i-th element of the given array/list.
+// Time limit: 1 sec
+
+//🔴appraoch 1: 
+
+// #include<iostream>
+// #include<algorithm>
+// #include<vector>
+// using namespace std;
+
+// int getKthlargest(vector<int> &arr, int k) {
+
+//     vector<int> sumStore ;
+//     int n =  arr.size() ;
+    
+//     for(int i=0; i<n; i++) {
+//         int sum = 0 ;
+
+//         for(int j=i; j<n; j++) {
+//             sum += arr[j] ;
+//             sumStore.push_back(sum) ;
+//         }
+//     }
+
+//     sort(sumStore.begin(), sumStore.end()) ;
+
+//     return sumStore[sumStore.size() - k] ;
+
+// }
+//🔴Time complexity: O(n^2 logn)
+//🔴space complexity: O(n^2)
+
+
+//🔴 Approach 2: Optimised using heap (min-heap)
+// #include<iostream>
+// #include<vector>
+// #include<queue>
+// using namespace std;
+
+// int getKthLargest(vector<int> &arr, int k) {
+//     //create min-heap
+//    priority_queue<int, vector<int>, greater<int> > mini ;
+
+//    int n = arr.size() ;
+
+//    for(int i=0; i<n; i++) {
+//     int sum = 0 ;
+
+//     for(int j=i; j<n; j++){
+//         sum += arr[i] ;
+
+//         if(mini.size() < k) {
+//             mini.push(sum) ;
+//         }
+//         else{
+//             if(sum > mini.top()) {
+//                 mini.pop() ;
+//                 mini.push(sum) ;
+//             }
+//         }
+//      }
+//    }
+
+//   return mini.top() ;
+// }
+//🔴time complexity: O(N^2 logK)
+//🔴space complexity: O(k)
