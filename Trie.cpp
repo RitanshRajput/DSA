@@ -99,3 +99,338 @@
 // Insert and search costs O(key_length), however, the memory requirements of Trie is O(ALPHABET_SIZE * key_length * N) where N is the number of keys in Trie.
 //  There are efficient representations of trie nodes (e.g. compressed trie, ternary search tree, etc.) 
 // to minimize the memory requirements of the trie.
+
+
+
+//🔴 Implementation : for trie 
+
+// #include<iostream>
+// using namespace std ;
+
+// //creating Trie Node class: 
+// class TrieNode{
+//     public:
+//     char data ;
+//     TrieNode* children[26] ;
+//     bool isTerminal ;
+  
+//     TrieNode(char ch) {
+//         data = ch ;
+//         for(int i=0; i<26; i++) {
+//             children[i] = NULL ;
+//         }
+//         isTerminal = false ;
+//     }
+
+// } ;
+
+
+// class Trie {
+//    public:
+//    TrieNode* root ;
+
+//    Trie(){
+//     root = new TrieNode('\0') ;
+//    }
+
+// //🔸insert function using recursion
+//    void insertUtil(TrieNode* root, string word) {
+//     //base case
+//        if(word.length() == 0){
+//         root->isTerminal = true ;        // if all the character are traversed then make the last node character isterminal as true
+//         return ;
+//        }
+       
+//     //taking assumption word will be in CAPS
+//       int index = word[0] - 'A' ;
+//       TrieNode* child ;
+
+//     //if present
+//       if( root -> children[index] != NULL) {
+//             child = root -> children[index] ;
+//       } 
+//       else{
+//     //if not present
+//         child = new TrieNode(word[0]) ;
+//         root -> children[index] = child ;
+//       }
+
+//     //recursion call
+//       insertUtil(child, word.substr(1)) ;
+  
+//    } 
+
+//  // insert function call
+//    void insertWord(string word) {
+//         insertUtil(root, word) ;
+//    }
+
+// //🔸 searching function
+//     bool searchUtil(TrieNode* root, string word) {
+//     //base case
+//        if(word.length() == 0){
+//           return root -> isTerminal ;
+//        }
+//     // Taking assumption word will be in CAPS
+//        int index = word[0] - 'A' ;
+//        TrieNode* child ;
+
+//     //if present   
+//        if( root -> children[index] != NULL){
+//           child = root -> children[index] ;
+//        }
+//        else{
+//     // if not present
+//         return false ;
+//        }
+
+//     //recursion call
+//        return searchUtil(child, word.substr(1)) ;
+//     }
+
+// // search function call
+//    bool searchWord(string word) {
+//     return searchUtil(root, word) ;
+//    }
+
+// //🔸deletion function 
+//   void removeWord(TrieNode* root, string word){
+//       //base case
+//       if(word.length() == 0){
+//         root -> isTerminal = false;
+//         return ;
+//       }
+
+//       int index = word[0] - 'A' ;
+//       TrieNode* child ;
+
+//       if( root -> children[index] != NULL){
+//         child = root->children[index] ; 
+//       }
+//       else{
+//         cout<<"word not found unable to delete" <<endl ;
+//         return ;
+//       }
+
+//       removeWord(child, word.substr(1)) ;
+//   }
+
+//   void remove(string word) {
+//     return removeWord(root, word) ;
+//   }
+
+// } ;
+
+// int main() {
+    
+//     Trie* t = new Trie();
+     
+//     t->insertWord("TIME") ;
+//     t->insertWord("ARM") ;
+//     t->insertWord("DO") ;
+
+//     cout<< " Present or not :" << t->searchWord("TIME") << endl ;
+
+//     t->remove("TIME") ;
+
+//     cout<< "present or not : "<< t->searchWord("TIME") << endl ;
+
+//     return 0 ;
+// }
+
+// insertion in Trie
+//🔴Time complexity: O(L)          //L = length of word
+
+// searching in Trie
+//🔴Time complexity: O(L)          //L = length of word
+
+// Deletion in Trie
+//🔴Time complexity: O(L)          //L = length of word
+
+
+
+
+//🔴🔴🔴                    //❓Question: Implement Trie
+
+// Implement Trie Data Structure to support these operations:
+//    insert(word) - To insert a string "word" in Trie
+//    search(word) - To check if string "word" is present in Trie or not.
+//    startsWith(word) - To check if there is any string in the Trie that starts with the given prefix string "word".
+
+// Three type of queries denote these operations:
+//    Type 1: To insert a string "word" in Trie.
+//    1 word
+//    Type 2: To check if the string "word" is present in Trie or not.
+//    2 word
+//    Type 3: To check if there is any string in the Trie that starts with the given prefix string "word".
+//    3 word
+
+
+// Constraints :
+//    1 <= Q <= 5*10^4
+//    1 <= W <= 10
+//    Where 'Q' is the number of queries, and "W" is the length of the "word".
+//    All input of "word" will consist of only lowercase letters a-z.
+
+// Sample Output 1 :
+// true
+// true
+// false
+//  Explanation To Sample Input 1 :
+// Query 1: "hello" is inserted
+// Query 2: "help" is inserted
+// Query 3: "true" is printed as "help" is present
+// Query 4: "true" is printed as "hello" and "help" is present having the prefix "hel"
+// Query 5: "false" is printed as "hel" is not present
+// Sample Input 2 :
+// 10
+// 1 aaaa
+// 1 aaaaaa
+// 1 bcd
+// 2 aaaaa
+// 3 aaaaa
+// 3 bc
+// 2 bc
+// 1 bc
+// 3 bcda
+// 2 bc
+
+
+// Sample Output 2 :
+// false
+// true
+// true
+// false
+// false
+// true
+//  Explanation To Sample Input 2 :
+// Query 1: "aaaa" is inserted
+// Query 2: "aaaaaa" is inserted
+// Query 3: "bcd" is inserted
+// Query 4: "false" is printed as "aaaaa" is not present
+// Query 5: "true" is printed as "aaaaaa" is present having the prefix "aaaaa"
+// Query 6: "true" is printed as "bcd" is present having the prefix "bc"
+// Query 7: "false" is printed as "bc" is not present
+// Query 8: "bc" is inserted
+// Query 9: "false" is printed as no word is present having the prefix "bcda"
+// Query 10: "true" is printed as "bc" is present
+
+
+// #include<iostream>
+// using namespace std;
+
+// class TrieNode{
+//     public:
+//     char data ;
+//     TrieNode* children[26] ;
+//     bool isTerminal ;
+
+//     TrieNode(char ch) {
+//         data = ch ;
+//         for(int i=0; i<26; i++){
+//             children[i] = NULL ;
+//         }
+//         isTerminal = false ;
+//     }
+// };
+
+// class Trie{
+//     public:
+
+//     TrieNode* root ;
+
+//     Trie() {
+//        root = new TrieNode('\0') ;
+//     }
+
+// /** Inserts a word into the trie. */
+
+//  void insertUtil(TrieNode* root, string word) {
+//     //base case
+//        if(word.length() == 0){
+//         root->isTerminal = true ;        // if all the character are traversed then make the last node character isterminal as true
+//         return ;
+//        }
+       
+//     //taking assumption word will be in CAPS
+//       int index = word[0] - 'a' ;
+//       TrieNode* child ;
+
+//     //if present
+//       if( root -> children[index] != NULL) {
+//             child = root -> children[index] ;
+//       } 
+//       else{
+//     //if not present
+//         child = new TrieNode(word[0]) ;
+//         root -> children[index] = child ;
+//       }
+
+//     //recursion call
+//       insertUtil(child, word.substr(1)) ;
+  
+//    } 
+//     void insert(string word) {
+//       return insertUtil(root, word) ;
+//     }
+
+// /** Returns if the word is in the trie. */
+
+//    bool searchUtil(TrieNode* root, string word) {
+//     //base case
+//        if(word.length() == 0){
+//           return root -> isTerminal ;
+//        }
+//     // Taking assumption word will be in CAPS
+//        int index = word[0] - 'a' ;
+//        TrieNode* child ;
+
+//     //if present   
+//        if( root -> children[index] != NULL){
+//           child = root -> children[index] ;
+//        }
+//        else{
+//     // if not present
+//         return false ;
+//        }
+
+//     //recursion call
+//        return searchUtil(child, word.substr(1)) ;
+//     }
+
+//     bool search(string word) {
+//         return searchUtil(root, word) ;
+//     }
+
+// /** Returns if there is any word in the trie that starts with the given prefix. */
+    
+//     bool prefixUtil(TrieNode* root, string word) {
+//     //base case
+//        if(word.length() == 0){
+//           return true ;
+//        }
+//     // Taking assumption word will be in CAPS
+//        int index = word[0] - 'a' ;
+//        TrieNode* child ;
+
+//     //if present   
+//        if( root -> children[index] != NULL){
+//           child = root -> children[index] ;
+//        }
+//        else{
+//     // if not present
+//         return false ;
+//        }
+
+//     //recursion call
+//        return prefixUtil(child, word.substr(1)) ;
+//     }
+
+//     bool startsWith(string prefix) {
+//         return prefixUtil(root, prefix)  ;
+//     }
+// } ;
+
+
+
+// 88 /149
