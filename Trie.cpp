@@ -433,4 +433,391 @@
 
 
 
-// 88 /149
+//                   //❓Question: Longest common prefix
+
+// You are given an array 'ARR' consisting of 'N' strings. Your task is to find the longest common prefix among all these strings. If there is no
+// common prefix, you have to return an empty string.
+// A prefix of a string can be defined as a substring obtained after removing some or all characters from the end of the string.
+// For Example:
+
+// Consider ARR ["coding", "codezen", "codingninja", "coders"]
+//  The longest common prefix among all the given strings is "cod" as it is present as a prefix in all strings. Hence,
+//  the answer is "cod".
+
+// Constraints:
+//    1 <= T <= 10
+//    1 <= N <= 3000
+//    1 <= |ARR[i]| <=1000
+//    Each string consists of only lowercase letters.
+//    Time limit: 1 sec
+
+
+// Sample Input 1:
+// 2
+// 4
+// coding codezen codingninja coder
+// 3
+// night ninja nil 
+// Sample Output 1:
+// cod
+// ni
+// Explanation Of Sample Input 1:
+// For the first test case, 
+// The longest common prefix among all the given strings is “cod” as it is present as a prefix in all strings. Hence, the answer is “cod”.
+
+// For the second test case,
+// The longest common prefix among all the given strings is “ni” as it is present as a prefix in all strings. Hence, the answer is “ni”.
+
+// Sample Input 2:
+// 2
+// 3
+// applejuice applepie apple
+// 4
+// car cus cart carat
+// Sample Output 2:
+// apple
+// c
+
+//🔴approach : using forloop only
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// string longestCommonPrefix(vector<string> &arr, int n) {
+       
+//        string ans ;
+
+//     // for traversing all characters of first string
+//        for(int i=0; i<arr[0].length() ; i++){
+
+//             char ch =  arr[0][i] ;
+//             bool match = true ;
+
+//         //for comparing character with rest of the strings
+//         for(int j=1; j<n; j++) {
+
+//             //if not match
+//             if(arr[j].size() < i  ||  ch != arr[j][i]) {
+//                 match = false ;
+//                 break ;
+//             }
+//         }
+
+//         if(match == false){
+//            break;
+//         }
+//         else{
+//             ans.push_back(ch) ;
+//         }
+//     }
+//     return ans ;
+// }
+// //🔸Time complexity: O(m*n) 
+// //🔸Space complexity: O(m)
+
+
+// //🔴approach 2:  using TRIE
+// #include<iostream>
+// #include<vector>
+
+// class TrieNode{
+//     public:
+//     TrieNode* children[26] ;
+//     int childCount ;
+//     bool isTerminal ;
+
+//     TrieNode(char ch) {
+//         char data = ch ;
+//         for(int i=0; i<26; i++) {
+//             children[i] = NULL ;
+//         }
+//         childCount = 0 ;
+//         isTerminal = false; 
+//     }
+// } ;
+
+
+// class Trie {
+//     public:
+//     TrieNode* root ;
+
+//     Trie(char ch) {
+//         root = new TrieNode(ch) ;
+//     }
+
+// // insertion in Trie function
+//     void insertUtil(TrieNode* root, string word) {
+//     //base case
+//        if(word.length() == 0){
+//         root->isTerminal = true ;        
+//         return ;
+//        }
+       
+//       int index = word[0] - 'a' ;
+//       TrieNode* child ;
+
+//       if( root -> children[index] != NULL) {
+//             child = root -> children[index] ;
+//       } 
+//       else{
+//         child = new TrieNode(word[0]) ;
+//         root -> childCount++ ;                 // changes for this question in Trie Insertion function
+//         root -> children[index] = child ;
+//       }
+
+//     //recursion call
+//       insertUtil(child, word.substr(1)) ;
+//    } 
+
+//    void insertWord(string word) {
+//     insertUtil(root ,word) ;
+//    }
+
+// // longest common prefix function call
+//    void lcp(string str, string &ans) {
+       
+//        for(int i=0; i<str.length(); i++){
+//             char ch = str[i] ;
+
+//             if(root -> childCount == 1) {
+//                 ans.push_back(ch) ;
+//                 // aage badhjao
+//                 int index = ch - 'a' ;
+//                 root = root ->children[index] ;
+//             }
+//             else{
+//                 break ;
+//             }
+
+//             if(root -> isTerminal){
+//                 break ;
+//             }
+//        }
+//    }
+
+// } ;
+
+// string longestCommonPrefix(vector<string> &arr, int n) {
+
+//     Trie* t = new Trie('\0') ;
+
+//     //insert krdo all strings into trie
+//     for(int i=0; i<n; i++){
+//         t->insertWord(arr[i]) ;
+//     }
+    
+//     string first =  arr[0];
+//     string ans = " "; 
+    
+//     t->lcp(first, ans) ;
+
+//     return ans ;
+// }
+//🔴Time complexity: O(m*n)
+//🔴space complexity: O(m*n)
+
+
+
+// 🔴🔴🔴            //❓Question: Impplement a phone directory
+
+// You are given a list/array of strings which denotes the contacts that exist in your phone directory. The search query on a string 'str' which is
+//  a query string displays all the contacts which are present in the given directory with the prefix as 'str'. One special property of the search
+//  function is that when a user searches for a contact from the contact list then suggestions (contacts with prefix as the string entered so for)
+//  are shown after the user enters each character.
+//  Note:
+//     If no suggestions are found, return an empty 2D array.
+
+// In the above google searchbox example everytime we enter a character, a few suggestions display the strings which contain the entered
+//  string as prefixes.
+
+// Constraints :
+//    1 <= T <= 50
+//    1 <= N <= 100
+//    1 <= len <= 10
+//    ARR[i] contains lowercase English alphabets.
+//    All the given strings contain lowercase English alphabets.
+//    Time Limit: 1 sec.
+
+
+// Sample Output 1 :
+// cod coding codding code coly
+// cod coding codding code coly
+// cod coding codding code coly
+// coding
+// coding
+// coding
+// ninjas
+// ninjas
+// ninjas
+// ninjas
+// ninjas
+// Explanation To Sample Input 1 :
+// In the first test case, 
+// The suggestions for “c” is {“cod”, “coding”, “codding”, “code”, “coly”}.
+// The suggestions for “co” is {“cod”, “coding”, “codding”, “code”, “coly”}.
+// The suggestions for “cod” is {“cod”, “coding”, “codding”, “code”, “coly”}.
+// The suggestion for “codi” is {“coding”}.
+// The suggestion for “codin” is {“coding”}.
+// The suggestion for “coding” is {“coding”}.
+
+// In the second test case, 
+// The suggestion for “n” is {“ninjas”}.
+// The suggestion for “ni” is {“ninjas”}.
+// The suggestion for “nin” is {“ninjas”}.
+// The suggestion for “ninj” is {“ninjas”}.
+// The suggestion for “ninja” is {“ninjas”}.
+// Sample Input 2 :
+// 3
+// 2
+// coding ninjas
+// cell
+// 2
+// ab abc
+// a
+// 2
+// ab abc
+// b
+
+
+// Sample Output 2 :
+// coding
+// ab abc
+// No suggestions found
+// Explanation To Sample Input 2 :
+// In the first test case, 
+// The suggestion for “c” is {“coding”}.
+// For the rest of the letters, there are no suggestions.
+
+// In the second test case,
+// The suggestion for “a” is {“ab”, “abc”}.
+
+// In the third test case, no suggestions are found.
+
+
+
+
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// class TrieNode{
+//     public:
+//     TrieNode* children[26] ;
+//     int childCount ;
+//     bool isTerminal ;
+
+//     TrieNode(char ch) {
+//         char data = ch ;
+//         for(int i=0; i<26; i++) {
+//             children[i] = NULL ;
+//         }
+//         childCount = 0 ;
+//         isTerminal = false; 
+//     }
+// } ;
+
+// class Trie {
+//     public:
+//     TrieNode* root ;
+
+//     Trie(char ch) {
+//         root = new TrieNode(ch) ;
+//     }
+
+// // insertion in Trie function
+//     void insertUtil(TrieNode* root, string word) {
+//     //base case
+//        if(word.length() == 0){
+//         root->isTerminal = true ;        
+//         return ;
+//        }
+       
+//       int index = word[0] - 'a' ;
+//       TrieNode* child ;
+
+//       if( root -> children[index] != NULL) {
+//             child = root -> children[index] ;
+//       } 
+//       else{
+//         child = new TrieNode(word[0]) ;
+//         root -> children[index] = child ;
+//       }
+
+//     //recursion call
+//       insertUtil(child, word.substr(1)) ;
+//    } 
+
+//    void insertWord(string word) {
+//     insertUtil(root ,word) ;
+//    }
+
+// // print suggestion function 
+// void printSuggestion(TrieNode* curr , vector<string> &temp, string prefix) {
+      
+//     if(curr->isTerminal){
+//         temp.push_back(prefix) ;
+//     }
+
+//     for(char ch='a'; ch <= 'z'; ch++) {
+         
+//         TrieNode* next = curr->children[ch - 'a'] ;
+//          if(next != NULL){
+//             prefix.push_back(ch) ;
+//             printSuggestion(next, temp, prefix) ;
+//             prefix.pop_back() ;
+//          }
+//     }
+// }
+
+// // getSuggestion function
+//    vector<vector<string>> getSuggestion(string str) {
+       
+//        TrieNode* prev = root ;
+//        vector<vector<string>> output ;
+//        string prefix = "" ;
+
+//        for(int i=0; i>str.length(); i++ ) {
+          
+//           char lastcharacter = str[i] ;
+//           prefix.push_back(lastcharacter) ;
+//         // check fpr last character
+//         TrieNode* curr = prev->children[lastcharacter - 'a'] ;
+
+//         //if not found
+//         if(curr == NULL) {
+//             break ;
+//         }
+        
+//         //if found
+//         vector<string> temp ;
+//         printSuggestion(curr, temp, prefix) ;
+
+//         output.push_back(temp) ;
+//         temp.clear() ;
+//         prev = curr ;
+//        }
+       
+//        return output;
+//    }
+
+// };
+
+
+// vector<vector<string>> phoneDirectory(vector<string>&contactList, string &queryStr){
+//     //creation of trie
+//     Trie* t = new Trie('\0') ;
+    
+//     //insert all contact in trie 
+//     for(int i=0; i<contactList.size(); i++) {
+//         string str = contactList[i] ;
+//         t->insertWord(str) ;
+//     }
+
+//    //return ans 
+//    return t->getSuggestion(queryStr) ;
+// }
+//🔴time complexity: O(n*m^2)
+//🔴space complexity: O(m*n)             // m = avg word length,  n= total no. of words
+
+
+// 90/149
