@@ -235,7 +235,7 @@
 //     cout<<i<<" ";                  // output : 2 1
 // }
 
-// li.erase(li.begin());              // using erase th remove element , and .begin() to get element at the beginning of li list
+// li.erase(li.begin());              // using erase to remove element , and .begin() to get element at the beginning of li list
 
 // cout<<endl<<" after erase : "<<endl ;
 // for(int i:li){
