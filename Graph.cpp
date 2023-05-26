@@ -678,4 +678,341 @@
 // but vector<int>[n] is array of n vectors
 
 
-// 94/149
+//                   //🔴🔴Breadth first search in Graph
+
+// The breadth-first search (BFS) algorithm is used to search a tree or graph data structure for a node that meets a set of criteria. 
+// It starts at the tree’s root or graph and searches/visits all nodes at the current depth level before moving on to the nodes at 
+// the next depth level. Breadth-first search can be used to solve many problems in graph theory.
+
+//🔴Algorithm of Breadth-First Search:
+
+// Step 1: Consider the graph you want to navigate.
+// Step 2: Select any vertex in your graph (say v1), from which you want to traverse the graph.
+// Step 3: Utilize the following two data structures for traversing the graph.
+//         Visited array(size of the graph) Queue data structure
+// Step 4: Add the starting vertex to the visited array, and afterward, you add v1’s adjacent vertices to the queue data structure.
+// Step 5: Now using the FIFO concept, remove the first element from the queue, put it into the visited array, 
+//         and then add the adjacent vertices of the removed element to the queue.
+// Step 6: Repeat step 5 until the queue is not empty and no vertex is left to be visited.
+
+//ex: 
+//         [0]
+//            \ 
+//             \ 
+//              [1]
+//                 \ 
+//                  \ 
+//        [4]-------[2]
+//          \     /
+//           \   /
+//            [3]
+
+// output: print ==>  0, 1, 2, 3, 4
+
+//ex2:  
+//             [3]--------[1]
+//            /             |
+//         [0]              |
+//            \             |
+//             [2]--------[4]
+
+//output: print ==>  0, 2, 3, 4, 1
+
+
+//🔸Disconnected graph:
+//
+//             [0]
+//           /    \         [2]
+//         [1]----[2]       component of graph
+//          component of graph       
+//
+//.. this is said to be disconnected graph :
+
+//algo :
+//step1: first we will create a visited map to make sure which node/vertices we have visited already
+//step2: then we will create a queue to store the top node/vertices of graph and 
+//       assign that to a variable frontNode = top , after assigning we will pop that node from queue
+//step3: then we will mark it as visited
+//step4: and we will store that node in ans variable
+//step5: put other connected node/vertices to that answer node into queue from adjacent list
+
+// source code : 
+// for(int i=0; i<n; i++){           //for loop is for disconnected graph to make sure we have traverse all the node/vertices of that graph
+//     if(!visited[node]) {
+//         bfs() ;
+//     }
+// }
+
+
+
+
+//🔴🔴🔴               //❓Question: BFS in GRaph
+
+// You are given an undirected and disconnected graph G(V, E) having V vertices numbered from 0 to V-1 and E edges. Your task is to print its
+// BFS traversal starting from the 0th vertex.
+// BFS or Breadth-First Traversal of a graph is an algorithm used to visit all of the nodes of a given graph. In this traversal algorithm, one
+// node is selected, and then all of the adjacent nodes are visited one by one.
+// An undirected graph is a graph where all the edges are bidirectional, i.e., they point from source to destination and destination to source.
+// A graph is disconnected if at least two vertices of the graph are not connected by a path.
+
+//  Note:
+//    1. Here, you need to consider that you need to print the BFS path starting from vertex 0 only.
+//    2. V is the number of vertices present in graph G, and all vertices are numbered from 0 to V-1.
+//    3. E is the number of edges present in graph G.
+//    4. Graph input is provided as the number of vertices and a list of edges.
+//    5. Handle for Disconnected Graphs as well.
+
+//
+//             [0]
+//            /  |
+//           /   |    [3]
+//        [1]    |   / 
+//           \   |  /
+//            \  | /
+//             [2]
+//
+
+// Here, starting from 0, it is connected to 1 and 2 so, BFS traversal from here will be [0, 1, 2 ]. Now, 3 is also
+//  connected to 2. So, BFS traversal becomes [0, 1, 2, 3].
+
+// Note:
+//  For each node, the correct order of printing the connected nodes will be sorted order, i.e., if {3,6,9,4} are
+//  connected to 1, then the correct order of their printing is {1,3,4,6,9}.
+
+// Sample Input 1:
+// 4 4
+// 0 1
+// 0 3
+// 1 2
+// 2 3
+// Sample Output 1:
+// 0 1 3 2
+// Explanation For Sample Input 1:
+//             [0]
+//            /  \  
+//           /    \ 
+//        [1]------------[2]
+//                  \    /
+//                   \  /
+//                   [3] 
+
+
+// Starting from 0, it is connected to 1 and 3, which will be printed. 
+// Then comes 2, which was connected to 1. 
+
+// Sample Input 2:
+// 4 3
+// 0 1
+// 0 3
+// 1 3
+// Sample Output 2:
+// 0 1 3 2
+// Explanation For Sample Input 2:
+//              [0]
+//             /  |
+//            /   |
+//         [1]    |       [2]
+//            \   |
+//             \  |
+//              [3]
+//
+// Starting from 0, it is connected to 1 and 3, which will be printed. 
+// The remaining node is 2, which will be printed at the end.
+
+
+// #include<iostream>
+// #include<vector>
+// #include<unordered_map>
+// #include<queue>
+// #include<set>
+// using namespace std;
+
+// //function to create adjacent list of given graph
+// // here we are using  set<int> instead of list<int> in adjList   ( because some platform accept only sorted answer therefore we use set to store value in sorted order)
+// //🔸A set is a data structure that stores unique elements of the same type in a sorted order
+// void prepareAdjList(unordered_map<int, set<int>> &adjList, vector<pair<int, int>> &edges) {
+//     for(int i=0; i<edges.size(); i++) {
+//       int u = edges[i].first ;             //u ==> node/vertex
+//       int v = edges[i].second ;            // v ==> edge
+
+//       adjList[u].insert(v) ;
+//       adjList[v].insert(u) ;
+//     }
+// }
+
+// // bfs solution function
+// void bfs(unordered_map<int, set<int>> &adjList, unordered_map<int, bool> &visited, vector<int> &ans, int node) {
+        
+//         queue<int> q ;           // creating queue to put every node into it and checking all the connected nodes and store in ans
+//         q.push(node) ;
+//         visited[node] = 1 ;      // mark visited as true, if we have added it into queue
+
+//         while( !q.empty()) {
+//             int frontNode = q.front() ;         //assign top node from queue to frontNode variable 
+//             q.pop() ;                       // and after assigning pop it 
+
+//             //store frontnode into ans ;
+//             ans.push_back(frontNode) ;
+
+//             //traverse all neighbour of frontNode(means all connected node)
+//             for(auto i:adjList[frontNode]) {
+//                 if( !visited[i]){
+//                     q.push(i);
+//                     visited[i] = 1 ;
+//                 }
+//             }
+//         }
+// }
+
+// //main function
+// vector<int> BFS(int vertex, vector<pair<int, int>> edges) {
+
+//     unordered_map<int, set<int>> adjList ;  // adjacent list to store all the connected nodes/vertices (into list) to a single node (int)
+//     vector<int> ans ;                        //to store final answer
+//     unordered_map<int, bool> visited ;       // visited map to keep track of nodes that are already taken care of
+
+//     prepareAdjList(adjList, edges) ;         //function to create adjacent list of the given graph
+
+//     //traverse all component of a graph
+//     for(int i=0; i<vertex; i++){          //for loop to make sure we include node/vertex of disconnected graph too
+//         if(!visited[i]) {
+//             bfs(adjList, visited, ans, i) ;   //function to record answer (means to traverse all the node/vertex of the graph)
+//         }
+//     }
+//     return ans ;
+// }
+//🔴Time complexity: O(N+E)              // N = node , E = edges
+//🔴space complexity: O(N+E)             
+
+
+
+//                   //🔴🔴Depth first search in Graph
+
+
+// Depth First Traversal (or DFS) for a graph is similar to Depth First Traversal of a tree.
+// The only catch here is, that, unlike trees, graphs may contain cycles (a node may be visited twice).
+// To avoid processing a node more than once, use a boolean visited array.
+// A graph can have more than one DFS traversal.
+
+// Depth-first search is an algorithm for traversing or searching tree or graph data structures. 
+// The algorithm starts at the root node (selecting some arbitrary node as the root node in the case of a graph) 
+// and explores as far as possible along each branch before backtracking. 
+
+// So the basic idea is to start from the root or any arbitrary node and mark the node 
+// and move to the adjacent unmarked node and continue this loop until there is no unmarked adjacent node. 
+// Then backtrack and check for other unmarked nodes and traverse them. Finally, print the nodes in the path.
+
+// 🔸Following below method to implement DFS traversal.
+
+// Step 1: Create a set or array to keep track of visited nodes.
+// Step 2: Choose a starting node.
+// Step 3: Create an empty stack and push the starting node onto the stack.
+// Step 4: Mark the starting node as visited.
+// Step 5: While the stack is not empty, do the following:
+//         Pop a node from the stack.
+//         Process or perform any necessary operations on the popped node.
+//         Get all the adjacent neighbors of the popped node.
+//         For each adjacent neighbor, if it has not been visited, do the following:
+//         Mark the neighbor as visited.
+//         Push the neighbor onto the stack.
+// Step 6: Repeat step 5 until the stack is empty.
+
+
+
+//🔴🔴🔴                  //❓Question: DFS Traversal
+
+// Given an undirected and disconnected graph G(V, E), containing 'V' vertices and 'E' edges, the information about edges is given using
+//  'GRAPH' matrix, where i-th edge is between GRAPH[[O] and GRAPH[1]. print its DFS traversal.
+//    V is the number of vertices present in graph G and vertices are numbered from 0 to V-1.
+//    E is the number of edges present in graph G.
+
+// Note:
+//    The Graph may not be connected i.e there may exist multiple components in a graph.
+
+// Constraints :
+//    2 <= V <= 10^3
+//    1 <= E <= (5 * (10^3))
+//    Time Limit: 1sec
+
+// Sample Input 1:
+// 5 4
+// 0 2
+// 0 1
+// 1 2
+// 3 4
+// Sample Output 1:
+// 2
+// 0 1 2
+// 3 4
+// Explanation For Sample Input 1:
+// If we do a DFS traversal from vertex 0 we will get a component with vertices [0, 2, 1]. If we do a DFS traversal from 3 we will get another component with vertices [3, 4]
+
+// Hence,  we have two disconnected components so on the first line, print 2. Now, print each component in increasing order. On the first line print 0 1 2 and on the second line, print 3 4.
+
+// [0 1 2] comes before [3 4] as the first vertex 0 from the first component is smaller than the first vertex 3 from the second component.
+// Sample Input 2:
+// 9 7
+// 0 1
+// 0 2
+// 0 5
+// 3 6
+// 7 4
+// 4 8
+// 7 8
+// Sample Output 2:
+// 3
+// 0 1 2 5
+// 3 6
+// 4 7 8
+
+// #include<iostream>
+// #include<vector>
+// #include<list>
+// #include<unordered_map>
+// using namespace std;
+
+
+// void dfs(int node, unordered_map<int, bool> &visited, unordered_map<int, list<int>> &adj, vector<int> &component) {
+
+//    //first store ans into components
+//     component.push_back(node) ;
+//    // mark visited
+//     visited[node] = true ;
+
+//     // recursive call for every connnected node
+//     for(auto i:adj[node]) {
+//         if(!visited[i]) {
+//             dfs( i, visited, adj, component) ;
+//         }
+//     }
+// }
+
+// vector<vector<int>> depthFirstSearch(int V, int E, vector<vector<int>> &edges)
+// {
+//    //step 1: prepare/create adjList
+//    unordered_map<int, list<int>> adj ;
+//    for(int i=0; i<edges.size(); i++){
+//         int u = edges[i][0] ;
+//         int v = edges[i][1] ;
+
+//         adj[u].push_back(v) ;
+//         adj[v].push_back(u) ;
+//    }
+
+//    vector<vector<int>> ans ;                     //to store main answer
+//    unordered_map<int, bool> visited ;
+
+//    // for all node call dfs if not visited
+//    for(int i=0; i<V; i++){
+//        if( !visited[i]) {
+//         vector<int> component ;
+//         dfs(i, visited, adj, component) ;
+//         ans.push_back(component) ;
+//        }
+//    }
+//    return ans;
+// }
+//🔴Time compplexity:  O(V+ E)
+//🔴space compplexity: O(V+ E)
+
+//  96/149
