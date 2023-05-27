@@ -1015,4 +1015,317 @@
 //🔴Time compplexity:  O(V+ E)
 //🔴space compplexity: O(V+ E)
 
-//  96  /  149
+
+
+
+
+
+//🔴🔴🔴             //❓Question: Cycle detection in Undirected Graph
+
+// You have been given an undirected graph with 'N' vertices and 'M' edges. The vertices are labelled from 1 to 'N'.
+//  Your task is to find if the graph contains a cycle or not.
+//  A path that starts from a given vertex and ends at the same vertex traversing the edges only once is called a cycle.
+//  Example:
+//    In the below graph, there exists a cycle between vertex 1, 2 and 3.
+//           [1]\
+//            |  \ 
+//            |   [3]
+//            |  /
+///          [2]/
+
+// Note:
+//    1. There are no parallel edges between two vertices.
+//    2. There are no self-loops(an edge connecting the vertex to itself) in the graph.
+//    3. The graph can be disconnected.
+
+// For Example:
+//    Input: N = 3 J Edges = [[1, 2], [2, 3], [1, 3]]
+//    Output: Yes
+//    Explanation : There are a total of 3 vertices in the graph. There is an edge between vertex 1 and 2, vertex 2 and 3
+//    and vertex 1 and 3. So, there exists a cycle in the graph.
+
+// Constraints:
+//    1 <= T <= 10
+//    1 <= N <= 5000
+//    0 <= M <= min(5000, (N (N - 1)) / 2)
+//    1 <= edges[i][e] <= N
+//    1 <= edges[i][1] <= N
+//    Time Limit: 1 sec
+
+// Sample Input 1:
+// 1
+// 3 2
+// 1 2
+// 2 3
+// Sample Output 1:
+// No
+// Explanation Of Sample Output 1:
+//  The above graph can be represented as 
+//           [1]
+//            |   
+//            |   [3]
+//            |  /
+///          [2]/
+
+// There are a total of 3 vertices in the graph.There is an edge between vertex 1 and 2 and vertex 2 and 3. So, there is no cycle present in the graph. 
+
+// Sample Input 2:
+// 2
+// 4 0 
+// 4 3
+// 1 4
+// 4 3
+// 3 1
+// Sample Output 2:
+// No
+// Yes
+
+// //🔴🔴🔴Approach using BFS(Breadth First search) :
+// // prefer video 96/149 for this solution
+// #include<iostream>
+// #include<vector>
+// #include<unordered_map>
+// #include<list>
+// #include<queue>
+// using namespace std;
+
+// //cycle bfs detection function
+// bool isCycleBFS(int srcNode, unordered_map<int, bool> &visited, unordered_map<int, list<int>> &adj){
+//     //first creating parent map, to keep track of parent nodes and there parent  
+//     unordered_map<int, int> parent ;
+
+//     parent[srcNode] = -1 ;               //the very first node will have no parent therfore marked as -1
+//     visited[srcNode] = 1 ;              // Now mark the node as visited as true
+//     queue<int> q;                      //creating queue to store all the related/neighbour nodes of given node
+//     q.push(srcNode) ;
+
+//     while( !q.empty()) {
+//         int front = q.front() ;
+//         q.pop() ;
+
+//         for(auto neighbour:adj[front]){
+//             if(visited[neighbour] == true && neighbour != parent[front]) {
+//                 return true ;
+//             }
+//             else if( !visited[neighbour]){
+//                 q.push(neighbour) ;
+//                 visited[neighbour] = 1 ;
+//                 parent[neighbour] = front ;
+//             }
+//         }
+//     }
+//   return false ;
+// }
+
+// //main function 
+// string cycleDetection(vector<vector<int>> &edges, int n, int m) {
+//     //create adjacency list
+//     unordered_map<int , list<int>> adj ;
+
+//     for(int i=0; i<m; i++){          // m = no. of edges  ,, n = no of vertices/nodes
+//         int u = edges[i][0] ;
+//         int v = edges[i][1] ;
+
+//         adj[u].push_back(v) ;
+//         adj[v].push_back(u) ;
+//     }
+
+//     //to handle disconnected components 
+//     unordered_map<int, bool> visited ;
+//     for(int i=0; i<n; i++){
+//         if( !visited[i]) {
+//             bool ans = isCycleBFS(i, visited, adj) ;
+//             if(ans == 1) {
+//                 return "Yes" ;
+//             }
+//         }
+//     }
+//     return "No" ;
+// }
+//🔴Time complexity: O(v + E)        // linear
+//🔴space complexity: O(v + E)       // linear
+
+
+// //🔴🔴Approach using DFS(Depth First search) :
+// //prefer video 96/149 for this solution
+// #include<iostream>
+// #include<vector>
+// #include<unordered_map>
+// #include<list>
+// #include<queue>
+// using namespace std;
+
+// //cycle dfs detection function
+// bool isCycleDFS(int srcNode, int parent, unordered_map<int, bool> &visited, unordered_map<int, list<int>> &adj){
+
+//    visited[srcNode] = true;           //mark visited of node as true 1
+   
+//    for(auto neighbour:adj[srcNode]) {
+//       if( !visited[neighbour]){
+//         bool cycleDetected =  isCycleDFS(neighbour, srcNode, visited, adj) ;
+//         if( cycleDetected){
+//             return true ;
+//         }
+//       }
+//         else if(neighbour != parent){
+//             //cycle present
+//             return true ;
+//         }
+//     }
+//      return false ;
+// }
+
+// //main function 
+// string cycleDetection(vector<vector<int>> &edges, int n, int m) {
+//     //create adjacency list
+//     unordered_map<int , list<int>> adj ;
+
+//     for(int i=0; i<m; i++){          
+//         int u = edges[i][0] ;
+//         int v = edges[i][1] ;
+
+//         adj[u].push_back(v) ;
+//         adj[v].push_back(u) ;
+//     }
+
+//     //to handle disconnected components 
+//     unordered_map<int, bool> visited ;
+//     for(int i=0; i<n; i++){
+//         if( !visited[i]) {
+//             bool ans = isCycleDFS(i, -1 , visited, adj) ;      // passing -1 as first node's parent
+//             if(ans == 1) {
+//                 return "Yes" ;
+//             }
+//         }
+//     }
+//     return "No" ;
+// }
+//🔴Time complexity: O(v + E)        // linear
+//🔴space complexity: O(v + E)       // linear
+
+
+
+
+//🔴🔴                     //❓Question: Detect Cycle in A Directed Graph
+
+// You are given a directed graph having 'N' nodes. A matrix 'EDGES' of size M x 2 is given which represents the 'M' edges such that there is
+//  an edge directed from node EDGES[i][O] to node EDGES[i][1].
+//  Find whether the graph contains a cycle or not, return true if a cycle is present in the given directed graph else return false.
+//  For Example:
+//     In the following directed graph has a cycle i.e. В->С->Е->D->8.
+
+//
+//                   [C]
+//                 ↗️   ↘️ 
+//         [A]➡️[B]       [E]
+//                ^      v    ↘️  
+//                   [D]        [F]
+//
+
+// Note:
+//    1. The cycle must contain at least two nodes.
+//    2. It is guaranteed that the given graph has no self-loops in the graph.
+//    3. The graph may or may not be connected.
+//    4. Nodes are numbered from 1 to N.
+//    5. Your solution will run on multiple test cases. If you are using global variables make sure to clear them.
+
+// Constraints :
+//    1STS5
+//    2 <= N <= 100
+//    1 <= M <= min(100,N(N-1)/2)
+//    1 <= EDGES[i][0], EDGES[i][1] <= N
+//    Where 'T' is the number of test cases.
+//    Time Limit: 1 sec
+
+
+// Sample Input 1 :
+// 1
+// 5
+// 6
+// 1 2
+// 4 1
+// 2 4
+// 3 4
+// 5 2
+// 1 3
+// Sample Output 1 :
+// true
+// Explanation For Input 1 :
+// The given graph contains cycle 1 -> 3 -> 4 -> 1 or the cycle 1 -> 2 -> 4 -> 1.
+
+// Sample Input 2 :
+// 2
+// 5
+// 4
+// 1 2
+// 2 3
+// 3 4
+// 4 5
+// 2
+// 1
+// 1 2
+// Sample Output 2 :
+// false
+// false
+// Explanation For Input 2 :
+// The given graphs don’t contain any cycle.
+
+//🔴check 97/197 to understand better
+// #include<iostream>
+// #include<vector>
+// #include<unordered_map>
+// #include<list>
+// using namespace std;
+
+// //cycle detection function
+// bool checkCycleDFS(int srcNode, unordered_map<int, bool> &visited, 
+//   unordered_map<int, bool> &dfsVisited, unordered_map<int, list<int>> &adj){
+
+//     visited[srcNode] = true ;
+//     dfsVisited[srcNode] = true ;
+
+//     for(auto neighbour:adj[srcNode]){
+//         if( !visited[neighbour]){
+//             bool cycleDetected = checkCycleDFS(neighbour, visited, dfsVisited, adj);
+//             if(cycleDetected){
+//                 return true ;
+//             }
+//         }
+//         else if( dfsVisited[neighbour]){
+//             return true ;
+//         }
+//     }
+
+//     dfsVisited[srcNode] = false ;
+//     return false ;
+//   }
+
+// //main function
+// int detectCycleInDirectedGraph(int n, vector< pair<int, int>> & edges) {
+//     //create adjacency list
+//     unordered_map<int, list<int>> adj ;
+//     for(int i=0; i<edges.size(); i++){
+//         int u = edges[i].first;            // since edges are sent in pair<int, int> so instead of using edge[i][0] == we will use edge[i].first
+//         int v = edges[i].second ;          // and here instead of dege[i][1] == we will use edge[i].second
+
+//         adj[u].push_back(v) ;       //since it is a directed graph we will only push u to v
+//     }
+
+// //call dfs for all component
+// unordered_map<int, bool> visited ;
+// unordered_map<int, bool> dfsVisited ;
+
+// for(int i=1; i<=n; i++) {            //because in question the format is from 1 to n therefore i=1 ; i<=n
+//   if( !visited[i]) {
+//     bool cycleFound = checkCycleDFS(i, visited, dfsVisited, adj) ;
+//     if(cycleFound){
+//         return true ;
+//     }
+//   }
+// }
+//  return false ; 
+// }
+//🔴Time complexity: O(v + E)        // linear
+//🔴space complexity: O(v + E)       // linear
+
+// 97 / 149
