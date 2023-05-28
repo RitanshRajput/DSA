@@ -1206,7 +1206,7 @@
 
 
 
-//🔴🔴                     //❓Question: Detect Cycle in A Directed Graph
+//🔴🔴                     //❓Question: Detect Cycle in A Directed Graph (USing DFS)
 
 // You are given a directed graph having 'N' nodes. A matrix 'EDGES' of size M x 2 is given which represents the 'M' edges such that there is
 //  an edge directed from node EDGES[i][O] to node EDGES[i][1].
@@ -1328,4 +1328,534 @@
 //🔴Time complexity: O(v + E)        // linear
 //🔴space complexity: O(v + E)       // linear
 
-// 97 / 149
+
+
+
+//🔴🔴🔴🔴🔴🔴🔴/ Topollogical Sort🔴🔴🔴🔴🔴 
+
+// Topological Sorting of DAG is a linear ordering of vertices such that for every directed edge from vertex 'u' to vertex 'v', 
+// vertex 'u' comes before 'v' in the ordering.
+// This sort is only applicable on directed asyclic graph(DAG) 
+// why ? consider below example graph:
+//        [1]
+//       ^   \ 
+//      /     v
+//     [3]<--[2]
+//
+//adjacency list:
+// for ( 1 2 3)
+// 1 -> 2           // 1(u) comes before  2(v)  == true
+// 2 -> 3           // 2(u) comes before 3(v) == true
+// 3 -> 1           // 3(u) comes before 1(u) another (u) because cyclic graph == hence not valid topology sort
+
+
+
+
+//               //❓Question: Topological Sort    (Using DFS)
+
+// A Directed Acyclic Graph (DAG) is a directed graph that contains no cycles.
+// Topological Sorting of DAG is a linear ordering of vertices such that for every directed edge from vertex 'u' to vertex 'v', vertex 'u' comes
+//  before 'v' in the ordering. Topological Sorting for a graph is not possible if the graph is not a DAG.
+//  Given a DAG consisting of 'V' vertices and 'E' edges, you need to find out any topological sorting of this DAG. Return an array of size 'V'
+//  representing the topological sort of the vertices of the given DAG.
+// For example, Consider the
+
+//              [0]
+//             /   \ 
+//            v     v  
+//           [1]   [3]
+//             \   /
+//              v v
+//              [2]
+
+// adjacency list:
+//  for ( 0 1 3 2)
+// 0 -> 1, 3           // 0(u) comes before 1(v) == true ,  o(u) comes before 3(v) == true
+// 1 -> 2              // 1(u) comes before 2(v) == true 
+// 2 ->               
+// 3 -> 2              // 3(u) comes before 2(v) == true
+
+// therefore ( 0 1 3 2 ) is a valid topological sort
+
+
+// In this graph, there are directed edges from 0 to 1 and 0 to 3, so 0 should come before 1 and 3. Also, there are directed edges from 1 to 2
+// and 3 to 2 so 1 and 3 should come before 2.
+// So, The topological sorting of this DAG is {0 1 3 2}.
+//  Note that there are multiple topological sortings possible for a DAG. 
+//For the graph given above one another topological sorting is: {0, 3, 1, 2}
+
+// Note:
+// 1. It is guaranteed that the given graph is DAG.
+// 2. There will be no multiple edges and self-loops in the given DAG.
+// 3. There can be multiple correct solutions, you can find any one of them.
+// 4. Don't print anything, just return an array representing the topological sort of the vertices of the given DAG.
+
+// Constraints:
+//    1 <= T <= 50
+//    1 <= V <= 10^4
+//    0 <= E <= 10^4
+//    0 <= u, V V V
+//    Where 'T' is the total number of test cases, 'V' is the number of vertices, 'E' is the number of edges, and 'u' and
+//    'v' both represent the vertex of a given graph.
+//    Time limit: 2 sec
+
+// Sample Input 1:
+// 2
+// 2 1
+// 1 0
+// 3 2
+// 0 1
+// 0 2
+// Sample Output 1:
+// 1 0
+// 0 2 1
+// Explanation Of Sample Input 1:
+// Test case 1:
+// The number of vertices ‘V’ = 2 and number of edges ‘E’ = 1.
+// The graph is shown in the picture: 
+//
+//       [1]--->[0]
+//
+// The topological sorting of this graph should be {1, 0}  as there is a directed edge from vertex 1 to vertex 0, thus 1 should come before 0 according to the given definition of topological sorting.
+
+// Test case 2:
+// The number of vertices ‘V’ = 3 and number of edges ‘E’ = 2.
+// The graph is shown in the picture:
+//
+//         [0]
+//        /   \ 
+//       v     v
+//      [1]    [2]
+//
+// As there are two directed edges starting from 0, so 0 should come before 1 and 2 in topological sorting. 
+// Thus the topological sorting of this graph should be {0, 2, 1} or {0, 1, 2}
+
+
+// Sample Input 2:
+// 2
+// 1 0
+// 4 4
+// 0 1
+// 0 3
+// 1 2
+// 3 2
+// Sample Output 2:
+// 0
+// 0 1 3 2
+// Explanation Of Sample Input 2:
+// Test case 1:   
+// There is only a single vertex in the graph that is 0, so its topological sort will be {0}.
+
+// Test case 2:
+// See problem statement for its explanation
+
+//🔴approach 1: solving using DFS
+// #include<iostream>
+// #include<vector>
+// #include<unordered_map>
+// #include<list>
+// #include<stack>
+// using namespace std;
+
+// //topological sort function
+// void topoSort(int srcNode, vector<bool> &visited, stack<int> &s, unordered_map<int, list<int>> &adj) {
+     
+//     visited[srcNode] = 1; 
+
+//     for(auto neighbour:adj[srcNode]) {
+//         if( !visited[neighbour]){
+//             topoSort(neighbour, visited, s, adj) ;
+//         }
+//     }
+//     //important
+//     s.push(srcNode) ;
+// }
+
+// //main functioon
+// vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)  {
+     
+//     //create adjacency
+//     unordered_map<int, list<int>> adj ;
+
+//     for(int i=0; i<e; i++){
+//         int u = edges[i][0] ;
+//         int v = edges[i][1] ;
+
+//         adj[u].push_back(v) ;
+//     }
+
+//     //call dfs topological sort util function for all components
+//     vector<bool> visited(v) ;        //size = (V)        //to prevent tle we used vector inplace of unordered_map
+//     stack<int> s ;
+
+//     for(int i=0; i<v; i++){
+//        if( !visited[i]) {
+//          topoSort(i, visited, s, adj) ;
+//        }
+//     }
+//     vector<int> ans ; 
+    
+//     while( !s.empty()) {
+//         ans.push_back(s.top())  ;
+//         s.pop() ;
+//     }
+
+//     return ans;
+// }
+//🔴Time complexity: O(N+E)     // or  O(V+E) linear
+//🔴Space complexity: o(N + E)
+
+
+
+//🔴🔴🔴        //❓Question: Topological Sort using (🔸Kahn's algorithm) and BFS
+
+// we are solving the same above question using BFS in (kahn's algorithm)
+// to better understand question refer above questoin (topological sort using DFS)
+
+//🔴appraoch: using (Kahn's algorihtm) BFS
+//
+// step1: find indegree of all nodes
+//        indegree means how many nodes are connected to that particular node that comes before
+//               [1]  indegree(0) bcoz no node is connected to 0 above or before
+//              /   \ 
+//             v     v
+//    idg(1)  [2]    [3]  idg(1) only 1 is connected above
+//              \   /
+//                v
+//               [5]    idg(2)  both 2 and 3 are connected above
+//                |  
+//                v 
+//               [4]    idg(1)   only 5 is connected above
+// indegree
+//        [ 0 | 1 | 1 | 1 | 2 ]
+//nodes:    1   2   3   4   5
+
+//step2: create a queue and insert 0 degree nodes into that queue
+//step3: perform BFS
+//       while performing BFS as we store node into queue there we decrease there neighbour's indegree
+//       suppose we insert (1) into ans then all the connected node to (1) will get there indegree decreased
+//       in above ex:  insert(1) into ans, therefore indegree(2)-- and indegree(3)--
+//       and then perform step2 simultaneously
+
+// #include<iostream>
+// #include<vector>
+// #include<unordered_map>
+// #include<list>
+// #include<queue>
+// using namespace std;
+
+// vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)  {
+//     //create adjacency list
+//     unordered_map<int, list<int>> adj ;
+
+//     for(int i=0; i<e; i++){
+//         int u = edges[i][0] ;
+//         int v = edges[i][1] ;
+
+//         adj[u].push_back(v) ;        //bcoz directed graph therefore only u.push_back(V)
+//     }
+
+//     //find all indegree
+//     vector<int> indegree(v) ;
+    
+//     for(auto i:adj) {
+//         for(auto j:i.second) {
+//             indegree[j]++ ;
+//         }
+//     }
+
+//     // push all 0 indegree nodes into queue
+//     queue<int> q ;
+//     for(int i=0; i<v; i++) {
+//         if(indegree[i] == 0){
+//             q.push(i) ;
+//         }
+//     }
+
+//    // Perform BFS
+//    vector<int> ans ;
+//    while( !q.empty()) {
+//     int front = q.front() ;
+//     q.pop() ;
+
+//     //store ans 
+//     ans.push_back(front) ;
+    
+//     //update neighbour indegree
+//     for(auto neighbour:adj[front]) {
+//         indegree[neighbour]-- ;
+//         if(indegree[neighbour] == 0){
+//             q.push(neighbour) ;
+//         }
+//       } 
+//    }
+//    return ans;
+// }
+//🔴Time complexity: O(N+E)           // or O(V+ E) linear
+//🔴space complexity: O(N+E)
+
+
+
+//🔸🔸(Using BFS) Kahn's ALgorithm
+//🔴🔴                   //❓Question: Detect Cycle in A Directed Graph 
+
+// You are given a directed graph having 'N' nodes. A matrix 'EDGES' of size M x 2 is given which represents the 'M' edges such that there is
+//  an edge directed from node EDGES[i][O] to node EDGES[i][1].
+//  Find whether the graph contains a cycle or not, return true if a cycle is present in the given directed graph else return false.
+//  For Example:
+//     In the following directed graph has a cycle i.e. В->С->Е->D->8.
+
+//
+//                   [C]
+//                 ↗️   ↘️ 
+//         [A]➡️[B]       [E]
+//                ^      v    ↘️  
+//                   [D]        [F]
+//
+
+// Note:
+//    1. The cycle must contain at least two nodes.
+//    2. It is guaranteed that the given graph has no self-loops in the graph.
+//    3. The graph may or may not be connected.
+//    4. Nodes are numbered from 1 to N.
+//    5. Your solution will run on multiple test cases. If you are using global variables make sure to clear them.
+
+// Constraints :
+//    1STS5
+//    2 <= N <= 100
+//    1 <= M <= min(100,N(N-1)/2)
+//    1 <= EDGES[i][0], EDGES[i][1] <= N
+//    Where 'T' is the number of test cases.
+//    Time Limit: 1 sec
+
+
+// Sample Input 1 :
+// 1
+// 5
+// 6
+// 1 2
+// 4 1
+// 2 4
+// 3 4
+// 5 2
+// 1 3
+// Sample Output 1 :
+// true
+// Explanation For Input 1 :
+// The given graph contains cycle 1 -> 3 -> 4 -> 1 or the cycle 1 -> 2 -> 4 -> 1.
+
+// Sample Input 2 :
+// 2
+// 5
+// 4
+// 1 2
+// 2 3
+// 3 4
+// 4 5
+// 2
+// 1
+// 1 2
+// Sample Output 2 :
+// false
+// false
+// Explanation For Input 2 :
+// The given graphs don’t contain any cycle.
+
+//🔴appraoch : Using Kahn's Algorithm (BFS)
+// which is basically used in Topological sort which is again used in (DAG) Directed Ascyclic graph
+// we will use reverse Engineering 
+// means in Kahn's Algorithm (BFS) it used to gives us valid output if the graph is asyclic 
+// so we will use that for our benefit if the output is invalid which means
+// graph is not asyclic means it is cyclic hence got the answer
+
+// #include<iostream>
+// #include<unordered_map>
+// #include<list>
+// #include<vector> 
+// #include<queue> 
+// using namespace std;
+
+// int detectCycleInDirectedGraph(int n, vector<pair<int, int>> &edges) {
+//     //create adjacencylist
+//     unordered_map<int, list<int>> adj ;
+//     for(int i=0; i<edges.size(); i++){
+//         int u = edges[i].first - 1;  //because nodes are between 1 to n
+//         int v = edges[i].second - 1;  //because nodes are between 1 to n
+
+//         adj[u].push_back(v) ;
+//     }
+
+//     //find all indegree
+//     vector<int> indegree(n)  ;
+//     for(auto i:adj){
+//         for(auto j:i.second) {
+//             indegree[j]++ ;
+//         }
+//     }
+
+//     // push all 0 indegree into queue
+//     queue<int> q;
+//     for(int i=0; i<n; i++){            
+//         if(indegree[i]== 0){
+//             q.push(i) ;
+//         }
+//     }
+
+//     //perfrom bfs
+//     int count = 0;
+//     while(!q.empty()) {
+//         int front = q.front() ;
+//         q.pop() ;
+
+//         //count increment
+//         count++ ;
+
+//         //update indegree
+//          for(auto neighbour: adj[front]) {
+//             indegree[neighbour]-- ;
+//             if(indegree[neighbour]==0) {
+//                 q.push(neighbour) ;
+//             }
+//          }
+//     }
+//        if( count == n) {        // means valid topological sort this happen only if it is a Directed asyclic graph
+//           return false;        // so if asyclic graph then return false
+//        }
+//        else{
+//         return true;           // if not valid topological sort means not DAG , then return true means cyclic graph
+//        }
+// }
+//🔴Time complexity: O(N+ E)        // or  O(V+ E) linear
+//🔴space complexity: O(N+ E)
+
+
+
+
+//🔴🔴🔴                //❓Question: Shortest path in an unweighted graph
+
+// The city of Ninjaland is analogous to the unweighted graph. The city has 'N' houses numbered from 1 to 'N' respectively and are
+// connected by M bidirectional roads. If a road is connecting two houses 'X' and 'Y' which means you can go from 'X' to 'Y' or 'Y' to 'X'. It is
+// guaranteed that you can reach any house from any other house via some combination of roads. Two houses are directly connected by at
+//  max one road.
+// A path between house 'S' to house 'T' is defined as a sequence of vertices from 'S' to 'T'. Where starting house is 'S' and the ending house
+// is 'T' and there is a road connecting two consecutive houses. Basically, the path looks like this: (S, h1, h2, h3 T). you have to find the
+// shortest path from 'S' to 'T'.
+
+// For Example
+//    In the below map of Ninjaland let say you want to go from S=1 to Т=8, the shortest path is (1, 3, 8). You can also
+// go from S=1 to T=8 via (1, 2, 5, 8) or (1, 4, 6, 7, 8) but these paths are not shortest.
+
+//
+//
+//
+//          [2]  ⬅️  ➡️  [5]
+//        ↗️                ^ 
+//        /                   \
+//       v                     ↘️  
+//     [1] ⬅️➡️ [3] ⬅️  ➡️  [8] 
+//       ^                      ⬆️ 
+//        \                     |
+//         ↘️                  v
+//           [4]⬅️➡️[6]⬅️➡️[7]
+//
+//Constraints :
+//    1 <= T <= 100
+//    2 <= N == 10 ٨ 3
+//    1 <= M <= min( N *(N - 1) / 2 , 1000 )
+//    1 <= S, T == N
+//    Time Limit: 1 sec
+
+// Sample Output 1 :
+// ( 1 , 3 , 4 )
+// Explanation Of Sample Input 1 :
+// In the above graph there are two ways to go from 1 to 4 ,
+// ( 1 , 2 , 3 , 4 ) and ( 1 , 3 , 4 ) but the second path is the shortest path.
+//
+//             [2]
+//           ↗️ ⬆️ 
+//          /    |
+//         v     |
+//       [1]     |
+//         ^     |
+//          \    | 
+//           ↘️  ⬇️ 
+//              [3] ⬅️➡️ [4]
+//
+// Sample Input 2 :
+// 1
+// 8 9
+// 1 8
+// 1 2
+// 1 3
+// 1 4
+// 2 5
+// 5 8 
+// 3 8
+// 4 6
+// 6 7
+// 7 8
+// Sample Output 2 :
+// ( 1 , 3 , 8 )
+
+//🔴Approach: using BFS 
+
+// #include<iostream>
+// #include<vector>
+// #include<unordered_map>
+// #include<list>
+// #include<queue>
+// #include<algorithm>
+// using namespace std;
+
+// vector<int> shortestPath( vector<pair<int,int>> edges , int n , int m, int s , int t){
+	
+//     //create a adjacency list
+//     unordered_map<int , list<int>> adj ;
+//     for(int i=0; i<edges.size(); i++){
+//       int u  = edges[i].first ;
+//       int v = edges[i].second;
+     
+//      adj[u].push_back(v) ;
+//      adj[v].push_back(u) ;
+//     }
+
+//     //do BFS
+//     unordered_map<int, bool> visited ;
+//     unordered_map<int, int> parent ;
+//     queue<int> q ;
+    
+//     parent[s] = -1;      //initially no parent will be there for the first node assuming
+//     q.push(s) ;         // given to find path between s to t , so s = firstnode
+//     visited[s] = true ;
+
+//     while(!q.empty()) {
+//         int front = q.front() ;
+//         q.pop() ;
+
+//         for(auto i:adj[front]) {
+//             if(!visited[i]) {
+//                 visited[i] = true ;
+//                 parent[i] = front;
+//                 q.push(i) ;
+//             }
+//         }
+//     }
+
+//     //prepare shortest path
+//     vector<int> ans ;
+//     int currentNode = t ;      // given to find path between s to t ,so t = lastNode
+//     ans.push_back(t) ;
+
+//     while(currentNode != s) {
+//         currentNode = parent[currentNode];
+//         ans.push_back(currentNode) ;
+//     }
+
+//     reverse(ans.begin(), ans.end()) ;
+  
+//   return ans ;
+// }
+//🔴Time complexity: O(N+E)     // or linear O(V+E)
+//🔴Space complexity: O(N+ E)
+
+// 103 /149
