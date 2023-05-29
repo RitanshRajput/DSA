@@ -2021,4 +2021,219 @@
 // //🔴space complexity: O(N + E)
 
 
-// 104/149
+
+//🔴🔴🔴🔴🔴🔴 DIJKSTRA's Algorithm (for shortest path) 🔴🔴🔴🔴🔴
+
+
+
+//                        //❓Question: Dijkstra's Shortest path
+
+// You have been given an undirected graph of 'V' vertices (labeled 0,1,..., V-1) and 'E' edges. Each edge connecting two nodes ('X','''' will
+//  have a weight denoting the distance between node 'X' and node 'Y'.
+//  Your task is to find the shortest path distance from the source node, which is the node labeled as 0, to all vertices given in the graph.
+//  Example:
+//    Input:
+//    4 5
+//    0 1 5
+//    0 2 8
+//    1 2 9
+//    1 3 2
+//    2 3 6
+
+//                  5
+//          [1]----------[0]          // 0 = source node
+//           | \       /
+//        2  |  \ 9   /  8
+//           |    \  /
+//          [3]----[2]
+//              6
+//
+// In the given input, the number of vertices is 4, and the number of edges is 5.
+// In the input, following the number of vertices and edges, three numbers are given. The first number denotes node
+//  'X', the second number denotes node 'Y' and the third number denotes the distance between node 'X' and 'Y'
+// As per the input, there is an edge between node 0 and node 1 and the distance between them is 5.
+// The vertices 0 and 2 have an edge between them and the distance between them is 8.
+// The vertices 1 and 2 have an edge between them and the distance between them is 9.
+// The vertices 1 and 3 have an edge between them and the distance between them is 2.
+// The vertices 2 and 3 have an edge between them and the distance between them is 6.
+
+// Note:
+//    1. There are no self-loops(an edge connecting the vertex to itself) in the given graph.
+//    2. There can be parallel edges i.e. two vertices can be directly connected by more than 1 edge.
+
+// Sample input 1
+// 2
+// 5 7
+// 0 1 7
+// 0 2 1
+// 0 3 2
+// 1 2 3
+// 1 3 5 
+// 1 4 1
+// 3 4 7
+// 4 5
+// 0 1 5
+// 0 2 8
+// 1 2 9
+// 1 3 2
+// 2 3 6
+// Sample output 1
+// 0 4 1 2 5
+// 0 5 8 7
+// Explanation For Sample Output 1
+// Test case 1:
+//                          [4] 5
+//                       1 /  |
+//                    4 [1]   | 7
+//                   3 / | \5 |
+//               1  [2] 7|  [3] 2
+//                   1 \ |  /2
+//                      [0] 
+//                       0
+ 
+// The source node is node 0.
+// The shortest distance from node 0 to node 0 is 0.
+// The shortest distance from node 0 to node 1 is 4. In the above figure, the green path represents this distance. The path goes from node 0->2->1, giving distance = 1+3=4.
+// The shortest distance from node 0 to node 2 is 1. In the above figure, the red path represents this distance. The path goes from node 0->2, giving distance = 1
+// The shortest distance from node 0 to node 3 is 2. In the above figure, the pink path represents this distance. The path goes from node 0->3, giving distance = 2.
+// The shortest distance from node 0 to node 4 is 5. In the above figure, the yellow path represents this distance. The path goes from node 0->2->1->4, giving distance = 1+3+1=5.
+// Test case 2:
+
+// The source node is node 0.
+// The shortest distance from node 0 to node 0 is 0.
+// The shortest distance from node 0 to node 1 is 5. In the above figure, the green path represents this distance. The path goes from node 0->1, giving distance = 5.
+// The shortest distance from node 0 to node 2 is 8. In the above figure, the pink path represents this distance. The path goes from node 0->2, giving distance = 8.
+// The shortest distance from node 0 to node 3 is 7. In the above figure, the yellow path represents this distance. The path goes from node 0->1->3, giving distance = 7.
+
+// Sample input 2:
+// 2
+// 9 14
+// 0 1 4
+// 0 7 8
+// 1 2 8
+// 1 7 11
+// 2 3 7
+// 2 5 4
+// 2 8 2 
+// 3 4 9
+// 3 5 14
+// 4 5 10
+// 5 6 2
+// 6 7 1
+// 6 8 6 
+// 7  8 7
+// 5 7
+// 0 1 7
+// 0 2 3
+// 1 2 1
+// 1 3 2
+// 1 4 6
+// 2 3 4
+// 3 4 4 
+// Sample output 2:
+// 0 4 12 19 21 11 9 8 14
+// 0 4 3 6 10
+
+//🔴 Dijkstra's Algorithm for undirected weighted graph:
+
+#include<iostream>
+#include<vector>
+#include<unordered_map>
+#include<list>
+#include<limits.h>
+#include<set>
+using namespace std;
+
+vector<int> dijkstra(vector<vector<int>> &vec, int vertices, int edges, int source) {
+      
+    //🔸step1: create adjacency list 
+    unordered_map<int, list<pair<int, int>>> adj ;
+
+    for(int i=0; i<edges; i++) {
+        int u = vec[i][0] ;        // u = nodes
+        int v = vec[i][1] ;        // v = edges
+        int w = vec[i][2] ;        // w = weights
+
+        adj[u].push_back(make_pair(v, w)) ; 
+        adj[v].push_back(make_pair(u, w))  ;
+      
+    // example format:  srcNode ==>  [node, weight]
+    // input: 
+    // 0 1 7        // node, edge, weight
+    // 0 2 1
+    // 0 3 2
+    // 1 2 3
+    // 1 3 5 
+    // 1 4 1
+
+    // 0 ==> [1,7] [2, 1] [3, 2] 
+    // 1 ==> [2, 3] [3, 5] [4, 1]
+
+    }
+   
+   //🔸step2: create a distance array which stores all the distance for given nodes
+   // ex:    distance :[ Inf | Inf | Inf | Inf | Inf ]        
+   //        nodes    :  0      1      2    3     4
+
+   // initialise all distance will be INT_MAX , and we will update the distance in the process 
+   // where we will find shortest distance and compare it with the previous distance
+   // and update shortest distance into the distance array
+   vector<int> dist(vertices);          // distance vector of size vertices/no. of nodes
+  
+   for(int i=0; i<vertices; i++) {
+     dist[i] = INT_MAX ;
+   }
+
+   //🔸step3: create a set<pair<int,int>>  which will check all the neighbour nodes 
+   //  distance connected to all nodes one by one 
+   // why set?  A set is a data structure that stores unique elements of the same type in a sorted order
+   // and we will use is as set<pair<distanceBetweenNode ,Node>>
+    set<pair<int, int>> st ;
+
+    // we will initialise first nodes distance as 0, bcoz it is the source node
+    dist[source] = 0 ;
+
+   // then we will add source node and its distance into set as a pair set<0,0> /  set<distance, node>
+   st.insert(make_pair(0, source)) ;   
+
+   //🔸step4: now run a loop till set is not empty and perform task like
+   // 1. fetch top record/data  (In this variable we will store the top pair of the set)
+   // 2. now create 2 different var, and assign distance and node respectively 
+   //     and after assigning pop/remove/erase  the top set<pair>
+   // 3. and traverse all the neighbour nodes, of that particular node from adjacency list
+   // 4. check condition if (distanceOfCurrentNode + NeighbourNodeDistance <  dist[neighbour.first](means the distance in the distance array)
+   // 5. if true then get the record store in distance array of the particular neighbourNode and erase it from set
+   // 6. then update the new shortest distance in the distance array
+   // 7. and push that new record in set
+   while( !st.empty()) {
+
+    //fetch top record from set
+    auto top = *(st.begin()) ;
+     
+    int nodeDistance = top.first ;
+    int topNode = top.second ;
+
+    //remove top record from set, as we have store them into variables
+    st.erase(st.begin()) ;
+
+    //traverse on neighbour
+    for(auto neighbour: adj[topNode]) {
+        if(nodeDistance + neighbour.second < dist[neighbour.first]) {
+           auto record = st.find(make_pair(dist[neighbour.first], neighbour.first)) ;
+          //if record found, then erase it
+           if(record != st.end()) {
+              st.erase(record) ;
+           }
+
+           //distance update
+           dist[neighbour.first] = nodeDistance + neighbour.second ;
+
+           //record push in set 
+            st.insert(make_pair(dist[neighbour.first], neighbour.first)) ;
+        }
+     }
+   }
+     return dist;
+}
+//🔴Time complexity: 
+//🔴space complexity: 
