@@ -1596,7 +1596,9 @@
 
 
 
-//🔸🔸(Using BFS) Kahn's ALgorithm
+//                      //🔴🔴  Kahn's ALgorithm
+
+
 //🔴🔴                   //❓Question: Detect Cycle in A Directed Graph 
 
 // You are given a directed graph having 'N' nodes. A matrix 'EDGES' of size M x 2 is given which represents the 'M' edges such that there is
@@ -1731,7 +1733,7 @@
 
 
 
-//🔴🔴🔴                //❓Question: Shortest path in an unweighted graph
+//🔴🔴🔴                //❓Question: Shortest path in an unweighted graph( Undirected Graph)
 
 // The city of Ninjaland is analogous to the unweighted graph. The city has 'N' houses numbered from 1 to 'N' respectively and are
 // connected by M bidirectional roads. If a road is connecting two houses 'X' and 'Y' which means you can go from 'X' to 'Y' or 'Y' to 'X'. It is
@@ -1748,15 +1750,13 @@
 //
 //
 //
-//          [2]  ⬅️  ➡️  [5]
-//        ↗️                ^ 
-//        /                   \
-//       v                     ↘️  
-//     [1] ⬅️➡️ [3] ⬅️  ➡️  [8] 
-//       ^                      ⬆️ 
-//        \                     |
-//         ↘️                  v
-//           [4]⬅️➡️[6]⬅️➡️[7]
+//          [2] ------------ [5]
+//         /                   \  
+//        /                     \ 
+//     [1] ----- [3] ---------- [8] 
+//       \                      /
+//        \                    /
+//           [4]----[6]-----[7]
 //
 //Constraints :
 //    1 <= T <= 100
@@ -1771,15 +1771,15 @@
 // In the above graph there are two ways to go from 1 to 4 ,
 // ( 1 , 2 , 3 , 4 ) and ( 1 , 3 , 4 ) but the second path is the shortest path.
 //
-//             [2]
-//           ↗️ ⬆️ 
+//            [2]
+//           /   |
 //          /    |
-//         v     |
+//         /     |
 //       [1]     |
-//         ^     |
+//         \     |
 //          \    | 
-//           ↘️  ⬇️ 
-//              [3] ⬅️➡️ [4]
+//           \   |
+//            [3]----[4]
 //
 // Sample Input 2 :
 // 1
@@ -1858,4 +1858,167 @@
 //🔴Time complexity: O(N+E)     // or linear O(V+E)
 //🔴Space complexity: O(N+ E)
 
-// 103 /149
+
+
+// 🔴🔴🔴🔴🔴    //❓Question: Shortest Path in (weighted) and Directed Acyclic Graph(DAG)
+
+
+//🔴Approach: ALgo
+
+//step1: first find adjacency list for the directed weighted graph
+//        as it is weighted there will be some changes in the way we will store the list
+//        unordered_map<int, list<pair<int, int>>> adj;
+//        bcoz = instead of storing value like this  
+//             o => 1, 2
+//             1= => 4, 5
+//        we will store them along with there weight given
+//             nodes => [connectedNode, weight]
+//             0 => [1, 5], [2, 7] 
+//             1 => [3, 9]
+//step2: Find Topological sort (this will helps us to get the order of nodes  ex:  a->b->c->d)
+//step3: after using topo sort, the Linear Order we will get we will utilise it and then update the distance array
+
+
+// #include<iostream>
+// #include<unordered_map>
+// #include<list>
+// #include<stack>
+// #include<vector>
+// #include<limits.h>
+// using namespace std;
+
+// class Graph{
+//   public:
+//   unordered_map<int, list<pair<int,int>>> adj ;
+
+// //creation of graph using u=node, v=edgeNode, weight
+//   void addEdge(int u, int v, int weight) {
+//     pair<int, int> p =  make_pair(v, weight) ;
+//     adj[u].push_back(p) ;
+//   }
+
+// //print function to print adjacency list of weight(DAG)
+//   void printAdj() {
+//     for(auto i:adj){
+//         cout<< i.first << " -> ";
+//         for(auto j:i.second) {
+//             cout<<"[" << j.first << "," << j.second << "], "  ;
+//         }
+//       cout<<endl ;
+//     }
+//   }
+   
+// // DFS function to solve and get topological sort and store that into stack
+//  void DFS(int node, unordered_map<int, bool> &visited, stack<int> &topo ) {
+
+//     visited[node] = true ;
+
+//     for(auto neighbour: adj[node]) {
+//         if( !visited[neighbour.first]) {
+//             DFS(neighbour.first, visited, topo) ;
+//         }
+//     }
+//     //important
+//     topo.push(node);
+//  }
+
+
+// // getShortest path function : where we actaully finding the answer
+//  void getShortestPath(int srcNode, vector<int> &dist, stack<int> &topo) {
+      
+//     dist[srcNode] = 0 ;
+
+//     while( !topo.empty()) {
+//         int top =  topo.top() ;
+//         topo.pop() ;
+
+//         if(dist[top] != INT_MAX){
+//             for(auto i:adj[top]) {
+//                 if(dist[top] + i.second < dist[i.first]) {
+//                     dist[i.first] = dist[top] + i.second ;
+//                 }
+//             }
+//         }
+//     }
+//  }
+
+// };
+
+// int main() {
+
+// //create a graph named g
+//  Graph g ;
+
+// //initialise node connected to edges and there weights
+//  g.addEdge(0, 1, 5) ;         //( u, v, weight),   (node, edgeNode, weight)
+//  g.addEdge(0, 2, 3) ;
+//  g.addEdge(1, 2, 2) ;
+//  g.addEdge(1, 3, 6) ;
+//  g.addEdge(2, 3, 7) ;
+//  g.addEdge(2, 4, 4) ;
+//  g.addEdge(2, 5, 2) ;
+//  g.addEdge(3, 4, -1) ;
+//  g.addEdge(4, 5, -2) ;
+
+// //print to see if they are created correctly
+//  g.printAdj() ;
+// //  output:
+// // 4 -> [5,-2], 
+// // 0 -> [1,5], [2,3], 
+// // 1 -> [2,2], [3,6], 
+// // 2 -> [3,7], [4,4], [5,2], 
+// // 3 -> [4,-1],
+
+// //shortest distance in weighted (DAG) solution call
+// // step1:topological sort 
+// int n = 6 ;          // n = no. of nodes  (0,1,2,3,4,5)
+// unordered_map<int, bool> visited ;
+// stack<int> s ;
+
+// //step2:perform DFS
+// for(int i=0; i<n; i++) {
+//     if( !visited[i]) {
+//         g.DFS(i, visited, s) ;
+//     }
+// }
+
+// int srcNode = 1 ;
+// vector<int> dist(n) ;
+
+// //step3: create a distance array and mark all the nodes distance as infinity/INT_MAX (as max value)
+// //       so later we will compare them to there actual weight and whichever is less we will update that weight in this array
+// for(int i=0; i<n; i++){
+//     dist[i] = INT_MAX ;
+// }
+
+
+// //step4: call shortest path function
+// g.getShortestPath(srcNode, dist, s) ;
+
+// //print final answer
+// cout<< "answer is : " <<endl ;
+// for(int i=0; i<dist.size(); i++) {
+//    cout<< dist[i] <<" ";   
+// }
+// cout<<endl ;
+
+// //output:   
+// // sourceNode = 1 
+// // 1 -> o  ==> Infinity    (No way to reach 0 from 1) 
+// // 1 -> 1  ==> 0
+// // 1 -> 2  ==> 2
+// // 1 -> 3  ==> 6
+// // 1 -> 4  ==> 5
+// // 1 -> 5  ==> 3
+
+// // shortestPath = [ infinity/INT_MAX  | 0 | 2 | 6 | 5 | 3 ]  // expected
+
+// // 2147483647 0 2 6 5 3         // original (correct output)
+
+//     return 0;
+// }
+// //🔴Time complexity:  O(N + E)    // linear O( v+ E)
+// //🔴space complexity: O(N + E)
+
+
+// 104/149
