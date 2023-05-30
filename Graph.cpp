@@ -2239,3 +2239,257 @@
 //🔴space complexity: O(N + E)              //linear O(V+E) vertices+edges
 
 
+
+
+//                //🔴🔴🔴 PRIMS's ALgorithm   ( to find Minimum Spanning Tree)
+
+// 🔸spanning tree : 
+// When we convert a graph into a tree such that it contains N nodes, and N-1 edges
+// Every nodes is recheable by every other nodes
+
+//🔸Minimum Spanning tree :
+// Minimum means Minimum cost of weight
+
+
+//                     //❓Question: Prim's MST
+
+// You are given an undirected connected weighted graph having 'N' nodes numbered from 1 to 'N'. A matrix 'E' of size M x 2 is given which
+//  represents the 'M' edges such that there is an edge directed from node E(i]o) to node E([[]]. You are supposed to return the minimum
+//  spanning tree where you need to return weight for each edge in the MST.
+//  For Example:
+//                [1]
+//             5 / | \ 15
+//              /  |  \ 
+//           [0]   |10 [3]
+//              \  |  /
+//             8 \ | / 20
+//                [2]
+
+// The MST (Minimum Spanning Tree) for the above graph is
+//                [1]
+//             5 /   \ 15
+//              /     \ 
+//           [0]      [3]
+//              \  
+//             8 \ 
+//                [2]
+
+// Constraints:
+//    1STS5
+//    2 <= N <= 100
+//    1 <= M <= min(1000, N(N - 1) / 2)
+//    1 <= E[i][0], E[i][1] <= N
+//    Time Limit: 1 sec
+
+// Sample Input 1 :
+// 1
+// 5 14
+// 1 2 2
+// 1 4 6
+// 2 1 2
+// 2 3 3
+// 2 4 8
+// 2 5 5
+// 3 2 3
+// 3 5 7
+// 4 1 6
+// 4 2 8
+// 4 5 9
+// 5 2 5
+// 5 3 7
+// 5 4 9
+// Sample Output 1 :
+// 1 2 2
+// 1 4 6
+// 2 3 3
+// 2 5 5
+// Explanation Of Input 1 :
+// The Minimum spanning tree for the given graph will contain the edges: (1,2) with weight 2, (1,4) with weight 6, (2,3) with weight 3 and (2,5) with weight 5.
+
+// Sample Input 2 :
+// 1
+// 5 15
+// 1 2 21
+// 1 4 16
+// 2 1 12
+// 2 3 13
+// 2 4 18
+// 2 5 15
+// 3 2 13
+// 3 5 17
+// 4 1 16
+// 4 2 18
+// 4 5 19
+// 5 1 18
+// 5 2 15
+// 5 3 17
+// 5 4 19
+// Sample Output 2 :
+// 1 2 12
+// 1 4 16
+// 2 3 13
+// 2 5 15
+// Explanation Of Input 2 :
+// The Minimum spanning tree for the given graph will contain the edges: (1,2) with weight 12, (1,4) with weight 16, (2,3) with weight 13 and (2,5) with weight 15.
+
+//🔸approach : Prims algo 
+// It requires 3 data structure (1. key array) (2. MST array) (3. parent array)
+// step1: make all nodes key as infinity(INT_MAx) except for source node which will be 0  
+// key  :  [ 0 | IM | IM | IM | IM ]
+// nodes:    0    1    2    3    4
+// step2: make all Nodes in MST as False 
+// step3: make all nodes in Parent as -1
+// 
+//  step1: find minimum weight from Node
+//  step2: mark that node in MST arrray as TRUE
+//  step3: search that nodes adjacence node, and update value in key array of that adjacence node from source node
+//  step4: now mark 0 for those adjacence nodes in parent array
+//  
+//  repeat above step with a condition of (  MST[i] = false && key[i] < mini )
+
+
+// #include<iostream>
+// #include<vector>
+// #include<unordered_map>
+// #include<list>
+// #include<limits.h>
+// using namespace std;
+
+// // here vector<pair<pair<int, int>, int>> === u, v, w
+// // n = no of nodes
+// // m = no of edges
+// // vector<pair<pair<int, int>, int>> &g == u, v, w
+// vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, int m, vector<pair<pair<int, int>, int>> &g)
+// {
+//     // create adjacency list
+//     unordered_map<int, list<pair<int,int>>> adj ;
+    
+//     for(int i=0; i<g.size(); i++) {
+//         int u = g[i].first.first ;
+//         int v = g[i].first.second ;
+//         int w = g[i].second ;
+
+//         adj[u].push_back(make_pair(v, w)) ;
+//         adj[v].push_back(make_pair(u, w)) ;
+//     }
+
+//     //create 3 datastructure : initially key(mark all INT_MAX), MST(mark all false), parent(mark all -1)
+//     vector<int> key(n+1)  ;                // (n+1) size ,means nodes will we shown node respective to the indes, like index 1 = node 1
+//     vector<bool> mst(n+1) ;
+//     vector<int> parent(n+1) ;
+
+//     for(int i=0; i<=n; i++) {           // for loop for all the edges
+//         key[i] = INT_MAX ;
+//         mst[i] = false;
+//         parent[i] = -1 ;
+//     }
+
+//     // perform Prims algo
+//     key[1] = 0 ;               // mark source node as 0
+//     parent[1] = -1 ;           // source node has no parent therfore -1
+   
+//     for(int i=1; i<n; i++){          //input nodes given from 1
+       
+//        int mini = INT_MAX ;
+//        int u ;
+       
+//        //find minimum node
+//        for(int v=1; v<=n; v++) {
+//          if(mst[v] == false && key[v] < mini) {
+//             u = v ;
+//             mini = key[v] ;
+//          }
+//        }
+
+//        //mark mini node as true
+//        mst[u] = true ;
+
+//        //check its adjacence nodes
+//        for(auto it:adj[u]) {
+//          int v = it.first ;
+//          int w = it.second ;
+
+//          if(mst[v] == false && w < key[v]) { 
+//             parent[v] = u ;
+//             key[v] = w ;
+//          }
+//        }
+//     }
+
+//     vector<pair<pair<int, int>, int>> result ;
+//     for(int i=2; i<=n; i++ )  {           // i=0 : not taken bcoz mapping starts from 1, i=1: cant start from1 bcoz parent of 1 is -1
+//       result.push_back({{parent[i], i}, key[i]}) ;        // it is working as (make_pair{(int,int), int}) , but this format is giving error 
+//     }
+
+//     return result ;
+// }
+//🔴time complexity: O(N^2)      // if used priority queue(Min heap) then can be implemented in O(nlog)
+
+
+//🔴Optimising using Min-heap
+// #include<iostream>
+// #include<vector>
+// #include<unordered_map>
+// #include<list>
+// #include<limits.h>
+// #include<queue>
+// using namespace std;
+
+// vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, int m, vector<pair<pair<int, int>, int>> &g)
+// {
+//     // create adjacency list
+//     unordered_map<int, list<pair<int,int>>> adj ;
+    
+//     for(int i=0; i<g.size(); i++) {
+//         int u = g[i].first.first ;
+//         int v = g[i].first.second ;
+//         int w = g[i].second ;
+
+//         adj[u].push_back(make_pair(v, w)) ;
+//         adj[v].push_back(make_pair(u, w)) ;
+//     }
+    
+//     //create min heap to get node with minimum weight
+//     priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq ;
+//     //let source as 1  ,and initially distance of source is 0 
+//     // {weigth, node}
+//     pq.push({0,1}) ;
+
+//     vector<int> key(n+1, INT_MAX)  ;   // another way to initialise all value with  INT_MAX 
+//     vector<bool> mst(n+1, false) ;     // another way to initialise all value with   false
+//     vector<int> parent(n+1, -1) ;      // another way to initialise all value with     -1
+
+
+//     // perform Prims algo
+//     key[1] = 0 ;             
+//     parent[1] = -1 ;          
+   
+//     while( pq.size()) {
+//         int w = pq.top().first ;
+//         int node = pq.top().second ;
+//         mst[node] = 1 ;
+//         pq.pop() ;
+
+//         //find node with minimum weight and to its neighbour
+//          for(auto neighbour: adj[node]) {
+//             int toGo = neighbour.first ;
+//             int toGoWeight = neighbour.second ;
+//           // if to react node N from key[N] ,update weight(key[N]) with distance from node to N
+//           if( mst[toGo] == false && toGoWeight < key[toGo]) {
+//             key[toGo] = toGoWeight ;
+//             parent[toGo] = node ;
+//             pq.push({toGoWeight, toGo}) ;
+//          }
+//         }
+//     }
+//     vector<pair<pair<int, int>, int>> result ;
+//     for(int i=2; i<=n; i++ )  {        
+//       result.push_back({{parent[i], i}, key[i]}) ;        
+//     }
+
+//     return result ;
+// }
+//🔴Time complexity: O(nlogn)        //using minHeap
+
+
+// 106 /149
