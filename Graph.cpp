@@ -2492,4 +2492,386 @@
 //🔴Time complexity: O(nlogn)        //using minHeap
 
 
-// 106 /149
+
+
+//             //🔴 Kruskal's Algorithm
+
+// 🔴 Disjoint Set:
+// disjoint set is a type of data structure using to implement Kruskal's algorithm
+// disjoint set can be used to detect cycle in a graph
+// disjoint set can be used to find, 
+//  if there are different component present in a graph
+//  and we have some nodes given, so we have to find whether those nodes belong to same component or different component
+
+//🔴 There are  2 major / important operation performed in Disjoint set :
+// 1. findParent() or findSet()
+// 2. Union or UnionSet()
+
+//🔸 FindParent() or FindSet() :
+
+// ex: we have some nodes and they are pointing to themselves, which means they are there own parents
+//      __     __      __      __     __ 
+//     |  |   |  |    |  |    |  |   |  |
+//     |  v   |  v    |  v    |  v   |  v 
+//      [1]    [2]     [3]     [4]    [5]
+
+// findParent(1) --> 1 
+// findParent(2) --> 2 
+// findParent(3) --> 3 
+// findParent(4) --> 4 
+// findParent(5) --> 5 
+
+
+//🔸 Union() or UnionSet() :
+
+//ex:  taking above example, where node pointing to themselves means they are there own parent
+//      __     __      __      __     __ 
+//     |  |   |  |    |  |    |  |   |  |
+//     |  v   |  v    |  v    |  v   |  v 
+//      [1]    [2]     [3]     [4]    [5]
+
+
+// Union(1, 2)  ==> 1 becomes parent of this component(1, 2)
+// Union(4, 5)  ==> 4 becomes parent of this component(4, 5)
+
+// Union(3, 5)  ==> here 5 belongs to other component(ie: 4,5)  therefore 
+//                  4 is parent of this component (4, 5, 3)    (we didn't consider 3 as parent because 3 was only to parent itself and no other component)
+ 
+// Union(1, 3)  ==> here 3 belongs to other component (ie: 4, 5, 3) therefore
+//                  1 is parent of this component (1, 2, 3, 4, 5)    (we consider 1 as parent because it was previously parent to one component(1, 2) hence it becomes the parent of (1,3))
+
+
+//🔴 Union by Ranks and path compression:
+
+//ex: we will understand it by following example:
+//      __     __      __      __     __     __    __ 
+//     |  |   |  |    |  |    |  |   |  |   |  |  |  |
+//     |  v   |  v    |  v    |  v   |  v   |  v  |  v
+//      [1]    [2]     [3]     [4]    [5]    [6]   [7]
+
+//🔸step1: find parent of each nodes:
+// findParent(1) ==> 1
+// findParent(2) ==> 2
+// findParent(3) ==> 3
+// findParent(4) ==> 4
+// findParent(5) ==> 5
+// findParent(6) ==> 6
+// findParent(7) ==> 7
+
+//🔸step2: create a rank array :
+// and initially rank of every node will be 0
+// and consider starting node will be parent to itself 
+// rank  : [ x | 0 | 0 | 0 | 0 | 0 | 0 | 0 ]
+// nodes :   0   1   2   3   4   5   6   7
+
+//🔸step3: start with first nodes:
+
+//🔸for Union(1, 2)
+// 1. find there parents :  as we have already found in FindParent()
+//    parent(1)  -->  1 
+//    parent(2)  -->  2
+
+// 2. Now find there rank : from the rank array
+//   1 --> 1   , parent rank of 1 is 0
+//   2 --> 2   , parent rank of 2 is 0
+// if both the ranks are same then we can attach them with whomever we want to
+// so we made parent(2) ==> 1
+//  [1]
+//    ⬆️  
+//    [2]
+
+// and increment rank of 1 :
+// rank  : [ x | 1 | 0 | 0 | 0 | 0 | 0 | 0 ]
+// nodes :   0   1   2   3   4   5   6   7
+
+//🔸for Union(2, 3) :
+// 1. findParent(2) --> 1
+// 2. findParent(3) --> 3
+
+//  2 --> 1 , rank of 1 is 1
+//  3 --> 3 , rank of 3 is 0
+// here we have different ranks for both nodes, therefore
+//  rank[3] < rank[1]           , higher rank node will become
+//  parent[3] == 1              ,  parent of lower node
+
+//    [1]
+//  ⬆️  ⬆️  
+// [3]   [2]
+
+//🔸for Union(4, 5) :
+// 1. findparent(4) --> 4 
+// 2. findparent(5) --> 5 
+
+// 4 --> 4 , rank of 4 is 0
+// 5 --> 5 , rank of 5 is 0
+// as both there ranks are same we can add on any node with anyother node
+//    [1]           [4]
+//  ⬆️  ⬆️          ⬆️ 
+// [3]   [2]         [5]
+
+// Now also increase rank of 4 as it became parent
+// rank  : [ x | 1 | 0 | 0 | 1 | 0 | 0 | 0 ]
+// nodes :   0   1   2   3   4   5   6   7
+
+//🔸for Union(6, 7) :
+// 1. findParent(6) --> 6 
+// 2. findParent(7) --> 7
+
+// 6 --> 6 ,rank of 6 is 0
+// 7 --> 7 ,rank of 7 is 0
+// as both the nodes have same ranks we can addOn any node with anyOther nodes
+//    [1]           [4]      [6]
+//  ⬆️  ⬆️          ⬆️       ⬆️ 
+// [3]   [2]         [5]       [7]
+
+// Also increase the rank of 6 as it became parent
+// rank  : [ x | 1 | 0 | 0 | 1 | 0 | 1 | 0 ]
+// nodes :   0   1   2   3   4   5   6   7
+
+//🔸for Union(5, 6) : 
+// 1. findParent(5) --> 4
+// 2. findParent(6) --> 6
+
+// 5 --> 4 ,rank of 4 is 1
+// 6 --> 6 ,rank of 6 is 1
+// as both the nodes have same ranks we can addOn any node with anyOther nodes
+//    [1]           [4]     
+//  ⬆️  ⬆️        ⬆️ ⬆️       
+// [3]   [2]      [6]  [5]     
+//                ⬆️ 
+//                [7]  
+
+// // Also increase the rank of 4 as it became parent
+// rank  : [ x | 1 | 0 | 0 | 2 | 0 | 1 | 0 ]
+// nodes :   0   1   2   3   4   5   6   7
+
+//🔸for Union(3, 7) :
+// 1. findParent(3) --> 1
+// 2. findParent(7) --> 6 --> 4     , 4 is parent of 6 and 6 is parent of 7 so 4 becomes parent of 7
+
+// 3 --> 1 ,rank of 1 is 1
+// 7 --> 4 ,rank of 4 is 2
+// Incase of non equal rank we check condition
+// and higher rank node became parent of lower rank node
+// rank[1] < rank[4]          (ie.: 1 < 2)
+// parent[1] = 4
+
+//                 [4]     
+//              ↗️  ⬆️⬆️       
+//            [1]  [6] [5]     
+//           ⬆️⬆️   ⬆️ 
+//          [3] [2]  [7]   
+
+//🔴  Path compression :
+// No suppose there was another node below [7] <--[8] 
+// and to find parent[8] we have to traverse upto the parent which [4]
+// ie:   parent[8] --> parent[7] --> parent[6] --> 4
+//       parent[8] --> 4
+
+// this process increase our time complexity : therfore we remove [7]
+// from below [6] <-- [7]      and put it next to parent Node which is [4]
+
+//                 [4] ⬅️ [7] 
+//              ↗️  ⬆️⬆️       
+//            [1]  [6] [5]     
+//           ⬆️⬆️   
+//          [3] [2]   
+// In this way we can find parent of any node easily without consuming many time
+
+
+//🔴🔴Kruskal's Algorithm :
+
+//                      5 
+//                [4] ----- [3]
+//          9  /   |  \      |  \  8
+//            /    |   \     |   \
+//          [5]  1 |  3 \  3 |    [6]
+//            \    |     \   |    /
+//           4 \   |      \  |   / 7
+//                [1] ----- [2] 
+//                      2
+
+// No adjacency list is Needed :
+// Use of linear data structure is done here:
+
+//🔸step1: find weight ,node and edges 
+//    wt   u   v 
+//----------------
+//    1    1   4
+//    2    1   2
+//    3    2   3
+//    3    2   4
+//    4    1   5
+//    5    3   4
+//    7    2   6 
+//    8    3   6
+//    9    4   5
+
+
+//🔸initially every node will be pointing to themselve, means they will be there own parent
+
+//🔸step2: after finding u and v, 
+//        check whether there parent are same or different
+//        In case of different parent, we will perform merge/union 
+//        In case of same parent, we will ignore them
+
+//   u -> same parent   // merge/union
+//   v -> same parent   // merge/union
+
+//   u -> diff parent   // ignore
+//   v -> diff parent   // ignore
+
+//final graph will look like :
+
+//                [4]       [3]
+//                 |         | 
+//                 |         |   
+//          [5]  1 |       3 |    [6]
+//            \    |         |    /
+//           4 \   |         |   / 7
+//                [1] ----- [2] 
+//                      2
+//🔸Minimum spanning tree achieved: (MST)
+
+
+
+
+
+//🔴🔴🔴                //❓Question: Minimum Spanning Tree
+
+// You are given an undirected, connected and weighted graph G(V, E), consisting of V number of vertices (numbered from 0 to V-1) and E
+//  number of edges.
+//  Find and print the total weight of the Minimum Spanning Tree (MST) using Kruskal's algorithm.
+//  By definition, a minimum weight spanning tree is a subset of the edges of a connected, edge-weighted undirected graph that connects all
+//  the vertices together, without any cycles and with the minimum possible total edge weight.
+
+// Constraints :
+//    2 <= V <= 10^5
+//    1 <= E <= 3 e 10^5
+//    0 <=X<N
+//    0 <=Y<N
+//    1 <= W <= 10^4
+//    where V and E represent the number of vertices and edges respectively
+//    x and Y represent the vertices between which there is an edge.
+//    W is the weight of the edge.
+//    Time limit: 1sec
+
+// Sample Input 1 :
+// 4 4
+// 0 1 3
+// 0 3 5
+// 1 2 1
+// 2 3 8
+// Sample Output 1 :
+// 9
+// Explanation For Sample Input 1:
+// The edge (2,3) having weight 8 will be excluded from the MST. The total weight of the MST then will be 1 + 3 + 5 = 9.
+
+// Sample Input 2:
+// 4 4
+// 1 2 6
+// 2 3 2
+// 1 3 2
+// 1 0 2
+// Sample Output 2:
+// 6
+
+//🔴appraoch: using kruskal's algorithm
+// #include<iostream>
+// #include<vector>
+// #include<algorithm>
+// using namespace std;
+
+// // cmp function: to sort the given node in weight order
+// bool cmp(vector<int> &a, vector<int> &b) {
+//     return a[2] < b[2] ;              // 2 is weight index in the given edges vector
+// }
+
+// //Make set function:
+// void initialisePandR(vector<int> &parent, vector<int> &rank, int n) {
+//     //initiallise every parent with its ownSelf, and rank with 0
+//     for(int i=0; i<n; i++) {
+//         parent[i] = i ;
+//         rank[i] = 0 ;
+//     }
+// }
+
+// // find parent function:
+// int findParent(vector<int> &parent, int node) {
+//     // if parent of node like for ex: parent[8] --> parent[7] --> parent[6] --> 4 
+//     // here parent[4] --> 4 itself so return 4
+//     if(parent[node] == node) {
+//         return node ;
+//     }
+//     //recursion call
+//     // path compression: parent[Node] = recursionCall
+//     return parent[node] = findParent(parent, parent[node]) ;
+// }
+
+// // unionset function:
+//  void unionSet( int u, int v, vector<int> &parent, vector<int> &rank) {
+//     //find parent 
+//     u = findParent(parent, u) ;
+//     v = findParent(parent, v) ;
+
+//     //find rank and update accordingly
+//     if(rank[u] < rank[v]) {
+//         parent[u] = v ;
+//     }
+//     else if(rank[v] < rank[u]) {
+//         parent[v] = u ;
+//     }
+//     else{
+//         //if rank is same
+//         parent[v] = u ;
+//         rank[u]++ ;
+//     }
+//  }
+
+// // main funtion:
+// int minimumSpanningTree(vector<vector<int>>& edges, int n)
+// {   
+//     // sort the given edge weight wise
+//     //    wt   u   v 
+//     //----------------
+//     //    1    1   4
+//     //    2    1   2
+//     //    3    2   3
+//     //    3    2   4
+//     //    4    1   5
+//     //    5    3   4
+//     //    7    2   6 
+//     //    8    3   6
+//     //    9    4   5
+//     // The third parameter of the array sort function in c++ is used to determine the order in which the components should be sorted    
+//     sort(edges.begin(), edges.end(), cmp) ;
+
+//     // create parent and rank array:
+//     vector<int> parent(n) ;
+//     vector<int> rank(n)  ;
+
+//     // call initialisePandR function, where we set parent and rank initial value
+//     initialisePandR(parent, rank, n) ;
+    
+//     //iterate through the sorted nodes and perform kruskals algo
+//     int minWeight = 0 ;
+
+//     for(int i=0; i<edges.size(); i++) {
+//         int u = findParent(parent, edges[i][0]) ;       // edges[i][0] first col
+//         int v = findParent(parent, edges[i][1]) ;       // edges[i][1] second col
+//         int w = edges[i][2] ;                          // edges[i][2] third col
+
+//         if( u != v ) {
+//             minWeight += w ;
+//             unionSet(u, v, parent, rank) ;
+//         }
+//     }
+  
+//   return minWeight ;
+// }
+// sort(stl) ==> time complexity : (m Log n)
+// findParent() / unionSet ==> time complexity:  O(1)  <-- O(4) <-- O(4 alpha)      // according to research and studies
+//🔴time complexity:  O(mLogN)
+//🔴space complexity: O(N)           //linear space
+
+// 107 / 149
