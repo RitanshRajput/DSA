@@ -3306,3 +3306,114 @@
 //🔴time complexity: O(N+E)
 //🔴space complexity: O(N+E)
 
+
+
+//               //❓Question: Bellman Ford
+
+// You have been given a directed weighted graph of 'N' vertices labeled from 1 to 'N' and 'M' edges. Each edge connecting two nodes 'u'
+//  and 'v' has a weight 'w' denoting the distance between them.
+//  Your task is to find the length of the shortest path between the 'src' and 'dest' vertex given to you in the graph. The graph may contain
+//  negatively weighted edges.
+
+//                [2]
+//             2 ↗️ \  -1
+//              / 2  ↘️ 
+//            [1]---➡️[3]
+//
+//  3 3 1 3
+//  1 2 2
+//  1 3 2
+//  2 3 1-
+//  In the above graph, the length of the shortest path between vertex 1 and vertex 3 is 1->2->3 with a cost of 2 - 1
+// = 1.
+
+// Note:
+//    It's guaranteed that the graph doesn't contain self-loops and multiple edges. Also the graph does not contain
+//    negative weight cycles.
+
+// Sample Input 1 :
+// 1    
+// 4 4 1 4
+// 1 2 4
+// 1 3 3
+// 2 4 7 
+// 3 4 -2
+// Sample Output 1 :
+// 1
+
+// explanation for sample output 1:
+//              [2]
+//          4 ↗️  \  7
+//          /       ↘️ 
+///      [1]         [4]
+//        3 \       ↗️  -2
+//           ↘️    /
+//             [3]
+
+// The optimal path from source vertex 1 to destination vertex 4 is 1->3->4 with a cost of 3 - 2 = 1.
+// Sample Input 2 :
+// 1
+// 2 1 1 2
+// 2 1 3
+// Sample Output 2 :
+// 1000000000
+
+//🔸 as dijkstra's algorithm not work on negative weight to find shortest distance
+//🔸 bellman ford can be use to find negative cycle 
+//🔸 bellman ford can work on negative weight to find shortest distance
+//🔸 bellman ford can be applied to directed graph with negative weight, but not negative cycle
+//🔸 for undirected graph, first convert it into directed graph and then apply bellman ford
+
+//🔴approach: using bellman ford
+//step1:  it says apply below formula 
+// if(distance[u] + weight < distance[v]) 
+//     distance[v] = distance[u] + weight
+
+// to  (n-1 times)
+
+//step2: apply same above formula one more time 
+//        if any value gets updated that means negative cycle is present therefore shortest path cannot be found
+
+// #include<iostream>
+// #include<vector>
+// #include<unordered_map>
+// #include<list>
+// using namespace std;
+
+// int bellmonFord(int n, int m, int src, int dest, vector<vector<int>> &edges) {
+
+//     vector<int> dist(n+1, 1e9) ;             // 1e9 = distance ,  the notation 1e9 represents a floating-point number in scientific notation. It stands for 1 × 10^9, which is equivalent to the number 1,000,000,000 (one billion).
+//     dist[src] = 0 ;
+
+// // n-1 times updates 
+//     for(int i=1; i<=n; i++) {
+//         //traverse on edge list 
+//         for(int j=0; j<m; j++) {
+//             int u = edges[j][0] ;
+//             int v = edges[j][1] ;
+//             int wt = edges[j][2] ;
+
+//             if(dist[u] != 1e9 &&  ((dist[u] + wt) < dist[v])) {
+//                 dist[v] = dist[u] + wt ;
+//             }
+//         }
+//     }
+
+//     //check for negative cycle
+//     bool flag = 0 ;
+//     for(int j=0; j<m; j++) {
+//         int u = edges[j][0] ;
+//         int v = edges[j][1] ;
+//         int wt = edges[j][2] ;
+
+//         if(dist[u] != 1e9 && ((dist[u] + wt) < dist[v])) {
+//             flag = 1 ;
+//         }
+//     }
+
+//     if(flag == 0) {
+//         return dist[dest] ;
+//     }
+//     return -1; 
+// }
+//🔴time complexity: O(N * M)       // (n-1) * E
