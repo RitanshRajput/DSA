@@ -2874,4 +2874,435 @@
 //🔴time complexity:  O(mLogN)
 //🔴space complexity: O(N)           //linear space
 
-// 107 / 149
+
+
+
+// 🔴🔴🔴               //❓Question: Bridges in a Graph
+
+// Given an undirected graph of V vertices and E edges. Your task is to find all the bridges in the given undirected graph. A bridge in any
+// graph is defined as an edge which, when removed, makes the graph disconnected (or more precisely, increases the number of
+// connected components in the graph).
+//  For Example:
+//    If the given graph is : :
+
+//     [2]                [5]
+//      | \             /  |
+//      |   [0]-----[4]    |
+//      | /             \  |
+//     [1]                [3]
+
+// Then the edge between 0 and 4 is the bridge because if the edge between 0 and 4 is removed, then there will be no
+// path left to reach from 0 to 4.and makes the graph disconnected, and increases the number of connected components.
+// Note:
+// There are no self-loops( (an edge connecting the vertex to itself) in the given graph.
+// There are no parallel edges i.e no two vertices are directly connected by more than 1 edge.
+
+// Constraints :
+//    1 <= T <= 50
+//    1 <= V <= 10 1 3
+//    V-1 <= E <= 3 10^3
+//    0 <= a, b < V
+//    Time Limit: 1 sec
+
+// Sample Input 1 :
+// 2
+// 5 4
+// 0 1
+// 3 1
+// 1 2
+// 3 4
+// 3 3
+// 0 1
+// 1 2
+// 2 0
+// Sample Output 1 :
+// 4
+// 0 1
+// 1 2    
+// 1 3
+// 3 4
+// 0
+// Explanation For Sample Input 1 :
+// For the first test case, the graph will be represented as 
+//  [2]
+//   |
+//   |
+//  [1]---[3]---[4]
+//   |
+//   |
+//  [0]
+// There are four bridges((0-1),(1-2),(1-3),(3-4)) in the above-given graph denoted by red lines.
+// For the second test case, there is no bridge present in the given graph.
+
+// Sample Input 2 :
+// 1
+// 6 7
+// 1 2
+// 1 0
+// 0 2
+// 0 4
+// 5 4
+// 5 3
+// 3 4
+// Sample Output 2 :
+// 1
+// 0 4
+// Explanation For Sample Input 2 :
+// For the first test case, the graph will be represented as 
+//     [2]                [5]
+//      | \             /  |
+//      |   [0]-----[4]    |
+//      | /             \  |
+//     [1]                [3]
+// There is only one bridge((0-4)) in the above-given graph denoted by red lines.
+
+//🔴approach:
+//🔸so basically bridge is type of edge , when we remove it then no of component will increase
+
+// #include<iostream>
+// #include<unordered_map>
+// #include<list>
+// #include<vector>
+// using namespace std; 
+
+// //dfs function
+// void dfs(int node, int parent, int &timer, vector<int> &discovery,  vector<int> &low, 
+//          vector<vector<int>> &result, unordered_map<int,list<int>> &adj, unordered_map<int, bool> &visited) {
+ 
+//     visited[node] = true ;
+//     discovery[node] = low[node] =  timer++ ;
+
+//     for(auto neighbour: adj[node]) {
+//         if(neighbour == parent) {         // ignore if neighbour is parent
+//             continue ;
+//         }
+
+//         if( !visited[neighbour]) {
+//             dfs(neighbour, node, timer, discovery, low, result, adj, visited) ;
+//             //after coming back from recursion
+//             low[node] = min(low[node], low[neighbour]) ;
+//             //check that particular edge is bridge or not
+//             if(low[neighbour] > discovery[node]) {
+//                 vector<int> ans ;
+//                 ans.push_back(node) ;
+//                 ans.push_back(neighbour) ;
+//                 result.push_back(ans) ;
+//             }
+//         }
+//         else{
+//             //(if already visited and not equal to parent)
+//             // back edge  (means another route to get to that node) 
+//             low[node] = min(low[node], discovery[neighbour]) ;
+//         }
+//     }
+
+// }
+
+// //main funstion
+// vector<vector<int>> findBridges(vector<vector<int>> &edges, int v, int e) {
+//    //create adjacency list
+//    unordered_map<int, list<int>> adj ;
+
+//    for(int i=0; i<edges.size(); i++){
+//        int u = edges[i][0] ;
+//        int v = edges[i][1] ;
+
+//        adj[u].push_back(v) ;
+//        adj[v].push_back(u) ;
+//    }
+
+//    int timer = 0 ;
+//    vector<int> discovery(v) ;
+//    vector<int> low(v) ;
+//    int parent = -1 ;
+//    unordered_map<int, bool> visited ;
+
+//    for(int i=0; i<v; i++) {
+//      discovery[i] = -1 ;
+//      low[i] = -1 ;
+//    }
+    
+//     vector<vector<int>> result ;
+//    // dfs 
+//    for(int i=0; i<v; i++) {
+//          if( !visited[i]) {
+//             dfs( i, parent, timer, discovery, low, result, adj, visited) ;
+//          }
+//    }
+
+//    return result ;
+// }
+//🔴time complexity: O(N+E)   // linear complexity
+//🔴space complexity: O(N+E)  // linear complexity
+
+
+
+//🔴🔴           //🔴Articulation Point in Graph
+
+// If removing a vertex and its related edges causes the graph to become disconnected, the vertex is considered to be an articulation point in the graph.
+//  Therefore, the number of related components in a graph grows as articulation points are removed. 
+//  A connected component, or simply component, is a subgraph where every pair of nodes is connected to every other node by a path.
+// Sometimes articulation points are referred to as cut vertices.
+// Finding all of a graph's articulation points is the primary goal here which can be done by Tarjan’s Algorithm.
+
+//🔸so basically articulation point is a node, when removed from a graph, creates more component
+
+// #include<iostream>
+// #include<unordered_map>
+// #include<list>
+// #include<vector>
+// using namespace std;
+
+// //min function
+// int min(int a, int b) {
+//     if(a < b) {
+//        return a ;
+//     }
+//     else{
+//        return b ;
+//     }
+    
+// }
+
+// //dfs
+// void dfs(int node, int parent, vector<int> &disc, vector<int> &low, unordered_map<int, bool> &vis, 
+//                      unordered_map<int, list<int>> &adj, vector<int> &ap, int &timer) {
+ 
+//      vis[node] = true ;
+//      disc[node] = low[node] = timer++ ;
+//      int child = 0;
+
+//      for(auto nbg: adj[node]){
+           
+//         if(nbg == parent) {
+//             continue ;
+//         }
+
+//         if( !vis[nbg])  {
+//             dfs(nbg, node, disc, low, vis, adj, ap, timer) ;
+//             low[node] = min( low[node], low[nbg]) ;
+//             //check articulation point or not
+//             if(low[nbg] >= disc[node] && parent != -1) {
+//                 ap[node] = 1 ;           // true == 1
+//             }
+//             child++ ;
+//         }
+//         else{
+//             low[node] = min(low[node], disc[nbg]) ;
+//         }
+//      }
+
+//       // edge case
+//       // if there is only one parent node and more than one nodes are connected to that single parent
+//       // which means removing that single parent , will create many component
+//      if(parent == -1 && child > 1) {
+//         ap[node] = 1 ;
+//      }
+
+// }
+
+// int main() {
+
+//     int n = 5 ;
+//     int e = 5 ;
+//     vector<pair<int,int>> edges ;
+
+//     edges.push_back(make_pair(0,3)) ;
+//     edges.push_back(make_pair(3,4)) ;
+//     edges.push_back(make_pair(0,4)) ;
+//     edges.push_back(make_pair(0,1)) ;
+//     edges.push_back(make_pair(1,2)) ;
+
+//     //adj list
+//     unordered_map<int, list<int>> adj ;
+
+//     for(int i=0; i<edges.size(); i++) {
+//         int u = edges[i].first ;
+//         int v = edges[i].second ;
+
+//         adj[u].push_back(v) ;
+//         adj[v].push_back(u) ;
+//     }
+  
+//    int timer = 0 ;
+//    vector<int> disc(n) ;
+//    vector<int> low(n) ;
+//    unordered_map<int, bool> vis ;
+//    vector<int> artiPoint(n,0) ;
+
+//    for(int i=0; i<n; i++) {
+//     disc[i] = -1;
+//     low[i] = -1;
+//    }
+
+//    //dfs call
+//    for(int i=0; i<n; i++) {
+//     if(!vis[i]){
+//         dfs(i, -1, disc, low, vis, adj, artiPoint,  timer) ;
+//     }
+//    }
+
+//    //print articulation point 
+//    cout<< " articulation point are as follows: "<<endl ;
+//    for(int i=0; i<n; i++){
+//         if(artiPoint[i] != 0) {
+//             cout<< i << " " ;
+//         }
+//    }
+//     cout<<endl ;
+// 🔸output: 0 1
+
+//     return 0 ;
+// }
+//🔴time complexity: O(N+E)
+//🔴space complexity: O(N+E)
+
+
+
+//🔴🔴🔴          //❓Question: Count strongly connected components( kosaraju's algorithm) HARD
+
+// You are given an unweighted directed graph having 'V' vertices and 'E' edges. Your task is to count the number of strongly connected
+//  components (SCCs) present in the graph.
+//  A directed graph is said to be strongly connected if every vertex is reachable from every other vertex. The strongly connected
+//  components of a graph are the subgraphs which are themselves strongly connected.
+//  Note:
+//    Use zero-based indexing for the vertices.
+//    The given graph doesn't contain any self-loops.
+
+// Constraints :
+//    1 <= T <= 10
+//    1 <= V <= 10^4
+//    0 <= E <= 10^4
+//    0 <= a, b < V
+//    Time Limit: 1 sec
+
+// Sample Input 1 :
+// 1
+// 5 6
+// 0 1
+// 1 2
+// 1 4
+// 2 3
+// 3 2
+// 4 0
+// Sample Output 1 :
+// 2
+// Explanation Of Sample Input 1 :
+// For the first test case, the graph is shown below. There are two SCCs in the graph, 
+// which are enclosed in the boxes as shown in the image below.
+
+// Sample Input 2 :
+// 2
+// 1 0
+// 4 4
+// 0 1
+// 1 2
+// 2 3
+// 3 1
+// Sample Output 2 :
+// 1
+// 2
+
+//🔸 strongly connected component means agar uss component ke kisi bhi node se start kare to 
+//  uss component ke sare nodes ko traverse kar sakte hai
+
+//              [1]
+//             ↗️ \ 
+//            /    ↘️ 
+//          [0]⬅️--[2] -----> [3]
+//                              |
+//                             ⬇️ 
+//                             [4]
+
+// here 0, 1, 2 are strongly connected component, bcoz no matter where we start traversing from we can traverse all three nodes
+// 3 itself is a strongly connected component
+// 4 itself is a strongly connected component
+//output:
+// 1 2 0  == ssc 1
+// 3      == ssc 2
+// 4      == ssc 3
+
+//🔴approach :
+
+// #include<iostream>
+// #include<unordered_map>
+// #include<list>
+// #include<vector>
+// #include<stack>
+// using namespace std;
+
+// //dfs function
+// void dfs(int node, unordered_map<int, bool> &vis, stack<int> &st, unordered_map<int, list<int>> &adj) {
+
+//     vis[node] = true ;
+
+//     for(auto nbg: adj[node]) {
+//         if( !vis[nbg]) {
+//             dfs(nbg, vis, st,  adj) ;
+//         }
+//     }
+//     //topo sort
+//     st.push(node) ;
+// }
+
+// //reverse order dfs function
+// void reverseDfs( int node, unordered_map<int, bool> &vis, unordered_map<int, list<int>> &adj) {
+       
+//     vis[node] = true ;
+
+//     for(auto nbg: adj[node]) {
+//         if( !vis[nbg]) {
+//             reverseDfs(nbg, vis, adj) ;
+//         }
+//     }
+// }
+
+// //main func
+// int stronglyConnectedComponents(int v, vector<vector<int>> &edges)
+// {
+//     //create adj list
+//     unordered_map<int, list<int>> adj ;
+
+//     for(int i=0; i<edges.size(); i++){
+//         int u = edges[i][0] ;
+//         int v = edges[i][1] ;
+
+//         adj[u].push_back(v) ;
+//     }
+
+//     //topological sort 
+//     stack<int> st ;
+//     unordered_map<int, bool> vis ;
+
+//     for(int i=0; i<v; i++) {
+//         if( !vis[i]) {
+//             dfs(i, vis, st, adj) ;
+//         }
+//     }
+
+//     // transpose the components edges ( means direction change kardo)
+//     // kyuki stack me FILo hota hai
+//     unordered_map<int, list<int>> transpose ;
+    
+//     for(int i=0; i<v; i++) {
+//         vis[i] = 0 ;
+//         for(auto nbg: adj[i]){
+//             transpose[nbg].push_back(i) ;
+//         }
+//     }
+
+//     // dfs call using above ordering
+//     int count = 0 ;
+//      while( !st.empty()) {
+//         int top = st.top() ;
+//         st.pop() ;
+//         if( !vis[top]) {
+//            count++ ;
+//            reverseDfs(top, vis, transpose) ;
+//         }
+//      }
+//      return count ;
+// }
+//🔴time complexity: O(N+E)
+//🔴space complexity: O(N+E)
+
