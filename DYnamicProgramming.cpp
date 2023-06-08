@@ -616,4 +616,181 @@
 //🔸space complexity: O(x)
 
 
-// 114 / 149
+//                  //❓Question: Maximum sum of non-adjacent element
+
+
+// You are given an array/list of 'N' integers. You are supposed to return the maximum sum of the subsequence with the constraint that no
+//  two elements are adjacent in the given array/list.
+//  Note:
+//    A subsequence of an array/list is obtained by deleting some number of elements (can be zero) from the array/list,
+//    leaving the remaining elements in their original order.
+
+// Constraints:
+//    1 <= T <= 500
+//    1 <= N <= 1000
+//    0 <= ARR[i] <= 10^5
+//    Where 'ARR[i]" denotes the 'i-th' element in the array/list.
+//    Time Limit: 1 sec.
+
+// Sample Input 1:
+// 2
+// 3
+// 1 2 4
+// 4
+// 2 1 4 9
+// Sample Output 1:
+// 5
+// 11
+// Explanation To Sample Output 1:
+// In test case 1, the sum of 'ARR[0]' & 'ARR[2]' is 5 which is greater than 'ARR[1]' which is 2 so the answer is 5.
+// In test case 2, the sum of 'ARR[0]' and 'ARR[2]' is 6, the sum of 'ARR[1]' and 'ARR[3]' is 10, and the sum of 'ARR[0]' and 'ARR[3]' is 11. So if we take the sum of 'ARR[0]' and 'ARR[3]', it will give the maximum sum of sequence in which no elements are adjacent in the given array/list.
+
+// Sample Input 2:
+// 2
+// 5
+// 1 2 3 5 4
+// 9
+// 1 2 3 1 3 5 8 1 9
+// Sample Output 2:
+// 8
+// 24
+// Explanation To Sample Output 2:
+// In test case 1, out of all the possibilities, if we take the sum of 'ARR[0]', 'ARR[2]' and 'ARR[4]', i.e. 8, it will give the maximum sum of sequence in which no elements are adjacent in the given array/list.
+// In test case 2, out of all the possibilities, if we take the sum of 'ARR[0]', 'ARR[2]', 'ARR[4]', 'ARR[6]' and 'ARR[8]', i.e. 24 so, it will give the maximum sum of sequence in which no elements are adjacent in the given array/list.
+
+//🔴approach: Recusrion 
+//🔸 Time limit exceeeded
+// #include<iostream>
+// #include<vector> 
+// using namespace std;
+
+// int solve(vector<int> &nums, int n){
+//     //base case
+//     if(n < 0){
+//         return 0 ;
+//     }
+
+//     if(n == 0){
+//         return nums[0] ;
+//     }
+
+//     int include = solve(nums, n-2)  + nums[n] ;
+//     int exclude = solve(nums, n-2) + 0 ;
+    
+//     return max(include, exclude) ;
+// }
+
+// int maximumNonAdjacentSum(vector<int> &nums){
+//     int n = nums.size() ;
+//     int ans = solve(nums, n-1) ;
+//     return ans ;
+// }
+
+
+//🔴approach: Recusrion  + Memoization
+//🔸 Time limit exceeded
+// #include<iostream>
+// #include<vector> 
+// using namespace std;
+
+// int solve(vector<int> &nums, int n, vector<int> &dp) {
+//     //base case
+//     if(n < 0){
+//         return 0 ;
+//     }
+
+//     if(n == 0){
+//         return nums[0] ;
+//     }
+   
+//      //step3:
+//     if(dp[n] != -1){
+//         return dp[n] ;
+//     }
+
+//     //step2:
+//     int include = solve(nums, n-2, dp)  + nums[n] ;
+//     int exclude = solve(nums, n-2, dp) + 0 ;
+    
+//     dp[n] = max(include, exclude) ;
+//     return dp[n] ;
+// }
+
+// int maximumNonAdjacentSum(vector<int> &nums){
+//     int n = nums.size() ;
+//     vector<int> dp(n, -1) ; 
+
+//    return solve(nums, n-1, dp) ;
+//    ;
+// }
+//🔸Time complexity: O(n)
+//🔸Space complexity: O(n)        // O(n) + O(n)
+
+
+
+//🔴approach: Tabulation
+//🔸
+// #include<iostream>
+// #include<vector> 
+// using namespace std;
+
+// int solve(vector<int> &nums) {
+    
+//     int n = nums.size() ;
+//     vector<int> dp(n, 0) ;
+
+//     dp[0] = nums[0] ;
+
+//     for(int i=1; i<n; i++) {
+//         int include = dp[i-2] + nums[i] ;
+//         int exclude = dp[i-1] + 0 ;
+//         dp[i] = max(include, exclude); 
+//     }
+
+//     return dp[n-1];
+// }
+
+// int maximumNonAdjacentSum(vector<int> &nums){
+   
+//    return solve(nums) ;
+//    ;
+// }
+//🔸Time complexity: O(n)
+//🔸Space complexity: O(n)
+
+
+
+// 🔴approach: Space optimisation
+
+// #include<iostream>
+// #include<vector> 
+// using namespace std;
+
+// int solve(vector<int> &nums) {
+    
+//     int n = nums.size() ;
+//     int prev2 = 0 ;
+//     int prev1 = nums[0] ;
+
+
+//     for(int i=1; i<n; i++) {
+//         int include = prev2 + nums[i] ;
+//         int exclude = prev1 + 0 ;
+
+//         int ans  = max(include, exclude); 
+//         prev2 = prev1 ;
+//         prev1 = ans ;
+//     }
+
+//     return prev1 ;
+// }
+
+// int maximumNonAdjacentSum(vector<int> &nums){
+   
+//    return solve(nums) ;
+//    ;
+// }
+//🔸Time complexity: O(n)
+//🔸Space complexity: O(1)
+
+// 114/ 149
