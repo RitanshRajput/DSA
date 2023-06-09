@@ -181,7 +181,7 @@
 
 
 
-//              //❓Question: Count ways to reach the N-th stairs 
+// 🔴🔴🔴             //❓Question: Count ways to reach the N-th stairs 
 
 // You have been given a number of stairs. Initially, you are at the 0th stair, and you need to reach the Nth stair. Each time you can either
 //  climb one step or two steps. You are supposed to return the number of distinct ways in which you can climb from the 0th step to Nth
@@ -269,7 +269,7 @@
 
 
 
-//             //❓Question: Min Cost Climbing Stairs
+// 🔴🔴🔴            //❓Question: Min Cost Climbing Stairs
 
 // You are given an integer array cost where cost[i] is the cost of ith step on a staircase. 
 // Once you pay the cost, you can either climb one or two steps.
@@ -433,7 +433,7 @@
 
 
 
-//                   //❓Question: Minimum elements
+// 🔴🔴🔴                //❓Question: Minimum elements
 
 // You are given an array of 'N' distinct integers and an integer 'X' representing the target sum. You have to tell the minimum number of
 //  elements you have to take to reach the target sum 'X'.
@@ -616,7 +616,7 @@
 //🔸space complexity: O(x)
 
 
-//                  //❓Question: Maximum sum of non-adjacent element
+//🔴🔴🔴               //❓Question: Maximum sum of non-adjacent element
 
 
 // You are given an array/list of 'N' integers. You are supposed to return the maximum sum of the subsequence with the constraint that no
@@ -793,4 +793,110 @@
 //🔸Time complexity: O(n)
 //🔸Space complexity: O(1)
 
-// 114/ 149
+
+
+//🔴🔴🔴           //❓Question : House robber II
+
+// Mr. x is a professional robber planning to rob houses along a street. Each house has a certain amount of money hidden. All houses
+// along this street are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, adjacent houses have a
+// security system connected, and it will automatically contact the police if two adjacent houses were broken into on the same night.
+// You are given an array/list of non-negative integers 'ARR' representing the amount of money of each house. Your task is to return the
+// maximum amount of money Mr. X can rob tonight without alerting the police.
+// Note:
+//    It is possible for Mr. x to rob the same amount of money by looting two different sets of houses. Just print the
+//    maximum possible robbed amount, irrespective of sets of houses robbed.
+// For Example:
+//  (i) Given the input array arr[] = {2, 3, 2} the output will be 3 because Mr x cannot rob house 1 (money - 2) and
+//    then rob house 3 (money = 2 2), because they are adjacent houses. So, he'll rob only house 2 (money 3)
+//  (ii) Given the input array arr[] = {1, 2, 3, 1} the output will be 4 because Mr x rob house 1 (money = 1 1) and then
+//    rob house 3 (money = 3).
+//  (iii) Given the input array arr[] - {0} the output will be 0 because Mr. x has got nothing to rob.
+
+// Constraints:
+//    1 <= y <= 10
+//    1 <=N == 5 x 10 ٨ 3
+//    9 ٨ 10 <= ARR[i] <= 1
+//    Time limit: 1 sec.
+
+// Sample Input 1:
+// 3
+// 1
+// 0
+// 3
+// 2 3 2
+// 4
+// 1 3 2 1
+// Sample Output 1:
+// 0
+// 3
+// 4
+// Explanation Of Input 1:
+// (i) Mr. X has only one house to rob, but with no money.
+
+// (ii) Mr. X cannot rob house 1 (money = 2) and then rob house 3 (money = 2), because they are adjacent houses (remember, it’s a circular street). So, he’ll rob only house 2 (money = 3) with a maximum value
+
+// (iii) Mr. X will get maximum value when he robs house 2 (money = 3) and then robs house 4 (money = 1) i.e. 4 units of money.
+// Sample Input 2:
+// 3
+// 5
+// 1 5 1 2 6
+// 3
+// 2 3 5
+// 4
+// 1 3 2 0
+// Sample Output 2:
+// 11
+// 5
+// 3
+
+
+// 🔴 approach: Last question space optimisation (solve function is used)
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+
+// long long solve(vector<int> &nums) {
+    
+//     long long n = nums.size() ;
+//     long long prev2 = 0 ;
+//     long long prev1 = nums[0] ;
+
+
+//     for(int i=1; i<n; i++) {
+//         long long include = prev2 + nums[i] ;
+//         long long exclude = prev1 + 0 ;
+//         long long ans  = max(include, exclude); 
+//         prev2 = prev1 ;
+//         prev1 = ans ;
+//     }
+
+//     return prev1 ;
+// }
+
+// long long int houseRobber(vector<int>& valueInHouse)
+// {
+//     long long n = valueInHouse.size() ;
+
+//     if(n== 1){
+//         return valueInHouse[0] ;
+//     }
+//         vector<int> first, second ;
+
+//         for(int i=0; i<n; i++){
+//             // if including first house then excluding last house, as it will be adjacent house
+//             if( i != n-1) {
+//                 first.push_back(valueInHouse[i]) ;
+//             }
+//             // if including last house then excluding first house , as it will be adjacent house
+//             if(i != 0){
+//                 second.push_back(valueInHouse[i]) ;
+//             }
+//         }
+
+//     return max(solve(first), solve(second)) ;
+// }
+//🔸time complexity: O(n)
+//🔸space complexity: O(n)
+
+//  116 / 149
