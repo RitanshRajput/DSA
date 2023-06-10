@@ -397,7 +397,7 @@
 
 //     while(start< end){
 //         if(arr[mid] >= arr[0]){              // check if mid is greater than or equal to arr[0]
-//             start = mid +1 ;                 // if greater then start = mid + 1
+//             start = mid + 1 ;                 // if greater then start = mid + 1
 //         }
 //         else{                                // if mid is not greater than equal to arr[0] then
 //             end = mid ;                      // end = mid ;
