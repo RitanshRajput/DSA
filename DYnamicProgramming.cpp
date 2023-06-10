@@ -1101,4 +1101,377 @@
 //🔸space complexity: O(n)
 
 
-// 117 / 149
+
+//🔴🔴🔴         //❓Question: COunt derangements
+
+// A Derangement is a permutation of 'N' elements, such that no element appears in its original position. For example, an instance of
+//  derangement of {0, 1, 2, 3} is {2, 3, 1, 0} because 2 present at index 0 is not at its initial position which is 2 and similarly for other
+//  elements of the sequence.
+//  Given a number 'N', find the total number of derangements possible of a set of 'N' elements.
+//  Note:
+//    The answer could be very large, output answer %(10 ٨ 9 + 7).
+
+// Constraints:
+//    1 <= T <= 100
+//    1 <= N <= 3000
+//    Time limit: 1 sec
+
+// Sample Input 1:
+// 2
+// 2
+// 3
+// Sample Output 1:
+// 1
+// 2
+// Explanation Of Sample Output 1:
+// In test case 1, For two elements say {0, 1}, there is only one possible derangement {1, 0}. 1 is present at index 0 and not at its actual position, that is, 1. Similarly, 0 is present at index 1 and not at its actual position, that is, 0.
+// In test case 2, For three elements say {0, 1, 2}, there are two possible derangements {2, 0, 1} and {1, 2, 0}. In both the derangements, no element is present at its actual position.
+//
+//                  [ n=3 ]
+// 
+//     arr       [ 0 | 1 | 2 ]
+//     index       0   1   2
+//         
+//           possible derangements
+//            /               \ 
+//  [ 2 | 0 | 1]            [ 1 | 2 | 0 ]
+//    0   1   2               0   1   2
+
+// Sample Input 2:
+// 2
+// 1
+// 4
+// Sample Output 2:
+// 0
+// 9
+// Explanation Of Sample Output 2:
+// In test case 1, For the array = {0}, there is no possible derrangements. Hence the answer is 0 (zero).
+
+// In test case 2, For the array elements = {0, 1, 2, 3}, total 9 derrangements are possible. One of them is: { 3, 2, 1, 0}.
+
+
+//🔴 approach: Recursion
+//🔸time limit exceeded
+// #include<iostream>
+// using namespace std;
+
+// #define MOD 1000000007
+
+// long long int countDerangements(int n){
+//    //base case
+//     if( n == 1) {
+//         return 0 ;
+//     }
+
+//     if( n == 2){
+//         return 1 ;
+//     }
+
+//     int ans = ( ((n-1)%MOD )*((countDerangements(n-1)%MOD) + (countDerangements(n-2)%MOD))%MOD ) ;
+   
+//    return ans ;
+// }
+//🔸time complexity: exponential
+//🔸space complexity: exponential
+
+
+// //🔴 approach: Recursion + memoization
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// #define MOD 1000000007
+
+// long long int solve(int n, vector<long long int> &dp) {
+// //base case
+//     if( n == 1) {
+//         return 0 ;
+//     }
+
+//     if( n == 2){
+//         return 1 ;
+//     }
+     
+//     //step3: 
+//      if( dp[n] != -1) 
+//      return dp[n] ;
+
+//     //step2:
+//     dp[n] = ( ((n-1)%MOD )*((solve(n-1, dp)%MOD) + (solve(n-2, dp)%MOD))%MOD ) ;
+   
+//    return dp[n] ;
+// }
+
+// long long int countDerangements(int n){
+//    //step1:
+//    vector<long long int> dp(n+1, -1) ;
+//    return solve(n, dp) ;
+// }
+//🔸time complexity: O(n)
+//🔸space complexity: O(n) + O(n)  
+
+
+
+// //🔴 approach: Tabulation
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// #define MOD 1000000007
+
+// long long int solve(int n) {
+//   vector<long long int> dp(n+1, 0) ;
+//   dp[1] = 0 ;
+//   dp[2] = 1 ; 
+
+//   for(int i=3; i<=n; i++) {
+//     long long int first = dp[i-1] % MOD ;
+//     long long int second = dp[i-2] % MOD ;
+//     long long int sum = (first + second) % MOD ;
+
+//     long long int ans = ( (i-1)*sum) %MOD ;
+//     dp[i] = ans ;
+//   }
+
+//     return dp[n] ;
+// }
+
+// long long int countDerangements(int n){
+//    return solve(n) ;
+// }
+//🔸time complexity: O(n)
+//🔸space complexity: O(n)   
+
+
+//🔴 approach: space optimisation
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// #define MOD 1000000007
+
+// long long int solve(int n) {
+
+//   long long int prev2 = 0 ;
+//   long long int prev1 = 1 ;
+
+//   for(int i=3; i<=n; i++) {
+//     long long int first = prev1 % MOD ;
+//     long long int second = prev2 % MOD ;
+//     long long int sum = (first + second) % MOD ;
+
+//     long long int ans = ( (i-1)*sum) %MOD ;
+//     prev2 = prev1 ;
+//     prev1 = ans ;
+//   }
+  
+//     return prev1  ;
+// }
+
+// long long int countDerangements(int n){
+//    return solve(n) ;
+// }
+//🔸time complexity: O(n)
+//🔸space complexity: O(1) 
+
+
+//                  🔴🔴 Painting Fence Algorithm:
+
+//🔴🔴🔴            //❓Question: Ninja and the fence
+
+// Ninja has given a fence, and he gave a task to paint this fence. The fence has 'N' posts, and Ninja has 'K' colors. Ninja wants to paint the
+// fence so that not more than two adjacent posts have the same color.
+//  Ninja wonders how many ways are there to do the above task, so he asked for your help.
+// Your task is to find the number of ways Ninja can paint the fence. Print the answer modulo 10^9 + 7.
+//  Example:
+//    Input: 'N' - 3, "K" = 2
+//    Output: 6
+//    Say we have the colors with the numbers 1
+// Say we have the colors with the numbers 1 and 0. We can paint the fence with 3 posts with the following different
+// combinations.
+// 110
+// 001
+// 101
+// 100
+// 010
+// 011
+
+// Constraints :
+//    1 <= 'T' <= 10
+//    1 <= 'N' <= 10^5
+//    1 <= "K" <= 10^5
+//    Time Limit: 1 sec
+
+// Sample Output 1 :
+// 1
+// 6
+// Explanation Of Sample Input 1 :
+// For the first test case, there is only one way to paint the fence. 
+
+// For the second test case, We can paint the fence with 3 posts with the following different combinations.
+// 110
+// 001
+// 101
+// 100
+// 010
+// 011
+
+// Sample Input 2 :
+// 2
+// 2 4
+// 4 2
+// Sample Output 2 :
+// 16
+// 10
+
+
+//🔴Approach: Recursion
+//🔸Timelimit exceeded
+// #include<iostream>
+// using namespace std;
+
+// #define MOD 1000000007
+
+// int add(int a, int b) {
+//     return (a % MOD + b % MOD) % MOD ;
+// }
+
+// int multi(int a, int b) {
+//     return (( a % MOD ) * (b % MOD )) % MOD ;
+// }
+
+// int solve(int n, int k) {
+//     //base case
+//     if( n==1)
+//     return k ;
+
+//     if( n==2)
+//     return add(k, multi(k, k-1)) ;
+
+//     int ans = add(multi(solve(n-2, k), k-1), multi(solve(n-1, k), k-1)) ;
+//     return ans ;
+// }
+
+// int numberOfWays(int n, int k) {
+//    return solve(n, k) ;
+// }
+//🔸time complexity: exponential
+//🔸space complexity: exponential
+
+
+
+//🔴Approach: Recursion + memoization
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// #define MOD 1000000007
+// #define LL long long
+
+// int add(int a, int b) {
+//     return (a % MOD + b % MOD) % MOD ;
+// }
+
+// int multi(int a, int b) {
+//     return (( a % MOD ) * 1LL * (b % MOD )) % MOD ;
+// }
+
+// int solve(int n, int k, vector<int> &dp) {
+//     //base case
+//     if( n==1)
+//     return k ;
+
+//     if( n==2)
+//     return add(k, multi(k, k-1)) ;
+     
+//     //step3:
+//     if(dp[n] != -1){
+//         return dp[n] ;
+//     }
+
+//     //step2:
+//     dp[n]  = add(multi(solve(n-2, k, dp), k-1), multi(solve(n-1, k, dp), k-1)) ;
+//     return dp[n] ;
+// }
+
+// int numberOfWays(int n, int k) {
+//     //step1:
+//     vector<int> dp(n+1, -1) ;
+//    return solve(n, k, dp);
+// }
+//🔸time complexity: O(n)
+//🔸space complexity: O(n)+O(N)
+
+
+//🔴Approach: Tabulation
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// #define MOD 1000000007
+// #define LL long long
+
+// int add(int a, int b) {
+//     return (a % MOD + b % MOD) % MOD ;
+// }
+
+// int multi(int a, int b) {
+//     return (( a % MOD ) * 1LL * (b % MOD )) % MOD ;
+// }
+
+// int solve(int n, int k) {
+//     vector<int> dp(n+1, 0) ;
+//     dp[1] = k ;
+//     dp[2] = add(k, multi(k, k-1)) ;
+
+//     for(int i=3 ; i<=n; i++) {
+//         dp[i] = add(multi(dp[i-2], k-1), multi(dp[i-1], k-1)) ;
+//     }
+
+//     return dp[n] ;
+// }
+
+// int numberOfWays(int n, int k) {
+//     return solve(n ,k) ;
+// }
+//🔸time complexity: O(N)
+//🔸space complexity: O(N)
+
+
+// 🔴Approach: space optimisation
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// #define MOD 1000000007
+// #define LL long long
+
+// int add(int a, int b) {
+//     return (a % MOD + b % MOD) % MOD ;
+// }
+
+// int multi(int a, int b) {
+//     return (( a % MOD ) * 1LL * (b % MOD )) % MOD ;
+// }
+
+// int solve(int n, int k) {
+//     int prev2  = k ;
+//     int prev1  = add(k, multi(k, k-1)) ;
+
+//     for(int i=3 ; i<=n; i++) {
+//         int ans  = add(multi(prev2, k-1), multi(prev1, k-1)) ;
+//         prev2 = prev1 ;
+//         prev1 = ans ;
+//     }
+
+//     return prev1  ;
+// }
+
+// int numberOfWays(int n, int k) {
+//     return solve(n ,k) ;
+// }
+//🔸time complexity: O(N)
+//🔸space complexity: O(1)
+
+
+//  119 / 149
