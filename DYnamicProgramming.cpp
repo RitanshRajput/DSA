@@ -1474,4 +1474,154 @@
 //🔸space complexity: O(1)
 
 
-//  119 / 149
+
+//     🔴🔴🔴          2-D  Dynamic Programming              🔴🔴🔴 
+
+
+// .🔴🔴                //❓Question: 0 1 Knapsack
+
+// A thief is robbing a store and can carry a maximal weight of W into his knapsack. 
+// There are N items and the ith item weighs wi and is of  value vi. 
+// Considering the constraints of the maximum weight that a knapsack can carry, 
+// you have to find and return the maximum value that a thief can generate by stealing items.
+
+// Constraints:
+//    1 < T <= 10
+//    1 < N <= 10^2
+//    1<= wi <= 50
+//    1 <= vi <= 10^2
+//    1 <= W <= 10^3
+//    Time Limit: 1 second
+
+// Sample Input:
+// 1 
+// 4
+// 1 2 4 5
+// 5 4 8 6
+// 5
+// Sample Output:
+// 13
+
+//🔸explanation:
+// 4 items are present 
+// knapsack can carrry weight ==> 5 
+// every item has weight and value 
+
+// item   = 1  2  3  4 
+// weight = 1  2  4  5  
+// value  = 5  4  8  6
+
+// case1:  {5} => value [6]                   // knapsack full value recived 6
+// case2:  {1, 4} => value 8 + 5 => [13]      // knapsack full value recived 13
+// case3:  {1, 2} => value 5 + 4 => [9]       // knapsack is not full but no other 
+//                                            // weight can be added further so value received 9
+
+// maximum value can be generated is ==> [13]   for weight {1, 4}
+
+//🔴Approach: Recursion
+//🔸time limit exceeded
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// int solve(vector<int> &weight, vector<int> &value, int index, int capacity){
+//     //base case
+//     //if only 1 item to steal,then just compare its weight with the knapsack capacity
+//     if(index == 0) {
+//         if( weight[0] <= capacity) {
+//             return value[0] ;
+//         }
+//         else{
+//             return 0 ;
+//         }
+//     }
+    
+//     int include =  0 ;
+//     if(weight[index] <= capacity) {
+//         include = value[index] + solve(weight, value, index-1, capacity - weight[index]) ;
+//     }
+
+//     int exclude = 0 + solve(weight, value, index - 1, capacity ) ;
+
+//     int ans = max(exclude, include) ;
+
+//     return ans ;
+// }
+
+// int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) {
+//        return solve(weight, value, n-1, maxWeight ) ;
+// }
+//🔸time complexity: 
+//🔸space complexity: 
+
+
+//🔴Approach: Recursion + memoization
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// int solve(vector<int> &weight, vector<int> &value, int index, int capacity ,  vector<vector<int>> &dp){
+//     //base case
+//     //if only 1 item to steal,then just compare its weight with the knapsack capacity
+//     if(index == 0) {
+//         if( weight[0] <= capacity) {
+//             return value[0] ;
+//         }
+//         else{
+//             return 0 ;
+//         }
+//     }
+    
+//     //step3:
+//     if(dp[index][capacity] != -1) {
+//         return dp[index][capacity] ;
+//     }
+    
+//     int include =  0 ;
+//     if(weight[index] <= capacity) {
+//         include = value[index] + solve(weight, value, index-1, capacity - weight[index], dp) ;
+//     }
+
+//     int exclude = 0 + solve(weight, value, index - 1, capacity, dp ) ;
+
+//     dp[index][capacity] = max(exclude, include) ;
+//     return dp[index][capacity];
+// }
+
+// int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) {
+//     // changes occuring in two states(index is changing , and capacity is changing in solve function) 
+//     // therfore using 2d DP
+//     vector<vector<int>> dp(n, vector<int>(maxWeight+1, -1))  ;
+//     return solve(weight, value, n-1, maxWeight, dp) ;
+
+// }
+//🔸time complexity: 
+//🔸space complexity: 
+
+
+
+//🔴Approach: Tabulation
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int solve(vector<int> &weight, vector<int> &value, int n, int capacity ){
+   //step1
+   vector<vector<int>> dp(n, vector<int>(capacity+1, 0)) ;
+
+   //step2: analyse base case
+
+
+}
+
+int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) {
+    // changes occuring in two states(index is changing , and capacity is changing in solve function) 
+    // therfore using 2d DP
+    vector<vector<int>> dp(n, vector<int>(maxWeight+1, -1))  ;
+    return solve(weight, value, n-1, maxWeight, dp) ;
+
+}
+//🔸time complexity: 
+//🔸space complexity: 
+
+// 119/149  28:35
