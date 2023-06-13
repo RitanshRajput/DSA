@@ -1551,8 +1551,8 @@
 // int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) {
 //        return solve(weight, value, n-1, maxWeight ) ;
 // }
-//🔸time complexity: 
-//🔸space complexity: 
+//🔸time complexity:  exponential
+//🔸space complexity:  exponential
 
 
 //🔴Approach: Recursion + memoization
@@ -1595,33 +1595,314 @@
 //     return solve(weight, value, n-1, maxWeight, dp) ;
 
 // }
-//🔸time complexity: 
-//🔸space complexity: 
+//🔸time complexity: O(N * maxweight)
+//🔸space complexity: O(N * maxWeight)
 
 
 
 //🔴Approach: Tabulation
-#include<iostream>
-#include<vector>
-using namespace std;
+// #include<iostream>
+// #include<vector>
+// using namespace std;
 
-int solve(vector<int> &weight, vector<int> &value, int n, int capacity ){
-   //step1
-   vector<vector<int>> dp(n, vector<int>(capacity+1, 0)) ;
+// int solve(vector<int> &weight, vector<int> &value, int n, int capacity ){
+//    //step1: initialise dp
+//    vector<vector<int>> dp(n, vector<int>(capacity+1, 0)) ;
 
-   //step2: analyse base case
+//    //step2: analyse base case
+//    for(int w = weight[0]; w <= capacity; w++) {
+//      if(weight[0] <= capacity) {
+//         dp[0][w] = value[0] ;
+//      }
+//      else{
+//         dp[0][w] = 0;
+//      }
+//    }
+
+//    //step3: take care remaining recursive call
+//    for(int index = 1; index < n; index++) {
+//        for(int w = 0; w <= capacity; w++) {
+//            int include = 0;
+
+//            if(weight[index] <= w) {
+//              include = value[index] + dp[index-1][w-weight[index]] ;
+//            }
+         
+//          int exclude = 0 + dp[index-1][w]; 
+
+//          dp[index][w] = max(exclude, include) ;
+//        }
+//    }
+  
+//   return dp[n-1][capacity] ;
+// }
+
+// int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) {
+
+//     return solve(weight, value, n, maxWeight) ;
+// }
+//🔸time complexity: O(N * maxWeight)
+//🔸space complexity: O(2 * maxWeight)
 
 
-}
+//🔴Approach: Space optimisation
+// #include<iostream>
+// #include<vector>
+// using namespace std;
 
-int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) {
-    // changes occuring in two states(index is changing , and capacity is changing in solve function) 
-    // therfore using 2d DP
-    vector<vector<int>> dp(n, vector<int>(maxWeight+1, -1))  ;
-    return solve(weight, value, n-1, maxWeight, dp) ;
+// int solve(vector<int> &weight, vector<int> &value, int n, int capacity ){
+//    //step1: 
+//    vector<int> prev(capacity+1, 0)    ;
+//    vector<int> curr(capacity+1, 0)    ;
 
-}
-//🔸time complexity: 
-//🔸space complexity: 
+//    //step2: analyse base case
+//    for(int w = weight[0]; w <= capacity; w++) {
+//      if(weight[0] <= capacity) {
+//         prev[w] = value[0] ;
+//      }
+//      else{
+//         prev[w] = 0;
+//      }
+//    }
 
-// 119/149  28:35
+//    //step3: take care remaining recursive call
+//    for(int index = 1; index < n; index++) {
+//        for(int w = 0; w <= capacity; w++) {
+//            int include = 0;
+
+//            if(weight[index] <= w) {
+//              include = value[index] + prev[w-weight[index]] ;
+//            }
+         
+//          int exclude = 0 + prev[w]; 
+
+//         curr[w] = max(exclude, include) ;
+//        }
+//        prev = curr ;
+//    }
+  
+//   return prev[capacity] ;
+// }
+
+// int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) {
+
+//     return solve(weight, value, n, maxWeight) ;
+// }
+//🔸time complexity: O(N * maxWeight)
+//🔸space complexity: O(N)
+
+
+//🔴Approach: More optimisation
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// int solve(vector<int> &weight, vector<int> &value, int n, int capacity ){
+//    //step1: 
+//    vector<int> curr(capacity+1, 0)    ;
+
+//    //step2: analyse base case
+//    for(int w = weight[0]; w <= capacity; w++) {
+//      if(weight[0] <= capacity) {
+//         curr[w] = value[0] ;
+//      }
+//      else{
+//         curr[w] = 0;
+//      }
+//    }
+
+//    //step3: take care remaining recursive call
+//    for(int index = 1; index < n; index++) {
+//        for(int w = capacity; w >=0; w--) {
+//            int include = 0;
+
+//            if(weight[index] <= w) {
+//              include = value[index] + curr[w-weight[index]] ;
+//            }
+         
+//          int exclude = 0 + curr[w]; 
+
+//         curr[w] = max(exclude, include) ;
+//        }
+//    }
+  
+//   return curr[capacity] ;
+// }
+
+// int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) {
+
+//     return solve(weight, value, n, maxWeight) ;
+// }
+//🔸time complexity: O(N * maxWeight)
+//🔸space complexity: O(N)
+
+
+
+// 🔴🔴                //?Question: Combination Sum IV
+
+// You are given an array of distinct integers and you have to tell how many different ways of selecting the elements from the array are
+//  there such that the sum of chosen elements is equal to the target number tar.
+//  Note: Two ways are considered the same if for every index the contents of both the ways are equal example way1=[1.2,3,1] and way2=
+//  [1,2,3,1] both way1 and way 2 are the same.
+//  But if way1 =[1,2,3,4] and way2= [4,3,2,1] then both ways are different.
+//  Input Is Given Such That The Answer Will Fit In A 32-Bit Integer.
+//  For Example:
+
+// If N 1 = 3 and tar and array elements are [1,2,5] then the number of possible ways of making sum 5 are:
+//  (1,1,1,1,1)
+//  (1,1,1,2)
+//  (1,2,1,1)
+//  (2,1,1,1)
+//  (1,1,2,1)
+//  (2,2,1)
+//  (1,2,2)
+//  (2,1,2)
+//  (5)
+// Hence the output will be 9.
+
+// Constraints:
+//    1 <= N <= 200
+//    1 <= nums[i] <= 1000
+//    All the elements will be unique
+//    1 <= tar <= 1000
+//    Time limit: 1 sec
+
+// Sample Input 1 :
+// 2
+// 3 5
+// 1 2 5
+// 2 3
+// 1 2
+// Sample Output 1 :
+// 9
+// 3
+// Explanation For Sample Output 1:
+// For the first test case, the number of possible ways will be
+// (1,1,1,1,1)
+// (1,1,1,2)
+// (1,2,1,1)
+// (2,1,1,1)
+// (1,1,2,1)
+// (2,2,1)
+// (1,2,2)
+// (2,1,2)
+// (5)
+
+// For the second test case, the number of ways will be
+// (1,1,1)
+// (1,2)
+// (2,1)
+// Here you can see we have considered (1,2) and (2,1) in 2 different ways.
+// Sample Input 2 :
+// 2
+// 3 4
+// 12 1 3
+// 2 41
+// 2 34
+// Sample Output 2 :
+// 3
+// 0
+
+//🔴Approach: Recursion
+//🔸 Time limit exceeded
+// #include<iostream>
+// #include<vector>
+// using namespace std ;
+
+// int solve(vector<int> &num, int tar){
+//     //base case
+//     if(tar < 0){
+//         return 0;
+//     }
+
+//     if(tar == 0){
+//         return 1 ;
+//     }
+
+//     int ans = 0 ;
+//     for(int i=0; i<=num.size(); i++){
+//        ans += solve(num, tar - num[i]) ;
+//     }
+
+//     return ans ;
+// }
+
+// int findWays(vector<int> &num, int tar) {
+//     return solve(num ,tar) ;
+// }
+//🔸Time complexity: exponential
+//🔸space complexity: exponential
+
+
+//🔴Approach: Recursion + memoization
+// #include<iostream>
+// #include<vector>
+// using namespace std ;
+
+// int solve(vector<int> &num, int tar, vector<int> &dp){
+//     //base case
+//     if(tar < 0){
+//         return 0;
+//     }
+
+//     if(tar == 0){
+//         return 1 ;
+//     }
+
+//    //step2: 
+//    if(dp[tar] != -1){
+//       return dp[tar] ;
+//    }
+  
+//   //step3:
+//     int ans = 0 ;
+//     for(int i=0; i<=num.size(); i++){
+//        ans += solve(num, tar - num[i], dp) ;
+//     }
+    
+//     dp[tar] = ans ;
+//     return dp[tar] ;
+// }
+
+// int findWays(vector<int> &num, int tar) {
+//     //create 1d dp (bcoz in above solve function only one value is changing on every recursive call ( tar - num[i]))
+//     vector<int> dp(tar+1, 0) ;
+
+//     return solve(num ,tar, dp) ;
+// }
+//🔸Time complexity: O(Target)
+//🔸space complexity: O(n)
+
+
+//🔴Approach: Tabulation
+// #include<iostream>
+// #include<vector>
+// using namespace std ;
+
+// int solve(vector<int> &num, int tar){
+//     vector<int> dp(tar+1, 0) ;
+//     dp[0] = 1;
+
+//    // traversing from target 1 to tar
+//     for(int i=1; i<=tar; i++){
+
+//        // traversing on num vector
+//         for(int j=0; j<num.size(); j++){
+
+//             if( i - num[j] >= 0) {
+//             dp[i] += dp[i - num[j]] ;
+//            }
+//         }
+//     }
+//  return dp[tar] ;
+// }
+
+// int findWays(vector<int> &num, int tar) {
+//     return solve(num ,tar) ;
+// }
+//🔸Time complexity: O( N * M)             // (tar * num)
+//🔸space complexity: O(n) ;
+
+
+
+//  121 / 149
