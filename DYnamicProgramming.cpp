@@ -2028,3 +2028,187 @@
 //🔸space complexity: O(N)
 
 
+
+
+//🔴🔴🔴             //❓Question: Minimum Cost for Tickets(leetcode)  / Ninjas's Trip(coding ninjas)
+
+// Ninja Is Willing To Take Some Time Off From His Training And Planning A Year-Long Tour.
+// You Are Given A DAYS Array Consisting Of 'N' Days When Ninjas Will Be Traveling During The Year. Each Day Is An Integer
+//  Between 1 To 365 (Both Inclusive).
+// Train Tickets Are Sold In Three Different Ways:
+//    A 1-day pass is sold for 'COST'[[]] coins,
+//    A 7-day pass is sold for 'COST'[1] coins, and
+//    A 30-day pass is sold for 'COST'[2] coins.
+//    The passes allow for many days of consecutive travel.
+
+// Your Task Is To Help The Ninja To Find The Minimum Number Of Coins Required To Complete His Tour.
+//  For Example,
+//    If Ninja gets a 7-day pass on day 2, then he can travel for 7 days: 2, 3, 4, 5, 6, 7, and 8.
+
+// Constraints:
+//    1 <= T <= 10
+//    1 <= N <= 365
+//    1 <= DAYS[i] <= 365
+//    Time Limit: 1 sec
+
+
+// Sample Input 1:
+// 2
+// 2 
+// 2 5
+// 1 4 25    
+// 7
+// 1 3 4 5 7 8 10
+// 2 7 20
+// Sample Output 1:
+// 2
+// 11
+// Explanation For Sample Input 1:
+// For the first test case, 
+// On Day 2, Ninja will buy a 1-day pass with 1 coin.
+// On Day 5, Ninja will buy a 1-day pass with 1 coin.
+// In total, Ninja will spend 2 coins. Hence the answer is 2.
+
+// For the second test case,
+// On Day 1, Ninja will buy a 1-day pass with 2 coins.
+// On Day 3, Ninja will buy a 7-day pass with 7 coins valid for days 3,4,5...9.
+// On Day 10, Ninja will buy a 1-day pass with 2 coins.
+// In total, Ninja will spend 11 coins. Hence the answer is 11.
+// Sample Input 2:
+// 2
+// 6
+// 1 4 6 7 8 20
+// 2 7 15
+// 12
+// 1 2 3 4 5 6 7 8 9 10 30 31
+// 2 7 15 
+// Sample Output 2:
+// 11
+// 17
+
+
+// //🔴Approach : Recursion
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// int solve(int n, vector<int> &days, vector<int> &cost, int index) {
+//     //base case
+//     if(index >= n) {
+//         return 0 ;
+//     }
+
+//     // 1 day pass :
+//     int option1 = cost[0] + solve(n, days, cost, index+1) ;
+
+//     int i ;
+//     // 7 day pass :
+//     for(i = index; i<n && days[i] < days[index] + 7; i++) ;
+        
+//         int option2 = cost[1] + solve(n, days, cost, i) ;
+    
+
+//    // 30 day pass :
+//     for(i = index; i<n && days[i] < days[index] + 30; i++) ;
+        
+//         int option3 = cost[2] + solve(n, days, cost, i) ;
+
+
+//     return min(option1, min(option2, option3));
+
+// }
+
+// int minimumCoins(int n, vector<int> days, vector<int> cost){
+//     return solve(n, days, cost, 0) ;
+// }
+// //🔸time complexity: exponential
+// //🔸space complexity: exponential
+
+
+//🔴Approach : Recursion + Memoisation (Top-Down)
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+
+// int solve(int n, vector<int> &days, vector<int> &cost, int index, vector<int> &dp) {
+//     //base case
+//     if(index >= n) {
+//         return 0 ;
+//     }
+
+//     //step2: 
+//     if(dp[index] != -1){
+//         return dp[index] ;
+//     }
+
+//     // 1 day pass :
+//     int option1 = cost[0] + solve(n, days, cost, index+1, dp) ;
+
+//     int i ;
+//     // 7 day pass :
+//     for(i = index; i<n && days[i] < days[index] + 7; i++) ;
+        
+//         int option2 = cost[1] + solve(n, days, cost, i, dp) ;
+    
+
+//    // 30 day pass :
+//     for(i = index; i<n && days[i] < days[index] + 30; i++) ;
+        
+//         int option3 = cost[2] + solve(n, days, cost, i, dp) ;
+
+
+//     dp[index] = min(option1, min(option2, option3));
+//     return dp[index] ;
+// }
+
+// int minimumCoins(int n, vector<int> days, vector<int> cost){
+//     vector<int> dp(n+1, -1) ;
+//     return solve(n, days, cost, 0, dp) ;
+// }
+//🔸time complexity: O(1)            // O(index) == index = O(365) ==> O(1)
+//🔸space complexity: O(n)
+
+
+
+//🔴Approach : Tabulation (Bottom up)
+// #include<iostream>
+// #include<vector>
+// #include<limits.h>
+// using namespace std;
+
+// int solve(int n, vector<int> &days, vector<int> &cost) {
+//     vector<int> dp(n+1, INT_MAX) ;
+//     dp[n] = 0;
+
+//     for(int k = n-1; k >= 0; k--) {
+
+//     // 1 day pass :
+//     int option1 = cost[0] + dp[k + 1] ;
+
+//     int i ;
+//     // 7 day pass :
+//     for(i = k; i<n && days[i] < days[k] + 7; i++) ;
+        
+//     int option2 = cost[1] + dp[i] ;
+    
+
+//    // 30 day pass :
+//     for(i = k; i<n && days[i] < days[k] + 30; i++) ;
+        
+//     int option3 = cost[2] + dp[i] ;
+
+//     dp[k] = min(option1, min(option2, option3));
+
+//     }
+
+//   return dp[0] ;
+// }
+
+// int minimumCoins(int n, vector<int> days, vector<int> cost){
+//     return solve(n, days, cost) ;
+// }
+//🔸time complexity: O(N)
+//🔸space complexity: O(N)
+
+//        123 / 149
