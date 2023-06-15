@@ -181,7 +181,7 @@
 // Private in the derived class.
 
 
-//Table to demonstrat mode of inheritance :
+//🔴Table to demonstrat mode of inheritance :
 //________________________________________________________________
 // Base Class member Access | Public    | Protected  | Private    |
 // Specifier                |           |            |            |
@@ -428,7 +428,8 @@
 
 
 
-//                 //🔘 Single inheritance
+//                  //🔘 Single inheritance
+
 // In single inheritance, a class is allowed to inherit from only one class. 
 //i.e. one subclass is inherited by one base class only.
 //ex:         [CLASS A] (base class)
@@ -466,7 +467,8 @@
 
 
 
-//                 //🔘 Multilevel inheritance
+//                  //🔘 Multilevel inheritance
+
 //  In this type of inheritance, a derived class is created from another derived class.
 //ex:         [Class C] (Base class 2)
 //                |
@@ -508,7 +510,8 @@
 // }
 
 
-//                //🔘 Multiple inheritance
+//                  //🔘 Multiple inheritance
+
 //Multiple Inheritance is a feature of C++ where a class can inherit from more than one class. 
 //i.e one subclass is inherited from more than one base class.
 
@@ -564,7 +567,8 @@
 
 
 
-//              //🔘 Hierarchical inheritance
+//                 //🔘 Hierarchical inheritance
+
 // In this type of inheritance, more than one subclass is inherited from a single base class.
 // i.e. more than one derived class is created from a single base class.
 
@@ -626,7 +630,8 @@
 
 
 
-//                //🔘 Hybrid (virtual) inheritance
+//                 //🔘 Hybrid (virtual) inheritance
+
 // Hybrid Inheritance is implemented by combining more than one type of inheritance.
 // For example: Combining Hierarchical inheritance and Multiple Inheritance. 
 
@@ -728,6 +733,7 @@
 
 
 //                     //🔘 C++ Ambiguity (uncertainty.) :
+
 //In multiple inheritances, when one class is derived from two or more base classes 
 //then there may be a possibility that the base classes have functions with the same name, 
 //and the derived class may not have functions with that name as those of its base classes. 
@@ -785,7 +791,8 @@
 // }
 
 
-//                  //🔘Polymorphism
+//                      //🔘Polymorphism
+
 // The word “polymorphism” means having many forms.
 // In simple words, we can define polymorphism as the ability of a message to be displayed 
 // in more than one form. 
@@ -806,13 +813,14 @@
 //   [function Overloading] [Operator overloading]   [Virtual function]
 
 
-//                 //🔘Compile-time Polymorphism. (Static polymorphism)
+//                 //🔘🔘Compile-time Polymorphism. (Static polymorphism)
 
 //🔸This type of polymorphism is achieved by function overloading or operator overloading.
 
 
 
-//                 //🔴Function Overloading:
+//                    //🔴Function Overloading:
+
 // When there are multiple functions with the same name but different parameters, 
 // then the functions are said to be overloaded, hence this is known as Function Overloading.
 // Functions can be overloaded by changing the number of arguments or/and changing the type of arguments. 
