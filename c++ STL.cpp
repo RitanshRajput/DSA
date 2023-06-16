@@ -398,8 +398,10 @@
 
 
                             //1️⃣ Set :
-//🔸 A set is a data structure that stores unique elements of the same type in a sorted order. Each value is a key, which means that we access each value using the value itself. With arrays,
-//🔸 on the other hand, we access each value by its position in the container (the index). Accordingly, each value in a set must be unique
+//🔸 A set is a data structure that stores unique elements of the same type in a sorted order. 
+//   Each value is a key, which means that we access each value using the value itself With arrays,
+//   on the other hand, we access each value by its position in the container
+//   (the index). Accordingly, each value in a set must be unique
 
 //🔘Ordered_Set :  O(log n) time complexity
 //🔸Every element should be unique 
@@ -449,7 +451,7 @@
 // set<int>::iterator itr = s.find(4) ;            // .find() to find the element
 
 // for(auto it=itr; it!=s.end(); it++){          // loop to run from .find() to .end() 
-//     cout<<*it<<" ";                      //output: 5 9
+//     cout<<*it<<" ";                           //output: 5 9
 // }
 
 //     return 0;

@@ -218,7 +218,6 @@
 //   return 0 ;
 // }
 
-
 //                            //❓ Union of two arrays
 
 // ex:
@@ -312,6 +311,26 @@
 // cout<<" ans :"<<ans <<endl ;
 //     return 0;
 // }
+
+ //🔸approach 3: using set
+// #include<iostream>
+// #include<set>
+// using namespace std;
+
+// int Union(int a[], int n, int b[], int m){
+
+//   set<int> ans ;
+  
+//   for(int i=0; i<n ; i++) {
+//       ans.insert(a[i]) ;
+//   }
+//   for(int j=0; j<m ; j++) {
+//       ans.insert(b[j]) ;
+//   }
+
+//   return ans.size() ;
+  
+// };
 
 
 //                         //❓Intersection of two array
