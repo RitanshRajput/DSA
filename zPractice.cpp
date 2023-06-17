@@ -446,6 +446,8 @@
 //     return 0;
 // }
 
+
+
 //                            //❓Rotate an array cyclically 
 //input: [1,2,3,4,5] 
 //output: [5,1,2,3,4]
@@ -552,6 +554,20 @@
 //     return 0;
 // }
 
+
+//🔴 approach 2: working fine
+//   long long maxSubarraySum(int arr[], int n){
+        
+//     long long maxi = 0 ;
+//     long long ans = arr[0] ;
+    
+//     for(int i=0; i<n; i++) {
+//         maxi = max((long long)arr[i], maxi + arr[i]) ;       // typecasting array element from int to long long, so it wont give error
+//         ans =  max(maxi, ans) ;
+//     }
+    
+//     return ans ; 
+//     }
 
 
 //🔴 Optimised kadane's algorithm O(n) time complexity
