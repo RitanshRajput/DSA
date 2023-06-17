@@ -2248,4 +2248,190 @@
 //🔸space complexity: O(1)
 
 
-//  124 / 149
+
+//                   //❓Question: Largest square formed in a matrix 
+
+// Given a binary matrix mat of size n * m, find out the maximum size square sub-matrix with all 1s.
+
+// Example 1:
+// Input: n = 2, m = 2
+// mat = {{1, 1}, 
+//        {1, 1}}
+// Output: 2
+// Explaination: The maximum size of the square
+// sub-matrix is 2. The matrix itself is the 
+// maximum sized sub-matrix in this case.
+
+// Example 2:
+// Input: n = 2, m = 2
+// mat = {{0, 0}, 
+//        {0, 0}}
+// Output: 0
+// Explaination: There is no 1 in the matrix.
+
+
+//🔴approach 1: Recursion
+//🔸Time limit exceeded
+// #include<iostream>
+// #include<vector>
+// using namespace std ;
+
+// int solve(vector<vector<int>> &mat, int i, int j, int &maxi) {
+//     //base case (if row or col are out of bound)
+//     if( i >= mat.size() || j >= mat[0].size()) {
+//         return 0 ;
+//     }
+    
+//     int right = solve(mat, i, j+1, maxi) ;
+//     int diagonal = solve(mat, i+1, j+1, maxi) ;
+//     int down = solve(mat, i+1, j, maxi) ;
+
+//     if( mat[i][j] == 1) {
+//         int ans = 1 + min(right, min(diagonal, down)); 
+//         maxi = max(maxi, ans) ;
+//         return ans;
+//     }
+//     else{
+//         return 0 ;
+//     }
+
+// }
+
+// int maxSquare(int n, int m, vector<vector<int>> mat) {
+//     int maxi = 0;
+//     solve(mat, 0, 0, maxi) ;
+//     return maxi ;
+// }
+//🔸Time complexity: exponential
+//🔸space complexity: exponential
+
+
+
+//🔴approach : Recursion + Memoization
+// #include<iostream>
+// #include<vector>
+// using namespace std ;
+
+// int solve(vector<vector<int>> &mat, int i, int j,vector<vector<int>> &dp,  int &maxi) {
+//     //base case (if row or col are out of bound)
+//     if( i >= mat.size() || j >= mat[0].size()) {
+//         return 0 ;
+//     }
+    
+//     //step2:
+//     if(dp[i][j] != -1) {
+//         return dp[i][j] ;
+//     }
+
+//     //step3: 
+//     int right = solve(mat, i, j+1, dp, maxi) ;
+//     int diagonal = solve(mat, i+1, j+1, dp, maxi) ;
+//     int down = solve(mat, i+1, j, dp, maxi) ;
+
+//     if( mat[i][j] == 1) {
+//         dp[i][j] = 1 + min(right, min(diagonal, down)); 
+//         maxi = max(maxi, dp[i][j]) ;
+//         return dp[i][j];
+//     }
+//     else{
+//         return dp[i][j] = 0;
+//     }
+
+// }
+
+// int maxSquare(int n, int m, vector<vector<int>> mat) {
+//     int maxi = 0;
+//     vector<vector<int>> dp(n, vector<int>(m, -1)) ;         // because there are 2 things which are changing on every recursive call (i, j) therefore we used 2d dp
+//     solve(mat, 0, 0, dp, maxi) ;
+//     return maxi ;
+// }
+//🔸Time complexity: O(m*n)
+//🔸space complexity: O(M*N)
+
+
+//🔴approach : Tabulation
+// #include<iostream>
+// #include<vector>
+// using namespace std ;
+
+// int solve(vector<vector<int>> &mat, int &maxi) {
+//     int row = mat.size();
+//     int col = mat[0].size() ;
+//     vector<vector<int>> dp(row+1, vector<int>(col+1, 0)) ;
+
+//     for(int i=row-1; i>=0; i--) {
+//         for(int j=col-1; j>=0; j--){
+            
+//             int right = dp[i][j+1];
+//             int diagonal = dp[i+1][j+1] ;
+//             int down = dp[i+1][j] ;
+           
+//             if(mat[i][j] == 1) {
+//                 dp[i][j] = 1 + min(right, min(diagonal, down)) ;
+//                 maxi = max(maxi, dp[i][j]) ;
+//             }
+//             else{
+//                 dp[i][j] = 0 ;
+//             }
+//         }
+//     }
+
+//     return dp[0][0] ;
+// }
+
+// int maxSquare(int n, int m, vector<vector<int>> mat) {
+//     int maxi = 0 ;
+//     solve(mat, maxi) ;
+//     return maxi ;
+// }
+//🔸Time complexity: O(m*n)
+//🔸space complexity: O(m*n)
+
+
+
+//🔴approach : Space Optimisation
+// #include<iostream>
+// #include<vector>
+// using namespace std ;
+
+// int solve(vector<vector<int>> &mat, int &maxi) {
+
+//     int row = mat.size();
+//     int col = mat[0].size() ;
+
+//     vector<int> curr(col+1, 0) ;
+//     vector<int> next(col+1, 0) ;
+
+
+//     for(int i=row-1; i>=0; i--) {
+//         for(int j=col-1; j>=0; j--){
+            
+//             int right = curr[j+1];
+//             int diagonal = next[j+1] ;
+//             int down = next[j] ;
+           
+//             if(mat[i][j] == 1) {
+//                 curr[j] = 1 + min(right, min(diagonal, down)) ;
+//                 maxi = max(maxi, curr[j]) ;
+//             }
+//             else{
+//                curr[j] = 0 ;
+//             }
+//         }
+
+//         next = curr ;
+//     }
+
+//     return next[0] ;
+// }
+
+// int maxSquare(int n, int m, vector<vector<int>> mat) {
+//     int maxi = 0 ;
+//     solve(mat, maxi) ;
+//     return maxi ;
+// }
+//🔸Time complexity: O(m*n)
+//🔸space complexity: O(m)
+
+
+//   125 / 149
