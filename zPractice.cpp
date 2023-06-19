@@ -581,7 +581,7 @@
 //  int localSum = 0 ;
 
 //  for(int i=0; i<n; i++){
-//     localSum = max(arr[i], (arr[i] + localSum)) ;
+//     localSum = max(arr[i], (arr[i] + localSum)) s;
 
 //     if(localSum > globalSum){
 //         globalSum = localSum ;
