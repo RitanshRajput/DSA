@@ -813,3 +813,43 @@
     
 // return 0;
 // }
+
+
+//               //❓ find duplicate in an array of N+1 Integers 
+
+// Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.
+// There is only one repeated number in nums, return this repeated number.
+// You must solve the problem without modifying the array nums and uses only constant extra space.
+
+// Example 1:
+// Input: nums = [1,3,4,2,2]
+// Output: 2
+
+// Example 2:
+// Input: nums = [3,1,3,4,2]
+// Output: 3
+
+#include<iostream>
+// #include<vector>
+// using namespace std;
+
+//  int findDuplicate(vector<int>& nums) {
+//     //🔸vector approach
+//     // Approach take a vector where you can store the value of occurance of a number to the    corresponding index of the vector and then traverse through vector find whose value is >1;
+//         int n = nums.size();
+//         int t = n+1; 
+//         vector<int> v(n, 0) ;
+
+//         for(int i=0; i<n; i++){
+//             v[nums[i]]++ ;
+//         }
+
+//         for(int i=1; i<t; i++) {
+//             if(v[i] > 1) {
+//                 return i ;
+//             }
+//         }
+//         return 0;
+//     }
+//🔸time complexity : O(n)
+//🔸space complexity : O(n)
