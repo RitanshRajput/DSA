@@ -2434,4 +2434,226 @@
 //🔸space complexity: O(m)
 
 
-//   125 / 149
+//                  //❓ Question: 1039. Minimum Score Triangulation of Polygon
+
+// You have a convex n-sided polygon where each vertex has an integer value. 
+// You are given an integer array values where values[i] is the value of the ith vertex (i.e., clockwise order).
+// You will triangulate the polygon into n - 2 triangles.
+// For each triangle, the value of that triangle is the product of the values of its vertices, 
+// and the total score of the triangulation is the sum of these values over all n - 2 triangles in the triangulation.
+// Return the smallest possible total score that you can achieve with some triangulation of the polygon.
+
+// Example 1:
+//           2
+//          / \ 
+//         /   \  
+//        /     \  
+//     1 /_______\ 3
+
+// Input: values = [1,2,3]
+// Output: 6
+// Explanation: The polygon is already triangulated, and the score of the only triangle is 6.
+
+// Example 2:
+//        3 __________ 7             3  __________ 7
+//         |        / |                | \        |    
+//         |      /   |                |   \      |    
+//         |    /     |                |     \    |    
+//         |  /       |                |       \  |    
+//       5 |/_________| 4            5 |_________\| 4
+//
+
+
+// Input: values = [3,7,4,5]
+// Output: 144
+// Explanation: There are two triangulations, with possible scores: 3*7*5 + 4*5*7 = 245, or 3*4*5 + 3*4*7 = 144.
+// The minimum score is 144.
+
+//🔴approach : Recursion:
+//🔸time limit exceeded
+// #include<iostream>
+// #include<vector>
+// #include<limits.h>
+// using namespace std; 
+
+// int solve(vector<int> &v, int i, int j) {
+//     //base case
+//     if( i+1 == j){         //means if only 2 points then return 0
+//         return 0 ;
+//     }
+
+//     int ans = INT_MAX;
+//     for(int k = i+1; k<j; k++) {
+//         ans = min(ans, (v[i]*v[j]*v[k] + solve(v, i, j) + solve(v, k, j))) ;
+//     }
+
+//     return ans ;
+// }
+
+// int minScoreTriangulation(vector<int> &values)
+// {
+//     int n = values.size() ;
+//     return solve(values, 0, n-1) ;
+// }
+//🔸time complexity: exponential 
+//🔸space complexity: exponential 
+
+
+//🔴approach : Recursion + memoization (top-bottom)
+// #include<iostream>
+// #include<vector>
+// #include<limits.h>
+// using namespace std; 
+
+// int solve(vector<int> &v, int i, int j, vector<vector<int>> &dp) {
+//     //base case
+//     if( i+1 == j){         //means if only 2 points cannot create a triangle
+//         return 0 ;
+//     }
+
+//     if(dp[i][j] != -1){
+//         return dp[i][j] ;
+//     }
+
+//     int ans = INT_MAX;
+//     for(int k = i+1; k<j; k++) {
+//       ans = min(ans, (v[i]*v[j]*v[k] + solve(v, i, k, dp) + solve(v, k, j, dp))) ;
+//     }
+    
+//     dp[i][j] = ans;
+//     return dp[i][j] ;
+// }
+
+// int minScoreTriangulation(vector<int> &values) {
+//     int n = values.size() ;
+//    vector<vector<int>> dp(n, vector<int> (n, -1)) ;
+//     return solve(values, 0, n-1, dp) ;
+// }
+//🔸time complexity: O(n^3)
+//🔸space complexity: O(n^2)
+
+
+//🔴approach : Tabulation (Bottom-up) 
+// #include<iostream>
+// #include<vector>
+// #include<limits.h>
+// using namespace std; 
+
+// int solve(vector<int> &v) {
+//     int n = v.size() ;
+//     vector<vector<int>> dp(n, vector<int> (n, 0)) ;
+
+//     for(int i= n-1; i>=0; i--) {
+//         for(int j=i+2; j<n; j++){
+
+//         int ans = INT_MAX;
+//         for(int k = i+1; k<j; k++) {
+//             ans = min(ans, (v[i]*v[j]*v[k] + dp[i][k] +  dp[k][j])) ;
+//         }
+
+//         dp[i][j] = ans ;
+//         }
+//     }
+//         return dp[0][n-1] ;
+// }
+
+// int minScoreTriangulation(vector<int> &values)
+// {
+//     return solve(values) ;
+// }
+//🔸time complexity: O(n^3)
+//🔸space complexity: O(n^2)
+
+
+
+//                      //🔴🔴Catalan Numbers:
+
+// Important topic to know how many traingle can be form by given polygon 
+// for above question
+
+// Catalan numbers are defined as a mathematical sequence that consists of positive integers, 
+// which can be used to find the number of possibilities of various combinations. 
+// The nth term in the sequence denoted Cn, 
+//is found in the following formula:  (2n)! / ((n+1)!n!)             
+
+// The first few Catalan numbers for n = 0, 1, 2, 3, … are : 1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, …  
+//ex:
+//          / \ 
+//         /   \          ==> 1 triangle can be formed     
+//        /     \  
+//       /_______\ 
+
+//          __________         __________ 
+//         |        / |       | \        |    
+//         |      /   |       |   \      |    
+//         |    /     |       |     \    |   ==> in both given polygon 2 triangles can be formed    
+//         |  /       |       |       \  |    
+//         |/_________|       |_________\| 
+//
+
+//             / \ 
+//            /   \ 
+//           /     \          
+//          |       |          ==> 5 triangles can be formed
+//          |       |
+//          |_______|
+
+
+//             / \ 
+//            /   \ 
+//           /     \          
+//          |       |          ==> 14 triangles can be formed
+//          |       |
+//          |       |
+//           \     /
+//            \   /
+//             \ /
+
+// Catalan numbers for n = 0, 1, 2, 3, 4 , 5   ==> : 1, 1, 2, 5, 14
+
+//🔴 Catalan numbers occur in many interesting counting problems like the following.
+//🔸Count the number of expressions containing n pairs of parentheses that are correctly matched. For n = 3, possible expressions are ((())), ()(()), ()()(), (())(), (()()).
+//🔸Count the number of possible Binary Search Trees with n keys (See this)
+//🔸Count the number of full binary trees (A rooted binary tree is full if every vertex has either two children or no children) with n+1 leaves.
+//🔸Given a number n, return the number of ways you can draw n chords in a circle with 2 x n points such that no 2 chords intersect.
+
+//🔴 Follow the steps below to implement the above recursive formula
+//🔸Base condition for the recursive approach, when n <= 1, return 1
+//🔸Iterate from i = 0 to i < n
+//🔸Make a recursive call catalan(i) and catalan(n – i – 1) and keep adding the product of both into res.
+//🔸Return the res
+
+//🔴Implementation :
+// #include <iostream>
+// using namespace std;
+ 
+// // A recursive function to find nth catalan number
+// unsigned long int catalan(unsigned int n)
+// {
+//     // Base case
+//     if (n <= 1)
+//         return 1;
+ 
+//     // catalan(n) is sum of
+//     // catalan(i)*catalan(n-i-1)
+//     unsigned long int res = 0;
+//     for (int i = 0; i < n; i++)
+//         res += catalan(i) * catalan(n - i - 1);
+ 
+//     return res;
+// }
+ 
+// // Driver code
+// int main()
+// {
+//     for (int i = 0; i < 10; i++)
+//         cout << catalan(i) << " ";
+//     return 0;
+// }
+
+//🔸Output :
+// 1 1 2 5 14 42 132 429 1430 4862 
+
+
+
+// 126 / 149
