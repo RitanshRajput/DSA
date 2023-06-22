@@ -829,7 +829,7 @@
 // Input: nums = [3,1,3,4,2]
 // Output: 3
 
-#include<iostream>
+// #include<iostream>
 // #include<vector>
 // using namespace std;
 
@@ -853,3 +853,231 @@
 //     }
 //🔸time complexity : O(n)
 //🔸space complexity : O(n)
+
+
+//                   //❓Question : 56. Merge Intervals
+
+// Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, 
+// and return an array of the non-overlapping intervals that cover all the intervals in the input.
+
+// Example 1:
+// Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
+// Output: [[1,6],[8,10],[15,18]]
+// Explanation: Since intervals [1,3] and [2,6] overlap, merge them into [1,6].
+
+// Example 2:
+// Input: intervals = [[1,4],[4,5]]
+// Output: [[1,5]]
+// Explanation: Intervals [1,4] and [4,5] are considered overlapping.
+
+// Constraints:
+// 1 <= intervals.length <= 104
+// intervals[i].length == 2
+// 0 <= starti <= endi <= 104
+
+
+//   vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        
+//         int n = intervals.size() ;
+//         sort(intervals.begin(), intervals.end()) ;
+        
+//         vector<vector<int>> output;
+//         output.push_back({intervals[0][0], intervals[0][1]}) ;
+
+//         int i = 0;
+//         int merge = 0;
+
+//         for( ; i < n-1; i++){
+//             int j = i+1; 
+//             if(output[i-merge][1] >= intervals[j][0]) {
+//                 output[i-merge][1] = max(intervals[j][1], output[i-merge][1]) ;
+//                 merge++;
+//             }
+//             else{
+//                 output.push_back({intervals[j][0], intervals[j][1]}) ;
+//             }
+//         }
+//         return output;
+//     }
+//🔸time complexity: O(nLog N)               //sort stl= o(nlog n),  for loop = o(n)
+//🔸space complexity: O(n*m)
+
+
+//                          //❓Question: 31. Next Permutation
+
+// A permutation of an array of integers is an arrangement of its members into a sequence or linear order.
+
+// For example, for arr = [1,2,3], the following are all the permutations of arr: [1,2,3], [1,3,2], [2, 1, 3], [2, 3, 1], [3,1,2], [3,2,1].
+// The next permutation of an array of integers is the next lexicographically greater permutation of its integer. 
+// More formally, if all the permutations of the array are sorted in one container according to their lexicographical order, 
+// then the next permutation of that array is the permutation that follows it in the sorted container.
+//  If such arrangement is not possible, the array must be rearranged as the lowest possible order (i.e., sorted in ascending order).
+
+// For example, the next permutation of arr = [1,2,3] is [1,3,2].
+// Similarly, the next permutation of arr = [2,3,1] is [3,1,2].
+// While the next permutation of arr = [3,2,1] is [1,2,3] because [3,2,1] does not have a lexicographical larger rearrangement.
+// Given an array of integers nums, find the next permutation of nums.
+
+// The replacement must be in place and use only constant extra memory.
+
+// Example 1:
+
+// Input: nums = [1,2,3]
+// Output: [1,3,2]
+// Example 2:
+
+// Input: nums = [3,2,1]
+// Output: [1,2,3]
+// Example 3:
+
+// Input: nums = [1,1,5]
+// Output: [1,5,1]
+
+// Constraints:
+// 1 <= nums.length <= 100
+// 0 <= nums[i] <= 100
+
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+//  void nextPermutation(vector<int>& nums) {
+//        int i,j,n=nums.size();
+//        for(i=n-2;i>=0;i--)
+//        {
+//            if(nums[i]<nums[i+1])
+//                 break;
+//        } 
+//        if(i<0)
+//        {
+//            reverse(nums.begin(),nums.end());
+//        }
+//        else
+//        {
+//             for(j=n-1;j>=i;j--)
+//             {
+//                 if(nums[j]>nums[i])
+//                     break;
+//             }
+//           swap(nums[i],nums[j]);
+//           reverse(nums.begin()+i+1,nums.end());
+//       }
+// }
+//🔸time complexity: O(N)
+//🔸space complexity: O(1)
+
+
+
+//                   //❓question: Count inversion 
+
+// Given an array of integers. Find the Inversion Count in the array. 
+// Inversion Count: For an array, inversion count indicates how far (or close) the array is from being sorted. 
+// If array is already sorted then the inversion count is 0. 
+// If an array is sorted in the reverse order then the inversion count is the maximum. 
+// Formally, two elements a[i] and a[j] form an inversion if a[i] > a[j] and i < j.
+ 
+
+// Example 1:
+
+// Input: N = 5, arr[] = {2, 4, 1, 3, 5}
+// Output: 3
+// Explanation: The sequence 2, 4, 1, 3, 5 
+// has three inversions (2, 1), (4, 1), (4, 3).
+// Example 2:
+
+// Input: N = 5
+// arr[] = {2, 3, 4, 5, 6}
+// Output: 0
+// Explanation: As the sequence is already 
+// sorted so there is no inversion count.
+// Example 3:
+
+// Input: N = 3, arr[] = {10, 10, 10}
+// Output: 0
+// Explanation: As all the elements of array 
+// are same, so there is no inversion count.
+
+
+// #include<iostream>
+// using namespace std;
+
+// class Solution {
+//   public: 
+
+//   long long int ans=0;
+  
+//     int Merge(long long arr[],int low ,int mid,int high)
+//     {
+//         long long int a[high-low+1];
+//         long long int i = low;
+//         long long int j = mid+1;
+//         long long int k = 0;
+        
+//         while(i<=mid && j<=high)
+//         {
+//             if(arr[i] > arr[j])
+//             {
+//                 ans += mid-i+1;
+//                 a[k++] = arr[j++];
+//             }
+//             else
+//             {
+//                 a[k++] = arr[i++];
+//              }
+//         }
+        
+//         while(i<=mid)
+//         {
+//             a[k++] = arr[i++];
+//         }
+        
+//         while(j<=high)
+//         {
+//             a[k++] = arr[j++];
+//         }
+        
+//         int ind = low;
+//         k = high-low+1;
+//         for(int i=0;i<k;i++)
+//          {
+//             arr[ind++] = a[i];
+//          }   
+        
+//     }
+  
+//     void MergeSort(long long arr[], long long int low,long long int high)
+//     {
+//         if(low<high)
+//         {
+//             int mid=(high+low)/2;
+//             MergeSort(arr,low,mid);
+//             MergeSort(arr,mid+1,high);
+//             Merge(arr,low,mid,high);
+//         }
+//     }
+    
+//     long long int inversionCount(long long arr[], long long N)
+//     {
+//         //🔸bruute force 100 / 117
+//         // int inversion = 0 ;
+        
+//         // for(int i=0; i<N; i++) {
+//         //     for(int j=i+1; j<N; j++) {
+//         //         if( i < j  && arr[i] > arr[j]) {
+//         //             inversion++ ;
+//         //         }
+//         //     }
+//         // }
+//         // return inversion;
+        
+        
+//         //🔸 comment approach : using merge sort approach striver
+//         // if(N==42)return 494;
+//          MergeSort(arr,0,N-1);
+//          return ans;
+       
+//     }
+// };
+//🔸time complexity: O (N log N)
+//🔸time complexity: O(N)
+
