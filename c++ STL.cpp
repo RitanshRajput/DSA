@@ -36,8 +36,10 @@
 
 
                       //🔘1️⃣ Sequence container :
-//🔸 sequence containers refer to a group of container class templates in the standard library of the C++ programming language that implement storage of data elements. 
-//🔸 Being templates, they can be used to store arbitrary elements, such as integers or custom classes.
+//🔸 sequence containers refer to a group of container class templates in the standard
+//    library of the C++ programming language that implement storage of data elements. 
+//🔸 Being templates, they can be used to store arbitrary elements, 
+//   such as integers or custom classes.
 
 
                              //1️⃣ Array :  
@@ -75,9 +77,12 @@
 
 
                              //2️⃣ Vector 
-//🔸Vectors are the same as dynamic arrays with the ability to resize itself automatically when an element is inserted or deleted, with their storage being handled automatically by the container.
+//🔸Vectors are the same as dynamic arrays with the ability to resize itself automatically 
+//  when an element is inserted or deleted, with their storage being handled automatically by the container.
 //🔸Vector elements are placed in contiguous storage so that they can be accessed and traversed using iterators
-//🔸In C++, vectors are used to store elements of similar data types. However, unlike arrays, the size of a vector can grow dynamically. That is, we can change the size of the vector during the execution of a program as per our requirements. 
+//🔸In C++, vectors are used to store elements of similar data types. 
+//   However, unlike arrays, the size of a vector can grow dynamically.
+//   That is, we can change the size of the vector during the execution of a program as per our requirements. 
 //🔸Vectors are part of the C++ Standard Template Library.
 
 //🔸Vector is dynamic 
@@ -159,7 +164,8 @@
                          //3️⃣ Double Ended Queue (DEQ)/(DEQUE)  :
 
 //🔸Double-ended queues are sequence containers with the feature of expansion and contraction on both ends.
-//   They are similar to vectors, but are more efficient in case of insertion and deletion of elements. Unlike vectors, contiguous storage allocation may not be guaranteed.
+//   They are similar to vectors, but are more efficient in case of insertion and deletion of elements. 
+//  Unlike vectors, contiguous storage allocation may not be guaranteed.
 
 //🔸 With the help of deq we can push as well as pop element at the same time on both end of an vector/array.
 
@@ -213,7 +219,8 @@
 
                               //4️⃣ List :
 //🔸 Lists are sequence containers that allow non-contiguous memory allocation. 
-//   As compared to vector, the list has slow traversal, but once a position has been found, insertion and deletion are quick. Normally,
+//   As compared to vector, the list has slow traversal, but once a position has been found, 
+//   insertion and deletion are quick. Normally,
 //   when we say a List, we talk about a doubly linked list.
 
 
@@ -260,7 +267,9 @@
 
                        //🔘2️⃣ Container adaptors :
  //🔸 These types of containers are called container adapters.
- //🔸 The C++ Standard Library implements class templates such as stack, queue, and priority_queue as a container that puts constraints on the process of storage and retrieval of elements.
+ //🔸 The C++ Standard Library implements class templates such as 
+ //   stack, queue, and priority_queue as a container that puts constraints on the process of 
+ //   storage and retrieval of elements.
 
 
                               //1️⃣ Stack :
@@ -333,8 +342,10 @@
 
 
                           //3️⃣ Priority Queue :
-//🔸 A C++ priority queue is a type of container adapter, specifically designed such that the first element of the queue is either the greatest or the smallest of all elements in the queue,
-//   and elements are in non-increasing or non-decreasing order (hence we can see that each element of the queue has a priority {fixed order} .
+//🔸 A C++ priority queue is a type of container adapter, specifically designed such that 
+//  the first element of the queue is either the greatest or the smallest of all elements in the queue,
+//   and elements are in non-increasing or non-decreasing order
+//  (hence we can see that each element of the queue has a priority {fixed order} .
 
 //🔸Whenever we create a priority queue the heap it creates is always max heap or min heap :
 //🔸By default the priority queue is set to create max heap :

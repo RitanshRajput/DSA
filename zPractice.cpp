@@ -1081,3 +1081,187 @@
 //🔸time complexity: O (N log N)
 //🔸time complexity: O(N)
 
+
+
+//                      //❓Question :121. Best Time to Buy and Sell Stock (easy)
+
+// You are given an array prices where prices[i] is the price of a given stock on the ith day.
+// You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+// Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+
+// Example 1:
+// Input: prices = [7,1,5,3,6,4]
+// Output: 5
+// Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+// Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+
+// Example 2:
+// Input: prices = [7,6,4,3,1]
+// Output: 0
+// Explanation: In this case, no transactions are done and the max profit = 0.
+ 
+// Constraints:
+// 1 <= prices.length <= 105
+// 0 <= prices[i] <= 104
+
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// //🔴 brute force : 199/211  TLE
+//   // int maxProfit(vector<int>& prices) {
+//   //   vector<int> output(0) ;
+//   //   int ans = 0;
+//   //   int n = prices.size() ;
+//   //   for(int i=0; i<n; i++) {
+//   //     for(int j=n-1; j>i; j--) {
+//   //        if(prices[j] > prices[i]) {
+//   //          ans = prices[j] - prices[i] ;
+//   //          output.push_back(ans) ; 
+//   //        }
+//   //     }
+//   //   }
+//   //   int maxi = 0;
+//   //   for(int k=0; k<output.size(); k++) {
+//   //     maxi = max(maxi, output[k]) ;
+//   //   }
+//   //   return maxi ;
+//   // }
+
+//   //🔴approach2 : optimal O(n) time, and O(1) space
+//   int maxProfit(vector<int>& prices) {
+
+//     int mini = INT_MAX ;
+//     int maxi = 0 ;
+
+//     for(int i=0; i<prices.size(); i++){
+//       mini = min(mini, prices[i]) ;
+//       maxi = max(maxi, prices[i]-mini) ;
+//     }
+//     return maxi ;
+//   }
+
+
+
+//               //❓Question: Count pairs with given sum
+
+// Given an array of N integers, and an integer K,
+// find the number of pairs of elements in the array whose sum is equal to K.
+
+
+// Example 1:
+// Input:
+// N = 4, K = 6
+// arr[] = {1, 5, 7, 1}
+// Output: 2
+// Explanation: 
+// arr[0] + arr[1] = 1 + 5 = 6 
+// and arr[1] + arr[3] = 5 + 1 = 6.
+
+// Example 2:
+// Input:
+// N = 4, K = 2
+// arr[] = {1, 1, 1, 1}
+// Output: 6
+// Explanation: 
+// Each 1 will produce sum 2 with any 1.
+
+// #include<iostream>
+// using namespace std;
+
+//   //🔴 brute force : 181 / 263 
+//     // int getPairsCount(int arr[], int n, int k) {
+        
+//     //     int pairCount = 0 ;
+        
+//     //     for(int i=0; i<n; i++) {
+//     //         for(int j=i+1; j<n; j++) {
+//     //             if( arr[i] + arr[j] == k) {
+//     //                 pairCount++ ;
+//     //             }
+//     //         }
+//     //     }
+//     //     return pairCount ;
+//     // }
+    
+    
+//     //🔴 approach 2: using unordered_map
+//       int getPairsCount(int arr[], int n, int k){
+          
+//         if (n == 1) {
+//             return 0;
+//         }
+            
+//         int count = 0;
+//         unordered_map<int, int> mp;
+        
+//         for (int i = 0; i < n; i++) {
+            
+//             int diff = k - arr[i];    
+//             if (mp[diff] > 0) {
+//                 count += mp[diff];
+//             }
+                
+//             mp[arr[i]]++;
+//         }
+            
+//         return count;
+//     }
+//🔸time complexity: O(N)
+//🔸space complexity: O(N)
+
+
+//                     //❓Question: Common elements
+
+// Given three arrays sorted in increasing order. Find the elements that are common in all three arrays.
+// Note: can you take care of the duplicates without using any additional Data Structure?
+
+// Example 1:
+// Input:
+// n1 = 6; A = {1, 5, 10, 20, 40, 80}
+// n2 = 5; B = {6, 7, 20, 80, 100}
+// n3 = 8; C = {3, 4, 15, 20, 30, 70, 80, 120}
+// Output: 20 80
+// Explanation: 20 and 80 are the only
+// common elements in A, B and C.
+
+
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+//  vector <int> commonElements (int A[], int B[], int C[], int n1, int n2, int n3)
+//         {
+//         int i=0, j=0, k=0 ;
+//         vector<int> ans ;
+         
+//         while( i < n1 && j < n2 && k < n3){
+            
+//             if(A[i] == B[j] && A[i]== C[k]) {
+//                 ans.push_back(A[i]) ;
+                
+//                 i++ ;
+//                 j++ ;
+//                 k++ ;
+                
+//             while( i < n1 && A[i] == A[i-1]) {
+//                 i++ ;
+//             }
+//           }
+//             else if( min(A[i], min(B[j], C[k])) == A[i]) {
+//                 i++ ;
+//             }
+//             else if( min(A[i], min(B[j], C[k])) == B[j]) {
+//                 j++ ;
+//             }
+//             else if( min(A[i], min(B[j], C[k])) == C[k]) {
+//                 k++ ;
+//             }
+//         }
+        
+//         return ans ;
+    
+//     }
+
+// 🔸time complexity: O(n1 + n2 + n3)
+// 🔸 space complexity: O(n1 + n2 + n3)
