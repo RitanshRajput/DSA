@@ -3035,4 +3035,296 @@
 //🔸space complexity: O(n)
 
 
-//  128 / 149
+
+//                  //❓Question: Longest Increasing Subsequence
+
+// Given an array of integers, find the length of the longest (strictly) increasing subsequence from the given array.
+
+// Example 1:
+// Input:
+// N = 16
+// A[]={0,8,4,12,2,10,6,14,1,9,5,13,3,11,7,15}
+// Output: 6
+// Explanation:Longest increasing subsequence
+// 0 2 6 9 13 15, which has length 6
+
+// Example 2:
+// Input:
+// N = 6
+// A[] = {5,8,3,7,9,1}
+// Output: 3
+// Explanation:Longest increasing subsequence
+// 5 7 9, with length 3
+// Your Task:
+// Complete the function longestSubsequence() which takes the input array and its size as input parameters and returns the length of the longest increasing subsequence.
+
+// Expected Time Complexity : O( N*log(N) )
+// Expected Auxiliary Space: O(N)
+
+// Constraints:
+// 1 ≤ N ≤ 104
+// 0 ≤ A[i] ≤ 106
+
+
+//🔴approach: Recursion
+// Time limit Exceeded
+// #include<iostream>
+// using namespace std; 
+// int solve(int n, int a[], int curr, int prev) {
+//     //base case
+//     if(curr == n) {
+//         return 0;
+//     }
+
+//     //include
+//     int take = 0 ;
+//     if(prev == -1 || a[curr] > a[prev]) {
+//         take = 1 + solve(n, a, curr + 1, curr) ;
+//     }
+
+//     // exclude
+//     int notTake = 0 + solve(n, a, curr + 1, prev) ;
+
+//     return max(take, notTake) ;
+// }
+
+// int longestSubsequence(int n, int a[]) {
+//     return solve(n, a, 0, -1) ;
+// }
+//🔸time complexity: exponential
+//🔸 space complexity: exponential
+
+
+//🔴approach: Recursion + Memoization
+//🔴 passing 111 / 116
+// #include<iostream>
+// #include<vector>
+// using namespace std; 
+// int solve(int n, int a[], int curr, int prev, vector<vector<int>> &dp) {
+//     //base case
+//     if(curr == n) {
+//         return 0;
+//     }
+
+//     if(dp[curr][prev+1] != -1){
+//         return dp[curr][prev+1] ;
+//     }
+
+//     //include
+//     int take = 0 ;
+//     if(prev == -1 || a[curr] > a[prev]) {
+//         take = 1 + solve(n, a, curr + 1, curr, dp) ;
+//     }
+
+//     // exclude
+//     int notTake = 0 + solve(n, a, curr + 1, prev, dp) ;
+
+//     return dp[curr][prev+1] = max(take, notTake) ;
+// }
+
+// int longestSubsequence(int n, int a[]) {
+//     vector<vector<int>> dp(n, vector<int>(n+1, -1));
+//     return solve(n, a, 0, -1, dp) ;
+// }
+//🔸time complexity: O(n^2)
+//🔸 space complexity: O(n^2)
+
+
+//🔴approach: Tabulation
+//🔴 passing 111 / 116
+// #include<iostream>
+// #include<vector>
+// using namespace std; 
+
+// int solve(int n, int a[]) {
+
+//     vector<vector<int>> dp(n+1, vector<int>(n+1, 0));
+
+//     for(int curr = n-1; curr >= 0; curr--) {
+//         for(int prev = curr-1; prev >= -1; prev--) {
+//             // include
+//             int take = 0;
+//             if(prev == -1 || a[curr] > a[prev]) {
+//                 take = 1 + dp[curr + 1][curr + 1] ;
+//             }
+
+//             // exclude
+//             int notTake = 0 + dp[curr + 1][prev+1] ;
+
+//             dp[curr][prev+1] = max(take, notTake) ;
+//         }
+//     }
+//     return dp[0][0] ;
+// }
+
+// int longestSubsequence(int n, int a[]) {
+//     return solve(n, a) ;
+// }
+//🔸time complexity: O(n^2)
+//🔸 space complexity: O(n^2)
+
+
+//🔴approach: space optimisation
+//🔴 passing 111 / 116
+// #include<iostream>
+// #include<vector>
+// using namespace std; 
+
+// int solve(int n, int a[]) {
+
+//     vector<int> currRow(n+1, 0);
+//     vector<int> nextRow(n+1, 0);
+
+//     for(int curr = n-1; curr >= 0; curr--) {
+//         for(int prev = curr-1; prev >= -1; prev--) {
+//             // include
+//             int take = 0;
+//             if(prev == -1 || a[curr] > a[prev]) {
+//                 take = 1 + nextRow[curr + 1] ;
+//             }
+
+//             // exclude
+//             int notTake = 0 + nextRow[prev+1] ;
+
+//             currRow[prev+1] = max(take, notTake) ;
+//         }
+//         nextRow = currRow ;
+//     }
+//     return nextRow[0] ;
+// }
+
+// int longestSubsequence(int n, int a[]) {
+//     return solve(n, a) ;
+// }
+//🔸time complexity: O(n^2)
+//🔸 space complexity: O(n)
+
+
+
+
+// 🔴approach: DP + Binary search
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+//     int solveBS(int n, int a[]) {
+
+//         if(n == 0) {
+//             return 0;
+//         }   
+
+//         vector<int> ans;
+//         ans.push_back(a[0]);
+        
+//         for(int i= 1; i<n; i++) {
+
+//             if(a[i] > ans.back()) {
+//                 ans.push_back(a[i]); 
+//             }
+//             else
+//             {
+//                 //finding index  of just greater element in ans array
+//                 int index = lower_bound(ans.begin(), ans.end(), a[i]) - ans.begin();
+//                 ans[index] = a[i];
+//             }
+//         } 
+//         return ans.size();
+//     }
+//    int longestSubsequence(int n, int a[]){  
+//         return solveBS(n,a);
+//     }
+// 🔴time complexity: O(n Log n)            // forloop => O(n)  , lower_bound == (binary search) ==> O(nlog n)
+// 🔴space complexity: O(n)
+
+
+
+//🔴 Lower_bound:
+//  Iterator pointing to the first element in the range [first, last) 
+//  such that element < value (or comp(element, value)) is false, 
+//  or last if no such element is found.
+
+//🔸parameterS:
+
+// first, last	-	iterators defining the partially-ordered range to examine
+// value	    -	value to compare the elements to
+// comp     	-	binary predicate which returns ​true if the first argument is less than
+//                 (i.e. is ordered before) the second.
+
+
+
+//                  //❓ Question: 354. Russian Doll Envelopes (HARD)
+
+//  You are given a 2D array of integers envelopes where envelopes[i] = [wi, hi]
+//  represents the width and the height of an envelope.
+//  One envelope can fit into another if and only if both the width and height 
+//  of one envelope are greater than the other envelope's width and height.
+//  Return the maximum number of envelopes you can Russian doll (i.e., put one inside the other).
+
+// Note: You cannot rotate an envelope.
+
+// Example 1:
+// Input: envelopes = [[5,4],[6,4],[6,7],[2,3]]
+// Output: 3
+// Explanation: The maximum number of envelopes you can Russian doll is 3 ([2,3] => [5,4] => [6,7]).
+
+// Example 2:
+// Input: envelopes = [[1,1],[1,1],[1,1]]
+// Output: 1
+ 
+// Constraints:
+// 1 <= envelopes.length <= 105
+// envelopes[i].length == 2
+// 1 <= wi, hi <= 105
+
+//🔴approach: DP + Binary search 
+// #include<iostream>
+// #include<vector>
+// #include<algorithm>
+// using namespace std;
+
+    // creating custom function, to sort the array: 
+    // width wise in ascending order and if width are equal then sort height wise in descending order
+    // given input: [5,4],[6,4],[6,7],[2,3]]
+    // output: 
+    //  2  3
+    //  5  4
+    //  6  7 
+    //  6  4
+
+    // static bool comp(vector<int> &a, vector<int> &b){
+    //     if(a[0] == b[0]){
+    //         return a[1] > b[1];
+    //     }
+    //     return a[0] < b[0];
+    // }
+
+    // int solveOptimal(int n, vector<vector<int>>& envelopes){
+       
+    //     if(n == 0)
+    //         return 0;
+            
+    //     vector<int> ans;
+    //     ans.push_back(envelopes[0][1]);
+        
+    //     for(int i=1; i<n; i++){
+    //         if(envelopes[i][1] > ans.back())
+    //             ans.push_back(envelopes[i][1]);
+                
+    //         else{
+    //             // find index of just bigger element
+    //             int index = lower_bound(ans.begin(), ans.end(), envelopes[i][1]) - ans.begin();
+    //             ans[index] = envelopes[i][1];
+    //         }
+    //     }
+        
+    //     return ans.size();
+    // }
+
+    // int maxEnvelopes(vector<vector<int>>& envelopes) {
+
+    //     int n = envelopes.size();
+    //     sort(envelopes.begin(), envelopes.end(), comp);    // comp define at top
+    //     return solveOptimal(n, envelopes);
+    // }
+//🔸time complexity: O(N log N)
+//🔸space complexity: O(N )
