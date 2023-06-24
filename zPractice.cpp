@@ -1399,3 +1399,51 @@
 
 //🔸time complexity: O(n)
 // 🔸space complexity: O(n)
+
+
+
+//            //❓Question : Factorials Of Large Numbers
+
+// Given an integer N, find its factorial. 
+// return a list of integers denoting the digits that make up the factorial of N.
+
+// Example 1:
+// Input: N = 5
+// Output: 120
+// Explanation : 5! = 1*2*3*4*5 = 120
+
+// Example 2:
+// Input: N = 10
+// Output: 3628800
+// Explanation :
+// 10! = 1*2*3*4*5*6*7*8*9*10 = 3628800
+
+
+// #include<iostream>
+// #include<vector>
+// #include<algorithm>
+// using namespace std;
+
+// vector<int> factorial(int N){
+        
+//       vector<int> ans ;
+//       ans.push_back(1) ;
+       
+//       for(int j=2; j<=N; j++){
+//           int carry = 0;
+//           for(int i=0; i<ans.size(); i++){
+//               int data = ans[i] * j + carry ;
+//               ans[i] = data % 10 ;
+//               carry  = data / 10 ;
+//           }
+           
+//           while(carry != 0) {
+//               ans.push_back(carry % 10) ;
+//               carry = carry/10 ;
+//           }
+//       }
+//       reverse(ans.begin(), ans.end()) ;
+//       return ans;
+//     }
+//🔸time complexity: O(N^2)
+//🔸space complexity: O(N) 
