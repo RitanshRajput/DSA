@@ -519,9 +519,11 @@
 
 //    while(n != 0){                             //Step1 : loop till n is not equal to zero 
 //     int bit = n & 1 ;                         //Step2 : Store the remainder of every single digit(by using AND operator)(if 0 & 1 => 0) (if 1 & 1 => 1)
+// //     cout << "bit "<< bit << endl ;
 //     answer = (bit * pow(10, i)) + answer ;    //Step3 : reverse the numbers that is store in bit (formula = (bit * pow(10, i)) + answer ) the i will be increased by each iteration
-//    
+   
 //     n = n >> 1 ;                              //Step4: Right shift each digit on every iteration so we can move to next digit( 110  => n>>1  => 110 => 11 => 1)
+// //     cout<<" n "<< n << endl ;
 //     i++ ;                                     //Step5:  increment i for the reversed formula
 //    }
 //      cout<<"answer is: "<<answer<<endl;
