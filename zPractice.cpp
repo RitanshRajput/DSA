@@ -1511,3 +1511,67 @@
 // 	}
 //🔸time complexity: O(N)
 //🔸space complexity: O(1)
+
+
+
+//                //❓question: Longest consecutive subsequence
+
+// Given an array of positive integers. Find the length of the longest sub-sequence
+// such that elements in the subsequence are consecutive integers, 
+// the consecutive numbers can be in any order.
+ 
+
+// Example 1:
+// Input:
+// N = 7
+// a[] = {2,6,1,9,4,5,3}
+// Output:
+// 6
+// Explanation:
+// The consecutive numbers here
+// are 1, 2, 3, 4, 5, 6. These 6 
+// numbers form the longest consecutive
+// subsquence.
+
+// Example 2:
+// Input:
+// N = 7
+// a[] = {1,9,3,10,4,20,2}
+// Output:
+// 4
+// Explanation:
+// 1, 2, 3, 4 is the longest
+// consecutive subsequence.
+
+// Expected Time Complexity: O(N).
+// Expected Auxiliary Space: O(N).
+
+//🔸code :
+//  int findLongestConseqSubseq(int arr[], int n)
+//     {
+//     sort(arr,arr+n);
+//       int temp = arr[0] ;
+//       int count = 1;
+//       int maxCount =1 ;
+      
+//       for(int i=1; i<n; i++){
+//           if(arr[i] == temp) {
+//               continue ;
+//           }
+          
+//           if(arr[i] == temp+1) {
+//               count++ ;
+//               temp = arr[i] ;
+//               maxCount = max(maxCount, count) ;
+//           }
+          
+//           else{
+//               temp = arr[i] ;
+//               count = 1;
+//           }
+//       }
+      
+//       return maxCount ;
+
+//🔸time complexity: O(N logN)
+//🔸space complexity: O(N)
