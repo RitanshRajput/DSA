@@ -1638,3 +1638,138 @@
 //     }
 // 🔸time complexity: O(N)
 // 🔸space complexity: O(N)
+
+
+
+//                   //🔴❓Question: Buy and sell a share at most twice
+
+// In daily share trading, a buyer buys shares in the morning and sells them on the same day. 
+// If the trader is allowed to make at most 2 transactions in a day, 
+// the second transaction can only start after the first one is complete (Buy->sell->Buy->sell). 
+// The stock prices throughout the day are represented in the form of an array of prices. 
+
+// Given an array price of size N, find out the maximum profit that a share trader could have made.
+
+// Example 1:
+
+// Input:
+// 6
+// 10 22 5 75 65 80
+// Output:
+// 87
+// Explanation:
+// Trader earns 87 as sum of 12, 75 
+// Buy at 10, sell at 22, 
+// Buy at 5 and sell at 80
+// Example 2:
+
+// Input:
+// 7
+// 2 30 15 10 8 25 80
+// Output:
+// 100
+// Explanation:
+
+// Trader earns 100 as sum of 28 and 72
+// Buy at price 2, sell at 30,
+// Buy at 8 and sell at 80
+
+// Constraints:
+// 1 <= N <= 105
+// 1 <= price[i] <= 105
+
+//🔴approach :
+// logic :
+
+// for example you dont have any money in your pocket.
+// so , your firstbuy is you do loan. so negative value of price.
+
+// in firstsell amount ,you get firstsell-firstbuy profit (as you need to repay loan)(fbuy is negative so add to fsell)
+// in secondbuy , you need take amount from previous profit and some loan if needed,
+// in secondsell amount  you just remove loan amount ,amount left is profit.
+
+// int maxProfit(vector<int>&price){
+//     int firstbuy = INT_MIN;
+//    int firstsell = 0;
+   
+//    int secondbuy = INT_MIN;
+//    int secondsell = 0;
+   
+//    for(int i=0; i<price.size();i++){
+//        firstbuy = max(firstbuy, -price[i]);
+//        firstsell = max(firstsell, firstbuy + price[i]);
+     
+//        secondbuy = max(secondbuy, firstsell - price[i]);
+//        secondsell = max(secondsell, secondbuy + price[i]);
+      
+//    }
+//    return secondsell;
+// }
+
+//🔸Time Complexity: O(N)
+//🔸Space Complexity: O(N)
+
+
+
+//                    //❓Question: Array Subset of another array 
+
+// Given two arrays: a1[0..n-1] of size n and a2[0..m-1] of size m. 
+// Task is to check whether a2[] is a subset of a1[] or not. 
+// Both the arrays can be sorted or unsorted. There can be duplicate elements.
+
+// Example 1:
+// Input:
+// a1[] = {11, 7, 1, 13, 21, 3, 7, 3}
+// a2[] = {11, 3, 7, 1, 7}
+// Output:
+// Yes
+// Explanation:
+// a2[] is a subset of a1[]
+
+// Example 2:
+// Input:
+// a1[] = {1, 2, 3, 4, 4, 5, 6}
+// a2[] = {1, 2, 4}
+// Output:
+// Yes
+// Explanation:
+// a2[] is a subset of a1[]
+
+// Example 3:
+// Input:
+// a1[] = {10, 5, 2, 23, 19}
+// a2[] = {19, 5, 3}
+// Output:
+// No
+// Explanation:
+// a2[] is not a subset of a1[]
+
+// Constraints:
+// 1 <= n,m <= 105
+// 1 <= a1[i], a2[j] <= 106
+
+//🔴approach :
+// string isSubset(int a1[], int a2[], int n, int m) {
+    
+//     unordered_map<int, int> count ;
+    
+//     for(int i=0; i<n; i++) {
+//         count[a1[i]]++ ;
+//     }
+    
+//     for(int i=0; i<m; i++) {
+//         if(count[a2[i]] > 0) {
+//             count[a2[i]]-- ;
+//         }
+//         else{
+//             return "No" ;
+//         }
+//     }
+    
+//     return "Yes" ;
+// }
+
+//🔸Time Complexity: O(n)
+//🔸Space complexity: O(n)
+
+
