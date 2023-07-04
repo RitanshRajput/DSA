@@ -1773,3 +1773,60 @@
 //🔸Space complexity: O(n)
 
 
+//             //❓Question :Triplet sum in array
+
+// Given an array arr of size n and an integer X. 
+// Find if there's a triplet in the array which sums up to the given integer X.
+
+// Example 1:
+// Input:
+// n = 6, X = 13
+// arr[] = [1 4 45 6 10 8]
+// Output:
+// 1
+// Explanation:
+// The triplet {1, 4, 8} in 
+// the array sums up to 13.
+
+// Example 2:
+// Input:
+// n = 5, X = 10
+// arr[] = [1 2 4 3 6]
+// Output:
+// 1
+// Explanation:
+// The triplet {1, 3, 6} in 
+// the array sums up to 10.
+
+// Constraints:
+// 1 ≤ n ≤ 103
+// 1 ≤ A[i] ≤ 105
+
+//🔴approach :
+// bool find3Numbers(int arr[], int n, int x)
+//     {   
+//         sort(arr, arr+n) ;
+        
+//         for(int i=0; i<n; i++) {
+//             int start = i+1;
+//             int end = n-1 ;
+            
+//             while(start < end) {
+//                 int sum = arr[i] + arr[start] + arr[end] ;
+                
+//                 if(sum == x) {
+//                     return true ;
+//                 }
+//                 else if(sum < x){
+//                     start++ ;
+//                 }
+//                 else{
+//                     end-- ;
+//                 }
+//             }
+//         }
+        
+//         return 0 ;
+//     }
+//🔸time complexity: O(N^2)
+//🔸space complexity: O(1)
