@@ -136,6 +136,7 @@
 // cout<< " kth smallest element : "<<ans <<endl ;
 // }
 
+
 //                             //❓sort 0s 1s 2s
 // #include<iostream>
 // using namespace std ;
@@ -219,7 +220,7 @@
 // ex:
 // input : a ={1,2,3,4}
 //         b = {6,7,2}
-// output:  {1,2,3,4,6,7}
+// output: 6 = {1,2,3,4,6,7}   
 
 // 🔸 correct brute force solution but TLE:
 //  #include<iostream>
@@ -388,7 +389,7 @@
 //     return 0;
 // }
 
-// 🔸Approach 2 : brute force but working very well :
+// 🔸Approach 2 : Optimised
 //  #include<iostream>
 //  #include<algorithm>
 //  using namespace std;
@@ -544,7 +545,7 @@
 //     return 0;
 // }
 
-// 🔴 approach 2: working fine
+// 🔴 approach 2: optimised approach
 //    long long maxSubarraySum(int arr[], int n){
 
 //     long long maxi = 0 ;
@@ -569,7 +570,7 @@
 //  int localSum = 0 ;
 
 //  for(int i=0; i<n; i++){
-//     localSum = max(arr[i], (arr[i] + localSum)) s;
+//     localSum = max(arr[i], (arr[i] + localSum)) ;
 
 //     if(localSum > globalSum){
 //         globalSum = localSum ;
@@ -589,7 +590,8 @@
 //     return 0;
 // }
 
-//                   //❓ Minimize the heights I
+//                         //❓ Minimize the heights I
+
 // Given an array arr[] denoting heights of N towers and a positive integer K,
 // you have to modify the height of each tower either by increasing or decreasing them by K only once.
 // Find out what could be the possible minimum difference of
@@ -627,6 +629,7 @@
 //  add and substract every element in the array by K
 //  and find the minimum difference after updating every element
 
+//🔸approach:
 // #include<iostream>
 // #include<algorithm>
 // using namespace std;
@@ -660,6 +663,7 @@
 // }
 
 //                   //❓ Minimize the heights II
+
 // Given an array arr[] denoting heights of N towers and a positive integer K.
 // For each tower, you must perform exactly one of the following operations exactly once.
 // Increase the height of the tower by K
@@ -734,6 +738,7 @@
 // }
 
 //                     ❓ Minimum number of jumps
+
 // Given an array of N integers arr[] where each element represents the maximum length of the jump
 // that can be made forward from that element.
 // This means if arr[i] = x, then we can jump any distance y such that y ≤ x.
@@ -763,6 +768,7 @@
 // First we jump from the 1st to 2nd element
 // and then jump to the last element.
 
+//🔸approach :
 // #include<iostream>
 // using namespace std;
 
@@ -796,6 +802,7 @@
 // return 0;
 // }
 
+
 //               //❓ find duplicate in an array of N+1 Integers
 
 // Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.
@@ -810,13 +817,15 @@
 // Input: nums = [3,1,3,4,2]
 // Output: 3
 
+//🔸approach :
 // #include<iostream>
 // #include<vector>
 // using namespace std;
 
 //  int findDuplicate(vector<int>& nums) {
 //     //🔸vector approach
-//     // Approach take a vector where you can store the value of occurance of a number to the    corresponding index of the vector and then traverse through vector find whose value is >1;
+//     // Approach take a vector where you can store the value of occurance of a number to the   
+//     // corresponding index of the vector and then traverse through vector find whose value is >1;
 //         int n = nums.size();
 //         int t = n+1;
 //         vector<int> v(n, 0) ;
@@ -834,6 +843,7 @@
 //     }
 // 🔸time complexity : O(n)
 // 🔸space complexity : O(n)
+
 
 //                   //❓Question : 56. Merge Intervals
 
@@ -855,6 +865,7 @@
 // intervals[i].length == 2
 // 0 <= starti <= endi <= 104
 
+//🔸approach :
 //   vector<vector<int>> merge(vector<vector<int>>& intervals) {
 
 //         int n = intervals.size() ;
@@ -915,6 +926,7 @@
 // 1 <= nums.length <= 100
 // 0 <= nums[i] <= 100
 
+//🔸approach :
 // #include<iostream>
 // #include<vector>
 // using namespace std;
@@ -944,6 +956,7 @@
 // 🔸time complexity: O(N)
 // 🔸space complexity: O(1)
 
+
 //                   //❓question: Count inversion
 
 // Given an array of integers. Find the Inversion Count in the array.
@@ -972,6 +985,7 @@
 // Explanation: As all the elements of array
 // are same, so there is no inversion count.
 
+//🔸approach :
 // #include<iostream>
 // using namespace std;
 
@@ -1054,6 +1068,8 @@
 // 🔸time complexity: O (N log N)
 // 🔸time complexity: O(N)
 
+
+
 //                      //❓Question :121. Best Time to Buy and Sell Stock (easy)
 
 // You are given an array prices where prices[i] is the price of a given stock on the ith day.
@@ -1080,24 +1096,25 @@
 // using namespace std;
 
 // //🔴 brute force : 199/211  TLE
-//   // int maxProfit(vector<int>& prices) {
-//   //   vector<int> output(0) ;
-//   //   int ans = 0;
-//   //   int n = prices.size() ;
-//   //   for(int i=0; i<n; i++) {
-//   //     for(int j=n-1; j>i; j--) {
-//   //        if(prices[j] > prices[i]) {
-//   //          ans = prices[j] - prices[i] ;
-//   //          output.push_back(ans) ;
-//   //        }
-//   //     }
-//   //   }
-//   //   int maxi = 0;
-//   //   for(int k=0; k<output.size(); k++) {
-//   //     maxi = max(maxi, output[k]) ;
-//   //   }
-//   //   return maxi ;
-//   // }
+// int maxProfit(vector<int>& prices) {
+//   vector<int> output(0) ;
+//   int ans = 0;
+//   int n = prices.size() ;
+
+//   for(int i=0; i<n; i++) {
+//     for(int j=n-1; j>i; j--) {
+//        if(prices[j] > prices[i]) {
+//          ans = prices[j] - prices[i] ;
+//          output.push_back(ans) ;
+//        }
+//     }
+//   }
+//   int maxi = 0;
+//   for(int k=0; k<output.size(); k++) {
+//     maxi = max(maxi, output[k]) ;
+//   }
+//   return maxi ;
+// }
 
 //   //🔴approach2 : optimal O(n) time, and O(1) space
 //   int maxProfit(vector<int>& prices) {
@@ -1134,6 +1151,7 @@
 // Explanation:
 // Each 1 will produce sum 2 with any 1.
 
+//🔸approach :
 // #include<iostream>
 // using namespace std;
 
@@ -1177,6 +1195,8 @@
 // 🔸time complexity: O(N)
 // 🔸space complexity: O(N)
 
+
+
 //                     //❓Question: Common elements
 
 // Given three arrays sorted in increasing order. Find the elements that are common in all three arrays.
@@ -1195,8 +1215,7 @@
 // #include<vector>
 // using namespace std;
 
-//  vector <int> commonElements (int A[], int B[], int C[], int n1, int n2, int n3)
-//         {
+//  vector <int> commonElements (int A[], int B[], int C[], int n1, int n2, int n3)  {
 //         int i=0, j=0, k=0 ;
 //         vector<int> ans ;
 
@@ -1225,15 +1244,18 @@
 //         }
 
 //         return ans ;
-
 //     }
 
 // 🔸time complexity: O(n1 + n2 + n3)
 // 🔸 space complexity: O(n1 + n2 + n3)
 
-//               //❓Question: Alternate positive and negative numbers
 
-// Given an unsorted array Arr of N positive and negative numbers. Your task is to create an array of alternate positive and negative numbers without changing the relative order of positive and negative numbers.
+
+//                   //❓Question: Alternate positive and negative numbers
+
+// Given an unsorted array Arr of N positive and negative numbers. 
+// Your task is to create an array of alternate positive and negative numbers without 
+// changing the relative order of positive and negative numbers.
 // Note: Array should start with a positive number and 0 (zero) should be considered a positive element.
 
 // Example 1:
@@ -1269,6 +1291,7 @@
 // Expected Time Complexity: O(N)
 // Expected Auxiliary Space: O(N)
 
+//🔸approach : 
 // #include<iostream>
 // #include<vector>
 // using namespace std;
@@ -1287,7 +1310,7 @@
 //     while( i <n )
 //     {
 
-//        if(j != pos.size())
+//        if(j != pos.size() )
 //         {
 //             arr[i] = pos[j];
 //             j++;
@@ -1302,7 +1325,9 @@
 //     }
 // }
 // 🔸 Time Complexity: O(N)
-// 🔸 Space complexity : O(N)
+// 🔸 Space complexity : O(N)       // O(2N)
+
+
 
 //                  //❓Question: Subarray with 0 Sum
 
@@ -1332,11 +1357,13 @@
 // in the array so there exist a
 // subarray with sum 0.
 
+//🔸approach :
 // #include<iostream>
 // #include<vector>
 // using namespace std;
 //  bool subArrayExists(int arr[], int n)
 //     {
+    //4 2 -3 1 6
 //         unordered_map<int, bool> m;
 //         m[0] = true;
 
@@ -1358,7 +1385,9 @@
 //     }
 
 // 🔸time complexity: O(n)
-//  🔸space complexity: O(n)
+// 🔸space complexity: O(n)
+
+
 
 //            //❓Question : Factorials Of Large Numbers
 
@@ -1376,6 +1405,7 @@
 // Explanation :
 // 10! = 1*2*3*4*5*6*7*8*9*10 = 3628800
 
+//🔸appraoch :
 // #include<iostream>
 // #include<vector>
 // #include<algorithm>
@@ -1405,6 +1435,8 @@
 // 🔸time complexity: O(N^2)
 // 🔸space complexity: O(N)
 
+
+
 ///                  //❓Question: Maximum Product subarray
 
 // Given an array Arr[] that contains N integers (may be positive, negative or zero).
@@ -1427,7 +1459,8 @@
 // is [2, 3, 4, 5] which gives product as 120.
 
 // Your Task:
-// You don't need to read input or print anything. Your task is to complete the function maxProduct() which takes the array of integers arr and n as parameters and returns an integer denoting the answer.
+// You don't need to read input or print anything. Your task is to complete the function maxProduct()
+// which takes the array of integers arr and n as parameters and returns an integer denoting the answer.
 // Note: Use 64-bit integer data type to avoid overflow.
 
 // Expected Time Complexity: O(N)
@@ -1436,6 +1469,9 @@
 // Constraints:
 // 1 ≤ N ≤ 500
 // -102 ≤ Arri ≤ 102
+
+//🔸approach :
+// Dry run for better understanding :
 
 // #include<iostream>
 // #include<vector>
@@ -1466,6 +1502,7 @@
 // 	}
 // 🔸time complexity: O(N)
 // 🔸space complexity: O(1)
+
 
 //                //❓question: Longest consecutive subsequence
 
@@ -1525,8 +1562,8 @@
 
 //       return maxCount ;
 
-// 🔸time complexity: O(N logN)
-// 🔸space complexity: O(N)
+// 🔸time complexity: O(N * logN)
+// 🔸space complexity: O(1)
 
 
 
@@ -1707,7 +1744,7 @@
 // }
 
 //🔸Time Complexity: O(N)
-//🔸Space Complexity: O(N)
+//🔸Space Complexity: O(1)
 
 
 
@@ -1769,7 +1806,7 @@
 //     return "Yes" ;
 // }
 
-//🔸Time Complexity: O(n)
+//🔸Time Complexity: O(n+m)
 //🔸Space complexity: O(n)
 
 
@@ -1828,6 +1865,194 @@
         
 //         return 0 ;
 //     }
-//🔸time complexity: O(N^2)
-
+//🔸time complexity: O(N^2)           // o(n^2 + logN)
 //🔸space complexity: O(1)
+
+
+
+//                   //🔴❓ Question:  Trapping Rain Water 
+
+// Given an array arr[] of N non-negative integers representing the height of blocks. If width of each block is 1,
+// compute how much water can be trapped between the blocks during the rainy season. 
+
+// Example 1:
+// Input:
+// N = 6
+// arr[] = {3,0,0,2,0,4}
+// Output:
+// 10
+//explanation :
+//                          ____
+//    ___ _ _ _ _ _ _ _ _ _|    |
+//   |   |         ___     |    |
+//   |   |        |   |    |    |
+//   |___|________|___|____|____|
+//    [3] [0] [0]  [2] [0]  [4]
+
+//Bars for input =  { 3, 0, 0 ,2, 0, 4}
+// Total trapped water = 3 + 3 + 1 + 3 = 10
+
+// Example 2:
+// Input:
+// N = 4
+// arr[] = {7,4,0,9}
+// Output:
+// 10
+// Explanation:
+// Water trapped by above 
+// block of height 4 is 3 units and above 
+// block of height 0 is 7 units. So, the 
+// total unit of water trapped is 10 units.
+
+
+// Example 3:
+// Input:
+// N = 3
+// arr[] = {6,9,9}
+// Output:
+// 0
+// Explanation:
+// No water will be trapped.
+
+// Constraints:
+// 3 < N < 106
+// 0 < Ai < 108
+
+//🔴 approach :
+// long long trappingWater(int arr[], int n){
+        
+//         int leftBlock[n] ;
+//         leftBlock[0] = arr[0] ;
+        
+//         for(int i=1; i<n; i++) {
+//             leftBlock[i] = max(leftBlock[i-1], arr[i]) ;
+//         }
+        
+//         int rightBlock[n] ;
+//         rightBlock[n-1] = arr[n-1] ;
+        
+//         for(int i=n-2; i>=0; i--) {
+//             rightBlock[i] = max(rightBlock[i+1], arr[i]) ;
+//         }
+        
+//         long long sum = 0;
+        
+//         for(int i=0; i<n; i++){
+//             sum += min(leftBlock[i], rightBlock[i]) - arr[i] ;
+//         }
+        
+//         return sum ;
+//     }
+//🔸time complexity: O(N)
+//🔸space complexity: O(N)      // O(2N)
+
+
+//                 //❓Question: Choclate Distribution Problem
+
+// Given an array A[ ] of positive integers of size N,
+//  where each value represents the number of chocolates in a packet. 
+//  Each packet can have a variable number of chocolates. 
+//  There are M students, the task is to distribute chocolate packets among M students such that :
+// 1. Each student gets exactly one packet.
+// 2. The difference between maximum number of chocolates given to a student and minimum number 
+// of chocolates given to a student is minimum.
+
+
+// Example 1:
+// Input:
+// N = 8, M = 5
+// A = {3, 4, 1, 9, 56, 7, 9, 12}
+// Output: 6
+// Explanation: The minimum difference between maximum chocolates and minimum chocolates 
+//is 9 - 3 = 6 by choosing following M packets :{3, 4, 9, 7, 9}.
+
+// Example 2:
+// Input:
+// N = 7, M = 3
+// A = {7, 3, 2, 4, 9, 12, 56}
+// Output: 2
+// Explanation: The minimum difference between maximum chocolates and minimum chocolates 
+// is 4 - 2 = 2 by choosing following M packets :{3, 2, 4}.
+
+// Constraints:
+// 1 ≤ T ≤ 100
+// 1 ≤ N ≤ 105
+// 1 ≤ Ai ≤ 109
+// 1 ≤ M ≤ N
+
+//🔴approach :
+// long long findMinDiff(vector<long long> a, long long n, long long m){
+        
+//        sort(a.begin(), a.end()) ;
+//        int first = 0;
+//        int second = m-1 ;
+//        long long diff = INT_MAX;
+       
+//        while( second < n) {
+//            diff = min(diff, a[second]-a[first]) ;
+//            second++ ;
+//            first++ ;
+//        }
+//        return diff ;
+//     }   
+
+//🔸time complexity: O(N * logN)
+//🔸space complexity: O(1) 
+
+
+//                    //❓Question: Smallest Subarray with sum greater than x
+
+// Given an array of integers (A[])  and a number x, 
+// find the smallest subarray with sum greater than the given value. 
+// If such a subarray do not exist return 0 in that case.
+
+// Note: The answer always exists. It is guaranteed that x doesn't exceed the summation of a[i] (from 1 to N).
+
+// Example 1:
+// Input:
+// A[] = {1, 4, 45, 6, 0, 19}
+// x  =  51
+// Output: 3
+// Explanation:
+// Minimum length subarray is 
+// {4, 45, 6}
+
+// Example 2:
+// Input:
+// A[] = {1, 10, 5, 2, 7}
+//    x  = 9
+// Output: 1
+// Explanation:
+// Minimum length subarray is {10}
+
+
+// Constraints:
+// 1 ≤ N, x ≤ 105
+// 1 ≤ A[] ≤ 104
+
+//🔸approach :
+
+// int smallestSubWithSum(int arr[], int n, int x)
+//     {
+//         int ans = n ;
+//         int i = 0;
+//         int j = -1;
+//         int sum = 0 ;
+        
+//         while( j < n ) {
+//             if( sum <= x ) {
+//                 j++ ;
+//                 sum = sum + arr[j] ;
+//             } 
+            
+//             else if( sum > x ) {
+//                 ans = min(ans, j - i + 1) ;
+//                 sum = sum - arr[i] ;
+//                 i++ ;
+//             }
+//         }
+        
+//         return ans ;
+//     }
+//🔸time complexity: O(N)
+//🔸space complexity: O(1) 
