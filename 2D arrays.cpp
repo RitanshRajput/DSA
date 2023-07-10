@@ -409,7 +409,7 @@
 //         for(int index = StrCol; index <= EndCol && count < total; index++){
 //             cout<<arr [StrRow][index] <<" "; // 1 2 3 
 //             count++;
-//         }
+//         }a
 //         StrRow++;  //  strrow =  1
 
 //         /* print last column */

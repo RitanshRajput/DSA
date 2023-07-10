@@ -2056,3 +2056,153 @@
 //     }
 //🔸time complexity: O(N)
 //🔸space complexity: O(1) 
+
+
+
+//                     //❓Question: Three way Partitioning
+
+// Given an array of size n and a range [a, b]. 
+//The task is to partition the array around the range such that array is divided into three parts.
+// 1) All elements smaller than a come first.
+// 2) All elements in range a to b come next.
+// 3) All elements greater than b appear in the end.
+// The individual elements of three sets can appear in any order. 
+// You are required to return the modified array.
+
+// Note: The generated output is 1 if you modify the given array successfully.
+
+// Example 1:
+// Input: 
+// n = 5
+// A[] = {1, 2, 3, 3, 4}
+// [a, b] = [1, 2]
+// Output: 1
+// Explanation: One possible arrangement is:
+// {1, 2, 3, 3, 4}. If you return a valid
+// arrangement, output will be 1.
+
+
+// Example 2:
+// Input: 
+// n = 3 
+// A[] = {1, 2, 3}
+// [a, b] = [1, 3]
+// Output: 1
+// Explanation: One possible arrangement 
+// is: {1, 2, 3}. If you return a valid
+// arrangement, output will be 1.
+
+// Expected Time Complexity: O(n)
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1 <= n <= 106
+// 1 <= A[i] <= 106
+
+//🔴 approach :
+// void threeWayPartition(vector<int>& arr,int a, int b)
+//     {
+//        int i = 0;
+//        int left = 0;
+//        int right = arr.size() -1 ;
+       
+//        while( i <= right) {
+           
+//            if( arr[i] < a) {
+//                swap(arr[i++], arr[left++]) ;
+//            }
+//            else if( arr[i] > b ) {
+//                swap(arr[i], arr[right--]) ;
+//            }
+//            else{
+//                i++ ;
+//            }
+//        }
+//     }
+//🔸time complexity: O(N)
+//🔸space complexity: O(1)
+
+
+
+//              //❓ Question :  Minimum swaps and K together
+
+// Given an array arr of n positive integers and a number k. 
+// One can apply a swap operation on the array any number of times, 
+// i.e choose any two index i and j (i < j) and swap arr[i] , arr[j] .
+//  Find the minimum number of swaps required to bring all the numbers less than or equal to k together, 
+//  i.e. make them a contiguous subarray.
+
+// Example 1:
+// Input : 
+// arr[ ] = {2, 1, 5, 6, 3} 
+// K = 3
+// Output : 
+// 1
+// Explanation:
+// To bring elements 2, 1, 3 together,
+// swap index 2 with 4 (0-based indexing),
+// i.e. element arr[2] = 5 with arr[4] = 3
+// such that final array will be- 
+// arr[] = {2, 1, 3, 6, 5}
+
+// Example 2:
+// Input : 
+// arr[ ] = {2, 7, 9, 5, 8, 7, 4} 
+// K = 6 
+// Output :  
+// 2 
+// Explanation: 
+// To bring elements 2, 5, 4 together, 
+// swap index 0 with 2 (0-based indexing)
+// and index 4 with 6 (0-based indexing)
+// such that final array will be- 
+// arr[] = {9, 7, 2, 5, 4, 7, 8}
+
+
+// Constraints:
+// 1 ≤ N ≤ 105
+// 1 ≤ Arri, K ≤107
+
+//🔴approach: 
+/// This approach uses Sliding Window technique 
+//  first we count how many element are good, means <= k
+//  then we count how many element are bad from 0 to good (window size) , bad means > k
+//  initialise ans and assign bad as initial answer, init j assign bad , init i assign 0
+//  loop from j < n, 
+//  check if arr[i] > k decrease bad-- ,   within window size
+//  check if arr[j] > k increase bad++ ,   outside of window size
+//  ans = minimum Of (ans, bad) 
+//  i++, j++ ;
+//  return ans as minimum swap
+
+// int minSwap(int arr[], int n, int k) {
+        
+//        int good=0;
+//        int bad=0;
+       
+//        for(int i=0;i<n;i++) {
+//             if(arr[i]<=k)
+//             good++;
+//         }
+        
+//         for(int i=0;i<good;i++) {
+//             if(arr[i]>k)
+//             bad++;
+//         }
+        
+//         int ans=bad;
+//         int i=0,j=good;
+        
+//         while(j<n) {  
+            
+//           if(arr[i]>k)bad--;
+          
+//           if(arr[j]>k)bad++;
+          
+//           ans=min(ans,bad);
+         
+//           i++;j++;
+//       }
+   
+//      return ans;  
+//     }
