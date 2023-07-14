@@ -4249,4 +4249,185 @@
 //🔸space complexity : O(1)            
 
 
-// 134 / 149
+
+//                 //❓Question : Longest arithmetic progression
+
+// Given an array called A[] of sorted integers having no duplicates, 
+// find the length of the Longest Arithmetic Progression (LLAP) in it.
+
+// Example 1:
+// Input:
+// N = 6
+// set[] = {1, 7, 10, 13, 14, 19}
+// Output: 4
+// Explanation: The longest arithmetic 
+// progression is {1, 7, 13, 19}.
+
+// Example 2:
+// Input:
+// N = 5
+// A[] = {2, 4, 6, 8, 10}
+// Output: 5
+// Explanation: The whole set is in AP.
+
+// Your Task:
+// You don't need to read input or print anything. 
+// Your task is to complete the function lenghtOfLongestAP() 
+// which takes the array of integers called set[] and n as input parameters and returns the length of LLAP.
+
+// Constraints:
+// 1 ≤ N ≤ 1000
+// 1 ≤ set[i] ≤ 104
+
+//🔴approach : Recursion   TLE
+// #include<iostream>
+// using namespace std;
+
+// int solve( int index, int diff, int A[]) {
+//     //backward check 
+//     //base case
+//     if(index < 0) {
+//         return 0 ;
+//     }
+
+//     int ans = 0 ;
+
+//     for(int j=index-1; j>=0; j--) {
+//         if( A[index]-A[j] == diff) {
+//             ans = max(ans, 1 + solve(j, diff, A)) ;
+//         }
+//     }
+
+//     return ans ;
+// }
+
+// int lengthOfLongestAP(int A[], int n) {
+
+//     if(n <= 2) {
+//         return n;
+//     }
+
+//     int ans = 0 ;
+
+//     for(int i=0; i<n; i++){
+//         for(int j=i+1; j<n; j++) {
+//             ans = max( ans, 2 + solve(i , A[j]- A[i], A)) ;
+//         }
+//     }
+
+//     return ans ;
+// }
+//🔸 time complexity : O(N^2 + N)
+//🔸 space complexity : O(1)
+
+
+
+//🔴approach : Recursion + Memoization (top-down)   TLE
+// #include<iostream>
+// #include<unordered_map>
+// using namespace std;
+
+// int solve( int index, int diff, int A[], unordered_map<int, int> dp[]) {
+//     //backward check 
+//     //base case
+//     if(index < 0) {
+//         return 0 ;
+//     }
+
+//     if(dp[index].count(diff)) {       // is any element with value of diff is present on dp[j] or not
+//         return dp[index][diff] ;
+//     }
+//     int ans = 0 ;
+
+//     for(int j=index-1; j>=0; j--) {
+//         if( A[index]-A[j] == diff) {
+//             ans = max(ans, 1 + solve(j, diff, A, dp)) ;
+//         }
+//     }
+
+//     return dp[index][diff] = ans ;
+// }
+
+// int lengthOfLongestAP(int A[], int n) {
+
+//     if(n <= 2) {
+//         return n;
+//     }
+
+//     int ans = 0 ;
+
+//     unordered_map<int, int> dp[n+1] ;
+
+//     for(int i=0; i<n; i++){
+//         for(int j=i+1; j<n; j++) {
+//             ans = max( ans, 2 + solve(i , A[j]- A[i], A, dp)) ;
+//         }
+//     }
+
+//     return ans ;
+// }
+//🔸 time complexity : O(N^2 + N)
+//🔸 space complexity : O(N^2)
+
+
+//🔴approach : Tabulation (Bottom - up )  TLE
+// #include<iostream>
+// #include<unordered_map>
+// using namespace std;
+
+// int lengthOfLongestAP(int A[], int n) {
+
+//     if( n <= 2) {
+//         return n ;
+//     }
+
+//     int ans = 0 ;
+
+//     unordered_map<int, int> dp[n+1] ;
+
+//     for(int i=1; i<n; i++){
+//         for(int j=0; j<i; j++) {
+//             int diff = A[i] - A[j] ;
+//             int cnt = 1 ;
+
+//             // check is answer already present
+//             if( dp[j].count(diff)) {        // is any element with value of diff is present on dp[j] or not
+//                 cnt = dp[j][diff] ;
+//             }
+
+//             dp[i][diff] = 1 + cnt ;
+//             ans = max(ans, dp[i][diff]) ;
+//         }
+//     }
+
+//     return ans ;
+// }
+//🔸 time complexity : O(n^2)
+//🔸 space complexity : O(N^2)
+
+
+//🔴Comment section gfg : optimised approach
+
+//     int lengthOfLongestAP(int a[], int n) {
+//          // code here
+//           if(n == 1)
+//            return 1;
+       
+//        vector<vector<int >> dp(n + 1, vector<int>(1e4 + 3, 1));
+//        int ans = 0;
+//        for(int i = 1; i <= n; ++i){
+//            for(int j = i + 1; j <= n; ++j){
+               
+//                int df = a[j - 1] - a[i - 1];
+//                dp[j][df] = 1 + dp[i][df];
+//                ans = max(ans, dp[j][df]);
+//            }
+//        }
+       
+//        return ans;
+       
+//     }
+//🔸 time complexity : O(n^2)
+//🔸 space complexity : O(N^2)
+
+// 135 / 149
