@@ -2277,3 +2277,190 @@
 //     }
 //🔸time complexity: O(N)
 //🔸space complexity: O(N)
+
+
+
+//                    //❓Question : Palindromic array 
+
+// Given a Integer array A[] of n elements. Your task is to complete the function PalinArray.
+//  Which will return 1 if all the elements of the Array are palindrome otherwise it will return 0.
+
+// Example 1:
+// Input:
+// 5
+// 111 222 333 444 555
+// Output:
+// 1
+
+// Explanation:
+// A[0] = 111 //which is a palindrome number.
+// A[1] = 222 //which is a palindrome number.
+// A[2] = 333 //which is a palindrome number.
+// A[3] = 444 //which is a palindrome number.
+// A[4] = 555 //which is a palindrome number.
+// As all numbers are palindrome so This will return 1.
+
+// Example 2:
+// Input:
+// 3
+// 121 131 20
+// Output:
+// 0
+
+// Explanation:
+// 20 is not a palindrome hence the output is 0.
+
+// Constraints:
+// 1 <=T<= 50
+// 1 <=n<= 20
+// 1 <=A[]<= 10000
+
+//🔴approach :
+// int PalinArray(int arr[], int n)
+//     {
+//     	for(int k=0; k<n; k++) {
+//     	    int a = arr[k] ;
+//     	    string str = to_string(a) ;
+    	    
+//     	    int i=0, j = str.length() - 1 ;
+    	    
+//     	    while( i <= j) {
+//     	        if(str[i] == str[j]) {
+//     	            i++ ;
+//     	            j-- ;
+//     	        }
+//     	        else{
+//     	            return 0;
+//     	        }
+//     	    }
+//     	}
+        
+//         return 1;
+//     }
+//🔸time complexity: O(N * element.size())
+//🔸space complexity: O(element)
+
+
+
+//                     //❓Question : Find the Median
+
+// Given an array arr[] of N integers, calculate the median
+
+// Example 1:
+// Input: N = 5
+// arr[] = 90 100 78 89 67
+// Output: 89
+// Explanation: After sorting the array 
+// middle element is the median 
+
+// Example 2:
+// Input: N = 4
+// arr[] = 56 67 30 79
+// Output: 61
+// Explanation: In case of even number of 
+// elements, average of two middle elements 
+// is the median.
+
+// Expected Time Complexity: O(n * log(n))
+// Expected Space Complexity: O(1)
+ 
+
+// Constraints:
+// 1 <= Length of Array <= 100
+// 1 <= Elements of Array <= 100
+
+//🔴Approach :
+// int find_median(vector<int> v)
+// 		{
+// 		    sort(v.begin(), v.end()) ;
+// 		    int size = v.size() ;
+// 		     int ans = size / 2 ;
+		    
+// 		    if( size % 2 == 0) {
+// 		        int avg = (v[ans] + v[ans-1] ) / 2 ;
+// 		        return avg;
+// 		    }
+// 		    else{
+// 		        return v[ans] ;
+// 		    }
+// 		}
+//🔸time complexity: O(Log(n))
+//🔸space complexity: O( 1 )
+
+
+//                    //❓Question: Sum of middle elements of two sorted array
+
+// Given 2 sorted arrays Ar1 and Ar2 of size N each. 
+// Merge the given arrays and find the sum of the two middle elements of the merged array.
+
+// Example 1:
+// Input:
+// N = 5
+// Ar1[] = {1, 2, 4, 6, 10}
+// Ar2[] = {4, 5, 6, 9, 12}
+// Output: 11
+// Explanation: The merged array looks like
+// {1,2,4,4,5,6,6,9,10,12}. Sum of middle
+// elements is 11 (5 + 6).
+ 
+
+// Example 2:
+// Input:
+// N = 5
+// Ar1[] = {1, 12, 15, 26, 38}
+// Ar2[] = {2, 13, 17, 30, 45}
+// Output: 32
+// Explanation: The merged array looks like
+// {1, 2, 12, 13, 15, 17, 26, 30, 38, 45} 
+// sum of middle elements is 32 (15 + 17).
+
+// Expected Time Complexity: O(log N)
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1 <= N <= 103
+// 1 <= Ar1[i] <= 106
+// 1 <= Ar2[i] <= 106
+
+//🔴appraoch :
+//  int findMidSum(int ar1[], int ar2[], int n) {
+//             int ans[n+n] ;
+//             int i=0; 
+//             int j=0;
+//             while( j < n) {
+//                 ans[i++] = ar1[j] ;
+//                 ans[i++] = ar2[j] ;
+//                 j++ ;
+                
+//             }
+            
+//             int size = n+n ;
+//             sort(ans, ans+size) ;
+            
+//             int midd = size / 2 ;
+//             int temp = ans[midd] + ans[midd-1] ;
+           
+//             return temp ;
+//     }
+//🔸time complexity: O(n + Log(n)) 
+//🔸space complexity: O(N+N)
+
+
+//🔴appraoch : Optimised
+//  int findMidSum(int arr1[], int arr2[], int n) {
+//        int left=n-1;
+//        int right=0;
+//        while(left>=0 && right<n)
+//        {
+//            if(arr1[left]>arr2[right])
+//            {
+//                swap(arr1[left--],arr2[right++]);
+//            }
+//            else    break;
+//        }
+//        int el1 = *max_element(arr1,arr1+n);
+//        int el2 = *min_element(arr2,arr2+n);
+//        return  el1+el2;
+//     }
+//🔸time complexity: O(n) 
+//🔸space complexity: O(1)
