@@ -4461,33 +4461,35 @@
 // 1 <= arr.length <= 105
 // -104 <= arr[i], difference <= 104
 
-//🔴Approach : Recursion
-#include<iostream>
-#include<vector>
-#include<unordered_map>
-using namespace std;
+//🔴Approach : hashing  + dp
+// #include<iostream>
+// #include<vector>
+// #include<unordered_map>
+// using namespace std;
 
-int longestSubsequence(vector<int>& arr, int difference) {
+// int longestSubsequence(vector<int>& arr, int difference) {
 
-    unordered_map<int, int> dp ;
-    int ans = 0 ;
+//     unordered_map<int, int> dp ;
+//     int ans = 0 ;
 
-    for(int i=0; i<arr.size(); i++) {
-        int temp = arr[i] - difference ;
-        int tempAns = 0 ;
+//     for(int i=0; i<arr.size(); i++) {
+//         int temp = arr[i] - difference ;
+//         int tempAns = 0 ;
 
-        //check ans exist for temp already or not
-        if(dp.count(temp)) {        // check dp me temp ka answer hai ya nahi
-            tempAns = dp[temp] ;
-        }
+//         //check ans exist for temp already or not
+//         if(dp.count(temp)) {        // check dp me temp ka answer hai ya nahi
+//             tempAns = dp[temp] ;
+//         }
 
-        //update current answer
-        dp[arr[i]] = 1 + tempAns ;
+//         //update current answer
+//         dp[arr[i]] = 1 + tempAns ;
 
-        // update main ans 
-        ans = max(ans, dp[arr[i]]) ;
-    }
-        return ans ;
-}
+//         // update main ans 
+//         ans = max(ans, dp[arr[i]]) ;
+//     }
+//         return ans ;
+// }
 //🔸time complexity : O(N)
 //🔸space complexity : O(n)
+
+// 136 / 149
