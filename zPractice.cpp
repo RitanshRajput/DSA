@@ -2464,3 +2464,81 @@
 //     }
 //🔸time complexity: O(n) 
 //🔸space complexity: O(1)
+
+
+//                      //❓Question: Spirally Traversing a Matrix
+
+// Given a matrix of size r*c. Traverse the matrix in spiral form.
+
+// Example 1:
+// Input:
+// r = 4, c = 4
+// matrix[][] = {{1, 2, 3, 4},
+//            {5, 6, 7, 8},
+//            {9, 10, 11, 12},
+//            {13, 14, 15,16}}
+// Output: 
+// 1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10
+// Explanation:
+
+// Example 2:
+// Input:
+// r = 3, c = 4  
+// matrix[][] = {{1, 2, 3, 4},
+//            {5, 6, 7, 8},
+//            {9, 10, 11, 12}}
+// Output: 
+// 1 2 3 4 8 12 11 10 9 5 6 7
+// Explanation:
+// Applying same technique as shown above, 
+// output for the 2nd testcase will be 
+// 1 2 3 4 8 12 11 10 9 5 6 7.
+
+
+//🔴approach : 
+
+// vector<int> spirallyTraverse(vector<vector<int>> matrix, int r, int c) 
+//     {
+//         int rowStart = 0 ;
+//         int rowEnd = r - 1 ;
+
+//         int colStart = 0 ;
+//         int colEnd = c - 1 ;
+        
+//         vector<int> ans ;
+        
+//         int total = r*c ;
+//         int count = 0 ;
+        
+//         while(count < total) {
+        
+//             for(int i = colStart; i<=colEnd && count < total; i++) {
+//                 ans.push_back(matrix[rowStart][i]) ;
+//                 count++ ;
+//             }
+//             rowStart++ ;
+            
+//             for(int j = rowStart; j<=rowEnd && count < total; j++) {
+//                 ans.push_back(matrix[j][colEnd]) ;
+//                 count++ ;
+//             }
+//             colEnd-- ;
+            
+//             for(int i = colEnd; i>=colStart && count < total; i--) {
+//                 ans.push_back(matrix[rowEnd][i]) ;
+//                 count++ ;
+//             }
+//             rowEnd-- ;
+            
+//             for(int j = rowEnd; j>=rowStart && count < total; j--){
+//                 ans.push_back(matrix[j][colStart]) ;
+//                 count++ ;
+//             }
+//             colStart++ ;
+      
+//         }
+//         return ans ;
+//     }
+// 🔸time complexity : O( r * c)
+// 🔸space complexity : O( r * c)
+
