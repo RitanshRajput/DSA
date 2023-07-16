@@ -2470,7 +2470,7 @@
 
 
 
-//                      //🔘🔘🔘 Strings 🔘🔘🔘 
+//                      //🔘🔘🔘 Matrix 🔘🔘🔘 
 
 
 
@@ -2550,3 +2550,266 @@
 // 🔸time complexity : O( r * c)
 // 🔸space complexity : O( r * c)
 
+
+
+//                       //❓Question : 74. Search a 2D Matrix
+
+// You are given an m x n integer matrix matrix with the following two properties:
+
+// Each row is sorted in non-decreasing order.
+// The first integer of each row is greater than the last integer of the previous row.
+// Given an integer target, return true if target is in matrix or false otherwise.
+
+// You must write a solution in O(log(m * n)) time complexity.
+
+// Example 1:
+// //  1   3   5   7
+// //  10  11  16  20
+// //  23  30  34  60
+
+// Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3
+// Output: true
+
+// Example 2:
+// //  1   3   5   7
+// //  10  11  16  20
+// //  23  30  34  60
+
+// Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13
+// Output: false
+ 
+
+// Constraints:
+// m == matrix.length
+// n == matrix[i].length
+// 1 <= m, n <= 100
+// -104 <= matrix[i][j], target <= 104
+
+//🔴 approach: Brute force
+//  bool searchMatrix(vector<vector<int>>& matrix, int target) {
+//  int row = matrix.size() ;
+//         int col = matrix[0].size()  ;
+
+//         if(target < matrix[0][0] || target > matrix[row-1][col-1]) {
+//             return false ;
+//         }
+
+//         if(target == matrix[0][0] || target == matrix[row-1][col-1]) {
+//             return true ;
+//         }
+
+
+//         for(int i=0; i<row; i++) {
+//             for(int j=0; j<col; j++) {
+//                 if(matrix[i][j] == target) {
+//                     return true ;
+//                 }
+//             }
+//         }
+//         return false ;
+// }
+//🔸time complexity: O(n*m)
+//🔸space complexity: O(1)
+
+
+//🔴 approach: Optimised appraoch using binary search
+
+// bool searchMatrix(vector<vector<int>>& matrix, int target) {
+//         int row = matrix.size() ;
+//         int col = matrix[0].size() ;
+//         int start = 0;
+//         int end = row*col - 1;
+//         int mid = start+(end-start)/2;
+
+//         while(start<=end){
+
+//          int result = matrix[mid/col][mid%col] ;
+//          if(result==target){
+//              return 1;
+//          }
+//          if(result<target){
+//              start=mid+1 ;
+//          }
+//          else{
+//              end=mid-1;
+//          }
+//          mid= start+(end-start)/2 ;
+//         }
+//         return 0;
+//     }
+//🔸time complexity: O(log (n*m))
+//🔸space complexity: O(1)
+
+
+//               //❓Question : Median in a row-wise sorted matrix
+
+// Given a row wise sorted matrix of size R*C where R and C are always odd, 
+// find the median of the matrix.
+
+// Example 1:
+// Input:
+// R = 3, C = 3
+// M = [[1, 3, 5], 
+//      [2, 6, 9], 
+//      [3, 6, 9]]
+// Output: 5
+// Explanation: Sorting matrix elements gives 
+// us {1,2,3,3,5,6,6,9,9}. Hence, 5 is median. 
+ 
+
+// Example 2:
+// Input:
+// R = 3, C = 1
+// M = [[1], [2], [3]]
+// Output: 2
+// Explanation: Sorting matrix elements gives 
+// us {1,2,3}. Hence, 2 is median.
+
+// Your Task:  
+// You don't need to read input or print anything. 
+// Your task is to complete the function median() which takes the integers R and C along 
+// with the 2D matrix as input parameters and returns the median of the matrix.
+
+// Expected Time Complexity: O(32 * R * log(C))
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1 <= R, C <= 400
+// 1 <= matrix[i][j] <= 2000
+
+//🔴approach :  Brute force TLE  461/580
+
+//  int median(vector<vector<int>> &matrix, int R, int C){
+        
+//         vector<int> v;
+        
+//         for(int i=0; i<R; i++) {
+//             for(int j=0; j<C; j++) {
+//                v.push_back(matrix[i][j])  ;
+//             }
+//         }         
+        
+//         int size = v.size() ;
+//         int median = size / 2 ;
+//         int ans = 0 ;
+//         sort(v.begin(), v.end()) ;
+        
+//         for(int i=0; i<=median; i++) {
+//             ans = v[i];
+//         }
+        
+//         return ans ;
+//     }
+//🔸time complexity : O( R * C)
+//🔸space complexity : O(R*C)
+
+//🔴appraoch : strivers optimised appraoch 
+//  int countSmaller(vector<int> &arr, int k) {
+//          int l = 0, h = arr.size() - 1;
+        
+//         while(l <= h){
+            
+//             int mid = l + (h - l) / 2;
+            
+//             if(arr[mid] <= k)   l = mid + 1;
+            
+//             else h = mid - 1;
+            
+//         }
+        
+//         return l;
+        
+//     }
+
+//     int median(vector<vector<int>> &matrix, int R, int C){
+        
+          
+//         int l = matrix[0][0], h = matrix[0][C - 1];
+        
+//         for(int i = 1; i < R; i++){
+            
+//             l = min(l, matrix[i][0]);
+            
+//             h = max(h, matrix[i][C - 1]);
+//         }
+        
+//         while(l <= h){
+            
+//             int mid = l + (h - l) / 2;
+            
+//             int count = 0, target = (R * C) / 2;
+            
+//             for(int i = 0; i < R; i++){
+//                 count += countSmaller(matrix[i], mid);
+//             }
+            
+//             if(count > target)  h = mid - 1;
+            
+//             else l = mid + 1;
+//         }
+        
+//         return l;
+//     }
+//🔸time complexity : O( R * log(C))
+//🔸space complexity : O(1)
+
+
+//                       //❓Question: Row with max 1s
+
+// Given a boolean 2D array of n x m dimensions where each row is sorted. 
+// Find the 0-based index of the first row that has the maximum number of 1's.
+
+// Example 1:
+// Input: 
+// N = 4 , M = 4
+// Arr[][] = {{0, 1, 1, 1},
+//            {0, 0, 1, 1},
+//            {1, 1, 1, 1},
+//            {0, 0, 0, 0}}
+// Output: 2
+// Explanation: Row 2 contains 4 1's (0-based
+// indexing).
+
+// Example 2:
+// Input: 
+// N = 2, M = 2
+// Arr[][] = {{0, 0}, {1, 1}}
+// Output: 1
+// Explanation: Row 1 contains 2 1's (0-based
+// indexing).
+
+// Constraints:
+// 1 ≤ N, M ≤ 103
+// 0 ≤ Arr[i][j] ≤ 1 
+
+ 
+
+//🔴approach:  
+// int solve(vector<int> &arr) {
+//         int count = 0;
+//         for(auto i:arr) {
+//             if( i == 1) {
+//                 count++ ;
+//             }
+//         }
+        
+//         return count ;
+//     }
+
+// 	int rowWithMax1s(vector<vector<int> > arr, int n, int m) {
+	    
+// 	    int count = 0 ;
+// 	    int ans = -1;
+// 	    int temp = count ;
+// 	    for(int i=0; i<n; i++) {
+// 	        count = solve(arr[i]) ;
+// 	        if(count > temp) {
+// 	            ans = i ;
+// 	            temp = count ;
+// 	        }
+// 	    }
+	    
+// 	    return ans ;
+// 	}
+//🔸time complexity: O( R*R)
+//🔸space complexity: O(1)
