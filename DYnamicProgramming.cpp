@@ -4492,4 +4492,307 @@
 //🔸time complexity : O(N)
 //🔸space complexity : O(n)
 
-// 136 / 149
+
+
+//            //❓Question: Unique Binary Search Trees
+
+// Given an integer n, return the number of structurally unique BST's 
+// (binary search trees) which has exactly n nodes of unique values from 1 to n.
+
+// Example 1:
+
+//  [1]         [1]              [2]                [3]          [3]
+//     \           \           /     \             /            /
+//     [3]          [2]     [1]       [3]       [2]           [1] 
+//     /               \                       /                \
+//  [2]                 [3]                 [1]                  [2]
+//
+// Input: n = 3
+// Output: 5
+
+// Example 2:
+// Input: n = 1
+// Output: 1
+ 
+
+// Constraints:
+// 1 <= n <= 19
+
+//🔴appraoch: Recursion 
+// TLE
+// #include<iostream>
+// using namespace std;
+
+// int numTrees(int n) {
+//     //base case
+//     if( n<=1) {
+//         return 1 ;
+//     }
+
+//     int ans = 0 ;
+//     //think i as root node
+//     for(int i=1; i<=n; i++) {
+//         ans += numTrees(i-1) * numTrees(n-i) ;
+//     }
+
+//     return ans ;
+// }
+//🔸 time complexity : expo
+//🔸 space complexity : O(1)
+
+
+//🔴appraoch: Recursion + memoization
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// int solve(int n, vector<int> &dp) {
+//     //base case
+//     if( n<=1) {
+//         return 1 ;
+//     }
+
+//     if(dp[n] != -1) {
+//         return dp[n] ;
+//     }
+//     int ans = 0 ;
+//     //think i as root node
+//     for(int i=1; i<=n; i++) {
+//         ans += solve(i-1, dp) * solve(n-i, dp) ;
+//     }
+//     return dp[n] = ans ;
+// }
+
+// int numTrees(int n) {
+//     vector<int> dp(n+1, -1) ;
+//     return solve(n, dp) ;
+// }
+//🔸 time complexity :  O(n)
+//🔸 space complexity : O(n)
+
+
+
+//🔴appraoch: Tabulation
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// int solve(int n) {
+//     vector<int> dp(n+1, 0) ;
+//     dp[0] = dp[1] = 1 ;
+
+//     // i => number of nodes
+//     for(int i=2; i<=n; i++) {
+//         // j => root node
+//         for(int j=1; j<=i; j++) {
+//             dp[i] +=  dp[j-i] * dp[i-j] ;
+//         }
+//     }
+//     return dp[n] ;
+// }
+
+// int numTrees(int n) {
+//     return solve(n) ;
+// }
+//🔸 time complexity :  O(n^2)
+//🔸 space complexity : O(n)
+
+//🔴🔴 Most optimised way is to get Catalan number == Unique binary trees
+// ex:
+//  N == UBT                 // UBT = unique binary trees
+//  1 == 1        
+//  2 == 2
+//  3 == 5
+//  4 == 14
+//  5 == 42
+//  6 == 132
+
+//🔸 expression for catalan number :
+//
+//    (2n)!
+//   -------
+//   (n+1)! n!
+
+//🔸Implementaion:
+// #include <iostream>
+// using namespace std;
+ 
+// // A recursive function to find nth catalan number :
+// unsigned long int catalan(unsigned int n)
+// {
+//     // Base case
+//     if (n <= 1)
+//         return 1;
+ 
+//     // catalan(n) is sum of
+//     // catalan(i)*catalan(n-i-1)
+//     unsigned long int res = 0;
+//     for (int i = 0; i < n; i++)
+//         res += catalan(i) * catalan(n - i - 1);
+ 
+//     return res;
+// }
+
+// // Driver code :
+// int main()
+// {
+//     for (int i = 0; i < 10; i++)
+//         cout << catalan(i) << " ";
+//     return 0;
+// }
+
+// Output :
+// 1 1 2 5 14 42 132 429 1430 4862 
+
+
+//                    //❓Question :375. Guess Number Higher or Lower II
+
+// We are playing the Guessing Game. The game will work as follows:
+
+// I pick a number between 1 and n.
+// You guess a number.
+// If you guess the right number, you win the game.
+// If you guess the wrong number, then I will tell you whether the number I picked is higher or lower, and you will continue guessing.
+// Every time you guess a wrong number x, you will pay x dollars. If you run out of money, you lose the game.
+// Given a particular n, return the minimum amount of money you need to guarantee a win regardless of what number I pick.
+
+ 
+// Example 1:
+//                      [7]
+//            lower /        \  higher
+//              [3]            [9]
+//    lower   /    \ high low /   \  higher  
+//          [1]    [5]      [8]   [10]
+//           \hi lo/  \ higher
+//            [2] [4]  [6]
+
+// Input: n = 10
+// Output: 16
+// Explanation: The winning strategy is as follows:
+// - The range is [1,10]. Guess 7.
+// - If this is my number, your total is $0. Otherwise, you pay $7.
+// - If my number is higher, the range is [8,10]. Guess 9.
+// - If this is my number, your total is $7. Otherwise, you pay $9.
+// - If my number is higher, it must be 10. Guess 10. Your total is $7 + $9 = $16.
+// - If my number is lower, it must be 8. Guess 8. Your total is $7 + $9 = $16.
+// - If my number is lower, the range is [1,6]. Guess 3.
+// - If this is my number, your total is $7. Otherwise, you pay $3.
+// - If my number is higher, the range is [4,6]. Guess 5.
+// - If this is my number, your total is $7 + $3 = $10. Otherwise, you pay $5.
+// - If my number is higher, it must be 6. Guess 6. Your total is $7 + $3 + $5 = $15.
+// - If my number is lower, it must be 4. Guess 4. Your total is $7 + $3 + $5 = $15.
+// - If my number is lower, the range is [1,2]. Guess 1.
+// - If this is my number, your total is $7 + $3 = $10. Otherwise, you pay $1.
+// - If my number is higher, it must be 2. Guess 2. Your total is $7 + $3 + $1 = $11.
+// The worst case in all these scenarios is that you pay $16. Hence, you only need $16 to guarantee a win.
+
+// Example 2:
+// Input: n = 1
+// Output: 0
+// Explanation: There is only one possible number, so you can guess 1 and not have to pay anything.
+// Example 3:
+
+// Input: n = 2
+// Output: 1
+// Explanation: There are two possible numbers, 1 and 2.
+// - Guess 1.
+// - If this is my number, your total is $0. Otherwise, you pay $1.
+// - If my number is higher, it must be 2. Guess 2. Your total is $1.
+// The worst case is that you pay $1.
+ 
+// Constraints:
+// 1 <= n <= 200
+
+//🔴approach : Recursion
+// TLE
+// #include<iostream>
+// #include<limits.h>
+// using namespace std;
+
+// int solve(int start, int end) {
+//     //worst case
+//     if( start >= end) {
+//         return 0 ;
+//     }
+
+//     int maxi = INT_MAX ;
+//     for(int i=start; i<=end; i++) {
+//         maxi = min(maxi, i+max(solve(start, i-1), solve(i+1, end))) ;
+//     }
+//     return maxi ;
+// }
+
+// int getMoneyAmount(int n) {
+//     return solve(1, n) ;
+// }
+//🔸 time complexity :  expo
+//🔸 space complexity : O(1)
+
+
+//🔴approach : Recursion + Memoization
+// #include<iostream>
+// #include<limits.h>
+// #include<vector>
+// using namespace std;
+
+// int solve(int start, int end, vector<vector<int>> &dp) {
+//     //worst case
+//     if( start >= end) {
+//         return 0 ;
+//     }
+
+//     if(dp[start][end] != -1){
+//         return dp[start][end] ;
+//     }
+
+//     int maxi = INT_MAX ;
+//     for(int i=start; i<=end; i++) {
+//         maxi = min(maxi, i+max(solve(start, i-1, dp), solve(i+1, end, dp))) ;
+//     }
+//     return dp[start][end] = maxi ;
+// }
+
+// int getMoneyAmount(int n) {
+//     vector<vector<int>> dp(n+1, vector<int>(n+1, -1)) ;
+//     return solve(1, n, dp) ;
+// }
+//🔸 time complexity :  O(n^2)
+//🔸 space complexity : O(n^2)
+
+
+
+//🔴approach : Tabulation
+// #include<iostream>
+// #include<limits.h>
+// #include<vector>
+// using namespace std;
+
+// int solve(int n) {
+//     vector<vector<int>> dp(n+2, vector<int>(n+2, 0)) ;
+    
+//     for(int start = n; start >= 1; start--) {
+//         for(int end = start; end<=n; end++) {
+//             if(start == end) {
+//                 continue;
+//             }
+//             else{
+//                 int maxi = INT_MAX ;
+//                 for(int i=start; i<=end; i++) {
+//                     maxi = min(maxi, i+max(dp[start][i-1], dp[i+1][end])) ;
+//                 }
+//                 dp[start][end] = maxi ;
+//             }
+//         }
+//     }
+
+//     return dp[1][n] ;
+// }
+
+// int getMoneyAmount(int n) {
+//     return solve(n) ;
+// }
+//🔸 time complexity :  O(n^2)
+//🔸 space complexity : O(n^2)
+
+
+//  138/149
