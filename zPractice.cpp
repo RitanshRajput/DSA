@@ -2813,3 +2813,285 @@
 // 	}
 //🔸time complexity: O( R*R)
 //🔸space complexity: O(1)
+
+
+//                       //❓Question: Sorted Matrix 
+
+// Given an NxN matrix Mat. Sort all elements of the matrix.
+
+// Example 1:
+// Input:
+// N=4
+// Mat=[[10,20,30,40],
+// [15,25,35,45] 
+// [27,29,37,48] 
+// [32,33,39,50]]
+// Output:
+// 10 15 20 25 
+// 27 29 30 32
+// 33 35 37 39
+// 40 45 48 50
+// Explanation:
+// Sorting the matrix gives this result.
+
+// Example 2:
+// Input:
+// N=3
+// Mat=[[1,5,3],[2,8,7],[4,6,9]]
+// Output:
+// 1 2 3 
+// 4 5 6
+// 7 8 9
+// Explanation:
+// Sorting the matrix gives this result.
+
+// Expected Time Complexity:O(N2LogN)
+// Expected Auxillary Space:O(N2)
+
+// Constraints:
+// 1<=N<=1000
+// 1<=Mat[i][j]<=105
+
+//🔴approach : 
+// vector<vector<int>> sortedMatrix(int N, vector<vector<int>> Mat) {
+           
+//            vector<int> temp ;
+           
+//            for(int i=0; i<N; i++) {
+//                for(int j=0; j<N; j++) {
+//                    temp.push_back(Mat[i][j]) ;
+//                }
+//            }
+           
+//            sort(temp.begin(), temp.end()) ;
+           
+//            int index = 0 ;
+           
+//            for(int i=0; i<N; i++) {
+//                for(int j=0; j<N; j++) {
+//                    Mat[i][j] = temp[index++] ;
+//                }
+//            }
+           
+//            return Mat ;
+//     }
+//🔸time complexitY: O(N^2 LogN)
+//🔸space complexitY: O(N^2)
+
+
+
+//                  //❓Question: Max Rectangle
+
+// Given a binary matrix M of size n X m. 
+//Find the maximum area of a rectangle formed only of 1s in the given matrix.
+
+// Example 1:
+// Input:
+// n = 4, m = 4
+// M[][] = {{0 1 1 0},
+//          {1 1 1 1},
+//          {1 1 1 1},
+//          {1 1 0 0}}
+// Output: 8
+// Explanation: For the above test case the
+// matrix will look like
+// 0 1 1 0
+// 1 1 1 1
+// 1 1 1 1
+// 1 1 0 0
+// the max size rectangle is 
+// 1 1 1 1
+// 1 1 1 1
+// and area is 4 *2 = 8.
+
+// Your Task: 
+// Your task is to complete the function maxArea which returns the maximum size rectangle area in a binary-sub-matrix with all 1’s. The function takes 3 arguments the first argument is the Matrix M[ ] [ ] and the next two are two integers n and m which denotes the size of the matrix M. 
+
+// Expected Time Complexity : O(n*m)
+// Expected Auixiliary Space : O(m)
+
+// Constraints:
+// 1<=n,m<=1000
+// 0<=M[][]<=1
+
+// Note:The Input/Ouput format and Example given are used for system's 
+// internal purpose, and should be used by a user for Expected Output only.
+// As it is a function problem, hence a user should not read any input from stdin/console.
+//The task is to complete the function specified, and not to write the full code.
+
+//🔴approach:
+// compute max-area for 1st row
+// for every remaining row  (add elem of above row)
+// compute area 
+// here we are also using concept from (Largest Rectangle in Histogram) problem
+
+// #include<bits/stdc++.h>
+// using namespace std;
+
+// //next smaller elem code:
+// vector<int> nextSmallerElement(int* arr, int n) {
+//     stack<int> s ;
+//     s.push(-1) ;        
+//     vector<int> ans(n) ;
+
+
+//     for(int i=n-1; i>=0; i--) {
+//         int curr = arr[i] ;
+       
+//         while( (s.top() != -1) && (arr[s.top()] >= curr)) {
+//             s.pop() ;
+//         }
+      
+//         ans[i] = s.top() ;
+//         s.push(i) ;
+//     }
+//     return ans;
+// }
+
+// //prev smaller elem code:
+// vector<int> prevSmallerElement(int* arr, int n) {
+//     stack<int> s ;
+//     s.push(-1) ;        
+//     vector<int> ans(n) ;
+
+
+//     for(int i=0; i<n; i++) {
+//         int curr = arr[i] ;
+       
+//         while( (s.top() != -1) && (arr[s.top()] >= curr)) {
+//             s.pop() ;
+//         }
+      
+//         ans[i] = s.top() ;
+//         s.push(i) ;
+//     }
+//     return ans;
+// }
+
+// //largest histogram  main code:
+// int largestRectangleArea(int* heights, int n ){
+
+//     vector<int> next(n) ;
+//     next = nextSmallerElement(heights, n) ;
+
+//     vector<int> prev(n) ;
+//     prev = prevSmallerElement(heights, n) ;
+
+//     int area = INT_MIN; 
+//     for(int i=0; i<n; i++) {
+//         int length = heights[i] ;
+         
+//         if(next[i] == -1){
+//             next[i] = n ;
+//         }
+
+//         int breadth = next[i] - prev[i] - 1 ;
+
+//         int newArea = length * breadth ;
+//         area = max(area, newArea) ;
+//     }  
+//    return area ;
+// }
+
+// //main code:
+// int maxArea(int M[MAX][MAX], int n, int m) {
+//     //compute area for first row
+//     int area = largestRectangleArea(M[0], m) ;
+
+//    //for every remaining rows
+//     for(int i=1; i<n; i++) {
+//         for(int j=0; j<m; j++) {
+//             //update row by adding previous rows value
+//             if(M[i][j] != 0)
+//             M[i][j] = M[i][j] + M[i-1][j] ;
+//             else
+//             M[i][j] = 0 ;
+//         }
+//         //entire row is updated now
+//         int newArea = largestRectangleArea(M[i], m) ;
+//         area = max(area, newArea) ;
+//     }
+//     return area;
+//  }
+//  int main() {}
+ //🔴Time complexity: O(N x M)     (n=rows, m=column)
+ //🔴space complexity: o(M)        (m=columns)
+
+
+
+
+//                 //❓Question: Find a Specific Pair in Matrix 
+
+// Problem Statement
+//                                                                 
+// You have been given a 2-D matrix 'MAT' of size 'N' x 'N' i.e. N rows and N columns.
+// Your task is to find the maximum value of' matrix[a][b] - matrix[c][d] 'over all possible
+// indices (О <= 'a', 'b', 'c', 'd' < 'N') such that. 'a'> 'c' and 'b'> 'd'.
+// For example:
+//     МАТ[3][3] =11  [    [1, 2, 3]
+//                         [4, 5, 6]
+//                         [7, 8, 9]  ]
+//    In this example, to maximise the value of  matrix[a][b] - matrix[c][d]
+//    fulfilling the given conditions on indices ('a' > 'c' and 'b' > 'd'),
+//    we take 'a' = 2, 'b' = 2, 'C'==0 and 'd' =0. So, 'MAT[a][b]' - MAT[c][d]'=> 9 - 1 = 8
+//    which is maximum among all possible combinations
+
+// Constraints:
+//    1 <= 'T' <= 100
+//    2 <= 'N' <= 100
+//    -10^5 <= 'MAT[i][j]" <= 10^5
+//    Time Limit : 1 second
+
+
+// Sample Input 1:
+// 2
+// 3
+// 1 2 3
+// 4 5 6
+// 7 8 9
+// 3
+// -1 -2 -3
+// -4 -5 -6
+// -7 -8 -9
+// Sample Output 1:
+// 8
+// -4
+// Explanation For Sample Output 1:
+// For sample test case 1: 
+
+// In this sample test case, to maximise the value of ‘MAT[a][b]’ - ‘MAT[c][d]’ fulfilling the given conditions on indices (‘a’ > ‘c’ and ‘b’ > ‘d’), we take ‘a’ = 3, ‘b’ = 3, ‘c’ = 0 and ‘d’ = 0 .  So, ‘MAT[a][b]’ = 9 and ‘MAT[c][d]’ = 1 and the value of ‘MAT[a][b]’ - ‘MAT[c][d]’ => 9 - 1 = 8 which is maximum among all possible combinations.
+
+// For sample test case 2: 
+
+// In this sample test case, to maximise the value of ‘MAT[a][b]’ - ‘MAT[c][d]’ fulfilling the given conditions on indices (‘a’ > ‘c’ and ‘b’ > ‘d’), we take ‘a’ = 1, ‘b’ = 1, ‘c’ = 0 and ‘d’ = 0 .  So, ‘MAT[a][b]’ = -5 and ‘MAT[c][d]’ = -1 and the value of ‘MAT[a][b]’ - ‘MAT[c][d]’ => (-5) - (-1) = -4 which is maximum among all possible combinations.
+// Sample Input 2:
+// 2
+// 2
+// 1 5 
+// 4 2 
+// 3
+// -1 5 -3
+// -14 -5 -2
+// -7 8 -9
+// Sample Output 2:
+// 1
+// 22
+
+//🔴approach ;
+// #include <bits/stdc++.h> 
+// int findMaxValue(vector<vector<int>>& mat, int n) {
+
+//   vector<vector<int>> temp(mat.size(), vector<int>(mat[0].size(), INT32_MIN));
+
+//     int ans = INT32_MIN;
+//     for(int i = n-2; i>=0; i--){
+//         for(int j = n-2; j>=0; j--){
+//             temp[i][j] = max(mat[i+1][j+1], max(temp[i+1][j+1], max(temp[i+1][j], temp[i][j+1])));
+//             ans = max(ans, temp[i][j]-mat[i][j]);
+//         }
+//     }
+
+//     return ans;
+// }
+//🔸time complexity: O(N^2)
+//🔸space complexity: O(N^2)
