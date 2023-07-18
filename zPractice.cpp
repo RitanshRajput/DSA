@@ -3095,3 +3095,251 @@
 // }
 //🔸time complexity: O(N^2)
 //🔸space complexity: O(N^2)
+
+
+
+//                      //❓Question: Rotate a 2D array/matrix without using extra space
+
+// Given a N x N 2D matrix Arr representing an image. 
+// Rotate the image by 90 degrees (anti-clockwise). 
+// You need to do this in place. Note that if you end up using an additional array, 
+// you will only receive partial score.
+
+// Example 1:
+// Input:
+// N = 3
+// Arr[][] = {{1,  2,  3}
+//            {4,  5,  6}
+//            {7,  8,  9}}
+// Output:
+//  3  6  9 
+//  2  5  8 
+//  1  4  7 
+// Explanation: The given matrix is rotated
+// by 90 degree in anti-clockwise direction.
+
+// Example 2:
+// Input:
+// N = 4
+// Arr[][] = {{1,  2,  3,  4}
+//            {5,  6,  7,  8}
+//            {9, 10, 11, 12}
+//            {13, 14, 15, 16}}
+// Output:
+//  4  8 12 16 
+//  3  7 11 15 
+//  2  6 10 14 
+//  1  5  9 13
+// Explanation: The given matrix is rotated
+// by 90 degree in anti-clockwise direction.
+
+// Expected Time Complexity: O(N*N)
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1 ≤ N ≤ 1000
+// 1 ≤ Arr[i][j] ≤ 1000
+
+//🔴approach: 
+// void rotateMatrix(vector<vector<int>>& arr, int n) {
+	     
+// 	     //🔸first transpose the matrix
+// 	     for(int i=0; i<n; i++) {
+// 	         for(int j=0; j<=i; j++) {
+// 	             swap(arr[i][j], arr[j][i]) ;
+// 	         }
+// 	     }
+	     
+// 	     //🔸now swap lower index row with higher index row value till the condition (lower <= higher)
+// 	     int i=0; 
+// 	     int j= n-1;
+	     
+// 	     while( i <= j) {
+// 	         swap(arr[i], arr[j]) ;
+// 	         i++ ;
+// 	         j-- ;
+// 	     }
+// 	}
+//🔸time complxeity: O(N^N)
+//🔸space complxeity: O(1)
+
+
+
+//                   //❓Question : Kth smallest element in matrix
+
+// Given a N x N matrix, where every row and column is sorted in non-decreasing order. 
+// Find the kth smallest element in the matrix.
+
+// Example 1:
+// Input:
+// N = 4
+// mat[][] =         {{16, 28, 60, 64},
+//                    {22, 41, 63, 91},
+//                    {27, 50, 87, 93},
+//                    {36, 78, 87, 94 }}
+// K = 3
+// Output: 27
+// Explanation: 27 is the 3rd smallest element.
+ 
+
+// Example 2:
+// Input:
+// N = 4
+// mat[][] =     {{10, 20, 30, 40}
+//                    {15, 25, 35, 45}
+//                    {24, 29, 37, 48}
+//                    {32, 33, 39, 50}}
+// K = 7
+// Output: 30
+// Explanation: 30 is the 7th smallest element.
+
+// Expected Time Complexity: O(K*Log(N))
+// Expected Auxiliary Space: O(N)
+
+// Constraints:
+// 1 <= N <= 50
+// 1 <= mat[][] <= 10000
+// 1 <= K <= N*N
+
+//🔴approach 1 :
+ //🔸using vector 
+    // vector<int> temp;
+    
+    // for(int i=0; i<n; i++) {
+    //     for(int j=0; j<n; j++) {
+    //         temp.push_back(mat[i][j]) ;
+    //     }
+    // } 
+    
+    // sort(temp.begin(), temp.end()) ;
+    
+    // return temp[k-1] ;
+ 
+//🔸time complexity: O(N^N logN)
+//🔸space complexity: O(n)   
+
+//🔴approach 2 : Optimised approach
+//🔸using Priority queue
+//     priority_queue<int> pq;
+//    for(int i =0 ;i<n;i++){
+//        for(int j = 0;j<n;j++)
+//        {
+//            if(pq.size()<k)
+//            {
+//                pq.push(mat[i][j]);
+//            }
+//            else if(mat[i][j]<pq.top())
+//            {
+//                pq.pop();
+//                pq.push(mat[i][j]);
+//            }
+//            else
+//            break;
+//        }
+//    }
+   
+//    return pq.top();
+
+//🔸time complexity: O(n^N)
+//🔸space complexity: O(k)
+
+
+
+//                  //❓Question : Common elements in all row in matrix
+
+// Problem Statement
+// You are given a 2-D Matrix 'MAT' having 'N' rows and 'M' columns,
+// respectively. Your task is to find all elements which are present in each
+// row of the matrix.
+// Note :
+//    1. The output array can contain the elements in any particular order.
+//    2. Even if a particular element appears more than once in each matrix row, it
+//    should still be present only once in the output array.
+
+// For Example:
+//    Consider the matrix MAT [ [ 2, 3, 4, 7
+//    ] , [ 0, 0, 3, 5],[1, 3, 8, 9]]
+//    having 3 rows and 4 columns
+//    respectively.
+//    The output array should be [ 3 ] as 3
+//    is the only element that is present in
+//    all three rows.
+
+// Sample Input 1 :
+// 2
+// 3 4
+// 1 4 5 6
+// 3 4 5 6
+// 5 6 7 2
+// 3 2
+// 4 6 
+// 6 4
+// 2 6
+// Sample Output 1 :
+// 5 6
+// 6
+// Explanation For Sample Input 1 :
+// For the first test case : 
+// Elements that are common in the first two rows are 4, 5, and 6.
+//  Out of which only 5 and 6 are present in the third row. 
+//  Therefore the output array is [ 5, 6 ] in this case.
+
+// For the second test case : 
+// We can see that only 6 are present in all three rows. 
+// Therefore the output array is [ 6 ] in this case.
+
+// Sample Input 2 :
+// 2
+// 4 3
+// 1 2 3
+// 2 2 3
+// 2 3 1
+// 2 3 4
+// 3 3
+// 1 2 3
+// 0 6 0
+// 4 6 1
+// Sample Output 2 :
+// 2 3 
+// Explanation For Sample Input 2 :
+// For the first test case : 
+// As elements 2 and 3 are present in all three rows of the matrix. 
+// Therefore the output array is [ 2, 3 ] in this case.
+
+// For the second test case : 
+// There is no such element that is present in all three rows. 
+// Therefore the output array is an empty array in this case.
+
+//🔴approach : using Unordered_map
+
+// vector<int> findCommonElements(vector<vector<int>> &mat)
+// {
+//    int row = mat.size() ;
+//    int col = mat[0].size() ;
+
+//    unordered_map<int, int> mp ;
+//    for(int j=0; j<col; j++) {
+//        mp[mat[0][j]] = 1 ;
+//    }
+
+//    for(int i=1; i<row; i++) {
+//        for(int j=0; j<col; j++) {
+//            if(mp[mat[i][j]] == i) {
+//                mp[mat[i][j]] = i+1 ;
+//            }
+//        }
+//    }
+
+//    vector<int> ans ;
+   
+//    for(auto i:mp) {
+//        if(i.second == row) {
+//            ans.push_back(i.first) ;
+//        }
+//    }
+
+//    return ans ;
+// }
+
+//🔸time complexity: O(row*col)
+//🔸space complexity: O(col)
