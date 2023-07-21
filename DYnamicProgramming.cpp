@@ -4969,4 +4969,195 @@
 //🔸time complexity: O(n)
 //🔸space complexity: O(1)
 
-// 140 / 149
+
+
+//                      //❓Question : 122. Best Time to Buy and Sell Stock II
+
+
+// You are given an integer array prices where prices[i] is the price of a given stock on the ith day.
+// On each day, you may decide to buy and/or sell the stock. 
+// You can only hold at most one share of the stock at any time. 
+// However, you can buy it then immediately sell it on the same day.
+
+// Find and return the maximum profit you can achieve.
+
+
+// Example 1:
+// Input: prices = [7,1,5,3,6,4]
+// Output: 7
+// Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.
+// Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.
+// Total profit is 4 + 3 = 7.
+
+// Example 2:
+// Input: prices = [1,2,3,4,5]
+// Output: 4
+// Explanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.
+// Total profit is 4.
+
+// Example 3:
+// Input: prices = [7,6,4,3,1]
+// Output: 0
+// Explanation: There is no way to make a positive profit, so we never buy the stock to achieve the maximum profit of 0.
+ 
+// Constraints:
+// 1 <= prices.length <= 3 * 104
+// 0 <= prices[i] <= 104
+
+// //🔴approach : Recursion
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// int solve(int index, int buy, vector<int>& prices) {
+//     //base case
+//     if(index == prices.size()) {
+//         return 0;
+//     }
+
+//     int profit = 0;
+
+//     if(buy) {
+//         int buykaro = -prices[index] + solve(index+1, 0, prices);
+//         int skipkaro = 0 + solve(index+1, 1, prices);
+//         profit = max(buykaro, skipkaro);
+//     }
+//     else{
+//         int sellkaro = +prices[index] + solve(index+1, 1, prices) ;
+//         int skipkaro = 0 + solve(index+1, 0, prices) ;
+//         profit = max(sellkaro, skipkaro) ;
+//     }
+
+//     return profit ;
+// }
+
+// int maxProfit(vector<int>& prices) {
+//     return solve(0, 1, prices);
+// }
+// //🔸time complexity: expo
+// //🔸space complexity: O(n)
+
+
+// //🔴approach : Recursion + memoization
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// int solve(int index, int buy, vector<int>& prices, vector<vector<int>>& dp) {
+//     //base case
+//     if(index == prices.size()) {
+//         return 0;
+//     }
+
+//     if(dp[index][buy] != -1){
+//         return dp[index][buy] ;
+//     }
+//     int profit = 0;
+
+//     if(buy) {
+//         int buykaro = -prices[index] + solve(index+1, 0, prices, dp);
+//         int skipkaro = 0 + solve(index+1, 1, prices, dp);
+//         profit = max(buykaro, skipkaro);
+//     }
+//     else{
+//         int sellkaro = +prices[index] + solve(index+1, 1, prices, dp) ;
+//         int skipkaro = 0 + solve(index+1, 0, prices, dp) ;
+//         profit = max(sellkaro, skipkaro) ;
+//     }
+
+//     return dp[index][buy] =  profit ;
+// }
+
+// int maxProfit(vector<int>& prices) {
+
+//     int n = prices.size() ;
+//     vector<vector<int>> dp(n, vector<int>(2, -1)) ;
+//     return solve(0, 1, prices, dp);
+// }
+// //🔸time complexity: O(n)
+// //🔸space complexity: O(n)
+
+
+// //🔴approach : Tabulation
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// int solve( vector<int>& prices) {
+//     int n = prices.size() ;
+//     vector<vector<int>> dp(n+1, vector<int>(2, 0)) ;
+
+//     for(int index = n-1; index >= 0; index--){
+//         for(int buy = 0; buy <= 1; buy++) {
+      
+//             int profit = 0;
+
+//             if(buy) {
+//                 int buykaro = -prices[index] + dp[index+1][0];
+//                 int skipkaro = 0 + dp[index+1][1];
+//                 profit = max(buykaro, skipkaro);
+//             }
+//             else{
+//                 int sellkaro = +prices[index] + dp[index+1][1] ;
+//                 int skipkaro = 0 + dp[index+1][0] ;
+//                 profit = max(sellkaro, skipkaro) ;
+//             }
+
+//             dp[index][buy] = profit ;
+//         }
+//     }
+
+//     return dp[0][1] ;
+// }
+
+// int maxProfit(vector<int>& prices) {
+
+//     return solve(prices);
+// }
+// //🔸time complexity: O(n)            // index = 0 - n, buy = 0/1
+// //🔸space complexity: O(n^2)
+
+
+
+//🔴approach : space optimisation
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// int solve( vector<int>& prices) {
+
+//     int n = prices.size() ;
+//     vector<int> curr(2, 0) ;
+//     vector<int> next(2, 0) ;
+
+
+//     for(int index = n-1; index >= 0; index--){
+//         for(int buy = 0; buy <= 1; buy++) {
+      
+//             int profit = 0;
+
+//             if(buy) {
+//                 int buykaro = -prices[index] + next[0];
+//                 int skipkaro = 0 + next[1];
+//                 profit = max(buykaro, skipkaro);
+//             }
+//             else{
+//                 int sellkaro = +prices[index] + next[1] ;
+//                 int skipkaro = 0 + next[0] ;
+//                 profit = max(sellkaro, skipkaro) ;
+//             }
+
+//             curr[buy] = profit ;
+//         }
+//         next = curr ;
+//     }
+
+//     return next[1] ;
+// }
+
+// int maxProfit(vector<int>& prices) {
+
+//     return solve(prices);
+// }
+//🔸time complexity: O(n)
+//🔸space complexity: O(1)
