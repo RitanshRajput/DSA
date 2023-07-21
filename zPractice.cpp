@@ -13,13 +13,17 @@
 //     while(start<=end) {
 //         // swap(arr[start], arr[end]) ;          //using in build swap function
 
-//         // temp = arr[start] ;                      // using functional swapping
+//         // temp = arr[start] ;                   // using functional swapping
 //         // arr[start] = arr[end] ;
 //         // arr[end] = temp ;
 
 //         start++ ;
 //         end-- ;
 //     }
+
+//    void reverse(int arr[], int size) {           // USing build-in Reverse() function 
+//        reverse(arr, arr+size) ;
+//    }
 
 //     //print reverse array ;
 //     for(int i=0; i<size; i++) {
@@ -138,6 +142,28 @@
 // int ans = findK(arr, s, e, k) ;
 // cout<< " kth smallest element : "<<ans <<endl ;
 // }
+
+//🔸another approach : using priority_queue  (max-heap) by default
+// arr : given array
+// l : starting index of the array i.e 0
+// r : ending index of the array i.e size-1
+// k : find kth smallest element and return using this function
+
+//  int kthSmallest(int arr[], int l, int r, int k) {
+//         priority_queue<int> pq;
+//         for(int i = 0 ; i <k ; i++){
+//             pq.push(arr[i]);
+//         }
+//         for(int i = k ; i <= r ; i++ ){
+//             if(arr[i] < pq.top() ){
+//                 pq.pop();
+//                 pq.push(arr[i]);
+//             }
+//         }
+//         int ans = pq.top();
+//         return ans;
+//     }
+// };
 
 
 //                             //❓sort 0s 1s 2s
@@ -675,7 +701,7 @@
 
 // 🔸 Note:
 //  It is compulsory to increase or decrease the height by K for each tower.
-// After the operation, the resultant array should not contain any negative integers.
+// 🔴After the operation, the resultant array should not contain any negative integers.
 
 // Example 1:
 // Input:
@@ -895,6 +921,28 @@
 // 🔸time complexity: O(nLog N)               //sort stl= o(nlog n),  for loop = o(n)
 // 🔸space complexity: O(n*m)
 
+
+
+//🔸approach 2: strivers approach 
+//   vector<vector<int>> merge(vector<vector<int>>& intervals) {
+//      int n = intervals.size() ;
+//      sort(intervals.begin(), intervals.end()) ;
+//      vector<vector<int>> ans  ;
+
+//      for(int i=0; i<n; i++) {
+//          if( ans.empty() || intervals[i][0] > ans.back()[1]) {
+//              ans.push_back(intervals[i]) ;
+//          }
+//          else{
+//              ans.back()[1] = max(ans.back()[1], intervals[i][1]) ;
+//          }
+//      
+//        return ans ;
+// } 
+//🔸time complexity: O( N Log(N) + N)
+//🔸space complexity: O( N)
+
+
 //                          //❓Question: 31. Next Permutation
 
 // A permutation of an array of integers is an arrangement of its members into a sequence or linear order.
@@ -957,6 +1005,58 @@
 //       }
 // }
 // 🔸time complexity: O(N)
+// 🔸space complexity: O(1)
+
+
+//🔴 approach: 2  inbuild stl
+//  void nextPermutation(vector<int>& nums) {
+//    next_permutation(nums.begin(), nums.end()) ;
+//   return nums;
+// }
+
+//🔸The next_permutation() function takes O(N) time to find the next permutation
+//🔸time complexity : O(N)
+//🔸space complexity: O(1)
+
+
+//🔴 approach: 3  strivers approach
+//  void nextPermutation(vector<int>& A) {
+//     int n = A.size(); // size of the array.
+
+//     // Step 1: Find the break point:
+//     int ind = -1; // break point
+//     for (int i = n - 2; i >= 0; i--) {
+//         if (A[i] < A[i + 1]) {
+//             // index i is the break point
+//             ind = i;
+//             break;
+//         }
+//     }
+
+//     // If break point does not exist:
+//     if (ind == -1) {
+//         // reverse the whole array:
+//         reverse(A.begin(), A.end());
+//         return A;
+//     }
+
+//     // Step 2: Find the next greater element
+//     //         and swap it with arr[ind]:
+
+//     for (int i = n - 1; i > ind; i--) {
+//         if (A[i] > A[ind]) {
+//             swap(A[i], A[ind]);
+//             break;
+//         }
+//     }
+
+//     // Step 3: reverse the right half:
+//     reverse(A.begin() + ind + 1, A.end());
+
+//     return A;
+// }
+
+// 🔸time complexity : O(3N)
 // 🔸space complexity: O(1)
 
 
@@ -3345,3 +3445,167 @@
 //🔸space complexity: O(col)
 
 
+
+
+//                    //🔘🔘 STRINGS 🔘🔘 //
+
+
+//                  //❓Question : 344 Reverse string
+
+// Write a function that reverses a string. 
+// The input string is given as an array of characters s.
+
+// You must do this by modifying the input array in-place with O(1) extra memory.
+
+
+// Example 1:
+// Input: s = ["h","e","l","l","o"]
+// Output: ["o","l","l","e","h"]
+
+// Example 2:
+// Input: s = ["H","a","n","n","a","h"]
+// Output: ["h","a","n","n","a","H"]
+ 
+// Constraints:
+// 1 <= s.length <= 105
+// s[i] is a printable ascii character.
+
+// void reverseString(vector<char>& s) 
+//     {   //🔸 approach 1 : using STL
+//         // reverse(s.begin(), s.end()) ;
+
+//         //🔸approach 2: by swapping
+//         // int st = 0 ;
+//         // int ed = s.size()-1;
+//         // while( st<=ed ){
+//         //     swap(s[st++], s[ed--]) ;
+//         // }
+
+//     }
+//🔸time complexity: O(n)            //reverse stl   / swapping
+//🔸space complexity: O(1)           //reverse stl   / swapping
+
+
+
+//                   // ❓ Question : Palindrome String
+
+// Given a string S, check if it is palindrome or not.
+
+// Example 1:
+// Input: S = "abba"
+// Output: 1
+// Explanation: S is a palindrome
+
+// Example 2:
+// Input: S = "abc" 
+// Output: 0
+// Explanation: S is not a palindrome
+ 
+// Constraints:
+// 1 <= Length of S<= 105
+
+//🔴approach : 1
+// int isPalindrome(string S)
+// 	{
+// 	    int start =  0;
+// 	    int end = S.size() - 1;
+	    
+// 	    while( start <= end) {
+// 	        if(S[start] != S[end]) {
+// 	            return 0;
+// 	        }
+// 	        start++ ;
+// 	        end-- ;
+// 	    }
+// 	    return 1;
+// 	}
+//🔸time complexity: O(N)
+//🔸space complexity: O(1)
+
+
+
+//                   //❓Question : Duplicates in a string
+
+// find all the duplicates in a string
+
+//example 1:
+// S = "abcdeafgc"
+// input:  2
+
+//example 2:
+// S = "abcdefg"
+// input:  0
+
+//🔸approach : brute force
+// #include<iostream>
+// #include<algorithm>
+// using namespace std;
+
+// void duplicates(string& s) {
+//     int len = s.size() ;
+//     sort(s.begin(), s.end()) ;
+
+//     for(int i=0; i<len; i++) {
+
+//         int count = 1 ;
+
+//         while(i < len-1 && s[i] == s[i+1]) {
+//             count++ ;
+//             i++ ;
+//         }
+
+//         if(count > 1) {
+//             cout<< s[i] << " count = "<< count <<endl;
+//         }
+//     }
+
+// }
+//🔸time complexity: O(N Log(N))
+//🔸space complexity: O(1)
+
+//🔸approach : optimised way using unordered_map
+// #include<iostream>
+// #include<unordered_map>
+// using namespace std;
+
+// void duplicates(string& S) {
+//     unordered_map<char ,int> mp ;
+
+//     for(int i=0; i<S.size(); i++) {
+//         mp[S[i]]++ ;
+//     }
+
+//     for(auto i:mp) {
+//         if(i.second > 1){
+//             cout<< i.first << " == "<< i.second <<endl ;
+//         }
+//     }
+// }
+
+// int main() {
+    
+//     string s = "meranamhai bulla" ;
+//     duplicates(s) ;
+
+//     return  0;
+// }
+//🔸time complexity = O(n) 
+//🔸space complexity = O(n)        // no. of character
+
+
+
+//                //❓Question : WHy is String are immutable in JAVA
+
+// String is immutable in Java because this offers several benefits: 
+// String pool is possible because String is immutable in Java. 
+// It increases security because any hacker can't change its value and
+//  it's used for storing sensitive information such as a database username or password.
+
+//🔸what is string pool ❓ 
+
+// String pool is nothing but a storage area in Java heap where string literals stores. 
+// It is also known as String Intern Pool or String Constant Pool.
+//  It is just like object allocation. By default, 
+//  it is empty and privately maintained by the Java String class. 
+//  Whenever we create a string the string object occupies some space in the heap memory.
+//   Creating a number of strings may increase the cost and memory too which may reduce the performance also
