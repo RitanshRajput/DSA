@@ -3609,3 +3609,192 @@
 //  it is empty and privately maintained by the Java String class. 
 //  Whenever we create a string the string object occupies some space in the heap memory.
 //   Creating a number of strings may increase the cost and memory too which may reduce the performance also
+
+
+
+
+//                   //❓Question : Check if one string is rotation of another or not
+
+// You are given two Strings 'P'and 'Q'of equal length. Your task is to return 1 if String
+//  'P' can be converted into String 'Q' by cyclically rotating it to the right any number of
+// times ( Possibly Zero ). else return 0.
+
+//  A cyclic rotation to the right on String 'A' consists of taking String 'A' and moving the
+//  rightmost character to the leftmost position. For example, if 'A' = "pqrst", then it will
+//  be "tpqrs" after one cyclic rotation on 'A'.
+
+// For Example:
+//    Consider the two strings 'P' - "abfyg" and 'Q' = "gabfy"
+//    If we cyclically rotate String 'P' to the right once. The resulting
+//    string P becomes "gabfy" which is equal to String 'Q'.
+//    Therefore it is possible to convert String 'P' to String 'Q'.
+
+
+// Sample Input 1:
+// abac
+// baca
+// Sample Output 1:
+// 1
+// Explanation For Sample Input 1:
+// Let's try rotating the String 'P' to the right and try all the possible rotations:
+// 1) If we rotate "abac" to the right, the resulting string becomes "caba".
+// 2) If we rotate "caba" to the right, the resulting string becomes "acab".
+// 3) If we rotate "acab" to the right, the resulting string becomes "baca" 
+//    which is equal to String 'Q'.
+// Therefore it is possible to convert String 'P' to String 'Q'. Hence, we will return 1 in this case.
+
+// Sample Input 2:
+// aabca
+// bacaa
+// Sample Output 2:
+// 0
+
+// Constraints:
+// 1 <= |P| , |Q| <= 10^5
+// |P| = |Q|
+// String 'P' and 'Q' have the same length and contain only lowercase English letters.
+
+// Time Limit: 1 sec
+// Follow Up:
+// Can you solve this in O(N) time?
+
+//🔴approach : Brute force appraoch  // TLE
+
+// int isCyclicRotation(string &p, string &q) 
+// {
+//     int psize = p.size() ;
+//     int qsize = q.size() ;
+
+//     for(int i=0; i<psize; i++) {
+//         int temp = p[psize-1] ;
+
+//         for(int j=psize-1; j>=1; j--) {
+//             p[j] = p[j-1] ;
+//         }
+
+//         p[0] = temp ;
+
+//         int k = 0 ;
+//         int l = 0 ;
+//         int count = 0 ;
+//         while( k < psize && l < qsize){
+//             if(p[k] == q[l]) {
+//                 count++ ;
+//                 k++ ;
+//                 l++ ;
+//             }
+//             else{
+//                 break ;
+//             }
+
+//             if(count == qsize-1) {
+//                 return 1;
+//             }
+//         }
+       
+//     }
+
+//     return 0;
+// }
+//🔸time complexity : O(N^3)       //  O(N*N*2N)
+//🔸space complexity :  O(1) 
+
+//🔴approach : Optimised approach using vector
+// int isCyclicRotation(string &p, string &q) 
+// {
+//     vector<char>a;    
+//     vector<char>b;    
+    
+//     for(int i=0;i<p.size();i++){   
+//         a.push_back(p[i]);       
+//         b.push_back(q[i]);    
+//     }   
+    
+//      if(a==b) return 1;    
+     
+//      for(int i=0;i<a.size();i++){
+//         b.push_back(b[0]);        
+//         b.erase(b.begin());        
+        
+//         if(a==b)  return 1;    
+//     }   
+    
+//     return 0; 
+// }
+//🔸time complexity : O(N)              // O(N+N)
+//🔸space complexity :  O(N)            // O(N+N) 
+
+
+
+//                 //❓Question : Check if a string is a valid shuffle of two distinct strings
+
+// Given two strings str1 and str2, and a third-string shuffle, 
+// determine if shuffle is a valid shuffle of str1 and str2, 
+// where a valid shuffle contains all characters from str1 and str2 occurring the same number of times,
+//  regardless of order. Print “YES” if valid, and “NO” otherwise.
+
+// Examples: 
+
+// Input: str1 = BA, str2 = XY, shuffle = XYAB 
+// Output: YES
+
+// Input: str1 = BA, str2 = XY, shuffle = XUMB 
+// Output: NO
+
+// Input: str1 = ABC, str2 = ZYS, shuffle = YBAZSC 
+// Output:YES
+
+//🔴approach : Brute force approach 
+// #include<iostream>
+// using namespace std;
+
+// string validshuffle(string& a, string& b, string& shuffle) {
+//     int asize = a.size() ;
+//     int bsize = b.size() ;
+//     int shsize = shuffle.size() ;
+
+//     if( (asize + bsize) != shsize) {
+//         return "NO" ;
+//     }
+
+//     for(int i=0; i<asize; i++) {
+//         int count = 0 ;
+//         for(int j=0; j<shsize; j++) {
+//             if(a[i] == shuffle[j]) {
+//                 count++ ;
+//                 break ;
+//             }
+//         }
+//         if(count != 1) {
+//             return "NO" ;
+//         }
+//     }
+
+//     for(int i=0; i<bsize; i++) {
+//         int count = 0 ;
+//         for(int j=0; j<shsize; j++) {
+//             if(b[i] == shuffle[j]) {
+//                 count++ ;
+//                 break ;
+//             }
+//         }
+//         if(count != 1) {
+//             return "NO" ;
+//         }
+//     }
+
+//     return "YES" ;
+// }
+//🔸time complexity : O(N^2)              //O(N^2 + N^2)
+//🔸space complexity: O(1)
+
+// int main() {
+//     string a = "BA" ;
+//     string b = "XY" ;
+//     string shuffle = "XYAB" ;
+
+//     bool result = validshuffle(a, b, shuffle) ;
+//     cout<<" answer : "<<result <<endl ;
+
+//     return 0 ;
+// }
