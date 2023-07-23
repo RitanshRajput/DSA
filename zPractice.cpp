@@ -3798,3 +3798,266 @@
 
 //     return 0 ;
 // }
+
+
+
+//                     //❓Question : 38. Count and Say
+
+// The count-and-say sequence is a sequence of digit strings defined by the recursive formula:
+
+// countAndSay(1) = "1"
+// countAndSay(n) is the way you would "say" the digit string from countAndSay(n-1), 
+// which is then converted into a different digit string.
+// To determine how you "say" a digit string, split it into the minimal number of substrings such that each substring 
+// contains exactly one unique digit. Then for each substring, say the number of digits, then say the digit.
+// Finally, concatenate every said digit.
+
+// For example, the saying and conversion for digit string "3322251":
+
+//              "3322251"
+//    tw0 3's, three 2's, One 5, and one 1
+//          2 3 + 3 2 + 1 5 + 1 1
+//              "23321511"
+
+// Given a positive integer n, return the nth term of the count-and-say sequence.
+
+// Example 1:
+
+// Input: n = 1
+// Output: "1"
+// Explanation: This is the base case.
+
+// Example 2:
+// Input: n = 4
+// Output: "1211"
+// Explanation:
+// countAndSay(1) = "1"
+// countAndSay(2) = say "1" = one 1 = "11"
+// countAndSay(3) = say "11" = two 1's = "21"
+// countAndSay(4) = say "21" = one 2 + one 1 = "12" + "11" = "1211"
+ 
+// Constraints:
+// 1 <= n <= 30
+
+//🔴approch : 
+// 1  = 1
+// 2  = 11
+// 3  = 21
+// 4  = 1211
+// 5  = 111221
+// 6  = 312211
+// 7  = 13112221
+// ...
+
+//  string countAndSay(int n) {
+//         if( n == 1) return "1" ;
+//         if( n == 2) return "11" ;
+
+//         string s = "11" ;
+
+//         for(int i=3; i<=n; i++) {
+//             string t = "" ;
+//             s = s + "&" ;
+//             int count = 1;
+
+//             for(int j=1; j<s.length(); j++) {
+//                 if( s[j] != s[j-1] ){
+//                     t = t + to_string(count) ;
+//                     t = t + s[j-1] ;
+//                     count = 1;
+//                 }
+//                 else{
+//                     count++ ;
+//                 }
+//             }
+//             s = t ;
+//         }
+//         return s ;
+//     }
+  
+//🔸time complexity :  O(N^2)
+//🔸space complexity : O(N)
+
+
+
+//                    //❓Question : Longest Palindrome in a string
+
+// Given a string S, find the longest palindromic substring in S. 
+// Substring of string S: S[ i . . . . j ] where 0 ≤ i ≤ j < len(S). 
+// Palindrome string: A string that reads the same backward. 
+// More formally, S is a palindrome if reverse(S) = S. In case of conflict, 
+// return the substring which occurs first ( with the least starting index).
+
+// Example 1:
+// Input:
+// S = "aaaabbaa"
+// Output: aabbaa
+// Explanation: The longest Palindromic
+// substring is "aabbaa".
+
+// Example 2:
+// Input: 
+// S = "abc"
+// Output: a
+// Explanation: "a", "b" and "c" are the 
+// longest palindromes with same length.
+// The result is the one with the least
+// starting index.
+
+// Constraints:
+// 1 ≤ |S| ≤ 103
+
+// //🔴approach : 
+//    string longestPalin (string S) {
+        
+//         string ans="";
+//         int n=S.size();
+        
+//         int maxl=0;
+//         int l=0;
+//         int r=0;
+//         for(int i=0; i<n; i++){
+//             //if longest substring palindrome is of  odd lemgth
+//             int left=i;
+//             int right=i;
+//             while(left>=0&&right<=(n-1)&&S[left]==S[right]){
+//                   left--;
+//                   right++; 
+//             }
+//             if(right-left+1>maxl){
+//                 maxl=right-left+1;
+//                 l=left+1;
+//                 r=right-1;
+//             }
+            
+//             //if longest substring palindrome is of  even lemgth
+//             left=i;
+//             right=i+1;
+//             while(left>=0&&right<=n-1&&S[left]==S[right]){
+//                 left--;
+//                 right++;
+//             }
+//             if(right-left+1>2&&right-left+1>maxl){
+//                 maxl=right-left+1;
+//                 l=left+1;
+//                 r=right-1;
+//             }
+//         }
+        
+//         for(int i=l; i<=r; i++){
+//             ans=ans+S[i];
+//         }
+//         return ans;
+//     }
+//🔸time complexity :  O(N*2N)
+//🔸space complexity : O(N)
+
+
+
+//                 //❓Question : Longest Repeating subsequence
+
+// Given string str, find the length of the longest repeating subsequence such that it can be 
+// found twice in the given string.
+
+// The two identified subsequences A and B can use the same ith character from string str 
+// if and only if that ith character has different indices in A and B. 
+// For example, A = "xax" and B = "xax" then the index of first "x" must be different in 
+// the original string for A and B.
+
+// Example 1:
+// Input:
+// str = "axxzxy"
+// Output: 2
+// Explanation:
+// The given array with indexes looks like
+// a x x z x y 
+// 0 1 2 3 4 5
+
+// The longest subsequence is "xx". 
+// It appears twice as explained below.
+
+// subsequence A
+// x x
+// 0 1  <-- index of subsequence A
+// ------
+// 1 2  <-- index of str 
+
+
+// subsequence B
+// x x
+// 0 1  <-- index of subsequence B
+// ------
+// 2 4  <-- index of str 
+
+// We are able to use character 'x' 
+// (at index 2 in str) in both subsequences
+// as it appears on index 1 in subsequence A 
+// and index 0 in subsequence B.
+
+
+// Example 2:
+
+// Input:
+// str = "axxxy"
+// Output: 2
+// Explanation:
+// The given array with indexes looks like
+// a x x x y 
+// 0 1 2 3 4
+
+// The longest subsequence is "xx". 
+// It appears twice as explained below.
+
+// subsequence A
+// x x
+// 0 1  <-- index of subsequence A
+// ------
+// 1 2  <-- index of str 
+
+
+// subsequence B
+// x x
+// 0 1  <-- index of subsequence B
+// ------
+// 2 3  <-- index of str 
+
+// We are able to use character 'x' 
+// (at index 2 in str) in both subsequences
+// as it appears on index 1 in subsequence A 
+// and index 0 in subsequence B.
+
+// Expected Time Complexity: O(n2)
+// Expected Space Complexity: O(n2)
+
+
+// Constraints:
+// 1 <= |str| <= 103
+
+//🔴approach :
+// int LongestRepeatingSubsequence(string str){
+		    
+// 		    int n = str.length() ;
+// 		    int mat[n+1][n+1] ;
+		    
+// 		    for(int i=0; i<=n; i++) {
+// 		        for(int j=0; j<=n; j++) {
+// 		            mat[i][j] = 0 ;
+// 		        }
+// 		    }
+		    
+// 	        for(int i=1; i<=n; i++) {
+// 	            for(int j=1; j<=n; j++) {
+	                
+// 	                if(str[i-1] == str[j-1] && i != j) {
+// 	                    mat[i][j] = 1 + mat[i-1][j-1] ;
+// 	                }
+// 	                else{
+// 	                    mat[i][j] = max(mat[i][j-1], mat[i-1][j]) ;
+// 	                }
+// 	            }
+// 	        }	    
+	        
+// 	        return mat[n][n] ;
+// 	}
+// 🔸 Time Complexity: O(n^2 )
+// 🔸 Space Complexity: O(n^2)
