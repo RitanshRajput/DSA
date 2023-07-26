@@ -4173,3 +4173,155 @@
 // 	}
 //🔸time complexity:  O(N! * n)
 //🔸space compplexity: O(N! * N!)
+
+
+
+
+//                 //❓Question : Split the binary string into substrings with equal number of 0s and 1s
+
+// Given a binary string str of length N, the task is to find the maximum count of consecutive 
+// substrings str can be divided into such that all the substrings are balanced 
+// i.e. they have equal number of 0s and 1s. If it is not possible to split str satisfying 
+// the conditions then print -1.
+
+// Example: 
+// Input: str = “0100110101” 
+// Output: 4
+// The required substrings are “01”, “0011”, “01” and “01”.
+
+// Input: str = “0111100010” 
+// Output: 3 
+
+// Input: str = “0000000000” 
+// Output: -1
+
+
+//🔴approach: 
+// #include<iostream>
+// using namespace std;
+// int maxSubStr(string str){
+     
+//     int count0=0;
+//     int count1=0;
+//     int ans=0;
+       
+//     for(int i=0;i<str.length();i++){
+           
+//         if(str[i]=='0'){
+//             count0++;
+//         }
+//         //   cout<< "count0 = "<< count0 << endl ;
+           
+//         if(str[i]=='1'){
+//             count1++;
+//         }
+//         //   cout<< "count1 = "<< count1 << endl ;
+           
+//         if(count0==count1){
+//             ans++;
+//         }
+//         //   cout<< "ans = "<< ans << endl ;
+//     }
+       
+//        if(ans==0 || count1!=count0){
+//            return -1;
+//        }
+       
+//        return ans;
+// }
+//🔸time complexity : O(n)
+//🔸space complexity : O(1)
+
+
+
+//                      //❓Question: Word Wrap
+
+// Given an array nums[] of size n, where nums[i] denotes the number of characters in one word. 
+// Let K be the limit on the number of characters that can be put in one line (line width).
+// Put line breaks in the given sequence such that the lines are printed neatly.
+// Assume that the length of each word is smaller than the line width. 
+// When line breaks are inserted there is a possibility that extra spaces are present in each line. 
+// The extra spaces include spaces put at the end of every line except the last one. 
+
+// You have to minimize the following total cost where total cost = Sum of cost of all lines, 
+// where cost of line is = (Number of extra spaces in the line)2.
+
+// Example 1:
+// Input: nums = {3,2,2,5}, k = 6
+// Output: 10
+// Explanation: Given a line can have 6
+// characters,
+// Line number 1: From word no. 1 to 1
+// Line number 2: From word no. 2 to 3
+// Line number 3: From word no. 4 to 4
+// So total cost = (6-3)2 + (6-2-2-1)2 = 32+12 = 10.
+// As in the first line word length = 3 thus
+// extra spaces = 6 - 3 = 3 and in the second line
+// there are two word of length 2 and there already
+// 1 space between two word thus extra spaces
+// = 6 - 2 -2 -1 = 1. As mentioned in the problem
+// description there will be no extra spaces in
+// the last line. Placing first and second word
+// in first line and third word on second line
+// would take a cost of 02 + 42 = 16 (zero spaces
+// on first line and 6-2 = 4 spaces on second),
+// which isn't the minimum possible cost.
+
+// Example 2:
+// Input: nums = {3,2,2}, k = 4
+// Output: 5
+// Explanation: Given a line can have 4 
+// characters,
+// Line number 1: From word no. 1 to 1
+// Line number 2: From word no. 2 to 2
+// Line number 3: From word no. 3 to 3
+// Same explaination as above total cost
+// = (4 - 3)2 + (4 - 2)2 = 5.
+
+// Expected Time Complexity: O(n2)
+// Expected Space Complexity: O(n)
+ 
+// Constraints:
+// 1 ≤ n ≤ 500
+// 1 ≤ nums[i] ≤ 1000
+// max(nums[i]) ≤ k ≤ 2000
+
+//🔴 approch: DP
+
+//  int dp[501][2001];
+    
+ 
+//     int helper(int ind,int curr,vector <int> &nums,int k)
+//     {
+//         if(ind == nums.size())
+//         {
+//             return 0;
+//         }
+        
+//         if(dp[ind][curr] != -1)
+//             return dp[ind][curr];
+        
+//         int pick = INT_MAX;
+        
+//         if(nums[ind] <= curr)
+//         {
+//             // ie we found some minimum
+//             pick = helper(ind+1,curr-nums[ind]-1,nums,k);
+//         }
+        
+//         int notPick = (curr+1)*(curr+1)+ helper(ind+1,k-nums[ind]-1,nums,k);
+        
+//         return dp[ind][curr] = min(pick,notPick);
+//     }
+//     int solveWordWrap(vector<int>nums, int k) 
+//     { 
+//         // Code here
+//             // Code here
+//        // vector<vector<int>>dp(1001,vector<int>(1001,-1));
+//         memset(dp,-1,sizeof(dp));
+//         return helper(0,k,nums,k);
+//     }
+//🔸time complexity : O(N^N)
+//🔸space complexity :O(N^N)
+
+
