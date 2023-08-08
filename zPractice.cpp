@@ -287,7 +287,7 @@
 //     return 0;
 // }
 
-// 🔸 approach 2 brute force but no TLE works fine :
+// 🔸 approach 2  :
 //  #include<iostream>
 //  #include<vector>
 //  using namespace std;
@@ -303,6 +303,7 @@
 // // here in vector t we have already define all element as 0;
 // // so we say if on index i  the element is 0 then make it 1 and increaase the count
 //         for(int i=0;i<n;i++){
+
 //             if(t[a[i]]==0){
 //                 t[a[i]]=1;
 //                 count++;
@@ -358,6 +359,7 @@
 
 // };
 
+
 //                         //❓Intersection of two array
 
 // Input:
@@ -371,37 +373,29 @@
 // 89 is the only element
 // in the intersection of two arrays.
 
-// 🔸Appraoch 1: but not passing all test cases 50/90
-// after 50 testcases its showing wrong answer
+// 🔸Appraoch 1: 
 // #include<iostream>
 // #include<vector>
 // using namespace std;
 
 // int intersection(int a[], int n, int b[], int m){
-//         int count = 0;
-//         int total = (n)+(m) ;
-//         cout<<"total :"<<total <<endl ;
-//         vector<int> t(100001, 0) ;
+//           vector<int> ans(100001, 0) ;
+//           int count = 0 ;
 
-//         for(int i=0; i<n; i++){
-//             if(t[a[i]] == 0) {
-//                 t[a[i]] = 1;
-//                 count++ ;
-//             }
-//         }
+//           for(int i=0; i<n; i++) {
+//               if(ans[a[i]] == 0){
+//                   ans[a[i]] = 1;
+//               }
+//           }
 
-//         for(int j=0 ; j <m; j++){
-//             if(t[b[j]] != 0){
-//                 count++ ;
-//             }
-//         }
-//         cout<<"count :"<<count <<endl ;
+//           for(int j=0; j<m; j++){
+//               if(ans[b[j]] == 1) {
+//                   ans[b[j]] += 1 ;
+//                   count++ ;
+//               }
+//           }
 
-//         long Final = total - count ;
-//         cout<<"final :"<<Final <<endl ;
-
-//         return Final ;
-
+//      return count ;
 //     }
 
 // int main() {
@@ -417,6 +411,8 @@
 
 //     return 0;
 // }
+//🔸time complexity: O(N+M)
+//🔸space complexity: O(N+M)
 
 // 🔸Approach 2 : Optimised
 //  #include<iostream>
@@ -473,6 +469,7 @@
 // input: [1,2,3,4,5]
 // output: [5,1,2,3,4]
 
+//🔸approach :
 // #include<iostream>
 // using namespace std;
 
@@ -511,6 +508,7 @@
 //     return 0;
 // }
 
+
 //                      //❓❓ Find (Max sum of contigous sub-array)
 
 // Given an array Arr[] of N integers. Find the contiguous sub-array(containing at least one number)
@@ -539,7 +537,7 @@
 // Max subarray sum is -1
 // of element (-1)
 
-// 🔸Brute force approach (TLE) O(n^2) time complexity
+// 🔸approach : Brute force approach (TLE) O(n^2) time complexity
 //  #include<iostream>
 //  #include<limits.h>
 //  using namespace std;
@@ -619,6 +617,7 @@
 //     return 0;
 // }
 
+
 //                         //❓ Minimize the heights I
 
 // Given an array arr[] denoting heights of N towers and a positive integer K,
@@ -691,6 +690,8 @@
 //     cout<<answer <<endl ;
 // }
 
+
+
 //                   //❓ Minimize the heights II
 
 // Given an array arr[] denoting heights of N towers and a positive integer K.
@@ -729,6 +730,7 @@
 // {6, 12, 9, 13, 17}. The difference between
 // the largest and the smallest is 17-6 = 11.
 
+//🔸approach : 
 // #include<iostream>
 // #include<algorithm>
 // using namespace std;
@@ -765,6 +767,7 @@
 
 //     return 0;
 // }
+
 
 //                     ❓ Minimum number of jumps
 
@@ -1232,6 +1235,8 @@
 //     return maxi ;
 //   }
 
+
+
 //               //❓Question: Count pairs with given sum
 
 // Given an array of N integers, and an integer K,
@@ -1466,7 +1471,7 @@
 // using namespace std;
 //  bool subArrayExists(int arr[], int n)
 //     {
-    //4 2 -3 1 6
+          //4 2 -3 1 6
 //         unordered_map<int, bool> m;
 //         m[0] = true;
 
@@ -1641,7 +1646,7 @@
 // 🔸code :
 //   int findLongestConseqSubseq(int arr[], int n)
 //      {
-//      sort(arr,arr+n);
+//        sort(arr,arr+n);
 //        int temp = arr[0] ;
 //        int count = 1;
 //        int maxCount =1 ;
@@ -4325,3 +4330,247 @@
 //🔸space complexity :O(N^N)
 
 
+
+//               ❓❓ Question: Edit Distance
+
+// Given two strings s and t. Return the minimum number of operations required to convert s to t.
+// The possible operations are permitted:
+
+// Insert a character at any position of the string.
+// Remove any character from the string.
+// Replace any character from the string with any other character.
+ 
+
+// Example 1:
+// Input: 
+// s = "geek", t = "gesek"
+// Output: 1
+// Explanation: One operation is required 
+// inserting 's' between two 'e's of s.
+
+// Example 2:
+// Input : 
+// s = "gfg", t = "gfg"
+// Output: 
+// 0
+// Explanation: Both strings are same.
+ 
+// Your Task:
+// You don't need to read or print anything. Your task is to complete the function editDistance() which takes strings s and t as input parameters and returns the minimum number of operation to convert the string s to string t. 
+
+// Expected Time Complexity: O(|s|*|t|)
+// Expected Space Complexity: O(|s|*|t|)
+
+// Constraints:
+// 1 ≤ Length of both strings ≤ 100
+// Both the strings are in lowercase.
+
+// //🔴approch : Recursion
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// int solve(string& a, string& b, int i, int j) {
+//     //base case
+//     if( i == a.length()) {
+//         return b.length() - j;
+//     }
+
+//     if( j == b.length()) {
+//         return a.length() - i;
+//     }
+
+//     int ans = 0;
+//     if(a[i] == b[j]) {
+//         return solve(a, b, i+1, j+1) ;
+//     }
+//     else{
+//         //insert 
+//         int insertAns = 1 + solve(a, b, i, j+1);
+
+//         //delete
+//         int deleteAns = 1 + solve(a, b, i+1, j) ;
+
+//         //replcae
+//         int replaceAns = 1 + solve(a, b, i+1, j+1) ;
+
+//         ans = min(insertAns, min(deleteAns, replaceAns)) ;
+//     }
+
+//     return ans ;
+// }
+
+//  int minDistance(string word1, string word2) {
+//         return solve(word1, word2, 0, 0) ;
+// }
+// //🔸time complexity: expo
+// //🔸space complexity: O(n)         // length of string
+
+
+// //🔴approch : Recursion + Memoization
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// int solve(string& a, string& b, int i, int j, vector<vector<int>>& dp) {
+//     //base case
+//     if( i == a.length()) {
+//         return b.length() - j;
+//     }
+
+//     if( j == b.length()) {
+//         return a.length() - i;
+//     }
+
+//     if(dp[i][j] != -1){
+//         return dp[i][j] ;
+//     }
+
+//     int ans = 0;
+//     if(a[i] == b[j]) {
+//         return solve(a, b, i+1, j+1, dp) ;
+//     }
+//     else{
+//         //insert 
+//         int insertAns = 1 + solve(a, b, i, j+1, dp);
+
+//         //delete
+//         int deleteAns = 1 + solve(a, b, i+1, j, dp) ;
+
+//         //replcae
+//         int replaceAns = 1 + solve(a, b, i+1, j+1, dp) ;
+
+//         ans = min(insertAns, min(deleteAns, replaceAns)) ;
+//     }
+
+//     return dp[i][j] = ans ;
+// }
+
+//  int minDistance(string word1, string word2) {
+
+//     vector<vector<int>> dp(word1.length(), vector<int>(word2.length(), -1));
+//     return solve(word1, word2, 0, 0, dp) ;
+// }
+// //🔸time complexity: O(n*m)
+// //🔸space complexity: O(n)         // length of minimum string
+
+
+
+// //🔴approch : Tabulation
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// int solve(string& a, string& b) {
+
+//     vector<vector<int>> dp(a.length()+1, vector<int>(b.length()+1, 0));
+
+//     //base case
+//     for(int j=0; j<b.length(); j++){
+//         dp[a.length()][j] = b.length() - j ;
+//     }
+
+//     for(int i=0; i<a.length(); i++){
+//         dp[i][b.length()] = a.length() - i ;
+//     }
+
+
+//     for( int i=a.length()-1; i>=0; i--){
+//         for(int j=b.length()-1; j>=0; j--){
+
+//             int ans = 0;
+
+//             if(a[i] == b[j]) {
+//                 ans = dp[i+1][j+1];
+//             }
+//             else{
+//                 //insert 
+//                 int insertAns = 1 + dp[i][j+1];
+
+//                 //delete
+//                 int deleteAns = 1 + dp[i+1][j] ;
+
+//                 //replcae
+//                 int replaceAns = 1 + dp[i+1][j+1] ;
+
+//                 ans = min(insertAns, min(deleteAns, replaceAns)) ;
+//             }
+
+//             dp[i][j] = ans ;
+//         }
+//     }
+
+//     return dp[0][0] ;
+// }
+
+//  int minDistance(string word1, string word2) {
+
+//     return solve(word1, word2) ;
+// }
+// //🔸time complexity: O(n*m)
+// //🔸space complexity: O(n)         // length of minimum string
+
+
+//🔴approch : space optimisation
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// int solve(string& a, string& b) {
+
+//     vector<int> curr(b.length()+1, 0) ;
+//     vector<int> next(b.length()+1, 0) ;
+
+//     //base case
+//     for(int j=0; j<b.length(); j++){
+//        next[j] = b.length() - j ;
+//     }
+
+//     for( int i=a.length()-1; i>=0; i--){
+//         for(int j=b.length()-1; j>=0; j--){
+
+//             //important line // got from 2nd base case
+//             curr[b.length()] = a.length() - i;
+
+//             int ans = 0;
+
+//             if(a[i] == b[j]) {
+//                 ans = next[j+1];
+//             }
+//             else{
+//                 //insert 
+//                 int insertAns = 1 + curr[j+1];
+
+//                 //delete
+//                 int deleteAns = 1 + next[j] ;
+
+//                 //replcae
+//                 int replaceAns = 1 + next[j+1] ;
+
+//                 ans = min(insertAns, min(deleteAns, replaceAns)) ;
+//             }
+//             curr[j] = ans ;
+//         }
+//         next = curr ;
+//     }
+
+//     return next[0] ;
+// }
+
+//  int minDistance(string word1, string word2) {
+
+//     if(word1.length() == 0){
+//         return word2.length();
+//     }
+//     if(word2.length() == 0){
+//         return word1.length() ;
+//     }
+
+//     return solve(word1, word2) ;
+// }
+//🔸time complexity: O(n*m)
+//🔸space complexity: O(n)         // length of minimum string
+
+
+//🔸time complexity :
+//🔸space complexity : 
