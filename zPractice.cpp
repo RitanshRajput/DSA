@@ -414,6 +414,30 @@
 //🔸time complexity: O(N+M)
 //🔸space complexity: O(N+M)
 
+
+
+//🔸apppraoch : 3 Optimise
+// int intersection(int a[], int n, int b[], int m){
+// unordered_map<int, int> mp ;
+// int count = 0 ;
+
+// for(int i=0; i<n; i++) {
+//     if(mp[a[i]] == 0) {
+//          mp[a[i]] = 1;
+//     }
+// }
+
+// for(int j=0; j<m; j++){
+//     if(mp[b[j]] == 1) {
+//         mp[b[j]] += 1;
+//         count++ ;
+//     }
+// }
+
+// return count ;
+// }
+
+
 // 🔸Approach 2 : Optimised
 //  #include<iostream>
 //  #include<algorithm>
@@ -508,6 +532,17 @@
 //     return 0;
 // }
 
+
+//🔸approach :
+// void rotate(int arr[], int n) {
+// int temp = arr[n-1] ;
+    
+//     for(int i = n-1; i >= 0; i--){
+//         arr[i] = arr[i-1] ;
+//     }
+    
+//     arr[0] = temp ;
+// } 
 
 //                      //❓❓ Find (Max sum of contigous sub-array)
 
