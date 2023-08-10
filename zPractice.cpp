@@ -3487,7 +3487,7 @@
 
 
 
-//                    //🔘🔘 STRINGS 🔘🔘 //
+//                          //🔘🔘 STRINGS 🔘🔘 //
 
 
 //                  //❓Question : 344 Reverse string
@@ -3958,6 +3958,7 @@
 //         int maxl=0;
 //         int l=0;
 //         int r=0;
+
 //         for(int i=0; i<n; i++){
 //             //if longest substring palindrome is of  odd length
 //             int left=i;
@@ -3968,8 +3969,8 @@
 //             }
 //             if(right-left+1>maxl){
 //                 maxl=right-left+1;
-//                 l=left+1;
-//                 r=right-1;
+//                 l++;
+//                 r--;
 
 //             }
             
@@ -3982,8 +3983,8 @@
 //             }
 //             if(right-left+1>2&&right-left+1>maxl){
 //                 maxl=right-left+1;
-//                 l=left+1;
-//                 r=right-1;
+//                 l++;
+//                 r--;
 //             }
 //         }
         
@@ -4139,7 +4140,6 @@
 //       //include
 //       char element = str[index] ;
 //       output.push_back(element) ;
-
 //       solve(str, output, index+1, ans) ;
 // }
 
