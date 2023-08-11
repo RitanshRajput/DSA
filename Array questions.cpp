@@ -567,7 +567,7 @@
 //🔸Space complexity: O(max(n+m))
 
 
-//                                 //❓Hard : Merge without extra space
+//                                 //❓Hard : Merge two sorted array without without extra space
 
 // Given two sorted arrays arr1[] and arr2[] of sizes n and m in non-decreasing order. 
 // Merge them in sorted order without using any extra space.
