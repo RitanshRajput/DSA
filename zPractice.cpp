@@ -373,7 +373,7 @@
 // 89 is the only element
 // in the intersection of two arrays.
 
-// 🔸Appraoch 1: 
+// 🔸Appraoch 1: using vector
 // #include<iostream>
 // #include<vector>
 // using namespace std;
@@ -416,7 +416,7 @@
 
 
 
-//🔸apppraoch : 3 Optimise
+//🔸apppraoch 2:  Optimise using unordered_map
 // int intersection(int a[], int n, int b[], int m){
 // unordered_map<int, int> mp ;
 // int count = 0 ;
@@ -438,7 +438,7 @@
 // }
 
 
-// 🔸Approach 2 : Optimised
+// 🔸Approach 3 : sorting and comparing
 //  #include<iostream>
 //  #include<algorithm>
 //  using namespace std;
@@ -804,7 +804,7 @@
 // }
 
 
-//                     ❓ Minimum number of jumps
+//                            ❓ Minimum number of jumps
 
 // Given an array of N integers arr[] where each element represents the maximum length of the jump
 // that can be made forward from that element.
@@ -924,7 +924,10 @@
 //🔸time complexity: O(Nlog n)             // loop => O(n)  , sort() => O(nlog n)
 //🔸space complexity: O(1)
 
-//               //❓ find duplicate in an array of N+1 Integers
+
+
+
+//                           //❓ find duplicate in an array of N+1 Integers
 
 // Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.
 // There is only one repeated number in nums, return this repeated number.
@@ -966,7 +969,9 @@
 // 🔸space complexity : O(n)
 
 
-//                   //❓Question : 56. Merge Intervals
+
+
+//                       //❓Question : 56. Merge Intervals
 
 // Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals,
 // and return an array of the non-overlapping intervals that cover all the intervals in the input.
@@ -1152,7 +1157,7 @@
 // 🔸space complexity: O(1)
 
 
-//                   //❓question: Count inversion
+//                       //❓question: Count inversion
 
 // Given an array of integers. Find the Inversion Count in the array.
 // Inversion Count: For an array, inversion count indicates how far (or close) the array is from being sorted.
@@ -1290,25 +1295,23 @@
 // #include<vector>
 // using namespace std;
 
-// //🔴 brute force : 199/211  TLE
-// int maxProfit(vector<int>& prices) {
-//   vector<int> output(0) ;
-//   int ans = 0;
-//   int n = prices.size() ;
+// int n = prices.size();
 
-//   for(int i=0; i<n; i++) {
-//     for(int j=n-1; j>i; j--) {
-//        if(prices[j] > prices[i]) {
-//          ans = prices[j] - prices[i] ;
-//          output.push_back(ans) ;
-//        }
-//     }
-//   }
-//   int maxi = 0;
-//   for(int k=0; k<output.size(); k++) {
-//     maxi = max(maxi, output[k]) ;
-//   }
-//   return maxi ;
+//🔴 approach: using vector      
+//         vector<int>maxprices(n,0);
+//         maxprices[n-1] = prices[n-1];
+//         for(int i=n-2;i>=0;i--)
+//         {
+//             maxprices[i] = max(maxprices[i+1], prices[i]);
+//         }
+//         int profit = 0;
+//         for(int i =0 ;i<n;i++)
+//         {
+//             profit = max(profit,maxprices[i]- prices[i]);
+//         }
+
+//         return profit;
+
 // }
 
 //   //🔴approach2 : optimal O(n) time, and O(1) space
@@ -1323,6 +1326,24 @@
 //     }
 //     return maxi ;
 //   }
+
+
+//🔸 dp series approach : optimal O(n) time, O(1) space
+//   int maxProfit(vector<int>& prices) {
+//     int mini = prices[0] ;
+//     int profit = 0 ;
+
+//     for(int i=1; i<prices.size(); i++) {
+//         int diff = prices[i] - mini ;
+//         profit = max(diff, profit) ;
+//         mini = min(prices[i], mini) ;
+//     }
+
+//     return profit ;
+//   }
+//🔸time  complexity: O(N)
+//🔸space complexity: O(1)
+
 
 
 
@@ -1367,7 +1388,8 @@
 //     //     return pairCount ;
 //     // }
 
-//     //🔴 approach 2: using unordered_map
+
+// 🔴 approach 2: using unordered_map
 //       int getPairsCount(int arr[], int n, int k){
 
 //         if (n == 1) {
@@ -1377,7 +1399,7 @@
 //         int count = 0;
 //         unordered_map<int, int> mp;
 
-//         for (int i = 0; i < n; i++) {
+//         for(int i = 0; i < n; i++) {
 
 //             int diff = k - arr[i];
 //             if (mp[diff] > 0) {
@@ -4380,40 +4402,40 @@
 // 1 ≤ nums[i] ≤ 1000
 // max(nums[i]) ≤ k ≤ 2000
 
-//🔴 approch: DP
+//🔴 approch: Memoization 
 
-//  int dp[501][2001];
-    
- 
-//     int helper(int ind,int curr,vector <int> &nums,int k)
-//     {
-//         if(ind == nums.size())
-//         {
-//             return 0;
-//         }
-        
-//         if(dp[ind][curr] != -1)
-//             return dp[ind][curr];
-        
-//         int pick = INT_MAX;
-        
-//         if(nums[ind] <= curr)
-//         {
-//             // ie we found some minimum
-//             pick = helper(ind+1,curr-nums[ind]-1,nums,k);
-//         }
-        
-//         int notPick = (curr+1)*(curr+1)+ helper(ind+1,k-nums[ind]-1,nums,k);
-        
-//         return dp[ind][curr] = min(pick,notPick);
-//     }
-//     int solveWordWrap(vector<int>nums, int k) 
-//     { 
-//         // Code here
-//        // vector<vector<int>>dp(1001,vector<int>(1001,-1));
-//         memset(dp,-1,sizeof(dp));
-//         return helper(0,k,nums,k);
-//     }
+//    int solve(vector<int> &nums, int i,int j,int k,vector<vector<int>> &dp){
+//        int n=nums.size();
+//        //base case
+//        if(i>j){
+//            return 0;
+//        }
+//        //memo
+//        if(dp[i][j]!=-1){
+//            return dp[i][j];
+//        }
+//        int ans=INT_MAX;
+//        int sum=0;
+//        for(int idx=i;idx<=j;idx++){
+//            sum+=nums[idx];
+//            // no need to calc. spaces for last line
+//            if(sum<=k && idx==n-1){
+//               return dp[i][j]=0;
+//            }
+//            if(sum<=k){
+//                ans=min(ans,(k-sum)*(k-sum)+solve(nums,idx+1,j,k,dp));
+//                sum++;//to handle space minus
+//            }
+           
+//        }
+//        return dp[i][j]=ans;//memo and return
+//    }
+//    int solveWordWrap(vector<int> nums, int k) 
+//    { 
+//        int n=nums.size();
+//        vector<vector<int>> dp(n,vector<int>(n,-1));
+//        return solve(nums,0,n-1,k,dp);
+//    } 
 //🔸time complexity : O(N^N)
 //🔸space complexity :O(N^N)
 
@@ -4776,3 +4798,183 @@
 
 // 🔸time complexity : O(3N)
 // 🔸space complexity: O(1)
+
+
+
+
+///                //❓Question: Paranthesis Checker
+
+// Given an expression string x. Examine whether the pairs and the orders of {,},(,),[,] are correct in exp.
+// For example, the function should return 'true' for exp = [()]{}{[()()]()} and 'false' for exp = [(]).
+
+// Note: The drive code prints "balanced" if function return true, otherwise it prints "not balanced".
+
+// Example 1:
+
+// Input:
+// {([])}
+// Output: 
+// true
+// Explanation: 
+// { ( [ ] ) }. Same colored brackets can form 
+// balanced pairs, with 0 number of 
+// unbalanced bracket.
+// Example 2:
+
+// Input: 
+// ()
+// Output: 
+// true
+// Explanation: 
+// (). Same bracket can form balanced pairs, 
+// and here only 1 type of bracket is 
+// present and in balanced way.
+// Example 3:
+
+// Input: 
+// ([]
+// Output: 
+// false
+// Explanation: 
+// ([]. Here square bracket is balanced but 
+// the small bracket is not balanced and 
+// Hence , the output will be unbalanced.
+// Your Task:
+// This is a function problem. You only need to complete the function ispar() that takes a string as a parameter and returns a boolean value true if brackets are balanced else returns false. The printing is done automatically by the driver code.
+
+// Expected Time Complexity: O(|x|)
+// Expected Auixilliary Space: O(|x|)
+
+// Constraints:
+// 1 ≤ |x| ≤ 32000
+
+ 
+//🔸approach : using stack
+
+//  bool ispar(string x)
+//     {
+//         stack<char> temp;
+//         temp.push(x[0]) ;
+        
+//         int n = x.length() ;
+//         int i=1; 
+        
+//         while(i < n) {
+            
+//             if(temp.empty()) {
+//                 temp.push(x[i]) ;
+//                 i++ ;
+//             }
+//             else{
+            
+//             if(temp.top() == '[' && x[i] == ']') {
+//                 temp.pop() ;
+//                 i++ ;
+//             }
+//             else if(temp.top() == '(' && x[i] == ')') {
+//                 temp.pop() ;
+//                 i++ ;
+//             }
+//             else if(temp.top() == '{' && x[i] == '}') {
+//                 temp.pop() ;
+//                 i++ ;
+//             }
+//             else{
+//                 temp.push(x[i]) ;
+//                 i++ ;
+//             }
+//             }
+//         }
+        
+//         if(temp.empty()) {
+//             return true ;
+//         }
+//         else{
+//             return false ;   
+//         }
+//     }
+//🔸time complexity: O(N)           // N = length of string
+//🔸space compplexity: O(N)
+
+
+
+
+//                        //❓Question: Word Break
+
+// Given a string A and a dictionary of n words B, find out if A can be 
+// segmented into a space-separated sequence of dictionary words.
+
+// Note: From the dictionary B each word can be taken any number of times and in any order.
+// Example 1:
+
+// Input:
+// n = 12
+// B = { "i", "like", "sam",
+// "sung", "samsung", "mobile",
+// "ice","cream", "icecream",
+// "man", "go", "mango" }
+// A = "ilike"
+// Output:
+// 1
+// Explanation:
+// The string can be segmented as "i like".
+
+// Example 2:
+
+// Input:
+// n = 12
+// B = { "i", "like", "sam",
+// "sung", "samsung", "mobile",
+// "ice","cream", "icecream", 
+// "man", "go", "mango" }
+// A = "ilikesamsung"
+// Output:
+// 1
+// Explanation:
+// The string can be segmented as 
+// "i like samsung" or "i like sam sung".
+ 
+
+// Your Task:
+// Complete wordBreak() function which takes a string and list of strings as 
+// a parameter and returns 1 if it is possible to break words, else return 0. 
+// You don't need to read any input or print any output, it is done by driver code.
+
+
+// Expected time complexity: O(s2)
+
+// Expected auxiliary space: O(s) , where s = length of string A
+
+ 
+
+// Constraints:
+// 1 ≤ N ≤ 12
+// 1 ≤ s ≤ 1100 , where s = length of string A
+
+//🔴approach:
+// bool solve(unordered_map<string,bool>mp, string word)
+//         {
+//             int size=word.size();
+//             if(size==0){
+//                 return true;
+//             }
+//             string temp="";
+//             for(int i=0;i<word.length();i++){
+//                 temp+=word[i];
+//                 if(mp.find(temp)!=mp.end() && solve(mp,word.substr(i+1)))
+//                 return true;
+//             }
+//             return false;
+//         }
+
+//     int wordBreak(string A, vector<string> &B) {
+       
+//         unordered_map <string, bool > mp ;
+//         for(auto it : B)
+//         mp[it]=true;
+        
+//         return solve(mp,A)==true?1:0;
+//     }
+
+//🔸time complexity: O(N^2)
+//🔸space complexity: O(B.size() + A.length())
