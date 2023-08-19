@@ -5032,3 +5032,204 @@
 //         }
 //🔴time  complexity: O(n)         // n = txt.size()-pat.size();
 //🔴space complexity: O(n)         // number of text found in pat
+
+
+
+
+//                   //❓question: Longest Prefix Suffix (KMP algo)
+
+
+// Given a string of characters, find the length of the longest proper prefix which is also a proper suffix.
+
+// NOTE: Prefix and suffix can be overlapping but they should not be equal to the entire string.
+
+// Example 1:
+
+// Input: s = "abab"
+// Output: 2
+// Explanation: "ab" is the longest proper 
+// prefix and suffix. 
+// Example 2:
+
+// Input: s = "aaaa"
+// Output: 3
+// Explanation: "aaa" is the longest proper 
+// prefix and suffix. 
+// Your task:
+// You do not need to read any input or print anything. The task is to complete the function lps(), which takes a string as input and returns an integer.
+
+// Expected Time Complexity: O(|s|)
+// Expected Auxiliary Space: O(|s|)
+
+// Constraints:
+// 1 ≤ |s| ≤ 105
+// s contains lower case English alphabets
+
+///🔴approach :  KMP algo
+
+// int lps(string pattern) {
+ 
+//     int n = pattern.size();
+//     vector<int> lps(n, 0);
+//     int length = 0;  // Length of the previous longest prefix suffix
+ 
+//     int i = 1;
+//     while (i < n) {
+//         if (pattern[i] == pattern[length]) {
+//             lps[i] = length + 1;
+//             length++;
+//             i++;
+//         } else {
+//             if (length != 0) {
+//                 length = lps[length - 1];
+//             } else {
+//                 lps[i] = 0;
+//                 i++;
+//             }
+//         }
+//     }
+ 
+//     return lps[n - 1];  // Return the length of the lps array for the last position
+// 	}
+//🔸time complexity: O(N)
+//🔸space complexity: O(n)
+
+
+//                 //❓Question: Convert a sentence into its equivalent mobile numeric keypad sequence
+
+
+// Given a sentence in the form of a string, convert it into its equivalent mobile numeric keypad sequence. 
+ 
+
+// Mobile-keypad
+
+//      1        2       3
+//     [ ]     [abc]   [def]
+//
+//      4        5       6
+//     [ghi]   [jkl]   [mno]
+//
+//      7        8       9
+//     [pqrs]  [tuv]   [wxyz]
+//               0
+//              [ ] 
+//
+
+// Examples : 
+
+// Input: GEEKSFORGEEKS
+// Output: 4333355777733366677743333557777
+// Explanation: For obtaining a number, we need to press a number corresponding to that character for a number of times equal to the position of the character. For example, for character E, press number 3 two times and accordingly.
+
+
+// Input : HELLO WORLD
+// Output : 4433555555666096667775553
+
+//🔴 appraoch:
+// #include <bits/stdc++.h>
+// using namespace std;
+ 
+// // Function which computes the sequence
+// string printSequence(string arr[], string input)
+// {
+//     string output = "";
+ 
+//     // length of input string
+//     int n = input.length();
+//     for (int i = 0; i < n; i++) {
+//         // Checking for space
+//         if (input[i] == ' ')
+//             output = output + "0";
+ 
+//         else {
+//             // Calculating index for each
+//             // character
+//             int position = input[i] - 'A';
+//             output = output + arr[position];
+//         }
+//     }
+ 
+//     // Output sequence
+//     return output;
+// }
+ 
+// // Driver Code
+// int main()
+// {
+//     // storing the sequence in array
+//     string str[]
+//         = { "2",   "22",  "222", "3",   "33",   "333", "4",
+//             "44",  "444", "5",   "55",  "555",  "6",   "66",
+//             "666", "7",   "77",  "777", "7777", "8",   "88",
+//             "888", "9",   "99",  "999", "9999" };
+ 
+//     string input = "GEEKSFORGEEKS";
+//     cout << printSequence(str, input);
+//     return 0;
+// }
+//🔸time complexity: O(N)
+//🔸space complexity: O(N)
+
+
+//                   //❓Question: Count the reversals
+
+// Given a string S consisting of only opening and closing curly brackets '{' and '}', find out the minimum number of reversals required to convert the string into a balanced expression.
+// A reversal means changing '{' to '}' or vice-versa.
+
+// Example 1:
+
+// Input:
+// S = "}{{}}{{{"
+// Output: 3
+// Explanation: One way to balance is:
+// "{{{}}{}}". There is no balanced sequence
+// that can be formed in lesser reversals.
+// Example 2:
+
+// Input: 
+// S = "{{}{{{}{{}}{{"
+// Output: -1
+// Explanation: There's no way we can balance
+// this sequence of braces.
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function countRev() which takes the string S as the input parameter and returns the minimum number of reversals required to balance the bracket sequence. If balancing is not possible, return -1. 
+
+// Expected Time Complexity: O(|S|).
+// Expected Auxiliary Space: O(1).
+
+// Constraints:
+// 1 ≤ |S| ≤ 105
+
+//🔴approach: 
+// int countRev (string s)
+// {
+//     int n = s.length() ;
+//     int open = 0;
+//     int count = 0;
+    
+//     if(n%2 != 0){
+//         return -1;
+//     }
+    
+//     for(int i=0; i<n; i++){
+        
+//         if(s[i] == '}') {
+            
+//           if(open > 0){
+//               open-- ;
+//           }else{
+//              open++ ;
+//              count++ ;
+//            }
+//         }
+        
+//         if(s[i] == '{'){
+//             open++; 
+//         }
+//     }
+    
+//     return count+open/2;
+
+// }
+//🔸time complexity: O(N)
+//🔸space complexity: O(1)
