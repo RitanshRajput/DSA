@@ -436,6 +436,8 @@
 
 // return count ;
 // }
+//🔸time complexity: O(N+M)
+//🔸space complexity: O(N+M)
 
 
 // 🔸Approach 3 : sorting and comparing
@@ -488,6 +490,9 @@
 
 //     return 0;
 // }
+//🔸time complexity: O(n+log n)
+//🔸space complexity: O(1)
+
 
 //                            //❓Rotate an array cyclically
 // input: [1,2,3,4,5]
@@ -531,9 +536,11 @@
 //     rotate(arr, n) ;
 //     return 0;
 // }
+//🔸time complexity: O(N)
+//🔸space complexity: O(N)
 
 
-//🔸approach :
+//🔸approach 2  :
 // void rotate(int arr[], int n) {
 // int temp = arr[n-1] ;
     
@@ -543,6 +550,10 @@
     
 //     arr[0] = temp ;
 // } 
+//🔸time complexity: O(N)
+//🔸space complexity: O(N)
+
+
 
 //                      //❓❓ Find (Max sum of contigous sub-array)
 
@@ -606,6 +617,9 @@
 //  cout<<" sum of max sub-array : "<< ans <<endl ;
 //     return 0;
 // }
+//🔸time complexity: O(N^2)
+//🔸space complexity: O(N+M)
+
 
 // 🔴 approach 2: optimised approach
 //    long long maxSubarraySum(int arr[], int n){
@@ -620,6 +634,8 @@
 
 //     return ans ;
 //     }
+//🔸time complexity: O(n)
+//🔸space complexity: O(sum of all elements)
 
 // 🔴 Optimised kadane's algorithm O(n) time complexity
 //  #include<iostream>
@@ -641,6 +657,8 @@
 
 //  return globalSum ;
 // }
+//🔸time complexity: O(N)
+//🔸space complexity: O(sum of all elements)
 
 // int main() {
 //     int arr[5] = {1, 2, 3, -2, 5} ;
@@ -714,6 +732,8 @@
 //     return result ;
 
 // }
+//🔸time complexity: O(N)
+//🔸space complexity: O(N)
 
 // int main() {
 //     int arr[10] = {2, 6, 3, 4, 7, 2, 10, 3, 2, 1} ;
@@ -1194,7 +1214,7 @@
 
 //   long long int ans=0;
 
-//     int Merge(long long arr[],int low ,int mid,int high)
+//     int Merge(long long arr[], int low, int mid, int high)
 //     {
 //         long long int a[high-low+1];
 //         long long int i = low;
@@ -1235,7 +1255,7 @@
 
 //     void MergeSort(long long arr[], long long int low,long long int high)
 //     {
-//         if(low<high)
+//         if(low < high)
 //         {
 //             int mid=(high+low)/2;
 //             MergeSort(arr,low,mid);
@@ -1297,7 +1317,9 @@
 
 // int n = prices.size();
 
-//🔴 approach: using vector      
+//🔴 approach: using vector  
+//   int maxProfit(vector<int>& prices) {
+
 //         vector<int>maxprices(n,0);
 //         maxprices[n-1] = prices[n-1];
 //         for(int i=n-2;i>=0;i--)
@@ -1373,20 +1395,19 @@
 // #include<iostream>
 // using namespace std;
 
-//   //🔴 brute force : 181 / 263
-//     // int getPairsCount(int arr[], int n, int k) {
+//🔴 brute force : 181 / 263
+// int getPairsCount(int arr[], int n, int k) {
 
-//     //     int pairCount = 0 ;
-
-//     //     for(int i=0; i<n; i++) {
-//     //         for(int j=i+1; j<n; j++) {
-//     //             if( arr[i] + arr[j] == k) {
-//     //                 pairCount++ ;
-//     //             }
-//     //         }
-//     //     }
-//     //     return pairCount ;
-//     // }
+//     int pairCount = 0 ;
+//     for(int i=0; i<n; i++) {
+//         for(int j=i+1; j<n; j++) {
+//             if( arr[i] + arr[j] == k) {
+//                 pairCount++ ;
+//             }
+//         }
+//     }
+//     return pairCount ;
+// }
 
 
 // 🔴 approach 2: using unordered_map
@@ -1521,7 +1542,7 @@
 //     vector<int> neg;
 //     for(int i=0;i<n;i++)
 //     {
-//         if(arr[i] <0) neg.push_back(arr[i]);
+//         if(arr[i] < 0) neg.push_back(arr[i]);
 //         else pos.push_back(arr[i]);
 //     };
 
@@ -1529,13 +1550,13 @@
 //     while( i <n )
 //     {
 
-//        if(j != pos.size() )
+//        if( j != pos.size() )
 //         {
 //             arr[i] = pos[j];
 //             j++;
 //             i++;
 //         }
-//         if( k!=neg.size())
+//         if( k != neg.size() )
 //         {
 //             arr[i] = neg[k];
 //             k++;
@@ -1582,7 +1603,7 @@
 // using namespace std;
 //  bool subArrayExists(int arr[], int n)
 //     {
-          //4 2 -3 1 6
+//             4 2 -3 1 6
 //         unordered_map<int, bool> m;
 //         m[0] = true;
 
@@ -1852,7 +1873,7 @@
 //       if (arr[j] == arr[i]){
 //            j++;
 //        }
-//      else {
+//         else {
 //           count = j - i;
 //           i = j;
 //           j = i + 1;
