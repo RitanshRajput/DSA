@@ -5254,3 +5254,652 @@
 // }
 //🔸time complexity: O(N)
 //🔸space complexity: O(1)
+
+
+
+//                       //❓Question Count Palindromic Subsequence
+
+// Given a string str of length N, you have to find number of palindromic subsequence (need not necessarily be distinct) present in the string str.
+// Note: You have to return the answer module 109+7;
+ 
+// Example 1:
+// Input: 
+// Str = "abcd"
+// Output: 
+// 4
+// Explanation:
+// palindromic subsequence are : "a" ,"b", "c" ,"d"
+ 
+// Example 2:
+// Input: 
+// Str = "aab"
+// Output: 
+// 4
+// Explanation:
+// palindromic subsequence are :"a", "a", "b", "aa"
+ 
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function countPs() which takes a string str as input parameter and returns the number of palindromic subsequence.
+
+// Expected Time Complexity: O(N*N)
+// Expected Auxiliary Space: O(N*N)
+
+// Constraints:
+// 1<=length of string str <=1000
+
+//🔴approach : DP
+
+//    const int MOD = 1000000007;
+
+// long long int solve(string& str, int i, int j, vector<vector<long long int>>& dp) {
+//     if (i > j) {
+//         return 0;
+//     }
+
+//     if (i == j) {
+//         return 1;
+//     }
+
+//     if (dp[i][j] != -1) {
+//         return dp[i][j];
+//     }
+
+//     if (str[i] == str[j]) {
+//         dp[i][j] = (solve(str, i + 1, j, dp) + solve(str, i, j - 1, dp) + 1) % MOD;
+//     } else {
+//         dp[i][j] = (solve(str, i + 1, j, dp) + solve(str, i, j - 1, dp) - solve(str, i + 1, j - 1, dp) + MOD) % MOD;
+//     }
+
+//     return dp[i][j];
+// }
+
+// long long int countPS(string str) {
+//     int n = str.length();
+//     vector<vector<long long int>> dp(n, vector<long long int>(n, -1));
+
+//     return solve(str, 0, n - 1, dp);
+// }
+//🔸time complexity: O(expo)
+//🔸space complexity: O(N*N)
+
+
+//                     //❓question: Count of number of given string in 2D character array
+
+// Given a 2-Dimensional character array and a string, we need to find the given string in 2-dimensional character array, such that individual characters can be present left to right, right to left, top to down or down to top.
+
+// Examples: 
+
+// Input : a ={
+//             {D,D,D,G,D,D},
+//             {B,B,D,E,B,S},
+//             {B,S,K,E,B,K},
+//             {D,D,D,D,D,E},
+//             {D,D,D,D,D,E},
+//             {D,D,D,D,D,G}
+//            }
+//         str= "GEEKS"
+// Output :2
+
+// Input : a = {
+//             {B,B,M,B,B,B},
+//             {C,B,A,B,B,B},
+//             {I,B,G,B,B,B},
+//             {G,B,I,B,B,B},
+//             {A,B,C,B,B,B},
+//             {M,C,I,G,A,M}
+//             }
+//         str= "MAGIC"
+
+// Output :4
+
+//🔴approach :
+// #include <bits/stdc++.h>
+// using namespace std;
+ 
+// #define ARRAY_SIZE(a) (sizeof(a) / sizeof(*a))
+ 
+// // utility function to search
+// // complete string from any
+// // given index of 2d char array
+// int internalSearch(string needle, int row, int col, string hay[], int row_max, int col_max, int xx)
+// {
+//     int found = 0;
+ 
+//     if (row >= 0 && row <= row_max && col >= 0 &&
+//         col <= col_max && needle[xx] == hay[row][col])
+//     {
+//         char match = needle[xx];
+//         xx += 1;
+ 
+//         hay[row][col] = 0;
+ 
+//         if (needle[xx] == 0)
+//         {
+//             found = 1;
+//         }
+//         else
+//         {
+//             // through Backtrack searching in every directions
+//             found += internalSearch(needle, row, col + 1, hay, row_max, col_max,xx);
+//             found += internalSearch(needle, row, col - 1,hay, row_max, col_max,xx);
+//             found += internalSearch(needle, row + 1, col,hay, row_max, col_max,xx);
+//             found += internalSearch(needle, row - 1, col,hay, row_max, col_max,xx);
+//         }
+//           //backtracking
+//         hay[row][col] = match;
+//     }
+//     return found;
+// }
+ 
+// // Function to search the string in 2d array
+// int searchString(string needle, int row, int col, string str[], int row_count, int col_count)
+// {
+//     int found = 0;
+//     int r, c;
+ 
+//     for (r = 0; r < row_count; ++r) {
+//         for (c = 0; c < col_count; ++c) {
+//             found += internalSearch(needle, r, c, str, row_count - 1, col_count - 1, 0);
+//         }
+//     }
+//     return found;
+// }
+ 
+// // Driver code
+// int main()
+// {
+//     string needle = "MAGIC";
+//     string input[] = { "BBABBM",
+//                        "CBMBBA",
+//                        "IBABBG",
+//                        "GOZBBI",
+//                        "ABBBBC",
+//                        "MCIGAM" };
+//     string str[ARRAY_SIZE(input)];
+//     int i;
+//     for (i = 0; i < ARRAY_SIZE(input); ++i)
+//     {
+//         str[i] = input[i];
+//     }
+ 
+//     cout << "count: " << searchString(needle, 0, 0, str,
+//                                       ARRAY_SIZE(str),
+//                                       str[0].size()) << endl;
+//     return 0;
+// }
+// 🔸Time Complexity: O(n*m)^2, where n is the row size and m is the column size.
+// 🔸Auxiliary Space: O(n*m)
+
+
+
+
+//                   //❓Question: Find The string in Grid
+
+// Given a 2D grid of n*m of characters and a word, find all occurrences of given word in grid. 
+// A word can be matched in all 8 directions at any point. Word is said to be found in a direction if 
+// all characters match in this direction (not in zig-zag form). The 8 directions are,
+//  horizontally left, horizontally right, vertically up, vertically down, and 4 diagonal directions.
+
+// Note: The returning list should be lexicographically smallest. If the word can be found in multiple 
+// directions starting from the same coordinates, the list should contain the coordinates only once. 
+
+// Example 1:
+
+// Input: 
+// grid = {{a,b,c},{d,r,f},{g,h,i}},
+// word = "abc"
+// Output: 
+// {{0,0}}
+// Explanation: 
+// From (0,0) we can find "abc" in horizontally right direction.
+// Example 2:
+
+// Input: 
+// grid = {{a,b,a,b},{a,b,e,b},{e,b,e,b}}
+// word = "abe"
+// Output: 
+// {{0,0},{0,2},{1,0}}
+// Explanation: 
+// From (0,0) we can find "abe" in right-down diagonal. 
+// From (0,2) we can find "abe" in left-down diagonal. 
+// From (1,0) we can find "abe" in horizontally right direction.
+// Your Task:
+// You don't need to read or print anything, Your task is to complete the function searchWord() 
+// which takes grid and word as input parameters and returns a list containing the positions from where the word
+// originates in any direction. If there is no such position then returns an empty list.
+
+// Expected Time Complexity: O(n*m*k) where k is constant
+// Expected Space Complexity: O(1)
+
+// Constraints:
+// 1 <= n <= m <= 50
+// 1 <= |word| <= 15
+
+//🔴Approach :
+//     int dx[8] = {0,0,1,-1,1,-1,-1,1};          // direction for row
+//     int dy[8] = {1,-1,0,0,1,1,-1,-1};          // direction for col
+    
+//     bool indirection(vector<vector<char>> &grid,int i,int j,int l,string word){
+//         int n = grid.size() , m = grid[0].size(),indx = 0;
+//         while(indx < word.length()){
+//             if(i >= n || j >= m || i < 0 || j < 0)return false;
+//             if(word[indx] != grid[i][j])return false;
+//             i += dx[l];
+//             j += dy[l];
+//             indx++;
+//         }
+//         return true;
+//     }
+//     bool check(vector<vector<char>> &grid,int i,int j,string &word){
+//         bool ans = false;
+        
+//         for(int l = 0; l < 8; l++){
+//             ans = ans || indirection(grid,i,j,l,word);
+//         }
+        
+//         return ans;
+//     }
+// 	vector<vector<int>>searchWord(vector<vector<char>>grid, string word){
+// 	    // Code here
+// 	    vector<vector<int>>ans;
+// 	    int n = grid.size() , m = grid[0].size();
+	    
+// 	    for(int i = 0; i < n; i++){
+// 	        for(int j = 0; j < m; j++){
+// 	            if(grid[i][j] == word[0]){
+// 	                if(check(grid,i,j,word)){
+// 	                    ans.push_back({i,j});
+// 	                }
+// 	            }
+// 	        }
+// 	    }
+	    
+// 	    return ans;
+// 	}
+//🔸time complexity: O(N*M)*8*word.length()
+//🔸space complexity: O(N*N)
+
+
+
+//                 //❓Question: Boyer Moore Algorithm for Pattern Searching
+
+// Pattern searching is an important problem in computer science. When we do search for a string in a notepad/word file, 
+// browser, or database, pattern searching algorithms are used to show the search results. 
+// A typical problem statement would be- 
+// Given a text txt[0..n-1] and a pattern pat[0..m-1] where n is the length of the text and m is 
+// the length of the pattern, write a function search(char pat[], char txt[]) that prints all occurrences 
+// of pat[] in txt[]. You may assume that n > m. 
+
+// Examples: 
+
+// Input:  txt[] = "THIS IS A TEST TEXT"
+//         pat[] = "TEST"
+// Output: Pattern found at index 10
+
+// Input:  txt[] =  "AABAACAADAABAABA"
+//         pat[] =  "AABA"
+// Output: Pattern found at index 0
+//         Pattern found at index 9
+//         Pattern found at index 12
+
+//🔴approach :
+
+// #include <bits/stdc++.h>
+// using namespace std;
+// # define NO_OF_CHARS 256
+ 
+// // The preprocessing function for Boyer Moore's bad character heuristic
+
+// void badCharHeuristic( string str, int size, int badchar[NO_OF_CHARS])
+// {
+//     int i;
+ 
+//     // Initialize all occurrences as -1
+//     for (i = 0; i < NO_OF_CHARS; i++)
+//         badchar[i] = -1;
+ 
+//     // Fill the actual value of last occurrence of a character
+//     for (i = 0; i < size; i++)
+//         badchar[(int) str[i]] = i;
+// }
+ 
+// /* A pattern searching function that uses Bad Character Heuristic of Boyer Moore Algorithm */
+// void search( string txt, string pat)
+// {
+//     int m = pat.size();
+//     int n = txt.size();
+ 
+//     int badchar[NO_OF_CHARS];
+ 
+//     /* Fill the bad character array by calling the preprocessing function badCharHeuristic() for given pattern */
+//     badCharHeuristic(pat, m, badchar);
+ 
+//     int s = 0; // s is shift of the pattern with respect to text
+//     while(s <= (n - m))
+//     {
+//         int j = m - 1;
+ 
+//         /* Keep reducing index j of pattern while characters of pattern and text are matching at this shift s */
+//         while(j >= 0 && pat[j] == txt[s + j])
+//             j--;
+ 
+//         /* If the pattern is present at current shift, then index j will become -1 after the above loop */
+//         if (j < 0)
+//         {
+//             cout << "pattern occurs at shift = " <<  s << endl;
+ 
+//             /* Shift the pattern so that the next
+//             character in text aligns with the last
+//             occurrence of it in pattern.
+//             The condition s+m < n is necessary for
+//             the case when pattern occurs at the end
+//             of text */
+//             s += (s + m < n)? m-badchar[txt[s + m]] : 1;
+ 
+//         }
+ 
+//         else
+//             /* Shift the pattern so that the bad character
+//             in text aligns with the last occurrence of
+//             it in pattern. The max function is used to
+//             make sure that we get a positive shift.
+//             We may get a negative shift if the last
+//             occurrence of bad character in pattern
+//             is on the right side of the current
+//             character. */
+//             s += max(1, j - badchar[txt[s + j]]);
+//     }
+// }
+ 
+// /* Driver code */
+// int main()
+// {
+//     string txt= "ABAAABCD";
+//     string pat = "ABC";
+//     search(txt, pat);
+//     return 0;
+// }
+// 🔸Time Complexity : O(n x m)
+// 🔸Auxiliary Space: O(1)
+
+
+
+//                            //❓Question: Roman Number to Integer
+
+// Given a string in roman no format (s)  your task is to convert it to an integer . 
+// Various symbols and their values are given below.
+// I 1
+// V 5
+// X 10
+// L 50
+// C 100
+// D 500
+// M 1000
+
+// Example 1:
+
+// Input:
+// s = V
+// Output: 5
+// Example 2:
+
+// Input:
+// s = III 
+// Output: 3
+// Your Task:
+// Complete the function romanToDecimal() which takes a string as input parameter and returns the equivalent decimal number. 
+
+// Expected Time Complexity: O(|S|), |S| = length of string S.
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1<=roman no range<=3999
+
+//🔴approach :
+// int romanToDecimal(string &str) {
+        
+//         unordered_map<char,int> mp;
+//         mp['I'] = 1;
+//         mp['V'] = 5;
+//         mp['X'] = 10;
+//         mp['L'] = 50;
+//         mp['C'] = 100;
+//         mp['D'] = 500;
+//         mp['M'] = 1000;
+        
+//         int ans = 0;
+        
+//         for(int i=0; i<str.length(); i++){
+//             if(mp[str[i]] < mp[str[i+1]]){
+//                 ans += mp[str[i+1]]-mp[str[i]];
+//                 i++;
+//             }
+//             else{
+//                 ans += mp[str[i]];
+//             }
+//         }
+//         return ans;
+//     }
+//🔸time complexity: O(N)
+//🔸space complexity: O(N)
+
+
+
+//                      //❓Question: Longest Common Prefix
+
+// Write a function to find the longest common prefix string amongst an array of strings.
+// If there is no common prefix, return an empty string "".
+
+// Example 1:
+
+// Input: strs = ["flower","flow","flight"]
+// Output: "fl"
+// Example 2:
+
+// Input: strs = ["dog","racecar","car"]
+// Output: ""
+// Explanation: There is no common prefix among the input strings.
+ 
+
+// Constraints:
+
+// 1 <= strs.length <= 200
+// 0 <= strs[i].length <= 200
+// strs[i] consists of only lowercase English letters.
+
+//🔴approach :
+//  string longestCommonPrefix(vector<string>& v) {
+        
+//         string ans="";
+//         sort(v.begin(),v.end());
+//         int n=v.size();
+        
+//         string first=v[0];
+//         string last=v[n-1];
+        
+//         for(int i=0; i<min(first.size(),last.size()); i++){
+//             if(first[i]!=last[i]){
+//                 return ans;
+//             }
+//             ans+=first[i];
+//         }
+//         return ans;   
+//     }
+//🔸time complexity: O(n log(n))
+//🔸time complexity: O(size of longest string)
+
+
+
+//                         //❓Question: Min Number of Flips
+
+// Given a binary string, that is it contains only 0s and 1s. 
+// We need to make this string a sequence of alternate characters by flipping some of the bits, 
+// our goal is to minimize the number of bits to be flipped.
+
+// Example 1:
+
+// Input:
+// S = "001"
+// Output: 1
+// Explanation: 
+// We can flip the 0th bit to 1 to have
+// 101.
+
+
+// Example 2:
+
+// Input:
+// S = "0001010111" 
+// Output: 2
+// Explanation: We can flip the 1st and 8th bit 
+// bit to have "0101010101"
+// 101.
+
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function minFlips() which takes the string S as input and returns the minimum number of flips required.
+
+// Expected Time Complexity: O(|S|).
+// Expected Auxiliary Space: O(1).
+
+// Constraints:
+// 1<=|S|<=105
+
+//🔴approach :
+// int minFlips (string s)
+// {
+//     int a=0,b=0,n=s.size();
+//         for(int i=0;i<n;i++)
+//         {
+//             s[i]=s[i]-'0';
+//             if((i%2)!=s[i]) a++;
+//             if((i+1)%2!=s[i]) b++;
+//         }
+//         return min(a,b);
+
+// }
+//🔸time complexity: O(N)
+//🔸space complexity: O(N)
+
+
+
+//                       //❓Question: Second Most Repeated string in a sequence
+
+// Given a sequence of strings, the task is to find out the second most repeated (or frequent) string in the given sequence.
+// Note: No two strings are the second most repeated, there will be always a single string.
+
+// Example 1:
+
+// Input:
+// N = 6
+// arr[] = {aaa, bbb, ccc, bbb, aaa, aaa}
+// Output: bbb
+// Explanation: "bbb" is the second most 
+// occurring string with frequency 2.
+
+// Example 2:
+
+// Input: 
+// N = 6
+// arr[] = {geek, for, geek, for, geek, aaa}
+// Output: for
+// Explanation: "for" is the second most
+// occurring string with frequency 2.
+
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function secFrequent() which takes the string array arr[] and its size N as inputs and returns the second most frequent string in the array.
+
+
+// Expected Time Complexity: O(N*max(|Si|).
+// Expected Auxiliary Space: O(N*max(|Si|).
+
+
+// Constraints:
+// 1<=N<=103
+
+//🔴approach:
+// string secFrequent (string arr[], int n)
+//     {
+//         //code here.
+//         unordered_map<string , int> mp;
+//         for( int i = 0 ;i < n ;i++){
+//             mp[arr[i]]++;
+//         }
+        
+//         int maxOccr = 0;
+//         for( auto it = mp.begin() ; it != mp.end() ; it++){
+//             if(it->second > maxOccr){
+//                 maxOccr = it->second;
+//             }
+//         }
+        
+//         string ans = "";
+//         int secFre = INT_MIN;
+//         for( auto it : mp){
+//             if(it.second < maxOccr && it.second >= secFre){
+//                 ans = it.first;
+//                 secFre = it.second;
+//             }
+            
+//         }
+//         return ans;
+//     }
+//🔸time complexity: O(N)
+//🔸space complexitY: O(1)
+
+
+
+//                 //❓ QUestion: Minimum Swaps for bracket Balancing
+
+// You are given a string S of 2N characters consisting of N ‘[‘ brackets and N ‘]’ brackets. A string is considered balanced if it can be represented in the form S2[S1] where S1 and S2 are balanced strings. We can make an unbalanced string balanced by swapping adjacent characters.
+// Calculate the minimum number of swaps necessary to make a string balanced.
+
+// Note - Strings S1 and S2 can be empty.
+
+// Example 1:
+
+// Input  : []][][
+// Output : 2
+// Explanation :
+// First swap: Position 3 and 4
+// [][]][
+// Second swap: Position 5 and 6
+// [][][]
+
+// Example 2:
+
+// Input : [[][]]
+// Output : 0 
+// Explanation:
+// String is already balanced.
+ 
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function minimumNumberOfSwaps() which takes the string S and return minimum number of operations required to balance the bracket sequence.
+
+// Expected Time Complexity: O(N)
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1<=|S|<=100000
+
+//🔴approach:
+//  int minimumNumberOfSwaps(string S){
+//         // code here 
+//         int extra = 0;
+//         int ans = 0 ;
+        
+//         for(auto i:S){
+//             if( i== '['){
+//                 if(extra > 0) {
+//                     ans += extra;
+//                 }
+//                   extra--;
+//             }
+//             else if( i==']'){
+//                 extra++;
+//             }
+//         }
+        
+//         return ans;
+//     }
+//🔸time complexity: O(N)
+//🔸space complexity: O(1)
