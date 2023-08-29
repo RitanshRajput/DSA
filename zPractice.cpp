@@ -5903,3 +5903,455 @@
 //     }
 //🔸time complexity: O(N)
 //🔸space complexity: O(1)
+
+
+
+//                          //❓Question: Longest common subsquence
+
+// Given two strings, find the length of longest subsequence present in both of them. Both the strings are in uppercase latin alphabets.
+
+// Example 1:
+
+// Input:
+// A = 6, B = 6
+// str1 = ABCDGH
+// str2 = AEDFHR
+// Output: 3
+// Explanation: LCS for input strings “ABCDGH” and “AEDFHR” is “ADH” of length 3.
+// Example 2:
+
+// Input:
+// A = 3, B = 2
+// str1 = ABC
+// str2 = AC
+// Output: 2
+// Explanation: LCS of "ABC" and "AC" is "AC" of length 2.
+// Your Task:
+// Complete the function lcs() which takes the length of two strings respectively and two strings as input parameters and returns the length of the longest subsequence present in both of them.
+
+// Expected Time Complexity : O(|str1|*|str2|)
+// Expected Auxiliary Space: O(|str1|*|str2|)
+
+// Constraints:
+// 1<=size(str1),size(str2)<=103
+
+///🔴approach: 
+
+// int lcs(int n, int m, string s1, string s2)
+//     {
+//         vector<vector<int>>dp(n+1,vector<int>(m+1,0));
+
+//         for(int i=1;i<n+1;i++){
+//             for(int j=1;j<m+1;j++){
+
+//                 if(s1[i-1]==s2[j-1]){
+
+//                     dp[i][j]=1+dp[i-1][j-1];
+//                 }
+//                 else{
+//                     dp[i][j]=max(dp[i][j-1],dp[i-1][j]);
+//                 }
+//             }
+//         }
+//         return dp[n][m];
+//     }
+//🔸time complexity: O(n*m)
+//🔸space complexity: O(n*M)
+
+
+
+//                         //❓Question: Program to generate all possible IP address from given string
+
+// Given a string containing only digits, restore it by returning all possible valid IP address combinations.
+// A valid IP address must be in the form of A.B.C.D, where A, B, C, and D are numbers from 0-255. The numbers cannot be 0 prefixed unless they are 0.
+
+// Examples :
+
+// Input: 25525511135
+// Output: [“255.255.11.135”, “255.255.111.35”]
+// Explanation:
+// These are the only valid possible
+// IP addresses.
+
+// Input: "25505011535"
+// Output: []
+// Explanation: 
+// We cannot generate a valid IP
+// address with this string.
+// First, we will place 3 dots in the given string and then try out all the possible combinations for the 3 dots. 
+// Corner case for validity:
+
+// For string "25011255255"
+// 25.011.255.255 is not valid as 011 is not valid.
+// 25.11.255.255 is not valid either as you are not
+// allowed to change the string.
+// 250.11.255.255 is valid.
+
+//🔴approach :
+// #include <bits/stdc++.h>
+// using namespace std;
+ 
+// // Function checks whether IP digits are valid or not.
+// int is_valid(string ip)
+// {
+//     // Splitting by "."
+//     vector<string> ips;
+//     string ex = "";
+//     for (int i = 0; i < ip.size(); i++) {
+//         if (ip[i] == '.') {
+//             ips.push_back(ex);
+//             ex = "";
+//         }
+//         else {
+//             ex = ex + ip[i];
+//         }
+//     }
+//     ips.push_back(ex);
+ 
+//     // Checking for the corner cases
+//     // cout << ip << endl;
+//     for (int i = 0; i < ips.size(); i++) {
+//         // cout << ips[i] <<endl;
+//         if (ips[i].length() > 3 || stoi(ips[i]) < 0 || stoi(ips[i]) > 255)
+//             return 0;
+ 
+//         if (ips[i].length() > 1 && stoi(ips[i]) == 0)
+//             return 0;
+ 
+//         if (ips[i].length() > 1 && stoi(ips[i]) != 0 && ips[i][0] == '0')
+//             return 0;
+//     }
+//     return 1;
+// }
+ 
+// // Function converts string to IP address
+// void convert(string ip)
+// {
+//     int l = ip.length();
+ 
+//     // Check for string size
+//     if (l > 12 || l < 4) {
+//         cout << "Not Valid IP Address";
+//     }
+ 
+//     string check = ip;
+//     vector<string> ans;
+ 
+//     // Generating different combinations.
+//     for (int i = 1; i < l - 2; i++) {
+//         for (int j = i + 1; j < l - 1; j++) {
+//             for (int k = j + 1; k < l; k++) {
+//                 check = check.substr(0, k) + "." + check.substr(k);
+//                 check = check.substr(0, j) + "." + check.substr(j);
+//                 check = check.substr(0, i) + "." + check.substr(i);
+ 
+//           // cout<< check <<endl; 
+//           // Check for the validity of combination
+//                 if (is_valid(check)) {
+//                     ans.push_back(check);
+//                     std::cout << check << '\n';
+//                 }
+//                 check = ip;
+//             }
+//         }
+//     }
+// }
+ 
+// // Driver code
+// int main()
+// {
+//     string A = "25525511135";
+//     string B = "25505011535";
+ 
+//     convert(A);
+//     convert(B);
+ 
+//     return 0;
+// }
+
+
+
+
+//                  //❓Question: Generate IP address
+
+// Given a string S containing only digits, Your task is to complete the function genIp() which returns a vector containing all possible combinations of valid IPv4 IP addresses and takes only a string S as its only argument.
+// Note: Order doesn't matter. A valid IP address must be in the form of A.B.C.D, where A, B, C, and D are numbers from 0-255. The numbers cannot be 0 prefixed unless they are 0.
+
+
+// For string 11211 the IP address possible are 
+// 1.1.2.11
+// 1.1.21.1
+// 1.12.1.1
+// 11.2.1.1
+
+// Example 1:
+
+// Input:
+// S = 1111
+// Output: 1.1.1.1
+// Example 2:
+
+// Input:
+// S = 55
+// Output: -1
+
+// Your Task:
+
+// Your task is to complete the function genIp() which returns a vector containing all possible combinations of valid IPv4 IP addresses or -1 if no such IP address could be generated through the input string S, the only argument to the function.
+
+// Expected Time Complexity: O(N * N * N)
+// Expected Auxiliary Space: O(N * N * N * N)
+
+// Constraints:
+// 1<=N<=16
+// here, N = length of S.
+// S only contains digits(i.e. 0-9)
+
+
+//🔴approach:
+//  bool isValid(string s){
+//     int n = s.length();
+//     if(n==0 or n>3 or (s[0] == '0' and n > 1 ) or stoi(s) > 255) return false;
+//     else return true;
+//   }
+
+//     vector<string> genIp(string &s) {
+//         // Your code here
+//         vector<string > ans;
+//         int n = s.length();
+//         if(n>12) return ans;
+//         for(int i = 1 ; i < n-2 ; i++){
+//             for(int j = i+1 ; j < n-1; j++){
+//                 for(int k = j+1 ; k < n ; k++){
+//                     string first = s.substr(0 , i);
+//                     string second = s.substr(i, j-i);
+//                     string third = s.substr(j , k-j);
+//                     string fourth = s.substr(k , n-k);
+//                     if(isValid(first) and isValid(second) and isValid(third) and isValid(fourth)) {
+//                         ans.push_back(first+"." + second+"."+third+"."+fourth);
+//                     }
+//                 }
+//             }
+//         }
+//         return ans;
+//     }
+//🔸time complexity: O(N*N*N)
+//🔸space complexity: O(N*N*N*N)
+
+
+
+//                      //❓Question: Smallest Distinct Window
+
+// Given a string 's'. The task is to find the smallest window length that contains all the characters of the given string at least one time.
+// For eg. A = aabcbcdbca, then the result would be 4 as of the smallest window will be dbca.
+
+ 
+// Example 1:
+// Input : "AABBBCBBAC"
+// Output : 3
+// Explanation : Sub-string -> "BAC"
+
+// Example 2:
+// Input : "aaab"
+// Output : 2
+// Explanation : Sub-string -> "ab"
+ 
+// Example 3:
+// Input : "GEEKSGEEKSFOR"
+// Output : 8
+// Explanation : Sub-string -> "GEEKSFOR"
+ 
+// Your Task:  
+// You don't need to read input or print anything. Your task is to complete the function findSubString() which takes the string  S as input and returns the length of the smallest such window of the string.
+
+// Expected Time Complexity: O(256.N)
+// Expected Auxiliary Space: O(256)
+
+// Constraints:
+// 1 ≤ |S| ≤ 105
+// String may contain both type of English Alphabets.
+
+//🔴approach:
+// int findSubString(string str)
+//     {
+//         unordered_map<char,int> visited;
+        
+//         for(int i=0;i<str.length();i++){
+//             visited[str[i]]++;
+//         }
+        
+//         unordered_map<char,int> mp;
+//         int start=0;
+//         int end=0;
+//         int ans=str.length();
+        
+//         for(int i=0;i<str.length();i++){
+            
+//             mp[str[i]]++;
+            
+//             if(mp.size()<visited.size())
+//                 continue;
+                
+//             while(mp[str[start]]>1){
+//                 mp[str[start]]--;
+//                 start++;
+//             }
+            
+//             ans=min(ans,i-start+1);
+//         }
+//         return ans; 
+//     }
+//🔸time complexity: O(N)
+//🔸space complexity: O(N)
+
+
+
+//                          //❓Question: Rearrange characters
+
+// Given a string S with repeated characters. The task is to rearrange characters in a string such that no two adjacent characters are the same.
+// Note: The string has only lowercase English alphabets and it can have multiple solutions. Return any one of them.
+
+// Example 1:
+// Input : str = "geeksforgeeks"
+// Output: 1
+// Explanation: All the repeated characters of the
+// given string can be rearranged so that no 
+// adjacent characters in the string is equal.
+// Any correct rearrangement will show a output
+// of 1.
+
+// Example 2:
+// Input : str = "bbbbb"
+// Output: 0
+// Explanation: Repeated characters in the string
+// cannot be rearranged such that there should not
+// be any adjacent repeated character.
+
+// Your task :
+// You don't have to read input or print anything. Your task is to complete the functionrearrangeString() which takes the string as input and returns the modified string. If the string cannot be modified return "-1".
+// Note:The generatedoutput is 1 if the string is successfully rearranged and is 0 if rearranging is not possible.
+ 
+// Expected Time Complexity : O(NlogN), N = length of String
+// Expected Auxiliary Space : O(number of english alphabets)
+ 
+// Constraints :
+// 1 <= length of string <= 104
+
+//🔴appproach :
+// string rearrangeString(string str)
+//     {
+//         int n = str.size();
+//         unordered_map<char, int> um;
+        
+//         for(auto it:str){
+//             um[it]++;
+//         }
+        
+//         for(auto it:um){
+//             if(it.second > (n+1)/2) return "-1";
+//         }
+        
+//         string ans(n, 'i');
+//         int i = 0, j = 1;
+//         vector<pair<int, char>> v;
+        
+//         for(auto it:um){
+//             v.push_back({it.second, it.first});
+//         }
+        
+//         sort(v.rbegin(), v.rend());
+        
+//         for(auto it:v){
+            
+//             int times = it.first;
+//             char ch = it.second;
+            
+//             while(times)
+//             {
+//                 if(i < str.size()){
+//                     ans[i] = ch;
+//                     i += 2;
+//                 }
+//                 else if(j < str.size()){
+//                     ans[j] = ch;
+//                     j += 2;
+//                 }
+//                 times--;
+//             }
+//         }
+//         return ans;
+//     }
+//🔸Time Complexity : O(NlogN), N = length of String
+//🔸Auxiliary Space : O(number of english alphabets)
+
+
+
+//                     //❓Question: Minimum Characters to be added to make string a palindrome
+
+// Given string str of length N. The task is to find the minimum characters to be added at the front to make string palindrome.
+// Note: A palindrome is a word which reads the same backward as forward. Example: "madam".
+
+// Example 1:
+
+// Input:
+// S = "abc"
+// Output: 2
+// Explanation: 
+// Add 'b' and 'c' at front of above string to make it
+// palindrome : "cbabc"
+// Example 2:
+
+// Input:
+// S = "aacecaaa"
+// Output: 1
+// Explanation: Add 'a' at front of above string
+// to make it palindrome : "aaacecaaa"
+// Your Task: 
+// You don't need to read input or print anything. Your task is to complete the function minChar() which takes a string S and returns an integer as output.
+
+// Expected Time Complexity: O(N)
+// Expected Auxiliary Space: O(N)
+
+// Constraints:
+// 1 <= S.length <= 106
+
+//🔴approach:  
+// int minChar(string str){
+        
+//         string rev = str;
+//         reverse(rev.begin(), rev.end());
+        
+//         string st = str+"$"+rev;
+        
+//         int LPS[st.size()+1]={0};
+//         char s[st.size()+1];
+        
+//         for(int i=0; i<st.size(); i++){
+//             s[i+1]=st[i];
+//         }
+        
+//         int first=0, second=2;
+        
+//         while(second<=st.size()){
+//             if(s[first+1] == s[second])
+//             {
+//                 LPS[second]=first+1;
+//                 first++;
+//                 second++;
+//             }
+//             else
+//             {
+//                 if(first == 0){
+//                     second++;
+//                 }
+//                 else
+//                 {
+//                     first = LPS[first];
+//                 }
+//             }
+//         }
+        
+//         return str.size()-LPS[st.size()];
+//     }
+//🔸time complexity; O(N logN + 2N)
+//🔸space complexity: O(4N)
