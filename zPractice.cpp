@@ -6355,3 +6355,273 @@
 //     }
 //🔸time complexity; O(N logN + 2N)
 //🔸space complexity: O(4N)
+
+
+
+//                         //❓Question: Print Anagrams together
+
+// Given an array of strings, return all groups of strings that are anagrams. 
+// The groups must be created in order of their appearance in the original array. 
+// Look at the sample case for clarification.
+// Note: The final output will be in lexicographic order.
+
+
+// Example 1:
+// Input:
+// N = 5
+// words[] = {act,god,cat,dog,tac}
+// Output:
+// act cat tac 
+// god dog
+// Explanation:
+// There are 2 groups of
+// anagrams "god", "dog" make group 1.
+// "act", "cat", "tac" make group 2.
+
+// Example 2:
+// Input:
+// N = 3
+// words[] = {no,on,is}
+// Output: 
+// is
+// no on
+// Explanation:
+// There are 2 groups of
+// anagrams "is" makes group 1.
+// "no", "on" make group 2.
+
+// Your Task:
+// The task is to complete the function Anagrams() that takes a list of strings as input and returns a list of groups such that each group consists of all the strings that are anagrams.
+
+// Expected Time Complexity: O(N*|S|*log|S|), where |S| is the length of the strings.
+// Expected Auxiliary Space: O(N*|S|), where |S| is the length of the strings.
+
+// Constraints:
+// 1<=N<=100
+// 1<=|S|<=10
+
+//🔴approach:
+//  vector<vector<string> > Anagrams(vector<string>& arr) {
+        
+//         map<string, vector<string>> mp;
+//         for(int i=0; i<arr.size(); i++){
+//             string temp = arr[i] ;
+//             sort(temp.begin(), temp.end()) ;
+//             mp[temp].push_back(arr[i]) ;
+//         }
+        
+//         vector<vector<string>> ans(mp.size());
+//         int index = 0 ;
+//         for(auto x:mp) {
+//             auto v = x.second;
+            
+//             for(int i=0; i<v.size(); i++){
+//                 ans[index].push_back(v[i]) ;
+//             }
+//             index++ ;
+//         }
+        
+//         return ans ;
+//     }
+//🔸time complexity: O(N*MLog(m))
+//🔸space complexity: O(N+M)
+
+
+//                 //❓Question: Smallest window in a string  containing all the characters of another string
+
+// Given two strings S and P. Find the smallest window in the string S consisting of all the characters(including duplicates) of the string P.  Return "-1" in case there is no such window present. In case there are multiple such windows of same length, return the one with the least starting index.
+// Note : All characters are in Lowercase alphabets. 
+
+// Example 1:
+// Input:
+// S = "timetopractice"
+// P = "toc"
+// Output: 
+// toprac
+// Explanation: "toprac" is the smallest
+// substring in which "toc" can be found.
+
+// Example 2:
+// Input:
+// S = "zoomlazapzo"
+// P = "oza"
+// Output: 
+// apzo
+// Explanation: "apzo" is the smallest 
+// substring in which "oza" can be found.
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function smallestWindow() which takes two string S and P as input paramters and returns the smallest window in string S having all the characters of the string P. In case there are multiple such windows of same length, return the one with the least starting index. 
+
+// Expected Time Complexity: O(|S|)
+// Expected Auxiliary Space: O(n) n = len(p) O
+
+// Constraints: 
+// 1 ≤ |S|, |P| ≤ 105
+
+
+//🔴approach :
+// string smallestWindow (string s, string p)
+//     {
+//         // Your code here
+//         int start_idx=0,j=0,len=INT_MAX;
+//         vector<int>v(26,0);
+       
+//         for(int i=0;i<p.size();i++){
+//             v[p[i]-'a']++;
+//         }
+        
+//         int need=0;
+//         for(int i=0;i<26;i++){
+//             if(v[i]!=0)
+//             need++;
+//         }
+        
+//         int have=0;
+//         vector<int>cur(26,0);
+       
+//         for(int i=0;i<s.size();i++){
+//             cur[s[i]-'a']++;
+            
+//             if(v[s[i]-'a']==cur[s[i]-'a'])
+//             have++;
+            
+//             while(have==need){
+//                 if(len > (i-j+1)){
+//                     len=i-j+1;
+//                     start_idx=j;
+//                 }
+//                 cur[s[j]-'a']--;
+//                 if(v[s[j]-'a']>cur[s[j]-'a'])
+//                 have--;
+//                 j++;
+//             }
+//         }
+//         if(len==INT_MAX)return "-1";
+//         string ans=s.substr(start_idx,len);
+//         return ans;
+//     }
+//🔸time complexity: O(S+P)
+//🔸space complexity: O(1)
+
+
+
+//                    //❓Question: Remove consecutive characters
+
+// Given a string S. For each index i(1<=i<=N-1), erase it if s[i] is equal to s[i-1] in the string.
+
+// Example 1:
+// Input:
+// S = aabb
+// Output:  ab 
+// Explanation: 'a' at 2nd position is
+// appearing 2nd time consecutively.
+// Similiar explanation for b at
+// 4th position.
+
+// Example 2:
+// Input:
+// S = aabaa
+// Output:  aba
+// Explanation: 'a' at 2nd position is
+// appearing 2nd time consecutively.
+// 'a' at fifth position is appearing
+// 2nd time consecutively.
+ 
+// Your Task:
+// You dont need to read input or print anything. Complete the function removeConsecutiveCharacter() which accepts a string as input parameter and returns modified string.
+ 
+// Expected Time Complexity: O(|S|).
+// Expected Auxiliary Space: O(|S|).
+ 
+// Constraints:
+// 1<=|S|<=105
+// All characters are lowercase alphabets.
+
+//🔴approach :
+//  string removeConsecutiveCharacter(string S)
+//     {
+//         string temp;
+//         temp.push_back(S[0]);
+        
+//       for(int i=1;i<S.size();i++)
+//        {
+//           if(S[i-1]!=S[i]){
+//               temp.push_back(S[i]);
+//             }
+//        }
+//        return temp;
+//     }
+//🔸time complexity: O(N)
+//🔸space complexity: O(N)
+
+
+
+//                  //❓Question: Wildcard String matching
+
+// Given two strings wild and pattern where wild string may contain wild card characters and pattern string is a normal string. Determine if the two strings match. The following are the allowed wild card characters in first string :-
+
+// * --> This character in string wild can be replaced by any sequence of characters, it can also be replaced by an empty string.
+// ? --> This character in string wild can be replaced by any one character.
+// Example 1:
+
+// Input: wild = ge*ks
+//        pattern = geeks
+// Output: Yes
+// Explanation: Replace the '*' in wild string 
+// with 'e' to obtain pattern "geeks".
+// Example 2:
+
+// Input: wild = ge?ks*
+//        pattern = geeksforgeeks
+// Output: Yes
+// Explanation: Replace '?' and '*' in wild string with
+// 'e' and 'forgeeks' respectively to obtain pattern 
+// "geeksforgeeks"
+
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function match() which takes the string wild and pattern as input parameters and returns true if the string wild can be made equal to the string pattern, otherwise, returns false.
+
+// Expected Time Complexity: O(length of wild string * length of pattern string)
+// Expected Auxiliary Space: O(length of wild string * length of pattern string)
+
+// Constraints:
+// 1<=length of the two string<=10^3 
+
+//🔴approach:
+//  bool f(int i, int j, string wild, string pattern) {
+          
+//         if(j==pattern.size()) {
+            
+//             while(i<wild.size()) {
+//                 if(wild[i] != '*')  return false;
+//                 i++;
+//             }
+//             return true;
+//         }
+        
+        
+//         bool fl=false;
+
+//         if(wild[i]==pattern[j]||wild[i]=='?') {
+//             return f(i+1,j+1,wild,pattern);
+//         }
+//         else if(wild[i]=='*') {
+//             for(int k=j;k<=pattern.size();k++) {
+//                 fl=  fl || f(i+1,k,wild,pattern);
+//             }
+//             return fl;
+//         }
+//         else if(wild[i]!=wild[j]) {
+//             return false;
+//         }
+//     }
+    
+//     bool match(string wild, string pattern)
+//     {
+//         int n=wild.size();
+//         int m=pattern.size();
+        
+//         return f(0,0,wild,pattern);  
+//     }
+//🔸time complexity: O(N x (*+?))
+//🔸space compplexity: O(1)
