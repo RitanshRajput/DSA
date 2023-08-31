@@ -6625,3 +6625,349 @@
 //     }
 //🔸time complexity: O(N x (*+?))
 //🔸space compplexity: O(1)
+
+
+
+//                  //❓Question:Function to find Number of customers who could not get a computer
+
+// Write a function “runCustomerSimulation” that takes following two inputs 
+
+// An integer ‘n’: total number of computers in a cafe and a string: 
+// A sequence of uppercase letters ‘seq’: Letters in the sequence occur in pairs. The first occurrence indicates the arrival of a customer; the second indicates the departure of that same customer. 
+// A customer will be serviced if there is an unoccupied computer. No letter will occur more than two times. 
+// Customers who leave without using a computer always depart before customers who are currently using the computers. There are at most 20 computers per cafe.
+
+// For each set of input the function should output a number telling how many customers, if any walked away without using a computer. Return 0 if all the customers were able to use a computer.
+// runCustomerSimulation (2, “ABBAJJKZKZ”) should return 0
+// runCustomerSimulation (3, “GACCBDDBAGEE”) should return 1 as ‘D’ was not able to get any computer
+// runCustomerSimulation (3, “GACCBGDDBAEE”) should return 0
+// runCustomerSimulation (1, “ABCBCA”) should return 2 as ‘B’ and ‘C’ were not able to get any computer.
+// runCustomerSimulation(1, “ABCBCADEED”) should return 3 as ‘B’, ‘C’ and ‘E’ were not able to get any computer.
+
+
+//🔴approach :
+// #include<iostream>
+// #include<cstring>
+// using namespace std;
+ 
+// #define MAX_CHAR 26
+ 
+// // n is number of computers in cafe.
+// // 'seq' is given sequence of customer entry, exit events
+// int runCustomerSimulation(int n, const char *seq)
+// {
+//     // seen[i] = 0, indicates that customer 'i' is not in cafe
+//     // seen[1] = 1, indicates that customer 'i' is in cafe but
+//     //             computer is not assigned yet.
+//     // seen[2] = 2, indicates that customer 'i' is in cafe and
+//     //             has occupied a computer.
+//     char seen[MAX_CHAR] = {0};
+ 
+//     // Initialize result which is number of customers who could
+//     // not get any computer.
+//     int res = 0;
+ 
+//     int occupied = 0; // To keep track of occupied computers
+ 
+//     // Traverse the input sequence
+//     for (int i=0; seq[i]; i++)
+//     {
+//         // Find index of current character in seen[0...25]
+//         int ind = seq[i] - 'A';
+ 
+//         // If First occurrence of 'seq[i]'
+//         if (seen[ind] == 0)
+//         {
+//             // set the current character as seen
+//             seen[ind] = 1;
+ 
+//             // If number of occupied computers is less than
+//             // n, then assign a computer to new customer
+//             if (occupied < n)
+//             {
+//                 occupied++;
+ 
+//                 // Set the current character as occupying a computer
+//                 seen[ind] = 2;
+//             }
+ 
+//             // Else this customer cannot get a computer,
+//             // increment result
+//             else
+//                 res++;
+//         }
+ 
+//         // If this is second occurrence of 'seq[i]'
+//         else
+//         {
+//         // Decrement occupied only if this customer
+//         // was using a computer
+//         if (seen[ind] == 2)
+//             occupied--;
+//         seen[ind] = 0;
+//         }
+//     }
+//     return res;
+// }
+ 
+// // Driver program
+// int main()
+// {
+//     cout << runCustomerSimulation(2, "ABBAJJKZKZ") << endl;
+//     cout << runCustomerSimulation(3, "GACCBDDBAGEE") << endl;
+//     cout << runCustomerSimulation(3, "GACCBGDDBAEE") << endl;
+//     cout << runCustomerSimulation(1, "ABCBCA") << endl;
+//     cout << runCustomerSimulation(1, "ABCBCADEED") << endl;
+//     return 0;
+// }
+//🔸time complexity: O(N)
+//🔸space complexity: O(max_char)
+
+
+//                  //❓Question: Transform String
+
+// Given two strings A and B. Find the minimum number of steps required to transform string A into string B. The only allowed operation for the transformation is selecting a character from string A and inserting it in the beginning of string A.
+
+// Example 1:
+// Input:
+// A = "abd"
+// B = "bad"
+// Output: 1
+// Explanation: The conversion can take place in
+// 1 operation: Pick 'b' and place it at the front.
+
+// Example 2:
+// Input:
+// A = "GeeksForGeeks"
+// B = "ForGeeksGeeks"
+// Output: 3
+// Explanation: The conversion can take
+// place in 3 operations:
+// Pick 'r' and place it at the front.
+// A = "rGeeksFoGeeks"
+// Pick 'o' and place it at the front.
+// A = "orGeeksFGeeks"
+// Pick 'F' and place it at the front.
+// A = "ForGeeksGeeks"
+// Your Task: 
+// You dont need to read input or print anything. Complete the function transform() which takes two strings A and B as input parameters and returns the minimum number of steps required to transform A into B. If transformation is not possible return -1.
+
+// Expected Time Complexity: O(N) where N is max(length of A, length of B) 
+// Expected Auxiliary Space: O(1)  
+
+// Constraints:
+// 1<= A.length(), B.length() <= 104
+
+
+//🔴approach: 
+// int transform (string A, string B)
+//     {
+//         int n = A.length() ;
+//         int m = B.length() ;
+//         if( n != m ) return -1;
+         
+//         string temp = A;
+//         string temp1 = B;
+
+//         sort(temp.begin(), temp.end()) ;
+//         sort(temp1.begin(), temp1.end());
+
+//          if(temp != temp1) return -1;
+        
+//         int i = n-1, j = m-1, count = 0;
+        
+//         while(i >=0 && j >=0) {
+//             if(A[i] == B[j]) {
+//                 i--;
+//                 j--;
+//             }
+//             else{
+//                 count++;
+//                 i--;
+//             }
+//         }
+//         return count;
+//     }
+//🔸time complexity: O(N+m log n)
+//🔸space complexity: O(N + M)
+
+
+//🔴approach: Optmised
+// int transform (string A, string B)
+//     {
+//           //code here.
+//         unordered_map<char,int>unm;
+//         for(int i=0;i<A.length();i++){
+//             unm[A[i]]++;
+//         }
+//         for(int i=0;i<B.length();i++){
+//             unm[B[i]]--;
+//         }
+//         for(auto i:unm){
+//             if(i.second!=0)return -1;
+//         }
+//         int i=A.length()-1;
+//         int j=B.length()-1;
+//         int count=0;
+//         while(i>=0 && j>=0){
+//             if(A[i]==B[j]){
+//                 i--;
+//                 j--;
+//             }
+//             else{
+//                 count++;
+//                 i--;
+//             }
+//         }
+//         return count;
+//     }
+//🔸time complexity: O(N)
+//🔸space compleity: O(N+M)
+
+
+//               //❓Question: Isomorphic string
+
+// Given two strings 'str1' and 'str2', check if these two strings are isomorphic to each other.
+// Two strings str1 and str2 are called isomorphic if there is a one to one mapping possible for every character of str1 to every character of str2 while preserving the order.
+// Note: All occurrences of every character in str1 should map to the same character in str2
+
+// Example 1:
+// Input:
+// str1 = aab
+// str2 = xxy
+// Output: 1
+// Explanation: There are two different
+// charactersin aab and xxy, i.e a and b
+// with frequency 2and 1 respectively.
+
+// Example 2:
+// Input:
+// str1 = aab
+// str2 = xyz
+// Output: 0
+// Explanation: There are two different
+// charactersin aab but there are three
+// different charactersin xyz. So there
+// won't be one to one mapping between
+// str1 and str2.
+// Your Task:
+// You don't need to read input or print anything.Your task is to complete the function areIsomorphic() which takes the string str1 and string str2 as input parameter and  check if two strings are isomorphic. The function returns true if strings are isomorphic else it returns false.
+
+// Expected Time Complexity: O(|str1|+|str2|).
+// Expected Auxiliary Space: O(Number of different characters).
+// Note: |s| represents the length of string s.
+
+// Constraints:
+// 1 <= |str1|, |str2| <= 2*104
+
+
+//🔴approach:
+// bool areIsomorphic(string str1, string str2)
+//     {
+        
+//         int n = str1.length() ;
+//         int m = str2.length() ;
+//         if(n != m) return false;
+        
+//         int m1[256] = {0} ;
+//         int m2[256] = {0} ;
+        
+//         for(int i=0; i<n; i++){
+//             if( !m1[str1[i]] && !m2[str2[i]]) {
+//                 m1[str1[i]] = str2[i] ;
+//                 m2[str2[i]] = str1[i] ;
+//             }
+//             else if(m1[str1[i]] != str2[i]){
+//                 return false;
+//             }
+//         }
+        
+//         return true ;
+//     }
+//🔸time complexity: O(N)
+//🔸space complexity: O(no of different character)
+
+
+//                     //❓QUestion: Recursively print all sentences that can be formed from list of word lists
+
+// Given a list of word lists How to print all sentences possible taking one word from a list at a time via recursion? 
+
+// Example: 
+
+// Input: {{"you", "we"},
+//         {"have", "are"},
+//         {"sleep", "eat", "drink"}}
+
+// Output:
+//   you have sleep
+//   you have eat
+//   you have drink
+//   you are sleep
+//   you are eat
+//   you are drink
+//   we have sleep
+//   we have eat
+//   we have drink
+//   we are sleep
+//   we are eat
+//   we are drink 
+
+//🔴approach:
+// #include <iostream>
+// #include <string>
+ 
+// #define R 3
+// #define C 3
+
+// using namespace std;
+ 
+// // A recursive function to print all possible sentences that can be formed from a list of word list
+// void printUtil(string arr[R][C], int m, int n, string output[R])
+// {
+//     // Add current word to output array
+//     output[m] = arr[m][n];
+ 
+//     // If this is last word of current output sentence, then print the output sentence
+//     if (m==R-1)
+//     {
+//         for (int i=0; i<R; i++)
+//         cout << output[i] << " ";
+//         cout << endl;
+//         return;
+//     }
+ 
+//     // Recur for next row
+//     for (int i=0; i<C; i++)
+//        if (arr[m+1][i] != "")
+//           printUtil(arr, m+1, i, output);
+// }
+ 
+// // A wrapper over printUtil()
+// void print(string arr[R][C])
+// {
+//    // Create an array to store sentence
+//    string output[R];
+ 
+//    // Consider all words for first row as starting points and print all sentences
+//    for (int i=0; i<C; i++) {
+//      if (arr[0][i] != "") {
+//         printUtil(arr, 0, i, output);
+//      }
+//    }
+// }
+ 
+// // Driver program to test above functions
+// int main()
+// {
+//    string arr[R][C]  = {{"you", "we"},
+//                         {"have", "are"},
+//                         {"sleep", "eat", "drink"}};
+ 
+//    print(arr);
+ 
+//  return 0 ;
+// }
+//🔸time complexity: O(n^m)
+//🔸space complexity: O(m)
+
+
