@@ -3584,7 +3584,7 @@
 
 
 
-//                          //🔘🔘 STRINGS 🔘🔘 //
+//                            //🔘🔘 STRINGS 🔘🔘 //
 
 
 //                  //❓Question : 344 Reverse string
@@ -6971,3 +6971,405 @@
 //🔸space complexity: O(m)
 
 
+
+
+//                     //🔘🔘 Searching and Sorting 🔘🔘//
+
+
+
+//                    //❓Question: First and last occurrences of x
+
+// Given a sorted array arr containing n elements with possibly duplicate  is to find indexes of first elements, the taskand last occurrences of an element x in the given array.
+// Note: If the number x is not found in the array then return both the indices as -1.
+
+// Example 1:
+
+// Input:
+// n=9, x=5
+// arr[] = { 1, 3, 5, 5, 5, 5, 67, 123, 125 }
+// Output:  
+// 2 5
+// Explanation: 
+// First occurrence of 5 is at index 2 and last occurrence of 5 is at index 5. 
+// Example 2:
+
+// Input:
+// n=9, x=7
+// arr[] = { 1, 3, 5, 5, 5, 5, 7, 123, 125 }
+// Output:  
+// 6 6
+// Explanation: 
+// First and last occurrence of 7 is at index 6.
+// Your Task:
+// Since, this is a function problem. You don't need to take any input, as it is already accomplished by the driver code. You just need to complete the function find() that takes array arr, integer n and integer x as parameters and returns the required answer.
+
+// Expected Time Complexity: O(logN)
+// Expected Auxiliary Space: O(1).
+
+// Constraints:
+// 1 ≤ N ≤ 106
+// 1 ≤ arr[i],x ≤ 109
+
+//🔴approach : brute force
+
+//  vector<int> find(int arr[], int n , int x )
+//     {
+//         int start = 0;
+//         int end = n-1 ;
+//         vector<int> ans ;
+        
+//         while(start < n){
+//             if(arr[start] == x) {
+//                 ans.push_back(start);
+//                 break;
+//             }
+//             start++ ;
+//         }
+        
+//         while(end >= 0){
+//             if(arr[end] == x) {
+//                 ans.push_back(end);
+//                 break;
+//             }
+//             end--;
+//         }
+        
+//         if(ans.size() == 0) {
+//             ans.push_back(-1);
+//             ans.push_back(-1);
+//         }
+        
+//         return ans;
+//     }
+//🔸time complexity: O(N)
+//🔸space complexity: O(1)
+
+
+
+//                        //❓Question: Value equal to index value
+
+// Given an array Arr of N positive integers. Your task is to find the elements whose value is equal to 
+// that of its index value ( Consider 1-based indexing ).
+
+// Note: There can be more than one element in the array which have the same value as its index. 
+// You need to include every such element's index. Follows 1-based indexing of the array.
+
+// Example 1:
+// Input:
+// N = 5
+// Arr[] = {15, 2, 45, 12, 7}
+// Output: 2
+// Explanation: Only Arr[2] = 2 exists here.
+
+// Example 2:
+// Input: 
+// N = 1
+// Arr[] = {1}
+// Output: 1
+// Explanation: Here Arr[1] = 1 exists.
+
+// Your Task:  
+// You don't need to read input or print anything. Your task is to complete the function valueEqualToIndex() which takes the array of integers arr[] and n as parameters and returns an array of indices where the given conditions are satisfied. When there is no such element exists then return an empty array of length 0.
+
+// Expected Time Complexity: O(N)
+// Expected Auxiliary Space: O(1)
+ 
+// Constraints:
+// 1 ≤ N ≤ 105
+// 1 ≤ Arr[i] ≤ 106
+
+//🔴approach :
+
+//    vector<int> valueEqualToIndex(int arr[], int n) {
+       
+//        vector<int> ans;
+//        for(int i=0; i<n; i++){
+//            if(i+1 == arr[i]){
+//                ans.push_back(i+1);
+//            }
+//        }
+       
+//        return ans;
+//    }
+//🔸time complexity: O(N)
+//🔸space complexity: O(N)
+
+
+//                    //❓Question: Search in a rotated sorted array
+
+// There is an integer array nums sorted in ascending order (with distinct values).
+// Prior to being passed to your function, nums is possibly rotated at an unknown pivot index k (1 <= k < nums.length)
+// such that the resulting array is [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed). 
+// For example, [0,1,2,4,5,6,7] might be rotated at pivot index 3 and become [4,5,6,7,0,1,2].
+// Given the array nums after the possible rotation and an integer target, return the index of target if it is in nums, or -1 if it is not in nums.
+
+// You must write an algorithm with O(log n) runtime complexity.
+
+ 
+// Example 1:
+// Input: nums = [4,5,6,7,0,1,2], target = 0
+// Output: 4
+
+// Example 2:
+// Input: nums = [4,5,6,7,0,1,2], target = 3
+// Output: -1
+
+// Example 3:
+// Input: nums = [1], target = 0
+// Output: -1
+ 
+// Constraints:
+// 1 <= nums.length <= 5000
+// -104 <= nums[i] <= 104
+// All values of nums are unique.
+// nums is an ascending array that is possibly rotated.
+// -104 <= target <= 104
+
+//🔴approach : brute force linear search
+// int search(vector<int>& nums, int target) {
+//         int ans = -1;
+        
+//         for(int i=0; i<nums.size(); i++){
+//             if(nums[i] == target){
+//                 ans = i;
+//                 return ans;
+//             }
+//         }
+        
+//         return ans;
+//     }
+//🔸time complexity: O(N)
+//🔸space complexity: O(1)
+
+
+//🔴approach : Optimised binary search
+// int search(vector<int>& nums, int target) {
+//         int start = 0;
+//         int end = nums.size()-1;
+        
+//         while(start <= end){
+//             int mid = start+(end-start)/2;
+            
+//             if(nums[mid] == target){
+//                 return mid;
+//             }
+            
+//             if(nums[start] <= nums[mid]) {
+//                 if(nums[start] <= target && target < nums[mid]) {
+//                     end = mid -1;
+//                 }
+//                 else{
+//                     start = mid + 1;
+//                 }
+//             }
+//             else{
+//                 if(target > nums[mid] && target <= nums[end]){
+//                     start = mid + 1;
+//                 }
+//                 else{
+//                     end = mid -1 ;
+//                 }
+//             }
+//         }
+        
+//         return -1;
+//     }
+//🔸time complexity: O(log n)
+//🔸space complexity: O(1)
+
+
+
+//                         //❓Question: Count Square
+
+// Consider a sample space S consisting of all perfect squares starting from 1, 4, 9 and so on. 
+// You are given a number N, you have to output the number of integers less than N in the sample space S.
+
+// Example 1:
+// Input :
+// N = 9
+// Output:
+// 2
+// Explanation:
+// 1 and 4 are the only Perfect Squares
+// less than 9. So, the Output is 2.
+
+// Example 2:
+// Input :
+// N = 3
+// Output:
+// 1
+// Explanation:
+// 1 is the only Perfect Square
+// less than 3. So, the Output is 1.
+ 
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function countSquares() which takes an Integer N as input and returns the answer.
+
+// Expected Time Complexity: O(sqrt(N))
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1 <= N <= 108
+
+
+//🔴approach : 
+// int countSquares(int N) {
+        
+//         int count = 0;
+//         for(int i=1; i*i<N; i++){
+//             count++ ;
+//         }
+        
+//         return count;
+//     }
+//🔸time complexity: O(N)
+//🔸space complexity: O(1)
+
+
+
+//                       //❓Question: Middle of three
+
+// Given three distinct numbers A, B and C. Find the number with value in middle 
+// (Try to do it with minimum comparisons).
+
+// Example 1:
+// Input:
+// A = 978, B = 518, C = 300
+// Output:
+// 518
+// Explanation:
+// Since 518>300 and 518<978, so 
+// 518 is the middle element.
+
+// Example 2:
+// Input:
+// A = 162, B = 934, C = 200
+// Output:
+// 200
+// Exaplanation:
+// Since 200>162 && 200<934,
+// So, 200 is the middle element.
+
+// Your Task:
+// You don't need to read input or print anything.Your task is to complete the function middle() which takes three integers A,B and C as input parameters and returns the number which has middle value.
+
+// Expected Time Complexity:O(1)
+// Expected Auxillary Space:O(1)
+
+// Constraints:
+// 1<=A,B,C<=109
+// A,B,C are distinct. 
+
+//🔴approach: Brute force
+
+// int middle(int A, int B, int C){
+//     int mini = min(A, min(B, C)) ;
+//     int maxi = max(A, max(B, C)) ;
+    
+//     if(mini == A && maxi == B) return C ;
+//     else if(mini == A && maxi == C) return B;
+//     else if(mini == B && maxi == A) return C;
+//     else if(mini == B && maxi == C) return A;
+//     else if(mini == C && maxi == A) return B;
+//     else if(mini == C && maxi == B) return A;
+// }
+//🔸time complexity: O(1)
+//🔸space complexity: O(1)
+
+//🔴approach: optimised 
+
+// int middle(int A, int B, int C){ 
+
+//         if(A>=B && A>=C)
+//         {
+//            if(B>=C) return B;
+//            else return C;
+//         }
+//         if(B>=C && B>=A)
+//         {
+//            if(C>=A) return C;
+//            else return A;
+//         }
+//         if(C>=A && C>=B)
+//         {
+//             if(A>=B) return A;
+//             else return B;
+//         } 
+//     }
+//🔸time complexity: O(1)
+//🔸space complexity: O(1)
+
+
+
+//                 //❓Question: Optimum location of point to minimize total distance
+
+// Given a set of coordinates points of the form [p, q] and a line L of the form ax + by + c = 0. 
+// The task is to find a point on a given line for which the sum of distances from a given set of coordinates is minimum. 
+ 
+// Example 1:
+// Input:
+// L = {1, -1, -3}
+// points[] = {{-3, 2}, {-1, 0}, 
+//             {-1, 2}, {1, 2}, {3, 4}}
+// Output: 20.77
+// Explanation: In above figure optimum location of 
+// point of x - y - 3 = 0 line is (2, -1), whose 
+// total distance with other points is 20.77, 
+// which is minimum obtainable total distance.
+
+// Example 2:
+// Input:
+// L = {2, 1, 4}
+// points[] = {{-1, 2}, {1, 3},{2, 4}}
+// Output: 11.20
+ 
+// Your Task:  
+// You don't need to read input or print anything. Your task is to complete the function findOptimumCost() which takes a line L and coordinates and returns an double up to 2 decimal places as output.
+
+// Expected Time Complexity: O(NlogN)
+// Expected Auxiliary Space: O(N)
+
+// Constraints:
+// 1 <= N <= 105
+// -103 <= point[i] <= 103
+
+
+//🔴approach: 
+// double  findTotalDistance(tuple<int,int,int>&l, vector<pair<int,int>>&p, int n,double x )
+//     {
+//         double a= get<0>(l);
+//         double b= get<1>(l);
+//         double c= get<2>(l);
+//         double y= -1*((a*x)+c)/b;
+//         double dist=0;
+//         for(auto it:p)
+//         {
+//             double x1=it.first;
+//             double y1= it.second;
+//             dist+=sqrt((x1-x)*(x1-x)+(y1-y)*(y1-y));
+//         }
+//         return dist;
+//     }
+//     double findOptimumCost(tuple<int,int,int>l, vector<pair<int,int>>p, int n){
+//         //Write your code here
+//       double low= -1e6;
+//       double high= 1e6;
+//       double eps=1e-6;
+//       while(high-low>eps)
+//       {
+//           double mid1= low+(high - low)/3;
+//           double mid2= high-(high-low)/3;
+//           double d1= findTotalDistance(l,p,n,mid1);
+//           double d2=  findTotalDistance(l,p,n,mid2);
+//           if(d1>d2)  low=mid1;
+//           else if(d2>d1) high=mid2;
+//           else{
+//               low=mid1;
+//               high=mid2;
+//           }
+//       }
+//       return ( findTotalDistance(l,p,n,low));
+      
+//     }
+//🔸time complexity: O(N log n)
+//🔸space complexity: O(N)
