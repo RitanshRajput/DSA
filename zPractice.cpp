@@ -7301,7 +7301,7 @@
 
 
 
-//                 //❓Question: Optimum location of point to minimize total distance
+//                 //❓Question: Optimum location of point to minimize total distance  (HARD)
 
 // Given a set of coordinates points of the form [p, q] and a line L of the form ax + by + c = 0. 
 // The task is to find a point on a given line for which the sum of distances from a given set of coordinates is minimum. 
@@ -7373,3 +7373,193 @@
 //     }
 //🔸time complexity: O(N log n)
 //🔸space complexity: O(N)
+
+
+
+//                      //❓QUestion: Find Missing and Repeating Number
+
+// Given an unsorted array Arr of size N of positive integers. One number 'A' from set {1, 2,....,N} 
+// is missing and one number 'B' occurs twice in array. Find these two numbers.
+
+// Example 1:
+// Input:
+// N = 2
+// Arr[] = {2, 2}
+// Output: 2 1
+// Explanation: Repeating number is 2 and 
+// smallest positive missing number is 1.
+
+// Example 2:
+// Input:
+// N = 3
+// Arr[] = {1, 3, 3}
+// Output: 3 2
+// Explanation: Repeating number is 3 and 
+// smallest positive missing number is 2.
+
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function findTwoElement() which takes the array of integers arr and n as parameters and returns an array of integers of size 2 denoting the answer ( The first index contains B and second index contains A.)
+
+// Expected Time Complexity: O(N)
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 2 ≤ N ≤ 105
+// 1 ≤ Arr[i] ≤ N
+
+
+//🔴approach:
+// vector<int> findTwoElement(vector<int> arr, int n) {
+     
+//         int arr1[n+1] = {0};
+//         vector<int> v;
+        
+//         // mapping every element
+//         for(int i=0;i<n;i++){
+//             arr1[arr[i]]+=1;
+//         }
+        
+//         // if after mapping any element has map > 1 then repeatation is there
+//         for(int i=1;i<n+1;i++){
+//             if(arr1[i]>1){
+//                 v.push_back(i);
+//                 break;
+//             }
+//         }
+        
+//         // if any element position has mapping of zero means that element is missing
+//         for(int i=1;i<n+1;i++){
+//             if(arr1[i]==0){
+//                 v.push_back(i);
+//                 break;
+//             }
+//         }
+    
+//         // if size is 0 then return {0,0}
+//         if(v.size()==0){
+//             return {0,0};
+//         }
+//         return v;
+//     }
+//🔸time complexity: O(3N)
+//🔸space complexity: O(N+1)
+
+
+//🔴approach: Optimised
+//  vector<int> findTwoElement(vector<int> arr, int n) 
+//     {
+//         map<int,int>m;
+//         int re=0;
+//         int ms=0;
+//         int element=1;
+        
+//         for(int i=0; i<n; i++)
+//         {
+//             m[arr[i]]++;
+//         }
+        
+//         for(auto it : m)
+//         {
+//             //repeating element
+//             if(it.second>1)
+//             {
+//                 re=it.first;
+//             }
+//             //missing element
+//             if(m.find(element)!=m.end())
+//             {
+//                 element++;
+//             }
+//         }
+//         ms=element;
+//         return{re,ms};
+//     }
+//🔸time complexity: O(N)
+//🔸space complexity: O(N)
+
+
+//                  //❓Question: Majority Element
+
+// Given an array A of N elements. Find the majority element in the array. 
+// A majority element in an array A of size N is an element that appears more than N/2 times in the array.
+ 
+// Example 1:
+// Input:
+// N = 3 
+// A[] = {1,2,3} 
+// Output:
+// -1
+// Explanation:
+// Since, each element in {1,2,3} appears only once so there is no majority element.
+
+// Example 2:
+// Input:
+// N = 5 
+// A[] = {3,1,3,3,2} 
+// Output:
+// 3
+// Explanation:
+// Since, 3 is present more than N/2 times, so it is the majority element.
+
+// Your Task:
+// The task is to complete the function majorityElement() which returns the majority element in the array. If no majority exists, return -1.
+ 
+// Expected Time Complexity: O(N).
+// Expected Auxiliary Space: O(1).
+ 
+// Constraints:
+// 1 ≤ N ≤ 107
+// 0 ≤ Ai ≤ 106
+
+
+//🔴approach:
+//  int majorityElement(int a[], int size) {    
+//       int count =-1;
+//       unordered_map<int,int>ans;
+//        for(int i=0;i<size;i++)
+//        {
+//            ans[a[i]]++;
+//        }
+       
+//        size=size/2;
+//        for(auto i:ans)
+//        {
+//            if(i.second>size){
+//              count=i.first;
+//              break;
+//            }
+//        }
+//         // your code here
+//         return count;
+//     }
+//🔸time complexity: O(2N)
+//🔸space complexity: O(N)
+
+
+
+//🔴approach: optimised
+//  int majorityElement(int a[], int size){
+//         int count = 0;
+//         int elem;
+
+//         for(int i=0; i<size; i++)
+//         {
+//             if(count==0){
+//                 count = 1; 
+//                 elem = a[i];
+//             }
+//             else if(a[i]==elem){
+//                 count++;
+//             }
+//             else count--;
+//         }
+//         int cnt=0;
+//         for(int i=0; i<size; i++)
+//         {
+//             if(a[i]==elem) cnt++;
+//         }
+//         if(cnt>size/2) return elem;
+//         return -1;
+//  }
+//🔸time complexity: O(2N)
+//🔸space complexity: O(1)
