@@ -155,16 +155,16 @@
 
 //     //base case 
 //     if(n == 0){
-//         return 1 ;
+//        return 1 ;
 //     }
 
-//     // recursive relation : solution 1
-//     // int smallProblem = power(n-1) ;
-//     // int bigProblem = 2 * smallProblem ;          // here 2 bcoz we want power of 2
-//     // return bigProblem ;
+// //     recursive relation : solution 1
+//     int smallProblem = power(n-1) ;
+//     int bigProblem = 2 * smallProblem ;          // here 2 bcoz we want power of 2
+//     return bigProblem ;
 
 //     // solution 2 
-//     return 2 * power(n-1) ;
+// //     return 2 * power(n-1) ;
 // }
 
 // int main(){
@@ -243,8 +243,8 @@
 //    cout<< "src :"<<src <<" destiny :"<<dest <<endl ;
 //     // base case 
 //     if( src == dest){
-//         cout<< " src === destiny "<<endl ;
-//         return ;
+//        cout<< " src === destiny "<<endl ;
+//        return ;
 //     }
 
 //     // processing 
@@ -294,7 +294,6 @@
 // using namespace std ;
 
 // int Fibo(int n){
-
 //     //base case 
 //     if( n==0){
 //         return 0;
@@ -1761,7 +1760,7 @@
 // input : 'str' = 'bbb'
 // output : 'b' 'b' 'b' 'bb' 'bb' 'bb' 'bbb'
 
-
+//🔴approach : Lovebabbar
 // #include<iostream>
 // #include<vector>
 // using namespace std ;
@@ -1804,6 +1803,45 @@
 //     }
 
 //     return 0;
+// }
+
+
+//🔴approach : Striver
+// #include <iostream>
+// #include<vector>
+// using namespace std;
+
+// void solve(int arr[], vector<int>& ans, int ind, int n){
+//   if(ind == n){
+//      for(auto i:ans){
+//        cout<<i <<" ";
+//      }
+     
+//      if(ans.size() == 0){
+//        cout<<"{}";
+//      }
+//      cout<<endl;
+     
+//      return ;
+//   }
+  
+//   //take 
+//   ans.push_back(arr[ind]);
+//   solve(arr, ans, ind+1, n);
+  
+//   //not take 
+//   ans.pop_back();
+//   solve(arr, ans, ind+1, n);
+  
+// }
+
+// int main() 
+// {
+//   int n = 3;
+//   int arr[n] = {1, 2, 3} ;
+//   vector<int> ans;
+//   solve(arr, ans, 0, n);
+//   return 0;
 // }
 
 
