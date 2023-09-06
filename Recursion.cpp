@@ -2700,5 +2700,47 @@
 
 
 
+//                 //❓Question: Find all the subsequences whose sum is equal to K
 
-//❓Homework to find all the recursion question space and time complexity 
+// We have been given index of 1st element of an array, the array itself, and ans vector in which we will 
+// hold our answer and k which is sum and n as size of given array
+// we need to find all the subsequences whose sum is equal to given k using recursion
+
+//🔴approach : recursiom
+// #include <iostream>
+// #include<vector>
+// #include<numeric>
+// using namespace std;
+
+// void solve(int index, vector<int>& ans, int arr[], int sum, int n){
+
+//   if( index == n){
+    
+//      int temp = accumulate(ans.begin(), ans.end(), 0);
+//      if(temp == sum){
+//        for(auto i:ans){
+//          cout<<i<<"," ;
+//        }
+//        cout<<endl;
+//      }
+     
+//      return ;
+//   }
+  
+//   ans.push_back(arr[index]);
+//   solve(index+1, ans, arr, sum, n);
+//   ans.pop_back() ;
+  
+//   solve(index+1, ans, arr, sum, n);
+  
+// }
+
+// int main() 
+// {
+//   int n = 6;
+//   int k = 5;
+//   int arr[n] = {1, 2, 1, 3, 4, 1} ;
+//   vector<int> ans;
+//   solve(0, ans, arr, k, n);
+//   return 0;
+// }
