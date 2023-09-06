@@ -2744,3 +2744,158 @@
 //   solve(0, ans, arr, k, n);
 //   return 0;
 // }
+//🔸time complexity: O(2^N)
+//🔸space complexity: O(N)
+
+
+
+//❓ Modifiying above question only return single subsequence whose sum is equal to k 
+
+//🔴approach :
+// #include <iostream>
+// #include<vector>
+// #include<numeric>
+// using namespace std;
+
+// bool solve(int index, vector<int>& ans, int arr[], int sum, int n){
+//   if( index == n){
+//      int temp = accumulate(ans.begin(), ans.end(), 0);
+//      if(temp == sum){
+//        for(auto i:ans){
+//          cout<<i<<"," ;
+//        }
+//        cout<<endl;
+//        return true ;
+//      }
+//      else {
+//        return false;
+//      }
+//   }
+  
+  
+//   ans.push_back(arr[index]);
+//   if(solve(index+1, ans, arr, sum, n) == true) {
+//     return true ;
+//   }
+//   ans.pop_back() ;
+  
+//   if(solve(index+1, ans, arr, sum, n) == true ) {
+//     return true ;
+//   }
+  
+//   return false;
+  
+// }
+
+// int main() 
+// {
+//   int n = 6;
+//   int sum =5;
+//   int arr[n] = {1, 2, 1, 3, 4, 1} ;
+//   vector<int> ans;
+//   solve(0, ans, arr, sum, n);
+//   return 0;
+// }
+//🔸time complexity: O(2^N)
+//🔸space complexity: O(N)
+
+
+//🔴approach : striver 
+// #include <iostream>
+// #include<vector>
+// #include<numeric>
+// using namespace std;
+
+// int solve(int index, int count, int arr[], int sum, int n){
+//   if( index == n){
+//      if(count == sum){
+//       return 1;
+//      }
+//      else{
+//       return 0;  
+//      }
+//   }
+  
+//   count += arr[index];
+//   int take = solve(index+1, count, arr, sum, n);
+
+//   count -= arr[index];
+//   int not_take = solve(index+1, count, arr, sum, n) ;
+  
+//   return take + not_take ;
+// }
+
+// int main() 
+// {
+//   int n = 3;
+//   int sum = 2;
+//   int arr[n] = {1, 2, 1} ;
+//   int count = 0 ;
+//   cout<< solve(0, count, arr, sum, n) ;
+//   return 0;
+// }
+//🔸time complexity: O(2^N)
+//🔸space complexity: O(N)
+
+
+//                //❓Question : Combination SUm
+
+// Given an array of distinct integers candidates and a target integer target, 
+// return a list of all unique combinations of candidates where the chosen numbers sum to target. 
+// You may return the combinations in any order.
+// The same number may be chosen from candidates an unlimited number of times.
+// Two combinations are unique if the frequency of at least one of the chosen numbers is different.
+// The test cases are generated such that the number of unique combinations that sum 
+// up to target is less than 150 combinations for the given input.
+
+// Example 1:
+// Input: candidates = [2,3,6,7], target = 7
+// Output: [[2,2,3],[7]]
+// Explanation:
+// 2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.
+// 7 is a candidate, and 7 = 7.
+// These are the only two combinations.
+
+// Example 2:
+// Input: candidates = [2,3,5], target = 8
+// Output: [[2,2,2,2],[2,3,3],[3,5]]
+
+// Example 3:
+// Input: candidates = [2], target = 1
+// Output: []
+ 
+// Constraints:
+// 1 <= candidates.length <= 30
+// 2 <= candidates[i] <= 40
+// All elements of candidates are distinct.
+// 1 <= target <= 40
+
+//🔴approach:
+//  void solve(int ind, vector<vector<int>>& ans, vector<int>& ds, int target, vector<int> candidates){
+//         //base case
+//         if(ind == candidates.size()) {
+//             if(target == 0) {
+//                 ans.push_back(ds);
+//             }
+//             return ;
+//         }
+        
+//         //pick element
+//         if(candidates[ind] <= target){
+//             ds.push_back(candidates[ind]);
+//             solve(ind, ans, ds, target-candidates[ind], candidates) ;
+//             ds.pop_back() ;
+//         }
+        
+//         solve(ind+1, ans, ds, target, candidates);
+        
+//     }
+    
+//     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+//         vector<vector<int>> ans;
+//         vector<int> ds;
+//         solve(0, ans, ds, target, candidates);
+//         return ans;
+//     }
+//🔸time complexity: O(2^target * k)              // k = average length
+//🔸space complexity: O(K * x)                // k = average lengt, x = combinations formed
