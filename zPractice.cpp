@@ -7771,7 +7771,7 @@
 //🔸space complexity: (N^2)
 
 
-//                 //❓Question: Stickler Thief 
+//                         //❓Question: Stickler Thief 
 
 // Stickler the thief wants to loot money from a society having n houses in a single line. 
 // He is a weird person and follows a certain rule when looting the houses. According to the rule, 
@@ -7849,8 +7849,8 @@
 //       }
 //       return solve(arr, n-1, tamatar);
 //   }
-//🔸time complexity: O(N)
-//🔸space complexity: O(N+1)
+//🔸time complexity: O(2^n)
+//🔸space complexity: O(2N+1)
 
 
 //               //❓Question: Count triplets with sum smaller than sum
@@ -7910,3 +7910,220 @@
 //🔸time complexity: O(N^2)
 //🔸space complexity: O(1)
 
+
+
+
+//                     //❓Question: Product array puzzle
+
+// Given an array nums[] of size n, construct a Product Array P (of same size n) 
+// such that P[i] is equal to the product of all the elements of nums except nums[i].
+
+// Example 1:
+// Input:
+// n = 5
+// nums[] = {10, 3, 5, 6, 2}
+// Output:
+// 180 600 360 300 900
+// Explanation: 
+// For i=0, P[i] = 3*5*6*2 = 180.
+// For i=1, P[i] = 10*5*6*2 = 600.
+// For i=2, P[i] = 10*3*6*2 = 360.
+// For i=3, P[i] = 10*3*5*2 = 300.
+// For i=4, P[i] = 10*3*5*6 = 900.
+
+// Example 2:
+// Input:
+// n = 2
+// nums[] = {12,0}
+// Output:
+// 0 12
+
+// Your Task:
+// You do not have to read input. Your task is to complete the function productExceptSelf() that takes array nums[] and n as input parameters and returns a list of n integers denoting the product array P. If the array has only one element the returned list should should contains one value i.e {1}
+// Note: Try to solve this problem without using the division operation.
+ 
+// Expected Time Complexity: O(n)
+// Expected Auxiliary Space: O(n)
+ 
+// Constraints:
+// 1 <= n <= 1000
+// 0 <= numsi <= 200
+// Array may contain duplicates.
+
+
+//🔴approach : brute force
+//  vector<long long int> productExceptSelf(vector<long long int>& nums, int n) {
+       
+//         vector<long long int> ans;
+        
+//         for(int i=0; i<n; i++){    
+//           long long int temp = 1;
+//             for(int j=0; j<n; j++){
+//                if( j == i ) {
+//                    continue;
+//                }
+//                else{        
+//                    temp *= nums[j];
+//                }
+//             }
+//             ans.push_back(temp) ;
+//         }
+        
+//         return ans;
+//     }
+//🔸time complexity: O(N^2)
+//🔸space complexity: O(N)
+
+
+//🔴approach : Optimal
+//  vector<long long int> productExceptSelf(vector<long long int>& nums, int n) {
+       
+//         //code here 
+//         vector<long long int> ans;
+//         int zero=0;
+//         long long int multiply=1;
+
+//         for(int i=0;i<n;i++)
+//         {
+//             if(nums[i]!=0)
+//             {
+//                 multiply=multiply*nums[i];
+//             }
+//             else{
+//                 zero++;
+//             }
+//         }
+
+//         for(int i=0;i<n;i++){
+//             if(nums[i]!=0 && zero<1)
+//             {
+//                 ans.push_back(multiply/nums[i]);
+//             }
+//             else if(nums[i]==0 && zero<2)
+//             {
+//                 ans.push_back(multiply);
+//             }
+//             else
+//             {
+//                 ans.push_back(0);
+//             }
+//         }
+//         return ans;   
+//     }
+//🔸time complexity: O(2N)
+//🔸space complexity: O(N)
+
+
+//                    //❓Question: Sort by Set bit Count
+
+// Given an array of integers, sort the array (in descending order) according to count of set bits in binary representation of array elements. 
+// Note: For integers having same number of set bits in their binary representation, sort according to their position in the original array i.e., a stable sort.
+
+// Example 1:
+// Input: 
+// arr[] = {5, 2, 3, 9, 4, 6, 7, 15, 32};
+// Output:
+// 15 7 5 3 9 6 2 4 32
+// Explanation:
+// The integers in their binary
+// representation are:
+// 15 - 1111
+// 7  - 0111
+// 5  - 0101
+// 3  - 0011
+// 9  - 1001
+// 6  - 0110
+// 2  - 0010
+// 4  - 0100
+// 32 - 10000
+// hence the non-increasing sorted order is:
+// {15}, {7}, {5, 3, 9, 6}, {2, 4, 32}
+ 
+// Example 2:
+// Input: 
+// arr[] = {1, 2, 3, 4, 5, 6};
+// Output: 
+// 3 5 6 1 2 4
+// Explanation:
+// 3  - 0011
+// 5  - 0101
+// 6  - 0110
+// 1  - 0001
+// 2  - 0010
+// 4  - 0100
+// hence the non-increasing sorted order is
+// {3, 5, 6}, {1, 2, 4}
+
+// Your Task:
+// You don't need to print anything, printing is done by the driver code itself. You just need to complete the function sortBySetBitCount() which takes the array arr[] and its size N as inputs and sort the array arr[] inplace. Use of extra space is prohibited.
+ 
+// Expected Time Complexity: O(N.log(N))
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1 ≤ N ≤ 105
+// 1 ≤ A[i] ≤ 106
+
+//🔴approach : TLE
+// static bool comp(pair<int,int> a,pair<int,int> b){
+//         if(a.first==b.first){
+//             return a.second<b.second;
+//         }
+//         return a.first>b.first;
+//     }
+//     int count(int n){
+//         int count=0;
+//         while(n){
+//             if(n&1){
+//                 count++;
+//             }
+//             n=n>>1;
+//         }
+//         return count;
+//     }
+//     void sortBySetBitCount(int arr[], int n)
+//     {
+//         vector<int>copy;
+//         for(int i=0;i<n;i++){
+//             copy.push_back(arr[i]);
+//         }
+//         vector<pair<int,int>>vec;
+//         for(int i=0;i<n;i++){
+//             vec.push_back({count(arr[i]),i});
+//         }
+//         sort(vec.begin(),vec.end(),comp);
+//         for(int i=0;i<copy.size();i++){
+//             arr[i]=copy[vec[i].second];
+//         }
+//     }
+//🔸time complexity: O(3N^2 + N logn)
+//🔸space complexity: O(2N)
+
+
+//🔴approach: TLE
+// int setbit(int n) {
+        
+//         int count=0;
+//         while(n>0)
+//         {
+//           if(n%2==1) count++;
+//           n=n/2;
+//         }
+//         return count;
+//     }
+    
+//     void sortBySetBitCount(int arr[], int n)
+//     {   
+//         for(int i=1; i<n; i++) {
+//           for(int j=i; j>0; j--) {
+//             int prevCount = setbit(arr[j-1]) ;
+//             int currCount = setbit(arr[j]) ;
+            
+//               if(prevCount < currCount) {
+//                   swap(arr[j], arr[j-1]) ;
+//               }
+//           }
+//         }  
+//     }
+//🔸time complexity: O(N^2)
+//🔸space complexity: O(1)
