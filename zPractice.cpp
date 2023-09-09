@@ -8127,3 +8127,290 @@
 //     }
 //🔸time complexity: O(N^2)
 //🔸space complexity: O(1)
+
+
+
+//                //❓Question: Combination Sum IV
+
+// Given an array of distinct integers nums and a target integer target, 
+// return the number of possible combinations that add up to target.
+// The test cases are generated so that the answer can fit in a 32-bit integer.
+
+// Example 1:
+// Input: nums = [1,2,3], target = 4
+// Output: 7
+// Explanation:
+// The possible combination ways are:
+// (1, 1, 1, 1)
+// (1, 1, 2)
+// (1, 2, 1)
+// (1, 3)
+// (2, 1, 1)
+// (2, 2)
+// (3, 1)
+// Note that different sequences are counted as different combinations.
+
+// Example 2:
+// Input: nums = [9], target = 3
+// Output: 0
+ 
+// Constraints:
+// 1 <= nums.length <= 200
+// 1 <= nums[i] <= 1000
+// All the elements of nums are unique.
+// 1 <= target <= 1000
+
+//🔴approach :  Recursion (TLE)
+//  int solve(vector<int>&nums, int target){
+//         if(target < 0) return 0;
+//         if(target == 0)return 1;
+//         int ans=0;
+//         for(int i=0;i<nums.size();i++){
+//             ans+=solve(nums, target-nums[i]);
+//         }
+//         return ans;
+//     }
+
+//     int combinationSum4(vector<int>& nums, int target) {
+//         return solve(nums, target);
+//     }
+//🔸time complexeity: O(exponential)
+//🔸space complexity: O(N)        //distinct possible answer
+
+
+//🔴approach : Memoization (top-down)
+//   int solve(vector<int>&nums, int target, vector<int>& dp){
+//         if(target < 0) return 0;
+//         if(target == 0)return 1;
+//         if(dp[target]!=-1) return dp[target];
+//         int ans=0;
+//         for(int i=0;i<nums.size();i++){
+//             ans+=solve(nums, target-nums[i], dp);
+//         }
+//         dp[target] = ans;
+//         return dp[target];
+//     }
+
+//     int combinationSum4(vector<int>& nums, int target) {
+//         vector<int> dp(target+1, -1);
+//         return solve(nums, target, dp);
+//     }
+//🔸time complexity: O(N^2)
+//🔸space complexity: O(target+1)
+
+//🔴approach : Tabulation (bottom-up)
+//   int combinationSum4(vector<int>& nums, int target) {
+//       vector<unsigned int> dp(target+1, 0);
+//       dp[0]=1;
+//       for(int i=1;i<=target;i++){
+//           for(int j=0;j<nums.size();j++){
+//               if(i-nums[j]>=0)
+//                   dp[i]+=dp[i-nums[j]];
+//           }
+//       }
+//       return dp[target];
+//   }
+//🔸time complexity:  O(N^2)
+//🔸space complexity: O(target+1)
+
+
+
+//              //❓Question: Bishu and Soldier
+
+// Bishu went to fight for Coding Club. There were N soldiers with various powers.
+// There will be Q rounds to fight and in each round, Bishu's power will be varied. 
+// With power M, Bishu can kill all the soldiers whose power is less than or equal to M(<=M). 
+// After each round, All the soldiers who are dead in the previous round will reborn. 
+// Such that in each round there will be N soldiers to fight. As Bishu is weak in mathematics, 
+// help him to count the number of soldiers that he can kill in each round and the total sum of their powers.
+
+// INPUT:
+// The first line of the input contains N, the number of soldiers.
+// The second line contains an array of N numbers denoting the power of each soldier
+// This third line contains Q, which denotes the number of rounds.
+// Q lines follow, each line having one number denoting the power of Bishu.
+
+// OUTPUT:
+// For each round, the output should be an array of two numbers. 
+// The first number should be the number of soldiers that Bishu can beat, 
+// and the second number denotes the cumulative strength of all the soldiers that Bishu can beat.
+
+// CONSTRAINTS:
+// 1<=N<=10000
+// 1<=power of each soldier<=100
+// 1<=Q<=10000
+// 1<=power of bishu<=100
+
+// Sample Input
+// 7
+// 1 2 3 4 5 6 7
+// 3
+// 3
+// 10
+// 2
+// Sample Output
+// 3 6
+// 7 28
+// 2 3
+
+// Time Limit: 1
+// Memory Limit: 256
+// Source Limit:
+// Explanation
+// There are 7 soldiers, each with the indicated power.
+// There are 3 rounds.
+// In the first round, Bishu's power is 3, which is greater than 3 soldiers, 
+// with the cumulative power of 6. Hence, the answer is 3 6
+// Similarly for the next round
+
+//🔴approach :
+// #include<bits/stdc++.h>
+// using namespace std;
+
+// #define ll long long
+
+// int main()
+// {
+
+//     int n;
+//     cin>>n;
+
+//     int ar[n];
+//     for(int i=0;i<n;i++)
+//     {
+//         cin>>ar[i];
+//     }
+// 	sort(ar, ar+n) ;
+
+//     int t;
+//     cin>>t;
+
+//     while(t--)
+//     {
+//         int sum=0,count=0;
+//         int p;
+//         cin>>p;
+
+//         for(int i=0;i<n;i++)
+//         {
+//             if(ar[i]<=p){
+//              sum+=ar[i];
+//              count++;
+// 			}
+// 			else{
+// 				break;
+// 			}
+//         }
+
+//         cout<<count<<" "<<sum<<endl;
+//     }
+// }
+//🔸time complexity:  O(N LogN + N^2)
+//🔸space complexity: O(N)
+
+
+
+//                     //❓Question: Kth smallest number again
+
+// Dexter was good in finding the K th smallest number from a set of numbers. 
+// He thought he could solve any problem related to K th smallest number. 
+// His friend Pipi challenged him with a problem.
+// He gave him various ranges of number, 
+// These numbers were arranged in increasing order(only distinct numbers to be taken into account). 
+// Now he asked him to find the K th smallest number in the sequence, again and again.
+
+// Input Format
+// The first line contains T, the number of test cases.
+// For each test case, there will be two integers N and Q.
+// Then N lines follow each line containing two integers A and B (denoting the range A-B)
+// Then Q lines follow each line containing a non-negative integer K .
+
+// Output Format
+// For each query output the K th smallest number.
+
+// Constraints
+// 1 <= T <= 100
+// 1 <= N <= 100
+// 1 <= Q <= 1000
+// -10^18 <= A <= B <= 10^18
+// K >= 1
+
+// N.B. If Kth smallest number is not present in the series, print -1
+
+// Sample Input
+// 1
+// 1 3
+// 1 5
+// 1
+// 3
+// 6
+// Sample Output
+// 1
+// 3
+// -1
+// Time Limit: 5
+// Memory Limit: 256
+// Source Limit:
+// Explanation
+// The numbers are "1 2 3 4 5". The 1st smallest number is 1
+// The 3rd smallest number is 3 The 6th smallest number is not present. Hence answer is -1
+
+//🔴approach :
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// int main(){
+
+//   int t;  
+//   cin>> t;
+
+//    while (t--){
+//     long long int n, q; 
+//   	cin >> n >> q;
+
+//     vector<pair<long long int, long long int>> v;
+
+//       for(long long int i=0; i< n; i++){
+//        long long int x,y; 
+// 	      cin >> x >> y;
+
+//         v.push_back ({x,y});
+//       }
+
+//        sort(v.begin(), v.end()); // sort
+
+//         long long int idx=0; // merge
+
+//         for(long long int i=1; i< v.size(); i++) {
+//             if(v[idx].second >= v[i].first){
+//                 v[idx].second=  max(v[idx].second, v[i].second);
+//             }else{
+//                 idx++;
+//                 v[idx]= v[i];
+//             }
+//         }    
+
+// 		while (q--){
+//            	long long int k;
+// 			cin >> k;
+			
+//             long long int ans=-1;
+
+//             for(long long int i=0; i<= idx; i++){
+//                 if((v[i].second - v[i].first + 1) >= k) {
+// 					ans= v[i].first + k -1;
+// 					break; 
+// 				}else {
+// 					k = k - (v[i].second - v[i].first + 1);
+// 				}
+//             }
+//             cout << ans << endl;
+//         }
+
+//     }
+
+//     return 0;  
+// }
+//🔸time complexity : O(N logn + T*N)         //  O( N LogN + (T * (2N + Q*idx)) )    // t=testcases, n=num of ranges, q=num of k elem to find, ind = index of answer vector
+//🔸space complexity: O(N)
+
