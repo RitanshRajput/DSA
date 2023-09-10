@@ -8414,3 +8414,82 @@
 //🔸time complexity : O(N logn + T*N)         //  O( N LogN + (T * (2N + Q*idx)) )    // t=testcases, n=num of ranges, q=num of k elem to find, ind = index of answer vector
 //🔸space complexity: O(N)
 
+
+
+//            //❓Question: COunt All valid Pickup and Delivery Options
+
+// Given n orders, each order consist in pickup and delivery services. 
+// Count all valid pickup/delivery possible sequences such that delivery(i) is always after of pickup(i). 
+// Since the answer may be too large, return it modulo 10^9 + 7.
+
+// Example 1:
+// Input: n = 1
+// Output: 1
+// Explanation: Unique order (P1, D1), Delivery 1 always is after of Pickup 1.
+
+// Example 2:
+// Input: n = 2
+// Output: 6
+// Explanation: All possible orders: 
+// (P1,P2,D1,D2), (P1,P2,D2,D1), (P1,D1,P2,D2), (P2,P1,D1,D2), (P2,P1,D2,D1) and (P2,D2,P1,D1).
+// This is an invalid order (P1,D2,P2,D1) because Pickup 2 is after of Delivery 2.
+
+// Example 3:
+// Input: n = 3
+// Output: 90
+ 
+// Constraints:
+// 1 <= n <= 500
+
+//🔴Intuition :
+// let (ABC) are the pickup and (abc) are the delivery
+// there are two things we have to do
+// 1/ pickup the item's
+// so there are no condition in pickup so we can pickup up the package's in "n!" ways
+// 2/. deliver the item's
+// let's take one posibility ABC
+// now we have to deliver the pakage one by one
+// let's start from the last pickup we made c ,there are only 1 valid slot which is
+// ABCc
+// then second one have 3 valid slot
+// AB_C_c_
+// let's take one possibility from here then third one have 5 valid slot
+// A_B_C_c_b_.
+// so in conclusion we have total (1) mul (3) mul (5) mul.........(2n-1) possibility to deliver the package(always an odd number)
+// thus total posibility (pickup+delivery) = n!*{(1) mul (3) mul (5) mul.........(2n-1)}
+// and we know how to find the factorial then just multiply it by possibility to deliver the package.
+
+//🔴Approach : Recursion
+
+//  int mod = 1000000000+7;
+
+//     int f(long long n){
+//         if(n == 1)  return 1;
+//         return (n*f(n-1)*(2*n-1))%mod;  
+        
+//     }
+//     int countOrders(int n) {
+//         return f(n);
+//     }
+//🔸Time complexity: O(N)
+//🔸space complexity: O(N)
+
+
+//🔴Approach : Memoization (top-bottom) approach 
+
+//  int mod = 1000000000+7;
+
+//     int f(long long n,vector<int> &dp){
+//         if(n == 1)  return 1;
+//         if(dp[n] != -1)  return dp[n];
+//         return dp[n] = (n*f(n-1,dp)*(2*n-1))%mod;
+        
+//     }
+//     int countOrders(int n) {
+//         // size = n;
+//         vector<int> dp(n+1,-1);
+//         return f(n,dp);
+//     }
+//🔸time complexity: O(n)
+//🔸space complexity: O(N)
+
