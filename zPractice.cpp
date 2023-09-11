@@ -8493,3 +8493,65 @@
 //🔸time complexity: O(n)
 //🔸space complexity: O(N)
 
+
+
+//.                   //❓Question: Find pivot element in a sorted element
+
+// Given an sorted rotated array, find pivot element in that array
+//🔸input:
+// 8, 9, 10, 1, 2, 3 
+// output:
+// 10
+
+//🔸input :
+// 8, 9, 10, 11, 12, 1, 2, 3
+// output:
+// 12
+
+
+//🔴Approach : Binary Search 
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// int solve(vector<int> ans, int start, int end) {
+     
+//     if(end < start) {
+//         return -1;
+//     }
+
+//     if(start == end) {
+//         return start ;
+//     }
+
+//     int mid = start+(end-start)/2;
+
+//     if(mid < end && ans[mid] > ans[mid + 1]) {
+//         return mid;
+//     }
+    
+//     if(mid > start && ans[mid] < ans[mid - 1]){
+//         return mid - 1;
+//     }
+
+//     return solve(ans, mid + 1, end) ;
+// }
+
+// int main() {
+
+//     int size;
+//     cin>>size;
+
+//     vector<int> ans;
+//     for(int i=0; i<size; i++){
+//         int temp;
+//         cin>> temp;
+//         ans.push_back(temp) ;
+//     }
+
+//     int start = 0;
+//     int end = size-1;
+//     cout << solve(ans, start, end) ;
+    
+//     return 0;
+// }
