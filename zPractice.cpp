@@ -8709,3 +8709,89 @@
 //     }
 //🔸time complexity: O(3N)
 //🔸space complexity: O(N)
+
+
+
+//                                //❓Question: Aggressive Cow
+
+
+// Given an array of length 'N', where each elements denotes the position of a arr. now you have 'N' stalls and
+// an integer 'K' which denotes the number of cows that are aggresive. to prevent the cows from hurting each other, 
+// you need to assign the cows to the stalls such that the minimun distance between any two of them is as large as possible. 
+// return the largest minimum distance.
+
+// input : {4, 2, 1, 3, 6} ;  //stalls positions
+// no. of stalls N = 5 ;
+// no. of cows  k = 2 ;
+
+// output: 5             // because in this case we need to obtain maximum distance between two cows placed in the stalls
+
+// explaination :
+
+// stalls   4    2    1    3     6
+//              |    |    |    |  
+//case1.    k1  | k2 |    |    |             // distance between k1 - k2 => 4 - 2 =>  2
+//case1.    k1  |    | k2 |    |             // distance between k1 - k2 => 4 - 1 =>  3  
+//case1.    k1  |    |    | k2 |             // distance between k1 - k2 => 4 - 3 =>  1  
+//case1.    k1  |    |    |    |  k2         // distance between k1 - k2 => 4 - 6 =>  2
+
+//case2.        | k1 |k2  |    |             // distance between k1 - k2 => 2 - 1 =>  1  
+//case2.        | k1 |    | k2 |             // distance between k1 - k2 => 2 - 3 =>  1  
+//case2.        | k1 |    |    |k2           // distance between k1 - k2 => 2 - 6 =>  4  
+
+//case3.        |    | k1 | k2 |             // distance between k1 - k2 => 1 - 3 =>  2  
+//case3.        |    | k1 |    | k2          // distance between k1 - k2 => 1 - 6 =>  5    // Found the largest distance between two aggresive cow
+
+//case4         |    |    | k1 |k2           // distance between k1 - k2 => 3 - 6 =>  3
+
+
+// MAximum distance  =>  5
+
+// Constraints :
+// 2 <= 'n' <= 10 ^ 5
+// 2 <= 'k' <= n
+// 0 <= 'arr[i]' <= 10 ^ 9
+// Time Limit: 1 sec.
+
+
+//🔴approach : Binary search 
+// #include<iostream>
+// #include<vector>
+// #include<algorithm>
+// using namespace std; 
+
+// bool possible(vector<int>&stall , int k , int mid){
+
+//     int countCow = 1 ;
+//     int last = stall[0];
+
+//     for(int i=1;i<stall.size();i++){
+//         if(stall[i] - last >= mid){    
+//             countCow++;                 
+//             last = stall[i];             
+//         }
+//         if(countCow >= k)   return true;   
+//     }
+//     return false;
+// }
+
+// int aggressiveCows(vector<int> &stalls, int k) {
+
+//     sort(stalls.begin(),stalls.end());              
+//     int n = stalls.size();                          
+//     int low = 1;
+//     int high = stalls[n-1] - stalls[0];           
+
+//     while(low<= high ){                             
+//         int mid =(low+high)/2;                      
+//         if(possible(stalls,k,mid)){                 
+//             low = mid+1;                            
+//         }
+//         else{
+//             high = mid-1;
+//         }
+//     }
+//     return high;
+// }
+//🔸time compplexity: O(n* logn)
+//🔸space complexity: O(1)

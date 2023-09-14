@@ -856,7 +856,7 @@
 
 
 
-//❓ Questions (google, amazon, facebook) :
+//                              //❓ Questions (google, amazon, facebook) :
 //🔴 Aggresive Cows :
 
 // Given an array of length 'N', where each elements denotes the position of a arr. now you have 'N' stalls and
@@ -872,7 +872,7 @@
 
 // explaination :
 
-// stalls     4    2    1    3     6
+// stalls   4    2    1    3     6
 //              |    |    |    |  
 //case1.    k1  | k2 |    |    |             // distance between k1 - k2 => 4 - 2 =>  2
 //case1.    k1  |    | k2 |    |             // distance between k1 - k2 => 4 - 1 =>  3  
@@ -921,7 +921,7 @@
 //        int start = 0;
 //        int maxi = -1 ;
 
-//        for(int i=0; i<n; i++){                           // loop to find maximum value in the array
+//        for(int i=0; i<n; i++){                         // loop to find maximum value in the array
 //           maxi = max(maxi, arr[i]) ;                   // store the max number in maxi 
 //        }
 
@@ -940,7 +940,7 @@
 //            }
 //         mid = start + (end - start)/2 ;
 //        }
-//    return ans ;
+//      return ans ;
 // }
 
 
