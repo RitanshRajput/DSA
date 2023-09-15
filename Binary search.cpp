@@ -642,24 +642,19 @@
 
 //     int studentCount = 1;
 //     int pageSum = 0;
-//           cout<<" mid in ispossible  : "<<mid<<endl ;
+//
 //     for(int i=0; i<n ; i++){
-//               cout<<" arr[i] : "<<arr[i]<<endl ;
 //         if( pageSum + arr[i] <= mid ){
 //             pageSum += arr[i] ;
-//             cout<<" PageSum : "<<pageSum<<endl ;
 //         }
 //         else {
 //             studentCount++ ;
 //             if( studentCount > m || arr[i] > mid) {
-//                 cout<<" false studentcount , arr[i]>mid : "<<studentCount<<" , "<<arr[i]<<endl ;
 //                 return false ;
 //             }
 //             pageSum = arr[i] ;
-//             cout<<" studentcount, pageSum else : "<<studentCount<<" , "<<pageSum<<endl ;
 //         }
 //     }
-//     cout<<" true  : "<<endl ;
 //     return true ;
 // }
 
@@ -671,24 +666,19 @@
 //             for(int i=0; i<n ; i++){
 //                 sum += arr[i] ;
 //             }    
-//             cout<<" Sum : "<<sum<<endl ;
 //             int e = sum ;
 //             int ans = -1;
 //             int mid = s + (e-s)/2 ;
-//             cout<<" e , ans, mid : "<<e<<" , "<<ans<<" , "<<mid<<" , "<<endl ;
 
 //             while(s<=e){
 //                 if( isPossible(arr, n, m, mid) ){
-//                      ans = mid ;
+//                      ans = mid  ;
 //                      e = mid - 1;
-//                      cout<<" inside while ans, e : "<<ans<<" , "<<e<<" , "<<endl ;
 //                 }                
 //                 else {
 //                     s = mid + 1 ;
-//                     cout<<" else in while s : "<<s<<endl ;
 //                 }
 //                 mid = s + (e-s)/2 ;
-//                 cout<<" start and end mid atlast : "<<s<<" , "<<e<<" , "<<mid <<endl ;
 //             }
 
 //          return ans; 

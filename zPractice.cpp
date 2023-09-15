@@ -8795,3 +8795,175 @@
 // }
 //🔸time compplexity: O(n* logn)
 //🔸space complexity: O(1)
+
+
+
+//                  //❓Question: Allocate Minimum number of pages
+
+// You have N books, each with A[i] number of pages. M students need to be allocated contiguous books, 
+// with each student getting at least one book.
+// Out of all the permutations, the goal is to find the permutation where 
+// the student with the most books allocated to him gets the minimum number of pages,
+// out of all possible permutations.
+
+// Note: Return -1 if a valid assignment is not possible, and allotment should be in contiguous order
+// (see the explanation for better understanding).
+
+// Example 1:
+// Input:
+// N = 4
+// A[] = {12,34,67,90}
+// M = 2
+// Output:113
+// Explanation:Allocation can be done in 
+// following ways:
+// {12} and {34, 67, 90} Maximum Pages = 191
+// {12, 34} and {67, 90} Maximum Pages = 157
+// {12, 34, 67} and {90} Maximum Pages =113.
+// Therefore, the minimum of these cases is 113,
+// which is selected as the output.
+
+// Example 2:
+// Input:
+// N = 3
+// A[] = {15,17,20}
+// M = 2
+// Output:32
+// Explanation: Allocation is done as
+// {15,17} and {20}
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function findPages() which takes 2 Integers N, and m and an array A[] of length N as input and returns the expected answer.
+
+// Expected Time Complexity: O(NlogN)
+// Expected Auxilliary Space: O(1)
+
+// Constraints:
+// 1 <= N <= 105
+// 1 <= A [ i ] <= 106
+// 1 <= M <= 105
+
+//🔴approach : binary search
+
+// int isPosssible(int maxi, int arr[], int n, int m){
+//         int cnt=0;
+//         int sum=0;
+//         for(int i=0; i<n; i++){
+//             if(sum+arr[i]<=maxi){
+//                 sum+=arr[i];
+//             }else{
+//                 cnt++;
+//                 sum=arr[i];
+//             }
+//         }
+//         return cnt;
+//     }
+    
+//     //Function to find minimum number of pages.
+//     int findPages(int A[], int N, int M) 
+//     {
+//         //code here
+//         if(N<M) return -1;
+//         int end=A[0];
+//         int start=A[0];
+
+//         for(int i=1; i<N; i++){
+//             end+=A[i];
+//             start= max(start, A[i]);
+//         }
+        
+        
+//         while (start<=end){
+//             int mid = start+(end - start)/2;
+//             if(isPosssible(mid, A, N, M)>=M){
+//                 start=mid+1;
+//             }else{
+//                 end=mid-1;
+//             }
+//         }
+//         return start;
+//     }
+//🔸time complexity: O(n*logn)
+//🔸 space complexity: O(n)        //sum of all element
+
+
+
+//                          //❓Question: EKO EKO
+
+// Lumberjack Mirko needs to chop down M metres of wood. It is an easy job for him since he has a 
+// nifty new woodcutting machine that can take down forests like wildfire. However, 
+// Mirko is only allowed to cut a single row of trees.
+
+// Mirko‟s machine works as follows: Mirko sets a height parameter H (in metres), 
+// and the machine raises a giant sawblade to that height and cuts off all tree parts higher than 
+// H (of course, trees not higher than H meters remain intact). Mirko then takes the parts that were cut off. 
+// For example, if the tree row contains trees with heights of 20, 15, 10, and 17 metres, 
+// and Mirko raises his sawblade to 15 metres, the remaining tree heights after cutting will be 15, 15, 10, and 15 metres, 
+// respectively, while Mirko will take 5 metres off the first tree and 2 metres off the fourth tree
+// (7 metres of wood in total).
+
+// Mirko is ecologically minded, so he doesn‟t want to cut off more wood than necessary. 
+// That‟s why he wants to set his sawblade as high as possible. Help Mirko find the maximum integer height 
+// of the sawblade that still allows him to cut off at least M metres of wood.
+
+// Input
+// The first line of input contains two space-separated positive integers, N (the number of trees, 1 ≤ N ≤ 1 000 000) and M (Mirko‟s required wood amount, 1 ≤ M ≤ 2 000 000 000).
+// The second line of input contains N space-separated positive integers less than 1 000 000 000, the heights of each tree (in metres). The sum of all heights will exceed M, thus Mirko will always be able to obtain the required amount of wood.
+// Output
+// The first and only line of output must contain the required height setting.
+
+// Example
+// Input:
+// 4 7
+// 20 15 10 17
+
+// Output:
+// 15
+// Input:
+// 5 20
+// 4 42 40 26 46
+
+// Output:
+// 36
+
+//🔴approach : 
+
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// bool find(vector<int> tree, int n, int k, int mid){
+//     int sum =0;
+//     for(int i=0; i<n; i++){
+//         if(tree[i] > mid){
+//             sum += tree[i]-mid;
+//         }
+//     }
+
+//     (sum <= k) ? true : false;
+// }
+
+// int solve(vector<int> tree, int n,  int k) {
+//         int low = 0;
+//         int high = 0;
+
+//         for(auto i:tree){
+//             high = max(high, i) ;
+//         }
+
+//         int ans = 0;
+
+//         while(low <= high) {
+//             int mid = (low+high)/2 ;
+//             if( find(tree, n, k, mid)) {
+//                 ans = mid;
+//                 low = mid+1;
+//             }
+//             else{
+//                 high = mid-1;
+//             }
+//         }
+
+//         return low;
+// } 
+//🔸time complexity: O(N logn)
+//🔸space complexity: O(1)
