@@ -2087,7 +2087,8 @@
 
 
 //🔴🔴❓ Question :  Medium GfG 
-// RAT IN A MAZE PROBLEM
+
+// 🔴 RAT IN A MAZE PROBLEM
 // Consider a rat placed at (0, 0) in a square matrix of order N * N.
 // It has to reach the destination at (N - 1, N - 1). 
 // Find all possible paths that the rat can take to reach from source to destination. 
@@ -2231,7 +2232,7 @@
 //           solve(m, n, newX, newY, visited, path, ans) ;
 
 //           //backtracking  , after finding one route clear the path string to store another routes if any
-//           path.pop_back() ;
+//           path.pop_back() 
 //      }
 
 //      //Left 

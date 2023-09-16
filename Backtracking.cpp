@@ -201,6 +201,7 @@
 // 	}
 // 	ans.push_back(temp);
 // }
+
 // bool isSafe(int row, int col, vector<vector<int>> &board, int n)
 // {
 // 	int x = row;
