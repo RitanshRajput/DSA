@@ -494,7 +494,9 @@
 // isFull(): Checks whether queue is full or not. 
 
 // Need to implement input restricted queue:
-// This queue is used when it is necessary to consume data in FIFO order but it is necessary to discard recently added data for a variety of reasons, such as useless data, performance issues, etc.
+// This queue is used when it is necessary to consume data in FIFO order but 
+// it is necessary to discard recently added data for a variety of reasons, 
+// such as useless data, performance issues, etc.
 // It is needed when we have to inhibit insertion from the front of the deque.
 // It is used in job scheduling algorithms.
 

@@ -9148,3 +9148,316 @@
 
 //🔸time complexity : O(2n*m)
 //🔸space complexity : O(n)      // pq.size()
+
+
+
+//                      //❓Question: Job sequencing Problem  (Job scheduling problem)
+
+// Given a set of N jobs where each jobi has a deadline and profit associated with it.
+// Each job takes 1 unit of time to complete and only one job can be scheduled at a time. 
+// We earn the profit associated with job if and only if the job is completed by its deadline.
+// Find the number of jobs done and the maximum profit.
+
+// Note: Jobs will be given in the form (Jobid, Deadline, Profit) associated with that Job.
+
+// Example 1:
+// Input:
+// N = 4
+// Jobs = {(1,4,20),(2,1,10),(3,1,40),(4,1,30)}
+// Output:
+// 2 60
+// Explanation:
+// Job1 and Job3 can be done with
+// maximum profit of 60 (20+40).
+
+// Example 2:
+// Input:
+// N = 5
+// Jobs = {(1,2,100),(2,1,19),(3,2,27),(4,1,25),(5,1,15)}
+// Output:
+// 2 127
+// Explanation:
+// 2 jobs can be done with
+// maximum profit of 127 (100+27).
+
+// Your Task :
+// You don't need to read input or print anything. Your task is to complete the function JobScheduling() which takes an integer N and an array of Jobs(Job id, Deadline, Profit) as input and returns the count of jobs and maximum profit as a list or vector of 2 elements.
+
+// Expected Time Complexity: O(NlogN)
+// Expected Auxilliary Space: O(N)
+
+// Constraints:
+// 1 <= N <= 105
+// 1 <= Deadline <= N
+// 1 <= Profit <= 500
+
+//🔴approach :  priorit_queue 
+
+//  bool static cmp(Job a, Job b){
+//         return a.dead < b.dead;
+//     }
+//     vector<int> JobScheduling(Job arr[], int n) 
+//     { 
+//         // your code here
+//         sort(arr, arr+n, cmp) ;
+//         priority_queue<int, vector<int> , greater<int> > pq;
+//         int curr = 1;
+        
+//         for(int i=0; i<n; i++) {
+            
+//             if(arr[i].dead >= curr) {
+//                 pq.push(arr[i].profit) ;
+//                 curr++ ;
+//             }
+//             else{
+//                 if(arr[i].profit > pq.top()) {
+//                     pq.push(arr[i].profit) ;
+//                     pq.pop() ;
+//                 }
+//             }
+//         }
+        
+//         int job = pq.size();
+//         int total = 0;
+        
+//         while( !pq.empty()) {
+//             total += pq.top() ;
+//             pq.pop() ;
+//         }
+        
+//         return {job, total};
+//     }
+//🔸time complexity : O(N logn)              // O(2n+pq logn)  == pq =  pq.size() ;
+//🔸space complexity: o(n)
+
+
+
+//              //🔴Question: Arithemetic Number
+
+// Given three integers  'A' denoting the first term of an arithmetic sequence , '
+// C' denoting the common difference of an arithmetic sequence and an integer 'B'. 
+// you need to tell whether 'B' exists in the arithmetic sequence or not. 
+// Return 1 if B is present in the sequence. Otherwise, returns 0.
+
+// Example 1:
+// Input: A = 1, B = 3, C = 2
+// Output: 1
+// Explaination: 3 is the second term of the 
+// sequence starting with 1 and having a common 
+// difference 2.
+
+// Example 2:
+// Input: A = 1, B = 2, C = 3
+// Output: 0
+// Explaination: 2 is not present in the sequence.
+// Your Task:
+// You do not need to read input or print anything. Your task is to complete the function inSequence() which takes A, B and C and returns 1 if B is present in the sequence. Otherwise, returns 0.
+
+// Expected Time Complexity: O(1)
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// -109 ≤ A, B, C ≤ 109  
+
+//🔴approach :
+// Let's Understand the Problem And Approach:
+// Jaisa ki question kehta h  A kisi arithmatic sequence ka first element hai and C common difference hai , hmko B ke liye check krna hai ki ye arithmatic sequence ka hissa hai ye nhi
+//    Agar hm ek general n terms ka arithmatic sequence lekr smjhe to 
+
+// A , A + C , A + 2C , ........... , A + (n-1)C 
+
+// and nth term of arithmetic sequence = A + (n-1)C
+// to hm B ko iss form me likh skte h
+
+//        B = A + ( n - 1 )*C;
+
+// Question me A , B , C given hai then n ki value se decide krenge ki B sequence ka part h ya nhi 
+//         n = (B - A) / C + 1;
+
+//  Agar ye n ki value positive integer aati h to B       sequence ka part jarur hoga 
+
+// But n +ve integer hi ku aaega ?
+
+// question me given hai ki A , B and C integers hai that's why n bhi integer hoga( because itn / int == int)
+// n positive hoga kuki squence to type ki ho skti hai increasing and decreasing
+//  Jb common difference (C) +ve hoga to sequence increasing hogi iss condition me (B - A) +ve milega
+// Jb common difference(C)  -ve hoga to sequence decreasing hogi uss conditon me  (B- A) -ve milega 
+
+//  Corner Case :
+// when ,  C == 0  and  A == B  
+
+//🔴Implementation :
+
+// int inSequence(int A, int B, int C){
+//         // code here
+        
+//         if (C == 0 && A == B)  return 1;
+
+//         double n = (double)(B - A) / C + 1;
+    
+//         if (n != int(n)) return 0;
+
+//         return n > 0 ? 1 : 0;
+        
+//     }
+//🔸time complexity: O(1)
+//🔸space complexity: O(1)
+
+
+
+//                      //❓Question: Smallest Factorial Number
+
+// Given a number n. The task is to find the smallest number whose factorial contains at least n trailing zeroes.
+
+// Example 1:
+// Input:
+// n = 1
+// Output: 5
+// Explanation : 5! = 120 which has at
+// least 1 trailing 0.
+
+// Example 2:
+// Input:
+// n = 6
+// Output: 25
+// Explanation : 25! has at least
+// 6 trailing 0.
+
+// User Task:
+// Complete the function findNum() which takes an integer N as input parameters, and returns the answer.
+
+// Expected Time Complexity: O(log2 N * log5 N).
+// Expected Auxiliary Space: O(1).
+
+// Constraints:
+// 1 <= n <= 104
+
+//🔴apporach : Math
+
+//   int findNum(int n) {
+            
+//         for(int i=0; i<1e5; i++) {
+//             int x = i/5 + i/25 + i/125 + i/625 + i/3125 + i/15625 ;
+//             if( x >= n) {
+//                 return i ;
+//             }
+//         } 
+
+//         return 0 ;
+//    }
+//🔸time complexity: O(1e5)
+//🔸space complexity: O(1)
+
+//🔴approach : binary search
+
+// int findNum(int n)
+//     {
+//         int low = 1;
+//         int high = 5*n;
+//         int ans = 0;
+        
+//         while(low <= high) {
+//             int mid = low + (high-low)/2;
+//             int count = 0;
+//             int pow = 5;
+            
+//             while(mid/pow != 0) {
+//                 count += mid/pow; 
+//                 pow = pow*5;
+//             }
+            
+//             if(count >= n) {
+//                 high = mid-1;
+//                 ans = mid;
+//             } else if(count < n) {
+//                 low = mid+1;
+//             }
+//         }
+        
+//         return ans;
+//     }
+//🔸time complexity: O(log2 N * log5 * n)
+//🔸space complexity: O(1)
+
+
+
+//                 //  ❓Question : Painter's Partition Problem :
+
+// Given an arrayList of length 'N'. where the arrayList represents the boards and each element of the given arraylist represents the length of each board . 
+// Some 'K' numbers of painters are available to paint these boards.consider that each unit of a board takes 1 unit of time to paint.  
+
+// You are supposed to return the area of the minimum time to get this job done of painting all the 'N' boards under a contraint that any painter will only paint the continous section of boards .
+
+// In the below figure where array/list elements are {2, 1, 5, 6, 2, 3}
+// A painter can paint blocks {5, 6} or {1, 5, 6, 2} together but not {2, 5, 6} or {5,6,3}        // Means allotment will be in contingous manner just like book allocation problem
+
+// Input : {5, 5, 5, 5}
+// no. of pianter 'k' = 2; 
+//output : 10 ;
+
+// Input : {10,20, 30, 40}
+// no. of pianter 'k' = 2; 
+//output : 60 ;
+
+
+// #include<iostream>
+// using namespace std ;
+
+// int isPossible(int arr[], int k, int n, int mid){
+              
+//               int painterCount = 1;
+//               int blockSum = 0;
+
+//               for(int i=0; i<n; i++){
+
+//                 if(blockSum + arr[i] <= mid){
+//                     blockSum += arr[i] ;
+//                 }
+//                 else{
+//                     painterCount++ ;
+
+//                     if(painterCount > k || arr[i] > mid) {
+//                         return false ;
+//                     }
+//                     blockSum = arr[i] ;
+//                 }
+//               }
+//               return true ;
+// }
+
+
+// int partition(int arr[], int k, int n){
+
+//              int start = 0;
+//              int sum = 0 ;
+
+//              for(int i=0; i<n; i++){
+//                 sum +=arr[i];
+//              }
+//          int end = sum ;
+//          int ans = -1 ;
+//          int mid = start + (end - start)/2 ;
+
+//          while(start<=end){
+//             if( isPossible(arr, k, n, mid)){
+//                 end = mid - 1 ;
+//                 ans = mid ;
+//             }
+//             else{
+//                 start = mid + 1;
+//             }
+//             mid = start + (end - start)/2 ;
+//          }
+//       return ans ;
+// }
+
+// int main(){
+
+//     int arr[4] = {5,5,5,5} ;
+//     int n = 4 ;                //no of blocks
+//     int k = 2 ;                // no. of painters; 
+
+//     cout<<" Answer of painter parition problem : "<<partition(arr, k, n)<<endl ;
+
+//     return 0 ;
+// }
