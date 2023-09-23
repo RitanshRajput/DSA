@@ -2374,7 +2374,6 @@
 // {1, 2, 3, 3, 4}. If you return a valid
 // arrangement, output will be 1.
 
-
 // Example 2:
 // Input: 
 // n = 3 
