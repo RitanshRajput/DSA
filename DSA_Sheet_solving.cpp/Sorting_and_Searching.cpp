@@ -1,8 +1,5 @@
 
-
-
 //                     //🔘🔘 Searching and Sorting 🔘🔘//
-
 
 
 //                    //❓Question: First and last occurrences of x
@@ -2661,4 +2658,237 @@
 // }
 //🔸time complexity: O(N* logN)
 //🔸space complexity: O(n)
+
+
+//                  //❓Question:  The Double HElix 
+
+//Two ﬁnite, strictly increasing, integer sequences are given. 
+//Any common integer between the two sequences constitute an intersection point.
+//Take for example the following two sequences where intersection points are
+// printed in bold:
+
+// First= 3 5 [7] 9 20 [25] 30 40 [55] 56 [57] 60 62
+// Second= 1 4 [7] 11 14 [25] 44 47 [55] [57] 100
+// You can ‘walk” over these two sequences in the following way:
+
+// You may start at the beginning of any of the two sequences. Now start moving forward.
+// At each intersection point, you have the choice of either continuing with the same sequence you’re currently on, or switching to the other sequence.
+// The objective is ﬁnding a path that produces the maximum sum of data you walked over. In the above example, the largest possible sum is 450, which is the result of adding 3, 5, 7, 9, 20, 25, 44, 47, 55, 56, 57, 60, and 62
+
+// Input
+// Your program will be tested on a number of test cases. Each test case will be speciﬁed on two separate lines. Each line denotes a sequence and is speciﬁed using the following format:
+
+// n v1 v2 ... vn
+// Where n is the length of the sequence and vi is the ith element in that sequence. Each sequence will have at least one element but no more than 10,000. All elements are between -10,000 and 10,000 (inclusive).
+// The last line of the input includes a single zero, which is not part of the test cases.
+
+// Output
+// For each test case, write on a separate line, the largest possible sum that can be produced.
+
+// Sample
+// Input:
+// 13 3 5 7 9 20 25 30 40 55 56 57 60 62
+// 11 1 4 7 11 14 25 44 47 55 57 100
+// 4 -5 100 1000 1005
+// 3 -12 1000 1001
+// 0
+
+// Output:
+// 450
+// 2100
+
+
+//🔴Approach :
+// #include<bits/stdc++.h>
+// using namespace std;
+ 
+// int main()
+// {
+ 
+//     int i,j,k;
+//     int x,y,z;
+//     int n1,n2;
+//     int result1,result2,result;
+ 
+//     result=result1=result2=0;
+
+//     cout<<"Enter the number of elements in the first sequence ";
+//     cin>>n1;
+ 
+//     vector<int> a(n1);
+
+//     cout<<"Enter the values of the first sequence"<<endl;
+//     for(i=0;i<n1;i++)
+//     {
+//         cin>>a[i];
+//     }
+ 
+ 
+//     cout<<"Enter the number of elements in the second sequence ";
+//     cin>>n2;
+
+//     vector<int> b(n2);
+//     j=0;
+ 
+//     cout<<"Enter the values of the second sequence"<<endl;
+//     for(i=0;i<n2;i++)
+//     {
+//        cin>>b[i]; 
+//        result2+=b[i];
+ 
+//        while(j<n1 && a[j]<b[i])
+//        {
+//            result1+=a[j];
+//            j++;
+//        }
+ 
+//        if(j<n1 && a[j]==b[i])
+//        {
+//             result1+=a[j];
+//             result+=max(result1,result2);     
+ 
+//             //reset
+//             result1=0;
+//             result2=0;
+//             j++;
+//        }
+//     }
+ 
+ 
+//     while(j<n1)
+//     {
+//         result1+=a[j];
+//         j++;
+//     }
+ 
+//     result+=max(result1,result2);     
+ 
+//     cout<<"The maximum sum of data obtained by walking over them is "<<endl;
+//     cout<<result<<endl;
+ 
+//     return 0;
+// }
+//🔸 time complexity: O(2n*m)
+//🔸 space complexity: O(1)
+
+
+
+//                  //❓Question: Subset Sum
+
+// Given a sequence of N (1 ≤ N ≤ 34) numbers S1, ..., SN (-20,000,000 ≤ Si ≤ 20,000,000), 
+// determine how many subsets of S (including the empty one) have a sum between 
+// A and B (-500,000,000 ≤ A ≤ B ≤ 500,000,000), inclusive.
+
+// Input
+// The first line of standard input contains the three integers N, A, and B. 
+// The following N lines contain S1 through SN, in order.
+
+// Output
+// Print a single integer to standard output representing the number of subsets satisfying the above property. 
+// Note that the answer may overflow a 32-bit integer.
+
+// Example
+// Input:
+// 3 -1 2
+// 1
+// -2
+// 3
+
+// Output:
+// 5
+// The following 5 subsets have a sum between -1 and 2:
+
+// 0 = 0 (the empty subset)
+// 1 = 1
+// 1 + (-2) = -1
+// -2 + 3 = 1
+// 1 + (-2) + 3 = 2
+
+
+//🔴Approach :
+// #include<iostream>
+// #include<vector>
+// #include<algorithm>
+// using namespace std;
+
+// void solve(int a[], int start, int end, vector<int>& v1) {
+//     int s = 0 ;
+//     int n = end-start+1;
+
+//     for(int i=0; i<(1<<n); i++) {           // (1<<n) == 2^20
+//         s = 0 ;
+//         int j = start ;
+//         int x = i ;
+
+//         while(x) {
+//             int l = x&1 ;
+//             if(l){
+//                 s += a[j] ;
+//             }
+//             j++ ;
+//             x = x>>1 ;
+//         }
+//         v1.push_back(s) ;
+//     }
+// }
+
+// int main() {
+
+//     //taking input for test case
+//     int n, a, b ;
+//     cin>>n>>a>>b ;
+
+//     //taking arr element
+//     int arr[n] ;
+//     for(int i=0; i<n; i++){
+//         cin>>arr[i] ;
+//     }
+
+//     //create 2 vector to store subset of arr, v1 will store first half elem subsets
+//     //and v2 will store second half elements subsets
+//     vector<int> v1, v2 ;
+//     solve(arr, 0, (n/2)-1, v1) ;  // passing first half elements
+//     solve(arr, (n/2), n-1, v2) ;  // passsing second half elements
+
+//     sort(v2.begin(), v2.end()) ;   //sorting v2 to apply binary search on it
+
+//     // applying below search formula
+//     //ex: 
+//     // a = 1, 5, 3, 4, 2, 6 
+//     // 0 is for empty subset
+//     // v1 = 0, 1, 5, 3, 6, 4, 8, 9 
+//     // v2 = 0, 2, 4, 6, 6, 8, 10, 12               //sorted to apply binary search
+
+//     // A = 6, B = 10             // to search number of subset sum between A - B inclusive
+//     // x = current element at v1 
+//     // y = current element at v2
+//     // 
+//     // for lower bound A :
+//     // x + y = A 
+//     // y = A - x == 5       (lowerBound of 5 in v2 will be 6) gives just one bigger element 
+//     //
+//     // for upper bound B :
+//     // x + y = B 
+//     // y = B - x == 9       (upperBounf of 9 in v2 will be 10) gives just one bigger element
+
+//     // 5 - 2 = 3 
+//     // Add 3 in count and repeat and after loop ends return count
+
+//     int count = 0 ;
+//     for(int i=0; i<v1.size(); i++) {
+//         int low = lower_bound(v2.begin(), v2.end(), a-v1[i]) - v2.begin() ;
+//         int high = upper_bound(v2.begin(), v2.end(), b-v1[i]) - v1.begin() ;
+//         count += (high - low) ;
+//     }
+
+//     count<<count;
+
+//     return 0 ; 
+// }
+
+//🔸 time complexity  : O(2n*log n)
+//🔸 space complexity : O(N)
+
+
+
 
