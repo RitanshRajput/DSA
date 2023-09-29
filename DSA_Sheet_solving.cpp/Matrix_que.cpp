@@ -10,10 +10,10 @@
 // Example 1:
 // Input:
 // r = 4, c = 4
-// matrix[][] = {{1, 2, 3, 4},
-//            {5, 6, 7, 8},
-//            {9, 10, 11, 12},
-//            {13, 14, 15,16}}
+// matrix[][] = {{1,  2, 3,  4 },
+//              { 5,  6, 7,  8 },
+//              { 9, 10, 11, 12},
+//              { 13,14, 15, 16}}
 // Output: 
 // 1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10
 // Explanation:
@@ -116,7 +116,7 @@
 
 //🔴 approach: Brute force
 //  bool searchMatrix(vector<vector<int>>& matrix, int target) {
-//  int row = matrix.size() ;
+//         int row = matrix.size() ;
 //         int col = matrix[0].size()  ;
 
 //         if(target < matrix[0][0] || target > matrix[row-1][col-1]) {
@@ -229,7 +229,7 @@
         
 //         return ans ;
 //     }
-//🔸time complexity : O( R * C)
+//🔸time complexity : O(N logn + N) == (2n logn) // N = r*c
 //🔸space complexity : O(R*C)
 
 //🔴appraoch : strivers optimised appraoch 
@@ -851,6 +851,13 @@
 //        mp[mat[0][j]] = 1 ;
 //    }
 
+//🔸 dry run
+// 1 2 3           //  1=1 2=1 3=1
+// 2 2 3           //      2=2 3=2
+// 2 3 1           //  2=3 3=3 
+// 2 3 4           //  2=4 3=4 
+//🔸 dry run 
+
 //    for(int i=1; i<row; i++) {
 //        for(int j=0; j<col; j++) {
 //            if(mp[mat[i][j]] == i) {
@@ -874,3 +881,55 @@
 //🔸space complexity: O(col)
 
 
+
+//                //❓Question: Number of enclaves
+
+// You are given an n x m binary matrix grid, where 0 represents a sea cell and 1 represents a land cell.
+// A move consists of walking from one land cell to another adjacent (4-directionally) 
+// land cell or walking off the boundary of the grid.
+
+// Find the number of land cells in grid for which we cannot walk off the boundary of the grid in 
+// any number of moves.
+
+// Example 1:
+// Input:
+// grid[][] = {{0, 0, 0, 0},
+//             {1, 0, 1, 0},
+//             {0, 1, 1, 0},
+//             {0, 0, 0, 0}}
+// Output:
+// 3
+// Explanation:
+// 0 0 0 0
+// 1 0 1 0
+// 0 1 1 0
+// 0 0 0 0
+// The highlighted cells represents the land cells.
+
+// Example 2:
+// Input:
+// grid[][] = {{0, 0, 0, 1},
+//             {0, 1, 1, 0},
+//             {0, 1, 1, 0},
+//             {0, 0, 0, 1},
+//             {0, 1, 1, 0}}
+// Output:
+// 4
+// Explanation:
+// 0 0 0 1
+// 0 1 1 0
+// 0 1 1 0
+// 0 0 0 1
+// 0 1 1 0
+// The highlighted cells represents the land cells.
+
+// Your Task:
+// You don't need to print or input anything. Complete the function numberOfEnclaves() which takes a 2D integer matrix grid as the input parameter and returns an integer, denoting the number of land cells.
+// Expected Time Complexity: O(n * m)
+// Expected Space Complexity: O(n * m)
+
+// Constraints:
+// 1 <= n, m <= 500
+// grid[i][j] == 0 or 1
+
+//🔴Approach : 
