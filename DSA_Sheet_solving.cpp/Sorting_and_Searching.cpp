@@ -2892,3 +2892,167 @@
 
 
 
+//                //❓Question: In-Place Merge Sort
+
+// You are given an array consisting of N integers. 
+// Your task is to sort the array in non-descending order using merge sort. 
+// Perform the task as in-place.
+
+// Note:
+// In-place means that your implementation does not require extra memory for merge operation, 
+// unlike the standard implementation.
+// Example:
+// Let the array be [1, 2, -3, 4, -4, -5]. /
+// On sorting the array in non-descending order we get the resulting array [-5, -4, -3, 1, 2, 4].
+// Input Format:
+// The very first line of input contains an integer ‘T’ denoting the number of test cases. 
+
+// The first line of every test case contains an integer ‘N’ denoting the number of elements present in the array.
+
+// The second line of every test case contains ‘N’ space-separated integers denoting the elements present in the array.
+// Output Format:
+// For each test case, the resulting sorted array is printed.
+
+// Output for each test case is printed on a separate line.
+// Note:
+// You do not need to print anything, it has already been taken care of. Just return the sorted array. 
+// Constraints:
+// 1 <= T <= 10
+// 1 <= N <= 5000
+// -10^5 <= Arr[i] <= 10^5
+
+// Where  ‘T’ represents the number of test cases and ‘N’ represents the number of elements present in the array.
+
+// Time Limit: 1 sec
+
+//🔴approach :
+// #include <iostream>
+// using namespace std;
+ 
+// // Merges two subarrays of arr[].
+// // First subarray is arr[l..m]
+// // Second subarray is arr[m+1..r]
+// // Inplace Implementation
+
+// void merge(int arr[], int start, int mid, int end)
+// {
+//     int start2 = mid + 1;
+ 
+//     // If the direct merge is already sorted
+//     if (arr[mid] <= arr[start2]) {
+//         return;
+//     }
+ 
+// // Two pointers to maintain start of both arrays to merge
+//     while (start <= mid && start2 <= end) {
+ 
+//         // If element 1 is in right place
+//         if (arr[start] <= arr[start2]) {
+//             start++;
+//         }
+//         else {
+//             int value = arr[start2];
+//             int index = start2;
+ 
+//             // Shift all the elements between element 1
+//             // element 2, right by 1.
+//             while (index != start) {
+//                 arr[index] = arr[index - 1];
+//                 index--;
+//             }
+//             arr[start] = value;
+ 
+//             // Update all the pointers
+//             start++;
+//             mid++;
+//             start2++;
+//         }
+//     }
+// }
+ 
+// /* l is for left index and r is right index of the sub-array of arr to be sorted */
+
+// void mergeSort(int arr[], int l, int r)
+// {
+//     if (l < r) {
+ 
+//         // Same as (l + r) / 2, but avoids overflow
+//         // for large l and r
+//         int m = l + (r - l) / 2;
+ 
+//         // Sort first and second halves
+//         mergeSort(arr, l, m);
+//         mergeSort(arr, m + 1, r);
+ 
+//         merge(arr, l, m, r);
+//     }
+// }
+ 
+// /* UTILITY FUNCTIONS Function to print an array */
+
+// void printArray(int A[], int size)
+// {
+//     int i;
+//     for (i = 0; i < size; i++)
+//         cout <<" "<< A[i];
+//     cout <<"\n";
+// }
+ 
+// /* Driver program to test above functions */
+// int main()
+// {
+//     int arr[] = { 12, 11, 13, 5, 6, 7 };
+//     int arr_size = sizeof(arr) / sizeof(arr[0]);
+ 
+//     mergeSort(arr, 0, arr_size - 1);
+ 
+//     printArray(arr, arr_size);
+//     return 0;
+// }
+//🔸time complexity : O(n2 * log(n)
+//🔸space complexity : O(1)
+
+
+
+
+//             //❓Question : Partitioning and sorting array with many repeating entriess
+
+
+// Problem statement
+// You’re given an array with many repeated values. Your task is to sort this array efficiently.
+
+// Input Format :
+// The first line of the input contains an integer T denoting the number of test cases.
+
+// The first line of each test case contains an integer N, the size of the array.
+
+// The second line of each test case contains N space-separated integers, the elements present in the array.
+// Output Format :
+// For every test case, the only line of output should contain N space-separated integers in sorted order.
+// Note :
+// You do not need to print anything, it has already been taken care of. Just implement the given function. 
+// Constraints :
+// 1 <= T <= 10
+// 1 <=  N <= 10^5
+// 10^-9<= arr[i] <= 10^9
+
+// Time limit: 1 sec
+
+//🔴approach : 
+// #include <bits/stdc++.h>
+
+// vector < int > sortArray(vector < int > & arr) {
+//  map < int, int > m;
+//  for (int i = 0; i < arr.size(); i++) {
+//    m[arr[i]]++;
+//  }
+//  int idx = 0;
+//  for (auto & val: m) {
+//    while (val.second--) {
+//      arr[idx++] = val.first;
+//    }
+//  }
+//  return arr;
+// }
+//🔸time complexity: O(N logn)
+//🔸space complexity: O(N)
