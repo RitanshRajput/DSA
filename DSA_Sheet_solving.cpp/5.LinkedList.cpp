@@ -96,7 +96,7 @@
 //      return head;
 //     }
 //🔸time complexity: O(2N)
-//🔸space complexity: O(1)
+//🔸space complexity: O(N)
 
 
 
@@ -119,10 +119,10 @@
 
 
 //🔴approach : Recursive
-//   ListNode* ansNode=nullptr;
-//     void reverse(ListNode* head,ListNode* prev)
+//   Node* ansNode= NULL;
+//     void reverse(Node* head, Node* prev)
 //     {
-//         if(head==nullptr)
+//         if(head==NULL)
 //         {
 //             ansNode=prev;
 //             return;
@@ -131,10 +131,10 @@
 //         head->next=prev;
 //     }
     
-//     ListNode* reverseList(ListNode* head) {
-//         if(head==nullptr)
-//             return nullptr;
-//         reverse(head,nullptr);
+//     Node* reverseList(Node* head) {
+//         if(head==NULL)
+//             return NULL;
+//         reverse(head,NULL);
 //         return ansNode;
 //     }
 //🔸time complexity: O(N)
@@ -512,3 +512,281 @@
 //   }
 //🔸time complexity: O(1)
 //🔸space complexity: O(N)
+
+
+
+//              //❓Question: Remove Duplicate element from the sorted linkedlist
+
+// Given a singly linked list consisting of N nodes. The task is to remove duplicates (nodes with duplicate values)
+// from the given list (if exists).
+// Note: Try not to use extra space. The nodes are arranged in a sorted way.
+
+// Example 1:
+// Input:
+// LinkedList: 2->2->4->5
+// Output: 2 4 5
+// Explanation: In the given linked list 
+// 2 ->2 -> 4-> 5, only 2 occurs more 
+// than 1 time. So we need to remove it once.
+
+// Example 2:
+// Input:
+// LinkedList: 2->2->2->2->2
+// Output: 2
+// Explanation: In the given linked list 
+// 2 ->2 ->2 ->2 ->2, 2 is the only element
+// and is repeated 5 times. So we need to remove
+// any four 2.
+// Your Task:
+// The task is to complete the function removeDuplicates() which takes the head of input linked list as input. 
+// The function should remove the duplicates from linked list and return the head of the linkedlist.
+
+// Expected Time Complexity : O(N)
+// Expected Auxilliary Space : O(1)
+
+// Constraints:
+// 1 <= Number of nodes <= 105
+
+//🔴appraoch : 
+// Node *removeDuplicates(Node *head)
+// {
+//     Node* prev = head;
+    
+//     while(prev->next != NULL){
+//         if(prev->data == prev->next->data){
+//             prev->next = prev->next->next ;
+//         }
+//         else{
+//             prev = prev->next ;
+//         }
+//     }
+    
+//     return head;
+// }
+//🔸time complexity : O(n)
+//🔸space complexity: O(n)     // node
+
+
+
+//             //❓Question: Remove duplicates from un-sorted linkedlist
+
+// Given an unsorted linked list of N nodes. The task is to remove duplicate elements from this unsorted Linked List.
+// When a value appears in multiple nodes, the node which appeared first should be kept, 
+// all others duplicates are to be removed.
+
+// Example 1:
+// Input:
+// N = 4
+// value[] = {5,2,2,4}
+// Output: 5 2 4
+// Explanation:Given linked list elements are
+// 5->2->2->4, in which 2 is repeated only.
+// So, we will delete the extra repeated
+// elements 2 from the linked list and the
+// resultant linked list will contain 5->2->4
+
+// Example 2:
+// Input:
+// N = 5
+// value[] = {2,2,2,2,2}
+// Output: 2
+// Explanation:Given linked list elements are
+// 2->2->2->2->2, in which 2 is repeated. So,
+// we will delete the extra repeated elements
+// 2 from the linked list and the resultant
+// linked list will contain only 2.
+// Your Task:
+// You have to complete the method removeDuplicates() which takes 1 argument: the head of the linked list.  Your function should return a pointer to a linked list with no duplicate element.
+
+// Expected Time Complexity: O(N)
+// Expected Auxiliary Space: O(N)
+
+// Constraints:
+// 1 <= size of linked lists <= 106
+// 0 <= numbers in list <= 104
+
+//🔴approach : iterative
+// Node * removeDuplicates( Node *head) {
+
+//     if (head == NULL) return head;
+
+//     Node* current = head;
+
+//     while (current != NULL) {
+//         Node* runner = current;
+
+//         while (runner->next != NULL) {
+//             if (runner->next->data == current->data) {
+//                 Node* temp = runner->next;
+//                 runner->next = runner->next->next;
+//                 delete temp;
+//             } else {
+//                 runner = runner->next;
+//             }
+//         }
+
+//             current = current->next;
+//     }
+
+//         return head;
+// }
+//🔸time complexity: O(n)
+//🔸space complexity: O(n)    // head of nodes
+
+
+//🔴 approach : unordered_map
+// Node * removeDuplicates( Node *head)  {
+
+//     map<int,bool> visited;
+
+//     if(head==NULL){
+//         return NULL;
+//     }
+
+//     Node* temp = head;
+     
+//     while(temp->next!=NULL){
+//         visited[temp->data] = true;
+
+//         if(visited[temp->next->data]==true){
+//             temp->next=temp->next->next;
+//         }
+//         else{
+//             temp=temp->next;
+//         }
+//     }
+//      return head;
+// }
+//🔸time complexity: O(n)
+//🔸space complexity: O(n)        // number of node
+
+
+
+//          //❓Question: Remove Last element to the front of the linkedlist
+
+// You are given the head of a Linked List. You have to move the last element to the front of the Linked List 
+// and return the list.
+
+// Example 1:
+// Input:
+// N = 5
+// List = {2,5,6,2,1}
+// Output:
+// {1,2,5,6,2}
+// Explanation:
+// In the given linked list, the last element is 1,
+// after moving the last element to the front the
+// linked list will be {1,2,5,6,2}.
+ 
+// Example 2:
+// Input:
+// N = 1
+// List = {2}
+// Output:
+// {2}
+// Explanation:
+// Here 2 is the only element so, the linked list
+// will remain the same.
+ 
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function moveToFront() which takes the address of the head of the linked list and returns the modified linked list.
+
+// Expected Time Complexity: O(N)
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1 <= N <= 105
+// 0 <= Elements of List <= 109
+// Sum of N over all test cases doesn't exceeds 106
+
+//🔴approach : 
+// ListNode *moveToFront(ListNode *head){
+        
+//         if(head == NULL || head->next == NULL) {
+//             return head;
+//         }
+        
+//         ListNode* prev = head;
+//         ListNode* curr = head->next;
+        
+//         while(curr->next != NULL){
+//             prev = prev->next;
+//             curr = curr->next;
+//         }
+        
+//         curr->next = head;
+//         prev->next = NULL;
+        
+//         return curr;
+//     }
+//🔸 time complexity: O(N)
+//🔸 space complexity: O(1)
+
+
+//              //❓Question: Add 1 to a number represented as linked list
+
+// A number N is represented in Linked List such that each digit corresponds to a node in linked list. 
+// You need to add 1 to it.
+
+// Example 1:
+// Input:
+// LinkedList: 4->5->6
+// Output: 457
+// Explanation: 4->5->6 represents 456 and when 1 is added it becomes 457. 
+
+// Example 2:
+// Input:
+// LinkedList: 1->2->3
+// Output: 124 
+// Your Task:
+// Your task is to complete the function addOne() which takes the head of the linked list as the only argument and returns the head of the modified linked list. The driver code prints the number.
+// Note: The head represents the left-most digit of the number.
+
+// Expected Time Complexity: O(N).
+// Expected Auxiliary Space: O(1).
+
+// Constraints:
+// 1 <= N <= 1021
+
+//🔴appraoch : 
+//     Node* reverse(Node* head) {
+        
+//     if(head->next == NULL)
+//         return head;
+        
+//         Node* headNext = head->next;
+//         Node* newHead  = reverse(head->next);
+//         headNext->next = head;
+//         head->next = NULL;
+//     return newHead;
+//  }
+ 
+// class Solution {
+//     public:
+    
+//     Node* addOne(Node *head) 
+//     {
+//         Node* h = reverse(head);
+//         Node* preptr = NULL;
+//         Node* ptr = h;
+//         int carry = 1;
+        
+//         while(ptr) {
+//             int cur = (ptr->data+carry) ;
+//             ptr->data = cur%10;
+//             carry=cur/10;   
+//             if(carry==0)
+//                 break;
+//             preptr = ptr;
+//             ptr = ptr->next;
+//         }
+        
+//         if(carry) {
+//             preptr->next = new Node(carry);
+//         }
+            
+//         return reverse(h);
+//     }
+// };
+//🔸time complexity  : O(2N)
+//🔸space complexity : O(N)

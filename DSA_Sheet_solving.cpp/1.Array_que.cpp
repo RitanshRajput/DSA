@@ -845,7 +845,7 @@
 //     int maxi = arr[size - 1] ;
 //     int result = maxi - mini ;
 
-//     for(int i=0; i<size; i++) {
+//     for(int i=1; i<size; i++) {
 
 //        if(arr[i]-k < 0){
 //         continue ;
