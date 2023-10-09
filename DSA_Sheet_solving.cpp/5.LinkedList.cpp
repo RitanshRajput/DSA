@@ -790,3 +790,233 @@
 // };
 //🔸time complexity  : O(2N)
 //🔸space complexity : O(N)
+
+
+//              //❓Question: Add two numbers represented by linkedlist
+
+// Given two decimal numbers represented by two linked lists of size N and M respectively. 
+// The task is to return a linked list that represents the sum of these two numbers.
+
+// For example, the number 190 will be represented by the linked list, 1->9->0->null, 
+// similarly 25 by 2->5->null. Sum of these two numbers is 190 + 25 = 215, 
+// which will be represented by 2->1->5->null. You are required to return the head of the linked list 2->1->5->null.
+
+// Example 1:
+// Input:
+// N = 2
+// valueN[] = {4,5}
+// M = 3
+// valueM[] = {3,4,5}
+// Output: 3 9 0  
+// Explanation: For the given two linked
+// list (4 5) and (3 4 5), after adding
+// the two linked list resultant linked
+// list will be (3 9 0).
+
+// Example 2:
+// Input:
+// N = 2
+// valueN[] = {6,3}
+// M = 1
+// valueM[] = {7}
+// Output: 7 0
+// Explanation: For the given two linked
+// list (6 3) and (7), after adding the
+// two linked list resultant linked list
+// will be (7 0).
+
+// Your Task:
+// The task is to complete the function addTwoLists() which has node reference of both the linked lists and returns the head of the sum list.   
+
+// Expected Time Complexity: O(N+M)
+// Expected Auxiliary Space: O(Max(N,M)) for the resultant list.
+
+// Constraints:
+// 1 <= N, M <= 5000
+
+//🔴approach : reverse -> add -> reverse
+
+//  struct Node* reverse(struct Node* head){
+//         Node *curr = head;
+//         Node *next = NULL;
+//         Node *prev = NULL;
+        
+//         while(curr!=NULL){
+//             next = curr->next;
+//             curr->next = prev;
+//             prev = curr;
+//             curr = next;
+//         }
+//         return prev;
+//     }
+    
+    
+//     void insertAtTail(struct Node* &head, struct Node* &tail, int val){
+//         Node* temp = new Node(val);
+//         if(head==NULL){
+//             head = temp;
+//             tail = temp;
+//             return;
+//         }
+//         else{
+//             tail->next=temp;
+//             tail = temp;
+//         }
+//     }
+    
+//     struct Node* add(struct Node* first, struct Node* second){
+//         int carry = 0;
+//         Node* ansHead = NULL, *ansTail = NULL;
+        
+//         while(first!=NULL || second!=NULL || carry!=0){
+//             int val1 = 0;
+//             if(first!=NULL) val1 = first->data;
+//             int val2 = 0;
+//             if(second!=NULL) val2 = second->data;
+            
+//             int sum = carry + val1 + val2;
+//             int digit = sum%10;
+            
+//             //create Node and add in answer linked list
+//             insertAtTail(ansHead, ansTail, digit);
+            
+//             carry = sum/10;
+//             if(first != NULL) first = first->next;
+//             if(second!= NULL) second =  second->next;
+//         }
+//         return ansHead;
+//     }
+    
+    
+//     //Function to add two numbers represented by linked list.
+//     struct Node* addTwoLists(struct Node* first, struct Node* second)
+//     {
+//         // code here
+//         //step 1: Reverse LL's
+//         first = reverse(first);
+//         second = reverse(second);
+        
+//         //step 2: Add
+//         Node *ans = add(first, second);
+        
+//         //step 3: reverse back the ans
+//         ans = reverse(ans);
+        
+//         return ans;
+//     }
+//🔸Time complexity : O(2N+M + ans)          // ans = total number of final nodes
+//🔸space complexity : O(ans)               // total sum of two ll
+
+
+
+//                  //❓Question: Intersection of two sorted linked list
+
+// Given two linked lists sorted in increasing order, create a new linked list representing the intersection of the two linked lists. The new linked list should be made with its own memory the original lists should not be changed.
+// Note: The linked list elements are not necessarily distinct.
+
+// Example 1:
+// Input:
+// L1 = 1->2->3->4->6
+// L2 = 2->4->6->8
+// Output: 2 4 6
+// Explanation: For the given first two
+// linked list, 2, 4 and 6 are the elements
+// in the intersection.
+
+// Example 2:
+// Input:
+// L1 = 10->20->40->50
+// L2 = 15->40
+// Output: 40
+// Your Task:
+// The task is to complete the function intersection() which should find the intersection of two linked list and add all the elements in intersection to the third linked list and return the head of the third linked list.
+
+// Expected Time Complexity : O(n+m)
+// Expected Auxilliary Space : O(n+m)
+// Note: n,m are the size of the linked lists.
+
+// Constraints:
+// 1 <= size of linked lists <= 5000
+// 1 <= Data in linked list nodes <= 104
+
+
+//🔴approach :
+// Node* reverse(Node* head) {
+    
+//     Node* temp = NULL ;
+    
+//     while(head != NULL) {
+//         Node* forward = head->next;
+//         head->next = temp;
+//         temp = head;
+//         head = forward;
+//     }
+    
+//     return temp ;
+// }
+
+// Node* findIntersection(Node* head1, Node* head2)
+// {
+//     Node* temp = NULL ;
+    
+//     while(head1 != NULL && head2 != NULL){
+        
+//         if(head1->data == head2->data){
+//             Node* ansNode = new Node(head1->data) ;
+//             ansNode->next = temp ;
+//             temp = ansNode;
+            
+//             head1 = head1->next ;
+//             head2 = head2->next ;
+//         }  
+//         else if(head1->data > head2->data) {
+//             head2 = head2->next;
+//         }
+//         else{
+//             head1 = head1->next;
+//         }
+//     }
+    
+//     return reverse(temp);
+// }
+//🔸time complexity:  O(min(N,M) + ansNode)
+//🔸space complexity: O(min(N,M))
+
+
+//🔴appraoch : Optimised 
+// Node* findIntersection(Node* head1, Node* head2)
+// {
+//     if(head1 == NULL || head2 == NULL){
+//         return NULL;
+//     }
+    
+//     Node* ansHead = NULL;
+//     Node* tail = NULL;
+    
+//     while(head1!=NULL &&head2!=NULL){
+//         if(head1 -> data == head2 -> data){
+//             Node* newNode = new Node(head1 -> data);
+//             if(ansHead == NULL){
+//                 ansHead = newNode;
+//                 tail = newNode;
+//             }
+//             else{
+//                 tail -> next = newNode;
+//                 tail = newNode;
+//             }
+//             head1 = head1 -> next;
+//             head2 = head2 -> next;
+//         }
+//         else if(head1 -> data < head2 -> data){
+//             head1 = head1 -> next;
+//         }
+//         else{
+//             head2 = head2 -> next;
+//         }
+//     }
+    
+//     return ansHead;
+// }
+//🔸time complexity : O(min(N, M))
+//🔸space complexity: O(min(N,M))
+ 
