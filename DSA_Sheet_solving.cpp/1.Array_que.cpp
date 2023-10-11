@@ -2756,3 +2756,124 @@
 //     }
 //🔸time complexity: O(n) 
 //🔸space complexity: O(1)
+
+
+
+//                  //❓ Question: Number of flowers in full bloom (leetcode hard)
+
+// You are given a 0-indexed 2D integer array flowers, where flowers[i] = [starti, endi] 
+// means the ith flower will be in full bloom from starti to endi (inclusive). 
+// You are also given a 0-indexed integer array people of size n, where people[i] is 
+// the time that the ith person will arrive to see the flowers.
+// Return an integer array answer of size n, where answer[i] is the number of flowers that are in full bloom when the ith person arrives.
+
+// Example 1:
+
+//    1   f   f   f   f   f   f 
+//    3           f   f   f   f   f 
+//    9                                   f   f   f   f 
+//    4               f   f   f   f   f   f   f   f   f   f 
+//    ______________________________________________________
+
+//    p:      2   3               7               11
+//       ---------------------------------------------
+//    o/p:    1   2               2               2
+
+// Input: flowers = [[1,6],[3,7],[9,12],[4,13]], poeple = [2,3,7,11]
+// Output: [1,2,2,2]
+// Explanation: The figure above shows the times when the flowers are in full bloom and when the people arrive.
+// For each person, we return the number of flowers in full bloom during their arrival.
+
+// Example 2:
+// Input: flowers = [[1,10],[3,3]], poeple = [3,3,2]
+// Output: [2,2,1]
+// Explanation: The figure above shows the times when the flowers are in full bloom and when the people arrive.
+// For each person, we return the number of flowers in full bloom during their arrival.
+ 
+
+// Constraints:
+
+// 1 <= flowers.length <= 5 * 104
+// flowers[i].length == 2
+// 1 <= starti <= endi <= 109
+// 1 <= people.length <= 5 * 104
+// 1 <= people[i] <= 109
+
+//🔴approach : Brute force (TLE)
+
+//   vector<int> fullBloomFlowers(vector<vector<int>>& flowers, vector<int>& people) {
+        
+//         int n = people.size() ;
+//         vector<pair<int,int>> vec; 
+        
+//         for(int i=0; i<n; i++){
+//              vec.push_back({people[i], 0});
+//         }
+        
+//         vector<int> ans ;
+//         int rows = flowers.size();
+//         int col = flowers[0].size() ;
+        
+//         for(int i=0; i<rows; i++) {
+//             int start = flowers[i][0] ;
+//             int end = flowers[i][col-1] ;
+            
+//             for(int k=0; k<n; k++){
+//                 // cout<<"["<<vec[k].first <<", " ;
+//                 //  cout<<vec[k].second <<"]"<< endl ;
+//               if(people[k] >= start && people[k] <= end) {
+//                   int temp = vec[k].second; 
+//                   vec[k].second = temp+1;
+//               }
+//                  //  cout<<"["<<vec[k].first <<", " ;
+//                  // cout<<vec[k].second <<"]"<< endl ;
+//             }
+//         }
+        
+//         for(auto i:vec){
+//             ans.push_back(i.second) ;
+//         }
+        
+//         return ans;
+//     }
+//🔸time complexity :  O(2N + rows*n)         // n = people.size() 
+//🔸space complexity : (2N)                   // n = number of people
+
+
+// 🔴approach : Binary search and sorting
+
+//   vector<int> fullBloomFlowers(vector<vector<int>>& flowers, vector<int>& people) {
+
+//      int n = flowers.size();
+//      vector<int> start(n);
+//      vector<int> end(n);
+//      for(int i = 0; i < n; i++) {
+//          start[i] = flowers[i][0];
+//          end[i] = flowers[i][1] + 1;
+//      }
+//      sort(start.begin(), start.end());
+//      sort(end.begin(), end.end());
+//      vector<int> ans(people.size());
+//      int e;
+//      int s;
+//      for(int i = 0; i < people.size(); i++) {
+//          e = binarySearch(end, people[i]);
+//          s = binarySearch(start, people[i]);
+//          ans[i] = s - e;
+//      }
+//      return ans;
+//  }
+
+//   int binarySearch(vector<int>& A, int target) {
+//      int l = 0;
+//      int r = A.size();
+//      int mid;
+//      while(l < r) {
+//          mid = (l + r) / 2;
+//          if(target < A[mid]) r = mid;
+//          else l = mid + 1;
+//      }
+//      return l;
+//  }
+//🔸time complexity :  (2N+M * (N*logn))       // m= no of people, n = no of flowers  (N + (2N * logn) + nP + N*(N*logn))
+//🔸space complexity : (2N + M )                              // n = no of flowers, m = no of people 
