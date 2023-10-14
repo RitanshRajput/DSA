@@ -1019,3 +1019,484 @@
 // }
 // 🔸time complexity : O(min(N, M))
 // 🔸space complexity: O(min(N,M))
+
+
+//                      //❓ Question : Intersection Point in Y Shaped Linked Lists
+
+// Given two singly linked lists of size N and M, 
+// write a program to get the point where two linked lists intersect each other.
+
+// Example 1:
+// Input:
+// LinkList1 = 3->6->9->common
+// LinkList2 = 10->common
+// common = 15->30->NULL
+// Output: 15
+// Explanation:
+// Y ShapedLinked List
+
+// Example 2:
+// Input: 
+// Linked List 1 = 4->1->common
+// Linked List 2 = 5->6->1->common
+// common = 8->4->5->NULL
+// Output: 8
+// Explanation: 
+
+// 4              5
+// |              |
+// 1              6
+//  \             /
+//   8   -----  1 
+//    |
+//    4
+//    |
+//   5
+//   |
+//   NULL    
+
+// Your Task:
+// You don't need to read input or print anything. The task is to complete the function intersetPoint() which takes the pointer to the head of linklist1(head1) and linklist2(head2) as input parameters and returns data value of a node where two linked lists intersect. If linked list do not merge at any point, then it should return -1.
+// Challenge : Try to solve the problem without using any extra space.
+
+// Expected Time Complexity: O(N+M)
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1 ≤ N + M ≤ 2*105
+// -1000 ≤ value ≤ 1000
+
+//🔴approach : 
+// int intersectPoint(Node* head1, Node* head2)
+// {
+//    int size1 = 0;
+//    int size2 = 0;
+//    Node* temp1 = head1;
+//    Node* temp2 = head2;
+   
+//    while(temp1 != NULL){
+//        size1++ ;
+//        temp1 = temp1->next;
+//    }
+   
+//    while(temp2 != NULL){
+//        size2++ ;
+//        temp2 = temp2->next;
+//    }
+   
+//    int intersect = 0 ;
+   
+//    if(size1 > size2){
+//        intersect = size1-size2;
+//        while(intersect != 0){
+//            head1 = head1->next ;
+//            intersect-- ;
+//        }
+//    }
+//    else{
+//        intersect = size2-size1;
+//        while(intersect != 0){
+//            head2 = head2->next ;
+//            intersect-- ;
+//        }
+//    }
+   
+//    while(head1 != NULL){
+//        if(head1 == head2){
+//            return head1->data;
+//        }
+//        else{
+//            head1 = head1->next;
+//            head2 = head2->next;
+//        }
+//    }
+   
+//    return -1;
+// }
+//🔸time complexity: O(M)        // max size node
+//🔸space complexity: O(N+M)     // size of both nodes
+
+
+
+//              //❓Question: Merge sort for Linked list
+
+// Given Pointer/Reference to the head of the linked list, the task is to Sort the given linked list using Merge Sort.
+// Note: If the length of linked list is odd, then the extra node should go in the first list while splitting.
+
+// Example 1:
+// Input:
+// N = 5
+// value[]  = {3,5,2,4,1}
+// Output: 1 2 3 4 5
+// Explanation: After sorting the given
+// linked list, the resultant matrix
+// will be 1->2->3->4->5.
+
+// Example 2:
+// Input:
+// N = 3
+// value[]  = {9,15,0}
+// Output: 0 9 15
+// Explanation: After sorting the given
+// linked list , resultant will be
+// 0->9->15.
+
+// Your Task:
+// For C++ and Python: The task is to complete the function mergeSort() which sort the linked list using merge sort function.
+// For Java: The task is to complete the function mergeSort() and return the node which can be used to print the sorted linked list.
+
+// Expected Time Complexity: O(N*Log(N))
+// Expected Auxiliary Space: O(N)
+
+// Constraints:
+// 1 <= N <= 105
+
+//🔴appraoch : 
+// class Solution{
+//   public:
+//   // function to get mid 
+//     Node* getMid(Node* root) {
+//         Node* slow = root;
+//         Node* fast = root->next ;
+        
+//         while(fast != NULL && fast->next != NULL){
+//             fast = fast->next->next;
+//             slow = slow->next;
+//         }
+        
+//         return slow;
+//     }
+    
+//     //Function to sort and merge the linked list 
+//     Node* merge_LL(Node* left, Node* right) {
+//         if(left == NULL){
+//             return right ;
+//         }    
+        
+//         if(right == NULL){
+//             return left ;
+//         }
+        
+//         Node* finalHead = new Node(-1);
+//         Node* finalTail = finalHead;
+        
+//         while(left != NULL && right != NULL){
+//             if(left->data < right->data){
+//                 finalTail->next = left ;
+//                 finalTail = left;
+//                 left = left->next;
+//             }
+//             else{
+//                 finalTail->next = right;
+//                 finalTail = right;
+//                 right = right->next;
+//             }
+//         }
+        
+//         while(left != NULL){
+//             finalTail->next = left ;
+//             finalTail = left;
+//             left = left->next; 
+//         }
+        
+//         while(right != NULL){
+//             finalTail->next = right ;
+//             finalTail = right ;
+//             right = right->next;
+//         }
+        
+//         finalHead = finalHead->next ;
+//         return finalHead;
+//     }
+    
+    
+//     //Function to sort the given linked list using Merge Sort.
+//     Node* mergeSort(Node* head) {
+//         //base case
+//         if(head == NULL || head->next == NULL){
+//             return head;
+//         }
+        
+//         // Divide the linked list and find mid
+//         Node* mid = getMid(head) ;
+        
+//         Node* left = head ;
+//         Node* right = mid->next;
+//         mid->next = NULL ;
+        
+//         //sort the left and right linkedlist
+//         left = mergeSort(left) ;
+//         right = mergeSort(right);
+        
+//         // Merge the final left and right linkedlist
+//         Node* result = merge_LL(left, right) ;
+        
+//         return result ;
+//     }
+// };
+//🔸time complexity: O(N* logn)
+//🔸space complexity: O(N)
+
+
+//              //❓Question: QuickSort for Linkedlist
+
+// Sort the given Linked List using quicksort. which takes O(n^2) time in worst case and O(nLogn) 
+// in average and best cases, otherwise you may get TLE.
+
+// Input:
+// In this problem, method takes 1 argument: address of the head of the linked list. The function should not read any input from stdin/console.
+// The struct Node has a data part which stores the data and a next pointer which points to the next element of the linked list.
+// There are multiple test cases. For each test case, this method will be called individually.
+
+// Output:
+// Set *headRef to head of resultant linked list.
+
+// Example:
+// Input:
+// 2
+// 3
+// 1 6 2
+// 4
+// 1 9 3 8
+
+// Output:
+// 1 2 6
+// 1 3 8 9
+
+// Explanation:
+// Testcase 1: After sorting the nodes, we have 1, 2 and 6.
+// Testcase 2: After sorting the nodes, we have 1, 3, 8 and 9.
+
+// User Task:
+// The task is to complete the function quickSort() which should set the *headRef to head of the resultant linked list.
+
+// Constraints:
+// 1<=T<=100
+// 1<=N<=200
+
+// Note: If you use "Test" or "Expected Output Button" use below example format
+
+//🔴appraoch :
+// struct node* partition(struct node* low, struct node* high) {
+//     int pivot = low->data ;
+//     struct node* ind = low ;
+    
+//     for(struct node* j = low->next; j != high; j = j->next) {
+//         if(j->data < pivot){
+//             ind = ind->next;
+//             swap(ind->data, j->data) ;
+//         }
+//     }
+    
+//     swap(low->data, ind->data) ;
+//     return ind ;
+// }
+
+
+// void solve(struct node* head, struct node* end){
+//     if(head==end || head->next==end) {
+//         return ;
+//     }
+//     struct node* pivot = partition(head, end);
+//     solve(head, pivot) ;
+//     solve(pivot->next, end) ;
+// }
+
+// //you have to complete this function
+// void quickSort(struct node **headRef) {
+//    node* head = *headRef ;
+//    solve(head, NULL) ;
+// }
+//🔸time complexity: O(N^2)
+//🔸space complexity: O(N)
+
+
+
+//              //❓Question: Middle of the linkedList
+
+// Given the head of a singly linked list, return the middle node of the linked list.
+// If there are two middle nodes, return the second middle node.
+
+// Example 1:
+// 1->2->3->4->5
+// Input: head = [1,2,3,4,5]
+// Output: [3,4,5]
+// Explanation: The middle node of the list is node 3.
+
+// Example 2:
+//  1->2->3->4->5->6
+// Input: head = [1,2,3,4,5,6]
+// Output: [4,5,6]
+// Explanation: Since the list has two middle nodes with values 3 and 4, we return the second one.
+ 
+// Constraints:
+// The number of nodes in the list is in the range [1, 100].
+// 1 <= Node.val <= 100
+
+//🔴appraoch :
+// class Solution {
+// public:
+//     ListNode* middleNode(ListNode* head) {
+        
+//        if(head == NULL || head->next == NULL){
+//             return head; 
+//        }
+        
+//        ListNode* slow = head ; 
+//        ListNode* fast = head ;
+        
+//         while(fast != NULL && fast->next != NULL){
+//             fast = fast->next->next;
+//             slow = slow->next ;
+//         }
+
+//         return slow;
+//     }
+// };
+//🔸time complexity: O(N)
+//🔸space complexity : O(1)
+
+
+//              //❓Question: Check if a linkedlist is a circular linkedlist or not
+
+// Given head, the head of a singly linked list, find if the linked list is circular or not. 
+// A linked list is called circular if it not NULL terminated and all nodes are connected in the form of a cycle. 
+// An empty linked list is considered as circular.
+// Note: The linked list does not contains any inner loop.
+
+// Example 1:
+// Input:
+// LinkedList: 1->2->3->4->5
+// (the first and last node is connected,
+// i.e. 5 --> 1)
+// Output: 1
+
+// Example 2:
+// Input:
+// LinkedList: 2->4->6->7->5->1
+// Output: 0
+// Your Task:
+// The task is to complete the function isCircular() which checks if the given linked list is circular or not. 
+// It should return true or false accordingly. (the driver code prints 1 if the returned values is true, otherwise 0)
+
+// Expected Time Complexity: O(N).
+// Expected Auxiliary Space: O(1).
+
+// Constraints:
+// 1 <=Number of nodes<= 100
+
+//🔴appraoch :
+// bool isCircular(Node *head)
+// {
+//     if(head == NULL || head->next == NULL){
+//         return 0 ;    
+//     }
+    
+//     Node* slow = head; 
+//     Node* fast = head; 
+    
+//     while(fast != NULL && fast->next != NULL){
+//          slow = slow->next;
+//          fast = fast->next->next;
+//          if(slow == fast){
+//              return 1 ;
+//          }
+//     }
+    
+//     return 0 ;
+// }
+//🔸time complexity: O(N)
+//🔸space complexity: O(1)
+
+
+
+//          //❓Question : Split a circular linkedlist in two halves
+
+// Given a Cirular Linked List of size N, split it into two halves circular lists. 
+// If there are odd number of nodes in the given circular linked list then out of the resulting two halved lists,
+// first list should have one node more than the second list. The resultant lists should also 
+// be circular lists and not linear lists.
+
+// Example 1:
+// Input:
+// Circular LinkedList: 1->5->7
+// Output:
+// 1 5
+// 7
+ 
+// Example 2:
+// Input:
+// Circular LinkedList: 2->6->1->5
+// Output:
+// 2 6
+// 1 5
+
+// Your Task:
+// Your task is to complete the given function splitList(), which takes 3 input parameters: The address of the head of the linked list, addresses of the head of the first and second halved resultant lists and Set the head1_ref and head2_ref to the first resultant list and second resultant list respectively.
+
+// Expected Time Complexity: O(N)
+// Expected Auxilliary Space: O(1)
+
+// Constraints:
+// 1 <= N <= 100
+
+//🔴approach :
+
+// void splitList(Node *head, Node **head1, Node **head2)
+// {
+//     // if single node or NULL node
+//     if(head->next == head || head==NULL){
+//         *head1 = NULL;
+//         *head2 = NULL;
+//         return ;
+//     }
+    
+//     // getting lengtt of the ll
+//     int length = 0 ;
+//     Node* temp = head;
+//     do{
+//         length++ ;
+//         temp = temp->next;
+//     }
+//     while(temp != head)  ;
+    
+    
+//     // distributing both ll 
+//     int first = 0;
+//     int second = 0 ;
+    
+//     // if odd 
+//     if(length & 1) {
+//         first = (length/2)+1;
+//         second = length/2 ;
+//     }
+//     else{
+//         first = length/2;
+//         second = length/2 ;
+//     }
+    
+    
+//     // spliting first half
+//     *head1 = head ;
+//     temp = head;
+    
+//     while(first > 1){
+//         temp = temp->next;
+//         first-- ;
+//     }
+     
+//     //splitting second half
+//     *head2 = temp->next ;
+//     temp->next = *head1 ;
+    
+//     temp = *head2;
+    
+//     while(second > 1){
+//         temp = temp->next;
+//         second--;
+//     }
+    
+//     temp->next = *head2;
+// }
+//🔸time complexity: O(N)
+//🔸space complexity: O(1)
