@@ -1500,3 +1500,218 @@
 // }
 //🔸time complexity: O(N)
 //🔸space complexity: O(1)
+
+
+
+//                  //❓Question: Check is LinkedList is Palindrome or not
+
+// Given a singly linked list of size N of integers. The task is to check if the given linked list 
+// is palindrome or not.
+
+// Example 1:
+// Input:
+// N = 3
+// value[] = {1,2,1}
+// Output: 1
+// Explanation: The given linked list is
+// 1 2 1 , which is a palindrome and
+// Hence, the output is 1.
+
+// Example 2:
+// Input:
+// N = 4
+// value[] = {1,2,3,4}
+// Output: 0
+// Explanation: The given linked list
+// is 1 2 3 4 , which is not a palindrome
+// and Hence, the output is 0.
+// Your Task:
+// The task is to complete the function isPalindrome() which takes head as reference as the only parameter and returns true or false if linked list is palindrome or not respectively.
+
+// Expected Time Complexity: O(N)
+// Expected Auxialliary Space Usage: O(1)  (ie, you should not use the recursive stack space as well)
+
+// Constraints:
+// 1 <= N <= 105
+
+//🔴 approach : brute force
+//   bool isPalind(vector<int> result){
+//         int start = 0 ;
+//         int end = result.size()-1;
+        
+//         while(start <= end){
+//             if(result[start] != result[end]) {
+//                 return 0 ;
+//             }
+//             start++ ;
+//             end-- ;
+//         }
+//         return 1;
+//     }
+//     //Function to check whether the list is palindrome.
+//     bool isPalindrome(Node *head)
+//     {
+//         if(head==NULL || head->next==NULL){
+//             return 1;
+//         }
+        
+//         vector<int> result ;
+//         Node* temp = head;
+        
+//         while(temp != NULL){
+//             result.push_back(temp->data);
+//             temp = temp->next;
+//         }
+        
+//         return isPalind(result) ;
+//     }
+//🔸time complexity: O(N)              // O(N + N/2)
+//🔸space complexity: O(N)
+
+
+//🔴approach : space Optmisied 
+////get middle of list
+//   Node* getMid(Node* head) {
+//     Node* slow = head ;
+//     Node* fast = head -> next ;
+    
+//     while(fast != NULL && fast->next != NULL){
+//         fast = fast -> next-> next ;
+//         slow = slow -> next ;
+//     }
+//     return slow  ;    //mid
+//   }
+  
+////reversed half list
+//   Node* reverse(Node* head) {
+     
+//      Node* curr = head ;
+//      Node* prev = NULL ;
+//      Node* next = NULL ;
+     
+//      while(curr != NULL){
+//          next = curr -> next ;
+//          curr -> next = prev ;
+//          prev = curr ;
+//          curr = next ;
+//      }
+//      return prev;         //head
+//   }
+
+////Function to check whether the list is palindrome.
+//     bool isPalindrome(Node *head)
+//     {
+//      //single node
+//      if(head -> next == NULL){
+//          return true ;
+//      }
+     
+//      //step1: find mid of list
+//      Node* middle = getMid(head) ;
+     
+//      //step2: reverse other half of list after middle
+//      Node* temp = middle -> next ;
+//      middle -> next = reverse(temp) ;
+     
+//      //step3: compare both list
+//      Node* head1  = head ;
+//      Node* head2 = middle -> next ;
+     
+//      while(head2 != NULL) {
+//          if(head1 -> data != head2 -> data){
+//              return false;
+//          }
+//          head1 = head1 -> next ;
+//          head2 = head2 -> next ;
+//      }
+     
+//      //step4: reverse the previously reverse list to get it back into its original order
+//      temp = middle -> next ;
+//      middle -> next = reverse(temp) ;
+     
+//      return true;
+//     }
+//🔸time complexity: O(N)              // O(3N)    //   O(N + N + N/2 + N)
+//🔸space complexity: O(1)
+
+
+
+//                  //❓Question : Deletion from a circular linkedlist (Deletion and reverse a LL)
+
+// Given a Circular Linked List of size N. The task is to delete the given node in the circular linked list 
+// and then print the reverse of the circular linked list.
+
+// Example 1:
+// Input:
+// 5
+// 2 5 7 8 10
+// 8
+
+// Output:
+// 10 7 5 2
+// Explanation: 
+// After deleting 8 from the given circular linked 
+// list, it has elements as 2, 5, 7, 10. Now, 
+// reversing this list will result in 10, 7, 5, 2.
+ 
+// Example 2:
+// Input:
+// 4
+// 1 7 8 10
+// 8
+
+// Output:
+// 10 7 1
+
+// Explanation:
+// After deleting 8 from the given circular linked 
+// list, it has elements as 1, 7,10. Now, reversing 
+// this list will result in 10, 7, 1.
+ 
+// Your Task:
+// You don't need to read, input, or print anything. Your task is to complete the function deleteNode( ), which takes Node head, and integer key as input parameters, and delete the node with data key. Also Complete function reverse() which reverses the linked list.
+
+// Constraints:
+// 1 <= T <= 100
+// 2 <= n <= 100
+// 1 <= data <= 100
+
+//🔴appraoch :
+// void deleteNode(struct Node **head, int key)
+// {   
+//     Node* temp = *head;
+//     Node* prev = NULL;
+//     Node* curr = temp;
+//     if(curr -> data == key){
+//         curr = curr -> next;
+//         *head = curr;
+//     }
+//     while(curr -> data != key){
+//         prev = curr;
+//         curr = curr -> next;
+//     }
+//     prev -> next = curr -> next;
+//     return;
+// }
+
+// /* Function to reverse the linked list */
+//  void reverse(struct Node** head_ref)
+// {
+
+//     Node* temp = *head_ref;
+//     Node* curr = temp -> next;
+//     Node* prev = temp;
+//     Node* forward = NULL;
+    
+//     while(curr != temp){
+//         forward = curr -> next;
+//         curr -> next = prev;
+//         prev = curr;
+//         curr = forward;
+//     }
+//     curr -> next = prev;
+//     *head_ref = prev;
+//     return;
+// }    
+//🔸time complexity: O(2N)
+//🔸space complexity: O(1)
