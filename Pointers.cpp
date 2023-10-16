@@ -49,7 +49,7 @@
 // The asterisk you used to declare a pointer is the same asterisk that you use for multiplication. 
 // However, in this statement the asterisk is being used to designate a variable as a pointer. 
 
-//Following are the valid pointer declaration −
+// Following are the valid pointer declaration −
 // int    *ip;    // pointer to an integer
 // double *dp;    // pointer to a double
 // float  *fp;    // pointer to a float
@@ -97,7 +97,8 @@
 // Value of *ip variable: 20
 
 
-//🔴 Pointers have many but easy concepts and they are very important to C++ programming. There are following few important pointer concepts which should be clear to a C++ programmer −
+//🔴 Pointers have many but easy concepts and they are very important to C++ programming.
+//   There are following few important pointer concepts which should be clear to a C++ programmer −
 
 //🔴 Concept & Description
 //1. Null Pointers :
@@ -227,7 +228,6 @@
 // (*p)++ ;
 // cout<<"after *p++ :"<< num <<endl ;     //output : 7
 
-
 //     return 0 ;
 // }
 
@@ -249,7 +249,7 @@
 // }
 
 
-//🔸 Important :
+// 🔸 Important :
 //  #include<iostream>
 // using namespace std;
 // int main() {
@@ -424,15 +424,17 @@
 // using namespace std;
 // int main() {
 
-// int arr[10] ;
+// int arr[10] = {1} ;
 // //ERROR
 // // arr = arr+1 ;   //output : error: incompatible types in assignment of 'int*' to 'int [10]'
 
-// int *ptr = &arr[10] ;
+// int *ptr = &arr[0] ;
 // cout<<" ptr : "<< ptr <<endl ;        //output :  0x61ff0c  (address of arr[0th index])
+// cout<<"*prt " << *ptr <<endl ;
 
 // ptr = ptr + 1 ;
 // cout<<" ptr + 1 : "<< ptr <<endl ;    //output : 0x61ff10  (address of arr[1th index])
+// cout<<"*prt " << *ptr <<endl ;
 
 //     return 0;
 // }
@@ -456,7 +458,7 @@
 
 // char *ctr = &ch[0] ;
 // cout<<" pointer ctr  : "<< ctr <<endl ;     //output : abcd    (entire string)
-// cout<<" pointer *ctr : "<< *ctr <<endl ;    //output : 1        (value at ch[0th index])
+// cout<<" pointer *ctr : "<< *ctr <<endl ;    //output : a        (value at ch[0th index])
 // cout<<" pointer &ctr : "<< &ctr <<endl ;    //output : 0x61fef0  (address of pointer ctr)
 
 // char temp = 'z' ;
@@ -545,6 +547,10 @@
 // int main() {
 
 // int arr[5] = {11, 12, 13, 14, 15} ;
+
+// int *ptr = arr;
+// cout<< "ptr:" <<sizeof(ptr)<< endl;       //output: 4
+
 // cout<<"printing sum of all no. in array : "<< getSum(arr, 5) <<endl ;   //output : 65
 // cout<<"printing sum of all no. in array : "<< getSum(arr+2, 3) <<endl ;   //output : 42  {13 + 14 + 15}
 // cout<<"printing sum of all no. in array : "<< getSum(arr+3, 2) <<endl ;   //output : 29  {14 + 15}
@@ -555,7 +561,7 @@
 
 
 
-                    //🔴🔴Double Pointer:
+//                    //🔴🔴Double Pointer:
 
 //🔸 when we define a pointer to a pointer, the first pointer is used to store the address of the variables,
 //   and the second pointer stores the address of the first pointer.
