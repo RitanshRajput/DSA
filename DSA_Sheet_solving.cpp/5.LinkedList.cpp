@@ -275,6 +275,7 @@
 //🔸space complexity: O(N)
 
 
+
 //              //❓Question:  Detect Loop in linked list
 
 // Given a linked list of N nodes. The task is to check if the linked list has a loop.
@@ -630,8 +631,8 @@
 
 //         return head;
 // }
-//🔸time complexity: O(n)
-//🔸space complexity: O(n)    // head of nodes
+//🔸time complexity: O(n^2)
+//🔸space complexity: O(1)    // head of nodes
 
 
 //🔴 approach : unordered_map
@@ -1715,3 +1716,248 @@
 // }    
 //🔸time complexity: O(2N)
 //🔸space complexity: O(1)
+
+
+
+//              //❓Question: Reverse a Doubly Linkedlist
+
+// Given a doubly linked list of n elements. The task is to reverse the doubly linked list.
+
+// Example 1:
+// Input:
+// LinkedList: 3 <--> 4 <--> 5
+// Output: 5 4 3
+
+// Example 2:
+// Input:
+// LinkedList: 75 <--> 122 <--> 59 <--> 196
+// Output: 196 59 122 75
+// Your Task:
+// Your task is to complete the given function reverseDLL(), which takes head reference as argument and should reverse the elements so that the tail becomes the new head and all pointers are correctly pointed. You need to return the new head of the reversed list. The printing and verification is done by the driver code.
+
+// Expected Time Complexity: O(n).
+// Expected Auxiliary Space: O(1).
+
+// Constraints:
+// 1 <= number of nodes <= 103
+// 0 <= value of nodes <= 103
+
+
+//🔴 approach : Iterative Approach 
+// Node* reverseDLL(Node * head)
+// {
+//     if(head == NULL || head->next == NULL){
+//         return head ;
+//     }
+//     Node* temp = NULL;
+//     Node* curr = head;
+//     Node* next = head;
+    
+//     while( next != NULL) {
+//         next = curr->next;
+//         curr->next = temp;
+//         curr->prev = next;
+        
+//         temp = curr;
+//         curr = next;
+//     }
+    
+//     return temp;
+// }
+//🔸time complexity: O(N)
+//🔸space complexity: O(1)
+
+
+//🔴 appraoch : Recursive 
+// void reverse(Node* &head, Node* curr, Node* back)
+// {
+//     //base case
+//     if(curr == NULL)
+//     {
+//         head = back;
+//         return;
+//     }
+//     Node* forward = curr->next;
+//     reverse(head,forward,curr);
+//     curr->next = curr->prev;
+//     curr->prev = forward;
+// }
+// Node* reverseDLL(Node * head)
+// {
+//     //Your code here
+//     Node* curr = head;
+//     Node* back = NULL;
+//     reverse(head,curr,back);
+//     return head;
+// }
+//🔸time complexity: O(N)
+//🔸space complexity: O(1)
+
+
+//              //❓QUestion: Find pairs with given sum in doubly linkedlist
+
+// Given a sorted doubly linked list of positive distinct elements, 
+// the task is to find pairs in a doubly-linked list whose sum is equal to given value target.
+
+// Example 1:
+// Input:  
+// 1 <-> 2 <-> 4 <-> 5 <-> 6 <-> 8 <-> 9
+// target = 7
+// Output: (1, 6), (2,5)
+// Explanation: We can see that there are two pairs 
+// (1, 6) and (2,5) with sum 7.
+ 
+// Example 2:
+// Input: 
+// 1 <-> 5 <-> 6
+// target = 6
+// Output: (1,5)
+// Explanation: We can see that there is one pairs  (1, 5) with sum 6.
+
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function findPairsWithGivenSum() which takes head node of the doubly linked list and an integer target as input parameter and returns an array of pairs. If there is no such pair return empty array.
+
+// Expected Time Complexity: O(N)
+// Expected Auxiliary Space: O(1)
+// Constraints:
+// 1 <= N <= 105
+// 1 <= target <= 105
+
+//🔴approach : Brute force
+// class Solution
+// {
+// public:
+//     vector<pair<int, int>> findPairsWithGivenSum(Node *head, int target)
+//     {
+//         vector<pair<int, int>> result ;
+//         vector<int> elem ;
+        
+//         Node* temp = head;
+//         while(temp != NULL){
+//             elem.push_back(temp->data) ;
+//             temp = temp->next;
+//         }
+        
+//         int low = 0 ;
+//         int high = elem.size()-1 ;
+        
+//         while(low < high) {
+//             int sum = elem[low] + elem[high] ;
+            
+//             if( sum == target) {
+//                 result.push_back({elem[low], elem[high]}) ;
+//                 low++ ;
+//             }
+//             else if(sum > target){
+//                 high-- ;
+//             }
+//             else{
+//                 low++ ;
+//             }
+//         }
+        
+//         return result;
+//     }
+// };
+//🔸time complexity:  O(N)               //O( N + n/2)
+//🔸space complexity: O(2N)              // temp.size() and result.size()
+
+
+//🔴appraoch : Optimised
+//  vector<pair<int, int>> findPairsWithGivenSum(Node *head, int target)
+//     {
+//         // code her
+//         vector<pair<int,int>>ans;
+//         Node*head1=head;
+//         Node*tail=head;
+//         while(tail->next!=NULL){
+//             tail=tail->next;
+//         }
+//         while(tail->data>head1->data){
+//             if((tail->data+head1->data)==target){
+//                 pair<int,int>p;
+//                 p.first=head1->data;
+//                 p.second=tail->data;
+//                 ans.push_back(p);
+//                 head1=head1->next;
+//                 tail=tail->prev;
+//             }
+//             else if((tail->data+head1->data)>target){
+//                 tail=tail->prev;
+//             }
+//             else {
+//                 head1=head1->next;
+//             }
+//         }
+//         return ans;
+//     }
+//🔸time complexity:  O(N/2)               
+//🔸space complexity: O(N)              //  result.size()
+
+
+
+//             //❓Question: Count triplet in a doubly Linked list
+
+// Given a sorted linked list of distinct nodes (no two nodes have the same data) and an integer X. 
+// Count distinct triplets in the list that sum up to given integer X.
+// Note: The Linked List is sorted in decending order.
+
+// Example 1:
+// Input: LinkedList: 9->8->6->5->4->2->1,  X = 17
+// Output: 2
+// Explanation: Distinct triplets are (2, 6, 9) 
+// and (4, 5, 8) which have sum equal to X i.e 17.
+
+// Example 2:
+// Input: LinkedList: 9->8->6->5->4->2->1, X = 15
+// Output: 5
+// Explanation: (1, 5, 9), (1, 6, 8), (2, 4, 9), 
+// (2, 5, 8), (4, 5, 6) are the distinct triplets
+// Your Task:  
+// You don't need to read input or print anything. Complete the function countTriplets() which takes a head reference and X as input parameters and returns the triplet count
+
+// Expected Time Complexity: O(N2)
+// Expected Auxiliary Space: O(N)
+
+// Constraints:
+// 1 ≤ Number of Nodes ≤ 103 
+// 1 ≤ Node value ≤ 104
+
+//🔴approach : 
+// int countTriplets(struct Node* head, int x) 
+// { 
+//    vector<int> vec;
+   
+//    while(head!=NULL) {
+//        vec.emplace_back(head->data);
+//        head=head->next;
+//    }
+   
+//    sort(vec.begin(),vec.end());
+   
+//    int count=0;
+   
+//     for(int i=vec.size()-1; i>=2; i--){
+//         int a=0;
+//         int b=i-1;
+        
+//         while(a < b) {
+//         int sum=vec[a]+vec[b]+vec[i];
+        
+//         if(sum==x) {
+//            count++;
+//             a++;
+//             b--;
+//         } 
+//         else if(sum<x) {
+//             a++;
+//         }
+//         else{ 
+//             b--;
+//         }
+//       } 
+//     }
+//    return count;
+// } 
+//🔸time complexity:O(N*logn)           //  O(N + N*logn + N)
+//🔸space complexity: O(N)
