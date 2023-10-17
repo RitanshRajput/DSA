@@ -1961,3 +1961,383 @@
 // } 
 //🔸time complexity:O(N*logn)           //  O(N + N*logn + N)
 //🔸space complexity: O(N)
+
+
+
+//          //❓Question : Sort a k sorted doubly linked list
+
+// Given a doubly linked list containing n nodes, where each node is at most k away from its target position in the list.
+// The problem is to sort the given doubly linked list. 
+// For example, let us consider k is 2, a node at position 7 in the sorted doubly linked list, 
+// can be at positions 5, 6, 7, 8, 9 in the given doubly linked list.
+
+// Examples:
+// DLL :  3<->6<->2<->12<->56<->8
+// k = 2 
+
+//output: 2<->3<->6<->8<->12<->56
+
+
+//🔴appraoch : brute force
+
+// // function to sort a k sorted doubly linked list
+// struct Node* sortAKSortedDLL(struct Node* head, int k)
+// {
+//     if(head == NULL || head->next == NULL)
+//         return head;
+  
+//     // perform on all the nodes in list
+//     for(Node *i = head->next; i != NULL; i = i->next) {
+//         Node *j = i;
+//           // There will be atmost k swaps for each element in the list
+//         // since each node is k steps away from its correct position
+//         while(j->prev != NULL && j->data < j->prev->data) {
+//               // swap j and j.prev node
+//             Node* temp = j->prev->prev;
+//             Node* temp2 = j->prev;
+//             Node *temp3 = j->next;
+//             j->prev->next = temp3;
+//             j->prev->prev = j;
+//             j->prev = temp;
+//             j->next = temp2;
+//             if(temp != NULL)
+//                 temp->next = j;
+//             if(temp3 != NULL)
+//                 temp3->prev = temp2;
+//         }
+//           // if j is now the new head
+//        // then reset head
+//         if(j->prev == NULL)
+//             head = j;
+//     }
+//     return head;
+// }
+//🔸time complexity : O(N*K)
+//🔸space complexity: O(1)
+
+
+//🔴approach : optmised (Min-heap) priority-queue
+
+// 'compare' function used to build up the priority queue
+// struct compare {
+//     bool operator()(struct Node* p1, struct Node* p2)
+//     {
+//         return p1->data > p2->data;
+//     }
+// };
+ 
+// // function to sort a k sorted doubly linked list
+// struct Node* sortAKSortedDLL(struct Node* head, int k)
+// {
+//     // if list is empty
+//     if (head == NULL)
+//         return head;
+ 
+//     // priority_queue 'pq' implemented as min heap with the help of 'compare' function
+//     priority_queue<Node*, vector<Node*>, compare> pq;
+ 
+//     struct Node* newHead = NULL, *last;
+ 
+//     // Create a Min Heap of first (k+1) elements from  input doubly linked list
+//     for (int i = 0; head != NULL && i <= k; i++) {
+//         // push the node on to 'pq'
+//         pq.push(head);
+ 
+//         // move to the next node
+//         head = head->next;
+//     }
+ 
+//     // loop till there are elements in 'pq'
+//     while (!pq.empty()) {
+ 
+//         // place root or top of 'pq' at the end of the result sorted list so far having the first node pointed to by 'newHead'
+//         // and adjust the required links
+//         if (newHead == NULL) {
+//             newHead = pq.top();
+//             newHead->prev = NULL;
+ 
+//             // 'last' points to the last node of the result sorted list so far
+//             last = newHead;
+//         }
+ 
+//         else {
+//             last->next = pq.top();
+//             pq.top()->prev = last;
+//             last = pq.top();
+//         }
+ 
+//         // remove element from 'pq'
+//         pq.pop();
+ 
+//         // if there are more nodes left in the input list
+//         if (head != NULL) {
+//             // push the node on to 'pq'
+//             pq.push(head);
+ 
+//             // move to the next node
+//             head = head->next;
+//         }
+//     }
+ 
+//     // making 'next' of last node point to NULL
+//     last->next = NULL;
+ 
+//     // new head of the required sorted DLL
+//     return newHead;
+// }
+//🔸time complexity: O(n*log k)
+//🔸space complexity: O(1)
+
+
+
+//              //❓Question : Rotate a doubly linked list by N nodes
+
+// Given a doubly-linked list, rotate the linked list counter-clockwise by N nodes. 
+// Here N is a given positive integer and is smaller than the count of nodes in linked list. 
+
+//Example :
+// DLL :  NULL <-> a <-> b <-> c <-> d <-> e 
+// N = 3
+
+//output: NULL <-> c <-> d <-> e <-> a <-> b 
+
+//🔴appraoch : 
+// void rotateByN(Node* &head, int pos) 
+// { 
+//     // return without any changes if position is 0. 
+//     if(pos==0) return; 
+  
+//     // Finding last node. 
+//     Node* temp=head; 
+//     while(temp->next!=NULL) 
+//     { 
+//         temp=temp->next; 
+//     } 
+//     // making the list circular. 
+//     temp->next=head; 
+//     head->pre=temp; 
+  
+//     // move head and temp by the given position. 
+//     int count=1; 
+//     while(count<=pos) 
+//     { 
+//         head=head->next; 
+//         temp=temp->next; 
+//         count++; 
+//     } 
+  
+//     // now again make list un-circular. 
+//     temp->next=NULL; 
+//     head->pre=NULL; 
+// }
+//🔸time complexity: O(N)         //  O(N+pos)
+//🔸 space complexity: O(1)
+
+
+//🔴appraoch :
+  
+// void rotateByN(Node *&head, int pos) 
+// { 
+//     if (pos == 0) 
+//         return; 
+  
+//     Node *curr = head; 
+//     while (pos) 
+//     { 
+//         curr = curr->next; 
+//         pos--; 
+//     } 
+  
+//     Node *tail = curr->pre; 
+//     Node *NewHead = curr; 
+//     tail->next = NULL; 
+//     curr->pre = NULL; 
+  
+//     while (curr->next != NULL) 
+//     { 
+//         curr = curr->next; 
+//     } 
+      
+//     curr->next = head; 
+//     head->pre = curr; 
+//     head = NewHead; 
+// } 
+//🔸time complexity: O(N)         
+//🔸space complexity: O(1)
+
+
+
+
+//              //❓Question: Reverse a doubly linked list in groups of given size
+
+// Given a doubly linked list containing n nodes. The problem is to reverse every group of k nodes in the list.
+
+//Example :
+// DLL : NULL <-> a <-> b <-> c <-> d <-> e 
+// k = 2
+
+//output: NULL <-> b <-> a <-> d <-> c <-> e 
+
+//🔴approach :
+// function to Reverse a doubly linked list in groups of given size
+// Node* reverseByN(Node* head, int k)
+// {
+//     if (!head)
+//         return NULL;
+//
+//     head->prev = NULL;
+//     Node *temp, *curr = head, *newHead;
+//     int count = 0;
+//     while (curr != NULL && count < k) {
+//         newHead = curr;
+//         temp = curr->prev;
+//         curr->prev = curr->next;
+//         curr->next = temp;
+//         curr = curr->prev;
+//         count++;
+//     }
+//     // checking if the reversed LinkedList size is equal to K or not
+//     // if it is not equal to k that means we have reversed
+//     // the last set of size K and we don't need to call the recursive function
+//     if (count >= k) {
+//         Node* rest = reverseByN(curr, k);
+//         head->next = rest;
+//         if (rest != NULL)
+//             // it is required for prev link otherwise u wont be backtrack list due to broken links
+//             rest->prev = head;
+//     }
+//     return newHead;
+// }
+//🔸time complexity:  O(N)
+//🔸space complexity : O(log n)           // recursive stack space
+
+
+
+//          //❓Question : CAN WE REVERSE A LINKEDL LIST IN LESS THAN O(N) TIME COMPLEXITY
+// ===> NO 
+//      It is not possible to reverse a simple singly linked list in less than O(n). 
+//      A simple singly linked list can only be reversed in O(n) time using recursive and iterative methods
+
+
+//          //❓QUESTION: WHY quicksort is prefered for arrays and merge sort is preferred for linked list
+
+//🔸 Why is Quick Sort preferred for arrays?
+
+// Quick Sort in its general form is an in-place sort (i.e. it doesn’t require any extra storage) 
+// whereas merge sort requires O(N) extra storage, N denoting the array size which may be quite expensive.
+// Allocating and de-allocating the extra space used for merge sort increases the running time of the algorithm.
+// Comparing average complexity we find that both type of sorts have O(NlogN) average complexity but the constants differ. 
+// For arrays, merge sort loses due to the use of extra O(N) storage space.
+// Most practical implementations of Quick Sort use randomized version. The randomized version has expected time complexity of O(nLogn). 
+// The worst case is possible in randomized version also, but worst case doesn’t occur for a particular pattern (like sorted array) 
+// and randomized Quick Sort works well in practice.
+// Quick Sort is also a cache friendly sorting algorithm as it has good locality of reference when used for arrays.
+// Quick Sort is also tail recursive, therefore tail call optimizations is done.
+
+//🔸 Why is Merge Sort preferred for Linked Lists?
+
+// In case of linked lists the case is different mainly due to difference in memory allocation of arrays and linked lists. 
+// Unlike arrays, linked list nodes may not be adjacent in memory.
+// Unlike array, in linked list, we can insert items in the middle in O(1) extra space and O(1) time if we are given reference/pointer to the previous node. 
+// Therefore merge operation of merge sort can be implemented without extra space for linked lists.
+// In arrays, we can do random access as elements are continuous in memory. Let us say we have an integer (4-byte) array A and let the address 
+// of A[0] be x then to access A[i], we can directly access the memory at (x + i*4). Unlike arrays, we can not do random access in linked list.
+// Quick Sort requires a lot of this kind of access. In linked list to access i’th index, 
+// we have to travel each and every node from the head to i’th node as we don’t have continuous block of memory. 
+// Therefore, the overhead increases for quick sort. Merge sort accesses data sequentially and the need of random access is low.
+
+
+
+//              //❓Question : Flatenning a Linked List
+
+// Given a Linked List of size N, where every node represents a sub-linked-list and contains two pointers:
+// (i) a next pointer to the next node,
+// (ii) a bottom pointer to a linked list where this node is head.
+// Each of the sub-linked-list is in sorted order.
+// Flatten the Link List such that all the nodes appear in a single level while maintaining the sorted order. 
+
+// Note: The flattened list will be printed using the bottom pointer instead of the next pointer.
+// For more clarity have a look at the printList() function in the driver code.
+
+// Example 1:
+// Input:
+// 5 -> 10 -> 19 -> 28
+// |     |     |     | 
+// 7     20    22   35
+// |           |     | 
+// 8          50    40
+// |                 | 
+// 30               45
+// Output:  5-> 7-> 8- > 10 -> 19-> 20->
+// 22-> 28-> 30-> 35-> 40-> 45-> 50.
+// Explanation:
+// The resultant linked lists has every 
+// node in a single level.
+// (Note: | represents the bottom pointer.)
+ 
+// Example 2:
+// Input:
+// 5 -> 10 -> 19 -> 28
+// |          |                
+// 7          22   
+// |          |                 
+// 8          50 
+// |                           
+// 30              
+// Output: 5->7->8->10->19->22->28->30->50
+// Explanation:
+// The resultant linked lists has every
+// node in a single level.
+// (Note: | represents the bottom pointer.)
+ 
+// Your Task:
+// You do not need to read input or print anything. Complete the function flatten() that takes the head of the linked list as input parameter and returns the head of flattened link list.
+
+// Expected Time Complexity: O(N*N*M)
+// Expected Auxiliary Space: O(N)
+
+// Constraints:
+// 0 <= N <= 50
+// 1 <= Mi <= 20
+// 1 <= Element of linked list <= 103
+
+
+//🔴approach :
+// Node *flatten(Node *root)
+// {
+//     if(root==NULL) return root;
+    
+//    Node* temp = root;
+//    Node* nxtroot = temp->next ;
+//    Node* btmroot = temp->bottom ;
+   
+//    vector<int> nodedata;
+
+//    while(temp != NULL){
+//        nodedata.push_back(temp->data);
+//        btmroot = temp->bottom;
+//        while(btmroot != NULL){
+//            nodedata.push_back(btmroot->data);
+//            btmroot = btmroot->bottom;
+//        }
+//        temp = temp->next;
+//    }
+   
+//    sort(nodedata.begin(), nodedata.end()) ;
+//    Node* dummy = new Node(-1) ;
+//    temp = dummy ;
+//    int vecsize = nodedata.size() ;
+   
+//    for(int i=0; i<vecsize; i++) {
+
+//         Node* dummy2 = new Node(nodedata[i]) ;
+//         dummy->bottom = dummy2 ;
+//         dummy = dummy->bottom;
+//    }
+   
+//   temp = temp->bottom ;
+   
+//    return temp ;
+// }
+//🔸time complexity: O(N*logn)                // O(node+bottom + N*logn + vectorSize ) 
+//🔸space complexity: O(Node+bottom)
