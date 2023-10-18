@@ -2341,3 +2341,404 @@
 // }
 //🔸time complexity: O(N*logn)                // O(node+bottom + N*logn + vectorSize ) 
 //🔸space complexity: O(Node+bottom)
+
+
+
+//                  //❓Question : Given a linkedList of 0s, 1s, and 2s Sort it 
+
+// Given a linked list of N nodes where nodes can contain values 0s, 1s, and 2s only. 
+// The task is to segregate 0s, 1s, and 2s linked list such that all zeros segregate to head side, 
+// 2s at the end of the linked list, and 1s in the mid of 0s and 2s.
+
+// Example 1:
+// Input:
+// N = 8
+// value[] = {1,2,2,1,2,0,2,2}
+// Output: 0 1 1 2 2 2 2 2
+// Explanation: All the 0s are segregated
+// to the left end of the linked list,
+// 2s to the right end of the list, and
+// 1s in between.
+
+// Example 2:
+// Input:
+// N = 4
+// value[] = {2,2,0,1}
+// Output: 0 1 2 2
+// Explanation: After arranging all the
+// 0s,1s and 2s in the given format,
+// the output will be 0 1 2 2.
+// Your Task:
+// The task is to complete the function segregate() which segregates the nodes in the linked list as asked in the problem statement and returns the head of the modified linked list. The printing is done automatically by the driver code.
+
+// Expected Time Complexity: O(N).
+// Expected Auxiliary Space: O(N).
+
+// Constraints:
+// 1 <= N <= 106
+
+
+//🔴approach : 
+// class Solution
+// {
+//     public:
+//     //Function to sort a linked list of 0s, 1s and 2s.
+//     Node* segregate(Node *head) {
+        
+//         Node* temp = head;  
+//         int zero=0, one=0, two=0;
+        
+//         while(temp != NULL){
+//             if(temp->data == 0){
+//                 zero++ ;
+//             }
+//             else if(temp->data == 1){
+//                 one++ ;
+//             }
+//             else{
+//                 two++ ;
+//             }
+            
+//             temp = temp->next;
+//         }
+        
+//         temp = head;
+        
+//         while(zero != 0){
+//             head->data = 0 ;
+//             head = head->next;
+//             zero--;
+//         }
+        
+//         while(one != 0){
+//             head->data = 1;
+//             head = head->next;
+//             one--;
+//         }
+        
+//         while(two != 0){
+//             head->data = 2;
+//             head = head->next;
+//             two-- ;
+//         }
+        
+//         return temp;
+//     }
+// };
+//🔸time complexity:  O(N)             // O(2N)  length of linkedlist
+//🔸space complexity: O(1)            
+
+
+//              //❓Question: Clone a linkedlist with next and random pointer
+
+// You are given a special linked list with N nodes where each node has a next pointer pointing to its next node.
+// You are also given M random pointers, where you will be given M number of pairs denoting two nodes a and b  i.e. a->arb = b (arb is pointer to random node).
+// Construct a copy of the given list. The copy should consist of exactly N new nodes, 
+// where each new node has its value set to the value of its corresponding original node.
+// Both the next and random pointer of the new nodes should point to new nodes in the copied list 
+// such that the pointers in the original list and copied list represent the same list state. 
+// None of the pointers in the new list should point to nodes in the original list.
+
+// For example, if there are two nodes X and Y in the original list, where X.arb --> Y, 
+// then for the corresponding two nodes x and y in the copied list, x.arb --> y.
+// Return the head of the copied linked list.
+
+// ArbitLinked List1
+// Note :- The diagram isn't part of any example, it just depicts an example of how the linked list may look like.
+
+// Example 1:
+// Input:
+// N = 4, M = 2
+// value = {1,2,3,4}
+// pairs = {{1,2},{2,4}}
+// Output: 1
+// Explanation: In this test case, there
+// are 4 nodes in linked list.  Among these
+// 4 nodes,  2 nodes have arbitrary pointer
+// set, rest two nodes have arbitrary pointer
+// as NULL. Second line tells us the value
+// of four nodes. The third line gives the
+// information about arbitrary pointers.
+// The first node arbitrary pointer is set to
+// node 2.  The second node arbitrary pointer
+// is set to node 4.
+
+// Example 2:
+// Input:
+// N = 4, M = 2
+// value[] = {1,3,5,9}
+// pairs[] = {{1,1},{3,4}}
+// Output: 1
+// Explanation: In the given testcase ,
+// applying the method as stated in the
+// above example, the output will be 1.
+
+// Your Task:
+// The task is to complete the function copyList() which takes one argument the head of the linked list to be cloned and should return the head of the cloned linked list.
+
+// NOTE : 
+// 1. If there is any node whose arbitrary pointer is not given then it's by default NULL. 
+// 2. Your solution return an output 1 if your clone linked list is correct, else it returns 0.
+// 3. Don't make any changes to the original linked list.
+
+// Expected Time Complexity : O(n)
+// Expected Auxilliary Space : O(1)
+
+// Constraints:
+// 1 <= N <= 100
+// 1 <= M <= N
+// 1 <= a, b <= 100
+
+
+//🔴approach : 
+//     void insertAtTail(Node* &head, Node* &tail, int data){
+//         Node* newNode = new Node(data) ;
+        
+//         if(head == NULL){
+//             head = newNode ;
+//             tail = newNode ;
+//         }
+//         else{
+//            tail -> next = newNode ;
+//            tail = newNode ;
+            
+//         }
+//     }
+
+//     Node *copyList(Node *head)
+//     {
+//         //step 1:  create a clone list
+//         Node* cloneHead = NULL ;
+//         Node* cloneTail = NULL ;
+//         Node* temp = head ;
+        
+//         while(temp != NULL){
+//             insertAtTail(cloneHead, cloneTail, temp -> data) ;
+//             temp = temp -> next ; 
+//         }
+        
+//         //step2: cloneHead add in between original list
+//         Node* originalNode = head ;
+//         Node* cloneNode = cloneHead ;
+        
+//         while(originalNode != NULL && cloneNode != NULL){
+//             Node* next = originalNode -> next ;
+//             originalNode -> next = cloneNode ;
+//             originalNode = next ;
+            
+//             next = cloneNode -> next ;
+//             cloneNode -> next = originalNode ;
+//             cloneNode = next ;
+//         }
+        
+//         //step3: random pointer copy from original to clone Node
+//         temp = head ;
+        
+//         while(temp != NULL){
+//             if(temp -> next != NULL) {
+//                 temp -> next -> arb = temp -> arb 
+//                 ? temp -> arb -> next : temp -> arb  ;
+//             }
+//             temp = temp -> next -> next ;
+//         }
+        
+//         //step 4: revert changes done in step2 (where we are keeping track of original-> next using clone->next)
+//         originalNode = head ;
+//         cloneNode = cloneHead ;
+        
+//         while(originalNode != NULL && cloneNode != NULL){
+//             originalNode -> next = cloneNode -> next ;
+//             originalNode = originalNode -> next ;
+            
+//             if(originalNode != NULL){
+//                 cloneNode -> next = originalNode -> next ;
+//             }
+            
+//             cloneNode = cloneNode -> next ;
+//         }
+        
+//         //step5: return ans
+//         return cloneHead ;
+//     }
+//🔸time complexity: O(N)
+//🔸space complexity: O(N)
+
+
+
+//🔴approach :
+//  Node *copyList(Node *head)
+//     {   
+//        for(Node *curr=head; curr!=NULL;  ){
+//            Node *temp = new Node(curr->data);
+//            Node *next = curr->next;
+//            curr->next = temp;
+//            temp->next = next;
+//            curr = next;
+//        }
+//        Node *head2= head->next;
+       
+//       for(Node *curr=head; curr!=NULL; ){
+//           curr->next->arb = (curr->arb!=NULL)? curr->arb->next : NULL;
+//           curr = curr->next->next;
+//       }
+       
+//       Node *curr2 = head2;
+//       for(Node *curr=head; curr!=NULL; ){
+//           curr2 = curr->next;
+//           curr->next = curr->next->next;
+//           curr2->next = (curr2->next!=NULL) ? curr2->next->next : NULL;
+           
+//           curr = curr->next;
+//       }
+//        return head2;
+//     }
+//🔸time complexity: O(N)
+//🔸space complexity: O(1)
+
+
+
+//                  //❓Question: Merge k sorted Linked List
+
+// Given K sorted linked lists of different sizes. The task is to merge them in such a way that after merging they will 
+// be a single sorted linked list.
+
+// Example 1:
+// Input:
+// K = 4
+// value = {{1,2,3},{4 5},{5 6},{7,8}}
+// Output: 1 2 3 4 5 5 6 7 8
+// Explanation:
+// The test case has 4 sorted linked 
+// list of size 3, 2, 2, 2
+// 1st    list     1 -> 2-> 3
+// 2nd   list      4->5
+// 3rd    list      5->6
+// 4th    list      7->8
+// The merged list will be
+// 1->2->3->4->5->5->6->7->8.
+
+// Example 2:
+// Input:
+// K = 3
+// value = {{1,3},{4,5,6},{8}}
+// Output: 1 3 4 5 6 8
+// Explanation:
+// The test case has 3 sorted linked
+// list of size 2, 3, 1.
+// 1st list 1 -> 3
+// 2nd list 4 -> 5 -> 6
+// 3rd list 8
+// The merged list will be
+// 1->3->4->5->6->8.
+
+// Your Task:
+// The task is to complete the function mergeKList() which merges the K given lists into a sorted one. The printing is done automatically by the driver code.
+
+// Expected Time Complexity: O(nk Logk)
+// Expected Auxiliary Space: O(k)
+// Note: n is the maximum size of all the k link list
+
+// Constraints
+// 1 <= K <= 103
+
+//🔴approach :
+// Node * mergeKLists(Node *arr[], int K){
+//         if(K == 1) return arr[0];
+//         for(int i = 1; i < K ; i++){
+            
+//             Node* ord = new Node(-1);
+//             Node* tail = ord;
+            
+//             Node* left = arr[i - 1];
+//             Node* right = arr[i];
+            
+//             while(left && right){
+//                 if(left->data < right->data){
+//                     tail->next = left;
+//                     tail = left;
+//                     left = left->next;
+//                 }
+//                 else{
+//                     tail->next = right;
+//                     tail = right;
+//                     right = right->next;
+//                 }
+//             }
+//             while(left){
+//                 tail->next = left;
+//                 tail = left;
+//                 left = left->next;
+//             }
+//             while(right){
+//                 tail->next = right;
+//                 tail = right;
+//                 right = right->next;
+//             }
+//             arr[i] = ord->next;
+//         }
+//         return arr[K - 1];
+//     }
+//🔸time complexity: O(NK)
+//🔸space complexity: O(1)
+
+
+
+//              //❓Question: Multiply two linked list
+
+// Given elements as nodes of the two linked lists. The task is to multiply these two linked lists, 
+// say L1 and L2. 
+// Note: The output could be large take modulo 109+7.
+
+// Example:
+// Input:
+// 2
+// 2
+// 3 2
+// 1
+// 2
+// 3
+// 1 0 0
+// 2
+// 1 0 
+// Output:
+// 64
+// 1000
+
+// Explanation:
+// Testcase 1: 32*2 = 64.
+// Testcase 2: 100*10 = 1000.
+// Input:
+// The first line of input contains an integer T denoting the number of test cases. Then T test cases follow, the first line of each test case contains an integer N denoting the size of the first linked list (L1). In the next line are the space-separated values of the first linked list. The third line of each test case contains an integer M denoting the size of the second linked list (L2). In the fourth line is space-separated values of the second linked list.
+
+// Output:
+// For each test case output will be an integer denoting the product of the two linked lists.
+
+// Your Task:
+// The task is to complete the function multiplyTwoLists() which should multiply the given two linked lists and return the result.
+
+// Constraints:
+// 1 <= T <= 100
+// 1 <= N, M <= 100
+
+//🔴approach :
+// long long  multiplyTwoLists (Node* l1, Node* l2)
+// {
+//   long long ans1=0;
+//   long long ans2=0;
+  
+//   while(l1){
+//       long long temp=l1->data;
+//       l1=l1->next;
+//       ans1=(ans1*10+temp)%1000000007;
+//   }
+  
+//   while(l2){
+//       long long temp=l2->data;
+//       l2=l2->next;
+//       ans2=(ans2*10+temp)%1000000007;
+//   }
+  
+//   return(ans1*ans2)%1000000007;
+// }
+//🔸time complexity:  O(N+M)
+//🔸space complexity: O(N*M)         
