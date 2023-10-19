@@ -2819,3 +2819,163 @@
 //🔸space complexity: O(1)
 
 
+
+//                 //❓Question: Segregate even and odd nodes in linked list
+
+// Given a link list of size N, modify the list such that all the even numbers appear before all the 
+// odd numbers in the modified list. The order of appearance of numbers within each segregation should 
+// be same as that in the original list.
+// NOTE: Don't create a new linked list, instead rearrange the provided one.
+
+// Example 1:
+// Input: 
+// N = 7
+// Link List:
+// 17 -> 15 -> 8 -> 9 -> 2 -> 4 -> 6 -> NULL
+// Output: 8 2 4 6 17 15 9
+// Explaination: 8,2,4,6 are the even numbers 
+// so they appear first and 17,15,9 are odd 
+// numbers that appear later.
+
+// Example 2:
+// Input:
+// N = 4
+// Link List:
+// 1 -> 3 -> 5 -> 7
+// Output: 1 3 5 7
+// Explaination: There is no even number. 
+// So ne need for modification.
+
+// Your Task:
+// You do not need to read input or print anything. Your task is to complete the function divide() which takes N and head of Link List as input parameters and returns the head of modified link list. Don't create a new linked list, instead rearrange the provided one.
+
+// Expected Time Complexity: O(N)
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1 ≤ N ≤ 105
+// 1 ≤ Each element of the list ≤ 105
+
+//🔴approach : 
+//      Node* divide(int N, Node* head){
+        
+//         Node* dummy = new Node(0);
+//         Node* tail = dummy;
+//         Node* current = head;
+//         while(current != NULL){
+//             if(current->data % 2 == 0){
+//                 tail->next = new Node(current->data);
+//                 tail = tail->next;
+//             }
+//             current = current->next;
+//         }
+        
+//         current = head;
+//         while(current != NULL){
+//             if(current->data % 2 == 1){
+//                 tail->next = new Node(current->data);
+//                 tail = tail->next;
+//             }
+//             current = current->next;
+//         }
+//         return dummy->next;
+//   }
+//🔸time complexity:  O(N)
+//🔸space complexity: O(1)
+
+
+
+//              //❓Question: Nth node from end of linked list
+
+// Given a linked list consisting of L nodes and given a number N. 
+// The task is to find the Nth node from the end of the linked list.
+
+// Example 1:
+// Input:
+// N = 2
+// LinkedList: 1->2->3->4->5->6->7->8->9
+// Output: 8
+// Explanation: In the first example, there
+// are 9 nodes in linked list and we need
+// to find 2nd node from end. 2nd node
+// from end is 8.  
+
+// Example 2:
+// Input:
+// N = 5
+// LinkedList: 10->5->100->5
+// Output: -1
+// Explanation: In the second example, there
+// are 4 nodes in the linked list and we
+// need to find 5th from the end. Since 'n'
+// is more than the number of nodes in the
+// linked list, the output is -1.
+
+// Your Task:
+// The task is to complete the function getNthFromLast() which takes two arguments: 
+// reference to head and N and you need to return Nth from the end or -1 in case node doesn't exist.
+// Note:
+// Try to solve in a single traversal.
+
+// Expected Time Complexity: O(N).
+// Expected Auxiliary Space: O(1).
+
+// Constraints:
+// 1 <= L <= 106
+// 1 <= N <= 106
+
+//🔴approach : 
+//  int getNthFromLast(Node *head, int n)
+//     {
+//         Node* temp = head;
+//         int count = 0;
+//         int ans = -1;    
+        
+//         while(temp != NULL){
+//             count++ ;
+//             temp = temp->next;
+//         }
+        
+//         int value = count - n;
+        
+//         if(value >= 0){
+//             temp = head;
+//             while(value > 0){
+//               temp = temp->next;
+//               value -= 1;
+//             }
+//             ans = temp->data;
+//             return ans;
+//         }
+//         else{
+//             return ans;
+//         }
+//     }
+//🔸time complexity :  O(N)
+//🔸space complexity :  O(1)
+
+
+//🔴approach : Optimised (Two Pointer)
+//   int getNthFromLast(Node *head, int n) {
+// 
+//         Node* p1=head;
+//         Node* p2=head;
+//       
+//         for(int i=0;i<n-1;i++){
+//             if(p2->next){
+//                 p2=p2->next;
+//             }else{
+//                 return -1;
+//             }
+//         }
+//      
+//         while(p2->next){
+//             p2=p2->next;
+//             p1=p1->next;
+//         }
+//      
+//         return p1->data;      
+//     }
+//🔸time complexity :  O(N)
+//🔸space complexity :  O(1)
+
