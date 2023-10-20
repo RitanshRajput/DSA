@@ -3498,7 +3498,7 @@
 
 
 
-/                //❓Question : First non-repeating character in a stream
+//                //❓Question : First non-repeating character in a stream
 
 // Given an input stream A of n characters consisting only of lower case alphabets. 
 // While reading characters from the stream, you have to tell which character has appeared 
