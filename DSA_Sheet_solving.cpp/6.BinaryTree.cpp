@@ -280,3 +280,264 @@
 //🔸time complexity:  O(right + left)
 //🔸space complexitY: O(N)
 
+
+
+//                  //❓Question: Mirror Tree
+
+// Given a Binary Tree, convert it into its mirror.            
+
+// Example 1:
+// Input:
+//       1
+//     /  \
+//    2    3
+// Output: 3 1 2
+// Explanation: The tree is
+//    1    (mirror)  1
+//  /  \    =>      /  \
+// 2    3          3    2
+// The inorder of mirror is 3 1 2
+// Example 2:
+
+// Input:
+//       10
+//      /  \
+//     20   30
+//    /  \
+//   40  60
+// Output: 30 10 60 20 40
+// Explanation: The tree is
+//       10               10
+//     /    \  (mirror) /    \
+//    20    30    =>   30    20
+//   /  \                   /   \
+//  40  60                 60   40
+// The inroder traversal of mirror is
+// 30 10 60 20 40.
+// Your Task:
+// Just complete the function mirror() that takes node as paramter  and convert it into its mirror. The printing is done by the driver code only.
+
+// Expected Time Complexity: O(N).
+// Expected Auxiliary Space: O(Height of the Tree).
+
+// Constraints:
+// 1 ≤ Number of nodes ≤ 105
+// 1 ≤ Data of a node ≤ 105
+
+
+//🔴appraoch : 
+// class Solution {
+//   public:
+    
+//     void mirror(Node* node) {
+//         if(node == NULL){
+//             return;
+//         }
+        
+//         Node* temp = node->left;
+//         node->left = node->right;
+//         node->right = temp;
+        
+//         mirror(node->left);
+//         mirror(node->right);
+//     }
+// };
+//🔸Time complexity: O(N)
+//🔸space complexity: O(height of tree)
+
+
+
+//              //❓Question: Inorder traversal both Recursive and iterative
+
+
+//🔴Recursion approach : 
+// #include <iostream>
+// using namespace std;
+
+// void inorder(Node* root)
+// {
+//     // return if the current node is empty
+//     if (root == nullptr) {
+//         return;
+//     }
+ 
+//     // Traverse the left subtree
+//     inorder(root->left);
+ 
+//     // Display the data part of the root (or current node)
+//     cout << root->data << " ";
+ 
+//     // Traverse the right subtree
+//     inorder(root->right);
+// }
+//🔸 time compelxitY: O(N)
+//🔸space complexitY: O(N)
+
+
+
+//🔴Iterative appraoch : 
+// void inorderIterative(Node* root)
+// {
+//     // create an empty stack
+//     stack<Node*> stack;
+ 
+//     // start from the root node (set current node to the root node)
+//     Node* curr = root;
+ 
+//     // if the current node is null and the stack is also empty, we are done
+//     while (!stack.empty() || curr != nullptr)
+//     {
+//         // if the current node exists, push it into the stack (defer it)
+//         // and move to its left child
+//         if (curr != nullptr)
+//         {
+//             stack.push(curr);
+//             curr = curr->left;
+//         }
+//         else {
+//             // otherwise, if the current node is null, pop an element from the stack,
+//             // print it, and finally set the current node to its right child
+//             curr = stack.top();
+//             stack.pop();
+//             cout << curr->data << " ";
+ 
+//             curr = curr->right;
+//         }
+//     }
+// }
+//🔸 time compelxitY: O(N)
+//🔸space complexitY: O(N)
+
+
+
+//                  //❓Question: Preorder Traversal Recursion and iterative
+
+
+//🔴Recursive appraoch :
+// void preorder(Node* root)
+// {
+//     // if the current node is empty
+//     if (root == nullptr) {
+//         return;
+//     }
+ 
+//     // Display the data part of the root (or current node)
+//     cout << root->data << " ";
+ 
+//     // Traverse the left subtree
+//     preorder(root->left);
+ 
+//     // Traverse the right subtree
+//     preorder(root->right);
+// }
+//🔸 time compelxitY: O(N)
+//🔸space complexitY: O(N)
+
+
+
+//🔴Iterative appraoch : 
+// void preorderIterative(Node* root)
+// {
+//     // return if the tree is empty
+//     if (root == nullptr)
+//     return;
+ 
+//     // create an empty stack and push the root node
+//     stack<Node*> stack;
+//     stack.push(root);
+ 
+//     // loop till stack is empty
+//     while (!stack.empty())
+//     {
+//         // pop a node from the stack and print it
+//         Node* curr = stack.top();
+//         stack.pop();
+ 
+//         cout << curr->data << " ";
+ 
+//         // push the right child of the popped node into the stack
+//         if (curr->right) {
+//             stack.push(curr->right);
+//         }
+ 
+//         // push the left child of the popped node into the stack
+//         if (curr->left) {
+//             stack.push(curr->left);
+//         }
+ 
+//         // the right child must be pushed first so that the left child
+//         // is processed first (LIFO order)
+//     }
+// }
+//🔸 time compelxitY: O(N)
+//🔸space complexitY: O(N)
+
+
+
+//                  //❓Question: Postorder Traversal Recursive and Iterative
+
+//🔴Recursive approach : 
+// void postorder(Node* root)
+// {
+//     // if the current node is empty
+//     if (root == nullptr) {
+//         return;
+//     }
+ 
+//     // Traverse the left subtree
+//     postorder(root->left);
+ 
+//     // Traverse the right subtree
+//     postorder(root->right);
+ 
+//     // Display the data part of the root (or current node)
+//     cout << root->data << " ";
+// }
+//🔸 time compelxitY: O(N)
+//🔸space complexitY: O(N)
+
+
+//🔴 Iterative appraoch : 
+// void postorderIterative(Node* root)
+// {
+//     // return if the tree is empty
+//     if (root == nullptr) {
+//         return;
+//     }
+ 
+//     // create an empty stack and push the root node
+//     stack<Node*> s;
+//     s.push(root);
+ 
+//     // create another stack to store postorder traversal
+//     stack<int> out;
+ 
+//     // loop till stack is empty
+//     while (!s.empty())
+//     {
+//         // pop a node from the stack and push the data into the output stack
+//         Node* curr = s.top();
+//         s.pop();
+ 
+//         out.push(curr->data);
+ 
+//         // push the left and right child of the popped node into the stack
+//         if (curr->left) {
+//             s.push(curr->left);
+//         }
+ 
+//         if (curr->right) {
+//             s.push(curr->right);
+//         }
+//     }
+ 
+//     // print postorder traversal
+//     while (!out.empty())
+//     {
+//         cout << out.top() << " ";
+//         out.pop();
+//     }
+// }
+//🔸 time compelxitY: O(N)
+//🔸space complexitY: O(N)
+
