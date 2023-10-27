@@ -541,3 +541,281 @@
 //🔸 time compelxitY: O(N)
 //🔸space complexitY: O(N)
 
+
+
+//                      //❓Question : Left View Of Binary tree
+
+
+// Given a Binary Tree, return Left view of it. Left view of a Binary Tree is set of nodes visible when tree is visited from Left side. 
+// The task is to complete the function leftView(), which accepts root of the tree as argument.
+
+// Left view of following tree is 1 2 4 8.
+//           1
+//        /     \
+//      2        3
+//    /     \    /    \
+//   4     5   6    7
+//    \
+//      8   
+
+// Example 1:
+
+// Input:
+//    1
+//  /  \
+// 3    2
+// Output: 1 3
+
+// Example 2:
+
+// Input:
+
+// Output: 10 20 40
+// Your Task:
+// You just have to complete the function leftView() that returns an array containing the nodes that are in the left view. The newline is automatically appended by the driver code.
+// Expected Time Complexity: O(N).
+// Expected Auxiliary Space: O(N).
+
+// Constraints:
+// 0 <= Number of nodes <= 100
+// 1 <= Data of a node <= 1000
+
+
+//🔴appraoch : Recursive 
+
+// void solve(vector<int> &ans, Node* root, int level){
+//     if(root==NULL){
+//         return;
+//     }
+    
+//     if(level == ans.size()) {
+//         ans.push_back(root->data) ;
+//     }
+//     solve(ans, root->left, level+1) ;
+//     solve(ans, root->right, level+1) ;
+
+// }
+
+
+// vector<int> leftView(Node *root)
+// {
+//     vector<int> ans; 
+//     solve(ans, root, 0);
+//     return ans;
+// }
+//🔸time complexity: O(n)
+//🔸space complexity: O(left height of tree)
+
+
+//🔴appraoch : Iterative 
+
+// vector<int> leftView(Node *root) {
+    
+//    vector<int>ans;
+   
+//    if(!root) return ans;
+    
+//     queue<Node*>q;
+//     q.push(root);
+    
+//     while(!q.empty()) {
+        
+//         int n = q.size();
+        
+//         for(int i = 0; i<n; i++) {
+//             Node* curr = q.front();
+//             q.pop();
+            
+//             if(i == 0)  ans.push_back(curr->data);
+            
+//             if(curr->left ) q.push(curr->left);
+//             if(curr->right) q.push(curr->right);
+//         }
+        
+//     }
+//     return ans;
+// }
+//🔸time complexity: O(n)
+//🔸space complexity: O(left height of tree)
+
+
+
+//                          //❓Question: Right view of Tree
+
+// Given a Binary Tree, find Right view of it. Right view of a Binary Tree is set of nodes visible when tree is viewed from right side.
+
+// Right view of following tree is 1 3 7 8.
+//           1
+//        /     \
+//      2        3
+//    /   \      /    \
+//   4     5   6    7
+//     \
+//      8
+
+// Example 1:
+// Input:
+//        1
+//     /    \
+//    3      2
+// Output: 1 2
+
+// Example 2:
+// Input:
+//      10
+//     /   \
+//   20     30
+//  /   \
+// 40  60 
+// Output: 10 30 60
+
+// Your Task:
+// Just complete the function rightView() that takes node as parameter and returns the right view as a list. 
+
+// Expected Time Complexity: O(N).
+// Expected Auxiliary Space: O(Height of the Tree).
+
+// Constraints:
+// 1 ≤ Number of nodes ≤ 105
+// 0 ≤ Data of a node ≤ 105
+
+//🔴approach :  Recursive
+
+//  void solve(vector<int> &ans, Node* root, int level) {
+        
+//         if(root == NULL)  return;
+        
+//         if(level == ans.size()) {
+//             ans.push_back(root->data) ;
+//         }
+        
+//         solve(ans, root->right, level+1) ;
+//         solve(ans, root->left, level+1) ;
+//     }
+//     //Function to return list containing elements of right view of binary tree.
+//     vector<int> rightView(Node *root)
+//     {
+//        vector<int> ans;
+//        solve(ans, root, 0);
+//        return ans;
+//     }
+//🔸time complexity: O(n)
+//🔸space complexity: O(right height of tree)
+
+
+//🔴appraoch : Iterative
+// vector<int> rightView(Node *root)
+// {
+//     vector<int> ans;
+//     if (!root)
+//         return ans;
+
+//     queue<Node *> q;
+//     q.push(root);
+
+//     while (!q.empty()) {
+
+//         int n = q.size();
+//         for (int i = 0; i < n; i++) {
+//             Node *curr = q.front();
+//             q.pop();
+
+//             if (i == 0) ans.push_back(curr->data);
+
+//             if (curr->right) q.push(curr->right);
+//             if (curr->left ) q.push(curr->left );
+//         }
+//     }
+//     return ans;
+// }
+//🔸time complexity: O(N)
+//🔸space complexiy: O(height of right tree)
+
+
+
+//                  //❓Question: Top View of tree
+
+// Given below is a binary tree. The task is to print the top view of binary tree. 
+// Top view of a binary tree is the set of nodes visible when the tree is viewed from the top. F
+// or the given below tree
+
+//        1
+//     /     \
+//    2       3
+//   /  \    /   \
+// 4    5  6   7
+
+// Top view will be: 4 2 1 3 7
+// Note: Return nodes from leftmost node to rightmost node. Also if 2 nodes are outside the shadow of the tree and are at same position then consider the extreme ones only(i.e. leftmost and rightmost). 
+// For ex - 1 2 3 N 4 5 N 6 N 7 N 8 N 9 N N N N N will give 8 2 1 3 as answer. Here 8 and 9 are on the same position but 9 will get shadowed.
+
+// Example 1:
+// Input:
+//       1
+//    /    \
+//   2      3
+// Output: 2 1 3
+
+// Example 2:
+// Input:
+//        10
+//     /      \
+//   20        30
+//  /   \    /    \
+// 40   60  90    100
+// Output: 40 20 10 30 100
+
+// Your Task:
+// Since this is a function problem. You don't have to take input. Just complete the function topView() that 
+// takes root node as parameter and returns a list of nodes visible from the top view from left to right.
+
+// Expected Time Complexity: O(NlogN)
+// Expected Auxiliary Space: O(N).
+
+// Constraints:
+// 1 ≤ N ≤ 105
+// 1 ≤ Node Data ≤ 105
+
+
+//🔴Approach : 
+// vector<int> topView(Node *root) {
+//         //Your code here
+//          vector<int> ans;
+         
+//         if(root == NULL) return ans;
+        
+//         map<int,int> topNode;
+//         queue<pair<Node*,int>> q;
+//         q.push(make_pair(root,0));
+        
+        
+//         while(!q.empty()) {
+//             pair<Node*, int> temp = q.front();
+//             q.pop();
+            
+//             Node* frontNode = temp.first;
+//             int hd = temp.second;
+            
+//             if(topNode.find(hd) == topNode.end()){
+//                 topNode[hd] = frontNode->data;
+//             }
+            
+//             if(frontNode->left){
+//                 q.push(make_pair(frontNode->left,hd-1));
+//             }
+            
+//             if(frontNode->right){
+//                 q.push(make_pair(frontNode->right,hd+1));
+//             }
+//         }
+        
+//         for(auto i : topNode){
+//             ans.push_back(i.second);
+//         }
+        
+//         return ans;
+//     }
+//🔸time complexity : O(N)
+//🔸space complexity : O(2N)
+
+
