@@ -1109,3 +1109,324 @@
 //     }
 //🔸time complexity: O(N)
 //🔸space complexity: O(height of tree)
+
+
+
+//                      //❓Question: Diagonal traversal of Binary treee
+
+// Given a Binary Tree, print the diagonal traversal of the binary tree.
+// Consider lines of slope -1 passing between nodes. Given a Binary Tree, 
+// print all diagonal elements in a binary tree belonging to same line.
+// If the diagonal element are present in two different subtress then left 
+// subtree diagonal element should be taken first and then right subtree. 
+
+// Example 1:
+// Input :
+//             8
+//          /    \
+//         3      10
+//       /   \      \
+//      1     6      14
+//          /   \   /
+//         4     7 13
+// Output : 8 10 14 3 6 7 13 1 4
+// Explanation:
+// unnamed
+// Diagonal Traversal of binary tree : 
+//  8 10 14 3 6 7 13 1 4
+
+// Your Task:
+// You don't need to read input or print anything. The task is to complete the function diagonal() that takes the root node as input argumets and returns the diagonal traversal of the given tree.
+
+// Expected Time Complexity: O(N).
+// Expected Auxiliary Space: O(N).
+// Here N is number of nodes.
+
+// Constraints:
+// 1 <= Number of nodes<= 105
+// 1 <= Data of a node<= 105
+
+//🔴appraoch :
+// vector<int> diagonal(Node *root)
+// {
+//     vector<int> result ;
+//     queue<Node*> q;
+//     Node* curr = root ;
+    
+//     while(curr) {
+//         result.push_back(curr->data) ;
+//         if(curr->left) {
+//             q.push(curr->left) ;
+//         }
+         
+//         curr = curr->right ;
+//     }
+    
+//     while(!q.empty()) {
+//         curr = q.front() ;
+//         q.pop() ;
+        
+//         while(curr) {
+//             result.push_back(curr->data) ;
+//             if(curr->left) {
+//                 q.push(curr->left) ;
+//             }
+            
+//             curr = curr->right ;
+//         }
+//     }
+    
+//     return result ;
+// }
+//🔸time complexity  : O(N)                  // N = height of tree
+//🔸space complexity : o(height of tree)
+
+
+
+//                     //❓Question : Boundary Traversal of a Binary tree
+
+// Given a Binary Tree, find its Boundary Traversal. The traversal should be in the following order: 
+
+// Left boundary nodes: defined as the path from the root to the left-most node ie- 
+//      the leaf node you could reach when you always travel preferring the left subtree over the right subtree. 
+// Leaf nodes: All the leaf nodes except for the ones that are part of left or right boundary.
+// Reverse right boundary nodes: defined as the path from the right-most node to the root. 
+//      The right-most node is the leaf node you could reach when you always travel preferring the right 
+//      subtree over the left subtree. Exclude the root from this as it was already included in the traversal of left boundary nodes.
+// Note: If the root doesn't have a left subtree or right subtree, then the root itself is the left or right boundary. 
+
+// Example 1:
+// Input:
+//         1 
+//       /   \
+//      2     3  
+//     / \   / \ 
+//    4   5 6   7
+//       / \
+//      8   9
+   
+// Output: 1 2 4 8 9 6 7 3
+// Explanation:
+
+// Example 2:
+// Input:
+//             1
+//            /
+//           2
+//         /  \
+//        4    9
+//      /  \    \
+//     6    5    3
+//              /  \
+//             7     8
+
+// Output: 1 2 4 6 5 7 8
+// Explanation:
+
+// As you can see we have not taken the right subtree. 
+// Your Task:
+// This is a function problem. You don't have to take input. Just complete the function boundary() 
+// sthat takes the root node as input and returns an array containing the boundary values in anti-clockwise.
+
+// Expected Time Complexity: O(N). 
+// Expected Auxiliary Space: O(Height of the Tree).
+
+// Constraints:
+// 1 ≤ Number of nodes ≤ 105
+// 1 ≤ Data of a node ≤ 105
+
+//🔴appoarch : 
+//      //Left Side 
+//     vector<int> left(Node* root, vector<int>& ans) {
+//         if(root==NULL || (root->left==NULL && root->right ==NULL)){
+//             return ans ;
+//         }
+        
+//         ans.push_back(root->data) ;
+        
+//         if(root->left) {
+//             left(root->left, ans) ;
+//         }
+//         else{
+//             left(root->right, ans) ;
+//         }
+        
+//         return ans ;
+//     }
+
+//     //Leaf Nodes
+//     vector<int> leaf(Node* root, vector<int>& ans) {
+//         if(root==NULL) return ans ;
+//         if(root->left == NULL && root->right == NULL){
+//             ans.push_back(root->data) ;
+//         }
+        
+//         leaf(root->left, ans) ;
+//         leaf(root->right, ans) ;
+        
+//         return ans ;
+//     }
+    
+//     // RIght side 
+//     vector<int> right(Node* root, vector<int>& ans) {
+//         if(root== NULL || (root->left==NULL && root->right== NULL))    {
+//             return ans ;
+//         }
+        
+//         if(root->right) {
+//             right(root->right, ans);
+//         }
+//         else{
+//             right(root->left, ans);
+//         }
+        
+//         ans.push_back(root->data) ;
+//         return ans ;
+//     }
+    
+//     //Main Function 
+//     vector <int> boundary(Node *root)
+//     {   
+//         if(root == NULL) return {} ;
+//         if(root->left == NULL && root->right == NULL) {
+//             return {root->data} ;
+//         }
+        
+//         vector<int> ans ;  
+//         ans.push_back(root->data) ;
+        
+//         if(root->left) left(root->left, ans) ;
+//         leaf(root, ans) ;
+//         if(root->right) right(root->right, ans) ;
+
+//         return ans ;
+//     }
+//🔸time complexity  : O(height of tree)
+//🔸space complexity : O(height of Tree + height of tree)
+
+
+
+//                  //❓Question: Construct Binary Tree from String with bracket representation
+
+// Construct a binary tree from a string consisting of parenthesis and integers. 
+// The whole input represents a binary tree. It contains an integer followed by zero, 
+// one or two pairs of parenthesis. The integer represents the roots value and a pair 
+// of parenthesis contains a child binary tree with the same structure. 
+// Always start to construct the left child node of the parent first if it exists. 
+// The integer values will be less than or equal to 10^5.
+
+// Example 1:
+// Input: "1(2)(3)" 
+// Output: 2 1 3
+// Explanation:
+//            1
+//           / \
+//          2   3
+// Explanation: first pair of parenthesis contains 
+// left subtree and second one contains the right 
+// subtree. Inorder of above tree is "2 1 3".
+
+// Example 2:
+// Input: "4(2(3)(1))(6(5))"
+// Output: 3 2 1 4 5 6
+// Explanation:
+//            4
+//          /   \
+//         2     6
+//        / \   / 
+//       3   1 5   
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function treeFromString()
+// which takes a string str as input parameter and returns the root node of the tree.
+
+// Expected Time Complexity: O(N)
+// Expected Auxiliary Space: O(N)
+
+// Constraints:
+// 1 <= |str| <= 105
+
+
+//🔴approach :
+// class Solution{
+//     Node* helper(string &s,int start,int end ){
+//         if(start>end){
+//             return NULL;
+//         }
+//         int num=0,i=start;
+        
+//         while(i<=end && s[i]>='0' && s[i]<='9'){
+//             num=(10*num)+s[i]-'0';
+//             i++;
+//         }
+        
+//         Node* root= new Node(num);
+//         if(i>=end){
+//             return root;
+//         }
+        
+//         int nextstartindex = i+1;
+        
+//         //we want the balanced part because it will serve as a subtree
+//         stack<char>st;
+//         st.push(s[i++]);
+        
+//         while(!st.empty()){
+//             if(s[i]=='('){
+//                 st.push('(');
+//             }
+//             else { 
+//              if(s[i]==')'){
+//                 if(st.top()=='('){
+//                     st.pop();
+//                 }
+//               }
+//             }
+//             i++; 
+//         }
+//         //now we got the left and rigt subtrree
+//         root->left=helper(s,nextstartindex,i-2);
+//         root->right=helper(s,i+1,end-1);
+//         return root; 
+//     }
+    
+// public:
+//     // function to construct tree from string
+//     Node *treeFromString(string str){
+//         return helper(str,0,str.size()-1);
+//     }
+// };
+//🔸time complexity : O(str.length + stack.size + height of tree)
+//🔸space complexitY: O(height of tree)
+
+
+//🔴Appraoch : easy to understand
+//  Node* solver(string s, int start, int end) {
+//      if(start > end) return NULL;
+     
+//      int i = start;
+//      while(i<=end && s[i]>='0' && s[i]<='9') {
+//          i++;
+//      }
+     
+//      string front = s.substr(start, i-start);
+//      int num = stoi(front);
+//      Node* curr = new Node(num);
+//      if(i>=end) return curr;
+     
+//      int pos = i, o = 0, c = 0;
+//      do{
+//          if(s[pos]=='(') o++; // 1
+//          if(s[pos]==')') c++; // 0
+//          pos++;
+//      } while(o!=c);
+     
+//      curr->left = solver(s, i+1, pos-2);
+//      curr->right = solver(s, pos+1, end-1);
+//      return curr;
+//  }
+//  Node *treeFromString(string str){
+//      int n = str.length();
+//      return solver(str, 0, n-1);
+//  }
+//🔸time complexity : O(str.length)
+//🔸space complexity : O(N)
