@@ -1302,7 +1302,7 @@
 //         return ans ;
 //     }
 //🔸time complexity  : O(height of tree)
-//🔸space complexity : O(height of Tree + height of tree)
+//🔸space complexity : O(border of tree)
 
 
 
@@ -1352,7 +1352,8 @@
 //         if(start>end){
 //             return NULL;
 //         }
-//         int num=0,i=start;
+//         int num = 0;
+//         int i = start;
         
 //         while(i<=end && s[i]>='0' && s[i]<='9'){
 //             num=(10*num)+s[i]-'0';
@@ -1430,3 +1431,146 @@
 //  }
 //🔸time complexity : O(str.length)
 //🔸space complexity : O(N)
+
+
+
+//                  //❓Question: Binary tree to Doubly Linked list
+
+// Given a Binary Tree (BT), convert it to a Doubly Linked List(DLL) In-Place. 
+// The left and right pointers in nodes are to be used as previous and next pointers respectively
+// in converted DLL. The order of nodes in DLL must be same as Inorder of the given Binary Tree. 
+// The first node of Inorder traversal (leftmost node in BT) must be the head node of the DLL.
+// Note: H is the height of the tree and this space is used implicitly for the recursion stack.
+ 
+// Example 1:
+// Input:
+//       1
+//     /  \
+//    3    2
+// Output:
+// 3 1 2 
+// 2 1 3 
+// Explanation: DLL would be 3<=>1<=>2
+
+// Example 2:
+// Input:
+//        10
+//       /   \
+//      20   30
+//    /   \
+//   40   60
+// Output:
+// 40 20 60 10 30 
+// 30 10 60 20 40
+// Explanation:  DLL would be 
+// 40<=>20<=>60<=>10<=>30.
+
+// Your Task:
+// You don't have to take input. Complete the function bToDLL() that takes root node of the tree as a parameter and returns the head of DLL . The driver code prints the DLL both ways.
+
+// Expected Time Complexity: O(N).
+// Expected Auxiliary Space: O(H).
+
+// Constraints:
+// 1 ≤ Number of nodes ≤ 105
+// 0 ≤ Data of a node ≤ 105
+
+//🔴appraoch :
+// class Solution {
+//  public :
+//     void inorder(Node* root, vector<int>& arr){
+//         if(root == NULL){
+//             return ;
+//         }
+        
+//         inorder(root->left, arr);
+//         arr.push_back(root->data);
+//         inorder(root->right, arr);
+//     }
+ 
+//     Node* bToDLL(Node *root) {
+//       if(root == NULL) return root;
+//       vector<int> arr; 
+//       inorder(root, arr);
+      
+//       Node* head = new Node(arr[0]) ;
+//       Node* curr = head;
+      
+//       for(int i=1; i<arr.size(); i++) {
+//          Node* temp = new Node(arr[i]) ;
+//          curr->right = temp;
+//          temp->left = curr;
+//          curr = curr->right;
+//       }
+      
+//       return head;
+//     }
+// };
+//🔸time complexity : O(N)
+//🔸space complexity: O(length of DLL)
+
+
+
+//                  //❓Question: Transform to sum tree
+
+// Given a Binary Tree of size N , where each node can have positive or negative values. 
+// Convert this to a tree where each node contains the sum of the left and right sub trees 
+// of the original tree. The values of leaf nodes are changed to 0.
+
+// Example 1:
+// Input:
+//              10
+//           /      \
+//         -2        6
+//        /   \     /  \
+//      8     -4   7    5
+
+// Output:
+//             20
+//           /    \
+//         4        12
+//        /  \     /  \
+//      0     0   0    0
+
+// Explanation:
+
+//            (4-2+12+6)
+//           /           \
+//       (8-4)          (7+5)
+//        /   \         /  \
+//       0     0       0    0
+ 
+// Your Task:  
+// You dont need to read input or print anything. Complete the function toSumTree() which takes root node as input parameter and modifies the given tree in-place.
+
+// Note: If you click on Compile and Test the output will be the in-order traversal of the modified tree.
+
+// Expected Time Complexity: O(N)
+// Expected Auxiliary Space: O(height of tree)
+ 
+// Constraints:
+// 1 ≤ N ≤ 104
+
+//🔴appraoch :
+// class Solution {
+//   public:
+//     int solve(Node* root) {
+//         if(root==NULL) return 0;
+        
+//         int left = solve(root->left);
+//         int right = solve(root->right);
+        
+//         int nodeData = root->data;
+//         root->data = left+right;
+        
+//         return nodeData + left + right;
+//     }
+    
+//     void toSumTree(Node *node)
+//     {
+//        solve(node);
+//        return;
+//     }
+// };
+//🔸time complexity : O(N)
+//🔸space complexity: O(H)
