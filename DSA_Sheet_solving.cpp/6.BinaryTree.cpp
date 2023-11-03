@@ -1348,7 +1348,7 @@
 
 //🔴approach :
 // class Solution{
-//     Node* helper(string &s,int start,int end ){
+//     Node* helper(string &s,int start,int end ) {
 //         if(start>end){
 //             return NULL;
 //         }
@@ -1574,3 +1574,192 @@
 // };
 //🔸time complexity : O(N)
 //🔸space complexity: O(H)
+
+
+
+//                  //❓Question: Count Nodes Equal to Average of Subtree
+
+// Given the root of a binary tree, return the number of nodes where the value of the node is equal 
+// to the average of the values in its subtree.
+
+// Note:
+// The average of n elements is the sum of the n elements divided by n and rounded down to the nearest integer.
+// A subtree of root is a tree consisting of root and all of its descendants.
+ 
+// Example 1:
+// Input: root = [4,8,5,0,1,null,6]
+// Output: 5
+// Explanation: 
+// For the node with value 4: The average of its subtree is (4 + 8 + 5 + 0 + 1 + 6) / 6 = 24 / 6 = 4.
+// For the node with value 5: The average of its subtree is (5 + 6) / 2 = 11 / 2 = 5.
+// For the node with value 0: The average of its subtree is 0 / 1 = 0.
+// For the node with value 1: The average of its subtree is 1 / 1 = 1.
+// For the node with value 6: The average of its subtree is 6 / 1 = 6.
+
+// Example 2:
+// Input: root = [1]
+// Output: 1
+// Explanation: For the node with value 1: The average of its subtree is 1 / 1 = 1.
+
+// Constraints:
+// The number of nodes in the tree is in the range [1, 1000].
+// 0 <= Node.val <= 1000
+
+
+//🔴approach : 
+// class Solution {
+//     int result = 0;
+
+// public:
+//     int averageOfSubtree(TreeNode* root) {
+//         postorder(root);
+//         return result;
+//     }
+
+//     pair<int, int> postorder(TreeNode* node) {
+//         if (!node) {
+//             return {0, 0}; // sum, number of nodes
+//         }
+
+//         auto left = postorder(node->left);
+//         auto right = postorder(node->right);
+
+//         int totalSum = left.first + right.first + node->val;
+//         int totalCount = 1 + left.second + right.second;
+//         result += (node->val == totalSum / totalCount);
+
+//         return {totalSum, totalCount};
+//     }
+// };
+//🔸time complexity: O(N)
+//🔸space complexity: O(N)
+
+
+//              //❓ Construct Tree from Inorder & Preorder
+
+// Given 2 Arrays of Inorder and preorder traversal. The tree can contain duplicate elements. 
+// Construct a tree and print the Postorder traversal. 
+
+// Example 1:
+// Input:
+// N = 4
+// inorder[] = {1 6 8 7}
+// preorder[] = {1 6 7 8}
+// Output: 8 7 6 1
+
+// Example 2:
+// Input:
+// N = 6
+// inorder[] = {3 1 4 0 5 2}
+// preorder[] = {0 1 3 4 2 5}
+// Output: 3 4 1 5 2 0
+// Explanation: The tree will look like
+//        0
+//     /     \
+//    1       2
+//  /   \    /
+// 3    4   5
+
+// Your Task:
+// Your task is to complete the function buildTree() which takes 3 arguments(inorder traversal array, preorder traversal array, and size of tree n) and returns the root node to the tree constructed. You are not required to print anything and a new line is added automatically (The post order of the returned tree is printed by the driver's code.)
+
+// Expected Time Complexity: O(N*N).
+// Expected Auxiliary Space: O(N).
+
+// Constraints:
+// 1<=Number of Nodes<=1000
+
+
+//🔴approach : 
+//   int preorderIndex = 0;
+    
+//     Node* preTree(int inorder[], int preorder[], int inorderStart, int inorderEnd)
+//     {
+//         if(inorderStart > inorderEnd) {
+//             return NULL;
+//         }
+        
+//         Node* root = new Node(preorder[preorderIndex]);
+//         preorderIndex++ ;
+        
+//         int inorderIndex;
+//         for(int i=inorderStart; i<=inorderEnd; i++){
+//             if(inorder[i] == root->data){
+//                 inorderIndex =i;
+//                 break;
+//             }
+//         }
+        
+//         root->left  = preTree(inorder, preorder, inorderStart, inorderIndex-1);
+//         root->right = preTree(inorder, preorder, inorderIndex+1, inorderEnd) ;
+        
+//         return root;
+//     }
+    
+//     Node* buildTree(int in[],int pre[], int n)
+//     {
+//         return preTree(in, pre, 0, n-1);
+//     }
+//🔸Time complexity: O(N*N)
+//🔸space complexity: O(n)
+
+
+
+
+//                  //❓Question: Minimum swap required to convert binary tree to binary search tree
+
+// Given an array A[] which represents a Complete Binary Tree i.e, if index i is the parent, 
+// index 2*i + 1 is the left child and index 2*i + 2 is the right child.
+// The task is to find the minimum number of swaps required to convert it into a Binary Search Tree. 
+
+// Example 1:
+// Input:
+// A[] = { 5, 6, 7, 8, 9, 10, 11 }
+// Output: 3
+// Explanation: 
+// Binary tree of the given array:
+// Swap 1: Swap node 8 with node 5.
+// Swap 2: Swap node 9 with node 10.
+// Swap 3: Swap node 10 with node 7.
+// So, minimum 3 swaps are required.
+
+// Example 2:
+// Input: 
+// A[] = {1, 2, 3}
+// Output: 1
+ 
+// Your Task:  
+// You don't need to read input or print anything. Your task is to complete the function minSwaps() which takes an array A[] and returns an integer as output.
+
+// Expected Time Complexity: O(NlogN)
+// Expected Auxiliary Space: O(N)
+
+// Constraints:
+// 1 <= N <= 105
+
+//🔴approach :
+//   vector <int> in;
+//     void inorder(vector <int> &a,int i){
+//         if(i >= a.size()) return;
+//         inorder(a,2*i+1);
+//         in.push_back(a[i]);
+//         inorder(a,2*i+2);
+//     }
+    
+//     int minSwaps(vector<int>&a, int n){
+//         inorder(a,0);
+//         vector <pair<int,int>> v;
+        
+//         for(int i = 0;i < n;i++) v.push_back({in[i],i});
+        
+//         sort(v.begin(),v.end());
+//         int ans = 0;
+        
+//         for(int i = 0;i < n;i++){
+//             if(i != v[i].second){
+//                 swap(v[i],v[v[i].second]);
+//                 i--; ans++;
+//             }
+//         }
+//     return ans;
+//    }
