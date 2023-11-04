@@ -1635,7 +1635,7 @@
 //🔸space complexity: O(N)
 
 
-//              //❓ Construct Tree from Inorder & Preorder
+//                    //❓ Construct Tree from Inorder & Preorder
 
 // Given 2 Arrays of Inorder and preorder traversal. The tree can contain duplicate elements. 
 // Construct a tree and print the Postorder traversal. 
@@ -1739,6 +1739,7 @@
 
 //🔴approach :
 //   vector <int> in;
+
 //     void inorder(vector <int> &a,int i){
 //         if(i >= a.size()) return;
 //         inorder(a,2*i+1);
@@ -1763,3 +1764,148 @@
 //         }
 //     return ans;
 //    }
+//🔸time complexity : O(N*logn)
+//🔸space complexity: O(N + 2N)
+
+
+
+
+//                      //❓Question: SUM treee
+
+// Given a Binary Tree. Return true if, for every node X in the tree other than the leaves, 
+// its value is equal to the sum of its left subtree's value and its right subtree's value. Else return false.
+// An empty tree is also a Sum Tree as the sum of an empty tree can be considered to be 0. 
+// A leaf node is also considered a Sum Tree.
+
+// Example 1:
+// Input:
+//     3
+//   /   \    
+//  1     2
+
+// Output: 1
+// Explanation:
+// The sum of left subtree and right subtree is
+// 1 + 2 = 3, which is the value of the root node.
+// Therefore,the given binary tree is a sum tree.
+
+// Example 2:
+// Input:
+//           10
+//         /    \
+//       20      30
+//     /   \ 
+//    10    10
+
+// Output: 0
+// Explanation:
+// The given tree is not a sum tree.
+// For the root node, sum of elements
+// in left subtree is 40 and sum of elements
+// in right subtree is 30. Root element = 10
+// which is not equal to 30+40.
+
+// Your Task: 
+// You don't need to read input or print anything. Complete the function isSumTree() which takes root node as input parameter and returns true if the tree is a SumTree else it returns false.
+
+// Expected Time Complexity: O(N)
+// Expected Auxiliary Space: O(Height of the Tree)
+
+// Constraints:
+// 1 ≤ number of nodes ≤ 104
+
+
+//🔴approach : 
+// class Solution
+// {
+//     public:
+//     int sum(Node* root){
+//         if(root==NULL) return 0;
+        
+//         return root->data + sum(root->left) + sum(root->right);
+//     }
+    
+//     bool isSumTree(Node* root) {
+//        if(root == NULL) return true;
+//        if(root->left==NULL && root->right== NULL) return true ;
+       
+//     return ( (root->data==sum(root->left)+sum(root->right)) 
+//             && (isSumTree(root->left)) 
+//             && (isSumTree(root->right)));
+//     }
+// };
+//🔸time complexity: O(N)
+//🔸space complexity: O(height of tree)
+
+
+
+//                      //❓Question: Leaf at same level
+
+// Given a Binary Tree, check if all leaves are at same level or not.
+
+// Example 1:
+// Input: 
+//             1
+//           /   \
+//          2     3
+
+// Output: 1
+// Explanation: Leaves 2 and 3 are at same level.
+
+// Example 2:
+// Input:
+//             10
+//           /    \
+//         20      30
+//        /  \        
+//      10    15
+
+// Output: 0
+// Explanation: Leaves 10, 15 and 30 are not at same level.
+
+// Your Task: 
+// You dont need to read input or print anything. Complete the function check() which takes root node as input parameter and returns true/false depending on whether all the leaf nodes are at the same level or not.
+ 
+// Expected Time Complexity: O(N)
+// Expected Auxiliary Space: O(height of tree)
+ 
+// Constraints:
+// 1 ≤ N ≤ 10^3
+
+//🔴appraoch : 
+// class Solution{
+//   public:
+
+//    int temp=-1;
+   
+//    void fun(Node* root, int h,int &val)
+//    {
+//       if(root==NULL) return;
+       
+//        if(root->left==NULL&&root->right==NULL){
+//            if(temp==-1){
+//                temp=h;
+//            }else{
+//                if(h!=temp){
+//                    val=0;
+//                }
+//            }
+//             return;
+//        }
+//        if(root->left)
+//        fun(root->left,h+1,val);
+//        if(root->right)
+//        fun(root->right,h+1,val);
+       
+//    }
+//     bool check(Node *root)
+//     {
+//         if(root==NULL) return 1;
+
+//        int val=1;
+//        fun(root,0,val);
+//        return val;
+//     }
+// };
+//🔸time complexity:  O(N)
+//🔸space complexity: O(1)
