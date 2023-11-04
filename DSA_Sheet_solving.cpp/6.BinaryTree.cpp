@@ -1909,3 +1909,40 @@
 // };
 //🔸time complexity:  O(N)
 //🔸space complexity: O(1)
+
+//🔴appraoch : 
+//   queue<Node*> q;
+//          q.push(root);
+         
+//         int level = 0;
+//         int leafLevel = -1;
+        
+//         while(!q.empty()){
+//             int n = q.size();
+//             level++;
+            
+//             for(int i=0; i<n; ++i){
+            
+//             Node* current = q.front();
+//             q.pop();
+            
+//             if(!current->left && !current->right){
+//                 if(leafLevel == -1){
+//                     leafLevel = level;
+//                 }else if(level != leafLevel){
+//                      return false;
+//                 }
+//             }
+            
+//             if(current->left){
+//                 q.push(current->left);
+//             }
+//             if(current->right){
+//                 q.push(current->right);
+//             }
+            
+//             }
+//         }
+//          return true;
+//🔸time complexity:  O(N)
+//🔸space complexity: O(N)
