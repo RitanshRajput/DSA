@@ -237,7 +237,7 @@
         
 //         int option1 = diameter(root -> left) ;
 //         int option2 = diameter(root -> right) ;
-//         int option3 = height(root -> left) + 1 + height(root -> right) ; //+1 for root node
+//         int option3 = height(root -> left) + 1 + height(root -> right) ;     //+1 for root node
         
 //         int ans = max(option1, max(option2, option3)) ;
 //         return ans ;
@@ -559,7 +559,6 @@
 //      8   
 
 // Example 1:
-
 // Input:
 //    1
 //  /  \
@@ -742,7 +741,7 @@
 //     /     \
 //    2       3
 //   /  \    /   \
-// 4    5  6   7
+// 4    5  6       7
 
 // Top view will be: 4 2 1 3 7
 // Note: Return nodes from leftmost node to rightmost node. Also if 2 nodes are outside the shadow of the tree and are at same position then consider the extreme ones only(i.e. leftmost and rightmost). 
@@ -965,53 +964,44 @@
 //         int i=0;
 //         while(!q.empty())
 //         {
-//             Node* t=q.front();
+//             Node* t = q.front();
 //             q.pop();
-//             if(t==NULL)
-//             {
-//                 if(i==0)
-//                 {
-//                      for(int i:v)
-//                     {
+//             if(t==NULL) {
+//                 if(i==0) {
+//                      for(int i:v) {
 //                         ans.push_back(i);
 //                     }
 //                     v.clear();
-//                      i=1;
-//                 }
-//                 else
-//                 {
+//                     i=1;
+//                  }
+//                  else {
 //                     reverse(v.begin(),v.end());
-//                     for(int i:v)
-//                     {
+//                     for(int i:v) {
 //                         ans.push_back(i);
 //                     }
 //                     v.clear();
 //                     i=0;
-
 //                 }
-//                 if(!q.empty())
-//                 {
+
+//                 if(!q.empty()) {
 //                     q.push(NULL);
 //                 }
-//             }
+//            }
 //             else
 //             {
 //                 v.push_back(t->data);
-//                 if(t->left!=NULL)
-//                 {
+//                 if(t->left!=NULL) {
 //                     q.push(t->left);
 //                 }
-//                 if(t->right!=NULL)
-//                 {
+//                 if(t->right!=NULL) {
 //                     q.push(t->right);
 //                 }
-
 //             }
 //         }
 //         return 1;
 
 //     }
-//     vector <int> zigZagTraversal(Node* root)
+//     vector<int> zigZagTraversal(Node* root)
 //     {
 //          if(root==NULL)
 //         {
@@ -1946,3 +1936,262 @@
 //          return true;
 //🔸time complexity:  O(N)
 //🔸space complexity: O(N)
+
+
+//                  //❓ Question: Duplicate subtree in Binary Tree
+
+// Given a binary tree, find out whether it contains a duplicate sub-tree of size two or more, or not.
+// Note: Two same leaf nodes are not considered as subtree as size of a leaf node is one. 
+
+// Example 1 :
+// Input : 
+//                1
+//              /   \ 
+//            2       3
+//          /   \       \    
+//         4     5       2     
+//                      /  \    
+//                     4    5
+// Output : 1
+// Explanation : 
+//     2     
+//   /   \    
+//  4     5
+// is the duplicate sub-tree.
+
+
+// Example 2 :
+// Input : 
+//                1
+//              /   \ 
+//            2       3
+// Output: 0
+// Explanation: There is no duplicate sub-tree 
+// in the given binary tree.
+
+// Your Task:  
+// You don't need to read input or print anything. Your task is to complete the function dupSub() which takes root of the tree as the only argument and returns 1 if the binary tree contains a duplicate sub-tree of size two or more, else 0.
+
+// Expected Time Complexity: O(N)
+// Expected Space Complexity: O(N)
+
+// Constraints:
+// 0 ≤ Data of nodes ≤ 9
+// 1 ≤ Number of nodes ≤ 105 
+
+//🔴approach : 
+// unordered_map<string, int>mp;
+   
+//  string solve(Node* root, Node *parent){
+//         if(!root) return "$";
+//         string s="";
+//         if(!root->right and !root->left){
+//             if(root == parent->right && parent->left) s += '/'; 
+//             s+=to_string(root->data);
+//             return s;
+//         }
+//         s+=to_string(root->data);
+//         s+='/';
+//         s+=solve(root->left, root);
+//         s+=solve(root->right, root);
+//         //cout << s << " ";
+//         mp[s]++;
+//         return s;
+//     }
+//     int dupSub(Node *root) {
+//          solve(root,NULL);
+//         for(auto it:mp)
+//         if(it.second>=2) return true;
+//         return false;
+//     }
+
+//🔸time complexity:  O(height of tree)
+//🔸space complexity: O(N)
+
+
+//                      //❓QUestion: Check Mirror in N-Ary Tree
+
+// Given two n-ary trees. Check if they are mirror images of each other or not. 
+// You are also given e denoting the number of edges in both trees, and two arrays, A[] and B[].
+// Each array has 2*e space separated values u,v denoting an edge from u to v for the both trees.
+
+// Example 1:
+// Input:
+// n = 3, e = 2
+// A[] = {1, 2, 1, 3}
+// B[] = {1, 3, 1, 2}
+// Output:
+// 1
+// Explanation:
+//    1          1
+//  / \        /  \
+// 2   3      3    2 
+// As we can clearly see, the second tree
+// is mirror image of the first.
+
+// Example 2:
+// Input:
+// n = 3, e = 2
+// A[] = {1, 2, 1, 3}
+// B[] = {1, 2, 1, 3}
+// Output:
+// 0
+// Explanation:
+//    1          1
+//  / \        /  \
+// 2   3      2    3 
+// As we can clearly see, the second tree
+// isn't mirror image of the first.
+
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function checkMirrorTree() which takes 2 Integers n, and e;  and two arrays A[] and B[] of size 2*e as input and returns 1 if the trees are mirror images of each other and 0 if not.
+
+// Expected Time Complexity: O(e)
+// Expected Auxiliary Space: O(e)
+
+// Constraints:
+// 1 <= n,e <= 105
+
+//🔴approach : 
+//  int checkMirrorTree(int n, int e, int A[], int B[]) {
+//    // Create an unordered map to store edges for each node in tree A
+//      unordered_map<int,stack<int>> mp;
+   
+//    // Store edges for tree A in the unordered map
+//      for(int i=0; i<2*e; i += 2){
+//          mp[A[i]].push(A[i+1]);
+//      }
+   
+//    // Check if the representations are mirrors
+//      for(int i=0; i<2*e; i += 2) {
+//            // If the top element of stack for B[i] is not equal to B[i+1], they are not mirrors
+//          if(mp[B[i]].top() != B[i+1]) {
+//              return 0;
+//          }
+//          // Remove the top element from the stack for B[i]
+//          mp[B[i]].pop() ;
+//      }
+//       return 1; // The representations are mirrors
+//  }
+//🔸time complexity:  O(2*e + 2*e)
+//🔸space complexity: O(N*M)
+
+
+//                  //❓Question : Sum of nodes on the longest path from root to leaf node
+
+// Given a binary tree of size N. Your task is to complete the function sumOfLongRootToLeafPath(), 
+// that find the sum of all nodes on the longest path from root to leaf node.
+// If two or more paths compete for the longest path,
+// then the path having maximum sum of nodes is being considered.
+
+// Example 1:
+// Input: 
+//         4        
+//        / \       
+//       2   5      
+//      / \ / \     
+//     7  1 2  3    
+//       /
+//      6
+// Output: 13
+// Explanation:
+//         4        
+//        / \       
+//       2   5      
+//      / \ / \     
+//     7  1 2  3 
+//       /
+//      6
+// The highlighted nodes (4, 2, 1, 6) above are 
+// part of the longest root to leaf path having
+// sum = (4 + 2 + 1 + 6) = 13
+
+// Example 2:
+// Input: 
+//           1
+//         /   \
+//        2     3
+//       / \   / \
+//      4   5 6   7
+// Output: 11
+
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function sumOfLongRootToLeafPath() which takes root node of the tree as input parameter and returns an integer denoting the sum of the longest root to leaf path of the tree. If the tree is empty, return 0.
+
+// Expected Time Complexity: O(N)
+// Expected Auxiliary Space: O(N)
+
+// Constraints:
+// 1 <= Number of nodes <= 104
+// 1 <= Data of a node <= 104
+
+//🔴approach : 
+// int traverse(Node* root, int& longestPath) {
+//         if(root == NULL) {
+//             longestPath = 0;
+//             return 0;
+//         }
+        
+//         int left;
+//         int right;
+        
+//         int ls = traverse(root->left, left);
+//         int rs = traverse(root->right, right);
+        
+//         if(left > right) {
+//             longestPath = left + 1;
+//             return ls + root->data;
+//         }
+//         else if(right > left) {
+//             longestPath = right + 1;
+//             return rs + root->data ;
+//          }
+//         else{
+//             longestPath = left + 1;
+//             return max(rs, ls) + root->data;
+//         }
+        
+//     }
+
+//     int sumOfLongRootToLeafPath(Node *root) {
+//         int longestPath = 0 ;
+//         int sum = traverse(root, longestPath);
+//         return sum;
+//     }
+//🔸time complexity :  O(height of tree)
+//🔸space complexity : O(sum of longest path)
+
+
+//🔴approach :
+// / void solve(Node* root, int sum, int &maxSum, int length, int &maxLeng) {
+//     //base case
+//     if(root == NULL){
+//         if(length > maxLeng) {       //is current length is greater than maxLength
+//             maxLeng = length;
+//             maxSum = sum ;
+//         }
+//         else if(length == maxLeng) {    //if current length is equal to maxLength then store maximum of (sum, maxSum)
+//            maxSum = max(sum, maxSum) ;
+//         }
+//         return ;
+//     }
+
+//     sum = sum + root -> data ;          //adding node data for that particular bloodline(part)
+
+//     solve(root -> left, sum, maxSum, length + 1, maxLeng) ;
+//     solve(root -> right, sum, maxSum, length + 1, maxLeng) ;
+// }
+
+// //main function:
+// int sumOfLongRootToLeafPath(Node* root){
+//     int length = 0 ;
+//     int maxLeng = 0 ;
+//     int sum = 0 ;
+//     int maxSum = INT_MIN ;
+
+//     solve(root, sum, maxSum, length, maxLeng) ;
+
+//     return maxSum ;
+// }
+//🔴time complexity: O(N)
+//🔴space complexity: O(N)    // N == Height of Tree
