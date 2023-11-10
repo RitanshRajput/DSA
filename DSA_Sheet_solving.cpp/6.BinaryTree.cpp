@@ -2196,3 +2196,411 @@
 //🔴time complexity: O(N)
 //🔴space complexity: O(N)    // N == Height of Tree
 
+
+
+//                  //❓Question: Check if a given graph is tree or not
+
+// Write a function that returns true if a given undirected graph is a tree and false otherwise. 
+// For example, the following graph is a tree.
+
+//         [0]-----[1]-----[3]
+//              /     \ 
+//         [2]          [4]
+
+// But the following graph is not a tree. 
+//         [0]-----[1]-----[3]
+//          |    /     \ 
+//         [2]          [4] 
+
+
+//🔴🔴 Approach 1:
+// An undirected graph is a tree if it has the following properties. 
+// There is no cycle. 
+// The graph is connected.
+// For an undirected graph, we can either use BFS or DFS to detect the above two properties.
+
+// How to detect cycles in an undirected graph? 
+// We can either use BFS or DFS. For every visited vertex ‘v’, if there is an adjacent ‘u’ such that u is already 
+// visited and u is not the parent of v, then there is a cycle in the graph. 
+// If we don’t find such an adjacent for any vertex, we say that there is no cycle 
+
+// How to check for connectivity? 
+// Since the graph is undirected, we can start BFS or DFS from any vertex and check if all vertices are 
+// reachable or not. If all vertices are reachable, then the graph is connected, otherwise not.
+// Implementation: 
+
+//🔸Implementation :
+// #include<iostream>
+// #include <list>
+// #include <limits.h>
+// using namespace std;
+ 
+// // Class for an undirected graph
+// class Graph
+// {
+//     int V;    // No. of vertices
+//     list<int> *adj; // Pointer to an array for adjacency lists
+//     bool isCyclicUtil(int v, bool visited[], int parent);
+// public:
+//     Graph(int V);   // Constructor
+//     void addEdge(int v, int w);   // to add an edge to graph
+//     bool isTree();   // returns true if graph is tree
+// };
+ 
+// Graph::Graph(int V)
+// {
+//     this->V = V;
+//     adj = new list<int>[V];
+// }
+ 
+// void Graph::addEdge(int v, int w)
+// {
+//     adj[v].push_back(w); // Add w to v’s list.
+//     adj[w].push_back(v); // Add v to w’s list.
+// }
+ 
+// // A recursive function that uses visited[] and parent to
+// // detect cycle in subgraph reachable from vertex v.
+// bool Graph::isCyclicUtil(int v, bool visited[], int parent)
+// {
+//     // Mark the current node as visited
+//     visited[v] = true;
+ 
+//     // Recur for all the vertices adjacent to this vertex
+//     list<int>::iterator i;
+//     for (i = adj[v].begin(); i != adj[v].end(); ++i)
+//     {
+//         // If an adjacent is not visited, then recur for 
+//         // that adjacent
+//         if (!visited[*i])
+//         {
+//            if (isCyclicUtil(*i, visited, v))
+//               return true;
+//         }
+ 
+//         // If an adjacent is visited and not parent of current
+//         // vertex, then there is a cycle.
+//         else if (*i != parent)
+//            return true;
+//     }
+//     return false;
+// }
+ 
+// // Returns true if the graph is a tree, else false.
+// bool Graph::isTree()
+// {
+//     // Mark all the vertices as not visited and not part of 
+//     // recursion stack
+//     bool *visited = new bool[V];
+//     for (int i = 0; i < V; i++)
+//         visited[i] = false;
+ 
+//     // The call to isCyclicUtil serves multiple purposes.
+//     // It returns true if graph reachable from vertex 0 
+//     // is cyclic. It also marks all vertices reachable 
+//     // from 0.
+//     if (isCyclicUtil(0, visited, -1))
+//              return false;
+ 
+//     // If we find a vertex which is not reachable from 0 
+//     // (not marked by isCyclicUtil(), then we return false
+//     for (int u = 0; u < V; u++)
+//         if (!visited[u])
+//            return false;
+ 
+//     return true;
+// }
+ 
+// // Driver program to test above functions
+// int main()
+// {
+//     Graph g1(5);
+//     g1.addEdge(1, 0);
+//     g1.addEdge(0, 2);
+//     g1.addEdge(0, 3);
+//     g1.addEdge(3, 4);
+//     g1.isTree()? cout << "Graph is Tree\n":
+//                  cout << "Graph is not Tree\n";
+ 
+//     Graph g2(5);
+//     g2.addEdge(1, 0);
+//     g2.addEdge(0, 2);
+//     g2.addEdge(2, 1);
+//     g2.addEdge(0, 3);
+//     g2.addEdge(3, 4);
+//     g2.isTree()? cout << "Graph is Tree\n":
+//                  cout << "Graph is not Tree\n";
+ 
+//     return 0;
+// }
+// Output
+// Graph is Tree
+// Graph is not Tree
+//🔸Time Complexity: O(V + E) 
+//🔸Auxiliary Space: O(V) as we are using the visited array.
+
+//🔴Approach 2:
+// However if we observe carefully the definition of tree and its structure we will deduce that 
+// if a graph is connected and has n – 1 edges exactly then the graph is a tree.
+// Proof: 
+// Since we have assumed our graph of n nodes to be connected, it must have at least n – 1 edges inside it. 
+// Now if we try to add one more edge than the n – 1 edges already the graph will end up forming a 
+// cycle and thus will not satisfy the definition of tree. Therefore, it is necessary for 
+// a connected graph to have exactly n – 1 edges to avoid forming cycle. 
+
+//🔸Implementation: 
+// #include<iostream>
+// #include <list>
+// #include <limits.h>
+// using namespace std;
+ 
+// // Class for an undirected graph
+// class Graph
+// {
+//     int V;    // No. of vertices
+//       int E;    // No. of edges
+//     list<int> *adj; // Pointer to an array for adjacency lists
+//     void dfsTraversal(int v, bool visited[], int parent);
+// public:
+//     Graph(int V);   // Constructor
+//     void addEdge(int v, int w);   // to add an edge to graph
+//     bool isConnected();   // returns true if graph is connected
+//     bool isTree();     // returns true of the graph is tree
+// };
+ 
+// Graph::Graph(int V)
+// {
+//     E = 0;
+//     this->V = V;
+//     adj = new list<int>[V];
+// }
+ 
+// void Graph::addEdge(int v, int w)
+// {
+//     E++;                 // increase the number of edges
+//     adj[v].push_back(w); // Add w to v’s list.
+//     adj[w].push_back(v); // Add v to w’s list.
+// }
+ 
+// // A recursive dfs function that uses visited[] and parent to
+// // traverse the graph and mark visited[v] to true for visited nodes
+// void Graph::dfsTraversal(int v, bool visited[], int parent)
+// {
+//     // Mark the current node as visited
+//     visited[v] = true;
+ 
+//     // Recur for all the vertices adjacent to this vertex
+//     list<int>::iterator i;
+//     for (i = adj[v].begin(); i != adj[v].end(); ++i)
+//     {
+//         // If an adjacent is not visited, then recur for 
+//         // that adjacent
+//         if (!visited[*i])
+//         {
+//            dfsTraversal(*i, visited, v);
+//         }
+//     }
+// }
+ 
+// // Returns true if the graph is connected, else false.
+// bool Graph::isConnected()
+// {
+//     // Mark all the vertices as not visited and not part of 
+//     // recursion stack
+//     bool *visited = new bool[V];
+//     for (int i = 0; i < V; i++)
+//         visited[i] = false;
+ 
+//     // Performing DFS traversal of the graph and marking
+//     // reachable vertices from 0 to true
+//     dfsTraversal(0, visited, -1);
+ 
+//     // If we find a vertex which is not reachable from 0 
+//     // (not marked by dfsTraversal(), then we return false
+//     // since graph is not connected
+//     for (int u = 0; u < V; u++)
+//         if (!visited[u])
+//            return false;
+ 
+//     // since all nodes were reachable so we returned true and
+//     // and hence graph is connected
+//     return true;
+// }
+ 
+// bool Graph::isTree()
+// {
+//     // as we proved earlier if a graph is connected and has
+//     // V - 1 edges then it is a tree i.e. E = V - 1
+//     return isConnected() and E == V - 1;
+// }
+// // Driver program to test above functions
+// int main()
+// {
+//     Graph g1(5);
+//     g1.addEdge(1, 0);
+//     g1.addEdge(0, 2);
+//     g1.addEdge(0, 3);
+//     g1.addEdge(3, 4);
+//     g1.isTree()? cout << "Graph is Tree\n":
+//                  cout << "Graph is not Tree\n";
+ 
+//     Graph g2(5);
+//     g2.addEdge(1, 0);
+//     g2.addEdge(0, 2);
+//     g2.addEdge(2, 1);
+//     g2.addEdge(0, 3);
+//     g2.addEdge(3, 4);
+//     g2.isTree()? cout << "Graph is Tree\n":
+//                  cout << "Graph is not Tree\n";
+ 
+//     return 0;
+// }
+
+// Output
+// Graph is Tree
+// Graph is not Tree
+//🔸Time Complexity: O(V + E) For performing the DFS traversal
+//🔸Auxiliary Space: O(V) For storing the visited array
+
+
+
+//              //❓Question: Find Largest Subtree Sum in a tree
+
+// Given a binary tree. The task is to find subtree with maximum sum in the tree and return its sum.
+
+// Example 1:
+// Input:
+//               1
+//             /   \
+//            2      3
+//           / \    / \
+//          4   5  6   7
+// Output: 28
+// Explanation: 
+// As all the tree elements are positive,
+// the largest subtree sum is equal to
+// sum of all tree elements.
+
+// Example 2:
+// Input:
+//                1
+//             /    \
+//           -2      3
+//           / \    /  \
+//          4   5  -6   2
+// Output: 7
+// Explanation: 
+// Subtree with largest sum is : 
+//   -2
+//  /  \ 
+// 4    5
+// Also, entire tree sum is also 7.
+ 
+// Your Task:  
+// You don't need to read input or print anything. Your task is to complete the function findLargestSubtreeSum() which takes the root of a binary tree and returns an integer.
+ 
+// Expected Time Complexity: O(N)
+// Expected Auxiliary Space: O(N)
+
+// Constraints:
+// 1 <= N <= 10^5
+// -10^3 <= tree.val <= 10^3
+
+
+//🔴Appraoch : 
+// class Solution {
+//   public:
+//    int build(Node* root){
+//        if(root == NULL){
+//            return 0;
+//        }
+//        else{
+//            root->data += build(root->left) + build(root->right);
+//            return root->data;
+//        }
+//    }
+   
+//    int getMax(Node* root){
+//        if(root == NULL){
+//            return INT_MIN;
+//        }
+//        else{
+//            return max(root->data, max(getMax(root->left), getMax(root->right)));
+//        }
+//    }
+   
+//     // Function to find largest subtree sum.
+//     int findLargestSubtreeSum(Node* root) {
+//         build(root);
+//         return getMax(root);
+//     }
+// };
+//🔸Time complexity: O(N)
+//🔸space complexity: O(1)
+
+
+
+//              //❓Question: Maximum sum of Non-adjacent nodes
+
+// Given a binary tree with a value associated with each node, 
+// we need to choose a subset of these nodes such that sum of chosen nodes is maximum under 
+// a constraint that no two chosen node in subset should be directly connected that is, 
+// if we have taken a node in our sum then we can’t take its any children or 
+// parents in consideration and vice versa.
+
+// Example 1:
+// Input:
+//      11
+//     /  \
+//    1    2
+// Output: 11
+// Explanation: The maximum sum is sum of
+// node 11.
+
+// Example 2:
+// Input:
+//         1
+//       /   \
+//      2     3
+//     /     /  \
+//    4     5    6
+// Output: 16
+// Explanation: The maximum sum is sum of
+// nodes 1 4 5 6 , i.e 16. These nodes are
+// non adjacent.
+
+// Your Task:
+// You don't need to read input or print anything. You just have to complete function getMaxSum() which accepts root node of the tree as parameter and returns the maximum sum as described.
+
+// Expected Time Complexity: O(Number of nodes in the tree).
+// Expected Auxiliary Space: O(Height of the Tree).
+
+// Constraints:
+// 1 ≤ Number of nodes in the tree ≤ 10000
+// 1 ≤ Value of each node ≤ 100000
+
+//🔴approach : 
+// class Solution{
+//   private:
+//   pair<int,int> solve(Node* root){
+//         if(!root) return {0,0};
+      
+//         pair<int,int>leftAns = solve(root->left);
+//         pair<int,int>rightAns = solve(root->right);
+        
+//         pair<int,int>res;
+        
+//         res.first = root->data + leftAns.second + rightAns.second;
+//         res.second = max(leftAns.first, leftAns.second) + max(rightAns.first, rightAns.second);
+       
+//         return res;
+//     }
+  
+//   public:
+//     int getMaxSum(Node *root) {
+//         pair<int,int>ans = solve(root);
+//         return max(ans.first, ans.second);
+//     }
+// };
+//🔸 time complexity: O(N)
+//🔸space complexity: O(N)
