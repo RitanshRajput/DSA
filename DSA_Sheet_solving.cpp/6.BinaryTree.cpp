@@ -2604,3 +2604,168 @@
 // };
 //🔸 time complexity: O(N)
 //🔸space complexity: O(N)
+
+
+
+//                  //❓Question: K sum paths
+
+// Given a binary tree and an integer K. Find the number of paths in the tree which have their sum equal to K.
+// A path may start from any node and end at any node in the downward direction.
+// Since the answer may be very large, compute it modulo 109+7.
+
+// Example 1:
+// Input:      
+// Tree = 
+//           1                               
+//         /   \                          
+//        2     3
+// K = 3
+// Output: 
+// 2
+// Explanation:
+// Path 1 : 1 + 2 = 3
+// Path 2 : only leaf node 3
+
+// Example 2:
+// Input: 
+// Tree = 
+//            1
+//         /     \
+//       3        -1
+//     /   \     /   \
+//    2     1   4     5                        
+//         /   / \     \                    
+//        1   1   2     6    
+// K = 5                    
+// Output: 
+// 8
+// Explanation:
+// The following paths sum to K.  
+// 3 2 
+// 3 1 1 
+// 1 3 1 
+// 4 1 
+// 1 -1 4 1 
+// -1 4 2 
+// 5 
+// 1 -1 5 
+
+// Your Task:  
+// You don't need to read input or print anything. Complete the function sumK() which takes root node and integer K as input parameters and returns the number of paths that have sum K. 
+
+// Expected Time Complexity: O(N)
+// Expected Auxiliary Space: O(Height of Tree)
+
+// Constraints:
+// 1 ≤ N ≤ 2*104
+// -105 ≤ Node Value ≤ 105
+// -109 ≤ K ≤ 109
+
+//🔴appraoch : 
+// class Solution{
+//   public:
+//     int count=0;
+//     void preorder(Node *root, int k, unordered_map<int,int>&mp,int prev)
+//     {
+//         if(root)
+//         {
+//             int curr=prev+root->data ;
+//             if(mp.find(curr-k)!=mp.end()){
+//                 count+=mp[curr-k];
+//             }
+      
+//             if(curr==k){
+//                   count++;
+//             }
+      
+//              mp[curr]++;
+            
+//             preorder(root->left,k,mp,curr);
+//             preorder(root->right,k,mp,curr);
+            
+//               mp[curr]--;
+//         }
+//     }
+//     int sumK(Node *root,int k)
+//     {
+//         unordered_map<int,int>mp;
+//         preorder(root,k,mp,0);
+        
+//         return count ;
+//     }
+// };
+//🔸time complexity: O(N)
+//🔸space complexity: O(N)
+
+
+
+//                  //❓Question: Lowest Common Ancestor in a Binary Tree
+
+// Given a Binary Tree with all unique values and two nodes value, n1 and n2. 
+// The task is to find the lowest common ancestor of the given two nodes. 
+// We may assume that either both n1 and n2 are present in the tree or none of them are present.
+// LCA: It is the first common ancestor of both the nodes n1 and n2 from bottom of tree.
+
+// Example 1:
+// Input:
+// n1 = 2 , n2 = 3  
+//        1 
+//       / \ 
+//      2   3
+// Output: 1
+// Explanation:
+// LCA of 2 and 3 is 1.
+
+// Example 2:
+// Input:
+// n1 = 3 , n2 = 4
+//            5    
+//           /    
+//          2  
+//         / \  
+//        3   4
+// Output: 2
+// Explanation:
+// LCA of 3 and 4 is 2. 
+
+// Your Task:
+// You don't have to read, input, or print anything. Your task is to complete the function lca() that takes nodes, n1, and n2 as parameters and returns the LCA node as output. 
+
+// Expected Time Complexity:O(N).
+// Expected Auxiliary Space:O(Height of Tree).
+
+// Constraints:
+// 1 ≤ Number of nodes ≤ 105
+// 1 ≤ Data of a node ≤ 105
+
+//🔴approach : 
+// class Solution
+// {
+//     public:
+//     //Function to return the lowest common ancestor in a Binary Tree.
+//     Node* lca(Node* root ,int n1 ,int n2 )
+//     {
+//        if(root==NULL){
+//             return root;
+//         }
+        
+//         if(root->data==n1 || root->data==n2){
+//             return root;
+//         }
+        
+//         Node* LEFTSIDE  =lca(root->left,n1,n2);
+//         Node* RIGHTSIDE =lca(root->right,n1,n2);
+        
+//         if(LEFTSIDE!=NULL && RIGHTSIDE!=NULL){
+//             return root;
+//         }
+//         else if(LEFTSIDE!=NULL){
+//             return LEFTSIDE;
+//         }
+//         else{
+//             return RIGHTSIDE;
+//         }
+//     }
+// };
+//🔸time complexity: O(N)
+//🔸space complexity: O(1)
