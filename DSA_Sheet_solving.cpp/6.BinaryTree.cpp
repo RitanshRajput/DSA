@@ -387,8 +387,7 @@
 //     // if the current node is null and the stack is also empty, we are done
 //     while (!stack.empty() || curr != nullptr)
 //     {
-//         // if the current node exists, push it into the stack (defer it)
-//         // and move to its left child
+//         // if the current node exists, push it into the stack (defer it) and move to its left child
 //         if (curr != nullptr)
 //         {
 //             stack.push(curr);
@@ -712,7 +711,6 @@
 //     q.push(root);
 
 //     while (!q.empty()) {
-
 //         int n = q.size();
 //         for (int i = 0; i < n; i++) {
 //             Node *curr = q.front();
@@ -785,7 +783,6 @@
 //         map<int,int> topNode;
 //         queue<pair<Node*,int>> q;
 //         q.push(make_pair(root,0));
-        
         
 //         while(!q.empty()) {
 //             pair<Node*, int> temp = q.front();
@@ -1001,9 +998,8 @@
 //         return 1;
 
 //     }
-//     vector<int> zigZagTraversal(Node* root)
-//     {
-//          if(root==NULL)
+//     vector<int> zigZagTraversal(Node* root) {
+//         if(root==NULL)
 //         {
 //             return {};
 //         }
@@ -1017,7 +1013,7 @@
 
 
 
-//                          //❓Question: check for Balanced Tree or Not
+//                    //❓Question: check for Balanced Tree or Not
 
 // Given a binary tree, find if it is height balanced or not. 
 // A tree is height balanced if difference between heights of 
@@ -2769,3 +2765,209 @@
 // };
 //🔸time complexity: O(N)
 //🔸space complexity: O(1)
+
+
+//                  //❓question: Min distance between two given nodes of a Binary Tree
+
+// Given a binary tree and two node values your task is to find the minimum distance between them.
+// The given two nodes are guaranteed to be in the binary tree and nodes are numbered from 1 to N.
+// Please Note that a and b are not always leaf node.
+
+// Example 1:
+// Input:
+//         1
+//       /  \
+//      2    3
+// a = 2, b = 3
+// Output: 2
+// Explanation: The tree formed is:
+//        1
+//      /   \ 
+//     2     3
+
+// We need the distance between 2 and 3.
+// Being at node 2, we need to take two
+// steps ahead in order to reach node 3.
+// The path followed will be:
+// 2 -> 1 -> 3. Hence, the result is 2. 
+
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function findDist() which takes the root node of the Tree and the two node values a and b as input parameters and returns the minimum distance between the nodes represented by the two given node values.
+
+// Expected Time Complexity: O(N).
+// Expected Auxiliary Space: O(Height of the Tree).
+
+// Constraints:
+// 1 <= Number of nodes <= 104
+// 1 <= Data of a node <= 105
+
+//🔴approach :
+// class Solution{
+//     public:
+//     Node* solve(Node* root, int a, int b){
+//         if(root == NULL){
+//             return NULL;
+//         }
+//         if(root->data == a || root->data == b){
+//             return root;
+//         }
+        
+//         Node* leftAns = solve(root->left, a, b);
+//         Node* rightAns = solve(root->right, a, b);
+        
+//         if(leftAns != NULL && rightAns != NULL){
+//             return root;
+//         }
+//         else if(leftAns != NULL && rightAns == NULL){
+//             return leftAns;
+//         }
+//         else if(leftAns ==NULL && rightAns != NULL){
+//             return rightAns;
+//         }
+//         else{
+//             return NULL;
+//         }
+//     }
+    
+//     int distance(Node* root, int node){
+//         if(root == NULL){
+//             return -1;
+//         }
+//         if(root->data == node){
+//             return 0;
+//         }
+        
+//         int left = distance(root->left, node);
+//         int right = distance(root->right, node);
+        
+//         if(left != -1){
+//             return left+1;
+//         }
+//         else if(right != -1){
+//             return right+1;
+//         }
+//     }
+//     int findDist(Node* root, int a, int b) {
+//         Node* ans = solve(root,a,b);
+//         int distance1 = distance(ans, a);
+//         int distance2 = distance(ans, b);
+        
+//         return distance1+distance2;
+//     }
+// };
+//🔸time complexity : O(N)
+//🔸space complexity: O(height of tree)
+
+
+//                  //❓Question: Kth ancestor of a node in binary tree
+
+
+// Given a binary tree of size  N, a node, and a positive integer k., 
+// Your task is to complete the function kthAncestor(), the function should return the kth ancestor of the given node in the binary tree. 
+// If there does not exist any such ancestor then return -1.
+// Note:
+// 1. It is guaranteed that the node exists in the tree.
+// 2. All the nodes of the tree have distinct values.
+
+// Example 1:
+// Input:
+// K = 2 Node = 4
+// Output: 1
+// Explanation:
+// Since, K is 2 and node is 4, so we
+// first need to locate the node and
+// look k times its ancestors.
+// Here in this Case node 4 has 1 as his
+// 2nd Ancestor aka the Root of the tree.
+// Example 2:
+
+// Input:
+// k=1 
+// node=3
+//       1
+//     /   \
+//     2     3
+
+// Output:
+// 1
+// Explanation:
+// K=1 and node=3 ,Kth ancestor of node 3 is 1.
+// Your Task:
+// You are asked to complete the function kthAncestor() which accepts root of the tree, k and node as input parameters, and returns the kth ancestor of Node which contains node as its value.
+
+// Expected Time Complexity: O(N)
+// Expected Auxiliary Space: O(N)
+
+// Constraints:
+// 1<=N<=105
+// 1<= K <= 100
+// 1 <= Node.data <= N
+
+//🔴appraoch : 
+// void solve(Node* root,int &node,bool &found,vector<int>&values){
+//     if(root==NULL) return;
+    
+//     if(root->data==node){
+//         found=1;
+//         return;
+//     }
+//     solve(root->left,node,found,values);
+    
+//     if(found){
+//         values.push_back(root->data);
+//         return;
+//     }
+   
+//     solve(root->right,node,found,values);
+    
+//     if(found){
+//         values.push_back(root->data);
+//     }
+
+// }
+// int kthAncestor(Node *root, int k, int node)
+// {
+//     bool found=0;
+//     vector<int>values;
+//     solve(root,node,found,values);
+    
+//     return values.size()<k?-1:values[k-1];
+
+// }
+//🔸time compplexity: O(N)
+//🔸space complexity: O(N)
+
+// int solve(Node* root, int k, int node, vector<int> &path) {
+//     //base case
+//     if(root == NULL){
+//         return 0;
+//     }
+
+//     path.push_back(root -> data) ;
+    
+//     solve(root -> left, k, node, path) ;
+//     solve(root -> right, k, node, path) ;
+
+//     int size = path.size() ;
+//     for(int i=size-1; i>=0; i--) {
+//         if(path[i] == node){
+//             int index = i-k; 
+
+//         if(index<0){
+//             return -1 ;
+//         }
+//         else{
+//           return path[i-k] ;
+//         }
+//       }
+//     }
+//     path.pop_back() ;
+// }
+
+// //main function
+// int kthAncestor(Node *root, int k, int node){
+//      vector<int> path ;
+//      return solve(root, k, node, path) ;
+// }
+//🔸time compplexity: O(N)
+//🔸space complexity: O(N)
