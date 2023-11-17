@@ -2971,3 +2971,146 @@
 // }
 //🔸time compplexity: O(N)
 //🔸space complexity: O(N)
+
+
+
+
+//              //❓Question: Duplicate Subtree
+
+// Given a binary tree of size N, your task is to that find all duplicate subtrees from the given binary tree.
+// Note: Here's the Output of every Node printed in the Pre-Order tree traversal format. Arrange nodes in the answer array based on the lexicographically increasing order of their preorder traversal of subtree.
+// For Example: if we have 3 preorder traversal as {1,2,3},{1},{11,2,3} then your lexicographically increasing order is {1},{1,2,3},{11,2,3}, you are supposed to output the head of all these subtrees in the same order.
+
+// Example:
+// Input : 
+// Output : 2 4
+//          4
+// Explanation: Above Trees are two 
+// duplicate subtrees.i.e  and 
+// Therefore,you need to return above trees 
+// root in the form of a list.
+// Your Task:
+// You don't need to take input. Just complete the function printAllDups() that takes the root node as a parameter and returns an array of Node*, which contains all the duplicate subtree.
+
+// Constraints:
+// 1<=T<=100
+// 1<=N<=100
+
+//🔴approach :
+// string preorder(Node *root, vector<Node*> &ans,unordered_map<string,int>&subTree){
+//     if(root==NULL) return "N";
+    
+//     string curr=to_string(root->data);
+//     string l=preorder(root->left,ans,subTree);
+//     string r=preorder(root->right,ans,subTree);
+//     string s=curr+","+l+","+r;
+//     if(subTree.find(s)!=subTree.end()){
+//         if(subTree[s]==1){
+//             ans.push_back(root);
+//         }
+        
+//          subTree[s]++;
+//     }
+//     else{
+//             subTree[s]=1;
+//         }
+//     return s;
+    
+// }
+// vector<Node*> printAllDups(Node* root)
+// {
+//     vector<Node*> ans;
+//     unordered_map<string,int>subTree;
+//     preorder(root,ans,subTree);
+//     sort(ans.begin(),ans.end());
+//     return ans;
+// }
+//🔸time complexity : O(N * Log N)
+//🔸space complexitY: O(2N)
+
+
+
+//              //❓Question: Check if Tree is Isomorphic
+
+// Given two Binary Trees. Check whether they are Isomorphic or not.
+// Note: 
+// Two trees are called isomorphic if one can be obtained from another by a series of flips, 
+// i.e. by swapping left and right children of several nodes. Any number of nodes at any level can have their children swapped. 
+// Two empty trees are isomorphic.
+// For example, the following two trees are isomorphic with the following sub-trees flipped:
+// 2 and 3, NULL and 6, 7 and 8.
+// ISomorphicTrees
+
+// Example 1:
+// Input:
+//  T1    1     T2:   1
+//      /   \        /  \
+//     2     3      3    2
+//    /            /
+//   4            4
+// Output: No
+
+// Example 2:
+// Input:
+// T1    1     T2:    1
+//     /  \         /   \
+//    2    3       3     2
+//   /                    \
+//   4                     4
+// Output: Yes
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function isomorphic() that takes the root nodes of both the Binary Trees as its input and returns True if the two trees are isomorphic. Else, it returns False. (The driver code will print Yes if the returned values are true, otherwise false.)
+
+// Expected Time Complexity: O(min(M, N)) where M and N are the sizes of the two trees.
+// Expected Auxiliary Space: O(min(H1, H2)) where H1 and H2 are the heights of the two trees.
+
+// Constraints:
+// 1<=Number of nodes<=105
+
+//🔴approach :  TLE
+// class Solution{
+//   public:
+//     // Return True if the given trees are isomotphic. Else return False.
+//     bool isIsomorphic(Node *root1,Node *root2)
+//     {
+//      if(root1== NULL && root2 != NULL) return false;
+//      if(root2== NULL && root1 != NULL) return false;
+//      if(root1== NULL && root2 == NULL) return true ;
+//      if(root1->data !=  root2->data) return false;
+     
+//      bool left1 = isIsomorphic(root1->left, root2->right) ;
+//      bool right1 = isIsomorphic(root1->right, root2->left);
+//      bool left = isIsomorphic(root1->left, root2->right) ;
+//      bool right = isIsomorphic(root1->right, root2->left);
+     
+//      return (left && right) || (left1 && right1);
+//     }
+// };
+//🔸time complexity : O(2* N+M)
+//🔸space complexitY: O(N+M)
+
+
+//🔴approach : optimised
+// class Solution{
+//   public:
+//     // Return True if the given trees are isomotphic. Else return False.
+//     bool isIsomorphic(Node *root1,Node *root2)
+//     {
+//         // code here.
+//          if(root1==NULL&&root2==NULL){
+//              return true;
+//          }
+         
+//          if(root1==NULL || root2==NULL){
+//              return false;
+//          }
+         
+//          if(root1->data!=root2->data)
+//          return false;
+         
+//          return (isIsomorphic(root1->left,root2->left) && isIsomorphic(root1->right,root2->right))
+//                 || (isIsomorphic(root1->left,root2->right)&& isIsomorphic(root1->right,root2->left));
+//     }
+// };
+//🔸time complexity : O(2* N+M)
+//🔸space complexitY: O(N+M)
