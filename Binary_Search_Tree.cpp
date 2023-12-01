@@ -1024,8 +1024,8 @@
 
 //         // 2 child
 //         if(root -> left != NULL && root -> right != NULL){
-//             int mini = minVal(root -> right) -> data ;   // find minimmum node using minVal function
-//             root -> data = mini ;                       // replace node we want to delete with the mini value node
+//             int mini = minVal(root -> right) -> data ;           // find minimmum node using minVal function
+//             root -> data = mini ;                                // replace node we want to delete with the mini value node
 //             root -> right = deleteFromBST(root -> right, mini) ; // and delete the node we want to delete
 //         }
 

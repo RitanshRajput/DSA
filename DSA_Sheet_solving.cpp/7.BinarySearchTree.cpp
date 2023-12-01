@@ -1,6 +1,6 @@
 
 
-//                //❓Question : Search a node in BST
+//                     //❓Question : Search a node in BST
 
 // Given a Binary Search Tree and a node value X, find if the node with value X is present in the BST or not.
 
@@ -94,7 +94,7 @@
 //      / \               /   \
 //      3  6     ==>     4      6
 //     /\   \           /        \
-//    1  4   7         2          7
+//    2  4   7         2          7
 // Input: root = [5,3,6,2,4,null,7], key = 3
 // Output: [5,4,6,2,null,null,7]
 // Explanation: Given key to delete is 3. So we find the node with value 3 and delete it.
@@ -122,39 +122,327 @@
 // root is a valid binary search tree.
 // -105 <= key <= 105
  
+//🔴Intuition: 
+// When we delete a node from a Binary Search Tree(BST), the BST properties should remain the same.
+// Hence, we have 3 cases for deleting a node from a BST :
+
+// The node is a leaf node - In this cases, we can just delete the node and return the root, since deleting any elaf node doesn't affect the remainig tree.
+// image
+
+// The node has one child - In this case, replace the node with the child node and return the root.
+// image
+
+// The node has 2 children - In this case, in order to conserve the BST properties, we need to replace the node with it's inorder successor (The next node that comes in the inorder traversal) i.e; we need to replace it with either :
+// 1. The greatest value node in it's left subtree (or)
+// 2. The smallest value node in it's right subtree
+// and return the root.
+// image
+
+// Time Complexity : O(h) - h = height of the tree.
+// (Worst case Time Complexity : O(n) )
 
 //🔴approach : 
 // class Solution {
 // public:
 //     TreeNode* deleteNode(TreeNode* root, int key) {
-//          if(root==NULL)return NULL;
-
-//         if(key<root->val){
-//             root->left=deleteNode(root->left,key);
-//         }
-//         else if(key>root->val){
-//             root->right=deleteNode(root->right,key);
-//         }
-//         else{
-//             if(!root->left && !root->right){
-//                 delete root;
-//                 return NULL;
-//             }
-//              else if(!root->left || !root->right){
-//                 TreeNode* temp=root->left?root->left:root->right;
-//                 delete root;
-//                 return temp;
-//             }
-//             else if(root->left && root->right){
-//                 TreeNode* temp=root;
-//                 temp=temp->left;
-//                 while(temp->right)temp=temp->right;
-//                 root->val=temp->val;
-//                 root->left=deleteNode(root->left,temp->val);
-//             }
-//         }
-//         return root;
+//         if(root) 
+//          if(key < root->val) root->left = deleteNode(root->left, key);     //We frecursively call the function until we find the target node
+//          else if(key > root->val) root->right = deleteNode(root->right, key);       
+//          else{
+//              if(!root->left && !root->right) return NULL;          //No child condition
+//              if (!root->left || !root->right)
+//                  return root->left ? root->left : root->right;    //One child contion -> replace the node with it's child
+//      			                                                //Two child condition   
+//              TreeNode* temp = root->left;                        //(or) TreeNode *temp = root->right;
+//              while(temp->right != NULL) temp = temp->right;     //      while(temp->left != NULL) temp = temp->left;
+//              root->val = temp->val;                            //       root->val = temp->val;
+//              root->left = deleteNode(root->left, temp->val);  //        root->right = deleteNode(root->right, temp);		
+//          }
+//      return root;
 //     }
 // };
 //🔴time complexity: O(H)
 //🔴space complexity: O(1) 
+
+
+
+//                  //❓Question: Minimum Node Element in BST
+
+// Given a Binary Search Tree. The task is to find the minimum valued element in this given BST.
+
+// Example 1:
+// Input:
+//            5
+//          /    \
+//         4      6
+//        /        \
+//       3          7
+//      /
+//     1
+// Output: 1
+
+// Example 2:
+// Input:
+//              9
+//               \
+//                10
+//                 \
+//                  11
+// Output: 9
+// Your Task:
+// The task is to complete the function minValue() which takes root as the argument and returns the minimum element of BST. If the tree is empty, there is no minimum element, so return -1 in that case.
+
+// Expected Time Complexity: O(Height of the BST)
+// Expected Auxiliary Space: O(1).
+
+// Constraints:
+// 0 <= N <= 104
+
+
+//🔴Approach :
+
+// int minValue(struct Node *root) {
+//        if(root == NULL) return -1;
+//        if(root->left == NULL) return root->data;
+//        minValue(root->left);
+// }
+//🔸Time complexity: O(height of BST))
+//🔸space complexity: O(1)
+
+
+
+//                  //❓Question: Predecessor and Successor 
+
+// There is BST given with the root node with the key part as an integer only. 
+// You need to find the in-order successor and predecessor of a given key. 
+// If either predecessor or successor is not found, then set it to NULL.
+
+// Note:- In an inorder traversal the number just smaller than the 
+// target is the predecessor and the number just greater than the target is the successor. 
+
+// Example 1:
+// Input:
+//         10
+//       /   \
+//      2    11
+//    /  \ 
+//   1    5
+//       /  \
+//      3    6
+//       \
+//        4
+// key = 8
+// Output: 
+// 6 10
+// Explanation: 
+// In the given BST the inorder predecessor of 8 is 6 and inorder successor of 8 is 10.
+
+// Example 2:
+// Input:
+//       8
+//     /   \
+//    1     9
+//     \     \
+//      4    10
+//     /
+//    3
+// key = 11
+// Output: 
+// 10 -1
+// Explanation: 
+// In given BST, the inorder predecessor of 11 is 10 whereas it does not have any inorder successor.
+// Your Task: You don't need to print anything. You need to update pre with the predecessor of 
+// the key or NULL if the predecessor doesn't exist and succ to the successor of the key or
+// NULL if the successor doesn't exist. pre and succ are passed as an argument to the function findPreSuc(). 
+
+// Expected Time Complexity: O(Height of the BST).
+// Expected Auxiliary Space: O(Height of the BST).
+
+// Constraints: 
+// 1 <= Number of nodes <= 104
+// 1 <= key of node <= 107
+// 1 <= key <= 107
+
+
+// 🔴Approach :
+/* struct Node
+{
+	int key;
+	struct Node *left;
+	struct Node *right;
+	
+	Node(int x){
+	    key = x;
+	    left = NULL;
+	    right = NULL;
+	}
+};
+*/
+// This function finds predecessor and successor of key in BST.
+// It sets pre and suc as predecessor and successor respectively 
+
+//  Public: 
+//  bool flag = true;
+//     void inorder(Node* root, Node*& pre, Node*& suc, int key){
+//         if(!root) return;
+//         inorder(root->left, pre, suc, key);
+//         if(root->key < key){
+//             pre = root;
+//         }
+//         if(root->key > key && flag){
+//             suc = root;
+//             flag = false;
+//             return;
+//         }
+//         inorder(root->right, pre, suc, key);
+//     }
+//     void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
+//     {
+//         // Your code goes here
+//         inorder(root, pre, suc, key);
+//     }
+//🔸time complexity:  O(H)
+//🔸space complexity: O(1)
+
+
+//						//❓Question: Check For a BST
+
+// Given the root of a binary tree. Check whether it is a BST or not.
+// Note: We are considering that BSTs can not contain duplicate Nodes.
+// A BST is defined as follows:
+
+// The left subtree of a node contains only nodes with keys less than the node's key.
+// The right subtree of a node contains only nodes with keys greater than the node's key.
+// Both the left and right subtrees must also be binary search trees.
+ 
+// Example 1:
+// Input:
+//    2
+//  /    \
+// 1      3
+// Output: 1 
+// Explanation: 
+// The left subtree of root node contains node
+// with key lesser than the root nodes key and 
+// the right subtree of root node contains node 
+// with key greater than the root nodes key.
+// Hence, the tree is a BST.
+
+// Example 2:
+// Input:
+//   2
+//    \
+//     7
+//      \
+//       6
+//        \
+//         5
+//          \
+//           9
+//            \
+//             2
+//              \
+//               6
+// Output: 0 
+// Explanation: 
+// Since the node with value 7 has right subtree 
+// nodes with keys less than 7, this is not a BST.
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function isBST() which takes the root of the tree as a parameter and returns true if the given binary tree is BST, else returns false. 
+
+// Expected Time Complexity: O(N).
+// Expected Auxiliary Space: O(Height of the BST).
+
+// Constraints:
+// 0 <= Number of edges <= 100000
+
+
+//🔴appraoch :
+// class Solution
+// {
+//     public:
+//     bool solve(Node* root, int mini, int maxi){
+//         if(root==NULL) return true;
+//         if(root->data <= mini || root->data >= maxi){
+//             return false;
+//         }
+        
+//         return solve(root->left, mini, root->data) && solve(root->right, root->data, maxi);
+//     }
+//     //Function to check whether a Binary Tree is BST or not.
+//     bool isBST(Node* root) 
+//     {
+//         return solve(root, INT_MIN, INT_MAX);
+//     }
+// };
+//🔸time complexity: O(H)
+//🔸space complexity: O(H)
+
+
+//					//❓Question: Populate inorder successor of all node
+
+// Given a Binary Tree, write a function to populate next pointer for all nodes. 
+// The next pointer for every node should be set to point to inorder successor.
+
+// Example 1:
+// Input:
+//        10
+//        /  \
+//       8    12
+//      /
+//     3
+  
+
+// Output: 3->8 8->10 10->12 12->-1
+// Explanation: The inorder of the above tree is :
+// 3 8 10 12. So the next pointer of node 3 is 
+// pointing to 8 , next pointer of 8 is pointing
+// to 10 and so on.And next pointer of 12 is
+// pointing to -1 as there is no inorder successor 
+// of 12.
+
+// Example 2:
+// Input:
+//        1
+//       /   \
+//      2     3
+// Output: 2->1 1->3 3->-1 
+// Your Task:
+// You do not need to read input or print anything. Your task is to complete the function populateNext() that takes the root node of the binary tree as input parameter.
+
+// Expected Time Complexity: O(N)
+// Expected Auxiliary Space: O(N)
+// Constraints:
+// 1<=n<=10^5
+// 1<=data of the node<=10^5
+
+//🔴approach :
+// class Solution
+// {
+// public:
+//     void solve(Node* root, vector<Node*>& temp){
+//         if(root==NULL) return;
+//         solve(root->left, temp);
+//         temp.push_back(root);
+//         solve(root->right, temp);
+//     }
+//     void populateNext(Node *root)
+//     {
+//         if(root==NULL) return;
+//         vector<Node*> temp; 
+//         solve(root, temp);
+        
+//         if(temp.size() < 2) {
+//             temp[0]->next = NULL;
+//         }
+//         else{
+//             int i=0; 
+//             while(i <= temp.size()-2){
+//                 temp[i]->next = temp[i+1];
+//                 i++;
+//             }
+//         }
+//     }
+// };
+//🔸time complexity:O(N)
+//🔸space complexity: O(N)
