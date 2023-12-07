@@ -31,13 +31,14 @@
 // the given nodes , so the output will be 0.
 
 // Your Task:
-// You don't need to read input or print anything. Complete the function search()which returns true if the node with value x is present in the BSTelse returns false.
+// You don't need to read input or print anything. Complete the function search() which returns true if the node with value x is present in the BSTelse returns false.
 
 // Expected Time Complexity: O(Height of the BST)
 // Expected Auxiliary Space: O(1).
 
 // Constraints:
 // 1 <= Number of nodes <= 105
+
 
 //🔴approach 1: recursive solution 
 // bool searchInBST(Node* root, int x) {
@@ -151,12 +152,12 @@
 //          else{
 //              if(!root->left && !root->right) return NULL;          //No child condition
 //              if (!root->left || !root->right)
-//                  return root->left ? root->left : root->right;    //One child contion -> replace the node with it's child
-//      			                                                //Two child condition   
-//              TreeNode* temp = root->left;                        //(or) TreeNode *temp = root->right;
-//              while(temp->right != NULL) temp = temp->right;     //      while(temp->left != NULL) temp = temp->left;
-//              root->val = temp->val;                            //       root->val = temp->val;
-//              root->left = deleteNode(root->left, temp->val);  //        root->right = deleteNode(root->right, temp);		
+//                  return root->left ? root->left : root->right;   // One child contion -> replace the node with it's child
+//      			                                                // Two child condition   
+//              TreeNode* temp = root->left;                        //(OR) TreeNode *temp = root->right;
+//              while(temp->right != NULL) temp = temp->right;      //     while(temp->left != NULL) temp = temp->left;
+//              root->val = temp->val;                              //     root->val = temp->val;
+//              root->left = deleteNode(root->left, temp->val);     //     root->right = deleteNode(root->right, temp);		
 //          }
 //      return root;
 //     }
@@ -189,6 +190,7 @@
 //                 \
 //                  11
 // Output: 9
+
 // Your Task:
 // The task is to complete the function minValue() which takes root as the argument and returns the minimum element of BST. If the tree is empty, there is no minimum element, so return -1 in that case.
 
@@ -301,6 +303,34 @@
 //         // Your code goes here
 //         inorder(root, pre, suc, key);
 //     }
+//🔸time complexity:  O(H)
+//🔸space complexity: O(1)
+
+
+//🔴appraoch 2: using mini maxi
+//    void solve(Node* root, Node*& pre, Node*& suc, int key,int &mx,int &mn){
+//     if(root==NULL) return;
+//
+//     solve(root->left,pre,suc,key,mx,mn);
+//
+//     if(root->key>key&&root->key<mn){
+//         mn=root->key;
+//         suc=root;
+//     }
+//     if(root->key<key&&root->key>mx){
+//         mx=root->key;
+//         pre=root;
+//     }
+//
+//     solve(root->right,pre,suc,key,mx,mn);
+//    }
+//
+//    void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
+//    {
+//        int mx=INT_MIN;
+//        int mn=INT_MAX;
+//        solve(root,pre,suc,key,mx,mn);
+//    }
 //🔸time complexity:  O(H)
 //🔸space complexity: O(1)
 
@@ -426,6 +456,7 @@
 //         temp.push_back(root);
 //         solve(root->right, temp);
 //     }
+//
 //     void populateNext(Node *root)
 //     {
 //         if(root==NULL) return;
@@ -446,3 +477,173 @@
 // };
 //🔸time complexity:O(N)
 //🔸space complexity: O(N)
+
+
+
+//          //❓Question: Lowest Common Ancestors(LCA)
+
+// Given a Binary Search Tree (with all values unique) and 
+// two node values n1 and n2 (n1!=n2). Find the Lowest Common Ancestors of the two nodes in the BST.
+
+// Example 1:
+
+// Input:
+//               5
+//             /   \
+//           4      6
+//          /        \
+//         3          7
+//                     \
+//                      8
+// n1 = 7, n2 = 8
+// Output: 7
+// Example 2:
+
+// Input:
+//      2
+//    /   \
+//   1     3
+// n1 = 1, n2 = 3
+// Output: 2
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function LCA() which takes the root Node of the BST and two integer values n1 and n2 as inputs and returns the Lowest Common Ancestor of the Nodes with values n1 and n2 in the given BST. 
+
+// Expected Time Complexity: O(Height of the BST).
+// Expected Auxiliary Space: O(Height of the BST).
+
+// Constraints:
+// 1 <= N <= 104
+
+//🔴appraoch 1 :
+// class Solution{
+//     public:
+//      int ancestor(Node* root,int n,vector<Node*>&ans) {
+//         if(root==NULL) return 0;
+//
+//         if(root->data==n) {
+//             ans.push_back(root);
+//             return root->data;
+//         }
+//        
+//         int left=-1,right=-1;
+//         if(root->data > n)
+//         left = ancestor(root->left,n,ans);
+//
+//         if(root->data<n)
+//         right = ancestor(root->right,n,ans);
+//       
+//         if(left==n || right==n) {
+//             ans.push_back(root);
+//             return n;
+//         }
+//     }
+//
+//         Node* LCA(Node *root, int n1, int n2) {
+//             vector<Node*>an1;
+//             vector<Node*>an2;   
+//
+//             int ans1 = ancestor(root,n1,an1);
+//             int ans2 = ancestor(root,n2,an2);
+//          
+//             for(int i=0;i<an1.size();i++)  {
+//                 for(int j = 0;j<an2.size();j++) {
+//                     if(an1[i]->data == an2[j]->data) {
+//                         return an1[i];
+//                     }
+//                 }
+//             }
+//         }
+// };
+//🔸time complexity: O(Heighht of BST)
+//🔸space complexity: O(height of BST) + (2Vector)
+
+//🔴appraoch 2:
+// class Solution{
+//     public:
+//         Node* ancestor(Node* root, int n1, int n2){
+//             if(root == NULL) {
+//                 return root;
+//             }
+            
+//             if(root->data > n1 && root->data > n2) {
+//                 return ancestor(root->left, n1, n2);
+//             }
+            
+//             if(root->data < n1 && root->data < n2){
+//                 return ancestor(root->right, n1, n2);
+//             }
+            
+//             return root;
+//         }
+//         Node* LCA(Node *root, int n1, int n2){
+//             return ancestor(root, n1, n2);
+//         }
+// };
+//🔸time complexity: O(Heighht of BST)
+//🔸space complexity: O(height of BST)
+
+
+
+//					//❓Question: Construct BST from Preorder Traversal
+
+// Given the preorder traversal of a binary search tree, construct the BST.
+
+// Examples:
+
+//  Input: {10, 5, 1, 7, 40, 50}
+// Output:   10
+//                /   \
+//             5     40
+//           /  \       \
+//        1    7       50
+
+//🔴approach 1: 
+
+// Node* insertIntoBST(Node* root, int d){
+// 	if(root == NULL){
+// 		root = new Node(d);
+// 		return root;
+// 	}
+
+// 	if(root->data < d){
+// 		root->right = insertIntoBST(root->right, d);
+// 	}
+// 	else{
+// 		root->left = insertIntoBST(root->left, d);
+// 	}
+// 	return root;
+// }
+
+//🔸Time complexity: O(N^2)
+//🔸space complexity: O(1)
+
+
+
+//🔴approach 2: 
+// Node* solve(vector<int> &preorder, int mini, int maxi, int &i) {
+//     //base case
+//     if( i >= preorder.size()) {
+//         return NULL ;
+//     }
+//     //base case
+//     if(preorder[i] < mini || preorder[i] > maxi) {
+//         return NULL ;
+//     }
+
+//     Node* root = new Node(preorder[i++]) ;
+//     root -> left = solve(preorder, mini, root -> data, i) ;
+//     root -> right = solve(preorder, root -> data, maxi, i) ;
+    
+//     return root;
+// }
+
+// //main function
+// Node* preorderToBST(vector<int> &preorder) {
+    
+//     int mini = INT_MIN ;
+//     int maxi = INT_MAX ;
+//     int i = 0;
+//     return solve(preorder, mini, maxi, i) ;
+// }
+//🔴Time complexity: O(N)       => O(3N)== O(N)
+//🔴space complexity: O(H)
