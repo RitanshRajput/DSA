@@ -630,7 +630,8 @@
 //         return NULL ;
 //     }
 
-//     Node* root = new Node(preorder[i++]) ;
+//     Node* root = new Node(preorder[i]) ;
+//	   i++;
 //     root -> left = solve(preorder, mini, root -> data, i) ;
 //     root -> right = solve(preorder, root -> data, maxi, i) ;
     
@@ -647,3 +648,160 @@
 // }
 //🔴Time complexity: O(N)       => O(3N)== O(N)
 //🔴space complexity: O(H)
+
+
+//				//❓ Question : Binary Tree to BST
+
+// Given a Binary Tree, convert it to Binary Search Tree in such a way that keeps the original structure of Binary Tree intact.
+//  Example 1:
+
+// Input:
+//       1
+//     /   \
+//    2     3
+// Output: 
+// 1 2 3
+// Explanation:
+// The converted BST will be 
+//       2
+//     /   \
+//    1     3
+
+// Example 2:
+
+// Input:
+//           1
+//        /    \
+//      2       3
+//    /        
+//  4       
+// Output: 
+// 1 2 3 4
+// Explanation:
+// The converted BST will be
+
+//         3
+//       /   \
+//     2     4
+//   /
+//  1
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function binaryTreeToBST() which takes the root of the Binary tree as input and returns the root of the BST. The driver code will print inorder traversal of the converted BST.
+
+// Expected Time Complexity: O(NLogN).
+// Expected Auxiliary Space: O(N).
+
+// Constraints:
+// 1 <= Number of nodes <= 105
+
+//🔴approach : 
+// class Solution{
+//   public:
+//    void inorder(Node* &root, vector<int>&q){
+//         if(root==NULL)return ;
+        
+//         inorder(root->left,q);
+//         q.push_back(root->data);
+//         inorder(root->right,q);
+//     }
+//     void solve(Node* &root, vector<int>&q,int size,int &index){
+//         if(root==NULL)return ;
+//         if(index>=size)return;
+//        solve(root->left,q,q.size(),index);
+//         root->data=q[index++];
+//         solve(root->right,q,q.size(),index);
+//     }
+//     Node *binaryTreeToBST (Node *root)
+//     {   
+//         vector<int>q;
+//         inorder(root,q);
+//         sort(q.begin(),q.end());
+//         int index=0;
+//         solve(root,q,q.size(),index);
+//         return root;
+//     }
+// };
+//🔸time complexity:  O(2(N) + O(N logN)) 
+//🔸space complexity: O(N)
+
+
+//				//❓Question: Balance a BST
+
+// Given a Binary Search Tree, modify the given BST such that it is 
+// balanced and has minimum possible height. Return the balanced BST.
+
+// Example1:
+// Input:
+//        30
+//       /
+//      20
+//     /
+//    10
+// Output:
+//      20
+//    /   \
+//  10     30
+
+// Example2:
+// Input:
+//          4
+//         /
+//        3
+//       /
+//      2
+//     /
+//    1
+// Output:
+//       3            3           2
+//     /  \         /  \        /  \
+//    1    4   OR  2    4  OR  1    3   
+//     \          /                  \ 
+//      2        1                    4
+
+// Your Task:
+// The task is to complete the function buildBalancedTree() which takes root as the input argument and returns the root of tree after converting the given BST into a balanced BST with minimum possible height. The driver code will print the height of the updated tree in output itself.
+ 
+// Expected Time Complexity: O(N)
+// Expected Auxiliary Space: O(N)
+// Here N denotes total number of nodes in given BST.
+
+// Constraints:
+// 1 <= N <= 105
+// 1 <= Node data <= 109
+
+//🔴approach : 
+
+// class Solution{
+    
+//     public:
+//     void inorder(Node* root, vector<int> &ans){
+//         if(root==NULL){
+//             return;
+//         }
+//         inorder(root->left,ans);
+//         ans.push_back(root->data);
+//         inorder(root->right,ans);
+//     }
+    
+//     Node* buildtree(vector<int> &ans,int left,int right){
+//         if(left > right){
+//             return NULL;
+//         }
+//         else{
+//             int mid= (left + right)/2;
+//             Node* root=new Node(ans[mid]);
+//             root->left=buildtree(ans,left,mid-1);
+//             root->right=buildtree(ans,mid+1,right);
+            
+//         }
+//     }
+    
+//     Node* buildBalancedTree(Node* root)
+//     {
+//         // Code here
+//         vector<int> ans;
+//         inorder(root,ans);
+        
+//         return buildtree(ans,0,ans.size()-1); 
+//     }
+// };
