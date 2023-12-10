@@ -708,7 +708,8 @@
 //         if(root==NULL)return ;
 //         if(index>=size)return;
 //        solve(root->left,q,q.size(),index);
-//         root->data=q[index++];
+//         root->data=q[index];
+//          index++;
 //         solve(root->right,q,q.size(),index);
 //     }
 //     Node *binaryTreeToBST (Node *root)
@@ -805,3 +806,288 @@
 //         return buildtree(ans,0,ans.size()-1); 
 //     }
 // };
+
+
+
+//				//❓Question: Merge Two BST
+
+// Given two BSTs, return elements of both BSTs in sorted form.
+
+// Example 1:
+// Input:
+// BST1:
+//        5
+//      /   \
+//     3     6
+//    / \
+//   2   4  
+// BST2:
+//         2
+//       /   \
+//      1     3
+//             \
+//              7
+//             /
+//            6
+// Output: 1 2 2 3 3 4 5 6 6 7
+// Explanation: 
+// After merging and sorting the
+// two BST we get 1 2 2 3 3 4 5 6 6 7.
+
+
+// Example 2:
+// Input:
+// BST1:
+//        12
+//      /   
+//     9
+//    / \    
+//   6   11
+// BST2:
+//       8
+//     /  \
+//    5    10
+//   /
+//  2
+// Output: 2 5 6 8 9 10 11 12
+// Explanation: 
+// After merging and sorting the
+// two BST we get 2 5 6 8 9 10 11 12.
+
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function merge() which takes roots of both the BSTs as its input and returns an array of integers denoting the node values of both the BSTs in a sorted order.
+
+// Expected Time Complexity: O(M+N) where M and N are the sizes of the two BSTs.
+// Expected Auxiliary Space: O(Height of BST1 + Height of BST2 + M + N(for storing the answer)).
+
+// Constraints:
+// 1 ≤ Number of Nodes ≤ 105
+
+//🔴appraoch: 
+//    void inorder(Node* root , vector<int>&arr){
+//         if(root == NULL){
+//             return;
+//         }
+//         inorder(root->left,arr);
+//         arr.push_back(root->data);
+//         inorder(root->right,arr);
+//     }
+//     void helper(vector<int>&arr1 , vector<int>&arr2 , vector<int>&arr){
+        
+//         int i = 0 , j = 0;
+//         while(i < arr1.size() && j < arr2.size()){
+//             if(arr1[i] < arr2[j]){
+//                 arr.push_back(arr1[i]);
+//                 i++;
+//             }
+//             else{
+//                 arr.push_back(arr2[j]);
+//                 j++;
+//             }
+//         }
+//         while(i < arr1.size()){
+//             arr.push_back(arr1[i]);
+//             i++;
+//         }
+//         while(j < arr2.size()){
+//             arr.push_back(arr2[j]);
+//             j++;
+//         }
+        
+//     }
+//     vector<int> merge(Node *root1, Node *root2)
+//     {
+//        vector<int> arr1 , arr2;
+//        inorder(root1,arr1);
+//        inorder(root2,arr2);
+       
+//        vector<int> arr;
+//        helper(arr1,arr2,arr);
+//        return arr;
+       
+//     }
+// }
+//🔸time complexity: O(2(N+M))
+//🔸space complexity: O(2(arr1+arr2 ))
+
+
+//🔴approach : 
+//     void inorder(Node* root, vector<int>& result){
+//         if(root == NULL){
+//             return ;
+//         }
+        
+//         inorder(root->left, result);
+//         result.push_back(root->data);
+//         inorder(root->right, result);
+//     }
+//     //Function to return a list of integers denoting the node 
+//     //values of both the BST in a sorted order.
+//     vector<int> merge(Node *root1, Node *root2)
+//     {
+//        vector<int> result;
+//        inorder(root1, result);
+//        inorder(root2, result);
+       
+//        sort(result.begin(), result.end());
+//        return result;
+//     }
+// };
+//🔸time complexity: O(N*logN + 2(N+M))
+//🔸space complexity: O(arr1+arr2)
+
+
+
+//			//❓Question: Kth Largest Element
+
+// Given a Binary Search Tree. Your task is to complete the function which will 
+// return the Kth largest element without doing any modification in Binary Search Tree.
+
+// Example 1:
+// Input:
+//       4
+//     /   \
+//    2     9
+// k = 2 
+// Output: 4
+
+// Example 2:
+// Input:
+//        9
+//         \ 
+//           10
+// K = 1
+// Output: 10
+
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function kthLargest() 
+// which takes the root of the BST and an integer K as inputs and returns the Kth largest element in the given BST.
+
+// Expected Time Complexity: O(N).
+// Expected Auxiliary Space: O(H) where H is max recursion stack of height H at a given time.
+
+// Constraints:
+// 1 <= N <= 105
+// 1 <= K <= N
+
+//🔴approach 1:
+// class Solution
+// {
+//     public:
+//     void helper(Node* root,int& k,int& ans)
+//     {
+//         if(root==NULL)
+//         {
+//             return;
+//         }
+//         helper(root->right,k,ans);
+//         k--;
+//         if(k==0)
+//         {
+//             ans=root->data;
+//             return ;
+//         }
+//         helper(root->left,k,ans);
+//     }
+    
+//     int kthLargest(Node *root, int k)
+//     {
+//         //Your code here
+//         int ans;
+//         helper(root,k,ans);
+//         return ans;
+//     }
+// };
+//🔸time complexitY: O(N)
+//🔸space complexity: O(H)
+
+
+//🔴approach 2: 
+//  int kthLargest(Node *root, int K)
+//     {
+//         priority_queue<int> pq;
+//         queue<Node*> q;
+//         q.push(root);
+//
+//         while(!q.empty())
+//         {
+//             Node* curr = q.front();
+//             q.pop();
+//             if(curr->left)
+//             {
+//                 q.push(curr->left);
+//             }
+//             if(curr->right)
+//             {
+//                 q.push(curr->right);
+//             }
+            
+//             pq.push(curr->data);
+//         }
+        
+//         while(K>1)
+//         {
+//             pq.pop();
+//             K--;
+//         }
+//         return pq.top();
+//     }
+//🔸time complexitY: O(N)
+//🔸space complexity: O(2N)
+
+
+
+// 				//❓Question: Kth smallest element in BST
+
+// Given a BST and an integer K. Find the Kth Smallest 
+//  element in the BST using O(1) extra space. 
+
+// Example 1:
+// Input:
+//       2
+//     /   \
+//    1     3
+// K = 2
+// Output: 2
+// Explanation: 2 is the 2nd smallest element in the BST
+
+// Example 2:
+// Input:
+//         2
+//       /  \
+//      1    3
+// K = 5
+// Output: -1
+// Explanation: There is no 5th smallest element in the BST as the size of BST is 3
+ 
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function KthSmallestElement() 
+// which takes the root of the BST and integer K as inputs and returns the Kth smallest element in the BST, if no such element exists return -1.
+
+// Expected Time Complexity: O(N).
+// Expected Auxiliary Space: O(1).
+
+// Constraints:
+// 1<=Number of nodes<=10^5
+
+ 
+//🔴approach 1:
+// class Solution {
+//   public:
+//       // Return the Kth smallest element in the given BST
+//     int height = 0;
+//     int KthSmallestElement(Node *root, int K) {
+//         // add code here.
+//         if(root == NULL)
+//             return -1;
+//         int left = KthSmallestElement(root -> left, K);
+//         if(left != -1)
+//             return left;
+//         height++;
+//         if(height == K)
+//             return root -> data;
+//         return KthSmallestElement(root -> right, K);
+//     }
+// };
+//🔸time complexity: O(H)
+//🔸space complexity: O(1)
