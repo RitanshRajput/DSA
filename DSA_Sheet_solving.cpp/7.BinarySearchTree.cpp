@@ -1371,3 +1371,365 @@
 // };
 // 🔸time complexity: O(N*H)
 // 🔸space complexity: O(H)
+//
+
+//			//❓ Question: Given n appointments, find all conflicting appointments
+
+// Given n appointments, find all conflicting appointments.
+// You will be given a list of appointments, where a single appointment contains the start time and end time. Your task is to find all of the conflicting appointments.
+// An appointment is conflicting when there is another appointment between the start and end time of the current appointment.
+
+// Sample Examples
+// Input
+//	list of appointments
+//	{ {1,5}, {5, 8}, {4,5}, {6, 10}, {10,30}}
+
+// Output
+// [4 5] conflicting with [1 5]
+// [6 10] conflicting with [5 8]
+
+// 🔴Appraoch :
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// struct Appointment
+// {
+// 	int startTime;
+// 	int endTime;
+// };
+
+// // node for interval tree
+// class Node{
+// public:
+// 	// represents start time and end time
+// 	Appointment *ap;
+// 	int max;
+// 	Node *left, *right;
+
+// 	Node(Appointment a)
+// 	{
+// 		ap = new Appointment(a);
+// 		max = a.endTime;
+// 		left = right = nullptr;
+// 	}
+// };
+
+// // function to insert new Node into interval tree
+// Node *insert(Node *root, Appointment a){
+// 	if (!root) return new Node(a);
+
+// 	// getting start time of root node
+// 	int st = root->ap->startTime;
+
+// 	// if root's start time is smaller the current appointment goes to left subtree
+// 	if (a.startTime < st)
+// 		root->left = insert(root->left, a);
+
+// 	// else the current appointment goes to right subtree
+// 	else
+// 		root->right = insert(root->right, a);
+
+// 	// updating the max value
+// 	if (root->max < a.endTime)
+// 		root->max = a.endTime;
+
+// 	return root;
+// }
+
+// // function to check whether two appointments conflict or not
+// bool isConflicting(Appointment a1, Appointment a2)
+// {
+// 	// appointments are conflicting
+// 	if (a1.startTime < a2.endTime && a2.startTime < a1.endTime)
+// 		return true;
+
+// 	// appointments are not conflicting
+// 	return false;
+// }
+
+// // searching for conflicting appointments
+// Appointment *searchAppointments(Node *root, Appointment ap)
+// {
+// 	if (!root)
+// 		return nullptr;
+
+// 	// given appointment is conflicting
+// 	if (isConflicting(ap, *root->ap))
+// 		return root->ap;
+
+// 	if (root->left && root->left->max >= ap.startTime)
+// 		return searchAppointments(root->left, ap);
+
+// 	return searchAppointments(root->right, ap);
+// }
+
+// // function to print the conflicting appointments
+// void printConflicting(vector<Appointment> appointments)
+// {
+// 	// creating interval tree with first appointment
+// 	Node *root = nullptr;
+// 	root = insert(root, appointments[0]);
+
+// 	// iterating rest of the appointments
+// 	for (int i = 1; i < appointments.size(); i++)
+// 	{
+
+// 		// checking if the current appointment conflicts with any other appointment
+// 		Appointment *ap = searchAppointments(root, appointments[i]);
+// 		if (ap)
+// 		{
+// 			cout << "[" << appointments[i].startTime << " " << appointments[i].endTime << "]\t";
+// 			cout << "conflicts with\t";
+// 			cout << "[" << ap->startTime << " " << ap->endTime << "]\n";
+// 		}
+
+// 		// inserting the current appointment into the interval tree
+// 		root = insert(root, appointments[i]);
+// 	}
+// }
+
+// // main function
+// int main()
+// {
+// 	// list of appointments
+// 	vector<Appointment> appointments = {{1, 5}, {5, 8}, {4, 5}, {6, 10}, {10, 30}};
+// 	// printing conflicting appointments
+// 	printConflicting(appointments);
+
+// 	return 0;
+// }
+// 🔸Time complexity: O(N * H)
+// 🔸space complexity: O(n)
+//
+
+//				//❓Questoin: Preorder to PostOrder
+
+// Given an array arr[] of N nodes representing preorder traversal of some BST. You have to build the exact PostOrder from the given given preorder traversal.
+// In Pre-Order traversal, the root node is visited before the left child and right child nodes.
+
+// Example 1:
+// Input:
+// N = 5
+// arr[]  = {40,30,35,80,100}
+// Output: 35 30 100 80 40
+// Explanation: PreOrder: 40 30 35 80 100
+// Therefore, the BST will be:
+//               40
+//            /      \
+//          30       80
+//            \        \   
+//            35      100
+// Hence, the postOrder traversal will
+// be: 35 30 100 80 40
+
+// Example 2:
+// Input:
+// N = 8
+// arr[]  = {40,30,32,35,80,90,100,120}
+// Output: 35 32 30 120 100 90 80 40
+// Your Task:
+// You need to complete the given function and return the root of the tree. The driver code will then use this root to print the post order traversal.
+
+// Expected Time Complexity: O(N).
+// Expected Auxiliary Space: O(N).
+
+// Constraints:
+// 1 <= N <= 103
+// 1 <= arr[i] <= 104
+
+// 🔴Approach :
+// class Solution{
+// public:
+//      Node* insertBST(Node* root,int data){
+//         if(root==NULL){
+//             return newNode(data);
+//         }else if(data > root->data){
+//             root->right = insertBST(root->right,data);
+//         }else{
+//             root->left = insertBST(root->left,data);
+//         }
+//         return root;
+//     }
+
+//     //Function that constructs BST from its preorder traversal.
+//     Node* post_order(int pre[], int size)
+//     {
+//         Node* root = NULL;
+//         for(int i=0;i<size;i++){
+//             root = insertBST(root,pre[i]);
+//         }
+//         return root;
+//     }
+// };
+// 🔸Time complexity: O(H)           // H = height of BST
+// 🔸space complexity: O(H)          // H = Postorder BST space
+//
+
+//				//❓Question: Whether BST contains DeadEnd
+
+// Given a Binary Search Tree that contains unique positive integer values greater than 0.
+// The task is to complete the function isDeadEnd which returns true if the BST contains
+// a dead end else returns false. Here Dead End means a leaf node,
+// at which no other node can be inserted.
+
+// Example 1:
+// Input :
+//                8
+//              /   \ 
+//            5      9
+//          /  \     
+//         2    7
+//        /
+//       1
+
+// Output :
+// Yes
+// Explanation :
+// Node 1 is a Dead End in the given BST.
+
+// Example 2:
+// Input :
+//               8
+//             /   \ 
+//            7     10
+//          /      /   \
+//         2      9     13
+
+// Output :
+// Yes
+// Explanation :
+// Node 9 is a Dead End in the given BST.
+// Your Task: You don't have to input or print anything. Complete the function isDeadEnd() which takes BST as input and returns a boolean value.
+
+// Expected Time Complexity: O(N), where N is the number of nodes in the BST.
+// Expected Space Complexity: O(N)
+
+// Constraints:
+// 1 <= N <= 1001
+// 1 <= Value of Nodes <= 10001
+
+// 🔴approach :
+// class Solution{
+//   public:
+//     bool rec(Node* root,int mini,int maxi){
+//       if(!root) return false;
+
+//       if(maxi-mini==0) return true;
+
+//       return rec(root->left,mini,root->data-1) || rec(root->right,root->data+1,maxi);
+//     }
+//     bool isDeadEnd(Node *root)
+//     {
+//         //Your code here
+//         return rec(root,1,INT_MAX);
+//     }
+// };
+// 🔸Time complexity: O(H)           // H = height of tree
+// 🔸space complexity: O(N)          // N = recursion stack space
+//
+
+// 🔴approach same but cleaning the code:
+// class Solution{
+//   public:
+//     bool rec(Node* root,int mini,int maxi){
+//       if(!root) return false;
+
+//       if(maxi-mini==0) return true;
+
+//       int left = rec(root->left,mini,root->data-1)
+//		 int right = rec(root->right,root->data+1,maxi);
+//
+//		return left || right;
+//     }
+//     bool isDeadEnd(Node *root)
+//     {
+//         //Your code here
+//         return rec(root,1,INT_MAX);
+//     }
+// };
+// 🔸Time complexity: O(H)           // H = height of tree
+// 🔸space complexity: O(N)          // N = recursion stack space
+//
+
+//				//❓Question: Largest BST
+
+// Given a binary tree. Find the size of its largest subtree that is a Binary Search Tree.
+// Note: Here Size is equal to the number of nodes in the subtree.
+
+// Example 1:
+// Input:
+//         1
+//       /   \
+//      4     4
+//    /   \
+//   6     8
+// Output: 1
+// Explanation: There's no sub-tree with size
+// greater than 1 which forms a BST. All the
+// leaf Nodes are the BSTs with size equal to 1.
+
+// Example 2:
+// Input: 6 6 3 N 2 9 3 N 8 8 2
+//             6
+//         /       \
+//        6         3
+//         \      /   \
+//          2    9     3
+//           \  /  \
+//           8 8    2
+// Output: 2
+// Explanation: The following sub-tree is a
+// BST of size 2:
+//        2
+//     /    \ 
+//    N      8
+
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function largestBst() that takes the root node of the Binary Tree as its input and returns the size of the largest subtree which is also the BST. If the complete Binary Tree is a BST, return the size of the complete Binary Tree.
+
+// Expected Time Complexity: O(N).
+// Expected Auxiliary Space: O(Height of the BST).
+
+// Constraints:
+// 1 ≤ Number of nodes ≤ 105
+// 1 ≤ Data of a node ≤ 106
+
+// 🔴 Appraoch :
+// class Solution{
+
+// public:
+//     bool isBst(Node* root, int low , int high){
+//         if(root==NULL) return true;
+//         if(low>=root->data || high<=root->data){
+//             return false;
+//         }
+//         return (isBst(root->left,low,root->data)
+//         && isBst(root->right,root->data,high));
+//     }
+
+//     int getSize(Node* root){
+//         if(root==NULL) return 0;
+//         return 1+getSize(root->left)+getSize(root->right);
+//     }
+
+//     void call(Node* root,int &ans){
+//          if(root==NULL) return;
+//          call(root->left,ans);
+//          call(root->right,ans);
+//             if(isBst(root,INT_MIN,INT_MAX)) {
+//                 ans = max(ans,getSize(root));
+//             }
+//          return;
+//     }
+
+//     int largestBst(Node *root)
+//     {
+//         //Your code here
+//         int ans=0;
+//         call(root,ans);
+//         return ans;
+//     }
+// };
+// 🔸Time complexity: O(H*H)           // H = height of tree
+// 🔸space complexity: O(H*H)          // N = recursion stack space
+//
