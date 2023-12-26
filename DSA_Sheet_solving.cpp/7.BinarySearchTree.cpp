@@ -143,13 +143,17 @@
 //  public:
 //      TreeNode* deleteNode(TreeNode* root, int key) {
 //          if(root)
-//           if(key < root->val) root->left = deleteNode(root->left, key);     //We frecursively call the function until we find the target node
-//           else if(key > root->val) root->right = deleteNode(root->right, key);
+//           if(key < root->val) {
+//              root->left = deleteNode(root->left, key);     //We frecursively call the function until we find the target node
+//           }
+//           else if(key > root->val) {
+//              root->right = deleteNode(root->right, key);
+//           }
 //           else{
 //               if(!root->left && !root->right) return NULL;          //No child condition
 //               if (!root->left || !root->right)
 //                   return root->left ? root->left : root->right;   // One child contion -> replace the node with it's child
-//       			                                                // Two child condition
+//       			                                                 // Two child condition
 //               TreeNode* temp = root->left;                        //(OR) TreeNode *temp = root->right;
 //               while(temp->right != NULL) temp = temp->right;      //     while(temp->left != NULL) temp = temp->left;
 //               root->val = temp->val;                              //     root->val = temp->val;
@@ -302,12 +306,12 @@
 //
 //      solve(root->left,pre,suc,key,mx,mn);
 //
-//      if(root->key>key&&root->key<mn){
-//          mn=root->key;
+//      if(root->data > key && root->data < mn){
+//          mn=root->data;
 //          suc=root;
 //      }
-//      if(root->key<key&&root->key>mx){
-//          mx=root->key;
+//      if(root->data < key && root->data > mx){
+//          mx=root->data;
 //          pre=root;
 //      }
 //
@@ -940,19 +944,15 @@
 // 1 <= K <= N
 
 // 🔴approach 1:
-//  class Solution
-//  {
-//      public:
-//      void helper(Node* root,int& k,int& ans)
-//      {
-//          if(root==NULL)
-//          {
+//  class Solution {
+//  public:
+//      void helper(Node* root,int& k,int& ans){
+//          if(root==NULL){
 //              return;
 //          }
 //          helper(root->right,k,ans);
 //          k--;
-//          if(k==0)
-//          {
+//          if(k==0) {
 //              ans=root->data;
 //              return ;
 //          }
@@ -1041,12 +1041,13 @@
 //    public:
 //      int height = 0;
 //      int KthSmallestElement(Node *root, int K) {
-//          // add code here.
-//          if(root == NULL)
-//              return -1;
+//
+//          if(root == NULL) return -1;
+//
 //          int left = KthSmallestElement(root -> left, K);
-//          if(left != -1)
-//              return left;
+//
+//          if(left != -1) return left;
+//
 //          height++;
 //          if(height == K)
 //              return root -> data;
@@ -1290,6 +1291,7 @@
 //     }
 // 🔸time complexity: O(H)
 // 🔸space complexity: O(H)      // stack space
+//
 
 //					//❓Question: Replace every element with the least greater element on its right
 
@@ -1631,20 +1633,19 @@
 // 🔴approach same but cleaning the code:
 // class Solution{
 //   public:
-//     bool rec(Node* root,int mini,int maxi){
+//     bool solve(Node* root,int mini,int maxi){
 //       if(!root) return false;
 
 //       if(maxi-mini==0) return true;
 
-//       int left = rec(root->left,mini,root->data-1)
-//		 int right = rec(root->right,root->data+1,maxi);
+//       int left = solve(root->left,mini,root->data-1)
+//		 int right = solve(root->right,root->data+1,maxi);
 //
 //		return left || right;
 //     }
-//     bool isDeadEnd(Node *root)
-//     {
-//         //Your code here
-//         return rec(root,1,INT_MAX);
+//
+//    bool isDeadEnd(Node *root) {
+//         return solve(root,1,INT_MAX);
 //     }
 // };
 // 🔸Time complexity: O(H)           // H = height of tree
@@ -1722,9 +1723,7 @@
 //          return;
 //     }
 
-//     int largestBst(Node *root)
-//     {
-//         //Your code here
+//     int largestBst(Node *root) {
 //         int ans=0;
 //         call(root,ans);
 //         return ans;
@@ -1733,3 +1732,111 @@
 // 🔸Time complexity: O(H*H)           // H = height of tree
 // 🔸space complexity: O(H*H)          // N = recursion stack space
 //
+
+//		  //❓Question: Flatten BST to sorted list | Increasing order
+
+// Given a binary search tree, the task is to flatten it to a sorted list.
+// Precisely, the value of each node must be lesser than the values of all
+// the nodes at its right, and its left node must be NULL after flattening.
+// We must do it in O(H) extra space where ‘H’ is the height of BST.
+
+// Examples:
+// Input:
+//           5
+//         /   \ 
+//        3     7
+//       / \   / \ 
+//      2   4 6   8
+// Output: 2 3 4 5 6 7 8
+
+// Input:
+//       1
+//        \
+//         2
+//          \
+//           3
+//            \
+//             4
+//              \
+//               5
+// Output: 1 2 3 4 5
+
+// 🔴approach :
+
+// void inorder(vector<int>& traversal, node* parent) {
+//
+//     if (parent == NULL)
+//         return;
+
+//     inorder(traversal, parent->left);
+//     traversal.push_back(parent->data);
+//     inorder(traversal, parent->right);
+// }
+
+// void formLinkedList(int pos, vector<int> traversal, node*& prev) {
+//     // Base Case
+//     if (pos == traversal.size())
+//         return;
+
+//     prev->right = new node(traversal[pos]);
+//     prev->left = NULL;
+//     prev = prev->right;
+
+//    formLinkedList(pos + 1, traversal, prev);
+// }
+
+// // Function to flatten binary tree using level order traversal
+// node* flatten(node* parent) {
+//
+//     node* dummy = new node(-1);
+//     node* prev = dummy;
+//
+//     vector<int> traversal;
+//     inorder(traversal, parent);
+//
+//     form(0, traversal, prev);
+//
+//     prev->left = NULL;
+//     prev->right = NULL;
+//     node* result = dummy->right;
+//
+//     // Delete dummy node
+//     delete dummy;
+//     return result;
+// }
+// 🔸time complexity: O(N + N)		  // N = inorder , N = formLinkedlist
+// 🔸space complexity: O(N + N)        // N = vector, N = recursion stack space
+
+// 🔴appraoch :
+//  void inorder(node* curr, node*& prev) {
+
+//     if (curr == NULL)
+//         return;
+
+//     inorder(curr->left, prev);
+
+//     prev->left = NULL;
+//     prev->right = curr;
+//     prev = curr;
+
+//     inorder(curr->right, prev);
+// }
+
+// // Function to flatten binary tree using level order traversal
+// node* flatten(node* parent) {
+
+//     node* dummy = new node(-1);
+//     node* prev = dummy;
+
+//     inorder(parent, prev);
+
+//     prev->left = NULL;
+//     prev->right = NULL;
+//     node* result = dummy->right;
+
+//     // Delete dummy node
+//     delete dummy;
+//     return result;
+// }
+// 🔸time complexity: O(N)		  // N = inorder
+// 🔸space complexity: O(N)       // N = auxilliary space for linkedlist
