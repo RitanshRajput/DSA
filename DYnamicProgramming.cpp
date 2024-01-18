@@ -1,29 +1,22 @@
 
-//                //🔴🔴🔴Dynamic Programming 
+//                //🔴🔴🔴Dynamic Programming
 
-// Dynamic Programming is mainly an optimization over plain recursion. 
-// Wherever we see a recursive solution that has repeated calls for same inputs, 
-// we can optimize it using Dynamic Programming. 
-// The idea is to simply store the results of subproblems, 
-// so that we do not have to re-compute them when needed later. 
+// Dynamic Programming is mainly an optimization over plain recursion.
+// Wherever we see a recursive solution that has repeated calls for same inputs,
+// we can optimize it using Dynamic Programming.
+// The idea is to simply store the results of subproblems,
+// so that we do not have to re-compute them when needed later.
 // This simple optimization reduces time complexities from exponential to polynomial.
 
-// For example, if we write simple recursive solution for Fibonacci Numbers, 
-// we get exponential time complexity and if we optimize it by storing solutions of subproblems, 
+// For example, if we write simple recursive solution for Fibonacci Numbers,
+// we get exponential time complexity and if we optimize it by storing solutions of subproblems,
 // time complexity reduces to linear.
 
+// 🔴 Those who forget the past, are condemned to repeat it !!!
 
-//🔴 Those who forget the past, are condemned to repeat it !!!
-
-
-//🔴🔴Approach to solve question using Dynamic Programming
-//🔸1.  top-down  ==>  Recursion +  Memoization(store the value of subproblem in map/table)
-//🔸2.  bottom-up  ==>  Tabulation
-
-
-
-
-
+// 🔴🔴Approach to solve question using Dynamic Programming
+// 🔸1.  top-down  ==>  Recursion +  Memoization(store the value of subproblem in map/table)
+// 🔸2.  bottom-up  ==>  Tabulation
 
 //                //❓Question: Nth fibonacci number
 
@@ -46,23 +39,22 @@
 // 8
 // Explanation
 // Now the number is ‘6’ so we have to find the “6th” Fibonacci number
-// So by using the property of the Fibonacci series i.e 
+// So by using the property of the Fibonacci series i.e
 
 // [ 1, 1, 2, 3, 5, 8, 13, 21]
 // So the “6th” element is “8” hence we get the output.
 
-
-//🔸Basic Recursion approach :
-// int fibo (int n) {
-//     if(n==1 || n==0) {
-//         return n ;
-//     }
+// 🔸Basic Recursion approach :
+//  int fibo (int n) {
+//      if(n==1 || n==0) {
+//          return n ;
+//      }
 
 //     return fibo(n-1) + fibo(n-2) ;
 // }
 
-//🔴approach using DP:
-//🔴using top-down ==> recursion + memoization
+// 🔴approach using DP:
+// 🔴using top-down ==> recursion + memoization
 
 // #include<iostream>
 // #include<vector>
@@ -76,13 +68,13 @@
 //         return n ;
 //     }
 
-//     //step3: 
+//     //step3:
 //     if(dp[n] != -1) {
 //         cout<<"step3:" <<endl ;
 //         return dp[n] ;
 //     }
 
-//     //step2: 
+//     //step2:
 //         cout<<"step2:" <<endl ;
 //     dp[n] = fib(n-1, dp) + fib(n-2, dp) ;
 //     return dp[n] ;
@@ -103,12 +95,11 @@
 
 //     return 0 ;
 // }
-//🔸time complexity: O(n)
-//🔸space complexity: O(n)              // O(N) + O(N)
+// 🔸time complexity: O(n)
+// 🔸space complexity: O(n)              // O(N) + O(N)
 
-
-//🔴approach using DP:
-//🔴using bottom-up ==> Tabulation
+// 🔴approach using DP:
+// 🔴using bottom-up ==> Tabulation
 
 // #include<iostream>
 // #include<vector>
@@ -116,7 +107,7 @@
 
 // //fibonacci series
 // int fib(int n,  vector<int> &dp) {
-    
+
 //     dp[0] = 0 ;
 //     dp[1] = 1 ;
 
@@ -142,16 +133,14 @@
 
 //     return 0 ;
 // }
-//🔸time complexity: O(n)
-//🔸space complexity: O(n)
+// 🔸time complexity: O(n)
+// 🔸space complexity: O(n)
 
-
-
-//🔴🔴approach using DP:
-//🔴space optimisation
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴🔴approach using DP:
+// 🔴space optimisation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int main() {
 
@@ -166,7 +155,7 @@
 //     }
 
 //     for(int i=2; i<=n; i++) {
-//         int curr = prev1 + prev2; 
+//         int curr = prev1 + prev2;
 //         //shift logic
 //         prev2 = prev1 ;
 //         prev1 = curr ;
@@ -175,33 +164,30 @@
 
 //     return 0 ;
 // }
-//🔸time complexity: O(n)
-//🔸space complexity: O(1)
+// 🔸time complexity: O(n)
+// 🔸space complexity: O(1)
 
-
-
-
-// 🔴🔴🔴             //❓Question: Count ways to reach the N-th stairs 
+// 🔴🔴🔴             //❓Question: Count ways to reach the N-th stairs
 
 // You have been given a number of stairs. Initially, you are at the 0th stair, and you need to reach the Nth stair. Each time you can either
 //  climb one step or two steps. You are supposed to return the number of distinct ways in which you can climb from the 0th step to Nth
 //  step.
 //  Example:
 //    N=3
-// ways 1      4️⃣ __                       
-//          3️⃣ __|                      
-//        2️⃣__|                            
-//     1️⃣__|                                 
+// ways 1      4️⃣ __
+//          3️⃣ __|
+//        2️⃣__|
+//     1️⃣__|
 
-// way 2      3️⃣__                       
-//        2️⃣ __|                      
-//        __|                            
-//   1️⃣__|                                 
+// way 2      3️⃣__
+//        2️⃣ __|
+//        __|
+//   1️⃣__|
 
-// ways 3     3️⃣__                       
-//           __|                      
-//      2️⃣__|                            
-//   1️⃣__|                                 
+// ways 3     3️⃣__
+//           __|
+//      2️⃣__|
+//   1️⃣__|
 
 // We can climb one step at a time i.e. {(о, 1) ,1, 2),(2,3)} or we can climb the first two-step and then one step
 //  i.e. {(0,2),(1, 3)} or we can climb first one step and then two step i.e. {(0,1), (1,3)}.
@@ -234,19 +220,19 @@
 // In the first test case, there are five ways to climb the stairs i.e. {1,1,1,1} , {1,1,2} , {2,1,1} , {1,2,1} , {2,2}.
 // In the second test case, there are eight ways to climb the stairs i.e. {1,1,1,1,1} , {1,1,1,2} , {1,1,2,1}, {1,2,1,1}, {2,1,1},{2,2,1},{2,1,2} and {2,2,1}.
 
-//🔴Appraoch using recursion  :
-//  Time limit exceeded
-// #include <iostream>
-// using namespace std ;
+// 🔴Appraoch using recursion  :
+//   Time limit exceeded
+//  #include <iostream>
+//  using namespace std ;
 
 // //🔸Output Format:
 // //   For each test case/query, print the number of distinct ways to reach the top of stairs.
-// //   Since the number can be huge, so return output modulo 10^9+7. 
+// //   Since the number can be huge, so return output modulo 10^9+7.
 // //   therefore using #define MOD 1000000007
 
 // #define MOD 1000000007
 // int solve(long long nStairs, int i) {
-//      //base case 
+//      //base case
 //     if(i == nStairs) {
 //         return 1 ;
 //     }
@@ -262,16 +248,12 @@
 //     int ans = solve(nStairs, 0) ;
 //     return ans ;
 // }
-//🔸time complexity: O()
-//🔸space complexity: O()
-
-
-
-
+// 🔸time complexity: O(n)
+// 🔸space complexity: O(n)
 
 // 🔴🔴🔴            //❓Question: Min Cost Climbing Stairs
 
-// You are given an integer array cost where cost[i] is the cost of ith step on a staircase. 
+// You are given an integer array cost where cost[i] is the cost of ith step on a staircase.
 // Once you pay the cost, you can either climb one or two steps.
 // You can either start from the step with index 0, or the step with index 1.
 // Return the minimum cost to reach the top of the floor.
@@ -296,14 +278,13 @@
 // - Pay 1 and climb two steps to reach index 9.
 // - Pay 1 and climb one step to reach the top.
 // The total cost is 6.
- 
+
 // Constraints:
 // 2 <= cost.length <= 1000
 // 0 <= cost[i] <= 999
 
-
-//🔴approach: using recusrion
-// Time limit exceeded
+// 🔴approach: using recusrion
+//  Time limit exceeded
 
 // #include<iostream>
 // #include<vector>
@@ -328,7 +309,7 @@
 //     int minCostClimbingStairs(vector<int>& cost) {
 //         int n = cost.size() ;
 //         int ans = min(solve(cost, n-1), solve(cost, n-2)) ;
-//         return ans; 
+//         return ans;
 //     }
 // };
 
@@ -360,20 +341,20 @@
 //     }
 
 //     int minCostClimbingStairs(vector<int>& cost) {
-//         int n = cost.size(); 
+//         int n = cost.size();
 //         //step1:
 //         vector<int> dp(n-1, -1) ;
 //         int ans = min(solve2(cost, n-1, dp), solve2(cost, n-2, dp)) ;
 //         return ans ;
 //     }
 // };
-//🔸time complexity: O(n)
-//🔸space complexity: O(n)         // o(n)+ o(n)
+// 🔸time complexity: O(n)
+// 🔸space complexity: O(n)         // o(n)+ o(n)
 
-//🔴approach using:  Tabulation (bottom-up)
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approach using:  Tabulation (bottom-up)
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // class Solution {
 // public:
@@ -383,55 +364,51 @@
 //         //step2: base case
 //         dp[0] = cost[0] ;
 //         dp[1] = cost[1] ;
-       
+
 //         //step3:
 //         for(int i=2; i<n; i++){
 //             dp[i] = cost[i] +  min(dp[i-1], dp[i-2]) ;
 //         }
-       
+
 //        return min(dp[n-1], dp[n-2]) ;
 //     }
 
 //     int minCostClimbingStairs(vector<int>& cost) {
-//         int n = cost.size(); 
+//         int n = cost.size();
 //         return solve(cost, n) ;
 //     }
 // };
-//🔸time complexity: O(n)
-//🔸space complexity: O(n)
+// 🔸time complexity: O(n)
+// 🔸space complexity: O(n)
 
-
-
-//🔴approach using:  space optimisation (method)
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approach using:  space optimisation (method)
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // class Solution {
 // public:
 //     int solve(vector<int> &cost, int n) {
-       
+
 //         int prev2 = cost[0] ;
 //         int prev1 = cost[1] ;
-       
+
 //         for(int i=2; i<n; i++){
 //             int curr = cost[i] + min(prev1, prev2) ;
 //             prev2 = prev1 ;
 //             prev1 = curr ;
 //         }
-       
+
 //        return min(prev1, prev2) ;
 //     }
 
 //     int minCostClimbingStairs(vector<int>& cost) {
-//         int n = cost.size(); 
+//         int n = cost.size();
 //         return solve(cost, n) ;
 //     }
 // };
-//🔸time complexity: O(n)
-//🔸space complexity: O(1)
-
-
+// 🔸time complexity: O(n)
+// 🔸space complexity: O(1)
 
 // 🔴🔴🔴                //❓Question: Minimum elements
 
@@ -484,14 +461,14 @@
 // 2 1
 // Sample Output 2 :
 // 2
-// 6 
+// 6
 
-//🔴approach: recursion
-//🔸Time limit exceeded
+// 🔴approach: recursion
+// 🔸Time limit exceeded
 
 // #include <iostream>
 // #include<vector>
-// #include<limits.h> 
+// #include<limits.h>
 // using namespace std;
 
 // int solve(vector<int> &num, int x) {
@@ -517,22 +494,21 @@
 // }
 
 // int minimumElements(vector<int> &num, int x)
-// { 
-//   int ans = solve(num, x) ;    
+// {
+//   int ans = solve(num, x) ;
 //   if( ans == INT_MAX) {
 //     return -1;
 //   }
 //  return ans ;
 // }
-//🔸time complexity: Exponential          // bad very bad
-
+// 🔸time complexity: Exponential          // bad very bad
 
 // //🔴approach: recursion + memoization
 // //🔸 Time limit exceeded
 
 // #include <iostream>
 // #include<vector>
-// #include<limits.h> 
+// #include<limits.h>
 // using namespace std;
 
 // int solve(vector<int> &num, int x, vector<int> &dp ) {
@@ -563,7 +539,7 @@
 // }
 
 // int minimumElements(vector<int> &num, int x)
-// { 
+// {
 //   vector<int> dp(x + 1, -1) ;
 //   int ans = solve(num, x, dp) ;
 
@@ -574,15 +550,14 @@
 //      return ans ;
 //   }
 // }
-//🔸time complexity: O(x * n)             // x = amount, n = no of coins
-//🔸space complexity: O(x)
+// 🔸time complexity: O(x * n)             // x = amount, n = no of coins
+// 🔸space complexity: O(x)
 
-
-//🔴approach: Tabulation 
+// 🔴approach: Tabulation
 
 // #include <iostream>
 // #include<vector>
-// #include<limits.h> 
+// #include<limits.h>
 // using namespace std;
 
 // int solve(vector<int> &num, int x) {
@@ -594,7 +569,7 @@
 //     // trying to solve for every amount figure from 1 to x
 //     for(int j=0; j<num.size(); j++) {
 
-//         if( i-num[j] >= 0 && dp[i-num[j]] != INT_MAX){ 
+//         if( i-num[j] >= 0 && dp[i-num[j]] != INT_MAX){
 //            dp[i] = min(dp[i], 1 + dp[i-num[j]]) ;
 //         }
 //     }
@@ -609,15 +584,13 @@
 // }
 
 // int minimumElements(vector<int> &num, int x)
-// { 
+// {
 //   return solve(num, x) ;
 // }
-//🔸time complexity: O(N)
-//🔸space complexity: O(x)
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(x)
 
-
-//🔴🔴🔴               //❓Question: Maximum sum of non-adjacent element
-
+// 🔴🔴🔴               //❓Question: Maximum sum of non-adjacent element
 
 // You are given an array/list of 'N' integers. You are supposed to return the maximum sum of the subsequence with the constraint that no
 //  two elements are adjacent in the given array/list.
@@ -658,11 +631,11 @@
 // In test case 1, out of all the possibilities, if we take the sum of 'ARR[0]', 'ARR[2]' and 'ARR[4]', i.e. 8, it will give the maximum sum of sequence in which no elements are adjacent in the given array/list.
 // In test case 2, out of all the possibilities, if we take the sum of 'ARR[0]', 'ARR[2]', 'ARR[4]', 'ARR[6]' and 'ARR[8]', i.e. 24 so, it will give the maximum sum of sequence in which no elements are adjacent in the given array/list.
 
-//🔴approach: Recusrion 
-//🔸 Time limit exceeeded
-// #include<iostream>
-// #include<vector> 
-// using namespace std;
+// 🔴approach: Recusrion
+// 🔸 Time limit exceeeded
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve(vector<int> &nums, int n){
 //     //base case
@@ -676,7 +649,7 @@
 
 //     int include = solve(nums, n-2)  + nums[n] ;
 //     int exclude = solve(nums, n-2) + 0 ;
-    
+
 //     return max(include, exclude) ;
 // }
 
@@ -686,12 +659,11 @@
 //     return ans ;
 // }
 
-
-//🔴approach: Recusrion  + Memoization
-//🔸 Time limit exceeded
-// #include<iostream>
-// #include<vector> 
-// using namespace std;
+// 🔴approach: Recusrion  + Memoization
+// 🔸 Time limit exceeded
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve(vector<int> &nums, int n, vector<int> &dp) {
 //     //base case
@@ -702,7 +674,7 @@
 //     if(n == 0){
 //         return nums[0] ;
 //     }
-   
+
 //      //step3:
 //     if(dp[n] != -1){
 //         return dp[n] ;
@@ -711,31 +683,29 @@
 //     //step2:
 //     int include = solve(nums, n-2, dp)  + nums[n] ;
 //     int exclude = solve(nums, n-2, dp) + 0 ;
-    
+
 //     dp[n] = max(include, exclude) ;
 //     return dp[n] ;
 // }
 
 // int maximumNonAdjacentSum(vector<int> &nums){
 //     int n = nums.size() ;
-//     vector<int> dp(n, -1) ; 
+//     vector<int> dp(n, -1) ;
 
 //    return solve(nums, n-1, dp) ;
 //    ;
 // }
-//🔸Time complexity: O(n)
-//🔸Space complexity: O(n)        // O(n) + O(n)
+// 🔸Time complexity: O(n)
+// 🔸Space complexity: O(n)        // O(n) + O(n)
 
-
-
-//🔴approach: Tabulation
-//🔸
-// #include<iostream>
-// #include<vector> 
-// using namespace std;
+// 🔴approach: Tabulation
+// 🔸
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve(vector<int> &nums) {
-    
+
 //     int n = nums.size() ;
 //     vector<int> dp(n, 0) ;
 
@@ -744,40 +714,37 @@
 //     for(int i=1; i<n; i++) {
 //         int include = dp[i-2] + nums[i] ;
 //         int exclude = dp[i-1] + 0 ;
-//         dp[i] = max(include, exclude); 
+//         dp[i] = max(include, exclude);
 //     }
 
 //     return dp[n-1];
 // }
 
 // int maximumNonAdjacentSum(vector<int> &nums){
-   
+
 //    return solve(nums) ;
 //    ;
 // }
-//🔸Time complexity: O(n)
-//🔸Space complexity: O(n)
-
-
+// 🔸Time complexity: O(n)
+// 🔸Space complexity: O(n)
 
 // 🔴approach: Space optimisation
 
 // #include<iostream>
-// #include<vector> 
+// #include<vector>
 // using namespace std;
 
 // int solve(vector<int> &nums) {
-    
+
 //     int n = nums.size() ;
 //     int prev2 = 0 ;
 //     int prev1 = nums[0] ;
-
 
 //     for(int i=1; i<n; i++) {
 //         int include = prev2 + nums[i] ;
 //         int exclude = prev1 + 0 ;
 
-//         int ans  = max(include, exclude); 
+//         int ans  = max(include, exclude);
 //         prev2 = prev1 ;
 //         prev1 = ans ;
 //     }
@@ -786,16 +753,14 @@
 // }
 
 // int maximumNonAdjacentSum(vector<int> &nums){
-   
+
 //    return solve(nums) ;
 //    ;
 // }
-//🔸Time complexity: O(n)
-//🔸Space complexity: O(1)
+// 🔸Time complexity: O(n)
+// 🔸Space complexity: O(1)
 
-
-
-//🔴🔴🔴           //❓Question : House robber II
+// 🔴🔴🔴           //❓Question : House robber II
 
 // Mr. x is a professional robber planning to rob houses along a street. Each house has a certain amount of money hidden. All houses
 // along this street are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, adjacent houses have a
@@ -849,24 +814,21 @@
 // 5
 // 3
 
-
 // 🔴 approach: Last question space optimisation (solve function is used)
 // #include<iostream>
 // #include<vector>
 // using namespace std;
 
-
 // long long solve(vector<int> &nums) {
-    
+
 //     long long n = nums.size() ;
 //     long long prev2 = 0 ;
 //     long long prev1 = nums[0] ;
 
-
 //     for(int i=1; i<n; i++) {
 //         long long include = prev2 + nums[i] ;
 //         long long exclude = prev1 + 0 ;
-//         long long ans  = max(include, exclude); 
+//         long long ans  = max(include, exclude);
 //         prev2 = prev1 ;
 //         prev1 = ans ;
 //     }
@@ -896,12 +858,10 @@
 
 //     return max(solve(first), solve(second)) ;
 // }
-//🔸time complexity: O(n)
-//🔸space complexity: O(n)
+// 🔸time complexity: O(n)
+// 🔸space complexity: O(n)
 
-
-
-//🔴🔴🔴          //❓Question: cut into segments
+// 🔴🔴🔴          //❓Question: cut into segments
 
 // You are given an integer 'N' denoting the length of the rod. You need to determine the maximum number of segments you can make of
 // this rod provided that each segment should be of the length 'X', 'Y', or 'Z'.
@@ -917,8 +877,8 @@
 //                7
 //   |=====================|=========
 //   |       5             |  2
-//   |                     | 
-// 
+//   |                     |
+//
 //    ====================
 //           5
 //                      ============
@@ -927,7 +887,7 @@
 //
 // In the first test case, cut it into 2 parts of 5 and 2.
 
-// In the second case, there is no way to cut into segments of 3 length only as the length of the rod is less than the given length. 
+// In the second case, there is no way to cut into segments of 3 length only as the length of the rod is less than the given length.
 // Sample Input 2:
 // 2
 // 7 3 2 2
@@ -940,12 +900,11 @@
 
 // In the second case, cut it into 8 parts of length 1.
 
-
-//🔴approach: Recursion
-//🔸time limit exceeded
-// #include<iostream>
-// #include<limits.h>
-// using namespace std;
+// 🔴approach: Recursion
+// 🔸time limit exceeded
+//  #include<iostream>
+//  #include<limits.h>
+//  using namespace std;
 
 // int solve(int n, int x, int y, int z){
 //     //base case
@@ -975,9 +934,8 @@
 //         return ans ;
 //     }
 // }
-//🔸time complexity: exponential
-//🔸space complexity: exponential
-
+// 🔸time complexity: exponential
+// 🔸space complexity: exponential
 
 // //🔴approach: Recursion + memoization
 
@@ -1013,18 +971,17 @@
 //     vector<int> dp(n+1, -1) ;
 //     int ans = solve(n, x, y, z, dp) ;
 
-//     if(ans < 0){   
+//     if(ans < 0){
 //     return 0 ;
 //     }
 //     else{
 //         return ans ;
 //     }
 // }
-//🔸time complexity:  O(n)
-//🔸space complexity: O(n) + O(n)
+// 🔸time complexity:  O(n)
+// 🔸space complexity: O(n) + O(n)
 
-
-//🔴approach: Tabulation
+// 🔴approach: Tabulation
 
 // #include<iostream>
 // #include<limits.h>
@@ -1056,13 +1013,13 @@
 // }
 
 // int cutSegments(int n, int x, int y, int z) {
-  
+
 //     return solve(n, x, y, z) ;
 // }
-//🔸time complexity: O(n)
-//🔸space complexity: O(n)
+// 🔸time complexity: O(n)
+// 🔸space complexity: O(n)
 
-//🔴approach: Tabulation (without INT_MIN)
+// 🔴approach: Tabulation (without INT_MIN)
 
 // #include<iostream>
 // #include<limits.h>
@@ -1094,15 +1051,13 @@
 // }
 
 // int cutSegments(int n, int x, int y, int z) {
-  
+
 //     return solve(n, x, y, z) ;
 // }
-//🔸time complexity: O(n)
-//🔸space complexity: O(n)
+// 🔸time complexity: O(n)
+// 🔸space complexity: O(n)
 
-
-
-//🔴🔴🔴         //❓Question: COunt derangements
+// 🔴🔴🔴         //❓Question: COunt derangements
 
 // A Derangement is a permutation of 'N' elements, such that no element appears in its original position. For example, an instance of
 //  derangement of {0, 1, 2, 3} is {2, 3, 1, 0} because 2 present at index 0 is not at its initial position which is 2 and similarly for other
@@ -1128,10 +1083,10 @@
 // In test case 2, For three elements say {0, 1, 2}, there are two possible derangements {2, 0, 1} and {1, 2, 0}. In both the derangements, no element is present at its actual position.
 //
 //                  [ n=3 ]
-// 
+//
 //     arr       [ 0 | 1 | 2 ]
 //     index       0   1   2
-//         
+//
 //           possible derangements
 //            /               \ 
 //  [ 2 | 0 | 1]            [ 1 | 2 | 0 ]
@@ -1149,11 +1104,10 @@
 
 // In test case 2, For the array elements = {0, 1, 2, 3}, total 9 derrangements are possible. One of them is: { 3, 2, 1, 0}.
 
-
-//🔴 approach: Recursion
-//🔸time limit exceeded
-// #include<iostream>
-// using namespace std;
+// 🔴 approach: Recursion
+// 🔸time limit exceeded
+//  #include<iostream>
+//  using namespace std;
 
 // #define MOD 1000000007
 
@@ -1168,12 +1122,11 @@
 //     }
 
 //     int ans = ( ((n-1)%MOD )*((countDerangements(n-1)%MOD) + (countDerangements(n-2)%MOD))%MOD ) ;
-   
+
 //    return ans ;
 // }
-//🔸time complexity: exponential
-//🔸space complexity: exponential
-
+// 🔸time complexity: exponential
+// 🔸space complexity: exponential
 
 // //🔴 approach: Recursion + memoization
 // #include<iostream>
@@ -1191,14 +1144,14 @@
 //     if( n == 2){
 //         return 1 ;
 //     }
-     
-//     //step3: 
-//      if( dp[n] != -1) 
+
+//     //step3:
+//      if( dp[n] != -1)
 //      return dp[n] ;
 
 //     //step2:
 //     dp[n] = ( ((n-1)%MOD )*((solve(n-1, dp)%MOD) + (solve(n-2, dp)%MOD))%MOD ) ;
-   
+
 //    return dp[n] ;
 // }
 
@@ -1207,10 +1160,8 @@
 //    vector<long long int> dp(n+1, -1) ;
 //    return solve(n, dp) ;
 // }
-//🔸time complexity: O(n)
-//🔸space complexity: O(n) + O(n)  
-
-
+// 🔸time complexity: O(n)
+// 🔸space complexity: O(n) + O(n)
 
 // //🔴 approach: Tabulation
 // #include<iostream>
@@ -1222,7 +1173,7 @@
 // long long int solve(int n) {
 //   vector<long long int> dp(n+1, 0) ;
 //   dp[1] = 0 ;
-//   dp[2] = 1 ; 
+//   dp[2] = 1 ;
 
 //   for(int i=3; i<=n; i++) {
 //     long long int first = dp[i-1] % MOD ;
@@ -1239,14 +1190,13 @@
 // long long int countDerangements(int n){
 //    return solve(n) ;
 // }
-//🔸time complexity: O(n)
-//🔸space complexity: O(n)   
+// 🔸time complexity: O(n)
+// 🔸space complexity: O(n)
 
-
-//🔴 approach: space optimisation
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴 approach: space optimisation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // #define MOD 1000000007
 
@@ -1264,20 +1214,19 @@
 //     prev2 = prev1 ;
 //     prev1 = ans ;
 //   }
-  
+
 //     return prev1  ;
 // }
 
 // long long int countDerangements(int n){
 //    return solve(n) ;
 // }
-//🔸time complexity: O(n)
-//🔸space complexity: O(1) 
-
+// 🔸time complexity: O(n)
+// 🔸space complexity: O(1)
 
 //                  🔴🔴 Painting Fence Algorithm:
 
-//🔴🔴🔴            //❓Question: Ninja and the fence
+// 🔴🔴🔴            //❓Question: Ninja and the fence
 
 // Ninja has given a fence, and he gave a task to paint this fence. The fence has 'N' posts, and Ninja has 'K' colors. Ninja wants to paint the
 // fence so that not more than two adjacent posts have the same color.
@@ -1306,7 +1255,7 @@
 // 1
 // 6
 // Explanation Of Sample Input 1 :
-// For the first test case, there is only one way to paint the fence. 
+// For the first test case, there is only one way to paint the fence.
 
 // For the second test case, We can paint the fence with 3 posts with the following different combinations.
 // 110
@@ -1324,11 +1273,10 @@
 // 16
 // 10
 
-
-//🔴Approach: Recursion
-//🔸Timelimit exceeded
-// #include<iostream>
-// using namespace std;
+// 🔴Approach: Recursion
+// 🔸Timelimit exceeded
+//  #include<iostream>
+//  using namespace std;
 
 // #define MOD 1000000007
 
@@ -1355,15 +1303,13 @@
 // int numberOfWays(int n, int k) {
 //    return solve(n, k) ;
 // }
-//🔸time complexity: exponential
-//🔸space complexity: exponential
+// 🔸time complexity: exponential
+// 🔸space complexity: exponential
 
-
-
-//🔴Approach: Recursion + memoization
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴Approach: Recursion + memoization
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // #define MOD 1000000007
 // #define LL long long
@@ -1383,7 +1329,7 @@
 
 //     if( n==2)
 //     return add(k, multi(k, k-1)) ;
-     
+
 //     //step3:
 //     if(dp[n] != -1){
 //         return dp[n] ;
@@ -1399,14 +1345,13 @@
 //     vector<int> dp(n+1, -1) ;
 //    return solve(n, k, dp);
 // }
-//🔸time complexity: O(n)
-//🔸space complexity: O(n)+O(N)
+// 🔸time complexity: O(n)
+// 🔸space complexity: O(n)+O(N)
 
-
-//🔴Approach: Tabulation
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴Approach: Tabulation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // #define MOD 1000000007
 // #define LL long long
@@ -1434,9 +1379,8 @@
 // int numberOfWays(int n, int k) {
 //     return solve(n ,k) ;
 // }
-//🔸time complexity: O(N)
-//🔸space complexity: O(N)
-
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(N)
 
 // 🔴Approach: space optimisation
 // #include<iostream>
@@ -1470,19 +1414,16 @@
 // int numberOfWays(int n, int k) {
 //     return solve(n ,k) ;
 // }
-//🔸time complexity: O(N)
-//🔸space complexity: O(1)
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(1)
 
-
-
-//     🔴🔴🔴          2-D  Dynamic Programming              🔴🔴🔴 
-
+//     🔴🔴🔴          2-D  Dynamic Programming              🔴🔴🔴
 
 // .🔴🔴                //❓Question: 0 1 Knapsack
 
-// A thief is robbing a store and can carry a maximal weight of W into his knapsack. 
-// There are N items and the ith item weighs wi and is of  value vi. 
-// Considering the constraints of the maximum weight that a knapsack can carry, 
+// A thief is robbing a store and can carry a maximal weight of W into his knapsack.
+// There are N items and the ith item weighs wi and is of  value vi.
+// Considering the constraints of the maximum weight that a knapsack can carry,
 // you have to find and return the maximum value that a thief can generate by stealing items.
 
 // Constraints:
@@ -1494,7 +1435,7 @@
 //    Time Limit: 1 second
 
 // Sample Input:
-// 1 
+// 1
 // 4
 // 1 2 4 5
 // 5 4 8 6
@@ -1502,27 +1443,27 @@
 // Sample Output:
 // 13
 
-//🔸explanation:
-// 4 items are present 
-// knapsack can carrry weight ==> 5 
-// every item has weight and value 
+// 🔸explanation:
+//  4 items are present
+//  knapsack can carrry weight ==> 5
+//  every item has weight and value
 
-// item   = 1  2  3  4 
-// weight = 1  2  4  5  
+// item   = 1  2  3  4
+// weight = 1  2  4  5
 // value  = 5  4  8  6
 
 // case1:  {5} => value [6]                   // knapsack full value recived 6
 // case2:  {1, 4} => value 8 + 5 => [13]      // knapsack full value recived 13
-// case3:  {1, 2} => value 5 + 4 => [9]       // knapsack is not full but no other 
+// case3:  {1, 2} => value 5 + 4 => [9]       // knapsack is not full but no other
 //                                            // weight can be added further so value received 9
 
 // maximum value can be generated is ==> [13]   for weight {1, 4}
 
-//🔴Approach: Recursion
-//🔸time limit exceeded
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴Approach: Recursion
+// 🔸time limit exceeded
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve(vector<int> &weight, vector<int> &value, int index, int capacity){
 //     //base case
@@ -1535,7 +1476,7 @@
 //             return 0 ;
 //         }
 //     }
-    
+
 //     int include =  0 ;
 //     if(weight[index] <= capacity) {
 //         include = value[index] + solve(weight, value, index-1, capacity - weight[index]) ;
@@ -1551,14 +1492,13 @@
 // int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) {
 //        return solve(weight, value, n-1, maxWeight ) ;
 // }
-//🔸time complexity:  exponential
-//🔸space complexity:  exponential
+// 🔸time complexity:  exponential
+// 🔸space complexity:  exponential
 
-
-//🔴Approach: Recursion + memoization
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴Approach: Recursion + memoization
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve(vector<int> &weight, vector<int> &value, int index, int capacity ,  vector<vector<int>> &dp){
 //     //base case
@@ -1571,12 +1511,12 @@
 //             return 0 ;
 //         }
 //     }
-    
+
 //     //step3:
 //     if(dp[index][capacity] != -1) {
 //         return dp[index][capacity] ;
 //     }
-    
+
 //     int include =  0 ;
 //     if(weight[index] <= capacity) {
 //         include = value[index] + solve(weight, value, index-1, capacity - weight[index], dp) ;
@@ -1589,21 +1529,19 @@
 // }
 
 // int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) {
-//     // changes occuring in two states(index is changing , and capacity is changing in solve function) 
+//     // changes occuring in two states(index is changing , and capacity is changing in solve function)
 //     // therfore using 2d DP
 //     vector<vector<int>> dp(n, vector<int>(maxWeight+1, -1))  ;
 //     return solve(weight, value, n-1, maxWeight, dp) ;
 
 // }
-//🔸time complexity: O(N * maxweight)
-//🔸space complexity: O(N * maxWeight)
+// 🔸time complexity: O(N * maxweight)
+// 🔸space complexity: O(N * maxWeight)
 
-
-
-//🔴Approach: Tabulation
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴Approach: Tabulation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve(vector<int> &weight, vector<int> &value, int n, int capacity ){
 //    //step1: initialise dp
@@ -1627,13 +1565,13 @@
 //            if(weight[index] <= w) {
 //              include = value[index] + dp[index-1][w-weight[index]] ;
 //            }
-         
-//          int exclude = 0 + dp[index-1][w]; 
+
+//          int exclude = 0 + dp[index-1][w];
 
 //          dp[index][w] = max(exclude, include) ;
 //        }
 //    }
-  
+
 //   return dp[n-1][capacity] ;
 // }
 
@@ -1641,17 +1579,16 @@
 
 //     return solve(weight, value, n, maxWeight) ;
 // }
-//🔸time complexity: O(N * maxWeight)
-//🔸space complexity: O(2 * maxWeight)
+// 🔸time complexity: O(N * maxWeight)
+// 🔸space complexity: O(2 * maxWeight)
 
-
-//🔴Approach: Space optimisation
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴Approach: Space optimisation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve(vector<int> &weight, vector<int> &value, int n, int capacity ){
-//    //step1: 
+//    //step1:
 //    vector<int> prev(capacity+1, 0)    ;
 //    vector<int> curr(capacity+1, 0)    ;
 
@@ -1673,14 +1610,14 @@
 //            if(weight[index] <= w) {
 //              include = value[index] + prev[w-weight[index]] ;
 //            }
-         
-//          int exclude = 0 + prev[w]; 
+
+//          int exclude = 0 + prev[w];
 
 //         curr[w] = max(exclude, include) ;
 //        }
 //        prev = curr ;
 //    }
-  
+
 //   return prev[capacity] ;
 // }
 
@@ -1688,17 +1625,16 @@
 
 //     return solve(weight, value, n, maxWeight) ;
 // }
-//🔸time complexity: O(N * maxWeight)
-//🔸space complexity: O(N)
+// 🔸time complexity: O(N * maxWeight)
+// 🔸space complexity: O(N)
 
-
-//🔴Approach: More optimisation
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴Approach: More optimisation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve(vector<int> &weight, vector<int> &value, int n, int capacity ){
-//    //step1: 
+//    //step1:
 //    vector<int> curr(capacity+1, 0)    ;
 
 //    //step2: analyse base case
@@ -1719,13 +1655,13 @@
 //            if(weight[index] <= w) {
 //              include = value[index] + curr[w-weight[index]] ;
 //            }
-         
-//          int exclude = 0 + curr[w]; 
+
+//          int exclude = 0 + curr[w];
 
 //         curr[w] = max(exclude, include) ;
 //        }
 //    }
-  
+
 //   return curr[capacity] ;
 // }
 
@@ -1733,10 +1669,8 @@
 
 //     return solve(weight, value, n, maxWeight) ;
 // }
-//🔸time complexity: O(N * maxWeight)
-//🔸space complexity: O(N)
-
-
+// 🔸time complexity: O(N * maxWeight)
+// 🔸space complexity: O(N)
 
 // 🔴🔴                //?Question: Combination Sum IV
 
@@ -1803,11 +1737,11 @@
 // 3
 // 0
 
-//🔴Approach: Recursion
-//🔸 Time limit exceeded
-// #include<iostream>
-// #include<vector>
-// using namespace std ;
+// 🔴Approach: Recursion
+// 🔸 Time limit exceeded
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std ;
 
 // int solve(vector<int> &num, int tar){
 //     //base case
@@ -1830,14 +1764,13 @@
 // int findWays(vector<int> &num, int tar) {
 //     return solve(num ,tar) ;
 // }
-//🔸Time complexity: exponential
-//🔸space complexity: exponential
+// 🔸Time complexity: exponential
+// 🔸space complexity: exponential
 
-
-//🔴Approach: Recursion + memoization
-// #include<iostream>
-// #include<vector>
-// using namespace std ;
+// 🔴Approach: Recursion + memoization
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std ;
 
 // int solve(vector<int> &num, int tar, vector<int> &dp){
 //     //base case
@@ -1849,17 +1782,17 @@
 //         return 1 ;
 //     }
 
-//    //step2: 
+//    //step2:
 //    if(dp[tar] != -1){
 //       return dp[tar] ;
 //    }
-  
+
 //   //step3:
 //     int ans = 0 ;
 //     for(int i=0; i<=num.size(); i++){
 //        ans += solve(num, tar - num[i], dp) ;
 //     }
-    
+
 //     dp[tar] = ans ;
 //     return dp[tar] ;
 // }
@@ -1870,14 +1803,13 @@
 
 //     return solve(num ,tar, dp) ;
 // }
-//🔸Time complexity: O(Target)
-//🔸space complexity: O(n)
+// 🔸Time complexity: O(Target)
+// 🔸space complexity: O(n)
 
-
-//🔴Approach: Tabulation
-// #include<iostream>
-// #include<vector>
-// using namespace std ;
+// 🔴Approach: Tabulation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std ;
 
 // int solve(vector<int> &num, int tar){
 //     vector<int> dp(tar+1, 0) ;
@@ -1900,18 +1832,15 @@
 // int findWays(vector<int> &num, int tar) {
 //     return solve(num ,tar) ;
 // }
-//🔸Time complexity: O( N * M)             // (tar * num)
-//🔸space complexity: O(n) ;
+// 🔸Time complexity: O( N * M)             // (tar * num)
+// 🔸space complexity: O(n) ;
 
+// 🔴🔴🔴           //❓Question: Get Minimum Square
 
-
-
-//🔴🔴🔴           //❓Question: Get Minimum Square
-
-// Given a number N. Find the minimum number of squares of any number that sums to N. 
+// Given a number N. Find the minimum number of squares of any number that sums to N.
 // For Example: If N = 100 , N can be expressed as (10*10) and also as (5*5 + 5*5 + 5*5 + 5*5)
 //  but the output will be 1 as minimum number of square is 1 , i.e (10*10).
- 
+
 //  Constraints:
 // 1 <= N <= 10000
 
@@ -1920,27 +1849,26 @@
 // Output: 1
 // Explanation: 10 * 10 = 100
 
-
 // Example 2:
 // Input: N = 6
 // Output: 3
 // Explanation = 1 * 1 + 1 * 1 + 2 * 2 = 6
 
-//🔴approach:  Recursion
-//🔸 Time limit exceeded
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approach:  Recursion
+// 🔸 Time limit exceeded
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // class solution{
 //     public:
-    
+
 //     int solve(int n){
 //         //base case
 //         if( n == 0){
 //             return 0;
 //         }
-        
+
 //         int ans = n ;
 //         for(int i=1; i*i <= n; i++) {
 //             int temp = i*i ;
@@ -1953,19 +1881,17 @@
 //         return solve(n) ;
 //     }
 // };
-//🔸time complexity: exponential
-//🔸space complexity: exponential
+// 🔸time complexity: exponential
+// 🔸space complexity: exponential
 
-
-
-//🔴approach:  Recursion + Memoization
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approach:  Recursion + Memoization
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // class solution{
 //     public:
-    
+
 //     int solve(int n, vector<int> &dp){
 //         //base case
 //         if( n == 0){
@@ -1992,9 +1918,8 @@
 //         return solve(n, dp) ;
 //     }
 // };
-//🔸time complexity: O(N)
-//🔸space complexity: O(N)
-
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(N)
 
 // //🔴approach:  Tabulation
 // #include<iostream>
@@ -2004,7 +1929,7 @@
 
 // class solution{
 //     public:
-    
+
 //     int solve(int n){
 //        vector<int> dp(n+1, INT_MAX) ;
 //        dp[0] = 0 ;
@@ -2024,13 +1949,10 @@
 //         return solve(n) ;
 //     }
 // };
-//🔸time complexity: O(n^2)
-//🔸space complexity: O(N)
+// 🔸time complexity: O(n^2)
+// 🔸space complexity: O(N)
 
-
-
-
-//🔴🔴🔴             //❓Question: Minimum Cost for Tickets(leetcode)  / Ninjas's Trip(coding ninjas)
+// 🔴🔴🔴             //❓Question: Minimum Cost for Tickets(leetcode)  / Ninjas's Trip(coding ninjas)
 
 // Ninja Is Willing To Take Some Time Off From His Training And Planning A Year-Long Tour.
 // You Are Given A DAYS Array Consisting Of 'N' Days When Ninjas Will Be Traveling During The Year. Each Day Is An Integer
@@ -2051,12 +1973,11 @@
 //    1 <= DAYS[i] <= 365
 //    Time Limit: 1 sec
 
-
 // Sample Input 1:
 // 2
-// 2 
+// 2
 // 2 5
-// 1 4 25    
+// 1 4 25
 // 7
 // 1 3 4 5 7 8 10
 // 2 7 20
@@ -2064,7 +1985,7 @@
 // 2
 // 11
 // Explanation For Sample Input 1:
-// For the first test case, 
+// For the first test case,
 // On Day 2, Ninja will buy a 1-day pass with 1 coin.
 // On Day 5, Ninja will buy a 1-day pass with 1 coin.
 // In total, Ninja will spend 2 coins. Hence the answer is 2.
@@ -2081,11 +2002,10 @@
 // 2 7 15
 // 12
 // 1 2 3 4 5 6 7 8 9 10 30 31
-// 2 7 15 
+// 2 7 15
 // Sample Output 2:
 // 11
 // 17
-
 
 // //🔴Approach : Recursion
 // #include<iostream>
@@ -2104,15 +2024,13 @@
 //     int i ;
 //     // 7 day pass :
 //     for(i = index; i<n && days[i] < days[index] + 7; i++) ;
-        
+
 //         int option2 = cost[1] + solve(n, days, cost, i) ;
-    
 
 //    // 30 day pass :
 //     for(i = index; i<n && days[i] < days[index] + 30; i++) ;
-        
-//         int option3 = cost[2] + solve(n, days, cost, i) ;
 
+//         int option3 = cost[2] + solve(n, days, cost, i) ;
 
 //     return min(option1, min(option2, option3));
 
@@ -2124,12 +2042,10 @@
 // //🔸time complexity: exponential
 // //🔸space complexity: exponential
 
-
-//🔴Approach : Recursion + Memoisation (Top-Down)
-// #include<iostream>
-// #include<vector>
-// using namespace std;
-
+// 🔴Approach : Recursion + Memoisation (Top-Down)
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve(int n, vector<int> &days, vector<int> &cost, int index, vector<int> &dp) {
 //     //base case
@@ -2137,7 +2053,7 @@
 //         return 0 ;
 //     }
 
-//     //step2: 
+//     //step2:
 //     if(dp[index] != -1){
 //         return dp[index] ;
 //     }
@@ -2148,15 +2064,13 @@
 //     int i ;
 //     // 7 day pass :
 //     for(i = index; i<n && days[i] < days[index] + 7; i++) ;
-        
+
 //         int option2 = cost[1] + solve(n, days, cost, i, dp) ;
-    
 
 //    // 30 day pass :
 //     for(i = index; i<n && days[i] < days[index] + 30; i++) ;
-        
-//         int option3 = cost[2] + solve(n, days, cost, i, dp) ;
 
+//         int option3 = cost[2] + solve(n, days, cost, i, dp) ;
 
 //     dp[index] = min(option1, min(option2, option3));
 //     return dp[index] ;
@@ -2166,16 +2080,14 @@
 //     vector<int> dp(n+1, -1) ;
 //     return solve(n, days, cost, 0, dp) ;
 // }
-//🔸time complexity: O(1)            // O(index) == index = O(365) ==> O(1)
-//🔸space complexity: O(n)
+// 🔸time complexity: O(1)            // O(index) == index = O(365) ==> O(1)
+// 🔸space complexity: O(n)
 
-
-
-//🔴Approach : Tabulation (Bottom up)
-// #include<iostream>
-// #include<vector>
-// #include<limits.h>
-// using namespace std;
+// 🔴Approach : Tabulation (Bottom up)
+//  #include<iostream>
+//  #include<vector>
+//  #include<limits.h>
+//  using namespace std;
 
 // int solve(int n, vector<int> &days, vector<int> &cost) {
 //     vector<int> dp(n+1, INT_MAX) ;
@@ -2189,13 +2101,12 @@
 //     int i ;
 //     // 7 day pass :
 //     for(i = k; i<n && days[i] < days[k] + 7; i++) ;
-        
+
 //     int option2 = cost[1] + dp[i] ;
-    
 
 //    // 30 day pass :
 //     for(i = k; i<n && days[i] < days[k] + 30; i++) ;
-        
+
 //     int option3 = cost[2] + dp[i] ;
 
 //     dp[k] = min(option1, min(option2, option3));
@@ -2208,34 +2119,31 @@
 // int minimumCoins(int n, vector<int> days, vector<int> cost){
 //     return solve(n, days, cost) ;
 // }
-//🔸time complexity: O(N)
-//🔸space complexity: O(N)
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(N)
 
-
-
-
-//🔴Approach : Space Optimisation
-// #include<iostream>
-// #include<vector>
-// #include<queue>
-// using namespace std;
+// 🔴Approach : Space Optimisation
+//  #include<iostream>
+//  #include<vector>
+//  #include<queue>
+//  using namespace std;
 
 // int minimumCoins(int n, vector<int> days, vector<int> cost){
 //     int ans  = 0 ;
-    
+
 //     queue<pair<int,int>> month ;
 //     queue<pair<int,int>> week ;
 
 //     for(int day:days) {
 
 //         //step1: remove expired days
-//         while(!month.empty() && month.front().first + 30 <= day) 
+//         while(!month.empty() && month.front().first + 30 <= day)
 //           month.pop() ;
 
-//         while(!week.empty() && week.front().first + 7 <= day) 
+//         while(!week.empty() && week.front().first + 7 <= day)
 //           week.pop() ;
 
-//         //step2: add cost for current day 
+//         //step2: add cost for current day
 //         week.push(make_pair(day, ans+cost[1])) ;
 //         month.push(make_pair(day, ans+cost[2])) ;
 
@@ -2244,50 +2152,47 @@
 //     }
 //         return ans ;
 // }
-//🔸time complexity: O(N)
-//🔸space complexity: O(1)
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(1)
 
-
-
-//                   //❓Question: Largest square formed in a matrix 
+//                   //❓Question: Largest square formed in a matrix
 
 // Given a binary matrix mat of size n * m, find out the maximum size square sub-matrix with all 1s.
 
 // Example 1:
 // Input: n = 2, m = 2
-// mat = {{1, 1}, 
+// mat = {{1, 1},
 //        {1, 1}}
 // Output: 2
 // Explaination: The maximum size of the square
-// sub-matrix is 2. The matrix itself is the 
+// sub-matrix is 2. The matrix itself is the
 // maximum sized sub-matrix in this case.
 
 // Example 2:
 // Input: n = 2, m = 2
-// mat = {{0, 0}, 
+// mat = {{0, 0},
 //        {0, 0}}
 // Output: 0
 // Explaination: There is no 1 in the matrix.
 
-
-//🔴approach 1: Recursion
-//🔸Time limit exceeded
-// #include<iostream>
-// #include<vector>
-// using namespace std ;
+// 🔴approach 1: Recursion
+// 🔸Time limit exceeded
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std ;
 
 // int solve(vector<vector<int>> &mat, int i, int j, int &maxi) {
 //     //base case (if row or col are out of bound)
 //     if( i >= mat.size() || j >= mat[0].size()) {
 //         return 0 ;
 //     }
-    
+
 //     int right = solve(mat, i, j+1, maxi) ;
 //     int diagonal = solve(mat, i+1, j+1, maxi) ;
 //     int down = solve(mat, i+1, j, maxi) ;
 
 //     if( mat[i][j] == 1) {
-//         int ans = 1 + min(right, min(diagonal, down)); 
+//         int ans = 1 + min(right, min(diagonal, down));
 //         maxi = max(maxi, ans) ;
 //         return ans;
 //     }
@@ -2302,34 +2207,32 @@
 //     solve(mat, 0, 0, maxi) ;
 //     return maxi ;
 // }
-//🔸Time complexity: exponential
-//🔸space complexity: exponential
+// 🔸Time complexity: exponential
+// 🔸space complexity: exponential
 
-
-
-//🔴approach : Recursion + Memoization
-// #include<iostream>
-// #include<vector>
-// using namespace std ;
+// 🔴approach : Recursion + Memoization
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std ;
 
 // int solve(vector<vector<int>> &mat, int i, int j,vector<vector<int>> &dp,  int &maxi) {
 //     //base case (if row or col are out of bound)
 //     if( i >= mat.size() || j >= mat[0].size()) {
 //         return 0 ;
 //     }
-    
+
 //     //step2:
 //     if(dp[i][j] != -1) {
 //         return dp[i][j] ;
 //     }
 
-//     //step3: 
+//     //step3:
 //     int right = solve(mat, i, j+1, dp, maxi) ;
 //     int diagonal = solve(mat, i+1, j+1, dp, maxi) ;
 //     int down = solve(mat, i+1, j, dp, maxi) ;
 
 //     if( mat[i][j] == 1) {
-//         dp[i][j] = 1 + min(right, min(diagonal, down)); 
+//         dp[i][j] = 1 + min(right, min(diagonal, down));
 //         maxi = max(maxi, dp[i][j]) ;
 //         return dp[i][j];
 //     }
@@ -2345,14 +2248,13 @@
 //     solve(mat, 0, 0, dp, maxi) ;
 //     return maxi ;
 // }
-//🔸Time complexity: O(m*n)
-//🔸space complexity: O(M*N)
+// 🔸Time complexity: O(m*n)
+// 🔸space complexity: O(M*N)
 
-
-//🔴approach : Tabulation
-// #include<iostream>
-// #include<vector>
-// using namespace std ;
+// 🔴approach : Tabulation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std ;
 
 // int solve(vector<vector<int>> &mat, int &maxi) {
 //     int row = mat.size();
@@ -2361,11 +2263,11 @@
 
 //     for(int i=row-1; i>=0; i--) {
 //         for(int j=col-1; j>=0; j--){
-            
+
 //             int right = dp[i][j+1];
 //             int diagonal = dp[i+1][j+1] ;
 //             int down = dp[i+1][j] ;
-           
+
 //             if(mat[i][j] == 1) {
 //                 dp[i][j] = 1 + min(right, min(diagonal, down)) ;
 //                 maxi = max(maxi, dp[i][j]) ;
@@ -2384,15 +2286,13 @@
 //     solve(mat, maxi) ;
 //     return maxi ;
 // }
-//🔸Time complexity: O(m*n)
-//🔸space complexity: O(m*n)
+// 🔸Time complexity: O(m*n)
+// 🔸space complexity: O(m*n)
 
-
-
-//🔴approach : Space Optimisation
-// #include<iostream>
-// #include<vector>
-// using namespace std ;
+// 🔴approach : Space Optimisation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std ;
 
 // int solve(vector<vector<int>> &mat, int &maxi) {
 
@@ -2402,14 +2302,13 @@
 //     vector<int> curr(col+1, 0) ;
 //     vector<int> next(col+1, 0) ;
 
-
 //     for(int i=row-1; i>=0; i--) {
 //         for(int j=col-1; j>=0; j--){
-            
+
 //             int right = curr[j+1];
 //             int diagonal = next[j+1] ;
 //             int down = next[j] ;
-           
+
 //             if(mat[i][j] == 1) {
 //                 curr[j] = 1 + min(right, min(diagonal, down)) ;
 //                 maxi = max(maxi, curr[j]) ;
@@ -2430,16 +2329,15 @@
 //     solve(mat, maxi) ;
 //     return maxi ;
 // }
-//🔸Time complexity: O(m*n)
-//🔸space complexity: O(m)
-
+// 🔸Time complexity: O(m*n)
+// 🔸space complexity: O(m)
 
 //                  //❓ Question: 1039. Minimum Score Triangulation of Polygon
 
-// You have a convex n-sided polygon where each vertex has an integer value. 
+// You have a convex n-sided polygon where each vertex has an integer value.
 // You are given an integer array values where values[i] is the value of the ith vertex (i.e., clockwise order).
 // You will triangulate the polygon into n - 2 triangles.
-// For each triangle, the value of that triangle is the product of the values of its vertices, 
+// For each triangle, the value of that triangle is the product of the values of its vertices,
 // and the total score of the triangulation is the sum of these values over all n - 2 triangles in the triangulation.
 // Return the smallest possible total score that you can achieve with some triangulation of the polygon.
 
@@ -2456,25 +2354,24 @@
 
 // Example 2:
 //        3 __________ 7             3  __________ 7
-//         |        / |                | \        |    
-//         |      /   |                |   \      |    
-//         |    /     |                |     \    |    
-//         |  /       |                |       \  |    
+//         |        / |                | \        |
+//         |      /   |                |   \      |
+//         |    /     |                |     \    |
+//         |  /       |                |       \  |
 //       5 |/_________| 4            5 |_________\| 4
 //
-
 
 // Input: values = [3,7,4,5]
 // Output: 144
 // Explanation: There are two triangulations, with possible scores: 3*7*5 + 4*5*7 = 245, or 3*4*5 + 3*4*7 = 144.
 // The minimum score is 144.
 
-//🔴approach : Recursion:
-//🔸time limit exceeded
-// #include<iostream>
-// #include<vector>
-// #include<limits.h>
-// using namespace std; 
+// 🔴approach : Recursion:
+// 🔸time limit exceeded
+//  #include<iostream>
+//  #include<vector>
+//  #include<limits.h>
+//  using namespace std;
 
 // int solve(vector<int> &v, int i, int j) {
 //     //base case
@@ -2495,15 +2392,14 @@
 //     int n = values.size() ;
 //     return solve(values, 0, n-1) ;
 // }
-//🔸time complexity: exponential 
-//🔸space complexity: exponential 
+// 🔸time complexity: exponential
+// 🔸space complexity: exponential
 
-
-//🔴approach : Recursion + memoization (top-bottom)
-// #include<iostream>
-// #include<vector>
-// #include<limits.h>
-// using namespace std; 
+// 🔴approach : Recursion + memoization (top-bottom)
+//  #include<iostream>
+//  #include<vector>
+//  #include<limits.h>
+//  using namespace std;
 
 // int solve(vector<int> &v, int i, int j, vector<vector<int>> &dp) {
 //     //base case
@@ -2519,7 +2415,7 @@
 //     for(int k = i+1; k<j; k++) {
 //       ans = min(ans, (v[i]*v[j]*v[k] + solve(v, i, k, dp) + solve(v, k, j, dp))) ;
 //     }
-    
+
 //     dp[i][j] = ans;
 //     return dp[i][j] ;
 // }
@@ -2529,15 +2425,14 @@
 //    vector<vector<int>> dp(n, vector<int> (n, -1)) ;
 //     return solve(values, 0, n-1, dp) ;
 // }
-//🔸time complexity: O(n^3)
-//🔸space complexity: O(n^2)
+// 🔸time complexity: O(n^3)
+// 🔸space complexity: O(n^2)
 
-
-//🔴approach : Tabulation (Bottom-up) 
-// #include<iostream>
-// #include<vector>
-// #include<limits.h>
-// using namespace std; 
+// 🔴approach : Tabulation (Bottom-up)
+//  #include<iostream>
+//  #include<vector>
+//  #include<limits.h>
+//  using namespace std;
 
 // int solve(vector<int> &v) {
 //     int n = v.size() ;
@@ -2561,34 +2456,32 @@
 // {
 //     return solve(values) ;
 // }
-//🔸time complexity: O(n^3)
-//🔸space complexity: O(n^2)
-
-
+// 🔸time complexity: O(n^3)
+// 🔸space complexity: O(n^2)
 
 //                      //🔴🔴Catalan Numbers:
 
-// Important topic to know how many traingle can be form by given polygon 
+// Important topic to know how many traingle can be form by given polygon
 // for above question
 
-// Catalan numbers are defined as a mathematical sequence that consists of positive integers, 
-// which can be used to find the number of possibilities of various combinations. 
-// The nth term in the sequence denoted Cn, 
-//is found in the following formula:  (2n)! / ((n+1)!n!)             
+// Catalan numbers are defined as a mathematical sequence that consists of positive integers,
+// which can be used to find the number of possibilities of various combinations.
+// The nth term in the sequence denoted Cn,
+// is found in the following formula:  (2n)! / ((n+1)!n!)
 
-// The first few Catalan numbers for n = 0, 1, 2, 3, … are : 1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, …  
-//ex:
+// The first few Catalan numbers for n = 0, 1, 2, 3, … are : 1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, …
+// ex:
 //          / \ 
-//         /   \          ==> 1 triangle can be formed     
+//         /   \          ==> 1 triangle can be formed
 //        /     \  
 //       /_______\ 
 
-//          __________         __________ 
-//         |        / |       | \        |    
-//         |      /   |       |   \      |    
-//         |    /     |       |     \    |   ==> in both given polygon 2 triangles can be formed    
-//         |  /       |       |       \  |    
-//         |/_________|       |_________\| 
+//          __________         __________
+//         |        / |       | \        |
+//         |      /   |       |   \      |
+//         |    /     |       |     \    |   ==> in both given polygon 2 triangles can be formed
+//         |  /       |       |       \  |
+//         |/_________|       |_________\|
 //
 
 //             / \ 
@@ -2597,7 +2490,6 @@
 //          |       |          ==> 5 triangles can be formed
 //          |       |
 //          |_______|
-
 
 //             / \ 
 //            /   \ 
@@ -2611,38 +2503,38 @@
 
 // Catalan numbers for n = 0, 1, 2, 3, 4 , 5   ==> : 1, 1, 2, 5, 14
 
-//🔴 Catalan numbers occur in many interesting counting problems like the following.
-//🔸Count the number of expressions containing n pairs of parentheses that are correctly matched. For n = 3, possible expressions are ((())), ()(()), ()()(), (())(), (()()).
-//🔸Count the number of possible Binary Search Trees with n keys (See this)
-//🔸Count the number of full binary trees (A rooted binary tree is full if every vertex has either two children or no children) with n+1 leaves.
-//🔸Given a number n, return the number of ways you can draw n chords in a circle with 2 x n points such that no 2 chords intersect.
+// 🔴 Catalan numbers occur in many interesting counting problems like the following.
+// 🔸Count the number of expressions containing n pairs of parentheses that are correctly matched. For n = 3, possible expressions are ((())), ()(()), ()()(), (())(), (()()).
+// 🔸Count the number of possible Binary Search Trees with n keys (See this)
+// 🔸Count the number of full binary trees (A rooted binary tree is full if every vertex has either two children or no children) with n+1 leaves.
+// 🔸Given a number n, return the number of ways you can draw n chords in a circle with 2 x n points such that no 2 chords intersect.
 
-//🔴 Follow the steps below to implement the above recursive formula
-//🔸Base condition for the recursive approach, when n <= 1, return 1
-//🔸Iterate from i = 0 to i < n
-//🔸Make a recursive call catalan(i) and catalan(n – i – 1) and keep adding the product of both into res.
-//🔸Return the res
+// 🔴 Follow the steps below to implement the above recursive formula
+// 🔸Base condition for the recursive approach, when n <= 1, return 1
+// 🔸Iterate from i = 0 to i < n
+// 🔸Make a recursive call catalan(i) and catalan(n – i – 1) and keep adding the product of both into res.
+// 🔸Return the res
 
-//🔴Implementation :
-// #include <iostream>
-// using namespace std;
- 
+// 🔴Implementation :
+//  #include <iostream>
+//  using namespace std;
+
 // // A recursive function to find nth catalan number
 // unsigned long int catalan(unsigned int n)
 // {
 //     // Base case
 //     if (n <= 1)
 //         return 1;
- 
+
 //     // catalan(n) is sum of
 //     // catalan(i)*catalan(n-i-1)
 //     unsigned long int res = 0;
 //     for (int i = 0; i < n; i++)
 //         res += catalan(i) * catalan(n - i - 1);
- 
+
 //     return res;
 // }
- 
+
 // // Driver code
 // int main()
 // {
@@ -2651,60 +2543,58 @@
 //     return 0;
 // }
 
-//🔸Output :
-// 1 1 2 5 14 42 132 429 1430 4862 
+// 🔸Output :
+//  1 1 2 5 14 42 132 429 1430 4862
 
+// 🔴🔴                //❓Question: 1824. Minimum Sideway Jumps  (HARD)
 
-
-//🔴🔴                //❓Question: 1824. Minimum Sideway Jumps  (HARD)
-
-// There is a 3 lane road of length n that consists of n + 1 points labeled from 0 to n. 
-// A frog starts at point 0 in the second lane and wants to jump to point n. 
+// There is a 3 lane road of length n that consists of n + 1 points labeled from 0 to n.
+// A frog starts at point 0 in the second lane and wants to jump to point n.
 // However, there could be obstacles along the way.
 
 // You are given an array obstacles of length n + 1 where each obstacles[i] (ranging from 0 to 3)
-// describes an obstacle on the lane obstacles[i] at point i. 
-// If obstacles[i] == 0, there are no obstacles at point i. 
+// describes an obstacle on the lane obstacles[i] at point i.
+// If obstacles[i] == 0, there are no obstacles at point i.
 // There will be at most one obstacle in the 3 lanes at each point.
 
 // For example, if obstacles[2] == 1, then there is an obstacle on lane 1 at point 2.
-// The frog can only travel from point i to point i + 1 on the same lane 
-// if there is not an obstacle on the lane at point i + 1. To avoid obstacles, 
+// The frog can only travel from point i to point i + 1 on the same lane
+// if there is not an obstacle on the lane at point i + 1. To avoid obstacles,
 // the frog can also perform a side jump to jump to another lane (even if they are not adjacent)
 //  at the same point if there is no obstacle on the new lane.
 
 // For example, the frog can jump from lane 3 at point 3 to lane 1 at point 3.
-// Return the minimum number of side jumps the frog needs to reach any lane 
+// Return the minimum number of side jumps the frog needs to reach any lane
 // at point n starting from lane 2 at point 0.
 
 // Note: There will be no obstacles on points 0 and n.
 
-//🔸example 1: 
-// lane1  ___________________________________
-//           [stone]            ^______>_____>             
-// lane2  ----------------------|------------
-//         [frog] ----->|    [stone]         
-// lane3  --------------|       |------------
-//                      |______>|    [stone]
-//        _____________________________________
-// 0              1       2      3     4
+// 🔸example 1:
+//  lane1  ___________________________________
+//            [stone]            ^______>_____>
+//  lane2  ----------------------|------------
+//          [frog] ----->|    [stone]
+//  lane3  --------------|       |------------
+//                       |______>|    [stone]
+//         _____________________________________
+//  0              1       2      3     4
 
 // Input: obstacles = [0,1,2,3,0]
-// Output: 2 
-// Explanation: The optimal solution is shown by the arrows above. 
+// Output: 2
+// Explanation: The optimal solution is shown by the arrows above.
 // There are 2 side jumps (red arrows).
 // Note that the frog can jump over obstacles only when making side jumps
 //  (as shown at point 2).
 
-//🔸exmaple 2:
-// lane1  ______________________________________________
-//                [stone]   [stone]
-// lane2  ----------------------------------------------
-//         [frog] ------>------->------>------------->
-// lane3  ----------------------------------------------
-//                                   [stone]  [stone]
-//       ________________________________________________
-// 0          1          2         3       4      5
+// 🔸exmaple 2:
+//  lane1  ______________________________________________
+//                 [stone]   [stone]
+//  lane2  ----------------------------------------------
+//          [frog] ------>------->------>------------->
+//  lane3  ----------------------------------------------
+//                                    [stone]  [stone]
+//        ________________________________________________
+//  0          1          2         3       4      5
 
 // Input: obstacles = [0,1,1,3,3,0]
 // Output: 0
@@ -2716,12 +2606,12 @@
 // 0 <= obstacles[i] <= 3
 // obstacles[0] == obstacles[n] == 0
 
-//🔴appraoch : Recursion
-// TIME lIMIT EXCEEDED 
-// #include<iostream>
-// #include<vector>
-// #include<limits.h>
-// using namespace std;
+// 🔴appraoch : Recursion
+//  TIME lIMIT EXCEEDED
+//  #include<iostream>
+//  #include<vector>
+//  #include<limits.h>
+//  using namespace std;
 
 // int solve(vector<int> &obstacles, int currlane, int currpos) {
 //     int n = obstacles.size() - 1;
@@ -2735,8 +2625,8 @@
 //         return solve(obstacles, currlane, currpos+1) ;
 //     }
 //     else{
-//         // else go sideways 
-//         int ans = INT_MAX;                 // for case: if cannot go further but, can go both sideways, lane1 and lane3 as well 
+//         // else go sideways
+//         int ans = INT_MAX;                 // for case: if cannot go further but, can go both sideways, lane1 and lane3 as well
 //         for(int i=1; i<=3; i++) {          //   then to decide which side to go we will go to the minimum side, ans = min
 //             if(currlane != i && obstacles[currpos] != i)
 //             ans = min(ans, 1+solve(obstacles, i, currpos)) ;
@@ -2748,15 +2638,14 @@
 // int minSidejumps(vector<int> &obstacles) {
 //     return solve(obstacles, 2, 0) ;
 // }
-//🔸time complexity: exponential
-//🔸space complexity: exponential
+// 🔸time complexity: exponential
+// 🔸space complexity: exponential
 
-
-//🔴appraoch : Recursion +Memoization
-// #include<iostream>
-// #include<vector>
-// #include<limits.h>
-// using namespace std;
+// 🔴appraoch : Recursion +Memoization
+//  #include<iostream>
+//  #include<vector>
+//  #include<limits.h>
+//  using namespace std;
 
 // int solve(vector<int> &obstacles, int currlane, int currpos, vector<vector<int>> &dp) {
 //     int n = obstacles.size() - 1;
@@ -2773,8 +2662,8 @@
 //         return solve(obstacles, currlane, currpos+1, dp) ;
 //     }
 //     else{
-//         int ans = INT_MAX;                 
-//         for(int i=1; i<=3; i++) {          
+//         int ans = INT_MAX;
+//         for(int i=1; i<=3; i++) {
 //             if(currlane != i && obstacles[currpos] != i)
 //             ans = min(ans, 1+solve(obstacles, i, currpos, dp)) ;
 //         }
@@ -2789,20 +2678,19 @@
 
 //     return solve(obstacles, 2, 0, dp) ;
 // }
-//🔸time complexity: O(n)
-//🔸space complexity: O(4 * n)
+// 🔸time complexity: O(n)
+// 🔸space complexity: O(4 * n)
 
-
-//🔴appraoch : Tabulation
-// #include<iostream>
-// #include<vector>
-// #include<limits.h>
-// using namespace std;
+// 🔴appraoch : Tabulation
+//  #include<iostream>
+//  #include<vector>
+//  #include<limits.h>
+//  using namespace std;
 
 // int solve(vector<int> &obstacles) {
 //     int n = obstacles.size() -1 ;
 //     vector<vector<int>> dp(4, vector<int>(obstacles.size(), 1e9)) ;  // to tackle integer overflow error
-    
+
 //     dp[0][n] = 0;
 //     dp[1][n] = 0;
 //     dp[2][n] = 0;
@@ -2831,20 +2719,18 @@
 // int minSidejumps(vector<int> &obstacles) {
 //     return solve(obstacles) ;
 // }
-//🔸time complexity: O(n)                     // O(3 * 3*n)
-//🔸space complexity: O(4 * n)
+// 🔸time complexity: O(n)                     // O(3 * 3*n)
+// 🔸space complexity: O(4 * n)
 
-
-
-//🔴appraoch : space optimisation
-// #include<iostream>
-// #include<vector>
-// #include<limits.h>
-// using namespace std;
+// 🔴appraoch : space optimisation
+//  #include<iostream>
+//  #include<vector>
+//  #include<limits.h>
+//  using namespace std;
 
 // int solve(vector<int> &obstacles) {
 //     int n = obstacles.size() -1 ;
-    
+
 //     vector<int> curr(4, INT_MAX) ;
 //     vector<int> next(4, INT_MAX) ;
 
@@ -2857,7 +2743,7 @@
 //         for(int currlane = 1; currlane<=3; currlane++) {
 
 //             if(obstacles[currpos + 1] != currlane) {
-//                 curr[currlane] = next[currlane] ; 
+//                 curr[currlane] = next[currlane] ;
 //             }
 //             else{
 //                 int ans = 1e9;                 // to tackle integer overflow error
@@ -2877,15 +2763,13 @@
 // int minSidejumps(vector<int> &obstacles) {
 //     return solve(obstacles) ;
 // }
-//🔸time complexity:  O(n)             // O(3 * 3*n)
-//🔸space complexity: O(1)               // O(4)
-
-
+// 🔸time complexity:  O(n)             // O(3 * 3*n)
+// 🔸space complexity: O(1)               // O(4)
 
 //                    //❓Question: 1402. Reducing Dishes (hard)
 
 // A chef has collected data on the satisfaction level of his n dishes. Chef can cook any dish in 1 unit of time.
-// Like-time coefficient of a dish is defined as the time taken to cook that dish 
+// Like-time coefficient of a dish is defined as the time taken to cook that dish
 // including previous dishes multiplied by its satisfaction level i.e. time[i] * satisfaction[i].
 // Return the maximum sum of like-time coefficient that the chef can obtain after dishes preparation.
 // Dishes can be prepared in any order and the chef can discard some dishes to get this maximum value.
@@ -2906,13 +2790,13 @@
 // Output: 0
 // Explanation: People do not like the dishes. No dish is prepared.
 
-//🔴intuition: 0/1 knapsack, like question
-//🔴approach: Recursion 
-// time limit exceeded
-// #include<iostream>
-// #include<vector>
-// #include<algorithm>
-// using namespace std;
+// 🔴intuition: 0/1 knapsack, like question
+// 🔴approach: Recursion
+//  time limit exceeded
+//  #include<iostream>
+//  #include<vector>
+//  #include<algorithm>
+//  using namespace std;
 
 // int solve(vector<int> &satisfaction, int index, int time) {
 //     //base case
@@ -2931,15 +2815,14 @@
 //     sort(satisfaction.begin(), satisfaction.end()) ;
 //     return solve(satisfaction, 0, 0) ;
 // }
-//🔸time complexity: exponential
-//🔸space complexity: exponential
+// 🔸time complexity: exponential
+// 🔸space complexity: exponential
 
-
-//🔴approach: Recursion + Memoization
-// #include<iostream>
-// #include<vector>
-// #include<algorithm>
-// using namespace std;
+// 🔴approach: Recursion + Memoization
+//  #include<iostream>
+//  #include<vector>
+//  #include<algorithm>
+//  using namespace std;
 
 // int solve(vector<int> &satisfaction, int index, int time, vector<vector<int>> &dp) {
 //     //base case
@@ -2965,19 +2848,17 @@
 
 //     return solve(satisfaction, 0, 0, dp) ;
 // }
-//🔸time complexity: O(n^2)
-//🔸space complexity: O(n^2)
+// 🔸time complexity: O(n^2)
+// 🔸space complexity: O(n^2)
 
-
-
-//🔴approach: Tabulation
-// #include<iostream>
-// #include<vector>
-// #include<algorithm>
-// using namespace std;
+// 🔴approach: Tabulation
+//  #include<iostream>
+//  #include<vector>
+//  #include<algorithm>
+//  using namespace std;
 
 // int solve(vector<int> &satisfaction) {
-    
+
 //     int n = satisfaction.size() ;
 //     vector<vector<int>> dp(n+1, vector<int>(n+1, 0)) ;
 
@@ -2997,19 +2878,17 @@
 //     sort(satisfaction.begin(), satisfaction.end()) ;
 //     return solve(satisfaction) ;
 // }
-//🔸time complexity: O(n^2)
-//🔸space complexity: O(n^2)
+// 🔸time complexity: O(n^2)
+// 🔸space complexity: O(n^2)
 
-
-
-//🔴approach: spaace optimisation
-// #include<iostream>
-// #include<vector>
-// #include<algorithm>
-// using namespace std;
+// 🔴approach: spaace optimisation
+//  #include<iostream>
+//  #include<vector>
+//  #include<algorithm>
+//  using namespace std;
 
 // int solve(vector<int> &satisfaction) {
-    
+
 //     int n = satisfaction.size() ;
 //     vector<int> curr(n+1, 0) ;
 //     vector<int> next(n+1, 0) ;
@@ -3031,10 +2910,8 @@
 //     sort(satisfaction.begin(), satisfaction.end()) ;
 //     return solve(satisfaction) ;
 // }
-//🔸time complexity: O(n^2)
-//🔸space complexity: O(n)
-
-
+// 🔸time complexity: O(n^2)
+// 🔸space complexity: O(n)
 
 //                  //❓Question: Longest Increasing Subsequence
 
@@ -3065,16 +2942,15 @@
 // 1 ≤ N ≤ 104
 // 0 ≤ A[i] ≤ 106
 
-
-//🔴approach: Recursion
-// Time limit Exceeded
-// #include<iostream>
-// using namespace std; 
-// int solve(int n, int a[], int curr, int prev) {
-//     //base case
-//     if(curr == n) {
-//         return 0;
-//     }
+// 🔴approach: Recursion
+//  Time limit Exceeded
+//  #include<iostream>
+//  using namespace std;
+//  int solve(int n, int a[], int curr, int prev) {
+//      //base case
+//      if(curr == n) {
+//          return 0;
+//      }
 
 //     //include
 //     int take = 0 ;
@@ -3091,20 +2967,19 @@
 // int longestSubsequence(int n, int a[]) {
 //     return solve(n, a, 0, -1) ;
 // }
-//🔸time complexity: exponential
-//🔸 space complexity: exponential
+// 🔸time complexity: exponential
+// 🔸 space complexity: exponential
 
-
-//🔴approach: Recursion + Memoization
-//🔴 passing 111 / 116
-// #include<iostream>
-// #include<vector>
-// using namespace std; 
-// int solve(int n, int a[], int curr, int prev, vector<vector<int>> &dp) {
-//     //base case
-//     if(curr == n) {
-//         return 0;
-//     }
+// 🔴approach: Recursion + Memoization
+// 🔴 passing 111 / 116
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
+//  int solve(int n, int a[], int curr, int prev, vector<vector<int>> &dp) {
+//      //base case
+//      if(curr == n) {
+//          return 0;
+//      }
 
 //     if(dp[curr][prev+1] != -1){
 //         return dp[curr][prev+1] ;
@@ -3126,15 +3001,14 @@
 //     vector<vector<int>> dp(n, vector<int>(n+1, -1));
 //     return solve(n, a, 0, -1, dp) ;
 // }
-//🔸time complexity: O(n^2)
-//🔸 space complexity: O(n^2)
+// 🔸time complexity: O(n^2)
+// 🔸 space complexity: O(n^2)
 
-
-//🔴approach: Tabulation
-//🔴 passing 111 / 116
-// #include<iostream>
-// #include<vector>
-// using namespace std; 
+// 🔴approach: Tabulation
+// 🔴 passing 111 / 116
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve(int n, int a[]) {
 
@@ -3160,15 +3034,14 @@
 // int longestSubsequence(int n, int a[]) {
 //     return solve(n, a) ;
 // }
-//🔸time complexity: O(n^2)
-//🔸 space complexity: O(n^2)
+// 🔸time complexity: O(n^2)
+// 🔸 space complexity: O(n^2)
 
-
-//🔴approach: space optimisation
-//🔴 passing 111 / 116
-// #include<iostream>
-// #include<vector>
-// using namespace std; 
+// 🔴approach: space optimisation
+// 🔴 passing 111 / 116
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve(int n, int a[]) {
 
@@ -3196,11 +3069,8 @@
 // int longestSubsequence(int n, int a[]) {
 //     return solve(n, a) ;
 // }
-//🔸time complexity: O(n^2)
-//🔸 space complexity: O(n)
-
-
-
+// 🔸time complexity: O(n^2)
+// 🔸 space complexity: O(n)
 
 // 🔴approach: DP + Binary search
 // #include<iostream>
@@ -3211,15 +3081,15 @@
 
 //         if(n == 0) {
 //             return 0;
-//         }   
+//         }
 
 //         vector<int> ans;
 //         ans.push_back(a[0]);
-        
+
 //         for(int i= 1; i<n; i++) {
 
 //             if(a[i] > ans.back()) {
-//                 ans.push_back(a[i]); 
+//                 ans.push_back(a[i]);
 //             }
 //             else
 //             {
@@ -3227,36 +3097,32 @@
 //                 int index = lower_bound(ans.begin(), ans.end(), a[i]) - ans.begin();
 //                 ans[index] = a[i];
 //             }
-//         } 
+//         }
 //         return ans.size();
 //     }
-//    int longestSubsequence(int n, int a[]){  
+//    int longestSubsequence(int n, int a[]){
 //         return solveBS(n,a);
 //     }
 // 🔴time complexity: O(n Log n)            // forloop => O(n)  , lower_bound == (binary search) ==> O(nlog n)
 // 🔴space complexity: O(n)
 
+// 🔴 Lower_bound:
+//   Iterator pointing to the first element in the range [first, last)
+//   such that element < value (or comp(element, value)) is false,
+//   or last if no such element is found.
 
-
-//🔴 Lower_bound:
-//  Iterator pointing to the first element in the range [first, last) 
-//  such that element < value (or comp(element, value)) is false, 
-//  or last if no such element is found.
-
-//🔸parameterS:
+// 🔸parameterS:
 
 // first, last	-	iterators defining the partially-ordered range to examine
 // value	    -	value to compare the elements to
 // comp     	-	binary predicate which returns ​true if the first argument is less than
 //                 (i.e. is ordered before) the second.
 
-
-
 //                  //❓ Question: 354. Russian Doll Envelopes (HARD)
 
 //  You are given a 2D array of integers envelopes where envelopes[i] = [wi, hi]
 //  represents the width and the height of an envelope.
-//  One envelope can fit into another if and only if both the width and height 
+//  One envelope can fit into another if and only if both the width and height
 //  of one envelope are greater than the other envelope's width and height.
 //  Return the maximum number of envelopes you can Russian doll (i.e., put one inside the other).
 
@@ -3270,85 +3136,82 @@
 // Example 2:
 // Input: envelopes = [[1,1],[1,1],[1,1]]
 // Output: 1
- 
+
 // Constraints:
 // 1 <= envelopes.length <= 105
 // envelopes[i].length == 2
 // 1 <= wi, hi <= 105
 
-//🔴approach: DP + Binary search 
-// #include<iostream>
-// #include<vector>
-// #include<algorithm>
-// using namespace std;
+// 🔴approach: DP + Binary search
+//  #include<iostream>
+//  #include<vector>
+//  #include<algorithm>
+//  using namespace std;
 
-    // creating custom function, to sort the array: 
-    // width wise in ascending order and if width are equal then sort height wise in descending order
-    // given input: [5,4],[6,4],[6,7],[2,3]]
-    // output: 
-    //  2  3
-    //  5  4
-    //  6  7 
-    //  6  4
+// creating custom function, to sort the array:
+// width wise in ascending order and if width are equal then sort height wise in descending order
+// given input: [5,4],[6,4],[6,7],[2,3]]
+// output:
+//  2  3
+//  5  4
+//  6  7
+//  6  4
 
-    // static bool comp(vector<int> &a, vector<int> &b){
-    //     if(a[0] == b[0]){
-    //         return a[1] > b[1];
-    //     }
-    //     return a[0] < b[0];
-    // }
+// static bool comp(vector<int> &a, vector<int> &b){
+//     if(a[0] == b[0]){
+//         return a[1] > b[1];
+//     }
+//     return a[0] < b[0];
+// }
 
-    // int solveOptimal(int n, vector<vector<int>>& envelopes){
-       
-    //     if(n == 0)
-    //         return 0;
-            
-    //     vector<int> ans;
-    //     ans.push_back(envelopes[0][1]);
-        
-    //     for(int i=1; i<n; i++){
-    //         if(envelopes[i][1] > ans.back())
-    //             ans.push_back(envelopes[i][1]);
-                
-    //         else{
-    //             // find index of just bigger element
-    //             int index = lower_bound(ans.begin(), ans.end(), envelopes[i][1]) - ans.begin();
-    //             ans[index] = envelopes[i][1];
-    //         }
-    //     }
-        
-    //     return ans.size();
-    // }
+// int solveOptimal(int n, vector<vector<int>>& envelopes){
 
-    // int maxEnvelopes(vector<vector<int>>& envelopes) {
+//     if(n == 0)
+//         return 0;
 
-    //     int n = envelopes.size();
-    //     sort(envelopes.begin(), envelopes.end(), comp);    // comp define at top
-    //     return solveOptimal(n, envelopes);
-    // }
-//🔸time complexity: O(N log N)
-//🔸space complexity: O(N )
+//     vector<int> ans;
+//     ans.push_back(envelopes[0][1]);
 
+//     for(int i=1; i<n; i++){
+//         if(envelopes[i][1] > ans.back())
+//             ans.push_back(envelopes[i][1]);
 
+//         else{
+//             // find index of just bigger element
+//             int index = lower_bound(ans.begin(), ans.end(), envelopes[i][1]) - ans.begin();
+//             ans[index] = envelopes[i][1];
+//         }
+//     }
+
+//     return ans.size();
+// }
+
+// int maxEnvelopes(vector<vector<int>>& envelopes) {
+
+//     int n = envelopes.size();
+//     sort(envelopes.begin(), envelopes.end(), comp);    // comp define at top
+//     return solveOptimal(n, envelopes);
+// }
+// 🔸time complexity: O(N log N)
+// 🔸space complexity: O(N )
 
 //                      //❓Question: 1691. Maximum Height by Stacking Cuboids (Hards)
 
 // Given n cuboids where the dimensions of the ith cuboid is cuboids[i] = [widthi, lengthi, heighti] (0-indexed).
 // // Choose a subset of cuboids and place them on each other.
-// You can place cuboid i on cuboid j if widthi <= widthj and lengthi <= lengthj and heighti <= heightj. 
+// You can place cuboid i on cuboid j if widthi <= widthj and lengthi <= lengthj and heighti <= heightj.
 // //You can rearrange any cuboid's dimensions by rotating it to put it on another cuboid.
 
 // Return the maximum height of the stacked cuboids.
 
-//🔸Example 1:
-// Input: cuboids = [[50,45,20],[95,37,53],[45,23,12]]
-// Output: 190
-// Explanation:
-// Cuboid 1 is placed on the bottom with the 53x37 side facing down with height 95.
-// Cuboid 0 is placed next with the 45x20 side facing down with height 50.
-// Cuboid 2 is placed next with the 23x12 side facing down with height 45.
-// The total height is 95 + 50 + 45 = 190.
-
+// 🔸Example 1:
+//  Input: cuboids = [[50,45,20],[95,37,53],[45,23,12]]
+//  Output: 190
+//  Explanation:
+//  Cuboid 1 is placed on the bottom with the 53x37 side facing down with height 95.
+//  Cuboid 0 is placed next with the 45x20 side facing down with height 50.
+//  Cuboid 2 is placed next with the 23x12 side facing down with height 45.
+//  The total height is 95 + 50 + 45 = 190.
 
 // Example 2:
 // Input: cuboids = [[38,25,45],[76,35,3]]
@@ -3364,20 +3227,17 @@
 // After rearranging the cuboids, you can see that all cuboids have the same dimension.
 // You can place the 11x7 side down on all cuboids so their heights are 17.
 // The maximum height of stacked cuboids is 6 * 17 = 102.
- 
 
 // Constraints:
 // n == cuboids.length
 // 1 <= n <= 100
 // 1 <= widthi, lengthi, heighti <= 100
 
-
-//🔴approach 1: Tabulation 
-// #include<iostream>
-// #include<vector>
-// #include<algorithm>
-// using namespace std;
-
+// 🔴approach 1: Tabulation
+//  #include<iostream>
+//  #include<vector>
+//  #include<algorithm>
+//  using namespace std;
 
 // bool check(vector<int> base, vector<int> newBox) {
 //     if(newBox[0] <= base[0] && newBox[1] <= base[1] && newBox[2] <= base[2]) {
@@ -3425,10 +3285,8 @@
 //     return solve(cuboids.size(), cuboids) ;
 
 // }
-//🔸time complexity: O(n^2)
-//🔸space complexity: O(n^2)
-
-
+// 🔸time complexity: O(n^2)
+// 🔸space complexity: O(n^2)
 
 //               //❓Question: Pizzza with 3n slices (hard)
 
@@ -3439,30 +3297,28 @@
 // Your friend Bob will pick the next slice in the clockwise direction of your pick.
 // Repeat until there are no more slices of pizzas.
 
-// Given an integer array slices that represent the sizes of the pizza slices in a clockwise direction, 
+// Given an integer array slices that represent the sizes of the pizza slices in a clockwise direction,
 // return the maximum possible sum of slice sizes that you can pick.
 
 // example 1:
 //  Input: slices = [1,2,3,4,5,6]
 // Output: 10
-// Explanation: Pick pizza slice of size 4, Alice and Bob will pick slices with size 3 and 5 respectively. 
-// Then Pick slices with size 6, finally Alice and Bob will pick slice of size 2 and 1 respectively. 
+// Explanation: Pick pizza slice of size 4, Alice and Bob will pick slices with size 3 and 5 respectively.
+// Then Pick slices with size 6, finally Alice and Bob will pick slice of size 2 and 1 respectively.
 // Total = 4 + 6.
 
-//example 2:
-// Input: slices = [8,9,8,6,1,1]
-// Output: 16
-// Explanation: Pick pizza slice of size 8 in each turn. 
-// If you pick slice with size 9 your partners will pick slices of size 8.
- 
+// example 2:
+//  Input: slices = [8,9,8,6,1,1]
+//  Output: 16
+//  Explanation: Pick pizza slice of size 8 in each turn.
+//  If you pick slice with size 9 your partners will pick slices of size 8.
 
 // Constraints:
 // 3 * n == slices.length
 // 1 <= slices.length <= 500
 // 1 <= slices[i] <= 1000
 
-
-// //🔴appraoch: Recursion 
+// //🔴appraoch: Recursion
 // //🔸time limit exceeded
 // #include<iostream>
 // #include<vector>
@@ -3470,7 +3326,7 @@
 
 // int solve(int index, int endIndex, vector<int> &slices, int n) {     // n = total no. of slices we will eat
 //     //base case
-//     if( n==0 || index > endIndex) { 
+//     if( n==0 || index > endIndex) {
 //         return 0;
 //     }
 
@@ -3488,15 +3344,14 @@
 // //🔸time complexity: expo
 // //🔸space complexity: expo
 
+// 🔴appraoch: Recursion + Memoization (top-down approach)
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
-//🔴appraoch: Recursion + Memoization (top-down approach)
-// #include<iostream>
-// #include<vector>
-// using namespace std;
-
-// int solve(int index, int endIndex, vector<int> &slices, int n, vector<vector<int>> &dp) {     
+// int solve(int index, int endIndex, vector<int> &slices, int n, vector<vector<int>> &dp) {
 //     //base case
-//     if( n==0 || index > endIndex) { 
+//     if( n==0 || index > endIndex) {
 //         return 0;
 //     }
 
@@ -3512,28 +3367,27 @@
 // int maxSizeSlices(vector<int> &slices) {
 //     int k = slices.size() ;
 //     //two different scenarios will require 2 different dp array
-//     vector<vector<int>> dp1(k, vector<int>(k, -1)) ;  
-//     int case1 = solve(0, k-2, slices, k/3, dp1) ;   
+//     vector<vector<int>> dp1(k, vector<int>(k, -1)) ;
+//     int case1 = solve(0, k-2, slices, k/3, dp1) ;
 
 //     vector<vector<int>> dp2(k, vector<int>(k, -1)) ;
-//     int case2 = solve(1, k-1 ,slices, k/3, dp2) ;   
+//     int case2 = solve(1, k-1 ,slices, k/3, dp2) ;
 //     return max(case1, case2) ;
 // }
-//🔸time complexity:  O(K^2)
-//🔸space complexity: O(K^2)
+// 🔸time complexity:  O(K^2)
+// 🔸space complexity: O(K^2)
 
+// 🔴appraoch: Tabulation (down-top approach)
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
-//🔴appraoch: Tabulation (down-top approach)
-// #include<iostream>
-// #include<vector>
-// using namespace std;
-
-// int solve(vector<int> &slices) {     
+// int solve(vector<int> &slices) {
 
 //     int k = slices.size() ;
 
-//     vector<vector<int>> dp1(k+2, vector<int>(k+2, 0)) ;  
-//     vector<vector<int>> dp2(k+2, vector<int>(k+2, 0)) ;  
+//     vector<vector<int>> dp1(k+2, vector<int>(k+2, 0)) ;
+//     vector<vector<int>> dp2(k+2, vector<int>(k+2, 0)) ;
 
 //     for(int index = k-2;  index >= 0; index--) {
 //         for(int n = 1; n <= k/3; n++) {
@@ -3563,17 +3417,15 @@
 // int maxSizeSlices(vector<int> &slices) {
 //     return solve(slices) ;
 // }
-//🔸time complexity: O(K^2)
-//🔸space complexity: O(k^2)         // slices of array size
+// 🔸time complexity: O(K^2)
+// 🔸space complexity: O(k^2)         // slices of array size
 
+// 🔴appraoch: space Optimisation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
-
-//🔴appraoch: space Optimisation
-// #include<iostream>
-// #include<vector>
-// using namespace std;
-
-// int solve(vector<int> &slices) {     
+// int solve(vector<int> &slices) {
 
 //     int k = slices.size() ;
 
@@ -3617,15 +3469,12 @@
 // int maxSizeSlices(vector<int> &slices) {
 //     return solve(slices) ;
 // }
-//🔸time complexity:  O(K^2)
-//🔸space complexity: O(6*k)
-
-
-
+// 🔸time complexity:  O(K^2)
+// 🔸space complexity: O(6*k)
 
 //                   //❓Question: Dice Throw
 
-// Given N dice each with M faces, numbered from 1 to M, find the number of ways to get sum X. 
+// Given N dice each with M faces, numbered from 1 to M, find the number of ways to get sum X.
 // X is the summation of values on each face when all the dice are thrown.
 
 //  Example 1:
@@ -3652,10 +3501,9 @@
 // Constraints:
 // 1 <= M,N,X <= 50
 
-
-//🔴approach : Recursion 
-// #include<iostream>
-// using namespace std;
+// 🔴approach : Recursion
+//  #include<iostream>
+//  using namespace std;
 
 // long long solve(int dice , int faces, int target) {
 //     //base case
@@ -3684,15 +3532,13 @@
 // long long noOfWays(int m, int n, int x) {
 //     return solve(n, m, x) ;
 // }
-//🔸time complexity: expo 
-//🔸space complexity: expo 
+// 🔸time complexity: expo
+// 🔸space complexity: expo
 
-
-
-//🔴approach : Recursion + Memiozation
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approach : Recursion + Memiozation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // long long solve(int dice , int faces, int target, vector<vector<long long>> &dp) {
 //     //base case
@@ -3728,10 +3574,8 @@
 //     vector<vector<long long>> dp(n+1, vector<long long>(x+1, -1)) ;
 //     return solve(n, m, x, dp) ;
 // }
-//🔸time complexity: O(N * M * X)
-//🔸space complexity: O(N * T)
-
-
+// 🔸time complexity: O(N * M * X)
+// 🔸space complexity: O(N * T)
 
 // //🔴approach : Tabulation
 // #include<iostream>
@@ -3739,7 +3583,7 @@
 // using namespace std;
 
 // long long solve(int d , int f, int t) {
-    
+
 //     vector<vector<long long>> dp(d+1, vector<long long>(t+1, 0)) ;
 //     dp[0][0] = 1 ;  // after analysing base case
 
@@ -3762,15 +3606,13 @@
 // //🔸time complexity: O(N*M*X)
 // //🔸space complexity: O( N * X)
 
-
-
-//🔴approach : Space Optimisation
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approach : Space Optimisation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // long long solve(int d , int f, int t) {
-    
+
 //     vector<long long> prev(t+1, 0) ;
 //     vector<long long> curr(t+1, 0) ;
 //     prev[0] = 1 ;
@@ -3796,27 +3638,24 @@
 // //🔸time complexity: O(N * M * X)
 // //🔸space complexity: O( X)
 
-
-
-
 //                      //❓Question: partition equal subset sum
 
-// Given an array arr[] of size N, 
-// check if it can be partitioned into two parts such that the sum of elements 
+// Given an array arr[] of size N,
+// check if it can be partitioned into two parts such that the sum of elements
 // in both parts is the same.
 
 // Example 1:
 // Input: N = 4
 // arr = {1, 5, 11, 5}
 // Output: YES
-// Explanation: 
+// Explanation:
 // The two parts are {1, 5, 5} and {11}.
 
 // Example 2:
 // Input: N = 3
 // arr = {1, 3, 5}
 // Output: NO
-// Explanation: This array can never be 
+// Explanation: This array can never be
 // partitioned into two such parts.
 
 // Constraints:
@@ -3862,11 +3701,10 @@
 // //🔸time complexity: expo
 // //🔸space complexity: expo
 
-
-//🔴approach : Recursion + Memoization
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approach : Recursion + Memoization
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // bool solve(int index, int arr[], int N, int target, vector<vector<int>> &dp) {
 //     //base case
@@ -3906,9 +3744,8 @@
 
 //     return solve(0, arr, N, target, dp) ;
 // }
-//🔸time complexity: o(N * sum of element)
-//🔸space complexity: o(N * sum of element)
-
+// 🔸time complexity: o(N * sum of element)
+// 🔸space complexity: o(N * sum of element)
 
 // //🔴approach : Tabulation
 // #include<iostream>
@@ -3916,7 +3753,7 @@
 // using namespace std;
 
 // bool solve( int N, int arr[], int total) {
-    
+
 //     vector<vector<int>> dp(N+1, vector<int>(total+1, 0)) ;
 
 //     for(int i=0; i<=N ; i++) {
@@ -3925,14 +3762,14 @@
 
 //     for(int index = N-1; index >= 0; index--) {
 //         for(int target = 0; target <= total/2; target++) {
-            
+
 //             bool include = 0 ;
 
 //             if(target - arr[index] >= 0) {
 //                 include = dp[index+1][target - arr[index]] ;
 //             }
 //            bool exclude =  dp[index+1][target - 0];
-       
+
 //           dp[index][target] = include or exclude ;
 //         }
 //     }
@@ -3956,14 +3793,13 @@
 // //🔸time complexity: O(Sum OF element * N)
 // //🔸space complexity: o(N * sum of element)
 
-
-//🔴approach : space optimisation
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approach : space optimisation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // bool solve( int N, int arr[], int total) {
-    
+
 //     vector<int> curr(total/2 +1, 0) ;
 //     vector<int> next(total/2 +1, 0) ;
 
@@ -3972,14 +3808,14 @@
 
 //     for(int index = N-1; index >= 0; index--) {
 //         for(int target = 0; target <= total/2; target++) {
-            
+
 //             bool include = 0 ;
 
 //             if(target - arr[index] >= 0) {
 //                 include = next[target - arr[index]] ;
 //             }
 //            bool exclude =  next[target - 0];
-       
+
 //           curr[target] = include or exclude ;
 //         }
 //         next = curr ;
@@ -4001,19 +3837,17 @@
 
 //     return solve(N, arr, target) ;
 // }
-//🔸time complexity: O(Sum OF element * N)
-//🔸space complexity: o(sum of element)
-
-
+// 🔸time complexity: O(Sum OF element * N)
+// 🔸space complexity: o(sum of element)
 
 //                       //❓Question: 801. Minimum Swaps To Make Sequences Increasing (hard)
 
-// You are given two integer arrays of the same length nums1 and nums2. In one operation, 
+// You are given two integer arrays of the same length nums1 and nums2. In one operation,
 // you are allowed to swap nums1[i] with nums2[i].
 
-// For example, if nums1 = [1,2,3,8], and nums2 = [5,6,7,4], you can swap the element at i = 3 to 
+// For example, if nums1 = [1,2,3,8], and nums2 = [5,6,7,4], you can swap the element at i = 3 to
 // obtain nums1 = [1,2,3,4] and nums2 = [5,6,7,8].
-// Return the minimum number of needed operations to make nums1 and nums2 strictly increasing. 
+// Return the minimum number of needed operations to make nums1 and nums2 strictly increasing.
 // The test cases are generated so that the given input always makes it possible.
 
 // An array arr is strictly increasing if and only if arr[0] < arr[1] < arr[2] < ... < arr[arr.length - 1].
@@ -4021,7 +3855,7 @@
 // Example 1:
 // Input: nums1 = [1,3,5,4], nums2 = [1,2,3,7]
 // Output: 1
-// Explanation: 
+// Explanation:
 // Swap nums1[3] and nums2[3]. Then the sequences are:
 // nums1 = [1, 3, 5, 7] and nums2 = [1, 2, 3, 4]
 // which are both strictly increasing.
@@ -4029,7 +3863,6 @@
 // Example 2:
 // Input: nums1 = [0,3,5,8,9], nums2 = [2,1,4,6,9]
 // Output: 1
- 
 
 // Constraints:
 
@@ -4037,12 +3870,11 @@
 // nums2.length == nums1.length
 // 0 <= nums1[i], nums2[i] <= 2 * 105
 
-
-//🔴approach : Recursion 
-// #include<iostream>
-// #include<vector>
-// #include<limits.h>
-// using namespace std;
+// 🔴approach : Recursion
+//  #include<iostream>
+//  #include<vector>
+//  #include<limits.h>
+//  using namespace std;
 
 // int solve(vector<int> &nums1, vector<int> &nums2, int index, bool swapped) {
 //     //base case
@@ -4051,8 +3883,8 @@
 //     }
 
 //     int ans = INT_MAX ;
-//     int prev1 = nums1[index - 1] ;        
-//     int prev2 = nums2[index - 1] ;    
+//     int prev1 = nums1[index - 1] ;
+//     int prev2 = nums2[index - 1] ;
 
 //     //catch
 //     if(swapped) {
@@ -4074,7 +3906,7 @@
 
 // int minSwap(vector<int>& nums1, vector<int>& nums2) {
 
-//     //initialise both array with -1 as first index element, 
+//     //initialise both array with -1 as first index element,
 //     //so that we can compare original first value with previous value which is -1
 //     //whether they are in increasing order or not
 //     nums1.insert(nums1.begin(), -1) ;
@@ -4083,15 +3915,14 @@
 //     int swapped = 0 ;  // means previous indexes were swapped or not
 //     return solve(nums1, nums2, 0, swapped) ;
 // }
-//🔸time complexity : expo
-//🔸space complexity : O(1)
+// 🔸time complexity : expo
+// 🔸space complexity : O(1)
 
-
-//🔴approach : Recursion + Memiozation (top - down)
-// #include<iostream>
-// #include<vector>
-// #include<limits.h>
-// using namespace std;
+// 🔴approach : Recursion + Memiozation (top - down)
+//  #include<iostream>
+//  #include<vector>
+//  #include<limits.h>
+//  using namespace std;
 
 // int solve(vector<int> &nums1, vector<int> &nums2, int index, bool swapped, vector<vector<int>> &dp) {
 //     //base case
@@ -4099,14 +3930,14 @@
 //         return 0 ;
 //     }
 
-//    //step2 
+//    //step2
 //     if(dp[index][swapped] != -1){
 //         return dp[index][swapped] ;
 //     }
 
 //     int ans = INT_MAX ;
-//     int prev1 = nums1[index - 1] ;        
-//     int prev2 = nums2[index - 1] ;    
+//     int prev1 = nums1[index - 1] ;
+//     int prev2 = nums2[index - 1] ;
 
 //     //catch
 //     if(swapped) {
@@ -4131,20 +3962,19 @@
 //     nums1.insert(nums1.begin(), -1) ;
 //     nums2.insert(nums2.begin(), -1) ;
 
-//     int swapped = 0 ;  
+//     int swapped = 0 ;
 //     int n = nums1.size() ;
 //     vector<vector<int>> dp(n, vector<int>(2, -1)) ;   // vector<int>(2, -1) bcoz it is changing as either 0 or 1
 //     return solve(nums1, nums2, 1, swapped, dp) ;
 // }
-//🔸time complexity : O(N)
-//🔸space complexity : O(N)
+// 🔸time complexity : O(N)
+// 🔸space complexity : O(N)
 
-
-//🔴approach : Tabulation (bottom - up)
-// #include<iostream>
-// #include<vector>
-// #include<limits.h>
-// using namespace std;
+// 🔴approach : Tabulation (bottom - up)
+//  #include<iostream>
+//  #include<vector>
+//  #include<limits.h>
+//  using namespace std;
 
 // int solve(vector<int> &nums1, vector<int> &nums2) {
 //   int n = nums1.size() ;
@@ -4154,8 +3984,8 @@
 //      for(int swapped = 1; swapped >= 0; swapped--) {
 
 //             int ans = INT_MAX ;
-//             int prev1 = nums1[index - 1] ;        
-//             int prev2 = nums2[index - 1] ;    
+//             int prev1 = nums1[index - 1] ;
+//             int prev2 = nums2[index - 1] ;
 
 //             //catch
 //             if(swapped) {
@@ -4182,18 +4012,17 @@
 
 //     nums1.insert(nums1.begin(), -1) ;
 //     nums2.insert(nums2.begin(), -1) ;
- 
+
 //     return solve(nums1, nums2) ;
 // }
-//🔸time complexity :  O(N)            // loop1 = n, loop2 = 0/1
-//🔸space complexity : O(N)            // dp[n][0/1] == O(n)   , if(dp[n][n] == O(n^2))
+// 🔸time complexity :  O(N)            // loop1 = n, loop2 = 0/1
+// 🔸space complexity : O(N)            // dp[n][0/1] == O(n)   , if(dp[n][n] == O(n^2))
 
-
-//🔴approach : space optimisation
-// #include<iostream>
-// #include<vector>
-// #include<limits.h>
-// using namespace std;
+// 🔴approach : space optimisation
+//  #include<iostream>
+//  #include<vector>
+//  #include<limits.h>
+//  using namespace std;
 
 // int solve(vector<int> &nums1, vector<int> &nums2) {
 
@@ -4207,8 +4036,8 @@
 //      for(int swapped = 1; swapped >= 0; swapped--) {
 
 //             int ans = INT_MAX ;
-//             int prev1 = nums1[index - 1] ;        
-//             int prev2 = nums2[index - 1] ;    
+//             int prev1 = nums1[index - 1] ;
+//             int prev2 = nums2[index - 1] ;
 
 //             //catch
 //             if(swapped) {
@@ -4235,24 +4064,22 @@
 //       swapp = currswapp ;
 //       noswapp = currnoswapp ;
 //    }
-//         return min(swapp, noswapp) ; 
+//         return min(swapp, noswapp) ;
 // }
 
 // int minSwap(vector<int>& nums1, vector<int>& nums2) {
 
 //     nums1.insert(nums1.begin(), -1) ;
 //     nums2.insert(nums2.begin(), -1) ;
- 
+
 //     return solve(nums1, nums2) ;
 // }
-//🔸time complexity :  O(N)            
-//🔸space complexity : O(1)            
-
-
+// 🔸time complexity :  O(N)
+// 🔸space complexity : O(1)
 
 //                 //❓Question : Longest arithmetic progression
 
-// Given an array called A[] of sorted integers having no duplicates, 
+// Given an array called A[] of sorted integers having no duplicates,
 // find the length of the Longest Arithmetic Progression (LLAP) in it.
 
 // Example 1:
@@ -4260,7 +4087,7 @@
 // N = 6
 // set[] = {1, 7, 10, 13, 14, 19}
 // Output: 4
-// Explanation: The longest arithmetic 
+// Explanation: The longest arithmetic
 // progression is {1, 7, 13, 19}.
 
 // Example 2:
@@ -4271,20 +4098,20 @@
 // Explanation: The whole set is in AP.
 
 // Your Task:
-// You don't need to read input or print anything. 
-// Your task is to complete the function lenghtOfLongestAP() 
+// You don't need to read input or print anything.
+// Your task is to complete the function lenghtOfLongestAP()
 // which takes the array of integers called set[] and n as input parameters and returns the length of LLAP.
 
 // Constraints:
 // 1 ≤ N ≤ 1000
 // 1 ≤ set[i] ≤ 104
 
-//🔴approach : Recursion   TLE
-// #include<iostream>
-// using namespace std;
+// 🔴approach : Recursion   TLE
+//  #include<iostream>
+//  using namespace std;
 
 // int solve( int index, int diff, int A[]) {
-//     //backward check 
+//     //backward check
 //     //base case
 //     if(index < 0) {
 //         return 0 ;
@@ -4317,18 +4144,16 @@
 
 //     return ans ;
 // }
-//🔸 time complexity : O(N^2 + N)
-//🔸 space complexity : O(1)
+// 🔸 time complexity : O(N^2 + N)
+// 🔸 space complexity : O(1)
 
-
-
-//🔴approach : Recursion + Memoization (top-down)   TLE
-// #include<iostream>
-// #include<unordered_map>
-// using namespace std;
+// 🔴approach : Recursion + Memoization (top-down)   TLE
+//  #include<iostream>
+//  #include<unordered_map>
+//  using namespace std;
 
 // int solve( int index, int diff, int A[], unordered_map<int, int> dp[]) {
-//     //backward check 
+//     //backward check
 //     //base case
 //     if(index < 0) {
 //         return 0 ;
@@ -4366,14 +4191,13 @@
 
 //     return ans ;
 // }
-//🔸 time complexity : O(N^2 + N)
-//🔸 space complexity : O(N^2)
+// 🔸 time complexity : O(N^2 + N)
+// 🔸 space complexity : O(N^2)
 
-
-//🔴approach : Tabulation (Bottom - up )  TLE
-// #include<iostream>
-// #include<unordered_map>
-// using namespace std;
+// 🔴approach : Tabulation (Bottom - up )  TLE
+//  #include<iostream>
+//  #include<unordered_map>
+//  using namespace std;
 
 // int lengthOfLongestAP(int A[], int n) {
 
@@ -4402,44 +4226,41 @@
 
 //     return ans ;
 // }
-//🔸 time complexity : O(n^2)
-//🔸 space complexity : O(N^2)
+// 🔸 time complexity : O(n^2)
+// 🔸 space complexity : O(N^2)
 
-
-//🔴Comment section gfg : optimised approach
+// 🔴Comment section gfg : optimised approach
 
 //     int lengthOfLongestAP(int a[], int n) {
 //          // code here
 //           if(n == 1)
 //            return 1;
-       
+
 //        vector<vector<int >> dp(n + 1, vector<int>(1e4 + 3, 1));
 //        int ans = 0;
 //        for(int i = 1; i <= n; ++i){
 //            for(int j = i + 1; j <= n; ++j){
-               
+
 //                int df = a[j - 1] - a[i - 1];
 //                dp[j][df] = 1 + dp[i][df];
 //                ans = max(ans, dp[j][df]);
 //            }
 //        }
-       
-//        return ans;
-       
-//     }
-//🔸 time complexity : O(n^2)
-//🔸 space complexity : O(N^2)
 
+//        return ans;
+
+//     }
+// 🔸 time complexity : O(n^2)
+// 🔸 space complexity : O(N^2)
 
 //               //❓Question: Longest Arithmetic Subsequence of Given Difference
 
-// Given an integer array arr and an integer difference, 
-// return the length of the longest subsequence in arr which is an arithmetic sequence 
+// Given an integer array arr and an integer difference,
+// return the length of the longest subsequence in arr which is an arithmetic sequence
 // such that the difference between adjacent elements in the subsequence equals difference.
 
-// A subsequence is a sequence that can be derived from arr by deleting some or 
+// A subsequence is a sequence that can be derived from arr by deleting some or
 // no elements without changing the order of the remaining elements.
-
 
 // Example 1:
 // Input: arr = [1,2,3,4], difference = 1
@@ -4461,11 +4282,11 @@
 // 1 <= arr.length <= 105
 // -104 <= arr[i], difference <= 104
 
-//🔴Approach : hashing  + dp
-// #include<iostream>
-// #include<vector>
-// #include<unordered_map>
-// using namespace std;
+// 🔴Approach : hashing  + dp
+//  #include<iostream>
+//  #include<vector>
+//  #include<unordered_map>
+//  using namespace std;
 
 // int longestSubsequence(vector<int>& arr, int difference) {
 
@@ -4484,26 +4305,24 @@
 //         //update current answer
 //         dp[arr[i]] = 1 + tempAns ;
 
-//         // update main ans 
+//         // update main ans
 //         ans = max(ans, dp[arr[i]]) ;
 //     }
 //         return ans ;
 // }
-//🔸time complexity : O(N)
-//🔸space complexity : O(n)
-
-
+// 🔸time complexity : O(N)
+// 🔸space complexity : O(n)
 
 //            //❓Question: Unique Binary Search Trees
 
-// Given an integer n, return the number of structurally unique BST's 
+// Given an integer n, return the number of structurally unique BST's
 // (binary search trees) which has exactly n nodes of unique values from 1 to n.
 
 // Example 1:
 
 //  [1]         [1]              [2]                [3]          [3]
 //     \           \           /     \             /            /
-//     [3]          [2]     [1]       [3]       [2]           [1] 
+//     [3]          [2]     [1]       [3]       [2]           [1]
 //     /               \                       /                \
 //  [2]                 [3]                 [1]                  [2]
 //
@@ -4513,15 +4332,14 @@
 // Example 2:
 // Input: n = 1
 // Output: 1
- 
 
 // Constraints:
 // 1 <= n <= 19
 
-//🔴appraoch: Recursion 
-// TLE
-// #include<iostream>
-// using namespace std;
+// 🔴appraoch: Recursion
+//  TLE
+//  #include<iostream>
+//  using namespace std;
 
 // int numTrees(int n) {
 //     //base case
@@ -4537,14 +4355,13 @@
 
 //     return ans ;
 // }
-//🔸 time complexity : expo
-//🔸 space complexity : O(1)
+// 🔸 time complexity : expo
+// 🔸 space complexity : O(1)
 
-
-//🔴appraoch: Recursion + memoization
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴appraoch: Recursion + memoization
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve(int n, vector<int> &dp) {
 //     //base case
@@ -4567,15 +4384,13 @@
 //     vector<int> dp(n+1, -1) ;
 //     return solve(n, dp) ;
 // }
-//🔸 time complexity :  O(n)
-//🔸 space complexity : O(n)
+// 🔸 time complexity :  O(n)
+// 🔸 space complexity : O(n)
 
-
-
-//🔴appraoch: Tabulation
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴appraoch: Tabulation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve(int n) {
 //     vector<int> dp(n+1, 0) ;
@@ -4594,42 +4409,42 @@
 // int numTrees(int n) {
 //     return solve(n) ;
 // }
-//🔸 time complexity :  O(n^2)
-//🔸 space complexity : O(n)
+// 🔸 time complexity :  O(n^2)
+// 🔸 space complexity : O(n)
 
-//🔴🔴 Most optimised way is to get Catalan number == Unique binary trees
-// ex:
-//  N == UBT                 // UBT = unique binary trees
-//  1 == 1        
-//  2 == 2
-//  3 == 5
-//  4 == 14
-//  5 == 42
-//  6 == 132
+// 🔴🔴 Most optimised way is to get Catalan number == Unique binary trees
+//  ex:
+//   N == UBT                 // UBT = unique binary trees
+//   1 == 1
+//   2 == 2
+//   3 == 5
+//   4 == 14
+//   5 == 42
+//   6 == 132
 
-//🔸 expression for catalan number :
+// 🔸 expression for catalan number :
 //
-//    (2n)!
-//   -------
-//   (n+1)! n!
+//     (2n)!
+//    -------
+//    (n+1)! n!
 
-//🔸Implementaion:
-// #include <iostream>
-// using namespace std;
- 
+// 🔸Implementaion:
+//  #include <iostream>
+//  using namespace std;
+
 // // A recursive function to find nth catalan number :
 // unsigned long int catalan(unsigned int n)
 // {
 //     // Base case
 //     if (n <= 1)
 //         return 1;
- 
+
 //     // catalan(n) is sum of
 //     // catalan(i)*catalan(n-i-1)
 //     unsigned long int res = 0;
 //     for (int i = 0; i < n; i++)
 //         res += catalan(i) * catalan(n - i - 1);
- 
+
 //     return res;
 // }
 
@@ -4642,8 +4457,7 @@
 // }
 
 // Output :
-// 1 1 2 5 14 42 132 429 1430 4862 
-
+// 1 1 2 5 14 42 132 429 1430 4862
 
 //                    //❓Question :375. Guess Number Higher or Lower II
 
@@ -4656,12 +4470,11 @@
 // Every time you guess a wrong number x, you will pay x dollars. If you run out of money, you lose the game.
 // Given a particular n, return the minimum amount of money you need to guarantee a win regardless of what number I pick.
 
- 
 // Example 1:
 //                      [7]
 //            lower /        \  higher
 //              [3]            [9]
-//    lower   /    \ high low /   \  higher  
+//    lower   /    \ high low /   \  higher
 //          [1]    [5]      [8]   [10]
 //           \hi lo/  \ higher
 //            [2] [4]  [6]
@@ -4699,15 +4512,15 @@
 // - If this is my number, your total is $0. Otherwise, you pay $1.
 // - If my number is higher, it must be 2. Guess 2. Your total is $1.
 // The worst case is that you pay $1.
- 
+
 // Constraints:
 // 1 <= n <= 200
 
-//🔴approach : Recursion
-// TLE
-// #include<iostream>
-// #include<limits.h>
-// using namespace std;
+// 🔴approach : Recursion
+//  TLE
+//  #include<iostream>
+//  #include<limits.h>
+//  using namespace std;
 
 // int solve(int start, int end) {
 //     //worst case
@@ -4725,15 +4538,14 @@
 // int getMoneyAmount(int n) {
 //     return solve(1, n) ;
 // }
-//🔸 time complexity :  expo
-//🔸 space complexity : O(1)
+// 🔸 time complexity :  expo
+// 🔸 space complexity : O(1)
 
-
-//🔴approach : Recursion + Memoization
-// #include<iostream>
-// #include<limits.h>
-// #include<vector>
-// using namespace std;
+// 🔴approach : Recursion + Memoization
+//  #include<iostream>
+//  #include<limits.h>
+//  #include<vector>
+//  using namespace std;
 
 // int solve(int start, int end, vector<vector<int>> &dp) {
 //     //worst case
@@ -4756,20 +4568,18 @@
 //     vector<vector<int>> dp(n+1, vector<int>(n+1, -1)) ;
 //     return solve(1, n, dp) ;
 // }
-//🔸 time complexity :  O(n^2)
-//🔸 space complexity : O(n^2)
+// 🔸 time complexity :  O(n^2)
+// 🔸 space complexity : O(n^2)
 
-
-
-//🔴approach : Tabulation
-// #include<iostream>
-// #include<limits.h>
-// #include<vector>
-// using namespace std;
+// 🔴approach : Tabulation
+//  #include<iostream>
+//  #include<limits.h>
+//  #include<vector>
+//  using namespace std;
 
 // int solve(int n) {
 //     vector<vector<int>> dp(n+2, vector<int>(n+2, 0)) ;
-    
+
 //     for(int start = n; start >= 1; start--) {
 //         for(int end = start; end<=n; end++) {
 //             if(start == end) {
@@ -4791,11 +4601,8 @@
 // int getMoneyAmount(int n) {
 //     return solve(n) ;
 // }
-//🔸 time complexity :  O(n^2)
-//🔸 space complexity : O(n^2)
-
-
-
+// 🔸 time complexity :  O(n^2)
+// 🔸 space complexity : O(n^2)
 
 //                         //❓Question : Minimum cost tree from leaf values
 
@@ -4804,8 +4611,8 @@
 // Each node has either 0 or 2 children;
 // The values of arr correspond to the values of each leaf in an in-order traversal of the tree.
 // The value of each non-leaf node is equal to the product of the largest leaf value in its left and right subtree, respectively.
-// Among all possible binary trees considered, 
-// return the smallest possible sum of the values of each non-leaf node. 
+// Among all possible binary trees considered,
+// return the smallest possible sum of the values of each non-leaf node.
 // It is guaranteed this sum fits into a 32-bit integer.
 
 // A node is a leaf if and only if it has zero children.
@@ -4827,20 +4634,19 @@
 //        [4]   [11]
 // Input: arr = [4,11]
 // Output: 44
- 
 
 // Constraints:
 // 2 <= arr.length <= 40
 // 1 <= arr[i] <= 15
 // It is guaranteed that the answer fits into a 32-bit signed integer (i.e., it is less than 231).
 
-//🔴approach: Recursion
-// TLE
-// #include<iostream>
-// #include<vector>
-// #include<map>
-// #include<limits.h>
-// using namespace std;
+// 🔴approach: Recursion
+//  TLE
+//  #include<iostream>
+//  #include<vector>
+//  #include<map>
+//  #include<limits.h>
+//  using namespace std;
 
 // int solve(vector<int> &arr, map<pair<int,int>, int> &maxi, int left, int right) {
 //     //leaf node
@@ -4849,7 +4655,7 @@
 //     }
 
 //     int ans = INT_MAX ;
-    
+
 //     for(int i=left; i<right; i++) {
 //         ans = min(ans, maxi[{left, i}] * maxi[{i+1, right}] + solve(arr, maxi, left, i) + solve(arr, maxi, i+1, right)) ;
 //     }
@@ -4870,9 +4676,8 @@
 //     return solve(arr, maxi, 0, arr.size()-1) ;
 
 // }
-//🔸time complexity : expo
-//🔸space complexity : O(n)
-
+// 🔸time complexity : expo
+// 🔸space complexity : O(n)
 
 // /🔴approach: Recursion + Memoization
 
@@ -4893,7 +4698,7 @@
 //     }
 
 //     int ans = INT_MAX ;
-    
+
 //     for(int i=left; i<right; i++) {
 //         ans = min(ans, maxi[{left, i}] * maxi[{i+1, right}] + solve(arr, maxi, left, i, dp) + solve(arr, maxi, i+1, right, dp)) ;
 //     }
@@ -4917,21 +4722,17 @@
 //     return solve(arr, maxi, 0, arr.size()-1, dp) ;
 
 // }
-//🔸time complexity : O(n^3)
-//🔸space complexity : O(N^N)
-
-
-
+// 🔸time complexity : O(n^3)
+// 🔸space complexity : O(N^N)
 
 //                   //❓Question : 121. Best Time to Buy and Sell Stock  [Part 1]
 
 // You are given an array prices where prices[i] is the price of a given stock on the ith day.
-// You want to maximize your profit by choosing a single day to buy one stock and choosing 
+// You want to maximize your profit by choosing a single day to buy one stock and choosing
 // a different day in the future to sell that stock.
 
-// Return the maximum profit you can achieve from this transaction. 
+// Return the maximum profit you can achieve from this transaction.
 // If you cannot achieve any profit, return 0.
-
 
 // Example 1:
 // Input: prices = [7,1,5,3,6,4]
@@ -4943,16 +4744,15 @@
 // Input: prices = [7,6,4,3,1]
 // Output: 0
 // Explanation: In this case, no transactions are done and the max profit = 0.
- 
+
 // Constraints:
 // 1 <= prices.length <= 105
 // 0 <= prices[i] <= 104
 
-
-//🔴approach: 
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approach:
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int maxProfit(vector<int>& prices) {
 
@@ -4968,21 +4768,17 @@
 //     return profit ;
 
 // }
-//🔸time complexity: O(n)
-//🔸space complexity: O(1)
-
-
+// 🔸time complexity: O(n)
+// 🔸space complexity: O(1)
 
 //                      //❓Question : 122. Best Time to Buy and Sell Stock II [part 2]
 
-
 // You are given an integer array prices where prices[i] is the price of a given stock on the ith day.
-// On each day, you may decide to buy and/or sell the stock. 
-// You can only hold at most one share of the stock at any time. 
+// On each day, you may decide to buy and/or sell the stock.
+// You can only hold at most one share of the stock at any time.
 // However, you can buy it then immediately sell it on the same day.
 
 // Find and return the maximum profit you can achieve.
-
 
 // Example 1:
 // Input: prices = [7,1,5,3,6,4]
@@ -5001,7 +4797,7 @@
 // Input: prices = [7,6,4,3,1]
 // Output: 0
 // Explanation: There is no way to make a positive profit, so we never buy the stock to achieve the maximum profit of 0.
- 
+
 // Constraints:
 // 1 <= prices.length <= 3 * 104
 // 0 <= prices[i] <= 104
@@ -5038,7 +4834,6 @@
 // }
 // //🔸time complexity: expo
 // //🔸space complexity: O(n)
-
 
 // //🔴approach : Recursion + memoization
 // #include<iostream>
@@ -5079,7 +4874,6 @@
 // //🔸time complexity: O(n)
 // //🔸space complexity: O(n)
 
-
 // //🔴approach : Tabulation
 // #include<iostream>
 // #include<vector>
@@ -5091,7 +4885,7 @@
 
 //     for(int index = n-1; index >= 0; index--){
 //         for(int buy = 0; buy <= 1; buy++) {
-      
+
 //             int profit = 0;
 
 //             if(buy) {
@@ -5119,12 +4913,10 @@
 // //🔸time complexity: O(n)            // index = 0 - n, buy = 0/1
 // //🔸space complexity: O(n^2)
 
-
-
-//🔴approach : space optimisation
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approach : space optimisation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve( vector<int>& prices) {
 
@@ -5132,10 +4924,9 @@
 //     vector<int> curr(2, 0) ;
 //     vector<int> next(2, 0) ;
 
-
 //     for(int index = n-1; index >= 0; index--){
 //         for(int buy = 0; buy <= 1; buy++) {
-      
+
 //             int profit = 0;
 
 //             if(buy) {
@@ -5161,17 +4952,14 @@
 
 //     return solve(prices);
 // }
-//🔸time complexity: O(n)
-//🔸space complexity: O(1)
-
-
+// 🔸time complexity: O(n)
+// 🔸space complexity: O(1)
 
 //                  //❓Question :123. Best Time to Buy and Sell Stock III [part 3]
 
 // You are given an array prices where prices[i] is the price of a given stock on the ith day.
 // Find the maximum profit you can achieve. You may complete at most two transactions.
 // Note: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
-
 
 // Example 1:
 // Input: prices = [3,3,5,0,0,3,1,4]
@@ -5183,24 +4971,22 @@
 // Input: prices = [1,2,3,4,5]
 // Output: 4
 // Explanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.
-// Note that you cannot buy on day 1, buy on day 2 and sell them later, 
+// Note that you cannot buy on day 1, buy on day 2 and sell them later,
 // as you are engaging multiple transactions at the same time. You must sell before buying again.
 // Example 3:
 
 // Input: prices = [7,6,4,3,1]
 // Output: 0
 // Explanation: In this case, no transaction is done, i.e. max profit = 0.
- 
 
 // Constraints:
 // 1 <= prices.length <= 105
 // 0 <= prices[i] <= 105
 
-
-//🔴approach : Recrusion 
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approach : Recrusion
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve(int index, int buy, vector<int>& prices, int limit) {
 //     //base case
@@ -5231,9 +5017,8 @@
 // int maxProfit(vector<int>& prices) {
 //     return solve(0, 1, prices, 2) ;
 // }
-//🔸time complexity : expo
-//🔸space complexity : O(1)
-
+// 🔸time complexity : expo
+// 🔸space complexity : O(1)
 
 // //🔴approach : Recrusion + Memoization
 // #include<iostream>
@@ -5280,20 +5065,19 @@
 // //🔸time complexity : O(N*2*3)
 // //🔸space complexity : O(N*2*3)
 
-
-//🔴approach : Tabulation
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approach : Tabulation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve( vector<int>& prices) {
 //     int n = prices.size() ;
 //     vector<vector<vector<int> >> dp(n+1, vector<vector<int>>(2, vector<int>(3, 0)))  ;          // 3d DP
-   
+
 //     for(int index = n-1; index >= 0; index--){
 //         for(int buy = 0; buy <= 1; buy++) {
 //             for(int limit = 1; limit <= 2; limit++) {
-                
+
 //             int profit = 0;
 
 //             if(buy) {
@@ -5321,12 +5105,10 @@
 // //🔸time complexity : O(N*2*3)
 // //🔸space complexity : O(N*2*3)
 
-
-
-//🔴approach : space optimisation
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approach : space optimisation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve( vector<int>& prices) {
 //     int n = prices.size() ;
@@ -5336,7 +5118,7 @@
 //     for(int index = n-1; index >= 0; index--){
 //         for(int buy = 0; buy <= 1; buy++) {
 //             for(int limit = 1; limit <= 2; limit++) {
-                
+
 //             int profit = 0;
 
 //             if(buy) {
@@ -5365,19 +5147,15 @@
 // //🔸time complexity : O(N)           // O(n*2*1)
 // //🔸space complexity : O(1)         // O(2*3)
 
-
-
-
-
 //                  //❓Question : 188. Best Time to Buy and Sell Stock IV  [part 4]
 
-// You are given an integer array prices where prices[i] is the price of a given stock on the ith day, 
+// You are given an integer array prices where prices[i] is the price of a given stock on the ith day,
 // and an integer k.
 
-// Find the maximum profit you can achieve. You may complete at most k transactions: 
+// Find the maximum profit you can achieve. You may complete at most k transactions:
 // i.e. you may buy at most k times and sell at most k times.
 
-// Note: You may not engage in multiple transactions simultaneously 
+// Note: You may not engage in multiple transactions simultaneously
 // (i.e., you must sell the stock before you buy again).
 
 // Example 1:
@@ -5388,18 +5166,18 @@
 // Example 2:
 // Input: k = 2, prices = [3,2,6,5,0,3]
 // Output: 7
-// Explanation: Buy on day 2 (price = 2) and sell on day 3 (price = 6), profit = 6-2 = 4. 
+// Explanation: Buy on day 2 (price = 2) and sell on day 3 (price = 6), profit = 6-2 = 4.
 // Then buy on day 5 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.
- 
+
 // Constraints:
 // 1 <= k <= 100
 // 1 <= prices.length <= 1000
 // 0 <= prices[i] <= 1000
 
-//🔴approach : space optimisation of previous question and little modification
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approach : space optimisation of previous question and little modification
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve( vector<int>& prices, int& k) {
 //     int n = prices.size() ;
@@ -5409,7 +5187,7 @@
 //     for(int index = n-1; index >= 0; index--){
 //         for(int buy = 0; buy <= 1; buy++) {
 //             for(int limit = 1; limit <= k; limit++) {
-                
+
 //             int profit = 0;
 
 //             if(buy) {
@@ -5434,16 +5212,14 @@
 // int maxProfit(int k, vector<int>& prices) {
 //         return solve(prices, k) ;
 // }
-//🔸time complexity : O(N*3*k)              // O(N*2*k)
-//🔸space complexity : O(k)
+// 🔸time complexity : O(N*3*k)              // O(N*2*k)
+// 🔸space complexity : O(k)
 
-
-
-//🔴approach : Operation/Transaction method
-// Recursion (TLE)
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approach : Operation/Transaction method
+//  Recursion (TLE)
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve( int index, int operationNo, int k, vector<int>& prices) {
 //     //base case
@@ -5474,9 +5250,8 @@
 // int maxProfit(int k, vector<int>& prices) {
 //         return solve(0, 0, k, prices) ;
 // }
-//🔸time complexity : expo
-//🔸space complexity : O(1)
-
+// 🔸time complexity : expo
+// 🔸space complexity : O(1)
 
 // //🔴approach : Operation/Transaction method
 // // Recursion + memoisation
@@ -5515,27 +5290,26 @@
 //     return dp[index][operationNo] = profit;
 // }
 // int maxProfit(int k, vector<int>& prices) {
-//     int n = prices.size(); 
+//     int n = prices.size();
 //     vector<vector<int>> dp(n, vector<int>(2*k, -1)) ;
 //     return solve(0, 0, k, prices, dp) ;
 // }
 // //🔸time complexity : O(N^2)
 // //🔸space complexity : O(N*k)
 
-
-//🔴approach : Operation/Transaction method
-// Tabulation
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approach : Operation/Transaction method
+//  Tabulation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve( int k, vector<int>& prices) {
-//     int n = prices.size(); 
+//     int n = prices.size();
 //     vector<vector<int>> dp(n+1, vector<int>(2*k+1, 0)) ;
 
 //     for(int index=n-1; index>=0; index--) {
 //         for(int operationNo=0; operationNo<2*k; operationNo++) {
-            
+
 //             int profit = 0 ;
 
 //             if(operationNo % 2 == 0){
@@ -5558,23 +5332,23 @@
 // int maxProfit(int k, vector<int>& prices) {
 //     return solve(k, prices) ;
 // }
-//🔸time complexity : O(N^2)
-//🔸space complexity : O(N*k)
+// 🔸time complexity : O(N^2)
+// 🔸space complexity : O(N*k)
 
-//🔴approach : Operation/Transaction method
-// space optimisation
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approach : Operation/Transaction method
+//  space optimisation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve( int k, vector<int>& prices) {
-//     int n = prices.size(); 
+//     int n = prices.size();
 //     vector<int> curr(2*k+1, 0) ;
 //     vector<int> next(2*k+1, 0) ;
 
 //     for(int index=n-1; index>=0; index--) {
 //         for(int operationNo=0; operationNo<2*k; operationNo++) {
-            
+
 //             int profit = 0 ;
 
 //             if(operationNo % 2 == 0){
@@ -5598,15 +5372,12 @@
 // int maxProfit(int k, vector<int>& prices) {
 //     return solve(k, prices) ;
 // }
-//🔸time complexity : O(N^2)
-//🔸space complexity : O(k)
-
-
-
+// 🔸time complexity : O(N^2)
+// 🔸space complexity : O(k)
 
 //                  //❓Question: 714. Best Time to Buy and Sell Stock with Transaction Fee [Part 5]
 
-// You are given an array prices where prices[i] is the price of a given stock on the ith day, 
+// You are given an array prices where prices[i] is the price of a given stock on the ith day,
 // and an integer fee representing a transaction fee.
 
 // Find the maximum profit you can achieve. You may complete as many transactions as you like,
@@ -5615,7 +5386,6 @@
 // Note:
 // You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
 // The transaction fee is only charged once for each stock purchase and sale.
- 
 
 // Example 1:
 // Input: prices = [1,3,2,8,4,9], fee = 2
@@ -5630,17 +5400,16 @@
 // Example 2:
 // Input: prices = [1,3,7,5,10,3], fee = 3
 // Output: 6
- 
 
 // Constraints:
 // 1 <= prices.length <= 5 * 104
 // 1 <= prices[i] < 5 * 104
 // 0 <= fee < 5 * 104
 
-//🔴approach : Recursion 
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approach : Recursion
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve( vector<int>& prices, int fee) {
 
@@ -5648,10 +5417,9 @@
 //     vector<int> curr(2, 0) ;
 //     vector<int> next(2, 0) ;
 
-
 //     for(int index = n-1; index >= 0; index--){
 //         for(int buy = 0; buy <= 1; buy++) {
-      
+
 //             int profit = 0;
 
 //             if(buy) {
@@ -5675,26 +5443,24 @@
 //   int maxProfit(vector<int>& prices, int fee) {
 //         return solve(prices, fee) ;
 //  }
-//🔸time complexity: O(N)
-//🔸space complexity: O(1)
-
-
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(1)
 
 //                //❓Question : 1143. Longest Common Subsequence
 
 // Given two strings text1 and text2, return the length of their longest common subsequence.
 // If there is no common subsequence, return 0.
 
-// A subsequence of a string is a new string generated from the original string with 
-// some characters (can be none) deleted without changing the relative order of the 
+// A subsequence of a string is a new string generated from the original string with
+// some characters (can be none) deleted without changing the relative order of the
 // remaining characters.
 
 // For example, "ace" is a subsequence of "abcde".
 // A common subsequence of two strings is a subsequence that is common to both strings.
 
 // Example 1:
-// Input: text1 = "abcde", text2 = "ace" 
-// Output: 3  
+// Input: text1 = "abcde", text2 = "ace"
+// Output: 3
 // Explanation: The longest common subsequence is "ace" and its length is 3.
 
 // Example 2:
@@ -5706,7 +5472,7 @@
 // Input: text1 = "abc", text2 = "def"
 // Output: 0
 // Explanation: There is no such common subsequence, so the result is 0.
- 
+
 // Constraints:
 // 1 <= text1.length, text2.length <= 1000
 // text1 and text2 consist of only lowercase English characters.
@@ -5740,9 +5506,7 @@
 // //🔸time complexity: expo
 // //🔸space complexity: O(n)        //length of string
 
-
-
-// //🔴approch : Recursion + Memoization 
+// //🔴approch : Recursion + Memoization
 // #include<iostream>
 // #include<vector>
 // using namespace std;
@@ -5755,7 +5519,7 @@
 
 //   if(dp[i][j] != -1) {
 //     return dp[i][j] ;
-//   }  
+//   }
 
 //   int ans = 0 ;
 
@@ -5765,7 +5529,7 @@
 //   else{
 //     ans = max(solve(a, b, i+1, j, dp), solve(a, b, i, j+1, dp)) ;
 //   }
-  
+
 //   return dp[i][j] = ans ;
 // }
 
@@ -5776,8 +5540,6 @@
 // //🔸time complexity:  O(N*m)
 // //🔸space complexity: O(n)
 
-
-
 // //🔴approch : Tabulation
 // #include<iostream>
 // #include<vector>
@@ -5786,10 +5548,10 @@
 // int solve(string& a, string& b) {
 
 //   vector<vector<int>> dp(a.length()+1, vector<int>(b.length()+1, 0)) ;
-  
+
 //   for(int i=a.length()-1; i>=0; i--){
 //     for(int j=b.length()-1; j>=0; j--) {
-        
+
 //       int ans = 0 ;
 
 //       if( a[i] == b[j]) {
@@ -5798,7 +5560,7 @@
 //       else{
 //         ans = max(dp[i+1][j], dp[i][j+1]) ;
 //       }
-      
+
 //       dp[i][j] = ans ;
 //     }
 //   }
@@ -5811,20 +5573,19 @@
 // //🔸time complexity:  O(N*m)
 // //🔸space complexity: O(n^2)
 
-
-//🔴approch : space Optimisation
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approch : space Optimisation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve(string& a, string& b) {
 
 //   vector<int> curr(a.length()+1, 0) ;
 //   vector<int> next(b.length()+1, 0) ;
-  
+
 //   for(int i=a.length()-1; i>=0; i--){
 //     for(int j=b.length()-1; j>=0; j--) {
-        
+
 //       int ans = 0 ;
 
 //       if( a[i] == b[j]) {
@@ -5833,7 +5594,7 @@
 //       else{
 //         ans = max(next[j], curr[j+1]) ;
 //       }
-      
+
 //       curr[j] = ans ;
 //     }
 //     next = curr ;
@@ -5844,10 +5605,8 @@
 // int longestCommonSubsequence(string text1, string text2) {
 //     return solve(text1, text2) ;
 // }
-//🔸time complexity:  O(N*m)
-//🔸space complexity: O(n)
-
-
+// 🔸time complexity:  O(N*m)
+// 🔸space complexity: O(n)
 
 //                 //❓Question: 516. Longest Palindromic SUbsequence
 
@@ -5864,15 +5623,15 @@
 // Input: s = "cbbd"
 // Output: 2
 // Explanation: One possible longest palindromic subsequence is "bb".
- 
+
 // Constraints:
 // 1 <= s.length <= 1000
 // s consists only of lowercase English letters.
 
-//🔴approach : using previous questions optimised approach 
-// s = "cbbd" 
-// revStr = "dbbc"  //reverse original string
-// longest subsequence from both the string will be answer
+// 🔴approach : using previous questions optimised approach
+//  s = "cbbd"
+//  revStr = "dbbc"  //reverse original string
+//  longest subsequence from both the string will be answer
 
 // #include<iostream>
 // #include<vector>
@@ -5883,10 +5642,10 @@
 
 //   vector<int> curr(a.length()+1, 0) ;
 //   vector<int> next(b.length()+1, 0) ;
-  
+
 //   for(int i=a.length()-1; i>=0; i--){
 //     for(int j=b.length()-1; j>=0; j--) {
-        
+
 //       int ans = 0 ;
 
 //       if( a[i] == b[j]) {
@@ -5895,7 +5654,7 @@
 //       else{
 //         ans = max(next[j], curr[j+1]) ;
 //       }
-      
+
 //       curr[j] = ans ;
 //     }
 //     next = curr ;
@@ -5909,14 +5668,12 @@
 //         int ans = solve(s, reverseStr) ;
 //         return  ans ;
 // }
-//🔸time complexity:  O(N*N)
-//🔸space complexity: O(n)
-
-
+// 🔸time complexity:  O(N*N)
+// 🔸space complexity: O(n)
 
 //                     //❓Question: 72. Edit Distance
 
-// Given two strings word1 and word2, 
+// Given two strings word1 and word2,
 // return the minimum number of operations required to convert word1 to word2.
 
 // You have the following three operations permitted on a word:
@@ -5924,11 +5681,11 @@
 // Insert a character
 // Delete a character
 // Replace a character
- 
+
 // Example 1:
 // Input: word1 = "horse", word2 = "ros"
 // Output: 3
-// Explanation: 
+// Explanation:
 // horse -> rorse (replace 'h' with 'r')
 // rorse -> rose (remove 'r')
 // rose -> ros (remove 'e')
@@ -5936,13 +5693,13 @@
 // Example 2:
 // Input: word1 = "intention", word2 = "execution"
 // Output: 5
-// Explanation: 
+// Explanation:
 // intention -> inention (remove 't')
 // inention -> enention (replace 'i' with 'e')
 // enention -> exention (replace 'n' with 'x')
 // exention -> exection (replace 'n' with 'c')
 // exection -> execution (insert 'u')
- 
+
 // Constraints:
 // 0 <= word1.length, word2.length <= 500
 // word1 and word2 consist of lowercase English letters.
@@ -5967,7 +5724,7 @@
 //         return solve(a, b, i+1, j+1) ;
 //     }
 //     else{
-//         //insert 
+//         //insert
 //         int insertAns = 1 + solve(a, b, i, j+1);
 
 //         //delete
@@ -5987,7 +5744,6 @@
 // }
 // //🔸time complexity: expo
 // //🔸space complexity: O(n)         // length of string
-
 
 // //🔴approch : Recursion + Memoization
 // #include<iostream>
@@ -6013,7 +5769,7 @@
 //         return solve(a, b, i+1, j+1, dp) ;
 //     }
 //     else{
-//         //insert 
+//         //insert
 //         int insertAns = 1 + solve(a, b, i, j+1, dp);
 
 //         //delete
@@ -6036,8 +5792,6 @@
 // //🔸time complexity: O(n*m)
 // //🔸space complexity: O(n)         // length of minimum string
 
-
-
 // //🔴approch : Tabulation
 // #include<iostream>
 // #include<vector>
@@ -6056,7 +5810,6 @@
 //         dp[i][b.length()] = a.length() - i ;
 //     }
 
-
 //     for( int i=a.length()-1; i>=0; i--){
 //         for(int j=b.length()-1; j>=0; j--){
 
@@ -6066,7 +5819,7 @@
 //                 ans = dp[i+1][j+1];
 //             }
 //             else{
-//                 //insert 
+//                 //insert
 //                 int insertAns = 1 + dp[i][j+1];
 
 //                 //delete
@@ -6092,11 +5845,10 @@
 // //🔸time complexity: O(n*m)
 // //🔸space complexity: O(n)         // length of minimum string
 
-
-//🔴approch : space optimisation
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approch : space optimisation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve(string& a, string& b) {
 
@@ -6120,7 +5872,7 @@
 //                 ans = next[j+1];
 //             }
 //             else{
-//                 //insert 
+//                 //insert
 //                 int insertAns = 1 + curr[j+1];
 
 //                 //delete
@@ -6150,20 +5902,17 @@
 
 //     return solve(word1, word2) ;
 // }
-//🔸time complexity: O(n*m)
-//🔸space complexity: O(n)         // length of minimum string
+// 🔸time complexity: O(n*m)
+// 🔸space complexity: O(n)         // length of minimum string
 
+//                //🔴Question: 85. Maximal Rectangle
 
-
-
-//                //🔴Question: 85. Maximal Rectangle 
-
-// Given a rows x cols binary matrix filled with 0's and 1's, 
+// Given a rows x cols binary matrix filled with 0's and 1's,
 // find the largest rectangle containing only 1's and return its area.
 
 // Example 1:
 
-//  1  0  1  0  0  
+//  1  0  1  0  0
 //        _______
 //  1  0 |1  1  1|
 //  1  1 |1  1  1|
@@ -6185,35 +5934,33 @@
 // Example 3:
 // Input: matrix = [["1"]]
 // Output: 1
- 
+
 // Constraints:
 // rows == matrix.length
 // cols == matrix[i].length
 // 1 <= row, cols <= 200
 // matrix[i][j] is '0' or '1'.
 
-
-//🔴approach: using largest area in histogram code and Improvising in it
-// #include<iostream>
-// #include<vector>
-// #include<limits.h>
-// #include<stack>
-// using namespace std;
+// 🔴approach: using largest area in histogram code and Improvising in it
+//  #include<iostream>
+//  #include<vector>
+//  #include<limits.h>
+//  #include<stack>
+//  using namespace std;
 
 // //next smaller elem code:
 // vector<int> nextSmallerElement(vector<int> arr, int n) {
 //     stack<int> s ;
-//     s.push(-1) ;        
+//     s.push(-1) ;
 //     vector<int> ans(n) ;
-
 
 //     for(int i=n-1; i>=0; i--) {
 //         int curr = arr[i] ;
-       
+
 //         while( (s.top() != -1) && (arr[s.top()] >= curr)) {
 //             s.pop() ;
 //         }
-      
+
 //         ans[i] = s.top() ;
 //         s.push(i) ;
 //     }
@@ -6223,17 +5970,16 @@
 // //prev smaller elem code:
 // vector<int> prevSmallerElement(vector<int> arr, int n) {
 //     stack<int> s ;
-//     s.push(-1) ;        
+//     s.push(-1) ;
 //     vector<int> ans(n) ;
-
 
 //     for(int i=0; i<n; i++) {
 //         int curr = arr[i] ;
-       
+
 //         while( (s.top() != -1) && (arr[s.top()] >= curr)) {
 //             s.pop() ;
 //         }
-      
+
 //         ans[i] = s.top() ;
 //         s.push(i) ;
 //     }
@@ -6250,10 +5996,10 @@
 //     vector<int> prev(n) ;
 //     prev = prevSmallerElement(heights, n) ;
 
-//     int area = INT_MIN; 
+//     int area = INT_MIN;
 //     for(int i=0; i<n; i++) {
 //         int length = heights[i] ;
-         
+
 //         if(next[i] == -1){
 //             next[i] = n ;
 //         }
@@ -6265,9 +6011,8 @@
 //    return area ;
 // }
 
-
 // int maximalRectangle(vector<vector<char>>& matrix) {
-        
+
 //     vector<int> height(matrix[0].size(), 0) ;
 //     int maxi = INT_MIN ;
 
@@ -6285,15 +6030,12 @@
 //         maxi = max(maxi, largestRectangleArea(height)) ;
 //     }
 // }
-//🔸time complexity:  O( N * (m*n))
-//🔸space complexity: O(N)
-
-
-
+// 🔸time complexity:  O( N * (m*n))
+// 🔸space complexity: O(N)
 
 //                     //❓Question: 44. Wildcard Matching
 
-// Given an input string (s) and a pattern (p), implement wildcard pattern matching with 
+// Given an input string (s) and a pattern (p), implement wildcard pattern matching with
 // support for '?' and '*' where:
 
 // '?' Matches any single character.
@@ -6320,7 +6062,6 @@
 // s contains only lowercase English letters.
 // p contains only lowercase English letters, '?' or '*'.
 
-
 // //🔴approch :  Recursion
 // #include<iostream>
 // using namespace std;
@@ -6344,7 +6085,6 @@
 //         return true ;
 //     }
 
-
 //     //match
 //     if( str[i] == pattern[j] || pattern[j] == 'j') {
 //         return solve(str, pattern, i-1, j-1) ;
@@ -6362,7 +6102,6 @@
 // }
 // //🔸time complexity : expo
 // //🔸space complexity : O(1)
-
 
 // //🔴approch :  Recursion + Memoization
 // #include<iostream>
@@ -6388,11 +6127,10 @@
 //         return true ;
 //     }
 
-//     //step2: 
+//     //step2:
 //     if(dp[i][j] != -1){
 //         return dp[i][j] ;
 //     }
-
 
 //     //match
 //     if( str[i] == pattern[j] || pattern[j] == '?') {
@@ -6412,7 +6150,6 @@
 // }
 // //🔸time complexity : O(N*M)
 // //🔸space complexity : O(N*M)
-
 
 // //🔴approch :  1base indexing in to-down
 // #include<iostream>
@@ -6438,11 +6175,10 @@
 //         return true ;
 //     }
 
-//     //step2: 
+//     //step2:
 //     if(dp[i][j] != -1){
 //         return dp[i][j] ;
 //     }
-
 
 //     //match
 //     if( str[i-1] == pattern[j-1] || pattern[j-1] == '?') {
@@ -6463,14 +6199,13 @@
 // //🔸time complexity : O(N*M)
 // //🔸space complexity : O(N*M)
 
-
-//🔴approch :  Tabulation
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approch :  Tabulation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // bool solve(string& str, string& pattern){
-    
+
 //     vector<vector<int>> dp(str.length()+1, vector<int>(pattern.length()+1 ,0));
 //     //base case
 //     dp[0][0] = true ;
@@ -6485,7 +6220,6 @@
 //         }
 //         dp[0][j] = flag ;
 //     }
-
 
 //     for(int i=1; i<=str.length(); i++){
 //         for(int j=1; j<=pattern.length(); j++){
@@ -6517,7 +6251,6 @@
 // using namespace std;
 
 // bool solve(string& str, string& pattern){
-    
 
 //     vector<int> prev(pattern.length()+1, 0);
 //     vector<int> curr(pattern.length()+1, 0);
@@ -6535,7 +6268,6 @@
 //         }
 //         prev[j] = flag ;
 //     }
-
 
 //     for(int i=1; i<=str.length(); i++){
 //         for(int j=1; j<=pattern.length(); j++){
@@ -6561,4 +6293,3 @@
 // }
 // //🔸time complexity : O(N*M)
 // //🔸space complexity : O(M)        //m = pattern.size
-
