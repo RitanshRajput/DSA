@@ -432,3 +432,149 @@
 // 1<=p<=50
 // 1<=a[i],b[i]<=20
 // 1<=d[i]<=100
+
+// 🔴Approach:
+//  class Solution
+//  {
+//      public:
+//         void dfs(int vertex,pair<int,int> graph[], int &last, int &mpipe){
+
+//         pair<int, int> child = graph[vertex];
+//         if(child.first==0 && child.second==0) return;
+//         mpipe = min(mpipe, child.second);
+//         last=child.first;
+//         dfs(child.first,graph,last, mpipe);
+//     }
+
+//     vector<vector<int>> solve(int n,int p,vector<int> a,vector<int> b,vector<int> d) {
+//         pair<int,int> graph[n+1];
+//         vector<bool> present(n+1,false);
+//         vector<int> indegree(n+1,0);
+
+//         for(int i=0; i<p; ++i){
+//             ++indegree[b[i]];
+//             graph[a[i]]= {b[i],d[i]};
+//             present[a[i]]=true;
+//             present[b[i]]=true;
+//         }
+
+//         vector<vector<int>> ans;
+//         for(int i=1; i<=n; ++i){
+//             if(indegree[i]==0 && present[i]){
+//                 int last;
+//                 int mpipe= INT_MAX;
+//                 dfs(i, graph, last, mpipe);
+//                 ans.push_back({i,last,mpipe});
+//             }
+//         }
+//         return ans;
+//     }
+// }
+// 🔸time complexity: O(N+P)
+// 🔸space complexity: O(N+P)
+
+//          ❓Question: Fractional Knapsack
+
+// Given weights and values of N items, we need to put these items in a knapsack of capacity W to get the maximum total value in the knapsack.
+// Note: Unlike 0/1 knapsack, you are allowed to break the item here.
+
+// Example 1:
+
+// Input:
+// N = 3, W = 50
+// value[] = {60,100,120}
+// weight[] = {10,20,30}
+// Output:
+// 240.000000
+// Explanation:
+// Take the item with value 60 and weight 10, value 100 and weight 20 and split the third item with value 120 and weight 30, to fit it into weight 20. so it becomes (120/30)*20=80, so the total weight becomes 60+100+80.0=240.0
+// Thus, total maximum value of item we can have is 240.00 from the given capacity of sack.
+// Example 2:
+
+// Input:
+// N = 2, W = 50
+// value[] = {60,100}
+// weight[] = {10,20}
+// Output:
+// 160.000000
+// Explanation:
+// Take both the items completely, without breaking.
+// Total maximum value of item we can have is 160.00 from the given capacity of sack.
+// Your Task :
+// Complete the function fractionalKnapsack() that receives maximum capacity , array of structure/class and size N and returns a double value representing the maximum value in knapsack.
+// Note: The details of structure/class is defined in the comments above the given function.
+
+// Expected Time Complexity : O(NlogN)
+// Expected Auxilliary Space: O(1)
+
+// Constraints:
+// 1 <= N <= 105
+// 1 <= W <= 109
+// 1 <= valuei, weighti <= 104
+
+// 🔴Appraoch :
+// class Solution
+// {
+//     public:
+//     static bool greaterItem(Item one, Item two) {
+//         double itemOne = double(one.value) / double(one.weight);
+//         double itemTwo = double(two.value) / double(two.weight);
+//         return itemOne > itemTwo;
+//     }
+//     //Function to get the maximum total value in the knapsack.
+//     double fractionalKnapsack(int W, Item arr[], int n)
+//     {
+//         sort(arr, arr+n, greaterItem);
+//         double sum = 0.0;
+//         for(int i = 0; i < n; i++) {
+//             if(W > arr[i].weight) {
+//                 sum += arr[i].value;
+//                 W -= arr[i].weight;
+//             } else {
+//                 sum += double(arr[i].value) * W/double(arr[i].weight);
+//                 break;
+//             }
+//         }
+//         return sum;
+//     }
+// };
+// 🔸time complexity: O(N*logn)
+// 🔸space complexity: O(1)
+
+//    ❓Question: Choose and Swap
+
+// You are given a string s of lower case english alphabets. You can choose any two characters in the string and replace all the occurences of the first character with the second character and replace all the occurences of the second character with the first character. Your aim is to find the lexicographically smallest string that can be obtained by doing this operation at most once.
+
+// Example 1:
+// Input:
+// A = "ccad"
+// Output: "aacd"
+// Explanation:
+// In ccad, we choose a and c and after
+// doing the replacement operation once we get,
+// aacd and this is the lexicographically
+// smallest string possible.
+
+// Example 2:
+// Input:
+// A = "abba"
+// Output: "abba"
+// Explanation:
+// In abba, we can get baab after doing the
+// replacement operation once for a and b
+// but that is not lexicographically smaller
+// than abba. So, the answer is abba.
+
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function chooseandswap() which takes the string A as input parameters and returns the lexicographically smallest string that is possible after doing the operation at most once.
+
+// Expected Time Complexity: O(|A|) length of the string A
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1<= |A| <=105
+
+// 🔴Appraoch :
+
+// 🔸time complexity: O()
+// 🔸space complexity: O()
