@@ -47,7 +47,7 @@
 //
 //
 
-//              //❓Question: N meetings in one room
+//                      //❓Question: N meetings in one room
 
 // There is one meeting room in a firm. There are N meetings in the form of (start[i], end[i])
 // where start[i] is start time of meeting i and end[i] is finish time of meeting i.
@@ -123,7 +123,7 @@
 // 🔸space complexity: O(N)
 //
 
-//          //❓Question: Maximum meeting in One room
+//                   //❓Question: Maximum meeting in One room
 
 // There is one meeting room in a firm. There are N meetings in the form of (S[i], F[i])
 // where S[i] is the start time of meeting i and F[i] is the finish time of meeting i.
@@ -200,7 +200,7 @@
 // 🔸space complexity: O(N)
 //
 
-//              //❓Question: Job Sequencing Problem
+//                   //❓Question: Job Sequencing Problem
 
 // Given a set of N jobs where each jobi has a deadline and profit associated with it.
 // Each job takes 1 unit of time to complete and only one job can be scheduled at a time.
@@ -283,7 +283,7 @@
 // 🔸space complexity: O(N)
 //
 
-//          //❓Question: Huffman Encoding
+//                    //❓Question: Huffman Encoding
 
 // Given a string S of distinct character of size N and their corresponding frequency f[ ]
 // i.e. character S[i] has f[i] frequency. Your task is to build the Huffman tree print all
@@ -384,7 +384,7 @@
 // 🔸space complexity: O(N)
 //
 
-//              //❓Question: Water Connection Problem
+//                     //❓Question: Water Connection Problem
 
 // There are n houses and p water pipes in Geek Colony. Every house has at most one pipe
 // going into it and at most one pipe going out of it. Geek needs to install pairs of tanks
@@ -473,7 +473,52 @@
 // 🔸time complexity: O(N+P)
 // 🔸space complexity: O(N+P)
 
-//          ❓Question: Fractional Knapsack
+// 🔴Approach 1:
+//  void dfs(int node, vector<pair<int,int>>adj[], int& end, int&mw, int vis[]) {
+//          vis[node] = 1;
+
+//         for(auto i:adj[node]){
+//             if(vis[i.first]==0){
+//                 mw = min(mw, i.second);
+//                 end = i.first;
+//                 dfs(i.first, adj, end, mw, vis);
+//             }
+//         }
+//     }
+
+//     vector<vector<int>> solve(int n,int p,vector<int> a,vector<int> b,vector<int> diam)
+//     {
+//         int vis[n+1];
+//         memset(vis, 0, sizeof(vis));
+//         vector<vector<int>> ans;
+//         vector<int> in(n+1,0);
+//         vector<int> out(n+1, 0);
+//         vector<pair<int,int>> adj[n+1];
+
+//         for(int i=0; i<p; i++){
+//             out[a[i]]=1;
+//             in[b[i]]=1;
+//             adj[a[i]].push_back({b[i], diam[i]});
+//         }
+
+//         for(int i=1; i<=n; i++){
+//             if(in[i]==0 && out[i]==1 && vis[i]==0){
+//                 int start = i;
+//                 int end;
+//                 int minWeight = INT_MAX;
+//                 dfs(i, adj, end, minWeight, vis);
+
+//                 ans.push_back({start, end, minWeight});
+//             }
+//         }
+
+//         return ans;
+//     }
+// };
+// 🔸time complexity: O(P + N*N)
+// 🔸space complexity: O(4N)
+
+//                      ❓Question: Fractional Knapsack
 
 // Given weights and values of N items, we need to put these items in a knapsack of capacity W to get the maximum total value in the knapsack.
 // Note: Unlike 0/1 knapsack, you are allowed to break the item here.
@@ -541,7 +586,46 @@
 // 🔸time complexity: O(N*logn)
 // 🔸space complexity: O(1)
 
-//    ❓Question: Choose and Swap
+// 🔴 approach 1:
+//  class Solution
+//  {
+//      public:
+//      static bool cmp(pair<double, Item>a, pair<double, Item> b){
+//          return a.first > b.first;
+//      }
+
+//     double fractionalKnapsack(int W, Item arr[], int n)
+//     {
+//       vector<pair<double, Item>> V;
+
+//       for(int i=0; i<n; i++){
+//           double perUnitValue = double(arr[i].value) / double(arr[i].weight);
+//           pair<double, Item> p = make_pair(perUnitValue, arr[i]);
+//           V.push_back(p);
+//       }
+
+//       sort(V.begin(), V.end(), cmp);
+
+//       double totalValue = 0;
+
+//       for(int i=0; i<n; i++){
+//           if(V[i].second.weight > W){   // value is greater than weight then take only fraction
+//               totalValue += W*V[i].first;
+//               W = 0;
+//           }
+//           else{
+//               totalValue += V[i].second.value;
+//               W -= V[i].second.weight;
+//           }
+//       }
+
+//       return totalValue;
+//     }
+// };
+// 🔸time complexity: O(N*logn)
+// 🔸space complexity: O(1)
+
+//                  ❓Question: Choose and Swap
 
 // You are given a string s of lower case english alphabets. You can choose any two characters in the string and replace all the occurences of the first character with the second character and replace all the occurences of the second character with the first character. Your aim is to find the lexicographically smallest string that can be obtained by doing this operation at most once.
 
@@ -575,6 +659,30 @@
 // 1<= |A| <=105
 
 // 🔴Appraoch :
+// class Solution{
+// public:
+//     string chooseandswap(string a){
+//         map<char, bool> visited;
+//         for(char ch: a){
+//             visited[ch] = true;
+//         }
 
-// 🔸time complexity: O()
-// 🔸space complexity: O()
+//         for(char ch: a){
+//             for(char i='a'; i<ch; i++){
+//                 if(visited[i]){
+//                     for(char &chch: a){
+//                         if(chch == i)
+//                             chch = ch;
+//                         else if(chch == ch)
+//                             chch = i;
+//                     }
+//                     return a;
+//                 }
+//             }
+//             visited[ch] = false;
+//         }
+//         return a;
+//     }
+// };
+// 🔸time complexity: O(2N * 26)
+// 🔸space complexity: O(n)
