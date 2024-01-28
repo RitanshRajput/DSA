@@ -686,3 +686,148 @@
 // };
 // 🔸time complexity: O(2N * 26)
 // 🔸space complexity: O(n)
+
+//                  //❓Question: Maximum trains for which stoppage can be provided
+
+// You are given n-platform and two main running railway tracks for both directions.
+// Trains that need to stop at your station must occupy one platform for their stoppage and the
+// trains which need not stop at your station will run away through either of the main track without stopping.
+// Now, each train has three values first arrival time, second departure time, and
+// the third required platform number. We are given m such trains you have to tell the maximum number
+// of trains for which you can provide stoppage at your station.
+
+// Note: Trains are given in the form of {arrival time, departure time, platform Number} and
+// the arrival time and departure time are represented by a 4-digit integer as 1030 will
+// represent 10:30 and 912 will represent 09:12 (24 hour Clock).
+
+// Example 1:
+// Input : n = 3, m = 6
+// Train no.|  Arrival Time |Dept. Time | Platform No.
+//     1    |   10:00       |  10:30    |    1
+//     2    |   10:10       |  10:30    |    1
+//     3    |   10:00       |  10:20    |    2
+//     4    |   10:30       |  12:30    |    2
+//     5    |   12:00       |  12:30    |    3
+//     6    |   09:00       |  10:05    |    1
+// Output : Maximum Stopped Trains = 5
+// Explanation : If train no. 1 will left
+// to go without stoppage then 2 and 6 can
+// easily be accommodated on platform 1.
+// And 3 and 4 on platform 2 and 5 on platform 3.
+
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function maxStop() which takes two integers n no of platforms, m number of trains, and array trains[] as input parameter and returns an integer.
+
+// Expected Time Complexity: O(M*logM)
+// Expected Auxiliary Space: O(M)
+
+// Constraints:
+
+// 1 <= N <= 100
+// 1 <= M <= 104
+
+// 🔴approach :
+// struct comp {
+//     bool operator()(const vector<int>& a, const vector<int>& b) {
+//         if (a[1] == b[1]) {
+//             return a[3] <= b[3];
+//         }
+//         return a[1] <= b[1];
+//     }
+// };
+
+// class Solution {
+//   public:
+//     int maxStop(int n, int m, vector<vector<int>> &trains) {
+//             for(int i=0; i<m; i++)
+//             trains[i].push_back(i);
+
+//         sort(trains.begin(), trains.end(), comp());
+//         vector<int> platform(n+1, -1);
+
+//         int ans = 0;
+
+//         for(int i=0; i<m; i++) {
+//             if(platform[trains[i][2]] <= trains[i][0]) {
+//                 ans++;
+//                 platform[trains[i][2]] = trains[i][1];
+//             }
+//         }
+
+//         return ans;
+//     }
+// };
+// 🔸time complexity: O(m*logM)
+// 🔸space complexity: O(M)
+
+//              ❓ Question: Minimum Platform
+
+// Given arrival and departure times of all trains that reach a railway station.
+// Find the minimum number of platforms required for the railway station so that no train is kept waiting.
+// Consider that all the trains arrive on the same day and leave on the same day.
+// Arrival and departure time can never be the same for a train but we can have arrival time
+// of one train equal to departure time of the other. At any given instance of time,
+// same platform can not be used for both departure of a train and arrival of another train.
+// In such cases, we need different platforms.
+
+// Example 1:
+// Input: n = 6
+// arr[] = {0900, 0940, 0950, 1100, 1500, 1800}
+// dep[] = {0910, 1200, 1120, 1130, 1900, 2000}
+// Output: 3
+// Explanation:
+// Minimum 3 platforms are required to
+// safely arrive and depart all trains.
+
+// Example 2:
+// Input: n = 3
+// arr[] = {0900, 1100, 1235}
+// dep[] = {1000, 1200, 1240}
+// Output: 1
+// Explanation: Only 1 platform is required to
+// safely manage the arrival and departure
+// of all trains.
+
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function
+//  findPlatform() which takes the array arr[] (denoting the arrival times),
+// array dep[] (denoting the departure times) and the size of the array as inputs and returns the minimum number of
+// platforms required at the railway station such that no train waits.
+// Note: Time intervals are in the 24-hour format(HHMM) , where the first two characters represent hour
+// (between 00 to 23 ) and the last two characters represent minutes (this will be <= 59 and >= 0).
+
+// Expected Time Complexity: O(nLogn)
+// Expected Auxiliary Space: O(n)
+
+// Constraints:
+// 1 ≤ n ≤ 50000
+// 0000 ≤ A[i] ≤ D[i] ≤ 2359
+
+// 🔴appraoch :
+// class Solution{
+//     public:
+//     int findPlatform(int arr[], int dep[], int n)
+//     {
+//         sort(arr, arr+n);
+//         sort(dep, dep+n);
+
+//         int platform = 0;
+//         int arriveIndex = 0;
+//         int departIndex = 0;
+
+//         while(arriveIndex < n && departIndex < n){
+//             if(arr[arriveIndex] <= dep[departIndex]){
+//                 platform++;
+//             }
+//             else{
+//                 departIndex++;
+//             }
+
+//             arriveIndex++;
+//         }
+
+//         return platform ;
+//     }
+// };
+// 🔸time complexity: O(n*logn)
+// 🔸space complexity: O(1)
