@@ -998,3 +998,90 @@
 // };
 //  🔸time complexity: O(n*logn)
 //  🔸space complexity: O(1)
+
+//                  ❓ Question: Minimize cash flow
+
+// Given a number of friends who have to give or take some amount of money from one another.
+// Design an algorithm by which the total cash flow among all the friends is minimized.
+
+// Example 1:
+// Input:
+// N=3
+// transaction [][]={{0,100,0}, {0,0,100}, {100,0,0}}
+// Output:
+// transaction [][]={{0,0,0},{0,0,0},{0,0,0}}
+// Explanation:
+// Since friend one has to give friend two which has to give friend three and which in turn has to give one. So it is better than no one will do anything to anyone.
+
+// Example 2:
+// Input:
+// N=3
+// transaction [][]={{0,100,0},{0,0,200},{0,0,0}}
+// Output:
+// transaction [][]={0,0,100},{0,0,100},{0,0,0}
+// Explanation:
+// The net flow is minimized.
+
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function minCashFlow() which takes the transaction array and number of friends as input parameters and returns the new transaction array as output;.
+
+// Expected Time Complexity: O(N*N)
+// Expected Auxiliary Space: O(N*N)
+
+// Constraints:
+// 1 <= N <= 1000
+// 0 <= transaction[i][j] <= 1000
+
+// 🔴approach :
+// class Solution{
+//     public:
+//      int getMin(vector<int> &amount){
+//         int minInd = 0;
+//         for(int i = 1; i<amount.size();i++){
+//             if(amount[i] < amount[minInd]){
+//                 minInd = i;
+//             }
+//         }
+//         return minInd;
+//     }
+
+//     int getMax(vector<int> &amount){
+//         int maxInd = 0;
+//         for(int i = 1; i<amount.size();i++){
+//             if(amount[i] > amount[maxInd]){
+//                 maxInd = i;
+//             }
+//         }
+//         return maxInd;
+//     }
+
+//       void solve(vector<int> &amount,vector<vector<int>> &ans){
+//         int maxC = getMax(amount);
+//         int maxD = getMin(amount);
+//         if(amount[maxC] == 0 && amount[maxD] == 0){
+//             return ;
+//         }
+//         int mini = min(-amount[maxD],amount[maxC]);
+//         amount[maxC]-=mini;
+//         amount[maxD]+=mini;
+//         ans[maxD][maxC] = mini;
+//         solve(amount,ans);
+//     }
+
+//         vector<vector<int>> minCashFlow(vector<vector<int>> &arr, int n)
+//         {
+//            vector<int> amount(n,0);
+//            vector<vector<int>> ans(n,vector<int>(n,0));
+
+//             for(int i = 0 ; i <n; i++){
+//                 for(int j = 0; j<n; j++){
+//                     amount[i]+=(arr[j][i]-arr[i][j]);
+//                 }
+//             }
+
+//             solve(amount,ans);
+//             return ans;
+//         }
+// };
+//  🔸time complexity: O(N*N)
+//  🔸space complexity: O(N*N)
