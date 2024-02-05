@@ -1085,3 +1085,170 @@
 // };
 //  🔸time complexity: O(N*N)
 //  🔸space complexity: O(N*N)
+
+//          ❓: Minimum Cost to cut a board into squares
+
+// A board of length M and width N is given. The task is to break this board into M * N
+// squares such that cost of breaking is minimum. The cutting cost for each edge will be
+// given for the board in two arrays X[] and Y[]. In short, you need to choose such a sequence
+// of cutting such that cost is minimized. Return the minimized cost.
+
+// Example 1:
+// Input:
+// M = 6. N = 4
+// X[] = {2, 1, 3, 1, 4}
+// Y[] = {4, 1, 2}
+// Output: 42
+// Explanation:
+// For above board optimal way to cut into square is:
+// Total minimum cost in above case is 42. It is
+// evaluated using following steps.
+// Initial Value : Total_cost = 0
+// Total_cost = Total_cost + edge_cost * total_pieces
+// Cost 4 Horizontal cut:      Cost = 0 + 4*1 = 4
+// Cost 4 Vertical cut:        Cost = 4 + 4*2 = 12
+// Cost 3 Vertical cut:        Cost = 12 + 3*2 = 18
+// Cost 2 Horizontal cut:      Cost = 18 + 2*3 = 24
+// Cost 2 Vertical cut:        Cost = 24 + 2*3 = 30
+// Cost 1 Horizontal cut:      Cost = 30 + 1*4 = 34
+// Cost 1 Vertical cut:        Cost = 34 + 1*4 = 38
+// Cost 1 Vertical cut:        Cost = 38 + 1*4 = 42
+
+// Example 2:
+// Input:
+// M = 4, N = 4
+// X[] = {1, 1, 1}
+// Y[] = {1, 1, 1}
+// Output: 15
+// Explanation:
+
+// For above board optimal way to cut into square is:
+// Total minimum cost in above case is 15.
+// It is evaluated using following steps.
+// Initial Value :
+// Total_cost = 0 Total_cost = Total_cost + edge_cost * total_pieces
+// Cost 1 Horizontal cut: Cost = 0 + 1*1 = 1
+// Cost 1 Horizontal cut: Cost = 1 + 1*1 = 2
+// Cost 1 Horizontal cut: Cost = 2 + 1*1 = 3
+// Cost 1 Vertical cut:   Cost = 3 + 1*4 = 7
+// Cost 1 Vertical cut:   Cost = 7 + 1*4 = 11
+// Cost 1 Vertical cut:   Cost = 11 + 1*4 = 15
+
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function minimumCostOfBreaking() which takes a string S and returns an integer as output.
+
+// Expected Time Complexity: O(NlogN + MlogM)
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 2 <= N, M <= 105
+
+// 🔴approach : Greedy
+// class Solution {
+// public:
+
+//     int minimumCostOfBreaking(vector<int> X, vector<int> Y, int M, int N){
+
+//         sort(X.begin(),X.end(),greater<int>());
+//         sort(Y.begin(),Y.end(),greater<int>());
+
+//         int v=1,h=1;
+
+//         int i=0,j=0,cost = 0;
+//         while (i<X.size() && j<Y.size()) {
+//             if (X[i] >= Y[j]) {
+//                 cost += (X[i]*h);
+//                 v++;
+//                 i++;
+//             } else {
+//                 cost += (Y[j]*v);
+//                 h++;
+//                 j++;
+//             }
+//         }
+
+//         while (i<X.size()) {
+//             cost += (X[i]*h);
+//             v++;
+//             i++;
+//         }
+
+//         while (j<Y.size()) {
+//             cost += (Y[j]*v);
+//             h++;
+//             j++;
+//         }
+
+//         return cost;
+//     }
+// };
+
+//  🔸time complexity: O(N*Logn + M*logn)
+//  🔸space complexity: O(1)
+
+//              ❓: Check if it is possible to survive on Island
+
+// Geekina got stuck on an island. There is only one shop on this island and it is open on all
+// days of the week except for Sunday. Consider following constraints:
+// N – The maximum unit of food you can buy each day.
+// S – Number of days you are required to survive.
+// M – Unit of food required each day to survive.
+// Currently, it’s Monday, and she needs to survive for the next S days.
+// Find the minimum number of days on which you need to buy food from the shop so that she can survive the next S days, or determine that it isn’t possible to survive.
+
+// Example 1:
+// Input: S = 10, N = 16, M = 2
+// Output: 2
+// Explaination: One possible solution is to
+// buy a box on the first day (Monday),
+// it’s sufficient to eat from this box up to
+// 8th day (Monday) inclusive. Now, on the 9th
+// day (Tuesday), you buy another box and use
+// the chocolates in it to survive the 9th and
+// 10th day.
+
+// Example 2:
+// Input: S = 10, N = 20, M = 30
+// Output: -1
+// Explaination: She can’t survive even if
+// she buy food because the maximum number
+// of units she can buy in 1 day is less the
+// required food for 1 day.
+// Your Task:
+// You do not need to read input or print anything. Your task is to complete the function minimumDays() which takes S, N, and M as input parameters and returns the minimum number of days Geekina needs to buy food. Otherwise, returns -1 if she cannot survive.
+
+// Expected Time Complexity: O(1)
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1 ≤ N, S ≤ 50
+// 1 ≤ M ≤ 30
+
+// 🔴approach :
+//  class Solution{
+//  public:
+//      int minimumDays(int S, int N, int M){
+//          // code here
+//      int Totalsunday = S/7 ;
+
+//     int buyingDays = S - Totalsunday ;
+//     int totalFood = S*M ;
+//     int ans = 0 ;
+
+//     if(totalFood % N == 0) {
+//         ans = totalFood / N ;
+//     }
+//     else{
+//         ans = totalFood/N + 1 ;
+//     }
+
+//     if(ans <= buyingDays) {
+//         return ans ;
+//     }
+//     else{
+//         return -1 ;
+//     }
+//     }
+// };
+// 🔸time complexity: O(1)
+// 🔸space complexity: O(1)
