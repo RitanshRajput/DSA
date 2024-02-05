@@ -1252,3 +1252,67 @@
 // };
 // 🔸time complexity: O(1)
 // 🔸space complexity: O(1)
+
+//          ❓ Question: Maximum product subset of an array
+
+// Given an array A[]. The task is to find the maximum product possible with the subset
+// of elements present in the array. The maximum product can be a single element also.
+// Since the product can be large, return it modulo (109 + 7).
+
+// Example 1:
+// Input:
+// A[] = {-1, -1, -2, 4, 3}
+// Output: 24
+// Explanation: Maximum product will be ( -2 * -1 * 4 * 3 ) = 24
+
+// Example 2:
+// Input:
+// A[] = {-1, 0}
+// Output: 0
+
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function findMaxProduct() which takes an array of size N and returns an integer.
+
+// Expected Time Complexity: O(N)
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1 <= N <= 2 * 104
+// -10 <= A[i] <= 10
+
+// 🔴approach :
+// class Solution{
+//     public:
+//     long long int findMaxProduct(vector<int>&a, int n){
+//         if(n==1) return a[0];
+
+//         long int mod = 1e9+7;
+//         long long int maxNeg = INT_MIN;
+//         long long int result = 1;
+//         int zero = 0, neg = 0;
+
+//         for(int i=0; i<n; i++){
+//             if(a[i] == 0) {
+//                 zero++;
+//                 continue;
+//             }
+//             else if(a[i] < 0){
+//                 neg++;
+//                 maxNeg = max(maxNeg, (long long int)a[i]);
+//             }
+
+//             result = (result*a[i])%mod;
+//         }
+
+//         if(zero == n || (zero == n-1 && neg == 1))  return 0;
+
+//         if(neg%2 != 0){
+//             result = (result/maxNeg)%mod;
+//         }
+
+//         return result;
+//     }
+// };
+
+// 🔸time complexity: O(n)
+// 🔸space complexity: O(1)
