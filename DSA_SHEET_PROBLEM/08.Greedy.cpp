@@ -1316,3 +1316,349 @@
 
 // 🔸time complexity: O(n)
 // 🔸space complexity: O(1)
+
+//              ❓Question: Maximize sum after K negations
+
+// Given an array of integers of size N and a number K., You must modify array arr[] exactly K
+// number of times. Here modify array means in each operation you can replace any array element
+// either arr[i] by -arr[i] or -arr[i] by arr[i]. You need to perform this operation in such a
+// way that after K operations, the sum of the array must be maximum.
+
+// Example 1:
+// Input:
+// N = 5, K = 1
+// arr[] = {1, 2, -3, 4, 5}
+// Output:
+// 15
+// Explanation:
+// We have k=1 so we can change -3 to 3 and
+// sum all the elements to produce 15 as output.
+
+// Example 2:
+// Input:
+// N = 10, K = 5
+// arr[] = {5, -2, 5, -4, 5, -12, 5, 5, 5, 20}
+// Output:
+// 68
+// Explanation:
+// Here  we have k=5 so we turn -2, -4, -12 to
+// 2, 4, and 12 respectively. Since we have
+// performed 3 operations so k is now 2. To get
+// maximum sum of array we can turn positive
+// turned 2 into negative and then positive
+// again so k is 0. Now sum is
+// 5+5+4+5+12+5+5+5+20+2 = 68
+
+// Your Task:
+// You don't have to print anything, printing is done by the driver code itself. You have to complete the function maximizeSum()
+// which takes the array A[], its size N, and an integer K as inputs and returns the maximum possible sum.
+
+// Expected Time Complexity: O(N*logN)
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1 ≤ N,K ≤ 105
+// -109 ≤ Ai ≤ 109
+
+// 🔴approach :
+// class Solution{
+//     public:
+//     long long int maximizeSum(long long int a[], int n, int k)
+//     {
+//         sort(a,a+n);
+
+//         for(int i=0;i<n and k>0;i++) {
+//             if( a[i] < 0) {
+//                 a[i] = -a[i];
+//                 k--;
+//             }
+//         }
+
+//         if(k>0) {
+//             long long int sum = accumulate(a,a+n,0ll);
+//             if(k%2==0) return sum;
+//             else{
+//                 int j = *min_element(a, a+n);
+//                 sum = sum - j;
+//                 sum = sum - j;
+//                 return sum;
+//             }
+//         }
+
+//         return accumulate( a,a+n,0ll);
+//     }
+// };
+//  🔸time complexity: O(n*logn)
+//  🔸space complexity: O(1)
+
+//              ❓Question: Maximize sum(arr[i]*i) of an Array
+
+// Given an array A of N integers. Your task is to write a program to find the maximum
+// value of ∑arr[i]*i, where i = 0, 1, 2,., n 1.
+// You are allowed to rearrange the elements of the array.
+// Note: Since output could be large, hence module 109+7 and then print answer.
+
+// Example 1:
+// Input : Arr[] = {5, 3, 2, 4, 1}
+// Output : 40
+// Explanation:
+// If we arrange the array as 1 2 3 4 5 then
+// we can see that the minimum index will multiply
+// with minimum number and maximum index will
+// multiply with maximum number.
+// So 1*0+2*1+3*2+4*3+5*4=0+2+6+12+20 = 40 mod(109+7) = 40
+
+// Example 2:
+// Input : Arr[] = {1, 2, 3}
+// Output : 8
+
+// Your Task:
+// This is a function problem. The input is already taken care of by the driver code. You only need to complete the function Maximize() that takes an array (arr), sizeOfArray (n), and return the maximum value of an array. The driver code takes care of the printing.
+
+// Expected Time Complexity: O(nlog(n)).
+// Expected Auxiliary Space: O(1).
+
+// Constraints:
+// 1 ≤ N ≤ 107
+// 1 ≤ Ai ≤ N
+
+// 🔴approach :
+// class Solution{
+//     public:
+//     int Maximize(int a[],int n)
+//     {
+//         long result=0;
+//         sort(a,a+n);
+
+//         for(long i=0;i<n;i++){
+//            long maxsum = a[i]*i;
+//            result += maxsum;
+//         }
+
+//         return result%1000000007;
+//     }
+// };
+// 🔸time complexity: O(n*logn)
+// 🔸space complexity: o(1)
+
+//              ❓Question: Maximum sum of absolute difference of any permutation
+
+// Given an array, we need to find the maximum sum of the absolute difference of any permutation of the given array.
+
+// Examples:
+// Input : { 1, 2, 4, 8 }
+// Output : 18
+// Explanation : For the given array there are
+// several sequence possible
+// like : {2, 1, 4, 8}
+//        {4, 2, 1, 8} and some more.
+// Now, the absolute difference of an array sequence will be
+// like for this array sequence {1, 2, 4, 8}, the absolute
+// difference sum is
+// = |1-2| + |2-4| + |4-8| + |8-1|
+// = 14
+// For the given array, we get the maximum value for
+// the sequence {1, 8, 2, 4}
+// = |1-8| + |8-2| + |2-4| + |4-1|
+// = 18
+
+// 🔴approach :
+// class Solution{
+// int MaxSumDifference(int a[], int n) {
+
+//     vector<int> finalSequence;
+//     sort(a, a + n);
+
+//     for (int i = 0; i < n / 2; ++i) {
+//         finalSequence.push_back(a[i]);
+//         finalSequence.push_back(a[n - i - 1]);
+//     }
+
+//     if (n % 2 != 0) {
+//         finalSequence.push_back(a[n/2]);
+//     }
+
+//     int MaximumSum = 0;
+
+//     for (int i = 0; i < n - 1; ++i) {
+//         MaximumSum = MaximumSum + abs(finalSequence[i] - finalSequence[i + 1]);
+//     }
+
+//     MaximumSum = MaximumSum + abs(finalSequence[n - 1] - finalSequence[0]);
+
+//     return MaximumSum;
+// }
+// };
+// 🔸time complexity: O(N*logn)
+// 🔸space complexity: o(n)
+
+//          ❓ Question: Swap and Maximize
+
+// Given an array a[ ] of N elements. Consider array as a circular array i.e. element
+// after an is a1. The task is to find maximum sum of the absolute difference between
+// consecutive elements with rearrangement of array elements allowed i.e. after any
+// rearrangement of array elements find |a1 – a2| + |a2 – a3| + …… + |an-1 – an| + |an – a1|.
+
+// Example 1:
+// Input:
+// N = 4
+// a[] = {4, 2, 1, 8}
+// Output:
+// 18
+// Explanation: Rearrangement done is {1, 8,
+// 2, 4}. Sum of absolute difference between
+// consecutive elements after rearrangement =
+// |1 - 8| + |8 - 2| + |2 - 4| + |4 - 1| = 7 + 6 + 2 + 3 = 18.
+
+// Example 2:
+// Input:
+// N = 2
+// a[] = {10, 12}
+// Output:
+// 4
+
+// Your Task:
+// This is a function problem. You don't need to take any input, as it is already accomplished by the driver code. You just need to complete the function maxSum() that takes array a[ ] and its size N as input parameters and return the maximum sum using above method.
+
+// Expected Time Complexity: O(N*logN)
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 2 ≤ N ≤ 105
+
+// 🔴approach :
+// long long int maxSum(int arr[], int n)
+// {
+//     sort(arr,arr+n);
+//     int st=0, end=n-1;
+//     long long sum=0;
+
+//     while(st<end){
+//        sum += abs(arr[st]-arr[end]);
+//        st++;
+//        if(st<end){
+//          sum+=abs(arr[end]-arr[st]);
+//        }
+//        end--;
+//     }
+
+//     sum += arr[st]-arr[0];
+
+//     return sum;
+// }
+// 🔸time complexity: O(n*logn)
+// 🔸space complexity: O(1)
+
+//        ❓Question: Minimum Sum of Absolute Differences of Pairs
+
+// You are given two arrays A and B of equal length N. Your task is to pair each element
+// of array A to an element in array B, such that the sum of the absolute differences of
+// all the pairs is minimum.
+
+// Example 1:
+// Input:
+// N = 4
+// A = {4,1,8,7}
+// B = {2,3,6,5}
+// Output:
+// 6
+// Explanation:
+// If we take the pairings as (1,2), (4,3),
+// (7,5), and (8,6), the sum will be S =
+// |1 - 2| + |4 - 3| + |7 - 5| + |8 - 6| = 6.
+// It can be shown that this is the minimum sum we can get.
+
+// Example 2:
+// Input:
+// N = 3
+// A = {4,1,2}
+// B = {2,4,1}
+// Output:
+// 0
+// Explanation:
+// If we take the pairings as (4,4), (1,1), and
+// (2,2), the sum will be S = |4 - 4| + |1 - 1| +
+// |2 - 2| = 0. It can be shown that this is the
+// minimum sum we can get.
+
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function findMinSum() which takes the arrays A[], B[], and its size N as inputs and returns the minimum sum of the absolute differences of the pairs.
+
+// Expected Time Complexity: O(N*log(N))
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1 <= N <= 105
+// 0 <= A[i] <= 109
+// 0 <= B[i] <= 109
+// Sum of N over all test cases doesn't exceeds 106
+
+// 🔴approach :
+// class Solution{
+// public:
+//     long long findMinSum(vector<int> &A,vector<int> &B,int N){
+//         sort(A.begin(), A.end());
+//         sort(B.begin(), B.end());
+
+//         long long sum = 0;
+
+//         int i=0, j=0;
+//         while(i<N && j<N){
+//             sum += abs(A[i++]-B[j++]);
+//         }
+
+//         return sum;
+//     }
+// };
+// 🔸time complexity: O(n*logn)
+// 🔸space complexity: O(1)
+
+//              //❓Question:Shortest Job first
+
+// Geek is a software engineer. He is assigned with the task of calculating average waiting time of all the processes by following shortest job first policy.
+// The shortest job first (SJF) or shortest job next, is a scheduling policy that selects the waiting process with the smallest execution time to execute next.
+// Given an array of integers bt of size n. Array bt denotes the burst time of each process. Calculate the average waiting time
+// of all the processes and return the nearest integer which is smaller or equal to the output.
+// Note: Consider all process are available at time 0.
+
+// Example 1:
+// Input:
+// n = 5
+// bt = [4,3,7,1,2]
+// Output: 4
+// Explanation: After sorting burst times by shortest job policy, calculated average waiting time is 4.
+// Example 2:
+
+// Input:
+// n = 4
+// arr = [1,2,3,4]
+// Output: 2
+// Explanation: After sorting burst times by shortest job policy, calculated average waiting time is 2.
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function solve() which takes bt[] as input parameter and returns the average waiting time of all the processes.
+
+// Expected Time Complexity: O(nlog(n))
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1 <= n <= 105
+// 1 <= arr[i] <= 105
+
+// 🔴appraoch :
+// class Solution {
+//   public:
+//     long long solve(vector<int>& bt) {
+//       long long wt=0,temp=0;
+
+//       sort(bt.begin(),bt.end());
+
+//         for(int i=0;i<bt.size()-1;i++){
+//             temp+=bt[i];
+//             wt+=temp;
+//         }
+
+//         return floor(wt/bt.size());
+//     }
+// };
+// 🔸time complexity: O(n*logn)
+// 🔸space complexity: O(1)
