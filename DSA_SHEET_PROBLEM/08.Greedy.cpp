@@ -1662,3 +1662,317 @@
 // };
 // 🔸time complexity: O(n*logn)
 // 🔸space complexity: O(1)
+
+//           ❓Question: Page Faults in LRU
+
+// In operating systems that use paging for memory management, page replacement algorithm is needed to decide
+// which page needs to be replaced when the new page comes in. Whenever a new page is referred and is not
+// present in memory, the page fault occurs and Operating System replaces one of the existing pages with
+// a newly needed page.
+// Given a sequence of pages in an array pages[] of length N and memory capacity C, find the number of page
+// faults using Least Recently Used (LRU) Algorithm.
+// Note:- Before solving this example revising the OS LRU cache mechanism is recommended.
+
+// Example 1:
+// Input: N = 9, C = 4
+// pages = {5, 0, 1, 3, 2, 4, 1, 0, 5}
+// Output: 8
+// Explaination: memory allocated with 4 pages 5, 0, 1,
+// 3: page fault = 4
+// page number 2 is required, replaces LRU 5:
+// page fault = 4+1 = 5
+// page number 4 is required, replaces LRU 0:
+// page fault = 5 + 1 = 6
+// page number 1 is required which is already present:
+// page fault = 6 + 0 = 6
+// page number 0 is required which replaces LRU 3:
+// page fault = 6 + 1 = 7
+// page number 5 is required which replaces LRU 2:
+// page fault = 7 + 1  = 8.
+
+// Your Task:
+// You do not need to read input or print anything. Your task is to complete the function pageFaults() which takes N, C and pages[] as input parameters and returns the number of page faults.
+
+// Expected Time Complexity: O(N*C)
+// Expected Auxiliary Space: O(N)
+
+// Constraints:
+// 1 ≤ N ≤ 1000
+// 1 ≤ C ≤ 100
+// 1 ≤ pages[i] ≤ 1000
+
+// 🔴approach :
+// class Node
+// {
+//     public:
+//     Node* prev;
+//     Node* next;
+//     int val;
+
+//     Node(int key) {
+//         prev = NULL;
+//         next = NULL;
+//         val = key;
+//     }
+// };
+
+// class Solution{
+//     Node* head = new Node(-1);
+//     Node* tail = new Node(-1);
+//     int size;
+
+// public:
+
+//     Solution()
+//     {
+//        head->next = tail;
+//        tail->prev = head;
+//     }
+
+//     void addNode(Node* node)
+//     {
+//         Node* temp = head->next;
+//         node->next = temp;
+//         temp->prev = node;
+//         head->next = node;
+//         node->prev = head;
+//     }
+
+//     void deleteNode(Node* node)
+//     {
+//         Node* prevNode = node->prev;
+//         Node* nextNode = node->next;
+
+//         prevNode->next = nextNode;
+//         nextNode->prev = prevNode;
+//         delete(node);
+//     }
+
+//     int pageFaults(int N, int C, int pages[]){
+//         // code here
+//         size = 0;
+//         unordered_map<int,Node*> mp;
+//         int ans = 0;
+
+//         for(int i=0;i<N;i++) {
+//             int key = pages[i];
+
+//             if(size == C) {
+//                 if(mp.count(key) > 0) {
+//                     deleteNode(mp[key]);
+//                     Node* newNode = new Node(key);
+//                     addNode(newNode);
+//                     mp[key] = head->next;
+//                 }
+//                 else {
+//                     mp.erase(tail->prev->val);
+//                     deleteNode(tail->prev);
+//                     Node* newNode = new Node(key);
+//                     addNode(newNode);
+//                     ans++;
+//                     mp[key] = head->next;
+//                 }
+//             }
+//             else {
+//                  if(mp.count(key) > 0) {
+//                     deleteNode(mp[key]);
+//                     Node* newNode = new Node(key);
+//                     addNode(newNode);
+//                     mp[key] = head->next;
+//                 }
+//                 else {
+//                     Node* newNode = new Node(key);
+//                     addNode(newNode);
+//                     ans++;
+//                     mp[key] = head->next;
+//                     size++;
+//                 }
+//             }
+//         }
+//         return ans;
+//     }
+// };
+// 🔸time complexity: O(n*c)
+// 🔸space complexity: O(n)
+
+//          ❓Question: Smallest Subset with Greater Sum
+
+// In operating systems that use paging for memory management, page replacement algorithm is needed to
+// decide which page needs to be replaced when the new page comes in. Whenever a new page is referred
+// and is not present in memory, the page fault occurs and Operating System replaces one of the existing
+// pages with a newly needed page.
+// Given a sequence of pages in an array pages[] of length N and memory capacity C, find the number of page
+// faults using Least Recently Used (LRU) Algorithm.
+// Note:- Before solving this example revising the OS LRU cache mechanism is recommended.
+
+// Example 1:
+// Input: N = 9, C = 4
+// pages = {5, 0, 1, 3, 2, 4, 1, 0, 5}
+// Output: 8
+// Explaination: memory allocated with 4 pages 5, 0, 1,
+// 3: page fault = 4
+// page number 2 is required, replaces LRU 5:
+// page fault = 4+1 = 5
+// page number 4 is required, replaces LRU 0:
+// page fault = 5 + 1 = 6
+// page number 1 is required which is already present:
+// page fault = 6 + 0 = 6
+// page number 0 is required which replaces LRU 3:
+// page fault = 6 + 1 = 7
+// page number 5 is required which replaces LRU 2:
+// page fault = 7 + 1  = 8.
+
+// Your Task:
+// You do not need to read input or print anything. Your task is to complete the function pageFaults() which takes N, C and pages[] as input parameters and returns the number of page faults.
+
+// Expected Time Complexity: O(N*C)
+// Expected Auxiliary Space: O(N)
+
+// Constraints:
+// 1 ≤ N ≤ 1000
+// 1 ≤ C ≤ 100
+// 1 ≤ pages[i] ≤ 1000
+
+// 🔴approach :
+// class Solution{
+//     public:
+//     int minSubset(vector<int> &arr,int n){
+
+//         sort(arr.begin(), arr.end(), greater<int>());
+
+//         long sumLeft = 0;
+//         long sumRight = 0;
+//         int count = 0;
+//         for(int i=0; i<n; i++)
+//         {
+//             sumRight += arr[i];
+//         }
+
+//         for(int i=0; i<n; i++)
+//         {
+//             sumLeft += arr[i];
+//             sumRight -= arr[i];
+//             if(sumLeft <= sumRight)
+//             {
+//                count++;
+//             }
+//             else
+//                 return count+1;
+//         }
+//     }
+// };
+
+// 🔸time complexity: O(n*logn)
+// 🔸space complexity: O(1)
+
+//              //❓Question: Chocolate Distribution Problem
+
+// Given an array A[ ] of positive integers of size N, where each value represents the number of chocolates in a packet.
+// Each packet can have a variable number of chocolates. There are M students, the task is to distribute
+// chocolate packets among M students such that :
+// 1. Each student gets exactly one packet.
+// 2. The difference between maximum number of chocolates given to a student and minimum number of chocolates
+// given to a student is minimum.
+
+// Example 1:
+// Input:
+// N = 8, M = 5
+// A = {3, 4, 1, 9, 56, 7, 9, 12}
+// Output: 6
+// Explanation: The minimum difference between maximum chocolates and minimum chocolates is 9 - 3 = 6 by choosing following M packets :{3, 4, 9, 7, 9}.
+
+// Example 2:
+// Input:
+// N = 7, M = 3
+// A = {7, 3, 2, 4, 9, 12, 56}
+// Output: 2
+// Explanation: The minimum difference between maximum chocolates and minimum chocolates is 4 - 2 = 2 by choosing following M packets :{3, 2, 4}.
+// Your Task:
+// You don't need to take any input or print anything. Your task is to complete the function findMinDiff() which takes array A[ ], N and M as input parameters and returns the minimum possible difference between maximum number of chocolates given to a student and minimum number of chocolates given to a student.
+
+// Expected Time Complexity: O(N*Log(N))
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1 ≤ T ≤ 100
+// 1 ≤ N ≤ 105
+// 1 ≤ Ai ≤ 109
+// 1 ≤ M ≤ N
+
+// 🔴approach :
+// class Solution{
+//     public:
+//     long long findMinDiff(vector<long long> a, long long n, long long m){
+//        sort(a.begin(), a.end());
+//        long long start=1, end=n;
+//        long long result = abs(a[0]-a[m-1]);
+
+//        while(start < end){
+//            long long mini = start;
+//            long long maxi = start+m-1;
+
+//            if(maxi >= n) break;
+//            result = min(abs(a[mini] - a[maxi]), result);
+//            start++;
+//        }
+
+//         return result;
+//     }
+// };
+// 🔸time complexity: O(n*logn)
+// 🔸space complexity: O(1)
+
+//              ❓Question: K Centers Problem
+
+// You have given N cities numbered from 0 to N-1. The distance between each pair of cities is given
+// by N * N matrix MAT where MAT[i][j] denotes the distance between city i and j.
+// The task is to select K (K<= N) ATM servers  in such a way that the maximum distance of a city from the
+// ATM Server is minimized.
+
+// Example 1:
+// Input: N = 4, K = 2,
+// MAT[][] = {{0, 10, 7, 6},
+//            {10, 0, 8, 5},
+//            {7, 8, 0, 12},
+//            {6, 5, 12, 0}}
+// Output: 6
+// Explanation:
+
+// Your Task:
+// You don't need to read or print anything. Your task is to complete the function selectKcities() which takes N, K  and MAT[][] as input parameter and returns an integer, indicating the maximum distance of a city from the ATM Server, which is minimized.
+
+// Expected Time Complexity: O(N * K * (2 ^ N))
+// Expected Space Complexity: O(K)
+
+// Constraints:
+// 1 <= K <= N <= 15
+// 1 <= MAT[i][j] <= 10^9
+
+// 🔴approach :
+// class Solution{
+//     public:
+//     int solve(vector<vector<int>> &mat,int ind,int k,vector<int> price){
+//        int n = mat.size();
+//        if(k == 0 or ind == n){
+//            int ans = INT_MIN;
+//            for(int i = 0 ; i < n ; i++){
+//                ans = max(ans, price[i]);
+//            }
+//            return ans;
+//        }
+//        int a = solve(mat,ind + 1,k,price);
+//        for(int i = 0 ; i < n ; i ++){
+//            price[i] = min(price[i],mat[ind][i]);
+//        }
+//        int b = solve(mat,ind + 1, k - 1 ,price);
+//        return min(a,b);
+
+//     }
+
+//     int selectKcities(int n, int k, vector<vector<int>>& mat){
+//       vector<int> price(n,INT_MAX);
+//       return solve(mat,0,k,price);
+//     }
+// };
+// 🔸time complexity: O(N * k * (2^N))
+// 🔸space complexity: O(N)
