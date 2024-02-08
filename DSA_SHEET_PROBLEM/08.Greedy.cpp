@@ -1976,3 +1976,316 @@
 // };
 // 🔸time complexity: O(N * k * (2^N))
 // 🔸space complexity: O(N)
+
+//          ❓Question: Minimum Cost of ropes
+
+// There are given N ropes of different lengths, we need to connect these ropes into one rope.
+// The cost to connect two ropes is equal to sum of their lengths.
+// The task is to connect the ropes with minimum cost. Given N size array arr[] contains the lengths of the ropes.
+
+// Example 1:
+// Input:
+// n = 4
+// arr[] = {4, 3, 2, 6}
+// Output:
+// 29
+// Explanation:
+// We can connect the ropes in following ways.
+// 1) First connect ropes of lengths 2 and 3.
+// Which makes the array {4, 5, 6}. Cost of
+// this operation 2+3 = 5.
+// 2) Now connect ropes of lengths 4 and 5.
+// Which makes the array {9, 6}. Cost of
+// this operation 4+5 = 9.
+// 3) Finally connect the two ropes and all
+// ropes have connected. Cost of this
+// operation 9+6 =15
+// Total cost for connecting all ropes is 5
+// + 9 + 15 = 29. This is the optimized cost
+// for connecting ropes.
+// Other ways of connecting ropes would always
+// have same or more cost. For example, if we
+// connect 4 and 6 first (we get three rope of 3,
+// 2 and 10), then connect 10 and 3 (we get
+// two rope of 13 and 2). Finally we
+// connect 13 and 2. Total cost in this way
+// is 10 + 13 + 15 = 38.
+
+// Example 2:
+// Input:
+// n = 5
+// arr[] = {4, 2, 7, 6, 9}
+// Output:
+// 62
+// Explanation:
+// First, connect ropes 4 and 2, which makes
+// the array {6,7,6,9}. Cost of
+// this operation 4+2 = 6. Next, add ropes
+// 6 and 6, which results in {12,7,9}.
+// Cost of this operation 6+6 = 12.
+// Then, add 7 and 9, which makes the array {12,16}.
+// Cost of this operation 7+9 = 16. And
+// finally, add these two which gives {28}.
+// Hence, the total cost is 6 + 12 + 16 +
+// 28 = 62.
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function minCost() which takes an integer array arr[] and an integer n as arguments and returns the minimum cost.
+
+// Expected Time Complexity : O(nlogn)
+// Expected Auxilliary Space : O(n)
+
+// Constraints:
+// 1 ≤ N ≤ 200000
+// 1 ≤ arr[i] ≤ 106
+
+// 🔴appraoch :
+// class Solution
+// {
+//     public:
+//     //Function to return the minimum cost of connecting the ropes.
+//     long long minCost(long long arr[], long long n) {
+//         if(n<=1) return 0;
+
+//         priority_queue<long long, vector<long long>, greater<long long>> pq;
+
+//         for(long long i=0; i<n; i++){
+//             pq.push(arr[i]);
+//         }
+
+//         long long cost = 0;
+
+//         while(pq.size() > 1){
+//             long long a = pq.top();
+//             pq.pop();
+//             long long b = pq.top();
+//             pq.pop();
+
+//             cost += a+b;
+
+//             pq.push(a+b);
+//         }
+
+//         return cost;
+//     }
+// };
+//  🔸time complexity: O(n*logn)
+//  🔸space complexity: O(n)
+
+//              //❓Question: Smallest Numbers
+
+// The task is to find the smallest number with given sum of digits as S and number of digits as D.
+
+// Example 1:
+// Input:
+// S = 9
+// D = 2
+// Output:
+// 18
+// Explanation:
+// 18 is the smallest number
+// possible with sum = 9
+// and total digits = 2.
+
+// Example 2:
+// Input:
+// S = 20
+// D = 3
+// Output:
+// 299
+// Explanation:
+// 299 is the smallest number
+// possible with sum = 20
+// and total digits = 3.
+
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function smallestNumber() which takes the two integers
+// S and D and returns a string which is the smallest number if possible, else return "-1".
+
+// Expected Time Complexity: O(D)
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1 ≤ S ≤ 100
+// 1 ≤ D ≤ 6
+
+// 🔴approach:
+// class Solution{
+// public:
+//     string smallestNumber(int S, int D){
+//         string ans = "";
+//         char arr[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+//         while(D){
+//             int cal = S-D+1;
+
+//             if(S > 9){
+//                 ans = '9' + ans;
+//                 S = S-9;
+//             }
+//             else if( S <=9 and D != 1){
+//                 ans = arr[S-1] + ans;
+//                 S = 1;
+//             }
+//             else if( S<=9 and D == 1){
+//                 ans = arr[S] + ans;
+//                 S = 0;
+//             }
+//             else if( S == 1 and D != 1){
+//                 ans = '0' + ans;
+//             }
+
+//             D--;
+//         }
+
+//         if(S !=0) return "-1";
+//         return ans;
+//     }
+// };
+// 🔸time complexity: O(D)
+// 🔸space complexity: O(1)
+
+//                  //❓Question: Rearrange characters
+
+// Given a string S with repeated characters. The task is to rearrange characters in a string such that no two adjacent characters are the same.
+// Note: The string has only lowercase English alphabets and it can have multiple solutions. Return any one of them.
+
+// Example 1:
+
+// Input : str = "geeksforgeeks"
+// Output: 1
+// Explanation: All the repeated characters of the
+// given string can be rearranged so that no
+// adjacent characters in the string is equal.
+// Any correct rearrangement will show a output
+// of 1.
+// Example 2:
+
+// Input : str = "bbbbb"
+// Output: 0
+// Explanation: Repeated characters in the string
+// cannot be rearranged such that there should not
+// be any adjacent repeated character.
+// Your task :
+// You don't have to read input or print anything. Your task is to complete the functionrearrangeString() which takes the string as input and returns the modified string. If the string cannot be modified return "-1".
+// Note:The generatedoutput is 1 if the string is successfully rearranged and is 0 if rearranging is not possible.
+
+// Expected Time Complexity : O(NlogN), N = length of String
+// Expected Auxiliary Space : O(number of english alphabets)
+
+// Constraints :
+// 1 <= length of string <= 104
+
+// 🔴approach:
+//  class Solution
+//  {
+//      public:
+//       string rearrangeString(string str){
+//          unordered_map<char, int> mp;
+//          for(char c : str){
+//              mp[c]++;
+//          }
+
+//         priority_queue<pair<int, char>> pq;
+//         for(auto& it: mp){
+//             pq.push({it.second, it.first});
+//         }
+
+//         pair<int, char> prev = {-1, '#'};
+//         string ans = "";
+
+//         while(!pq.empty()){
+//             pair<int, char> curr = pq.top();
+//             pq.pop();
+
+//             curr.first--;
+//             ans += curr.second;
+
+//             if(prev.first > 0){
+//                 pq.push(prev);
+//             }
+
+//             prev = curr;
+
+//             if(pq.empty() && prev.first > 0){
+//                 return "-1";
+//             }
+//         }
+
+//         return ans;
+//     }
+// };
+// 🔸time complexity: O(N*Logn)
+// 🔸space complexity: O(N)
+
+//              //❓Question: Find Maximum Equal sum of Three Stacks
+
+// Given three stacks S1, S2 & S3 of size N1, N2 & N3 respectively, having only Positive Integers.
+// The task is to find the possible equal maximum sum of the stacks with the removal of top elements allowed.
+//  Stacks are represented as an array, and the first index of the array represents the top element of the stack.
+
+// Example 1:
+// Input:
+// N1 = 3, N2 = 4, N3 = 2
+// S1 = {4,2,3}
+// S2 = {1,1,2,3}
+// S3= {1,4}
+// Output:
+// 5
+// Explanation:
+// We can pop 1 element from the 1st stack, and 2
+// elements from the 2nd stack. Now remaining elements
+// yield the equal sum of the three stacks, that is 5.
+
+// Example 2:
+// Input:
+// N1 =2, N2 = 1, N3 = 3
+// S1 = {4,7}
+// S2 = {10}
+// S3 = {1,2,3}
+// Output:
+// 0
+// Explanation:
+// We will never get an equal sum after popping
+// some elements, so the answer will be 0.
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function maxEqualSum()
+// which takes the arrays S1[], S2[], and S3[] and their sizes N1, N2, and N3 as inputs and returns the maximum equal sum we can obtain.
+
+// Expected Time Complexity: O(N1+N2+N3)
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1 <= N1, N2, N3 <= 105
+// 1 <= S1[i], S2[i], S3[i] <= 103
+// The sum, N1+N2+N3 doesn't exceed 106
+
+// 🔴approach :
+// class Solution{
+// public:
+//     int maxEqualSum(int N1,int N2,int N3,vector<int> &S1,vector<int> &S2,vector<int> &S3){
+//         int sum1 = accumulate(S1.begin(), S1.end(), 0);
+//         int sum2 = accumulate(S2.begin(), S2.end(), 0);
+//         int sum3 = accumulate(S3.begin(), S3.end(), 0);
+
+//         int i = 0, j = 0, k = 0;
+
+//         while (i < N1 && j < N2 && k < N3) {
+//             if (sum1 == sum2 && sum2 == sum3) {
+//                 return sum1;
+//             }
+
+//             if (sum1 >= sum2 && sum1 >= sum3) {
+//                 sum1 -= S1[i++];
+//             }
+//             else if (sum2 >= sum1 && sum2 >= sum3) {
+//                 sum2 -= S2[j++];
+//             }
+//             else if (sum3 >= sum1 && sum3 >= sum2) {
+//                 sum3 -= S3[k++];
+//             }
+//         }
+
+//         return 0;
+//     }
+// };
+//  🔸time complexity: O(N1+N2+N3)
+//  🔸space complexity: O(N)
