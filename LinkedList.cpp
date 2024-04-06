@@ -1,53 +1,51 @@
-//                             //🔴🔴🔴 LINKED LIST 
+//                             //🔴🔴🔴 LINKED LIST
 
-//🔸A Linked List is a linear data structure which looks like a chain of nodes, 
-//  where each node is a different element. Unlike Arrays, Linked List elements 
-//  are not stored at a contiguous location. 
+// 🔸A Linked List is a linear data structure which looks like a chain of nodes,
+//   where each node is a different element. Unlike Arrays, Linked List elements
+//   are not stored at a contiguous location.
 
-//🔸It is basically chains of nodes, each node contains information such as data and 
-//  a pointer to the next node in the chain. In the linked list there is a head pointer, 
-//  which points to the first element of the linked list, and if the list is empty then 
-//  it simply points to null or nothing.
+// 🔸It is basically chains of nodes, each node contains information such as data and
+//   a pointer to the next node in the chain. In the linked list there is a head pointer,
+//   which points to the first element of the linked list, and if the list is empty then
+//   it simply points to null or nothing.
 
-//🔴 Why linked list data structure needed?
+// 🔴 Why linked list data structure needed?
 
-//🔸1.Dynamic Data structure:
-//  The size of memory can be allocated(grow) or de-allocated(shrink) at run time based on the operation insertion or deletion.
+// 🔸1.Dynamic Data structure:
+//   The size of memory can be allocated(grow) or de-allocated(shrink) at run time based on the operation insertion or deletion.
 
-//🔸2.Ease of Insertion/Deletion: 
-//  The insertion and deletion of elements are simpler than arrays since no elements need to be shifted after insertion and deletion,
-//  Just the address needed to be updated.
+// 🔸2.Ease of Insertion/Deletion:
+//   The insertion and deletion of elements are simpler than arrays since no elements need to be shifted after insertion and deletion,
+//   Just the address needed to be updated.
 
-//🔸3.Efficient Memory Utilization:
-//  As we know Linked List is a dynamic data structure the size increases or decreases as per the requirement 
-//  so this avoids the wastage of memory. 
+// 🔸3.Efficient Memory Utilization:
+//   As we know Linked List is a dynamic data structure the size increases or decreases as per the requirement
+//   so this avoids the wastage of memory.
 
-//🔸4.Implementation: 
-//  Various advanced data structures can be implemented using a linked list like a stack, queue, graph, hash maps, etc.
+// 🔸4.Implementation:
+//   Various advanced data structures can be implemented using a linked list like a stack, queue, graph, hash maps, etc.
 
+// 🔸Node :
+//  Node contains information such as data and a pointer (address of) to the next node in the chain
+//  If no node is present then pointer points to NULL
 
-//🔸Node :
-// Node contains information such as data and a pointer (address of) to the next node in the chain
-// If no node is present then pointer points to NULL
+// ex:
+//  address:      100              104              108              112
+//             ___________      ___________      ___________      ___________
+//            [data | 104 ] == [data | 108 ] == [data | 112 ] == [data | NULL]
+//             ------------      -----------     -----------      -----------
 
-//ex:
-// address:      100              104              108              112
-//            ___________      ___________      ___________      ___________
-//           [data | 104 ] == [data | 108 ] == [data | 112 ] == [data | NULL]
-//            ------------      -----------     -----------      -----------
-
-//   🔴 Types of linked lists: 
+//   🔴 Types of linked lists:
 // There are mainly three types of linked lists:
 
-//🔘Single-linked list
-//🔘Double-linked list
-//🔘Circular-linked list
-//🔘Circular-Doubly-linked list
-
+// 🔘Single-linked list
+// 🔘Double-linked list
+// 🔘Circular-linked list
+// 🔘Circular-Doubly-linked list
 
 //                      🔘Singly-linked list
 
-// Traversal of items can be done in the forward direction only due to 
+// Traversal of items can be done in the forward direction only due to
 // the linking of every node to its next node.
 
 // address:     100              104              108              112
@@ -57,9 +55,9 @@
 //                  |                |                |                 |
 //                node              node            node              node
 
-//🔸 implementation :
-// #include<iostream>
-// using namespace std;
+// 🔸 implementation :
+//  #include<iostream>
+//  using namespace std;
 
 // //creating a node
 // class Node {
@@ -84,11 +82,9 @@
 //     return 0;
 // }
 
-
-
-//🔴Insertion in Singly LinkedList :
-//🔴Traversing in Singly LinkedList :
-//🔴deletion in Singly LinkedList :
+// 🔴Insertion in Singly LinkedList :
+// 🔴Traversing in Singly LinkedList :
+// 🔴deletion in Singly LinkedList :
 
 // #include<iostream>
 // using namespace std;
@@ -99,7 +95,7 @@
 //     public:
 //     int data ;
 //     Node* next;
-   
+
 //     //constructor
 //     Node(int data) {
 //         this -> data = data ;
@@ -110,10 +106,10 @@
 //    ~Node() {
 //      int value = this -> data ;
 
-//      //freeing memory 
+//      //freeing memory
 //      if( this -> next != NULL ){
 //         delete next ;                    // if next not == null , then delete
-//         this -> next = NULL;             // and makes current next == null 
+//         this -> next = NULL;             // and makes current next == null
 //      }
 //      cout<< "memory is free for node with data : "<< value << endl ;
 //    }
@@ -134,7 +130,7 @@
 
 //     //new node creating at tail
 //     Node* temp = new Node(d) ;
-//     tail -> next = temp ; 
+//     tail -> next = temp ;
 //     tail  = temp ;
 
 // }
@@ -158,11 +154,11 @@
 
 //     // if we are inserting at last position then update tail , so that tail will point to new node not the previous tail
 //     if(temp -> next == NULL){
-//         insertionAtTail(tail, d); 
+//         insertionAtTail(tail, d);
 //         return ;
 //     }
 
-//     //creating node for d 
+//     //creating node for d
 //     Node* nodeToInsert = new Node(d) ;
 //     nodeToInsert -> next = temp -> next ;
 //     temp -> next = nodeToInsert ;
@@ -175,7 +171,7 @@
 //     if(position == 1){
 //       Node* temp = head ;
 //       head = head -> next ;
-      
+
 //       //memory freeing of head /first node from heap
 //       temp -> next = NULL ;
 //       delete temp ;
@@ -186,12 +182,11 @@
 //       Node* previous = NULL ;
 
 //       int count = 1 ;
-//       while(count < position ){
+//       while(count < position){
 //         previous = current ;
 //         current = current -> next ;
 //         count++ ;
 //       }
-
 
 //       //memory freeing of the node at the given position
 //       previous -> next = current -> next ;
@@ -204,10 +199,9 @@
 //     }
 // }
 
-
 // //🔸function to (traverse) print element in Node
 // void print(Node* &head){
-    
+
 //     Node* temp = head ;
 
 //     while(temp != NULL) {
@@ -219,9 +213,8 @@
 
 // int main() {
 
-// //create a new node 
+// //create a new node
 // Node* node1 = new Node(10) ;
-
 
 // //🔸Inserting from head
 // // Node* head = node1 ;
@@ -232,7 +225,6 @@
 
 // // insertAtHead(head , 30) ;
 // // print(head) ;                  //output : 30 20 10
-
 
 // //🔸Inserting from Tail
 // Node* head = node1 ;
@@ -245,22 +237,17 @@
 // insertionAtTail(tail , 30) ;
 // print(head) ;                  //output : 10 20 30
 
-
-// //🔸Inserting at any position 
+// //🔸Inserting at any position
 // insertionAtPosition(head, tail, 4, 22) ;
 // print(head) ;                 //output: 10 20 22 30  (inserted 22 at 3rd position)
-
 
 // //to verify if head and tail pointing to correct node after insertion
 // cout<<"Head after insertion : "<< head -> data <<endl ;
 // cout<<"tail after insertion : "<< tail -> data <<endl ;
 
-
 // //🔸Deletion of any position :
 // deleteNode(4, head, tail) ;
 // print(head) ;                     //output: 10 20 30  (memory is free for node with data : 22)
-
-
 
 // //to verify if head and tail pointing to correct node after deletion
 // cout<<"Head after insertion : "<< head -> data <<endl ;
@@ -269,42 +256,36 @@
 //     return 0;
 // }
 
-
-
-
 //                           //🔘Double linked list
 
-//🔸A Doubly Linked List (DLL) contains an extra pointer, typically called the previous pointer,
-//  together with the next pointer and data which are there in the singly linked list.
+// 🔸A Doubly Linked List (DLL) contains an extra pointer, typically called the previous pointer,
+//   together with the next pointer and data which are there in the singly linked list.
 
-//🔴Advantages of DLL over the singly linked list:
-//1. A DLL can be traversed in both forward and backward directions. 
-//2. The delete operation in DLL is more efficient if a pointer to the node to be deleted is given. 
-//3. We can quickly insert a new node before a given node. 
-//4. In a singly linked list, to delete a node, a pointer to the previous node is needed. 
-//   To get this previous node, sometimes the list is traversed. 
-//   In DLL, we can get the previous node using the previous pointer. 
+// 🔴Advantages of DLL over the singly linked list:
+// 1. A DLL can be traversed in both forward and backward directions.
+// 2. The delete operation in DLL is more efficient if a pointer to the node to be deleted is given.
+// 3. We can quickly insert a new node before a given node.
+// 4. In a singly linked list, to delete a node, a pointer to the previous node is needed.
+//    To get this previous node, sometimes the list is traversed.
+//    In DLL, we can get the previous node using the previous pointer.
 
-//🔴Disadvantages of DLL over the singly linked list:
-//1.Every node of DLL Requires extra space for a previous pointer. 
-//  It is possible to implement DLL with a single pointer though
-//2.All operations require an extra pointer previous to be maintained. 
-//  For example, in insertion, we need to modify previous pointers together with the next pointers.
-//  For example in the following functions for insertions at different positions, we need 1 or 2 extra steps to set the previous pointer.
+// 🔴Disadvantages of DLL over the singly linked list:
+// 1.Every node of DLL Requires extra space for a previous pointer.
+//   It is possible to implement DLL with a single pointer though
+// 2.All operations require an extra pointer previous to be maintained.
+//   For example, in insertion, we need to modify previous pointers together with the next pointers.
+//   For example in the following functions for insertions at different positions, we need 1 or 2 extra steps to set the previous pointer.
 
+// ex :
+//  address :   100                   104                   108                   112
+//   Null <=  [Null | data | 104] == [100 | data | 108] == [104 | data | 112] == [108 | data | NULL] => NULL
+//                      |                                                                |
+//                    Head                                                             tail
 
-
-//ex : 
-// address :   100                   104                   108                   112
-//  Null <=  [Null | data | 104] == [100 | data | 108] == [104 | data | 112] == [108 | data | NULL] => NULL
-//                     |                                                                |            
-//                   Head                                                             tail
-
-
-//🔸Implementation
-//🔸Insertion, traversal in Doubly linkedlist :
-// #include<iostream>
-// using namespace std;
+// 🔸Implementation
+// 🔸Insertion, traversal in Doubly linkedlist :
+//  #include<iostream>
+//  using namespace std;
 
 // // main node
 // class Node{
@@ -332,11 +313,10 @@
 //    }
 // };
 
-
 // //🔸function to Insertion in Doubly linkedlist (from head)
 // int insertAtHead(Node* &head, Node* &tail, int d){
-     
-//     //if there is no node 
+
+//     //if there is no node
 //     if( head == NULL) {
 //         Node* temp = new Node(d) ;
 //         head = temp ;
@@ -369,7 +349,7 @@
 
 // //🔸function to Insert element in any position :
 // void insertAtPosition(Node* &head, Node* &tail, int position, int d){
-        
+
 //         //if inserting at 1st position
 //         if(position == 1) {
 //             insertAtHead(head, tail, d) ;
@@ -390,7 +370,7 @@
 //         insertAtTail(tail, head, d) ;
 //         return ;
 //        }
-        
+
 //       //insertion at given position
 //       Node* nodeToInsert = new Node(d) ;         //create a node
 //       nodeToInsert -> nextAdd = temp -> nextAdd ;  // newNode ka nextadd = pointing to temp ka nextadd
@@ -402,8 +382,8 @@
 
 // //🔸function to Delete any node from Doubly Linkedlist
 // void deleteNode (Node* &head, Node* &tail, int position) {
-    
-//     //if we want to delete 1st node (or head) 
+
+//     //if we want to delete 1st node (or head)
 //     if( position == 1){
 //         Node* temp = head ;
 //         temp -> nextAdd -> prevAdd = NULL ;
@@ -423,31 +403,30 @@
 //         current = current -> nextAdd ;
 //         count++ ;
 //     }
-     
+
 //     //for deleting tail
 //     if(current  ==  tail) {
 //        previous -> nextAdd = current -> nextAdd ;
 //        tail = previous ;
 //        current -> prevAdd = NULL ;
-//        delete current ; 
+//        delete current ;
 //     return ;
 //     }
-    
+
 //     previous -> nextAdd = current -> nextAdd ;
 //     current -> nextAdd -> prevAdd = current -> prevAdd ;
 //     current -> nextAdd = NULL ;
 //     current -> prevAdd = NULL ;
-//     delete current; 
+//     delete current;
 
 //     }
 // }
-
 
 // //🔸function to print (get) length of a Doubly linkedList
 // int getLength(Node* head){
 
 //     int len = 0;
-//     Node* temp = head; 
+//     Node* temp = head;
 
 //     while( temp != NULL){
 //         len++ ;
@@ -459,7 +438,7 @@
 // //🔸function to (print) Traverse Doubly linkedList data
 // void print(Node* head) {
 
-//     Node* temp = head; 
+//     Node* temp = head;
 
 //     while( temp != NULL){
 //         cout<< temp -> data <<" " ;
@@ -494,7 +473,6 @@
 // // insertAtHead(head, tail, 14) ;
 // // print(head);                   //output: 14 13 12 11 10  (insertion)
 
-
 // //🔸insertion in tail
 
 // insertAtTail(tail, head, 22);
@@ -525,7 +503,6 @@
 // cout<<" Head : "<< head -> data <<endl ;
 // cout<<" tail : "<< tail -> data <<endl ;
 
-
 // //🔸 Delete any node
 // deleteNode(head, tail, 4) ;
 
@@ -536,36 +513,32 @@
 //     return 0;
 // }
 
-
-
-
 //                 //🔘🔘Circular LinkedList
 
-//🔸 The circular linked list is a linked list where all nodes are connected to form a circle. 
-// In a circular linked list, the first node and the last node are connected to each other which 
-// forms a circle. There is no NULL at the end.
+// 🔸 The circular linked list is a linked list where all nodes are connected to form a circle.
+//  In a circular linked list, the first node and the last node are connected to each other which
+//  forms a circle. There is no NULL at the end.
 
-//🔸There are generally two types of circular linked lists:
+// 🔸There are generally two types of circular linked lists:
 
-//🔘Circular singly linked list: 
-//  In a circular Singly linked list, the last node of the list contains 
-//  a pointer to the first node of the list. We traverse the circular singly linked list 
-//  until we reach the same node where we started. The circular singly linked list has no beginning or end.
-//  No null value is present in the next part of any of the nodes.
+// 🔘Circular singly linked list:
+//   In a circular Singly linked list, the last node of the list contains
+//   a pointer to the first node of the list. We traverse the circular singly linked list
+//   until we reach the same node where we started. The circular singly linked list has no beginning or end.
+//   No null value is present in the next part of any of the nodes.
 
-//ex:  
-// address:      100              104              108              112
-//            ____________      ___________      ___________      ___________
-//      ==>  [data |  104 ] == [data | 108 ] == [data | 112 ] == [data | 100] ==> 
-//     ||     ------------      -----------      -----------      -----------    ||
-//     ||________________________________________________________________________||
-//                         Last Node pointing to the first Node
+// ex:
+//  address:      100              104              108              112
+//             ____________      ___________      ___________      ___________
+//       ==>  [data |  104 ] == [data | 108 ] == [data | 112 ] == [data | 100] ==>
+//      ||     ------------      -----------      -----------      -----------    ||
+//      ||________________________________________________________________________||
+//                          Last Node pointing to the first Node
 
-
-//🔸Implementation of circular linkedlist:
-//🔴 Insertion
-//🔴 deletion
-//🔴 traversal
+// 🔸Implementation of circular linkedlist:
+// 🔴 Insertion
+// 🔴 deletion
+// 🔴 traversal
 
 // #include<iostream>
 // using namespace std;
@@ -616,14 +589,14 @@
 //       current -> next = temp ;
 //    }
 
-// } 
+// }
 
 // //🔴deletion code
 // void deleteNode(Node* &tail, int value){
 
 //     //if empty list
 //     if(tail == NULL) {
-//         cout<< " list is empty, please check again" <<endl; 
+//         cout<< " list is empty, please check again" <<endl;
 //         return ;
 //     }
 //     else {
@@ -641,7 +614,7 @@
 
 //         // 1 Node linked list
 //         if(current == previous){
-//             tail = NULL; 
+//             tail = NULL;
 //         }
 //         // >=2 node linked list
 //         else if(tail == current) {
@@ -655,13 +628,13 @@
 
 // //🔴traversal / print code
 // void print(Node* tail) {
-     
+
 //     Node* temp = tail ;
 
 //     if(tail == NULL) {
 //         cout<< "list is empty" <<endl ;
 //     }
-    
+
 //    do{
 //     cout<< tail-> data <<" " ;
 //     tail = tail -> next ;
@@ -670,13 +643,12 @@
 //    cout<<endl ;
 // }
 
-
-// int main() { 
+// int main() {
 
 // Node* tail = NULL ;
 
 // //inserting in empty list
-// insertNode(tail, 5, 3) ;  
+// insertNode(tail, 5, 3) ;
 // print(tail) ;          //output: 3
 
 // //inserting at last of list
@@ -696,17 +668,15 @@
 // insertNode(tail, 3, 4) ;
 // print(tail) ;          //output: 3 4 5 6 7 9
 
-
-// //deletion node 
+// //deletion node
 // deleteNode( tail, 9) ;
 // print(tail) ;          //output: 3 4 5 6 7
 
 // deleteNode( tail, 3) ;
-// print(tail) ;          //output: 7 4 5 6 
+// print(tail) ;          //output: 7 4 5 6
 
 // deleteNode( tail, 5) ;
-// print(tail) ;          //output: 7 4 6 
+// print(tail) ;          //output: 7 4 6
 
 //  return 0;
 // }
-

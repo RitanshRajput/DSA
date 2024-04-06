@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "vector": "cpp",
-        "memory": "cpp",
-        "system_error": "cpp",
-        "array": "cpp",
-        "string": "cpp"
-    }
-}

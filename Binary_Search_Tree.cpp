@@ -1,11 +1,11 @@
 
-//               //🔴🔴Binary Search Tree
+//                         //🔴🔴Binary Search Tree
 
-// A Binary Search Tree is a special type of binary tree data structure which has the following properties:  
+// A Binary Search Tree is a special type of binary tree data structure which has the following properties:
 
-//1. The left subtree of a node contains only nodes with keys lesser than the node’s key.
-//2. The right subtree of a node contains only nodes with keys greater than the node’s key.
-//3. The left and right subtree each must also be a binary search tree.
+// 1. The left subtree of a node contains only nodes with keys lesser than the node’s key.
+// 2. The right subtree of a node contains only nodes with keys greater than the node’s key.
+// 3. The left and right subtree each must also be a binary search tree.
 
 // There must be no duplicate nodes.
 
@@ -18,28 +18,22 @@
 //                     [4]   [7]  [13]
 
 // The above properties of the Binary Search Tree provide an ordering among keys
-// so that the operations like search, minimum and maximum can be done fast. 
+// so that the operations like search, minimum and maximum can be done fast.
 // If there is no order, then we may have to compare every key to search for a given key.
 
-//🔸How to search a key in a given Binary Tree?
-// For searching a value, if we had a sorted array we could have performed a binary search.
+// 🔸How to search a key in a given Binary Tree ?
+//  For searching a value, if we had a sorted array we could have performed a binary search.
 
-// Search operations in binary search trees will be very similar to that. 
-// Let’s say we want to search for the number X. 
+// Search operations in binary search trees will be very similar to that.
+// Let’s say we want to search for the number X.
 
-//🔸We start at the root, and then we compare the value to be searched with the value of the root, 
-//🔸If it’s equal we are done with the search if it’s smaller we know that we need to go to
-//   the left subtree because in a binary search tree all the elements in the left subtree are smaller 
-//   and all the elements in the right subtree are larger. 
-//🔸Searching an element in the binary search tree is basically this traversal, 
-//   at each step we go either left or right and at each step we discard one of the sub-trees. 
-
-// If the tree is balanced,
-// (we call a tree balanced if for all nodes the difference between the heights of left and right subtrees is not greater than one) 
-// we start with a search space of ‘n’ nodes and as we discard one of the sub-trees, we discard ‘n/2’ nodes so our search space gets reduced to ‘n/2’. 
-// In the next step, we reduce the search space to ‘n/4’ and we repeat until we find the element or our search space is reduced to only one node. 
-// The search here is also a binary search hence the name; Binary Search Tree.
-
+// 🔸We start at the root, and then we compare the value to be searched with the value of the root,
+// 🔸If it’s equal we are done with the search if it’s smaller we know that we need to go to
+//    the left subtree because in a binary search tree all the elements in the left subtree are smaller
+//    and all the elements in the right subtree are larger.
+// 🔸Searching an element in the binary search tree is basically this traversal,
+//    at each step we go either left or right and at each step we discard one of the sub-trees.
+//
 
 // Illustration of searching in BST:
 // See the illustration below for a better understanding:
@@ -54,22 +48,20 @@
 //                      /    \      /
 //                     [4]   [7]  [13]
 
-//🔸Initially compare the key with the root i.e., 8. As 6 is less than 8, search in the left subtree of 8.
-//🔸Now compare the key with 3. As key is greater than 3, search next in the right subtree of 3.
-//🔸Now compare the key with 6. The value of the key is 6. So we have found the key. 
+// 🔸Initially compare the key with the root i.e., 8. As 6 is less than 8, search in the left subtree of 8.
+// 🔸Now compare the key with 3. As key is greater than 3, search next in the right subtree of 3.
+// 🔸Now compare the key with 6. The value of the key is 6. So we have found the key.
 
-
-//🔴point :
+// 🔴point :
 
 //                      [root -> data]
 //        left subtree /               \ right subtree
 //                    /                 \
 // [Node-> data  <  root -> data]    [Node->data  >  root -> data]
 
-
 //                          //🔘Insertion in BST
 
-//🔴🔴        //❓Question Create BST and Insertion in BST
+// 🔴🔴        //❓Question Create BST and Insertion in BST
 
 // #include<iostream>
 // #include<queue>
@@ -123,19 +115,18 @@
 //     cout<< root-> data <<" " ;
 // }
 
-
 // //🔸level order traversal function:
 //  void levelOrderTraversal(Node* root) {
 
 //     queue<Node* > q ;
 //     q.push(root) ;
 //     q.push(NULL) ;             //for separator (separator is used to give us output in level format)
-    
+
 //     while( !q.empty()) {
 
 //        Node* temp = q.front() ;
 //        q.pop() ;
-     
+
 //     //if part is for adding a separator to give output in level format:
 //        if(temp == NULL) {           //means old level completed its traversal
 //           cout<< endl ;
@@ -144,7 +135,7 @@
 //             q.push(NULL) ;       // add another separator
 //           }
 //        }
-//        else{ 
+//        else{
 //     //else part is the main level order traversal part where it is traversing the binary tree:
 
 //         cout<< temp -> data << " " ;   //print data is temp is not nULL
@@ -155,10 +146,9 @@
 //         if(temp -> right) {          //if temp ->right NULL nahi hai toh q.push(temp->right) karo
 //           q.push(temp -> right) ;
 //         }
-//       }  
+//       }
 //     }
-//  }     
-
+//  }
 
 // //🔸insert into BST function
 // Node* insertIntoBST(Node* root, int d) {
@@ -178,10 +168,9 @@
 //     }
 // }
 
-
 // //🔸taking input function
 // void takeInput(Node* &root) {                //🔴 &root == Imp
-//     int data ; 
+//     int data ;
 //     cin >> data ;
 
 //     while(data != -1) {
@@ -193,10 +182,10 @@
 // //driver code
 // int main () {
 //     Node* root = NULL ;
-    
+
 //     cout<<"enter data to create a BST" <<endl ;
 //     takeInput(root) ;
-     
+
 //     cout<< "Printing BST using Level order traversal" <<endl ;
 //     levelOrderTraversal(root) ;
 
@@ -212,61 +201,56 @@
 //    return 0;
 // }
 
-//🔴Time complexity: O(Log N) for BST insertion 
+// 🔴Time complexity: O(Log N) for BST insertion
 
-//🔴 Derivation of Time Complexity for Binary Search is O(log n)  : same applies for insertion in BST
+// 🔴 Derivation of Time Complexity for Binary Search is O(log n)  : same applies for insertion in BST
 
-//    [ | | | | | | | | ]  => arrray of size N  
+//    [ | | | | | | | | ]  => arrray of size N
 
 //    [ | | | | |]        => First Iteration  N / 2    => also equal to N / 2^0
 
 //    [ | | |]            => First Iteration  N / 4    => also equal to N / 2^1
 
 //    [ | |]              => First Iteration  N / 8    => also equal to N / 2^2
-//    . 
+//    .
 //    .
 //    .
 //    []                  => Nth iteration    N / 2^k
 
-
 //  =>    N / 2^k  =  1
-//  =>    N = 2^K 
+//  =>    N = 2^K
 //  =>    k = log N               // This is how Binary search Time complexity is O(log N)  worst case (upper bound)
 
+// 🔸Time complexity analysis:
+// 1. At each step of recursion or iteration, we are performing O(1) operation and
+//  moving one level downward in the tree (till we reach the NULL link). So total
+//  number of comparison is equal to the height of BST. Time complexity of
+//  insert operation = The height of BST * O(1) = h O(1) = O(h).
 
+// 2. When BST is balanced, both left and right subtree will be of same size (n/2)
+//  and height of BST will be O(logn). So time complexity of insertion in a
+//   balanced BST = O(logn).
 
-//🔸Time complexity analysis:
-//1. At each step of recursion or iteration, we are performing O(1) operation and
-// moving one level downward in the tree (till we reach the NULL link). So total
-// number of comparison is equal to the height of BST. Time complexity of
-// insert operation = The height of BST * O(1) = h O(1) = O(h).
+// 3. When BST is completely unbalanced, it will be a linear chain of nodes (one
+//  node at each level) and the height of such BST is O(n). So time complexity of
+//  insertion in a unbalanced BST = O(n).
 
-//2. When BST is balanced, both left and right subtree will be of same size (n/2)
-// and height of BST will be O(logn). So time complexity of insertion in a
-//  balanced BST = O(logn).
-
-//3. When BST is completely unbalanced, it will be a linear chain of nodes (one
-// node at each level) and the height of such BST is O(n). So time complexity of
-// insertion in a unbalanced BST = O(n).
-
-
-//🔸Space complexity analysis:
-// We are using constant extra memory in iterative implementation, so space
-// complexity of iterative insert operation in BST = O(1). In the recursive
-// implementation, there will be one recursive call at each level of tree. So
-// space complexity depends on the size of recursion call stack, which is equal
-// to the height of the tree. So space complexity of recursive insert in BST = O(h)
+// 🔸Space complexity analysis:
+//  We are using constant extra memory in iterative implementation, so space
+//  complexity of iterative insert operation in BST = O(1). In the recursive
+//  implementation, there will be one recursive call at each level of tree. So
+//  space complexity depends on the size of recursion call stack, which is equal
+//  to the height of the tree. So space complexity of recursive insert in BST = O(h)
 
 //    For balanced BST, space complexity = O(logn).
 //    For completely unbalanced BST, space complexity= O(n).
-
 
 //                      //🔘🔘🔘 Search / Traversal in BST
 
 //                     //❓Question: Search in BST
 
 // There is a Binary Search Tree (BST) consisting of 'N' nodes. Each node of this BST has some integer data.
-// You are given a pointer to the root node of this BST, and an integer 'X'. 
+// You are given a pointer to the root node of this BST, and an integer 'X'.
 // Print "True" if there is a node in BST having data equals to 'X',
 // otherwise print "False".
 
@@ -288,8 +272,8 @@
 // True
 // False
 // Explanation For Sample Input 1:
-// In the first test case, there is only one node and it has data 1, thus we should print ‘True’. 
-// In the second test case, there is no node having data 8. 
+// In the first test case, there is only one node and it has data 1, thus we should print ‘True’.
+// In the second test case, there is no node having data 8.
 // See the problem statement for the picture of this BST.
 
 // Sample Input 2:
@@ -302,13 +286,12 @@
 // True
 // False
 // Explanation For Sample Input 1:
-// In the first test case, there is left node and it has data 1, thus we should print ‘True’. 
-// In the second test case, there is no node having data 6. thus we should print ‘False’. 
+// In the first test case, there is left node and it has data 1, thus we should print ‘True’.
+// In the second test case, there is no node having data 6. thus we should print ‘False’.
 
-
-//🔴approach 1: recursive solution (right solution but TLE)
-// #include<iostream>
-// using namespace std;
+// 🔴approach 1: recursive solution (right solution but TLE)
+//  #include<iostream>
+//  using namespace std;
 
 // class Node{
 //     public:
@@ -323,7 +306,6 @@
 //     }
 // } ;
 
-
 // //main function
 // bool searchInBST(Node* root, int x) {
 //     //base case
@@ -335,7 +317,7 @@
 //         return true;
 //     }
 
-//     //if x is smaller than root data 
+//     //if x is smaller than root data
 //     if(root -> data > x) {
 //         //left part me search karo
 //         return searchInBST(root->left, x) ;
@@ -346,14 +328,13 @@
 //         return searchInBST(root -> right , x) ;
 //     }
 // }
-//🔸Time complexity: O(H) or O(LogN)  //height of tree 
+// 🔸Time complexity: O(H) or O(LogN)  //height of tree
 //       worst case: O(N)
-//🔸space complexity: O(1)
+// 🔸space complexity: O(1)
 
-
-//🔴approach 2: iterative solution 
-// #include<iostream>
-// using namespace std;
+// 🔴approach 2: iterative solution
+//  #include<iostream>
+//  using namespace std;
 
 // class Node{
 //     public:
@@ -385,10 +366,8 @@
 //     }
 //     return false;
 // }
-//🔴time complexity: O(H)   : worst case O(N)
-//🔴space complexity: O(1) 
-
-
+// 🔴time complexity: O(H)   : worst case O(N)
+// 🔴space complexity: O(1)
 
 //                  //🔘🔘🔘 Deletion in BST
 
@@ -411,13 +390,13 @@
 //     }
 // } ;
 
-//🔸insert into BST function
-// Node* insertIntoBST(Node* root, int d) {
-//     //base case
-//     if(root == NULL) {
-//         root = new Node(d) ;
-//         return root ;
-//     }
+// 🔸insert into BST function
+//  Node* insertIntoBST(Node* root, int d) {
+//      //base case
+//      if(root == NULL) {
+//          root = new Node(d) ;
+//          return root ;
+//      }
 
 //     if( d > root -> data) {
 //         //right part me insert karna hai
@@ -449,7 +428,7 @@
 
 // //🔸taking input function
 // void takeInput(Node* &root) {                //🔴 &root == Imp
-//     int data ; 
+//     int data ;
 //     cin >> data ;
 
 //     while(data != -1) {
@@ -461,7 +440,7 @@
 // //driver code
 // int main () {
 //     Node* root = NULL ;
-    
+
 //     cout<<"enter data to create a BST" <<endl ;
 //     takeInput(root) ;
 
@@ -471,12 +450,11 @@
 //    return 0;
 // }
 
-
 //                  //🔴Inorder PRedecessor and Successor
 
 // Inorder predecessor and successor for a given key in BST
 
-// There is BST given with root node with key part as integer only. 
+// There is BST given with root node with key part as integer only.
 // The structure of each node is as follows:
 // struct Node
 // {
@@ -484,10 +462,10 @@
 //     struct Node *left, *right ;
 // };
 
-// You need to find the inorder successor and predecessor of a given key. 
-//In case the given key is not found in BST, then return the two values within which this key will lie.
+// You need to find the inorder successor and predecessor of a given key.
+// In case the given key is not found in BST, then return the two values within which this key will lie.
 
-//🔴Following is the algorithm to reach the desired result. It is a recursive method: 
+// 🔴Following is the algorithm to reach the desired result. It is a recursive method:
 
 // Input: root node, key
 // output: predecessor node, successor node
@@ -496,10 +474,10 @@
 //       then return
 // 2. if key is found then
 //     a. If its left subtree is not null
-//         Then predecessor will be the right most 
+//         Then predecessor will be the right most
 //         child of left subtree or left child itself.
 //     b. If its right subtree is not null
-//         The successor will be the left most child 
+//         The successor will be the left most child
 //         of right subtree or right child itself.
 //     return
 // 3. If key is smaller than root node
@@ -508,26 +486,26 @@
 //     else
 //         set the predecessor as root
 //         search recursively into right subtree
-// Following is the implementation of the above algorithm: 
+// Following is the implementation of the above algorithm:
 
-//🔸Implementation:
-// #include <iostream>
-// using namespace std;
- 
+// 🔸Implementation:
+//  #include <iostream>
+//  using namespace std;
+
 // // BST Node
 // struct Node
 // {
 //     int key;
 //     struct Node *left, *right;
 // };
- 
+
 // // This function finds predecessor and successor of key in BST.
 // // It sets pre and suc as predecessor and successor respectively
 // void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
 // {
 //     // Base case
 //     if (root == NULL)  return ;
- 
+
 //     // If key is present at root
 //     if (root->key == key)
 //     {
@@ -539,7 +517,7 @@
 //                 tmp = tmp->right;
 //             pre = tmp ;
 //         }
- 
+
 //         // the minimum value in right subtree is successor
 //         if (root->right != NULL)
 //         {
@@ -550,7 +528,7 @@
 //         }
 //         return ;
 //     }
- 
+
 //     // If key is smaller than root's key, go to left subtree
 //     if (root->key > key)
 //     {
@@ -563,7 +541,7 @@
 //         findPreSuc(root->right, pre, suc, key) ;
 //     }
 // }
- 
+
 // // A utility function to create a new BST node
 // Node *newNode(int item)
 // {
@@ -572,7 +550,7 @@
 //     temp->left = temp->right = NULL;
 //     return temp;
 // }
- 
+
 // /* A utility function to insert a new node with given key in BST */
 // Node* insert(Node* node, int key)
 // {
@@ -583,12 +561,12 @@
 //         node->right = insert(node->right, key);
 //     return node;
 // }
- 
+
 // // Driver program to test above function
 // int main()
 // {
 //     int key = 65;    //Key to be searched in BST
- 
+
 //    /* Let us create following BST
 //               50
 //            /     \
@@ -603,16 +581,15 @@
 //     insert(root, 70);
 //     insert(root, 60);
 //     insert(root, 80);
- 
- 
+
 //     Node* pre = NULL, *suc = NULL;
- 
+
 //     findPreSuc(root, pre, suc, key);
 //     if (pre != NULL)
 //       cout << "Predecessor is " << pre->key << endl;
 //     else
 //       cout << "No Predecessor";
- 
+
 //     if (suc != NULL)
 //       cout << "Successor is " << suc->key;
 //     else
@@ -620,36 +597,34 @@
 //     return 0;
 // }
 
-//🔸Output
-// Predecessor is 60
-// Successor is 70
+// 🔸Output
+//  Predecessor is 60
+//  Successor is 70
 
 // Complexity Analysis:
-//🔸Time Complexity: O(h), where h is the height of the tree. In the worst case as explained above we travel the whole height of the tree.
-//🔸Auxiliary Space: O(1),  since no extra space has been taken.
+// 🔸Time Complexity: O(h), where h is the height of the tree. In the worst case as explained above we travel the whole height of the tree.
+// 🔸Auxiliary Space: O(1),  since no extra space has been taken.
 
-
-//🔴Another Approach: 
-// We can also find the inorder successor and inorder predecessor using inorder traversal. 
-//Check if the current node is smaller than the given key for the predecessor and for a successor,
-// check if it is greater than the given key. 
-//If it is greater than the given key then,
-// check if it is smaller than the already stored value in the successor then, update it. 
-//At last, get the predecessor and successor stored in q(successor) and p(predecessor). 
-
+// 🔴Another Approach:
+//  We can also find the inorder successor and inorder predecessor using inorder traversal.
+// Check if the current node is smaller than the given key for the predecessor and for a successor,
+//  check if it is greater than the given key.
+// If it is greater than the given key then,
+//  check if it is smaller than the already stored value in the successor then, update it.
+// At last, get the predecessor and successor stored in q(successor) and p(predecessor).
 
 // CPP code for inorder successor and predecessor of tree
 // #include<iostream>
 // #include<stdlib.h>
- 
+
 // using namespace std;
- 
+
 // struct Node
 // {
 //     int data;
 //     Node* left,*right;
 // };
-  
+
 // // Function to return data
 // Node* getnode(int info)
 // {
@@ -659,7 +634,7 @@
 //     p->left = NULL;
 //     return p;
 // }
- 
+
 // /*
 // since inorder traversal results in
 // ascending order visit to node , we
@@ -674,32 +649,32 @@
 //     // If root is null return
 //     if(!root)
 //         return ;
-         
-//     // traverse the left subtree   
+
+//     // traverse the left subtree
 //     find_p_s(root->left, a, p, q);
-     
+
 //     // root data is greater than a
 //     if(root&&root->data > a)
 //     {
-         
+
 //         // q stores the node whose data is greater
 //         // than a and is smaller than the previously
 //         // stored data in *q which is successor
 //         if((!*q) || (*q) && (*q)->data > root->data)
 //                 *q = root;
 //     }
-     
+
 //     // if the root data is smaller than
 //     // store it in p which is predecessor
 //     else if(root && root->data < a)
 //     {
 //         *p = root;
 //     }
-     
+
 //     // traverse the right subtree
 //     find_p_s(root->right, a, p, q);
 // }
- 
+
 // // Driver code
 // int main()
 // {
@@ -711,9 +686,9 @@
 //     root1->right->left = getnode(55);
 //     root1->right->right = getnode(70);
 //     Node* p = NULL, *q = NULL;
-  
+
 //     find_p_s(root1, 55, &p, &q);
-     
+
 //     if(p)
 //         cout << p->data;
 //     if(q)
@@ -721,37 +696,36 @@
 //     return 0;
 // }
 
-//🔸Output
-// 50 60
-// Complexity Analysis:
+// 🔸Output
+//  50 60
+//  Complexity Analysis:
 
-//🔴Time Complexity: O(n), where n is the total number of nodes in the tree. In the worst case as explained above we travel the whole tree.
-//🔴Auxiliary Space: O(n).
+// 🔴Time Complexity: O(n), where n is the total number of nodes in the tree. In the worst case as explained above we travel the whole tree.
+// 🔴Auxiliary Space: O(n).
 
-
-//🔴Approach 3: Iterative method:
+// 🔴Approach 3: Iterative method:
 
 // Input: root node, key
 // output: predecessor node, successor node
-//1.set suc and pre as NULL initially.
-//2.Create a Node temp1 and set it to root node, temp1 will give the successor while traversing
-//3.In first while loop, if temp1->key>key, then temp1->key may be a successor of the key and go to the left of temp.
-//4.else, go to the right.
-//5.Create a Node temp2 and set it to root node, temp2 will give the predecessor while traversing
-//6.In second while loop, if temp2->key<key, then temp1->key may be a predecessor of the key and go to the right of temp.
-//7.else, go to the left.
-// Following is the implementation of the above algorithm: 
+// 1.set suc and pre as NULL initially.
+// 2.Create a Node temp1 and set it to root node, temp1 will give the successor while traversing
+// 3.In first while loop, if temp1->key>key, then temp1->key may be a successor of the key and go to the left of temp.
+// 4.else, go to the right.
+// 5.Create a Node temp2 and set it to root node, temp2 will give the predecessor while traversing
+// 6.In second while loop, if temp2->key<key, then temp1->key may be a predecessor of the key and go to the right of temp.
+// 7.else, go to the left.
+// Following is the implementation of the above algorithm:
 
-//🔸Implemetnation
-// #include <iostream>
-// using namespace std;
- 
+// 🔸Implemetnation
+//  #include <iostream>
+//  using namespace std;
+
 // // BST Node
 // struct Node {
 //     int key;
 //     struct Node *left, *right;
 // };
- 
+
 // // This function finds predecessor and successor of key in
 // // BST. It sets pre and suc as predecessor and successor
 // // respectively
@@ -760,7 +734,7 @@
 //     // set pre and suc as NULL initially
 //     pre = NULL;
 //     suc = NULL;
- 
+
 //     // set temp node as root
 //     Node* temp1 = root;
 //     while (temp1) {
@@ -784,7 +758,7 @@
 //     }
 //     return;
 // }
- 
+
 // // A utility function to create a new BST node
 // Node* newNode(int item)
 // {
@@ -793,7 +767,7 @@
 //     temp->left = temp->right = NULL;
 //     return temp;
 // }
- 
+
 // /* A utility function to insert a new node with given key in
 //  * BST */
 // Node* insert(Node* node, int key)
@@ -806,12 +780,12 @@
 //         node->right = insert(node->right, key);
 //     return node;
 // }
- 
+
 // // Driver program to test above function
 // int main()
 // {
 //     int key = 65; // Key to be searched in BST
- 
+
 //     /* Let us create following BST
 //                             50
 //                     /     \
@@ -826,15 +800,15 @@
 //     insert(root, 70);
 //     insert(root, 60);
 //     insert(root, 80);
- 
+
 //     Node *pre = NULL, *suc = NULL;
- 
+
 //     findPreSuc(root, pre, suc, key);
 //     if (pre != NULL)
 //         cout << "Predecessor is " << pre->key << endl;
 //     else
 //         cout << "No Predecessor";
- 
+
 //     if (suc != NULL)
 //         cout << "Successor is " << suc->key;
 //     else
@@ -849,8 +823,6 @@
 
 // Time Complexity: O(n), where n is the total number of nodes in the tree. In the worst case as explained above we travel the whole tree.
 // Auxiliary Space: O(1).
-
-
 
 //                  //🔘Deletion in BST
 
@@ -870,7 +842,6 @@
 //         this -> right = NULL ;
 //     }
 // };
-
 
 // //🔸Inorder function: (LNR)
 // void inorder(Node* root) {
@@ -914,12 +885,12 @@
 //     queue<Node* > q ;
 //     q.push(root) ;
 //     q.push(NULL) ;             //for separator (separator is used to give us output in level format)
-    
+
 //     while( !q.empty()) {
 
 //        Node* temp = q.front() ;
 //        q.pop() ;
-     
+
 //     //if part is for adding a separator to give output in level format:
 //        if(temp == NULL) {           //means old level completed its traversal
 //           cout<< endl ;
@@ -928,7 +899,7 @@
 //             q.push(NULL) ;       // add another separator
 //           }
 //        }
-//        else{ 
+//        else{
 //     //else part is the main level order traversal part where it is traversing the binary tree:
 
 //         cout<< temp -> data << " " ;   //print data is temp is not nULL
@@ -939,10 +910,9 @@
 //         if(temp -> right) {          //if temp ->right NULL nahi hai toh q.push(temp->right) karo
 //           q.push(temp -> right) ;
 //         }
-//       }  
+//       }
 //     }
-//  }     
-
+//  }
 
 // // 🔸insert into BST function
 // Node* insertIntoBST(Node* root, int d) {
@@ -961,7 +931,6 @@
 //         root -> left = insertIntoBST(root -> left, d) ;
 //     }
 // }
-
 
 // // 🔸Find minimum value in BST
 // Node* minVal(Node* root) {
@@ -983,7 +952,7 @@
 
 // //🔸taking input function
 // void takeInput(Node* &root) {                //🔴 &root == Imp
-//     int data ; 
+//     int data ;
 //     cin >> data ;
 
 //     while(data != -1) {
@@ -992,8 +961,7 @@
 //     }
 // }
 
-
-// //🔴delete from BST main code 
+// //🔴delete from BST main code
 // Node* deleteFromBST(Node* root, int val) {
 //     // base case
 //     if(root == NULL){
@@ -1021,7 +989,6 @@
 //             return temp ;
 //         }
 
-
 //         // 2 child
 //         if(root -> left != NULL && root -> right != NULL){
 //             int mini = minVal(root -> right) -> data ;           // find minimmum node using minVal function
@@ -1032,7 +999,7 @@
 //     }
 
 //     else if ( root -> data > val) {
-//         // left part me search karo agar value chota hai 
+//         // left part me search karo agar value chota hai
 //         root -> left = deleteFromBST(root -> left, val) ;
 //         return root ;
 //     }
@@ -1045,11 +1012,10 @@
 
 // }
 
-
 // //driver code
 // int main () {
 //     Node* root = NULL ;
-    
+
 //     cout<<"enter data to create a BST" <<endl ;
 //     takeInput(root) ;
 
@@ -1063,10 +1029,7 @@
 //     cout<<" POSTORDERtraversal" << endl ;
 //     postorder(root) ;
 
-
-
 //     deleteFromBST(root, 20) ;
-
 
 //     cout<<"printing lOT in BST" <<endl ;
 //     levelOrderTraversal(root) ;
@@ -1078,15 +1041,10 @@
 //     cout<<" POSTORDERtraversal" << endl ;
 //     postorder(root) ;
 
-   
-
 //    return 0;
 // }
-//🔴Time complexity: O(H)   :  worst case O(N)
-//🔴space complexity: O(1)
-
-
-
+// 🔴Time complexity: O(H)   :  worst case O(N)
+// 🔴space complexity: O(1)
 
 //                //❓Question: Validate  BST
 
@@ -1096,7 +1054,7 @@
 //       The right subtree of a node contains only nodes with data greater than and equal to the node's data.
 //       Both the left and right subtrees must also be partial binary search trees.
 
-// ex:              
+// ex:
 //              [4]
 //             /   \
 //           [2]    [3]
@@ -1121,7 +1079,6 @@
 //    For node 3:
 //    The
 
-
 // Sample Input 1:
 // 2
 // 3 1 5 -1 2 -1 -1 -1 -1
@@ -1132,8 +1089,7 @@
 // Explanation Of The Sample Input1:
 // Here we have 2 test cases, hence there are 2 binary trees
 
-// Test Case 1: 
-
+// Test Case 1:
 
 // #include<iostream>
 // #include<limits.h>
@@ -1172,9 +1128,8 @@
 // bool validateBst(Node* root) {
 //     return isBST(root, INT_MIN, INT_MAX ) ;
 // }
-//🔴Time complexity: O(N)    
-//🔴space complexity: O(H)     : worst case O(N)
-
+// 🔴Time complexity: O(N)
+// 🔴space complexity: O(H)     : worst case O(N)
 
 //                     //❓Question: Find K-th smallest Element in BST
 
@@ -1194,14 +1149,14 @@
 // 4
 // 5 2 -1 -1 4 3 -1 -1 -1
 // Sample Output 1:
-// 4   
+// 4
 // 5
 // Explanation Of Sample Input 1:
 // Test case 1:
 
 //     [3]
 //   /     \
-// [1]     [4] 
+// [1]     [4]
 //           \ 
 //            [5]
 
@@ -1231,7 +1186,6 @@
 // 1
 // -1
 
-
 // #include<iostream>
 // using namespace std;
 
@@ -1253,7 +1207,7 @@
 //     if(root == NULL){
 //         return -1;
 //     }
-     
+
 //     // L
 //     int left = solve(root -> left , i, k) ;
 
@@ -1278,12 +1232,10 @@
 //     return ans ;
 // }
 
-//🔴Time complexity: O(N)
-//🔴Space complexity: O(H)  : worst case o(N)
+// 🔴Time complexity: O(N)
+// 🔴Space complexity: O(H)  : worst case o(N)
 
-
-//🔴🔴Homework:  solve above question using morris traversal
-
+// 🔴🔴Homework:  solve above question using morris traversal
 
 //                 //❓Question: Predecessor and Successor in BST
 
@@ -1300,7 +1252,6 @@
 //        The right subtree of a node contains only nodes with data greater than the node's data.
 //        Both the left and right subtrees must also be binary search trees.
 
-
 // Sample Input 1:
 // 1
 // 15 10 20 8 12 16 25 -1 -1 -1 -1 -1 -1 -1 -1
@@ -1308,11 +1259,11 @@
 // Sample Output 1:
 // 8 12
 
-// ex:    
-    //          [15]
-    //         /   \
+// ex:
+//          [15]
+//         /   \
     //     [10]     [20]
-    //    /    \    /   \
+//    /    \    /   \
     //  [8]   [12] [16]  [25]
 
 //     The inorder traversal of this tree will be 8 10 12 15 16 20 25.
@@ -1320,7 +1271,7 @@
 // Since the node with data 12 is on the immediate right of the node with data 10 in the inorder traversal, the node with data 12 is the successor.
 
 // Sample Input 2:
-// 2 
+// 2
 // 10 5 -1 -1 -1 -1
 // 5
 // 20 -1 -1
@@ -1344,7 +1295,6 @@
 //         this -> right = NULL;
 //     }
 // } ;
-
 
 // pair<int,int> predecessororSuccessor(Node* root, int key) {
 
@@ -1391,17 +1341,15 @@
 //     return {predecessor, succcessor} ;
 // }
 
-//🔴Time complexity: O(N)
-//🔴space complexity: O(1)
-
-
+// 🔴Time complexity: O(N)
+// 🔴space complexity: O(1)
 
 //                   //❓Question: LCA(lowest common ancestor) of TWO Nodes in a BST
 
-//You are given a binary search tree of integers with N nodes. You are also given references to two nodes P and Q from this BST.
-// Your task is to find the lowest common ancestor(LCA) of these two given nodes.
-// The lowest common ancestor for two nodes P and Q is defined as the lowest node that has both P and Q as descendants (where we
-// allow a node to be a descendant of itself)
+// You are given a binary search tree of integers with N nodes. You are also given references to two nodes P and Q from this BST.
+//  Your task is to find the lowest common ancestor(LCA) of these two given nodes.
+//  The lowest common ancestor for two nodes P and Q is defined as the lowest node that has both P and Q as descendants (where we
+//  allow a node to be a descendant of itself)
 
 // A binary search tree (BST) is a binary tree data structure which has the following properties.
 //  The left subtree of a node contains only nodes with data less than the node's data.
@@ -1427,7 +1375,7 @@
 //                          [5]
 
 // Here, we can clearly see that LCA of node 3 and node 5 is 3.
-// The BST corresponding to the second test case will be- 
+// The BST corresponding to the second test case will be-
 
 //                  [2]
 //                 /   \
@@ -1435,7 +1383,7 @@
 //                      /
 //                    [3]
 
-//Here, we can clearly see that LCA of node 1 and node 3 is 2.
+// Here, we can clearly see that LCA of node 1 and node 3 is 2.
 
 // Sample Input 2 :
 // 1
@@ -1444,9 +1392,9 @@
 // Sample Output 2:
 // 1
 
-//🔴Approach 1: recursion
-// #include<iostream>
-// using namespace std;
+// 🔴Approach 1: recursion
+//  #include<iostream>
+//  using namespace std;
 
 // class Node{
 //     public:
@@ -1461,11 +1409,10 @@
 //     }
 // } ;
 
-
 // Node*  LCAinBST(Node* root, Node* p, Node* q) {
 //     //base case
 //     if(root == NULL){
-//         return NULL; 
+//         return NULL;
 //     }
 
 //     if( (root->data < p->data) && (root->data < q->data)) {
@@ -1478,13 +1425,12 @@
 
 //     return root;
 // }
-//🔴Time complexity: O(N)
-//🔴Space complexity: O(H)
+// 🔴Time complexity: O(N)
+// 🔴Space complexity: O(H)
 
-
-//🔴Approach 2: Iterative
-// #include<iostream>
-// using namespace std;
+// 🔴Approach 2: Iterative
+//  #include<iostream>
+//  using namespace std;
 
 // class Node{
 //     public:
@@ -1498,7 +1444,6 @@
 //         this -> right = NULL;
 //     }
 // } ;
-
 
 // Node*  LCAinBST(Node* root, Node* p, Node* q) {
 
@@ -1517,10 +1462,8 @@
 //     }
 
 // }
-//🔴Time complexity: O(N)
-//🔴Space complexity: O(1)
-
-
+// 🔴Time complexity: O(N)
+// 🔴Space complexity: O(1)
 
 //                //❓Question: Two Sum in BST
 
@@ -1546,7 +1489,6 @@
 //   [6]     [12]
 //  /   \    /   \
 // [2]  [8] [11]  [15]
-                
 
 // Sample Input 2:
 // 1
@@ -1562,7 +1504,6 @@
 //   [3]     [7]
 //          /   \
 //         [6]  [8]
-
 
 // #include<iostream>
 // #include<vector>
@@ -1581,7 +1522,7 @@
 //     }
 // };
 
-// void inorder(Node* root, vector<int> &in){   
+// void inorder(Node* root, vector<int> &in){
 //     if(root == NULL){
 //         return ;
 //     }
@@ -1616,9 +1557,8 @@
 //     }
 //     return false;
 // }
-//🔴Time complexity: O(N)
-//🔴space complexity: O(N)
-
+// 🔴Time complexity: O(N)
+// 🔴space complexity: O(N)
 
 //               //❓Question: Flatten a BST to a sorted list
 
@@ -1630,7 +1570,6 @@
 
 // Follow Up:
 //    Can you solve this in O(N) time and O(H) space complexity?
-
 
 // Sample Input 1
 // 2
@@ -1648,19 +1587,19 @@
 //  /   \    /   \
 // [2]  [8] [11]  [15]
 
-//so after flattening the BST is transposed as the below figure.
+// so after flattening the BST is transposed as the below figure.
 
 // [2]
 //   \
-//    [6] 
+//    [6]
 //      \
-//       [8] 
+//       [8]
 //         \ 
 //          [10]
 //            \
-//             [11] 
+//             [11]
 //               \ 
-//                [12] 
+//                [12]
 //                  \ 
 //                   [15]
 
@@ -1673,9 +1612,9 @@
 // So, after flattening, the BST is transposed as the below figure.
 // [-5]
 //   \
-//    [5] 
+//    [5]
 //      \
-//       [8] 
+//       [8]
 
 // Sample Input 2
 // 2
@@ -1688,7 +1627,6 @@
 // #include<iostream>
 // #include<vector>
 // using namespace std;
-
 
 // class Node{
 //     public:
@@ -1721,10 +1659,10 @@
 //     vector<int> inorderValue;          // create a vector to store inorder data (sorted data)
 //     inorder(root, inorderValue) ;      // call inorder function
 
-//     int n = inorderValue.size() ;      
+//     int n = inorderValue.size() ;
 
-//     Node* newRoot = new Node(inorderValue[0]) ;     //create a new node(for flattening means for linkedlist initialise) and add first data of inorder 
-//     Node* current =  newRoot ; 
+//     Node* newRoot = new Node(inorderValue[0]) ;     //create a new node(for flattening means for linkedlist initialise) and add first data of inorder
+//     Node* current =  newRoot ;
 
 //    //step 2:
 //     for(int i=1; i<n; i++) {           //because we already added [0] index data into linkedlist we start from [1] index
@@ -1734,17 +1672,15 @@
 //         current -> right = temp ;          // and right pointing to new node  (because in singly linked list only node-> right points to something )
 //         current =  temp ;                  // and then make new node as current node
 //     }
-  
+
 //   //step 3:
 //     current -> left = NULL ;
 //     current -> right = NULL ;
 
 //     return newRoot ;
 // }
-//🔴Time complexity:  O(N)
-//🔴space complexity: O(N)
-
-
+// 🔴Time complexity:  O(N)
+// 🔴space complexity: O(N)
 
 //                   //❓Question: Normal BST to balanced BST
 
@@ -1775,7 +1711,6 @@
 //  /   \    /   \
 // [2]  [8] [12]  [20]
 
-
 // Sample Input 1:
 // 1
 // 10 6 -1 4 -1 -1 -1
@@ -1785,35 +1720,32 @@
 // The tree can be represented as follows:
 
 //        [10]
-//       /     
-//      [6]   
-//     /  
+//       /
+//      [6]
+//     /
 //   [4]
 
-// After converting this tree to balanced BST. It will look like this:   
+// After converting this tree to balanced BST. It will look like this:
 
 //       [6]
 //      /    \
 //   [4]     [10]
 
 // Sample Input 2:
-// 2 
+// 2
 // 10 5 -1 -1 -1
 // 20 -1 -1
 // Sample Output 2:
-// 5 10 
-// 20 
-
+// 5 10
+// 20
 
 // A Balanced BST is defined as a BST, in which the height of two subtrees of every node differs no more than 1.
 // means :  absoluteValue[H(left) - H(right)] <= 1
 
-
-//🔴approach : recursion 
-// #include<iostream>
-// #include<vector>
-// using namespace std;
-
+// 🔴approach : recursion
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // class Node{
 //     public:
@@ -1858,18 +1790,16 @@
 
 // //main function
 // Node* balancedBST(Node* root) {
-    
+
 //     vector<int> inorderValue ;
 //     inorder(root, inorderValue );
-    
+
 //     int start = 0;
 //     int end = inorderValue.size()-1 ;
 //     return inorderToBST( start, end, inorderValue) ;
 // }
-//🔴Time complexity: O(N)
-//🔴space complexity: O(N)
-
-
+// 🔴Time complexity: O(N)
+// 🔴space complexity: O(N)
 
 //                 //❓Question: Preorder Traversal of a BST  (BST from preorder)
 
@@ -1894,12 +1824,12 @@
 //          /   \      /   \
 //       [5]   [15]   [30]  [42]
 //              /
-//           [13]  
+//           [13]
 
 // Sample Input 1:
 // 1
 // 6
-// 10 4 3 7 40 55 
+// 10 4 3 7 40 55
 // Sample Output 1:
 // 3 5 7 10 40 50
 // Explanation For Sample Output1:
@@ -1915,19 +1845,17 @@
 // Sample Input 2:
 // 2
 // 7
-// 15 10 7 13 21 20 25 
+// 15 10 7 13 21 20 25
 // 3
 // 1 2 4
 // Sample Output 2:
 // 7 10 13 15 20 21 25
 // 1 2 4
 
-
 // #include<iostream>
 // #include<limits.h>
 // #include<vector>
 // using namespace std;
-
 
 // class Node{
 //     public:
@@ -1955,39 +1883,36 @@
 //     Node* root = new Node(preorder[i++]) ;
 //     root -> left = solve(preorder, mini, root -> data, i) ;
 //     root -> right = solve(preorder, root -> data, maxi, i) ;
-    
+
 //     return root;
 // }
 
 // //main function
 // Node* preorderToBST(vector<int> &preorder) {
-    
+
 //     int mini = INT_MIN ;
 //     int maxi = INT_MAX ;
 //     int i = 0;
 //     return solve(preorder, mini, maxi, i) ;
 // }
-//🔴Time complexity: O(N)       => O(3N)== O(N)
-//🔴space complexity: O(H)
-
-
-
+// 🔴Time complexity: O(N)       => O(3N)== O(N)
+// 🔴space complexity: O(H)
 
 //                   //❓Question:  Merge Two BST
 
-//You are given two balanced binary search trees of integers having 'N' and 'M' nodes. You have to merge the two BSTs into a balanced
-//  binary search tree and return the root node to that balanced BST.
-//  A binary search tree (BST) is a binary tree data structure with the following properties.
-//   The left subtree of a node contains only nodes with data less than the node's data.
-//   The right subtree of a node contains only nodes with data greater than the node's data.
-//   Both the left and right subtrees must also be binary search trees.
+// You are given two balanced binary search trees of integers having 'N' and 'M' nodes. You have to merge the two BSTs into a balanced
+//   binary search tree and return the root node to that balanced BST.
+//   A binary search tree (BST) is a binary tree data structure with the following properties.
+//    The left subtree of a node contains only nodes with data less than the node's data.
+//    The right subtree of a node contains only nodes with data greater than the node's data.
+//    Both the left and right subtrees must also be binary search trees.
 
 // Sample Input 1:
 // 1
 // 2 1 3 -1 -1 -1 -1
 // 4 -1 -1
 // Sample Output 1:
-// 1 2 3 4 
+// 1 2 3 4
 // Explanation For Sample Output 1:
 //  The given BST are:-
 
@@ -1998,23 +1923,22 @@
 // we can see that after merging tree1 and tree2, it will look like the following:
 //        [2]
 //       /   \
-//      [1]  [3]  
+//      [1]  [3]
 //             \ 
 //             [4]
 // Hence the output will be 1 2 3 4
 
 // Sample Input 2:
 // 1
-// 4 2 7 -1 3 -1 -1 -1 -1  
+// 4 2 7 -1 3 -1 -1 -1 -1
 // 5 1 7 -1 -1 -1 -1
 // Sample Output 2:
-// 1 2 3 4 5 7 7 
+// 1 2 3 4 5 7 7
 
-
-//🔴approach 1: 
-// step1: store inorder of both root1 root2 into a vector ( time : o(m) O(N), space : O(M) O(N))
-// step2: merge both sorted inorder into a array (time: O(m+n), space: o(m+n))
-// stpe3: using inorderToBST that we done in previous questions create a new merge BST tree
+// 🔴approach 1:
+//  step1: store inorder of both root1 root2 into a vector ( time : o(m) O(N), space : O(M) O(N))
+//  step2: merge both sorted inorder into a array (time: O(m+n), space: o(m+n))
+//  stpe3: using inorderToBST that we done in previous questions create a new merge BST tree
 
 // #include<iostream>
 // #include<vector>
@@ -2104,14 +2028,13 @@
 
 //     return inorderToBST(start, end, mergeArrays) ;
 // }
-//🔴Time complexity: O(m+n)
-//🔴space complexity: O(m+n) 
+// 🔴Time complexity: O(m+n)
+// 🔴space complexity: O(m+n)
 
-
-//🔴approach 2: 
-// step1: convert root1 and root2 into sorted linkedlist (Time: O(M) O(N), space: O(h1) O(h2))
-// step2: merge both sorted linkedlist (Time: O(m+n), space : O(1))
-// stpe3: convert linkedlist into BST (time : O(m+n), space: o(h1+h2))
+// 🔴approach 2:
+//  step1: convert root1 and root2 into sorted linkedlist (Time: O(M) O(N), space: O(h1) O(h2))
+//  step2: merge both sorted linkedlist (Time: O(m+n), space : O(1))
+//  stpe3: convert linkedlist into BST (time : O(m+n), space: o(h1+h2))
 
 // #include<iostream>
 // #include<vector>
@@ -2184,7 +2107,6 @@
 //         }
 //     }
 
-
 //     while(head1 != NULL){
 //         tail-> right = head1 ;
 //         head1 -> left = tail ;
@@ -2219,7 +2141,7 @@
 //     if( n <= 0 || head == NULL){
 //         return NULL ;
 //     }
-     
+
 //     Node* left = sortedLLToBST(head, n/2) ;
 //     Node* root = head ;
 //     root -> left = left ;
@@ -2231,7 +2153,7 @@
 
 // //main function
 // Node* mergeBST(Node* root1, Node* root2) {
-    
+
 //     //step1: convert bst into sorted DLL
 //     Node* head1 = NULL ;
 //     convertIntoSortedDLL(root1, head1) ;
@@ -2243,29 +2165,26 @@
 
 //     //step2: merge sorted linkedlist
 //     Node* head = mergeLL(head1, head2) ;
-  
+
 //    //step3: convert sortedLL into bst
 //    return sortedLLToBST(head, countNodes(head)) ;
 
 // }
-//🔴Time complexity: O(m+n)
-//🔴space complexity: O(h1 + h2) 
+// 🔴Time complexity: O(m+n)
+// 🔴space complexity: O(h1 + h2)
 
+// 🔴🔴🔴           //❓Question: Largest BST in a Binary Tree
 
-
-//🔴🔴🔴           //❓Question: Largest BST in a Binary Tree
-
-//You are given a binary tree with 'N' nodes. Your task is to return the size of the largest subtree of the binary tree which is also a BST.
-//  A binary search tree (BST) is a binary tree data structure which has the following properties.
+// You are given a binary tree with 'N' nodes. Your task is to return the size of the largest subtree of the binary tree which is also a BST.
+//   A binary search tree (BST) is a binary tree data structure which has the following properties.
 
 //  The left subtree of a node contains only nodes with data less than the node's data.
 //  The right subtree of a node contains only nodes with data greater than the node's data.
 //  Both the left and right subtrees must also be binary search trees.
 
-
 // Sample Input 1 :
 // 2
-// 5 2 4 1 3 -1 -1 -1 -1 -1 -1 
+// 5 2 4 1 3 -1 -1 -1 -1 -1 -1
 // 2 1 3 -1 -1 -1 -1
 // Sample Output 1:
 // 3
@@ -2286,7 +2205,7 @@
 //               [2]
 //              /   \
 //            [1]   [3]
-//The subtree rooted at 2 is a BST and its size is 3.
+// The subtree rooted at 2 is a BST and its size is 3.
 
 // Sample Input 2 :
 // 1
@@ -2294,12 +2213,10 @@
 // Sample Output 2:
 // 4
 
-
-
-//🔴approach:
-// #include<iostream>
-// #include<limits.h>
-// using namespace std ;
+// 🔴approach:
+//  #include<iostream>
+//  #include<limits.h>
+//  using namespace std ;
 
 // class Node{
 //    public:
@@ -2314,7 +2231,7 @@
 //    }
 // } ;
 
-// // Information class 
+// // Information class
 // class info{
 //    public:
 //    int maxi ;
@@ -2362,5 +2279,5 @@
 //     return maxSize;
 // }
 
-//🔴Time complexity: O(N)
-// 🔴space complexity: O(H)
+// 🔴Time complexity: O(N)
+//  🔴space complexity: O(H)

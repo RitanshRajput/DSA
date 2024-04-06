@@ -1,7 +1,7 @@
 
 //                  //🔘🔘🔘 ARRAY 🔘🔘🔘 //
 
-//                                      //❓Question : Reverse the array 
+//                                      //❓Question : Reverse the array
 // #include<iostream>
 // using namespace std;
 
@@ -21,7 +21,7 @@
 //         end-- ;
 //     }
 
-//    void reverse(int arr[], int size) {           // USing build-in Reverse() function 
+//    void reverse(int arr[], int size) {           // USing build-in Reverse() function
 //        reverse(arr, arr+size) ;
 //    }
 
@@ -101,17 +101,13 @@
 // int main() {
 //     int arr[5] = {-1 ,-2, -3, -4 ,-5} ;
 //     int n = 5 ;
-
 //     int ans = findMinMax(arr, n) ;
 //     cout<< "ans : "<<ans <<endl ;
 //     return 0 ;
 // }
-
-
-
+//
 
 //                              //❓Question: find kth smallest element :
-
 
 // #include<iostream>
 // using namespace std ;
@@ -147,15 +143,16 @@
 // int ans = findK(arr, s, e, k) ;
 // cout<< " kth smallest element : "<<ans <<endl ;
 // }
-//🔸time compplexity : O(n)
-//🔸space compplexity: O(1)
+// 🔸time compplexity : O(n)
+// 🔸space compplexity: O(1)
+//
 
-
-//🔴another approach : using priority_queue  (max-heap) by default
-// arr : given array
-// l : starting index of the array i.e 0
-// r : ending index of the array i.e size-1
-// k : find kth smallest element and return using this function
+// 🔴another approach :  using priority_queue  (max-heap) by default
+//  arr : given array
+//  l : starting index of the array i.e 0
+//  r : ending index of the array i.e size-1
+//  k : find kth smallest element and return using this function
+//
 
 //  int kthSmallest(int arr[], int l, int r, int k) {
 //         priority_queue<int> pq;
@@ -172,15 +169,10 @@
 //         return ans;
 //     }
 // };
-//🔸time compplexity : O(n*log(n))
-//🔸space compplexity: O(n)
-
-
-
+// 🔸time compplexity : O(n*log(n))
+// 🔸space compplexity: O(n)
 
 //                             //❓Question: Sort 0s 1s 2s
-
-
 
 // #include<iostream>
 // using namespace std ;
@@ -228,9 +220,8 @@
 
 //     return 0;
 // }
-//🔸time complexity: O(2N)
-//🔸space complexity: O(1)
-
+// 🔸time complexity: O(2N)
+// 🔸space complexity: O(1)
 
 //                           //❓Question:  Move all the negative elements to one side of the array
 
@@ -262,28 +253,25 @@
 //   sortNegative(arr,size) ;
 //   return 0 ;
 // }
-//🔸time complexity: o(n^2)
-//🔸space complexity:O(1)
+// 🔸time complexity: o(n^2)
+// 🔸space complexity:O(1)
 
-
-//🔴approach : optimised using in-build sort data structure
+// 🔴approach : optimised using in-build sort data structure
 
 // #include<iostream>
 // using namespace std ;
 // void sortNegative( int arr[], int size) {
 //    sort(arr, arr+size) ;
 // }
-//🔸time complexity: o(n* logn)           // it is better than O(N^2) because O(n*logn) is far closer to O(N)
-//🔸space complexity: O(1)
-
-
+// 🔸time complexity: o(n* logn)           // it is better than O(N^2) because O(n*logn) is far closer to O(N)
+// 🔸space complexity: O(1)
 
 //                            //❓Question :  Union of two arrays
 
 // ex:
 // input : a ={1,2,3,4}
 //         b = {6,7,2}
-// output: 6 = {1,2,3,4,6,7}   
+// output: 6 = {1,2,3,4,6,7}
 
 // 🔸 correct brute force solution but TLE:
 //  #include<iostream>
@@ -320,8 +308,8 @@
 // cout<<" ans :"<<ans <<endl ;
 //     return 0;
 // }
-//🔸time complexity : O(n*m)
-//🔸 space complexity: O(1)
+// 🔸time complexity : O(n*m)
+// 🔸 space complexity: O(1)
 
 // 🔴 approach 2  : Optimised using vector
 //  #include<iostream>
@@ -374,14 +362,13 @@
 // cout<<" ans :"<<ans <<endl ;
 //     return 0;
 // }
-//🔸 time complexity: O(N + M)
-//🔸 space complexity: O(1)
+// 🔸 time complexity: O(N + M)
+// 🔸 space complexity: O(1)
 
-
-//🔴 approach 3: using set
-// #include<iostream>
-// #include<set>
-// using namespace std;
+// 🔴 approach 3: using set
+//  #include<iostream>
+//  #include<set>
+//  using namespace std;
 
 // int Union(int a[], int n, int b[], int m){
 
@@ -396,10 +383,8 @@
 
 //   return ans.size() ;
 // };
-//🔸 time complexity: O(log n)
-//🔸 space complexity: O(n)
-
-
+// 🔸 time complexity: O(log n)
+// 🔸 space complexity: O(n)
 
 //                         //❓Question :  Intersection of two array
 
@@ -452,15 +437,13 @@
 
 //     return 0;
 // }
-//🔸time complexity: O(N+M)
-//🔸space complexity: O(1)
+// 🔸time complexity: O(N+M)
+// 🔸space complexity: O(1)
 
-
-
-//🔴 apppraoch 2:  Optimise using unordered_map
-// int intersection(int a[], int n, int b[], int m){
-// unordered_map<int, int> mp ;
-// int count = 0 ;
+// 🔴 apppraoch 2:  Optimise using unordered_map
+//  int intersection(int a[], int n, int b[], int m){
+//  unordered_map<int, int> mp ;
+//  int count = 0 ;
 
 // for(int i=0; i<n; i++) {
 //     if(mp[a[i]] == 0) {
@@ -477,9 +460,8 @@
 
 // return count ;
 // }
-//🔸time complexity: O(N+M)
-//🔸space complexity: O(N+M)
-
+// 🔸time complexity: O(N+M)
+// 🔸space complexity: O(N+M)
 
 // 🔴 Approach 3 : sorting and comparing
 //  #include<iostream>
@@ -531,18 +513,16 @@
 
 //     return 0;
 // }
-//🔸time complexity: O(n+log n)
-//🔸space complexity: O(1)
-
-
+// 🔸time complexity: O(n+log n)
+// 🔸space complexity: O(1)
 
 //                            //❓Question : Rotate an array cyclically
 // input: [1,2,3,4,5]
 // output: [5,1,2,3,4]
 
-//🔸approach :
-// #include<iostream>
-// using namespace std;
+// 🔸approach :
+//  #include<iostream>
+//  using namespace std;
 
 // void rotate(int arr[], int n) {
 //     int temp[n] ;
@@ -578,29 +558,26 @@
 //     rotate(arr, n) ;
 //     return 0;
 // }
-//🔸time complexity: O(N)
-//🔸space complexity: O(N)
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(N)
 
-
-//🔴 approach 2  :
-// #include<iostream>
-// using namespace std;
+// 🔴 approach 2  :
+//  #include<iostream>
+//  using namespace std;
 
 // void rotate(int arr[], int n)  {
 
 //    int temp = arr[n-1] ;
-    
+
 //     for(int i = n-1; i >= 0; i--){
 //         arr[i] = arr[i-1] ;
 //     }
-    
+
 //     arr[0] = temp ;
-// } 
- 
-//🔸time complexity: O(N)
-//🔸space complexity: O(1)
+// }
 
-
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(1)
 
 //                      //❓Question :  Find (Max sum of contigous sub-array)
 
@@ -663,9 +640,8 @@
 //  cout<<" sum of max sub-array : "<< ans <<endl ;
 //     return 0;
 // }
-//🔸time complexity: O(N^2)
-//🔸space complexity: O(N+M)
-
+// 🔸time complexity: O(N^2)
+// 🔸space complexity: O(N+M)
 
 // 🔴 approach 2: optimised approach
 //    long long maxSubarraySum(int arr[], int n){
@@ -680,9 +656,8 @@
 
 //     return ans ;
 //     }
-//🔸time complexity: O(n)
-//🔸space complexity: O(sum of all elements)
-
+// 🔸time complexity: O(n)
+// 🔸space complexity: O(sum of all elements)
 
 // 🔴 appraoch 3: Optimised kadane's algorithm O(n) time complexity
 //  #include<iostream>
@@ -714,10 +689,8 @@
 //  cout<<" sum of max sub-array : "<< ans <<endl ;
 //     return 0;
 // }
-//🔸time complexity: O(N)
-//🔸space complexity: O(sum of all elements)
-
-
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(sum of all elements)
 
 //                         //❓Question:  Minimize the heights I
 
@@ -758,10 +731,10 @@
 //  add and substract every element in the array by K
 //  and find the minimum difference after updating every element
 
-//🔸approach:
-// #include<iostream>
-// #include<algorithm>
-// using namespace std;
+// 🔸approach:
+//  #include<iostream>
+//  #include<algorithm>
+//  using namespace std;
 
 // int miniDiff(int arr[], int size, int k) {
 //     sort(arr, arr+size) ;   //sort array using inbuild function
@@ -780,8 +753,8 @@
 //     return result ;
 
 // }
-//🔸time complexity: O(N)
-//🔸space complexity: O(N)
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(N)
 
 // int main() {
 //     int arr[10] = {2, 6, 3, 4, 7, 2, 10, 3, 2, 1} ;
@@ -792,8 +765,6 @@
 //     cout<<" minimum difference of the height of shortest and longest towers after you have modified each tower: " <<endl ;
 //     cout<<answer <<endl ;
 // }
-
-
 
 //                     //❓Question:  Minimize the heights II
 
@@ -833,10 +804,10 @@
 // {6, 12, 9, 13, 17}. The difference between
 // the largest and the smallest is 17-6 = 11.
 
-//🔸approach : 
-// #include<iostream>
-// #include<algorithm>
-// using namespace std;
+// 🔸approach :
+//  #include<iostream>
+//  #include<algorithm>
+//  using namespace std;
 
 // int minDiff(int arr[], int size, int k){
 //     sort(arr, arr+size) ;
@@ -859,8 +830,8 @@
 
 //    return result ;
 // }
-//🔸time complexity: O(N)
-//🔸space complexity: O(N)
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(N)
 
 // int main() {
 //     int arr[5] = {3, 12, 20, 9, 16} ;
@@ -872,7 +843,6 @@
 
 //     return 0;
 // }
-
 
 //                            ❓Question:  Minimum number of jumps
 
@@ -905,9 +875,9 @@
 // First we jump from the 1st to 2nd element
 // and then jump to the last element.
 
-//🔸approach :
-// #include<iostream>
-// using namespace std;
+// 🔸approach :
+//  #include<iostream>
+//  using namespace std;
 
 // int minJump(int arr[], int n) {
 
@@ -938,49 +908,48 @@
 
 // return 0;
 // }
-//🔸time complexity: O(N)
-//🔸space complexity: O(1)
-
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(1)
 
 //                                 //❓Question:   Merge two sorted array without without extra space
 
-// Given two sorted arrays arr1[] and arr2[] of sizes n and m in non-decreasing order. 
+// Given two sorted arrays arr1[] and arr2[] of sizes n and m in non-decreasing order.
 // Merge them in sorted order without using any extra space.
 //  Modify arr1 so that it contains the first N elements and modify arr2 so that it contains the last M elements.
 
 // Example 1:
 
-// Input: 
-// n = 4, arr1[] = [1 3 5 7] 
+// Input:
+// n = 4, arr1[] = [1 3 5 7]
 // m = 5, arr2[] = [0 2 6 8 9]
-// Output: 
+// Output:
 // arr1[] = [0 1 2 3]
 // arr2[] = [5 6 7 8 9]
 // Explanation:
-// After merging the two 
-// non-decreasing arrays, we get, 
+// After merging the two
+// non-decreasing arrays, we get,
 // 0 1 2 3 5 6 7 8 9.
 // Example 2:
 
-// Input: 
-// n = 2, arr1[] = [10 12] 
+// Input:
+// n = 2, arr1[] = [10 12]
 // m = 3, arr2[] = [5 18 20]
-// Output: 
+// Output:
 // arr1[] = [5 10]
 // arr2[] = [12 18 20]
 // Explanation:
-// After merging two sorted arrays 
+// After merging two sorted arrays
 // we get 5 10 12 18 20.
 
 // #include<iostream>
 // using namespace std;
 
-//     void merge(long long arr1[], long long arr2[], int n, int m) 
-//     { 
-         
+//     void merge(long long arr1[], long long arr2[], int n, int m)
+//     {
+
 //         int left = n-1;
 //         int right = 0;
-            
+
 //         while( right < m && left >= 0 ) {
 //             if(arr1[left] >= arr2[right]) {
 //                 swap(arr1[left], arr2[right]) ;
@@ -990,14 +959,11 @@
 //             else break;
 //         }
 //         sort(arr1, arr1+n) ;
-//         sort(arr2, arr2+m) ; 
-        
-//     } 
-//🔸time complexity: O(Nlog n)             // loop => O(n)  , sort() => O(nlog n)
-//🔸space complexity: O(1)
+//         sort(arr2, arr2+m) ;
 
-
-
+//     }
+// 🔸time complexity: O(Nlog n)             // loop => O(n)  , sort() => O(nlog n)
+// 🔸space complexity: O(1)
 
 //                           //❓Question:  find duplicate in an array of N+1 Integers
 
@@ -1013,14 +979,14 @@
 // Input: nums = [3,1,3,4,2]
 // Output: 3
 
-//🔸approach :
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔸approach :
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 //  int findDuplicate(vector<int>& nums) {
 //     //🔸vector approach
-//     // Approach take a vector where you can store the value of occurance of a number to the   
+//     // Approach take a vector where you can store the value of occurance of a number to the
 //     // corresponding index of the vector and then traverse through vector find whose value is >1;
 //         int n = nums.size();
 //         int t = n+1;
@@ -1039,9 +1005,6 @@
 //     }
 // 🔸time complexity : O(n)
 // 🔸space complexity : O(n)
-
-
-
 
 //                       //❓Question : 56. Merge Intervals
 
@@ -1063,8 +1026,8 @@
 // intervals[i].length == 2
 // 0 <= starti <= endi <= 104
 
-//🔸approach :
-//   vector<vector<int>> merge(vector<vector<int>>& intervals) {
+// 🔸approach :
+//    vector<vector<int>> merge(vector<vector<int>>& intervals) {
 
 //         int n = intervals.size() ;
 //         sort(intervals.begin(), intervals.end()) ;
@@ -1090,13 +1053,11 @@
 // 🔸time complexity: O(nLog N)               //sort stl= o(nlog n),  for loop = o(n)
 // 🔸space complexity: O(n*m)
 
-
-
-//🔸approach 2: strivers approach 
-//   vector<vector<int>> merge(vector<vector<int>>& intervals) {
-//      int n = intervals.size() ;
-//      sort(intervals.begin(), intervals.end()) ;
-//      vector<vector<int>> ans  ;
+// 🔸approach 2: strivers approach
+//    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+//       int n = intervals.size() ;
+//       sort(intervals.begin(), intervals.end()) ;
+//       vector<vector<int>> ans  ;
 
 //      for(int i=0; i<n; i++) {
 //          if( ans.empty() || intervals[i][0] > ans.back()[1]) {
@@ -1105,13 +1066,11 @@
 //          else{
 //              ans.back()[1] = max(ans.back()[1], intervals[i][1]) ;
 //          }
-//      
+//
 //        return ans ;
-// } 
-//🔸time complexity: O( N Log(N) + N)
-//🔸space complexity: O( N)
-
-
+// }
+// 🔸time complexity: O( N Log(N) + N)
+// 🔸space complexity: O( N)
 
 //                          //❓Question: 31. Next Permutation
 
@@ -1147,10 +1106,10 @@
 // 1 <= nums.length <= 100
 // 0 <= nums[i] <= 100
 
-//🔸approach :
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔸approach :
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 //  void nextPermutation(vector<int>& nums) {
 //        int i,j,n=nums.size();
@@ -1177,21 +1136,19 @@
 // 🔸time complexity: O(N)
 // 🔸space complexity: O(1)
 
+// 🔴 approach: 2  inbuild stl
+//   void nextPermutation(vector<int>& nums) {
+//     next_permutation(nums.begin(), nums.end()) ;
+//    return nums;
+//  }
 
-//🔴 approach: 2  inbuild stl
-//  void nextPermutation(vector<int>& nums) {
-//    next_permutation(nums.begin(), nums.end()) ;
-//   return nums;
-// }
+// 🔸The next_permutation() function takes O(N) time to find the next permutation
+// 🔸time complexity : O(N)
+// 🔸space complexity: O(1)
 
-//🔸The next_permutation() function takes O(N) time to find the next permutation
-//🔸time complexity : O(N)
-//🔸space complexity: O(1)
-
-
-//🔴 approach: 3  strivers approach
-//  void nextPermutation(vector<int>& A) {
-//     int n = A.size(); // size of the array.
+// 🔴 approach: 3  strivers approach
+//   void nextPermutation(vector<int>& A) {
+//      int n = A.size(); // size of the array.
 
 //     // Step 1: Find the break point:
 //     int ind = -1; // break point
@@ -1229,7 +1186,6 @@
 // 🔸time complexity : O(3N)
 // 🔸space complexity: O(1)
 
-
 //                       //❓question: Count inversion
 
 // Given an array of integers. Find the Inversion Count in the array.
@@ -1258,9 +1214,9 @@
 // Explanation: As all the elements of array
 // are same, so there is no inversion count.
 
-//🔸approach :
-// #include<iostream>
-// using namespace std;
+// 🔸approach :
+//  #include<iostream>
+//  using namespace std;
 
 // class Solution {
 //   public:
@@ -1341,8 +1297,6 @@
 // 🔸time complexity: O (N log N)
 // 🔸time complexity: O(N)
 
-
-
 //                      //❓Question :121. Best Time to Buy and Sell Stock (easy)
 
 // You are given an array prices where prices[i] is the price of a given stock on the ith day.
@@ -1370,8 +1324,8 @@
 
 // int n = prices.size();
 
-//🔴 approach: using vector  
-//   int maxProfit(vector<int>& prices) {
+// 🔴 approach: using vector
+//    int maxProfit(vector<int>& prices) {
 
 //         vector<int>maxprices(n,0);
 //         maxprices[n-1] = prices[n-1];
@@ -1402,11 +1356,10 @@
 //     return maxi ;
 //   }
 
-
-//🔸 dp series approach : optimal O(n) time, O(1) space
-//   int maxProfit(vector<int>& prices) {
-//     int mini = prices[0] ;
-//     int profit = 0 ;
+// 🔸 dp series approach : optimal O(n) time, O(1) space
+//    int maxProfit(vector<int>& prices) {
+//      int mini = prices[0] ;
+//      int profit = 0 ;
 
 //     for(int i=1; i<prices.size(); i++) {
 //         int diff = prices[i] - mini ;
@@ -1416,11 +1369,8 @@
 
 //     return profit ;
 //   }
-//🔸time  complexity: O(N)
-//🔸space complexity: O(1)
-
-
-
+// 🔸time  complexity: O(N)
+// 🔸space complexity: O(1)
 
 //               //❓Question: Count pairs with given sum
 
@@ -1444,12 +1394,12 @@
 // Explanation:
 // Each 1 will produce sum 2 with any 1.
 
-//🔸approach :
-// #include<iostream>
-// using namespace std;
+// 🔸approach :
+//  #include<iostream>
+//  using namespace std;
 
-//🔴 brute force : 181 / 263
-// int getPairsCount(int arr[], int n, int k) {
+// 🔴 brute force : 181 / 263
+//  int getPairsCount(int arr[], int n, int k) {
 
 //     int pairCount = 0 ;
 //     for(int i=0; i<n; i++) {
@@ -1461,7 +1411,6 @@
 //     }
 //     return pairCount ;
 // }
-
 
 // 🔴 approach 2: using unordered_map
 //       int getPairsCount(int arr[], int n, int k){
@@ -1487,8 +1436,6 @@
 //     }
 // 🔸time complexity: O(N)
 // 🔸space complexity: O(N)
-
-
 
 //                     //❓Question: Common elements
 
@@ -1542,12 +1489,10 @@
 // 🔸time complexity: O(n1 + n2 + n3)
 // 🔸 space complexity: O(n1 + n2 + n3)
 
-
-
 //                   //❓Question: Alternate positive and negative numbers
 
-// Given an unsorted array Arr of N positive and negative numbers. 
-// Your task is to create an array of alternate positive and negative numbers without 
+// Given an unsorted array Arr of N positive and negative numbers.
+// Your task is to create an array of alternate positive and negative numbers without
 // changing the relative order of positive and negative numbers.
 // Note: Array should start with a positive number and 0 (zero) should be considered a positive element.
 
@@ -1584,12 +1529,12 @@
 // Expected Time Complexity: O(N)
 // Expected Auxiliary Space: O(N)
 
-//🔸approach : 
-// #include<iostream>
-// #include<vector>
-// using namespace std;
-// void rearrange(int arr[], int n)
-// {
+// 🔸approach :
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
+//  void rearrange(int arr[], int n)
+//  {
 
 //     vector<int> pos;
 //     vector<int> neg;
@@ -1620,8 +1565,6 @@
 // 🔸 Time Complexity: O(N)
 // 🔸 Space complexity : O(N)       // O(2N)
 
-
-
 //                  //❓Question: Subarray with 0 Sum
 
 // Given an array of positive and negative numbers.
@@ -1650,15 +1593,15 @@
 // in the array so there exist a
 // subarray with sum 0.
 
-//🔸approach :
-// #include<iostream>
-// #include<vector>
-// using namespace std;
-//  bool subArrayExists(int arr[], int n)
-//     {
-//             4 2 -3 1 6
-//         unordered_map<int, bool> m;
-//         m[0] = true;
+// 🔸approach :
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
+//   bool subArrayExists(int arr[], int n)
+//      {
+//              4 2 -3 1 6
+//          unordered_map<int, bool> m;
+//          m[0] = true;
 
 //         int sum = 0;
 
@@ -1680,8 +1623,6 @@
 // 🔸time complexity: O(n)
 // 🔸space complexity: O(n)
 
-
-
 //            //❓Question : Factorials Of Large Numbers
 
 // Given an integer N, find its factorial.
@@ -1698,11 +1639,11 @@
 // Explanation :
 // 10! = 1*2*3*4*5*6*7*8*9*10 = 3628800
 
-//🔸appraoch :
-// #include<iostream>
-// #include<vector>
-// #include<algorithm>
-// using namespace std;
+// 🔸appraoch :
+//  #include<iostream>
+//  #include<vector>
+//  #include<algorithm>
+//  using namespace std;
 
 // vector<int> factorial(int N){
 
@@ -1727,8 +1668,6 @@
 //     }
 // 🔸time complexity: O(N^2)
 // 🔸space complexity: O(N)
-
-
 
 ///                  //❓Question: Maximum Product subarray
 
@@ -1763,8 +1702,8 @@
 // 1 ≤ N ≤ 500
 // -102 ≤ Arri ≤ 102
 
-//🔸approach :
-// Dry run for better understanding :
+// 🔸approach :
+//  Dry run for better understanding :
 
 // #include<iostream>
 // #include<vector>
@@ -1795,7 +1734,6 @@
 // 	}
 // 🔸time complexity: O(N)
 // 🔸space complexity: O(1)
-
 
 //                //❓question: Longest consecutive subsequence
 
@@ -1857,8 +1795,6 @@
 
 // 🔸time complexity: O(N * logN)
 // 🔸space complexity: O(1)
-
-
 
 //                  //❓Question: Count More than n/k Occurences
 
@@ -1969,14 +1905,12 @@
 // 🔸time complexity: O(N)
 // 🔸space complexity: O(N)
 
-
-
 //                   //🔴❓Question: Buy and sell a share at most twice
 
-// In daily share trading, a buyer buys shares in the morning and sells them on the same day. 
-// If the trader is allowed to make at most 2 transactions in a day, 
-// the second transaction can only start after the first one is complete (Buy->sell->Buy->sell). 
-// The stock prices throughout the day are represented in the form of an array of prices. 
+// In daily share trading, a buyer buys shares in the morning and sells them on the same day.
+// If the trader is allowed to make at most 2 transactions in a day,
+// the second transaction can only start after the first one is complete (Buy->sell->Buy->sell).
+// The stock prices throughout the day are represented in the form of an array of prices.
 
 // Given an array price of size N, find out the maximum profit that a share trader could have made.
 
@@ -1988,8 +1922,8 @@
 // Output:
 // 87
 // Explanation:
-// Trader earns 87 as sum of 12, 75 
-// Buy at 10, sell at 22, 
+// Trader earns 87 as sum of 12, 75
+// Buy at 10, sell at 22,
 // Buy at 5 and sell at 80
 // Example 2:
 
@@ -2008,8 +1942,8 @@
 // 1 <= N <= 105
 // 1 <= price[i] <= 105
 
-//🔴approach :
-// logic :
+// 🔴approach :
+//  logic :
 
 // for example you dont have any money in your pocket.
 // so , your firstbuy is you do loan. so negative value of price.
@@ -2021,30 +1955,28 @@
 // int maxProfit(vector<int>&price){
 //     int firstbuy = INT_MIN;
 //    int firstsell = 0;
-   
+
 //    int secondbuy = INT_MIN;
 //    int secondsell = 0;
-   
+
 //    for(int i=0; i<price.size();i++){
 //        firstbuy = max(firstbuy, -price[i]);
 //        firstsell = max(firstsell, firstbuy + price[i]);
-     
+
 //        secondbuy = max(secondbuy, firstsell - price[i]);
 //        secondsell = max(secondsell, secondbuy + price[i]);
-      
+
 //    }
 //    return secondsell;
 // }
 
-//🔸Time Complexity: O(N)
-//🔸Space Complexity: O(1)
+// 🔸Time Complexity: O(N)
+// 🔸Space Complexity: O(1)
 
+//                    //❓Question: Array Subset of another array
 
-
-//                    //❓Question: Array Subset of another array 
-
-// Given two arrays: a1[0..n-1] of size n and a2[0..m-1] of size m. 
-// Task is to check whether a2[] is a subset of a1[] or not. 
+// Given two arrays: a1[0..n-1] of size n and a2[0..m-1] of size m.
+// Task is to check whether a2[] is a subset of a1[] or not.
 // Both the arrays can be sorted or unsorted. There can be duplicate elements.
 
 // Example 1:
@@ -2078,15 +2010,15 @@
 // 1 <= n,m <= 105
 // 1 <= a1[i], a2[j] <= 106
 
-//🔴approach :
-// string isSubset(int a1[], int a2[], int n, int m) {
-    
+// 🔴approach :
+//  string isSubset(int a1[], int a2[], int n, int m) {
+
 //     unordered_map<int, int> count ;
-    
+
 //     for(int i=0; i<n; i++) {
 //         count[a1[i]]++ ;
 //     }
-    
+
 //     for(int i=0; i<m; i++) {
 //         if(count[a2[i]] > 0) {
 //             count[a2[i]]-- ;
@@ -2095,17 +2027,16 @@
 //             return "No" ;
 //         }
 //     }
-    
+
 //     return "Yes" ;
 // }
 
-//🔸Time Complexity: O(n+m)
-//🔸Space complexity: O(n)
-
+// 🔸Time Complexity: O(n+m)
+// 🔸Space complexity: O(n)
 
 //             //❓Question :Triplet sum in array
 
-// Given an array arr of size n and an integer X. 
+// Given an array arr of size n and an integer X.
 // Find if there's a triplet in the array which sums up to the given integer X.
 
 // Example 1:
@@ -2115,7 +2046,7 @@
 // Output:
 // 1
 // Explanation:
-// The triplet {1, 4, 8} in 
+// The triplet {1, 4, 8} in
 // the array sums up to 13.
 
 // Example 2:
@@ -2125,25 +2056,25 @@
 // Output:
 // 1
 // Explanation:
-// The triplet {1, 3, 6} in 
+// The triplet {1, 3, 6} in
 // the array sums up to 10.
 
 // Constraints:
 // 1 ≤ n ≤ 103
 // 1 ≤ A[i] ≤ 105
 
-//🔴approach :
-// bool find3Numbers(int arr[], int n, int x)
-//     {   
-//         sort(arr, arr+n) ;
-        
+// 🔴approach :
+//  bool find3Numbers(int arr[], int n, int x)
+//      {
+//          sort(arr, arr+n) ;
+
 //         for(int i=0; i<n; i++) {
 //             int start = i+1;
 //             int end = n-1 ;
-            
+
 //             while(start < end) {
 //                 int sum = arr[i] + arr[start] + arr[end] ;
-                
+
 //                 if(sum == x) {
 //                     return true ;
 //                 }
@@ -2155,18 +2086,16 @@
 //                 }
 //             }
 //         }
-        
+
 //         return 0 ;
 //     }
-//🔸time complexity: O(N^2)           // o(n^2 + logN)
-//🔸space complexity: O(1)
+// 🔸time complexity: O(N^2)           // o(n^2 + logN)
+// 🔸space complexity: O(1)
 
-
-
-//                   //🔴❓ Question:  Trapping Rain Water 
+//                   //🔴❓ Question:  Trapping Rain Water
 
 // Given an array arr[] of N non-negative integers representing the height of blocks. If width of each block is 1,
-// compute how much water can be trapped between the blocks during the rainy season. 
+// compute how much water can be trapped between the blocks during the rainy season.
 
 // Example 1:
 // Input:
@@ -2174,7 +2103,7 @@
 // arr[] = {3,0,0,2,0,4}
 // Output:
 // 10
-//explanation :
+// explanation :
 //                          ____
 //    ___ _ _ _ _ _ _ _ _ _|    |
 //   |   |         ___     |    |
@@ -2182,8 +2111,8 @@
 //   |___|________|___|____|____|
 //    [3] [0] [0]  [2] [0]  [4]
 
-//Bars for input =  { 3, 0, 0 ,2, 0, 4}
-// Total trapped water = 3 + 3 + 1 + 3 = 10
+// Bars for input =  { 3, 0, 0 ,2, 0, 4}
+//  Total trapped water = 3 + 3 + 1 + 3 = 10
 
 // Example 2:
 // Input:
@@ -2192,11 +2121,10 @@
 // Output:
 // 10
 // Explanation:
-// Water trapped by above 
-// block of height 4 is 3 units and above 
-// block of height 0 is 7 units. So, the 
+// Water trapped by above
+// block of height 4 is 3 units and above
+// block of height 0 is 7 units. So, the
 // total unit of water trapped is 10 units.
-
 
 // Example 3:
 // Input:
@@ -2211,60 +2139,58 @@
 // 3 < N < 106
 // 0 < Ai < 108
 
-//🔴 approach :
-// long long trappingWater(int arr[], int n){
-        
+// 🔴 approach :
+//  long long trappingWater(int arr[], int n){
+
 //         int leftBlock[n] ;
 //         leftBlock[0] = arr[0] ;
-        
+
 //         for(int i=1; i<n; i++) {
 //             leftBlock[i] = max(leftBlock[i-1], arr[i]) ;
 //         }
-        
+
 //         int rightBlock[n] ;
 //         rightBlock[n-1] = arr[n-1] ;
-        
+
 //         for(int i=n-2; i>=0; i--) {
 //             rightBlock[i] = max(rightBlock[i+1], arr[i]) ;
 //         }
-        
+
 //         long long sum = 0;
-        
+
 //         for(int i=0; i<n; i++){
 //             sum += min(leftBlock[i], rightBlock[i]) - arr[i] ;
 //         }
-        
+
 //         return sum ;
 //     }
-//🔸time complexity: O(N)
-//🔸space complexity: O(N)      // O(2N)
-
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(N)      // O(2N)
 
 //                 //❓Question: Choclate Distribution Problem
 
 // Given an array A[ ] of positive integers of size N,
-//  where each value represents the number of chocolates in a packet. 
-//  Each packet can have a variable number of chocolates. 
+//  where each value represents the number of chocolates in a packet.
+//  Each packet can have a variable number of chocolates.
 //  There are M students, the task is to distribute chocolate packets among M students such that :
 // 1. Each student gets exactly one packet.
-// 2. The difference between maximum number of chocolates given to a student and minimum number 
+// 2. The difference between maximum number of chocolates given to a student and minimum number
 // of chocolates given to a student is minimum.
-
 
 // Example 1:
 // Input:
 // N = 8, M = 5
 // A = {3, 4, 1, 9, 56, 7, 9, 12}
 // Output: 6
-// Explanation: The minimum difference between maximum chocolates and minimum chocolates 
-//is 9 - 3 = 6 by choosing following M packets :{3, 4, 9, 7, 9}.
+// Explanation: The minimum difference between maximum chocolates and minimum chocolates
+// is 9 - 3 = 6 by choosing following M packets :{3, 4, 9, 7, 9}.
 
 // Example 2:
 // Input:
 // N = 7, M = 3
 // A = {7, 3, 2, 4, 9, 12, 56}
 // Output: 2
-// Explanation: The minimum difference between maximum chocolates and minimum chocolates 
+// Explanation: The minimum difference between maximum chocolates and minimum chocolates
 // is 4 - 2 = 2 by choosing following M packets :{3, 2, 4}.
 
 // Constraints:
@@ -2273,30 +2199,29 @@
 // 1 ≤ Ai ≤ 109
 // 1 ≤ M ≤ N
 
-//🔴approach :
-// long long findMinDiff(vector<long long> a, long long n, long long m){
-        
+// 🔴approach :
+//  long long findMinDiff(vector<long long> a, long long n, long long m){
+
 //        sort(a.begin(), a.end()) ;
 //        int first = 0;
 //        int second = m-1 ;
 //        long long diff = INT_MAX;
-       
+
 //        while( second < n) {
 //            diff = min(diff, a[second]-a[first]) ;
 //            second++ ;
 //            first++ ;
 //        }
 //        return diff ;
-//     }   
+//     }
 
-//🔸time complexity: O(N * logN)
-//🔸space complexity: O(1) 
-
+// 🔸time complexity: O(N * logN)
+// 🔸space complexity: O(1)
 
 //                    //❓Question: Smallest Subarray with sum greater than x
 
-// Given an array of integers (A[])  and a number x, 
-// find the smallest subarray with sum greater than the given value. 
+// Given an array of integers (A[])  and a number x,
+// find the smallest subarray with sum greater than the given value.
 // If such a subarray do not exist return 0 in that case.
 
 // Note: The answer always exists. It is guaranteed that x doesn't exceed the summation of a[i] (from 1 to N).
@@ -2307,7 +2232,7 @@
 // x  =  51
 // Output: 3
 // Explanation:
-// Minimum length subarray is 
+// Minimum length subarray is
 // {4, 45, 6}
 
 // Example 2:
@@ -2318,12 +2243,11 @@
 // Explanation:
 // Minimum length subarray is {10}
 
-
 // Constraints:
 // 1 ≤ N, x ≤ 105
 // 1 ≤ A[] ≤ 104
 
-//🔸approach :
+// 🔸approach :
 
 // int smallestSubWithSum(int arr[], int n, int x)
 //     {
@@ -2331,41 +2255,39 @@
 //         int i = 0;
 //         int j = -1;
 //         int sum = 0 ;
-        
+
 //         while( j < n ) {
 //             if( sum <= x ) {
 //                 j++ ;
 //                 sum = sum + arr[j] ;
-//             } 
-            
+//             }
+
 //             else if( sum > x ) {
 //                 ans = min(ans, j - i + 1) ;
 //                 sum = sum - arr[i] ;
 //                 i++ ;
 //             }
 //         }
-        
+
 //         return ans ;
 //     }
-//🔸time complexity: O(N)
-//🔸space complexity: O(1) 
-
-
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(1)
 
 //                     //❓Question: Three way Partitioning
 
-// Given an array of size n and a range [a, b]. 
-//The task is to partition the array around the range such that array is divided into three parts.
+// Given an array of size n and a range [a, b].
+// The task is to partition the array around the range such that array is divided into three parts.
 // 1) All elements smaller than a come first.
 // 2) All elements in range a to b come next.
 // 3) All elements greater than b appear in the end.
-// The individual elements of three sets can appear in any order. 
+// The individual elements of three sets can appear in any order.
 // You are required to return the modified array.
 
 // Note: The generated output is 1 if you modify the given array successfully.
 
 // Example 1:
-// Input: 
+// Input:
 // n = 5
 // A[] = {1, 2, 3, 3, 4}
 // [a, b] = [1, 2]
@@ -2375,12 +2297,12 @@
 // arrangement, output will be 1.
 
 // Example 2:
-// Input: 
-// n = 3 
+// Input:
+// n = 3
 // A[] = {1, 2, 3}
 // [a, b] = [1, 3]
 // Output: 1
-// Explanation: One possible arrangement 
+// Explanation: One possible arrangement
 // is: {1, 2, 3}. If you return a valid
 // arrangement, output will be 1.
 
@@ -2391,15 +2313,15 @@
 // 1 <= n <= 106
 // 1 <= A[i] <= 106
 
-//🔴 approach :
-// void threeWayPartition(vector<int>& arr,int a, int b)
-//     {
-//        int i = 0;
-//        int left = 0;
-//        int right = arr.size() -1 ;
-       
+// 🔴 approach :
+//  void threeWayPartition(vector<int>& arr,int a, int b)
+//      {
+//         int i = 0;
+//         int left = 0;
+//         int right = arr.size() -1 ;
+
 //        while( i <= right) {
-           
+
 //            if( arr[i] < a) {
 //                swap(arr[i++], arr[left++]) ;
 //            }
@@ -2411,100 +2333,96 @@
 //            }
 //        }
 //     }
-//🔸time complexity: O(N)
-//🔸space complexity: O(1)
-
-
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(1)
 
 //              //❓ Question :  Minimum swaps and K together
 
-// Given an array arr of n positive integers and a number k. 
-// One can apply a swap operation on the array any number of times, 
+// Given an array arr of n positive integers and a number k.
+// One can apply a swap operation on the array any number of times,
 // i.e choose any two index i and j (i < j) and swap arr[i] , arr[j] .
-//  Find the minimum number of swaps required to bring all the numbers less than or equal to k together, 
+//  Find the minimum number of swaps required to bring all the numbers less than or equal to k together,
 //  i.e. make them a contiguous subarray.
 
 // Example 1:
-// Input : 
-// arr[ ] = {2, 1, 5, 6, 3} 
+// Input :
+// arr[ ] = {2, 1, 5, 6, 3}
 // K = 3
-// Output : 
+// Output :
 // 1
 // Explanation:
 // To bring elements 2, 1, 3 together,
 // swap index 2 with 4 (0-based indexing),
 // i.e. element arr[2] = 5 with arr[4] = 3
-// such that final array will be- 
+// such that final array will be-
 // arr[] = {2, 1, 3, 6, 5}
 
 // Example 2:
-// Input : 
-// arr[ ] = {2, 7, 9, 5, 8, 7, 4} 
-// K = 6 
-// Output :  
-// 2 
-// Explanation: 
-// To bring elements 2, 5, 4 together, 
+// Input :
+// arr[ ] = {2, 7, 9, 5, 8, 7, 4}
+// K = 6
+// Output :
+// 2
+// Explanation:
+// To bring elements 2, 5, 4 together,
 // swap index 0 with 2 (0-based indexing)
 // and index 4 with 6 (0-based indexing)
-// such that final array will be- 
+// such that final array will be-
 // arr[] = {9, 7, 2, 5, 4, 7, 8}
-
 
 // Constraints:
 // 1 ≤ N ≤ 105
 // 1 ≤ Arri, K ≤107
 
-//🔴approach: 
-/// This approach uses Sliding Window technique 
+// 🔴approach:
+/// This approach uses Sliding Window technique
 //  first we count how many element are good, means <= k
 //  then we count how many element are bad from 0 to good (window size) , bad means > k
 //  initialise ans and assign bad as initial answer, init j assign bad , init i assign 0
-//  loop from j < n, 
+//  loop from j < n,
 //  check if arr[i] > k decrease bad-- ,   within window size
 //  check if arr[j] > k increase bad++ ,   outside of window size
-//  ans = minimum Of (ans, bad) 
+//  ans = minimum Of (ans, bad)
 //  i++, j++ ;
 //  return ans as minimum swap
 
 // int minSwap(int arr[], int n, int k) {
-        
+
 //        int good=0;
 //        int bad=0;
-       
+
 //        for(int i=0;i<n;i++) {
 //             if(arr[i]<=k)
 //             good++;
 //         }
-        
+
 //         for(int i=0;i<good;i++) {
 //             if(arr[i]>k)
 //             bad++;
 //         }
-        
+
 //         int ans=bad;
 //         int i=0,j=good;
-        
-//         while(j<n) {  
-            
+
+//         while(j<n) {
+
 //           if(arr[i]>k)bad--;
-          
+
 //           if(arr[j]>k)bad++;
-          
+
 //           ans=min(ans,bad);
-         
+
 //           i++;j++;
 //       }
-   
-//      return ans;  
-//     }
 
+//      return ans;
+//     }
 
 //                   //❓Question: Unique Number of Occurences
 
-// Given an array arr of N integers, 
-// the task is to check whether the frequency of the elements in the array is unique or not. 
-// Or in other words, there are no two distinct numbers in array with equal frequency. 
+// Given an array arr of N integers,
+// the task is to check whether the frequency of the elements in the array is unique or not.
+// Or in other words, there are no two distinct numbers in array with equal frequency.
 // If all the frequency is unique then return true, else return false.
 
 // Example 1:
@@ -2514,7 +2432,7 @@
 // Output:
 // false
 // Explanation:
-// The array contains 2 (1’s), 1 (2’s) and 2 (5’s), since the number of frequency of 1 and 5 are the same i.e. 2 times. 
+// The array contains 2 (1’s), 1 (2’s) and 2 (5’s), since the number of frequency of 1 and 5 are the same i.e. 2 times.
 // Therefore, this array does not satisfy the condition.
 // Example 2:
 
@@ -2528,51 +2446,49 @@
 // Number of 2’s -> 4
 // Number of 5’s -> 2
 // Number of 10’s -> 3.
-// Since, the number of occurrences of elements present in the array is unique. 
+// Since, the number of occurrences of elements present in the array is unique.
 // Therefore, this array satisfy the condition.
 // Your task:
-// You don't need to read input or print anything. 
-// Your task is to complete the function isFrequencyUnique() which take integer N and array arr of size N as arguments, 
+// You don't need to read input or print anything.
+// Your task is to complete the function isFrequencyUnique() which take integer N and array arr of size N as arguments,
 // and returns a boolean.
 
 // Constraints:
 // 1 <= N <=105
 // -109 <= arr[i] <= 109
 
-//🔴approach: 
+// 🔴approach:
 
 //  bool isFrequencyUnique(int n, int arr[])
 //     {
-//         map<int, int> mp; 
-        
+//         map<int, int> mp;
+
 //         for(int i=0; i<n; i++) {
 //             mp[arr[i]]++ ;
 //         }
-        
+
 //         vector<int> v;
 //         for(auto i:mp) {
 //             v.push_back(i.second) ;
 //         }
-        
+
 //         set<int> ans ;
 //         for(int i=0; i<v.size(); i++) {
 //             ans.insert(v[i]) ;
 //         }
-        
+
 //         if(ans.size() == v.size()) {
 //             return true ;
 //         }
 //         else{
 //             return false ;
 //         }
-        
+
 //     }
-//🔸time complexity: O(N)
-//🔸space complexity: O(N)
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(N)
 
-
-
-//                    //❓Question : Palindromic array 
+//                    //❓Question : Palindromic array
 
 // Given a Integer array A[] of n elements. Your task is to complete the function PalinArray.
 //  Which will return 1 if all the elements of the Array are palindrome otherwise it will return 0.
@@ -2607,15 +2523,15 @@
 // 1 <=n<= 20
 // 1 <=A[]<= 10000
 
-//🔴approach :
-// int PalinArray(int arr[], int n)
-//     {
-//     	for(int k=0; k<n; k++) {
-//     	    int a = arr[k] ;
-//     	    string str = to_string(a) ;
-    	    
+// 🔴approach :
+//  int PalinArray(int arr[], int n)
+//      {
+//      	for(int k=0; k<n; k++) {
+//      	    int a = arr[k] ;
+//      	    string str = to_string(a) ;
+
 //     	    int i=0, j = str.length() - 1 ;
-    	    
+
 //     	    while( i <= j) {
 //     	        if(str[i] == str[j]) {
 //     	            i++ ;
@@ -2626,13 +2542,11 @@
 //     	        }
 //     	    }
 //     	}
-        
+
 //         return 1;
 //     }
-//🔸time complexity: O(N * element.size())
-//🔸space complexity: O(element)
-
-
+// 🔸time complexity: O(N * element.size())
+// 🔸space complexity: O(element)
 
 //                     //❓Question : Find the Median
 
@@ -2642,32 +2556,31 @@
 // Input: N = 5
 // arr[] = 90 100 78 89 67
 // Output: 89
-// Explanation: After sorting the array 
-// middle element is the median 
+// Explanation: After sorting the array
+// middle element is the median
 
 // Example 2:
 // Input: N = 4
 // arr[] = 56 67 30 79
 // Output: 61
-// Explanation: In case of even number of 
-// elements, average of two middle elements 
+// Explanation: In case of even number of
+// elements, average of two middle elements
 // is the median.
 
 // Expected Time Complexity: O(n * log(n))
 // Expected Space Complexity: O(1)
- 
 
 // Constraints:
 // 1 <= Length of Array <= 100
 // 1 <= Elements of Array <= 100
 
-//🔴Approach :
-// int find_median(vector<int> v)
-// 		{
-// 		    sort(v.begin(), v.end()) ;
-// 		    int size = v.size() ;
-// 		     int ans = size / 2 ;
-		    
+// 🔴Approach :
+//  int find_median(vector<int> v)
+//  		{
+//  		    sort(v.begin(), v.end()) ;
+//  		    int size = v.size() ;
+//  		     int ans = size / 2 ;
+
 // 		    if( size % 2 == 0) {
 // 		        int avg = (v[ans] + v[ans-1] ) / 2 ;
 // 		        return avg;
@@ -2676,13 +2589,12 @@
 // 		        return v[ans] ;
 // 		    }
 // 		}
-//🔸time complexity: O(Log(n))
-//🔸space complexity: O( 1 )
-
+// 🔸time complexity: O(Log(n))
+// 🔸space complexity: O( 1 )
 
 //                    //❓Question: Sum of middle elements of two sorted array
 
-// Given 2 sorted arrays Ar1 and Ar2 of size N each. 
+// Given 2 sorted arrays Ar1 and Ar2 of size N each.
 // Merge the given arrays and find the sum of the two middle elements of the merged array.
 
 // Example 1:
@@ -2694,7 +2606,6 @@
 // Explanation: The merged array looks like
 // {1,2,4,4,5,6,6,9,10,12}. Sum of middle
 // elements is 11 (5 + 6).
- 
 
 // Example 2:
 // Input:
@@ -2703,7 +2614,7 @@
 // Ar2[] = {2, 13, 17, 30, 45}
 // Output: 32
 // Explanation: The merged array looks like
-// {1, 2, 12, 13, 15, 17, 26, 30, 38, 45} 
+// {1, 2, 12, 13, 15, 17, 26, 30, 38, 45}
 // sum of middle elements is 32 (15 + 17).
 
 // Expected Time Complexity: O(log N)
@@ -2714,65 +2625,62 @@
 // 1 <= Ar1[i] <= 106
 // 1 <= Ar2[i] <= 106
 
-//🔴appraoch :
-//  int findMidSum(int ar1[], int ar2[], int n) {
-//             int ans[n+n] ;
-//             int i=0; 
-//             int j=0;
-//             while( j < n) {
-//                 ans[i++] = ar1[j] ;
-//                 ans[i++] = ar2[j] ;
-//                 j++ ;
-                
+// 🔴appraoch :
+//   int findMidSum(int ar1[], int ar2[], int n) {
+//              int ans[n+n] ;
+//              int i=0;
+//              int j=0;
+//              while( j < n) {
+//                  ans[i++] = ar1[j] ;
+//                  ans[i++] = ar2[j] ;
+//                  j++ ;
+
 //             }
-            
+
 //             int size = n+n ;
 //             sort(ans, ans+size) ;
-            
+
 //             int midd = size / 2 ;
 //             int temp = ans[midd] + ans[midd-1] ;
-           
+
 //             return temp ;
 //     }
-//🔸time complexity: O(n + Log(n)) 
-//🔸space complexity: O(N+N)
+// 🔸time complexity: O(n + Log(n))
+// 🔸space complexity: O(N+N)
 
-
-//🔴appraoch : Optimised
-//  int findMidSum(int arr1[], int arr2[], int n) {
-//        int left=n-1;
-//        int right=0;
-//        while(left>=0 && right<n)
-//        {
-//            if(arr1[left]>arr2[right])
-//            {
-//                swap(arr1[left--],arr2[right++]);
-//            }
-//            else    break;
-//        }
-//        int el1 = *max_element(arr1,arr1+n);
-//        int el2 = *min_element(arr2,arr2+n);
-//        return  el1+el2;
-//     }
-//🔸time complexity: O(n) 
-//🔸space complexity: O(1)
-
-
+// 🔴appraoch : Optimised
+//   int findMidSum(int arr1[], int arr2[], int n) {
+//         int left=n-1;
+//         int right=0;
+//         while(left>=0 && right<n)
+//         {
+//             if(arr1[left]>arr2[right])
+//             {
+//                 swap(arr1[left--],arr2[right++]);
+//             }
+//             else    break;
+//         }
+//         int el1 = *max_element(arr1,arr1+n);
+//         int el2 = *min_element(arr2,arr2+n);
+//         return  el1+el2;
+//      }
+// 🔸time complexity: O(n)
+// 🔸space complexity: O(1)
 
 //                  //❓ Question: Number of flowers in full bloom (leetcode hard)
 
-// You are given a 0-indexed 2D integer array flowers, where flowers[i] = [starti, endi] 
-// means the ith flower will be in full bloom from starti to endi (inclusive). 
-// You are also given a 0-indexed integer array people of size n, where people[i] is 
+// You are given a 0-indexed 2D integer array flowers, where flowers[i] = [starti, endi]
+// means the ith flower will be in full bloom from starti to endi (inclusive).
+// You are also given a 0-indexed integer array people of size n, where people[i] is
 // the time that the ith person will arrive to see the flowers.
 // Return an integer array answer of size n, where answer[i] is the number of flowers that are in full bloom when the ith person arrives.
 
 // Example 1:
 
-//    1   f   f   f   f   f   f 
-//    3           f   f   f   f   f 
-//    9                                   f   f   f   f 
-//    4               f   f   f   f   f   f   f   f   f   f 
+//    1   f   f   f   f   f   f
+//    3           f   f   f   f   f
+//    9                                   f   f   f   f
+//    4               f   f   f   f   f   f   f   f   f   f
 //    ______________________________________________________
 
 //    p:      2   3               7               11
@@ -2789,7 +2697,6 @@
 // Output: [2,2,1]
 // Explanation: The figure above shows the times when the flowers are in full bloom and when the people arrive.
 // For each person, we return the number of flowers in full bloom during their arrival.
- 
 
 // Constraints:
 
@@ -2799,46 +2706,45 @@
 // 1 <= people.length <= 5 * 104
 // 1 <= people[i] <= 109
 
-//🔴approach : Brute force (TLE)
+// 🔴approach : Brute force (TLE)
 
 //   vector<int> fullBloomFlowers(vector<vector<int>>& flowers, vector<int>& people) {
-        
+
 //         int n = people.size() ;
-//         vector<pair<int,int>> vec; 
-        
+//         vector<pair<int,int>> vec;
+
 //         for(int i=0; i<n; i++){
 //              vec.push_back({people[i], 0});
 //         }
-        
+
 //         vector<int> ans ;
 //         int rows = flowers.size();
 //         int col = flowers[0].size() ;
-        
+
 //         for(int i=0; i<rows; i++) {
 //             int start = flowers[i][0] ;
 //             int end = flowers[i][col-1] ;
-            
+
 //             for(int k=0; k<n; k++){
 //                 // cout<<"["<<vec[k].first <<", " ;
 //                 //  cout<<vec[k].second <<"]"<< endl ;
 //               if(people[k] >= start && people[k] <= end) {
-//                   int temp = vec[k].second; 
+//                   int temp = vec[k].second;
 //                   vec[k].second = temp+1;
 //               }
 //                  //  cout<<"["<<vec[k].first <<", " ;
 //                  // cout<<vec[k].second <<"]"<< endl ;
 //             }
 //         }
-        
+
 //         for(auto i:vec){
 //             ans.push_back(i.second) ;
 //         }
-        
+
 //         return ans;
 //     }
-//🔸time complexity :  O(2N + rows*n)         // n = people.size() 
-//🔸space complexity : (2N)                   // n = number of people
-
+// 🔸time complexity :  O(2N + rows*n)         // n = people.size()
+// 🔸space complexity : (2N)                   // n = number of people
 
 // 🔴approach : Binary search and sorting
 
@@ -2875,5 +2781,5 @@
 //      }
 //      return l;
 //  }
-//🔸time complexity :  (2N+M * (N*logn))       // m= no of people, n = no of flowers  (N + (2N * logn) + nP + N*(N*logn))
-//🔸space complexity : (2N + M )                              // n = no of flowers, m = no of people 
+// 🔸time complexity :  (2N+M * (N*logn))       // m= no of people, n = no of flowers  (N + (2N * logn) + nP + N*(N*logn))
+// 🔸space complexity : (2N + M )                              // n = no of flowers, m = no of people

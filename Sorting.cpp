@@ -1,4 +1,4 @@
-// 🔴🔴 SELECTION SORT :
+//               🔴🔴 SELECTION SORT :
 
 // When we store element of an arrray in either increasing or decreasing order is called sorting .
 
@@ -97,7 +97,9 @@
 
 // Ex : 🔸 Quick sort, 🔸Heap sort , 🔸Selection sort
 
-// 🔴🔴 BUBBLE SORT :
+//
+//                    🔴🔴 BUBBLE SORT :
+//
 
 // In bubble sort we compare the element of neighbour indexes
 // And swap the greater element with the smaller element.
@@ -227,7 +229,9 @@
 // 🔴 Is a bubble sort an in-place algorithm?
 //  🔸 A bubble sort is an in-place algorithm because it doesn't need an extra space and produces an output of the same size by manipulating the input in one place.
 
-// 🔴🔴 INSERTION SORTING :
+//
+//                 🔴🔴 INSERTION SORTING :
+//
 
 // 🔸In insertion sort we compare each element with its elements to check whether they are smaller or greater
 //   If the element on the left side is greater then we will insert our element before that greater element else we will give it on the same place.
