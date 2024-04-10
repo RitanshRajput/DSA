@@ -578,6 +578,7 @@
 
 // 🔸time complexity: O(N)
 // 🔸space complexity: O(1)
+//
 
 //                      //❓Question :  Find (Max sum of contigous sub-array)
 
@@ -911,7 +912,7 @@
 // 🔸time complexity: O(N)
 // 🔸space complexity: O(1)
 
-//                                 //❓Question:   Merge two sorted array without without extra space
+//                                 //❓Question:   Merge two sorted array without extra space
 
 // Given two sorted arrays arr1[] and arr2[] of sizes n and m in non-decreasing order.
 // Merge them in sorted order without using any extra space.
@@ -1195,20 +1196,18 @@
 // Formally, two elements a[i] and a[j] form an inversion if a[i] > a[j] and i < j.
 
 // Example 1:
-
 // Input: N = 5, arr[] = {2, 4, 1, 3, 5}
 // Output: 3
 // Explanation: The sequence 2, 4, 1, 3, 5
 // has three inversions (2, 1), (4, 1), (4, 3).
-// Example 2:
 
-// Input: N = 5
-// arr[] = {2, 3, 4, 5, 6}
+// Example 2:
+// Input: N = 5, arr[] = {2, 3, 4, 5, 6}
 // Output: 0
 // Explanation: As the sequence is already
 // sorted so there is no inversion count.
-// Example 3:
 
+// Example 3:
 // Input: N = 3, arr[] = {10, 10, 10}
 // Output: 0
 // Explanation: As all the elements of array
@@ -1223,49 +1222,40 @@
 
 //   long long int ans=0;
 
-//     int Merge(long long arr[], int low, int mid, int high)
-//     {
+//     int Merge(long long arr[], int low, int mid, int high) {
 //         long long int a[high-low+1];
 //         long long int i = low;
 //         long long int j = mid+1;
 //         long long int k = 0;
 
-//         while(i<=mid && j<=high)
-//         {
-//             if(arr[i] > arr[j])
-//             {
+//         while(i<=mid && j<=high) {
+//             if(arr[i] > arr[j]) {
 //                 ans += mid-i+1;
 //                 a[k++] = arr[j++];
 //             }
-//             else
-//             {
+//             else {
 //                 a[k++] = arr[i++];
 //              }
 //         }
 
-//         while(i<=mid)
-//         {
+//         while(i<=mid) {
 //             a[k++] = arr[i++];
 //         }
 
-//         while(j<=high)
-//         {
+//         while(j<=high) {
 //             a[k++] = arr[j++];
 //         }
 
 //         int ind = low;
 //         k = high-low+1;
-//         for(int i=0;i<k;i++)
-//          {
+
+//         for(int i=0;i<k;i++) {
 //             arr[ind++] = a[i];
 //          }
-
 //     }
 
-//     void MergeSort(long long arr[], long long int low,long long int high)
-//     {
-//         if(low < high)
-//         {
+//     void MergeSort(long long arr[], long long int low,long long int high) {
+//         if(low < high) {
 //             int mid=(high+low)/2;
 //             MergeSort(arr,low,mid);
 //             MergeSort(arr,mid+1,high);
@@ -1273,8 +1263,7 @@
 //         }
 //     }
 
-//     long long int inversionCount(long long arr[], long long N)
-//     {
+//     long long int inversionCount(long long arr[], long long N) {
 //         //🔸bruute force 100 / 117
 //         // int inversion = 0 ;
 
@@ -1369,7 +1358,7 @@
 
 //     return profit ;
 //   }
-// 🔸time  complexity: O(N)
+// 🔸time complexity: O(N)
 // 🔸space complexity: O(1)
 
 //               //❓Question: Count pairs with given sum
@@ -1488,6 +1477,7 @@
 
 // 🔸time complexity: O(n1 + n2 + n3)
 // 🔸 space complexity: O(n1 + n2 + n3)
+//
 
 //                   //❓Question: Alternate positive and negative numbers
 
@@ -1734,6 +1724,7 @@
 // 	}
 // 🔸time complexity: O(N)
 // 🔸space complexity: O(1)
+//
 
 //                //❓question: Longest consecutive subsequence
 
@@ -1793,8 +1784,9 @@
 
 //       return maxCount ;
 
-// 🔸time complexity: O(N * logN)
+// 🔸time complexity: O(N logN)
 // 🔸space complexity: O(1)
+//
 
 //                  //❓Question: Count More than n/k Occurences
 
@@ -1915,7 +1907,6 @@
 // Given an array price of size N, find out the maximum profit that a share trader could have made.
 
 // Example 1:
-
 // Input:
 // 6
 // 10 22 5 75 65 80
@@ -1925,8 +1916,8 @@
 // Trader earns 87 as sum of 12, 75
 // Buy at 10, sell at 22,
 // Buy at 5 and sell at 80
-// Example 2:
 
+// Example 2:
 // Input:
 // 7
 // 2 30 15 10 8 25 80
@@ -1972,6 +1963,7 @@
 
 // 🔸Time Complexity: O(N)
 // 🔸Space Complexity: O(1)
+//
 
 //                    //❓Question: Array Subset of another array
 
@@ -2033,6 +2025,7 @@
 
 // 🔸Time Complexity: O(n+m)
 // 🔸Space complexity: O(n)
+//
 
 //             //❓Question :Triplet sum in array
 
@@ -2166,6 +2159,7 @@
 //     }
 // 🔸time complexity: O(N)
 // 🔸space complexity: O(N)      // O(2N)
+//
 
 //                 //❓Question: Choclate Distribution Problem
 
@@ -2217,6 +2211,7 @@
 
 // 🔸time complexity: O(N * logN)
 // 🔸space complexity: O(1)
+//
 
 //                    //❓Question: Smallest Subarray with sum greater than x
 
@@ -2273,6 +2268,7 @@
 //     }
 // 🔸time complexity: O(N)
 // 🔸space complexity: O(1)
+//
 
 //                     //❓Question: Three way Partitioning
 
@@ -2335,6 +2331,7 @@
 //     }
 // 🔸time complexity: O(N)
 // 🔸space complexity: O(1)
+//
 
 //              //❓ Question :  Minimum swaps and K together
 
@@ -2547,6 +2544,7 @@
 //     }
 // 🔸time complexity: O(N * element.size())
 // 🔸space complexity: O(element)
+//
 
 //                     //❓Question : Find the Median
 
@@ -2662,10 +2660,12 @@
 //         }
 //         int el1 = *max_element(arr1,arr1+n);
 //         int el2 = *min_element(arr2,arr2+n);
+
 //         return  el1+el2;
 //      }
 // 🔸time complexity: O(n)
 // 🔸space complexity: O(1)
+//
 
 //                  //❓ Question: Number of flowers in full bloom (leetcode hard)
 
@@ -2676,7 +2676,6 @@
 // Return an integer array answer of size n, where answer[i] is the number of flowers that are in full bloom when the ith person arrives.
 
 // Example 1:
-
 //    1   f   f   f   f   f   f
 //    3           f   f   f   f   f
 //    9                                   f   f   f   f
@@ -2684,7 +2683,7 @@
 //    ______________________________________________________
 
 //    p:      2   3               7               11
-//       ---------------------------------------------
+//       --------------------------------------------------
 //    o/p:    1   2               2               2
 
 // Input: flowers = [[1,6],[3,7],[9,12],[4,13]], poeple = [2,3,7,11]
@@ -2782,4 +2781,4 @@
 //      return l;
 //  }
 // 🔸time complexity :  (2N+M * (N*logn))       // m= no of people, n = no of flowers  (N + (2N * logn) + nP + N*(N*logn))
-// 🔸space complexity : (2N + M )                              // n = no of flowers, m = no of people
+// 🔸space complexity : (2N + M )               // n = no of flowers, m = no of people
