@@ -1,14 +1,12 @@
 
 //                            //🔘🔘 STRINGS 🔘🔘 //
 
-
 //                  //❓Question : 344 Reverse string
 
-// Write a function that reverses a string. 
+// Write a function that reverses a string.
 // The input string is given as an array of characters s.
 
 // You must do this by modifying the input array in-place with O(1) extra memory.
-
 
 // Example 1:
 // Input: s = ["h","e","l","l","o"]
@@ -17,12 +15,12 @@
 // Example 2:
 // Input: s = ["H","a","n","n","a","h"]
 // Output: ["h","a","n","n","a","H"]
- 
+
 // Constraints:
 // 1 <= s.length <= 105
 // s[i] is a printable ascii character.
 
-// void reverseString(vector<char>& s) 
+// void reverseString(vector<char>& s)
 //     {   //🔸 approach 1 : using STL
 //         // reverse(s.begin(), s.end()) ;
 
@@ -34,10 +32,8 @@
 //         // }
 
 //     }
-//🔸time complexity: O(n)            //reverse stl   / swapping
-//🔸space complexity: O(1)           //reverse stl   / swapping
-
-
+// 🔸time complexity: O(n)            //reverse stl   / swapping
+// 🔸space complexity: O(1)           //reverse stl   / swapping
 
 //                   // ❓ Question : Palindrome String
 
@@ -49,19 +45,19 @@
 // Explanation: S is a palindrome
 
 // Example 2:
-// Input: S = "abc" 
+// Input: S = "abc"
 // Output: 0
 // Explanation: S is not a palindrome
- 
+
 // Constraints:
 // 1 <= Length of S<= 105
 
-//🔴approach : 1
-// int isPalindrome(string S)
-// 	{
-// 	    int start =  0;
-// 	    int end = S.size() - 1;
-	    
+// 🔴approach : 1
+//  int isPalindrome(string S)
+//  	{
+//  	    int start =  0;
+//  	    int end = S.size() - 1;
+
 // 	    while( start <= end) {
 // 	        if(S[start] != S[end]) {
 // 	            return 0;
@@ -71,27 +67,25 @@
 // 	    }
 // 	    return 1;
 // 	}
-//🔸time complexity: O(N)
-//🔸space complexity: O(1)
-
-
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(1)
 
 //                   //❓Question : Duplicates in a string
 
 // find all the duplicates in a string
 
-//example 1:
-// S = "abcdeafgc"
-// input:  2
+// example 1:
+//  S = "abcdeafgc"
+//  input:  2
 
-//example 2:
-// S = "abcdefg"
-// input:  0
+// example 2:
+//  S = "abcdefg"
+//  input:  0
 
-//🔸approach : brute force
-// #include<iostream>
-// #include<algorithm>
-// using namespace std;
+// 🔸approach : brute force
+//  #include<iostream>
+//  #include<algorithm>
+//  using namespace std;
 
 // void duplicates(string& s) {
 //     int len = s.size() ;
@@ -112,13 +106,13 @@
 //     }
 
 // }
-//🔸time complexity: O(N Log(N))
-//🔸space complexity: O(1)
+// 🔸time complexity: O(N Log(N))
+// 🔸space complexity: O(1)
 
-//🔸approach : optimised way using unordered_map
-// #include<iostream>
-// #include<unordered_map>
-// using namespace std;
+// 🔸approach : optimised way using unordered_map
+//  #include<iostream>
+//  #include<unordered_map>
+//  using namespace std;
 
 // void duplicates(string& S) {
 //     unordered_map<char ,int> mp ;
@@ -135,35 +129,30 @@
 // }
 
 // int main() {
-    
+
 //     string s = "meranamhai gulla" ;
 //     duplicates(s) ;
 
 //     return  0;
 // }
-//🔸time complexity = O(n) 
-//🔸space complexity = O(n)        // no. of character
-
-
+// 🔸time complexity = O(n)
+// 🔸space complexity = O(n)        // no. of character
 
 //                //❓Question : WHy is String are immutable in JAVA
 
-// String is immutable in Java because this offers several benefits: 
-// String pool is possible because String is immutable in Java. 
+// String is immutable in Java because this offers several benefits:
+// String pool is possible because String is immutable in Java.
 // It increases security because any hacker can't change its value and
 //  it's used for storing sensitive information such as a database username or password.
 
-//🔸what is string pool ❓ 
+// 🔸what is string pool ❓
 
-// String pool is nothing but a storage area in Java heap where string literals stores. 
+// String pool is nothing but a storage area in Java heap where string literals stores.
 // It is also known as String Intern Pool or String Constant Pool.
-//  It is just like object allocation. By default, 
-//  it is empty and privately maintained by the Java String class. 
+//  It is just like object allocation. By default,
+//  it is empty and privately maintained by the Java String class.
 //  Whenever we create a string the string object occupies some space in the heap memory.
 //   Creating a number of strings may increase the cost and memory too which may reduce the performance also
-
-
-
 
 //                   //❓Question : Check if one string is rotation of another or not
 
@@ -181,7 +170,6 @@
 //    string P becomes "gabfy" which is equal to String 'Q'.
 //    Therefore it is possible to convert String 'P' to String 'Q'.
 
-
 // Sample Input 1:
 // abac
 // baca
@@ -191,7 +179,7 @@
 // Let's try rotating the String 'P' to the right and try all the possible rotations:
 // 1) If we rotate "abac" to the right, the resulting string becomes "caba".
 // 2) If we rotate "caba" to the right, the resulting string becomes "acab".
-// 3) If we rotate "acab" to the right, the resulting string becomes "baca" 
+// 3) If we rotate "acab" to the right, the resulting string becomes "baca"
 //    which is equal to String 'Q'.
 // Therefore it is possible to convert String 'P' to String 'Q'. Hence, we will return 1 in this case.
 
@@ -210,9 +198,9 @@
 // Follow Up:
 // Can you solve this in O(N) time?
 
-//🔴approach : Brute force appraoch  // TLE
+// 🔴approach : Brute force appraoch  // TLE
 
-// int isCyclicRotation(string &p, string &q) 
+// int isCyclicRotation(string &p, string &q)
 // {
 //     int psize = p.size() ;
 //     int qsize = q.size() ;
@@ -243,62 +231,62 @@
 //                 return 1;
 //             }
 //         }
-       
+
 //     }
 
 //     return 0;
 // }
-//🔸time complexity : O(N^3)       //  O(N*N*2N)
-//🔸space complexity :  O(1) 
+// 🔸time complexity : O(N^3)       //  O(N*N*2N)
+// 🔸space complexity :  O(1)
+//
 
-//🔴approach : Optimised approach using vector
-// int isCyclicRotation(string &p, string &q) 
-// {
-//     vector<char>a;    
-//     vector<char>b;    
-    
-//     for(int i=0;i<p.size();i++){   
-//         a.push_back(p[i]);       
-//         b.push_back(q[i]);    
-//     }   
-    
-//      if(a==b) return 1;    
-     
+// 🔴approach : Optimised approach using vector
+//  int isCyclicRotation(string &p, string &q)
+//  {
+//      vector<char>a;
+//      vector<char>b;
+
+//     for(int i=0;i<p.size();i++){
+//         a.push_back(p[i]);
+//         b.push_back(q[i]);
+//     }
+
+//      if(a==b) return 1;
+
 //      for(int i=0;i<a.size();i++){
-//         b.push_back(b[0]);        
-//         b.erase(b.begin());        
-        
-//         if(a==b)  return 1;    
-//     }   
-    
-//     return 0; 
+//         b.push_back(b[0]);
+//         b.erase(b.begin());
+
+//         if(a==b)  return 1;
+//     }
+
+//     return 0;
 // }
-//🔸time complexity : O(N)              // O(N+N)
-//🔸space complexity :  O(N)            // O(N+N) 
-
-
+// 🔸time complexity : O(N)              // O(N+N)
+// 🔸space complexity :  O(N)            // O(N+N)
+//
 
 //                 //❓Question : Check if a string is a valid shuffle of two distinct strings
 
-// Given two strings str1 and str2, and a third-string shuffle, 
-// determine if shuffle is a valid shuffle of str1 and str2, 
+// Given two strings str1 and str2, and a third-string shuffle,
+// determine if shuffle is a valid shuffle of str1 and str2,
 // where a valid shuffle contains all characters from str1 and str2 occurring the same number of times,
 //  regardless of order. Print “YES” if valid, and “NO” otherwise.
 
-// Examples: 
+// Examples:
 
-// Input: str1 = BA, str2 = XY, shuffle = XYAB 
+// Input: str1 = BA, str2 = XY, shuffle = XYAB
 // Output: YES
 
-// Input: str1 = BA, str2 = XY, shuffle = XUMB 
+// Input: str1 = BA, str2 = XY, shuffle = XUMB
 // Output: NO
 
-// Input: str1 = ABC, str2 = ZYS, shuffle = YBAZSC 
+// Input: str1 = ABC, str2 = ZYS, shuffle = YBAZSC
 // Output:YES
 
-//🔴approach : Brute force approach 
-// #include<iostream>
-// using namespace std;
+// 🔴approach : Brute force approach
+//  #include<iostream>
+//  using namespace std;
 
 // string validshuffle(string& a, string& b, string& shuffle) {
 //     int asize = a.size() ;
@@ -337,8 +325,8 @@
 
 //     return "YES" ;
 // }
-//🔸time complexity : O(N^2)              //O(N^2 + N^2)
-//🔸space complexity: O(1)
+// 🔸time complexity : O(N^2)              //O(N^2 + N^2)
+// 🔸space complexity: O(1)
 
 // int main() {
 //     string a = "BA" ;
@@ -351,16 +339,14 @@
 //     return 0 ;
 // }
 
-
-
 //                     //❓Question : 38. Count and Say
 
 // The count-and-say sequence is a sequence of digit strings defined by the recursive formula:
 
 // countAndSay(1) = "1"
-// countAndSay(n) is the way you would "say" the digit string from countAndSay(n-1), 
+// countAndSay(n) is the way you would "say" the digit string from countAndSay(n-1),
 // which is then converted into a different digit string.
-// To determine how you "say" a digit string, split it into the minimal number of substrings such that each substring 
+// To determine how you "say" a digit string, split it into the minimal number of substrings such that each substring
 // contains exactly one unique digit. Then for each substring, say the number of digits, then say the digit.
 // Finally, concatenate every said digit.
 
@@ -387,19 +373,19 @@
 // countAndSay(2) = say "1" = one 1 = "11"
 // countAndSay(3) = say "11" = two 1's = "21"
 // countAndSay(4) = say "21" = one 2 + one 1 = "12" + "11" = "1211"
- 
+
 // Constraints:
 // 1 <= n <= 30
 
-//🔴approch : 
-// 1  = 1
-// 2  = 11
-// 3  = 21
-// 4  = 1211
-// 5  = 111221
-// 6  = 312211
-// 7  = 13112221
-// ...
+// 🔴approch :
+//  1  = 1
+//  2  = 11
+//  3  = 21
+//  4  = 1211
+//  5  = 111221
+//  6  = 312211
+//  7  = 13112221
+//  ...
 
 //  string countAndSay(int n) {
 //         if( n == 1) return "1" ;
@@ -426,18 +412,17 @@
 //         }
 //         return s ;
 //     }
-  
-//🔸time complexity :  O(N^2)
-//🔸space complexity : O(N)
 
-
+// 🔸time complexity :  O(N^2)
+// 🔸space complexity : O(N)
+//
 
 //                    //❓Question : Longest Palindrome in a string
 
-// Given a string S, find the longest palindromic substring in S. 
-// Substring of string S: S[ i . . . . j ] where 0 ≤ i ≤ j < len(S). 
-// Palindrome string: A string that reads the same backward. 
-// More formally, S is a palindrome if reverse(S) = S. In case of conflict, 
+// Given a string S, find the longest palindromic substring in S.
+// Substring of string S: S[ i . . . . j ] where 0 ≤ i ≤ j < len(S).
+// Palindrome string: A string that reads the same backward.
+// More formally, S is a palindrome if reverse(S) = S. In case of conflict,
 // return the substring which occurs first ( with the least starting index).
 
 // Example 1:
@@ -448,10 +433,10 @@
 // substring is "aabbaa".
 
 // Example 2:
-// Input: 
+// Input:
 // S = "abc"
 // Output: a
-// Explanation: "a", "b" and "c" are the 
+// Explanation: "a", "b" and "c" are the
 // longest palindromes with same length.
 // The result is the one with the least
 // starting index.
@@ -459,14 +444,14 @@
 // Constraints:
 // 1 ≤ |S| ≤ 103
 
-// //🔴approach : 
+// //🔴approach :
 // #include<iostream>
 // using namespace std;
 //    string longestPalin (string S) {
-        
+
 //         string ans="";
 //         int n=S.size();
-        
+
 //         int maxl=0;
 //         int l=0;
 //         int r=0;
@@ -477,7 +462,7 @@
 //             int right=i;
 //             while(left>=0&&right<=(n-1)&&S[left]==S[right]){
 //                   left--;
-//                   right++; 
+//                   right++;
 //             }
 //             if(right-left+1>maxl){
 //                 maxl=right-left+1;
@@ -485,8 +470,8 @@
 //                 r--;
 
 //             }
-            
-//             //if longest substring palindrome is of  even lemgth  
+
+//             //if longest substring palindrome is of  even lemgth
 //             left=i;
 //             right=i+1;
 //             while(left>=0&&right<=n-1&&S[left]==S[right]){
@@ -499,26 +484,25 @@
 //                 r--;
 //             }
 //         }
-        
+
 //         for(int i=l; i<=r; i++){
 //             ans=ans+S[i];
 //         }
 //         return ans;
 //     }
-    
-//🔸time complexity :  O(N*2N)
-//🔸space complexity : O(N)
 
-
+// 🔸time complexity :  O(N*2N)
+// 🔸space complexity : O(N)
+//
 
 //                 //❓Question : Longest Repeating subsequence
 
-// Given string str, find the length of the longest repeating subsequence such that it can be 
+// Given string str, find the length of the longest repeating subsequence such that it can be
 // found twice in the given string.
 
-// The two identified subsequences A and B can use the same ith character from string str 
-// if and only if that ith character has different indices in A and B. 
-// For example, A = "xax" and B = "xax" then the index of first "x" must be different in 
+// The two identified subsequences A and B can use the same ith character from string str
+// if and only if that ith character has different indices in A and B.
+// For example, A = "xax" and B = "xax" then the index of first "x" must be different in
 // the original string for A and B.
 
 // Example 1:
@@ -527,30 +511,28 @@
 // Output: 2
 // Explanation:
 // The given array with indexes looks like
-// a x x z x y 
+// a x x z x y
 // 0 1 2 3 4 5
 
-// The longest subsequence is "xx". 
+// The longest subsequence is "xx".
 // It appears twice as explained below.
 
 // subsequence A
 // x x
 // 0 1  <-- index of subsequence A
 // ------
-// 1 2  <-- index of str 
-
+// 1 2  <-- index of str
 
 // subsequence B
 // x x
 // 0 1  <-- index of subsequence B
 // ------
-// 2 4  <-- index of str 
+// 2 4  <-- index of str
 
-// We are able to use character 'x' 
+// We are able to use character 'x'
 // (at index 2 in str) in both subsequences
-// as it appears on index 1 in subsequence A 
+// as it appears on index 1 in subsequence A
 // and index 0 in subsequence B.
-
 
 // Example 2:
 
@@ -559,52 +541,50 @@
 // Output: 2
 // Explanation:
 // The given array with indexes looks like
-// a x x x y 
+// a x x x y
 // 0 1 2 3 4
 
-// The longest subsequence is "xx". 
+// The longest subsequence is "xx".
 // It appears twice as explained below.
 
 // subsequence A
 // x x
 // 0 1  <-- index of subsequence A
 // ------
-// 1 2  <-- index of str 
-
+// 1 2  <-- index of str
 
 // subsequence B
 // x x
 // 0 1  <-- index of subsequence B
 // ------
-// 2 3  <-- index of str 
+// 2 3  <-- index of str
 
-// We are able to use character 'x' 
+// We are able to use character 'x'
 // (at index 2 in str) in both subsequences
-// as it appears on index 1 in subsequence A 
+// as it appears on index 1 in subsequence A
 // and index 0 in subsequence B.
 
 // Expected Time Complexity: O(n2)
 // Expected Space Complexity: O(n2)
 
-
 // Constraints:
 // 1 <= |str| <= 103
 
-//🔴approach :
-// int LongestRepeatingSubsequence(string str){
-		    
+// 🔴approach :
+//  int LongestRepeatingSubsequence(string str){
+
 // 		    int n = str.length() ;
 // 		    int mat[n+1][n+1] ;
-		    
+
 // 		    for(int i=0; i<=n; i++) {
 // 		        for(int j=0; j<=n; j++) {
 // 		            mat[i][j] = 0 ;
 // 		        }
 // 		    }
-		    
+
 // 	        for(int i=1; i<=n; i++) {
 // 	            for(int j=1; j<=n; j++) {
-	                
+
 // 	                if(str[i-1] == str[j-1] && i != j) {
 // 	                    mat[i][j] = 1 + mat[i-1][j-1] ;
 // 	                }
@@ -612,14 +592,13 @@
 // 	                    mat[i][j] = max(mat[i][j-1], mat[i-1][j]) ;
 // 	                }
 // 	            }
-// 	        }	    
-	        
+// 	        }
+
 // 	        return mat[n][n] ;
 // 	}
 // 🔸 Time Complexity: O(n^2 )
 // 🔸 Space Complexity: O(n^2)
-
-
+//
 
 //           //❓Question: Print all subsequences of a string
 
@@ -627,17 +606,16 @@
 // A String is a subsequence of a given String, that is generated by deleting some character of
 // a given string without changing its order.
 
-// Examples: 
+// Examples:
 // Input : abc
 // Output : a, b, c, ab, bc, ac, abc
 
 // Input : aaa
 // Output : a, a, a, aa, aa, aa, aaa
 
+// 🔴 approch : using Recursion
+//  void solve(string str, string output, int index, vector<string>& ans) {
 
-//🔴 approch : using Recursion
-// void solve(string str, string output, int index, vector<string>& ans) {
-	
 //       //base case
 //       if( index >= str.length()){
 //          if( output.length() > 0){          // if condition if dont want to return an empty string as an answers
@@ -656,21 +634,19 @@
 // }
 
 // vector<string> subsequences(string str){
-	
+
 // 	vector<string> ans ;
 // 	string output = "" ;
 // 	int index = 0 ;
 // 	solve(str, output, index, ans) ;
 // 	return ans ;
 // }
-//🔸time complexity :
-//🔸space complexity :
-
-
+// 🔸time complexity :
+// 🔸space complexity :
 
 //                       //❓Question: Permutation of Given String
 
-// Given a string S. The task is to print all unique permutations of the given string 
+// Given a string S. The task is to print all unique permutations of the given string
 // in lexicographically sorted order.
 
 // Example 1:
@@ -678,20 +654,20 @@
 // Output:
 // ABC ACB BAC BCA CAB CBA
 // Explanation:
-// Given string ABC has permutations in 6 
+// Given string ABC has permutations in 6
 // forms as ABC, ACB, BAC, BCA, CAB and CBA .
 
 // Example 2:
 // Input: ABSG
 // Output:
-// ABGS ABSG AGBS AGSB ASBG ASGB BAGS 
-// BASG BGAS BGSA BSAG BSGA GABS GASB 
-// GBAS GBSA GSAB GSBA SABG SAGB SBAG 
+// ABGS ABSG AGBS AGSB ASBG ASGB BAGS
+// BASG BGAS BGSA BSAG BSGA GABS GASB
+// GBAS GBSA GSAB GSBA SABG SAGB SBAG
 // SBGA SGAB SGBA
 // Explanation:
 // Given string ABSG has 24 permutations.
 
-// Your Task:  
+// Your Task:
 // You don't need to read input or print anything. Your task is to complete the function find_permutaion() which takes the string S as input parameter and returns a vector of string in lexicographical order.
 
 // Expected Time Complexity: O(n! * n)
@@ -700,102 +676,95 @@
 // Constraints:
 // 1 <= length of string <= 5
 
-//🔴approch : Recursion + backtrack
-// void solve(int index, string S, set<string>&ans) {
-//         if(index == S.size()) {
-//             ans.insert(S);
-//             return;
-//         }
-//         for(int i=index; i<S.size();i++) {
-//             swap(S[index],S[i]);
-//             solve(index+1,S,ans);
-//             //backtrack
-//             swap(S[index],S[i]);
-//         }
-        
+// 🔴approch : Recursion + backtrack
+//  void solve(int index, string S, set<string>&ans) {
+//          if(index == S.size()) {
+//              ans.insert(S);
+//              return;
+//          }
+//          for(int i=index; i<S.size();i++) {
+//              swap(S[index],S[i]);
+//              solve(index+1,S,ans);
+//              //backtrack
+//              swap(S[index],S[i]);
+//          }
+
 //     }
 
-	
 // 	vector<string>find_permutation(string S){
-		  		 
+
 //         set<string>ans;
 //         solve(0,S,ans);
 //         vector<string>result(ans.begin(),ans.end());
 //         return result;
 // 	}
-//🔸time complexity:  O(N! * n)
-//🔸space compplexity: O(N! * N!)
-
-
-
+// 🔸time complexity:  O(N! * n)
+// 🔸space compplexity: O(N! * N!)
 
 //                 //❓Question : Split the binary string into substrings with equal number of 0s and 1s
 
-// Given a binary string str of length N, the task is to find the maximum count of consecutive 
-// substrings str can be divided into such that all the substrings are balanced 
-// i.e. they have equal number of 0s and 1s. If it is not possible to split str satisfying 
+// Given a binary string str of length N, the task is to find the maximum count of consecutive
+// substrings str can be divided into such that all the substrings are balanced
+// i.e. they have equal number of 0s and 1s. If it is not possible to split str satisfying
 // the conditions then print -1.
 
-// Example: 
-// Input: str = “0100110101” 
+// Example:
+// Input: str = “0100110101”
 // Output: 4
 // The required substrings are “01”, “0011”, “01” and “01”.
 
-// Input: str = “0111100010” 
-// Output: 3 
+// Input: str = “0111100010”
+// Output: 3
 
-// Input: str = “0000000000” 
+// Input: str = “0000000000”
 // Output: -1
 
+// 🔴approach:
+//  #include<iostream>
+//  using namespace std;
+//  int maxSubStr(string str){
 
-//🔴approach: 
-// #include<iostream>
-// using namespace std;
-// int maxSubStr(string str){
-     
 //     int count0=0;
 //     int count1=0;
 //     int ans=0;
-       
+
 //     for(int i=0;i<str.length();i++){
-           
+
 //         if(str[i]=='0'){
 //             count0++;
 //         }
 //         //   cout<< "count0 = "<< count0 << endl ;
-           
+
 //         if(str[i]=='1'){
 //             count1++;
 //         }
 //         //   cout<< "count1 = "<< count1 << endl ;
-           
+
 //         if(count0==count1){
 //             ans++;
 //         }
 //         //   cout<< "ans = "<< ans << endl ;
 //     }
-       
+
 //        if(ans==0 || count1!=count0){
 //            return -1;
 //        }
-       
+
 //        return ans;
 // }
-//🔸time complexity : O(n)
-//🔸space complexity : O(1)
-
-
+// 🔸time complexity : O(n)
+// 🔸space complexity : O(1)
 
 //                      //❓Question: Word Wrap
 
-// Given an array nums[] of size n, where nums[i] denotes the number of characters in one word. 
+// Given an array nums[] of size n, where nums[i] denotes the number of characters in one word.
 // Let K be the limit on the number of characters that can be put in one line (line width).
 // Put line breaks in the given sequence such that the lines are printed neatly.
-// Assume that the length of each word is smaller than the line width. 
-// When line breaks are inserted there is a possibility that extra spaces are present in each line. 
-// The extra spaces include spaces put at the end of every line except the last one. 
+// Assume that the length of each word is smaller than the line width.
+// When line breaks are inserted there is a possibility that extra spaces are present in each line.
+// The extra spaces include spaces put at the end of every line except the last one.
 
-// You have to minimize the following total cost where total cost = Sum of cost of all lines, 
+// You have to minimize the following total cost where total cost = Sum of cost of all lines,
 // where cost of line is = (Number of extra spaces in the line)2.
 
 // Example 1:
@@ -822,7 +791,7 @@
 // Example 2:
 // Input: nums = {3,2,2}, k = 4
 // Output: 5
-// Explanation: Given a line can have 4 
+// Explanation: Given a line can have 4
 // characters,
 // Line number 1: From word no. 1 to 1
 // Line number 2: From word no. 2 to 2
@@ -832,13 +801,13 @@
 
 // Expected Time Complexity: O(n2)
 // Expected Space Complexity: O(n)
- 
+
 // Constraints:
 // 1 ≤ n ≤ 500
 // 1 ≤ nums[i] ≤ 1000
 // max(nums[i]) ≤ k ≤ 2000
 
-//🔴 approch: Memoization 
+// 🔴 approch: Memoization
 
 //    int solve(vector<int> &nums, int i,int j,int k,vector<vector<int>> &dp){
 //        int n=nums.size();
@@ -862,20 +831,18 @@
 //                ans=min(ans,(k-sum)*(k-sum)+solve(nums,idx+1,j,k,dp));
 //                sum++;//to handle space minus
 //            }
-           
+
 //        }
 //        return dp[i][j]=ans;//memo and return
 //    }
-//    int solveWordWrap(vector<int> nums, int k) 
-//    { 
+//    int solveWordWrap(vector<int> nums, int k)
+//    {
 //        int n=nums.size();
 //        vector<vector<int>> dp(n,vector<int>(n,-1));
 //        return solve(nums,0,n-1,k,dp);
-//    } 
-//🔸time complexity : O(N^N)
-//🔸space complexity :O(N^N)
-
-
+//    }
+// 🔸time complexity : O(N^N)
+// 🔸space complexity :O(N^N)
 
 //               ❓❓ Question: Edit Distance
 
@@ -885,24 +852,23 @@
 // Insert a character at any position of the string.
 // Remove any character from the string.
 // Replace any character from the string with any other character.
- 
 
 // Example 1:
-// Input: 
+// Input:
 // s = "geek", t = "gesek"
 // Output: 1
-// Explanation: One operation is required 
+// Explanation: One operation is required
 // inserting 's' between two 'e's of s.
 
 // Example 2:
-// Input : 
+// Input :
 // s = "gfg", t = "gfg"
-// Output: 
+// Output:
 // 0
 // Explanation: Both strings are same.
- 
+
 // Your Task:
-// You don't need to read or print anything. Your task is to complete the function editDistance() which takes strings s and t as input parameters and returns the minimum number of operation to convert the string s to string t. 
+// You don't need to read or print anything. Your task is to complete the function editDistance() which takes strings s and t as input parameters and returns the minimum number of operation to convert the string s to string t.
 
 // Expected Time Complexity: O(|s|*|t|)
 // Expected Space Complexity: O(|s|*|t|)
@@ -931,7 +897,7 @@
 //         return solve(a, b, i+1, j+1) ;
 //     }
 //     else{
-//         //insert 
+//         //insert
 //         int insertAns = 1 + solve(a, b, i, j+1);
 
 //         //delete
@@ -951,7 +917,6 @@
 // }
 // //🔸time complexity: expo
 // //🔸space complexity: O(n)         // length of string
-
 
 // //🔴approch : Recursion + Memoization
 // #include<iostream>
@@ -977,7 +942,7 @@
 //         return solve(a, b, i+1, j+1, dp) ;
 //     }
 //     else{
-//         //insert 
+//         //insert
 //         int insertAns = 1 + solve(a, b, i, j+1, dp);
 
 //         //delete
@@ -1000,8 +965,6 @@
 // //🔸time complexity: O(n*m)
 // //🔸space complexity: O(n)         // length of minimum string
 
-
-
 // //🔴approch : Tabulation
 // #include<iostream>
 // #include<vector>
@@ -1020,7 +983,6 @@
 //         dp[i][b.length()] = a.length() - i ;
 //     }
 
-
 //     for( int i=a.length()-1; i>=0; i--){
 //         for(int j=b.length()-1; j>=0; j--){
 
@@ -1030,7 +992,7 @@
 //                 ans = dp[i+1][j+1];
 //             }
 //             else{
-//                 //insert 
+//                 //insert
 //                 int insertAns = 1 + dp[i][j+1];
 
 //                 //delete
@@ -1056,11 +1018,10 @@
 // //🔸time complexity: O(n*m)
 // //🔸space complexity: O(n)         // length of minimum string
 
-
-//🔴approch : space optimisation
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔴approch : space optimisation
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 // int solve(string& a, string& b) {
 
@@ -1084,7 +1045,7 @@
 //                 ans = next[j+1];
 //             }
 //             else{
-//                 //insert 
+//                 //insert
 //                 int insertAns = 1 + curr[j+1];
 
 //                 //delete
@@ -1114,10 +1075,8 @@
 
 //     return solve(word1, word2) ;
 // }
-//🔸time complexity: O(n*m)
-//🔸space complexity: O(n)         // length of minimum string
-
-
+// 🔸time complexity: O(n*m)
+// 🔸space complexity: O(n)         // length of minimum string
 
 //                          //❓Question: 31. Next Permutation
 
@@ -1153,10 +1112,10 @@
 // 1 <= nums.length <= 100
 // 0 <= nums[i] <= 100
 
-//🔸approach :
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+// 🔸approach :
+//  #include<iostream>
+//  #include<vector>
+//  using namespace std;
 
 //  void nextPermutation(vector<int>& nums) {
 //        int i,j,n=nums.size();
@@ -1183,21 +1142,19 @@
 // 🔸time complexity: O(N)
 // 🔸space complexity: O(1)
 
+// 🔴 approach: 2  inbuild stl
+//   void nextPermutation(vector<int>& nums) {
+//     next_permutation(nums.begin(), nums.end()) ;
+//    return nums;
+//  }
 
-//🔴 approach: 2  inbuild stl
-//  void nextPermutation(vector<int>& nums) {
-//    next_permutation(nums.begin(), nums.end()) ;
-//   return nums;
-// }
+// 🔸The next_permutation() function takes O(N) time to find the next permutation
+// 🔸time complexity : O(N)
+// 🔸space complexity: O(1)
 
-//🔸The next_permutation() function takes O(N) time to find the next permutation
-//🔸time complexity : O(N)
-//🔸space complexity: O(1)
-
-
-//🔴 approach: 3  strivers approach
-//  void nextPermutation(vector<int>& A) {
-//     int n = A.size(); // size of the array.
+// 🔴 approach: 3  strivers approach
+//   void nextPermutation(vector<int>& A) {
+//      int n = A.size(); // size of the array.
 
 //     // Step 1: Find the break point:
 //     int ind = -1; // break point
@@ -1235,9 +1192,6 @@
 // 🔸time complexity : O(3N)
 // 🔸space complexity: O(1)
 
-
-
-
 ///                //❓Question: Paranthesis Checker
 
 // Given an expression string x. Examine whether the pairs and the orders of {,},(,),[,] are correct in exp.
@@ -1249,31 +1203,31 @@
 
 // Input:
 // {([])}
-// Output: 
+// Output:
 // true
-// Explanation: 
-// { ( [ ] ) }. Same colored brackets can form 
-// balanced pairs, with 0 number of 
+// Explanation:
+// { ( [ ] ) }. Same colored brackets can form
+// balanced pairs, with 0 number of
 // unbalanced bracket.
 // Example 2:
 
-// Input: 
+// Input:
 // ()
-// Output: 
+// Output:
 // true
-// Explanation: 
-// (). Same bracket can form balanced pairs, 
-// and here only 1 type of bracket is 
+// Explanation:
+// (). Same bracket can form balanced pairs,
+// and here only 1 type of bracket is
 // present and in balanced way.
 // Example 3:
 
-// Input: 
+// Input:
 // ([]
-// Output: 
+// Output:
 // false
-// Explanation: 
-// ([]. Here square bracket is balanced but 
-// the small bracket is not balanced and 
+// Explanation:
+// ([]. Here square bracket is balanced but
+// the small bracket is not balanced and
 // Hence , the output will be unbalanced.
 // Your Task:
 // This is a function problem. You only need to complete the function ispar() that takes a string as a parameter and returns a boolean value true if brackets are balanced else returns false. The printing is done automatically by the driver code.
@@ -1284,25 +1238,24 @@
 // Constraints:
 // 1 ≤ |x| ≤ 32000
 
- 
-//🔸approach : using stack
+// 🔸approach : using stack
 
 //  bool ispar(string x)
 //     {
 //         stack<char> temp;
 //         temp.push(x[0]) ;
-        
+
 //         int n = x.length() ;
-//         int i=1; 
-        
+//         int i=1;
+
 //         while(i < n) {
-            
+
 //             if(temp.empty()) {
 //                 temp.push(x[i]) ;
 //                 i++ ;
 //             }
 //             else{
-            
+
 //             if(temp.top() == '[' && x[i] == ']') {
 //                 temp.pop() ;
 //                 i++ ;
@@ -1321,23 +1274,20 @@
 //             }
 //             }
 //         }
-        
+
 //         if(temp.empty()) {
 //             return true ;
 //         }
 //         else{
-//             return false ;   
+//             return false ;
 //         }
 //     }
-//🔸time complexity: O(N)           // N = length of string
-//🔸space compplexity: O(N)
-
-
-
+// 🔸time complexity: O(N)           // N = length of string
+// 🔸space compplexity: O(N)
 
 //                        //❓Question: Word Break
 
-// Given a string A and a dictionary of n words B, find out if A can be 
+// Given a string A and a dictionary of n words B, find out if A can be
 // segmented into a space-separated sequence of dictionary words.
 
 // Note: From the dictionary B each word can be taken any number of times and in any order.
@@ -1361,66 +1311,59 @@
 // n = 12
 // B = { "i", "like", "sam",
 // "sung", "samsung", "mobile",
-// "ice","cream", "icecream", 
+// "ice","cream", "icecream",
 // "man", "go", "mango" }
 // A = "ilikesamsung"
 // Output:
 // 1
 // Explanation:
-// The string can be segmented as 
+// The string can be segmented as
 // "i like samsung" or "i like sam sung".
- 
 
 // Your Task:
-// Complete wordBreak() function which takes a string and list of strings as 
-// a parameter and returns 1 if it is possible to break words, else return 0. 
+// Complete wordBreak() function which takes a string and list of strings as
+// a parameter and returns 1 if it is possible to break words, else return 0.
 // You don't need to read any input or print any output, it is done by driver code.
-
 
 // Expected time complexity: O(s2)
 
 // Expected auxiliary space: O(s) , where s = length of string A
 
- 
-
 // Constraints:
 // 1 ≤ N ≤ 12
 // 1 ≤ s ≤ 1100 , where s = length of string A
 
-//🔴approach:
-// bool solve(unordered_map<string,bool>mp, string word)
-//         {
-//             int size=word.size();
-//             if(size==0){
-//                 return true;
-//             }
-//             string temp="";
-//             for(int i=0;i<word.length();i++){
-//                 temp+=word[i];
-//                 if(mp.find(temp)!=mp.end() && solve(mp,word.substr(i+1)))
-//                 return true;
-//             }
-//             return false;
-//         }
+// 🔴approach:
+//  bool solve(unordered_map<string,bool>mp, string word)
+//          {
+//              int size=word.size();
+//              if(size==0){
+//                  return true;
+//              }
+//              string temp="";
+//              for(int i=0;i<word.length();i++){
+//                  temp+=word[i];
+//                  if(mp.find(temp)!=mp.end() && solve(mp,word.substr(i+1)))
+//                  return true;
+//              }
+//              return false;
+//          }
 
 //     int wordBreak(string A, vector<string> &B) {
-       
+
 //         unordered_map <string, bool > mp ;
 //         for(auto it : B)
 //         mp[it]=true;
-        
+
 //         return solve(mp,A)==true?1:0;
 //     }
 
-//🔸time complexity: O(N^2)
-//🔸space complexity: O(B.size() + A.length())
-
-
-
+// 🔸time complexity: O(N^2)
+// 🔸space complexity: O(B.size() + A.length())
 
 //                   ///❓Question: Search Pattern (Rabin-Karp Algorithm)
 
-// Given two strings, one is a text string and other is a pattern string. 
+// Given two strings, one is a text string and other is a pattern string.
 // The task is to print the indexes of all the occurences of pattern string in the text string.
 //  For printing, Starting Index of a string should be taken as 1.
 
@@ -1430,17 +1373,17 @@
 // Output: 1 18
 // Explanation: The string "bat" occurs twice
 // in S, one starts are index 1 and the other
-// at index 18. 
+// at index 18.
 // â€‹Example 2:
 
-// Input: 
+// Input:
 // S = "abesdu", pat = "edu"
 // Output: -1
 // Explanation: There's not substring "edu"
 // present in S.
 
 // Your Task:
-// You don't need to read input or print anything. Your task is to complete the function search() which takes the string S and the string pat as inputs and returns an array denoting the start indices (1-based) of substring pat in the string S. 
+// You don't need to read input or print anything. Your task is to complete the function search() which takes the string S and the string pat as inputs and returns an array denoting the start indices (1-based) of substring pat in the string S.
 
 // Expected Time Complexity: O(|S|*|pat|).
 // Expected Auxiliary Space: O(1).
@@ -1449,11 +1392,11 @@
 // 1<=|S|<=105
 // 1<=|pat|<|S|
 
-//🔸approach : 
-//  vector <int> search(string pat, string txt)
-//         {
-//            vector<int> result;
-        
+// 🔸approach :
+//   vector <int> search(string pat, string txt)
+//          {
+//             vector<int> result;
+
 //         int n = txt.size()-pat.size();
 //         for(int i=0; i<=n; i++)
 //         {
@@ -1466,14 +1409,10 @@
 //         return result;
 
 //         }
-//🔴time  complexity: O(n)         // n = txt.size()-pat.size();
-//🔴space complexity: O(n)         // number of text found in pat
-
-
-
+// 🔴time  complexity: O(n)         // n = txt.size()-pat.size();
+// 🔴space complexity: O(n)         // number of text found in pat
 
 //                   //❓question: Longest Prefix Suffix (KMP algo)
-
 
 // Given a string of characters, find the length of the longest proper prefix which is also a proper suffix.
 
@@ -1483,14 +1422,14 @@
 
 // Input: s = "abab"
 // Output: 2
-// Explanation: "ab" is the longest proper 
-// prefix and suffix. 
+// Explanation: "ab" is the longest proper
+// prefix and suffix.
 // Example 2:
 
 // Input: s = "aaaa"
 // Output: 3
-// Explanation: "aaa" is the longest proper 
-// prefix and suffix. 
+// Explanation: "aaa" is the longest proper
+// prefix and suffix.
 // Your task:
 // You do not need to read any input or print anything. The task is to complete the function lps(), which takes a string as input and returns an integer.
 
@@ -1501,14 +1440,14 @@
 // 1 ≤ |s| ≤ 105
 // s contains lower case English alphabets
 
-///🔴approach :  KMP algo
+/// 🔴approach :  KMP algo
 
 // int lps(string pattern) {
- 
+
 //     int n = pattern.size();
 //     vector<int> lps(n, 0);
 //     int length = 0;  // Length of the previous longest prefix suffix
- 
+
 //     int i = 1;
 //     while (i < n) {
 //         if (pattern[i] == pattern[length]) {
@@ -1524,18 +1463,15 @@
 //             }
 //         }
 //     }
- 
+
 //     return lps[n - 1];  // Return the length of the lps array for the last position
 // 	}
-//🔸time complexity: O(N)
-//🔸space complexity: O(n)
-
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(n)
 
 //                 //❓Question: Convert a sentence into its equivalent mobile numeric keypad sequence
 
-
-// Given a sentence in the form of a string, convert it into its equivalent mobile numeric keypad sequence. 
- 
+// Given a sentence in the form of a string, convert it into its equivalent mobile numeric keypad sequence.
 
 // Mobile-keypad
 
@@ -1548,35 +1484,34 @@
 //      7        8       9
 //     [pqrs]  [tuv]   [wxyz]
 //               0
-//              [ ] 
+//              [ ]
 //
 
-// Examples : 
+// Examples :
 
 // Input: GEEKSFORGEEKS
 // Output: 4333355777733366677743333557777
 // Explanation: For obtaining a number, we need to press a number corresponding to that character for a number of times equal to the position of the character. For example, for character E, press number 3 two times and accordingly.
 
-
 // Input : HELLO WORLD
 // Output : 4433555555666096667775553
 
-//🔴 appraoch:
-// #include <bits/stdc++.h>
-// using namespace std;
- 
+// 🔴 appraoch:
+//  #include <bits/stdc++.h>
+//  using namespace std;
+
 // // Function which computes the sequence
 // string printSequence(string arr[], string input)
 // {
 //     string output = "";
- 
+
 //     // length of input string
 //     int n = input.length();
 //     for (int i = 0; i < n; i++) {
 //         // Checking for space
 //         if (input[i] == ' ')
 //             output = output + "0";
- 
+
 //         else {
 //             // Calculating index for each
 //             // character
@@ -1584,11 +1519,11 @@
 //             output = output + arr[position];
 //         }
 //     }
- 
+
 //     // Output sequence
 //     return output;
 // }
- 
+
 // // Driver Code
 // int main()
 // {
@@ -1598,14 +1533,13 @@
 //             "44",  "444", "5",   "55",  "555",  "6",   "66",
 //             "666", "7",   "77",  "777", "7777", "8",   "88",
 //             "888", "9",   "99",  "999", "9999" };
- 
+
 //     string input = "GEEKSFORGEEKS";
 //     cout << printSequence(str, input);
 //     return 0;
 // }
-//🔸time complexity: O(N)
-//🔸space complexity: O(N)
-
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(N)
 
 //                   //❓Question: Count the reversals
 
@@ -1622,13 +1556,13 @@
 // that can be formed in lesser reversals.
 // Example 2:
 
-// Input: 
+// Input:
 // S = "{{}{{{}{{}}{{"
 // Output: -1
 // Explanation: There's no way we can balance
 // this sequence of braces.
 // Your Task:
-// You don't need to read input or print anything. Your task is to complete the function countRev() which takes the string S as the input parameter and returns the minimum number of reversals required to balance the bracket sequence. If balancing is not possible, return -1. 
+// You don't need to read input or print anything. Your task is to complete the function countRev() which takes the string S as the input parameter and returns the minimum number of reversals required to balance the bracket sequence. If balancing is not possible, return -1.
 
 // Expected Time Complexity: O(|S|).
 // Expected Auxiliary Space: O(1).
@@ -1636,21 +1570,21 @@
 // Constraints:
 // 1 ≤ |S| ≤ 105
 
-//🔴approach: 
-// int countRev (string s)
-// {
-//     int n = s.length() ;
-//     int open = 0;
-//     int count = 0;
-    
+// 🔴approach:
+//  int countRev (string s)
+//  {
+//      int n = s.length() ;
+//      int open = 0;
+//      int count = 0;
+
 //     if(n%2 != 0){
 //         return -1;
 //     }
-    
+
 //     for(int i=0; i<n; i++){
-        
+
 //         if(s[i] == '}') {
-            
+
 //           if(open > 0){
 //               open-- ;
 //           }else{
@@ -1658,41 +1592,39 @@
 //              count++ ;
 //            }
 //         }
-        
+
 //         if(s[i] == '{'){
-//             open++; 
+//             open++;
 //         }
 //     }
-    
+
 //     return count+open/2;
 
 // }
-//🔸time complexity: O(N)
-//🔸space complexity: O(1)
-
-
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(1)
 
 //                       //❓Question Count Palindromic Subsequence
 
 // Given a string str of length N, you have to find number of palindromic subsequence (need not necessarily be distinct) present in the string str.
 // Note: You have to return the answer module 109+7;
- 
+
 // Example 1:
-// Input: 
+// Input:
 // Str = "abcd"
-// Output: 
+// Output:
 // 4
 // Explanation:
 // palindromic subsequence are : "a" ,"b", "c" ,"d"
- 
+
 // Example 2:
-// Input: 
+// Input:
 // Str = "aab"
-// Output: 
+// Output:
 // 4
 // Explanation:
 // palindromic subsequence are :"a", "a", "b", "aa"
- 
+
 // Your Task:
 // You don't need to read input or print anything. Your task is to complete the function countPs() which takes a string str as input parameter and returns the number of palindromic subsequence.
 
@@ -1702,7 +1634,7 @@
 // Constraints:
 // 1<=length of string str <=1000
 
-//🔴approach : DP
+// 🔴approach : DP
 
 //    const int MOD = 1000000007;
 
@@ -1734,15 +1666,14 @@
 
 //     return solve(str, 0, n - 1, dp);
 // }
-//🔸time complexity: O(expo)
-//🔸space complexity: O(N*N)
-
+// 🔸time complexity: O(expo)
+// 🔸space complexity: O(N*N)
 
 //                     //❓question: Count of number of given string in 2D character array
 
 // Given a 2-Dimensional character array and a string, we need to find the given string in 2-dimensional character array, such that individual characters can be present left to right, right to left, top to down or down to top.
 
-// Examples: 
+// Examples:
 
 // Input : a ={
 //             {D,D,D,G,D,D},
@@ -1767,27 +1698,27 @@
 
 // Output :4
 
-//🔴approach :
-// #include <bits/stdc++.h>
-// using namespace std;
- 
+// 🔴approach :
+//  #include <bits/stdc++.h>
+//  using namespace std;
+
 // #define ARRAY_SIZE(a) (sizeof(a) / sizeof(*a))
- 
+
 // // utility function to search
 // // complete string from any
 // // given index of 2d char array
 // int internalSearch(string needle, int row, int col, string hay[], int row_max, int col_max, int xx)
 // {
 //     int found = 0;
- 
+
 //     if (row >= 0 && row <= row_max && col >= 0 &&
 //         col <= col_max && needle[xx] == hay[row][col])
 //     {
 //         char match = needle[xx];
 //         xx += 1;
- 
+
 //         hay[row][col] = 0;
- 
+
 //         if (needle[xx] == 0)
 //         {
 //             found = 1;
@@ -1805,13 +1736,13 @@
 //     }
 //     return found;
 // }
- 
+
 // // Function to search the string in 2d array
 // int searchString(string needle, int row, int col, string str[], int row_count, int col_count)
 // {
 //     int found = 0;
 //     int r, c;
- 
+
 //     for (r = 0; r < row_count; ++r) {
 //         for (c = 0; c < col_count; ++c) {
 //             found += internalSearch(needle, r, c, str, row_count - 1, col_count - 1, 0);
@@ -1819,7 +1750,7 @@
 //     }
 //     return found;
 // }
- 
+
 // // Driver code
 // int main()
 // {
@@ -1836,7 +1767,7 @@
 //     {
 //         str[i] = input[i];
 //     }
- 
+
 //     cout << "count: " << searchString(needle, 0, 0, str,
 //                                       ARRAY_SIZE(str),
 //                                       str[0].size()) << endl;
@@ -1845,41 +1776,38 @@
 // 🔸Time Complexity: O(n*m)^2, where n is the row size and m is the column size.
 // 🔸Auxiliary Space: O(n*m)
 
-
-
-
 //                   //❓Question: Find The string in Grid
 
-// Given a 2D grid of n*m of characters and a word, find all occurrences of given word in grid. 
-// A word can be matched in all 8 directions at any point. Word is said to be found in a direction if 
+// Given a 2D grid of n*m of characters and a word, find all occurrences of given word in grid.
+// A word can be matched in all 8 directions at any point. Word is said to be found in a direction if
 // all characters match in this direction (not in zig-zag form). The 8 directions are,
 //  horizontally left, horizontally right, vertically up, vertically down, and 4 diagonal directions.
 
-// Note: The returning list should be lexicographically smallest. If the word can be found in multiple 
-// directions starting from the same coordinates, the list should contain the coordinates only once. 
+// Note: The returning list should be lexicographically smallest. If the word can be found in multiple
+// directions starting from the same coordinates, the list should contain the coordinates only once.
 
 // Example 1:
 
-// Input: 
+// Input:
 // grid = {{a,b,c},{d,r,f},{g,h,i}},
 // word = "abc"
-// Output: 
+// Output:
 // {{0,0}}
-// Explanation: 
+// Explanation:
 // From (0,0) we can find "abc" in horizontally right direction.
 // Example 2:
 
-// Input: 
+// Input:
 // grid = {{a,b,a,b},{a,b,e,b},{e,b,e,b}}
 // word = "abe"
-// Output: 
+// Output:
 // {{0,0},{0,2},{1,0}}
-// Explanation: 
-// From (0,0) we can find "abe" in right-down diagonal. 
-// From (0,2) we can find "abe" in left-down diagonal. 
+// Explanation:
+// From (0,0) we can find "abe" in right-down diagonal.
+// From (0,2) we can find "abe" in left-down diagonal.
 // From (1,0) we can find "abe" in horizontally right direction.
 // Your Task:
-// You don't need to read or print anything, Your task is to complete the function searchWord() 
+// You don't need to read or print anything, Your task is to complete the function searchWord()
 // which takes grid and word as input parameters and returns a list containing the positions from where the word
 // originates in any direction. If there is no such position then returns an empty list.
 
@@ -1890,10 +1818,10 @@
 // 1 <= n <= m <= 50
 // 1 <= |word| <= 15
 
-//🔴Approach :
-//     int dx[8] = {0,0,1,-1,1,-1,-1,1};          // direction for row
-//     int dy[8] = {1,-1,0,0,1,1,-1,-1};          // direction for col
-    
+// 🔴Approach :
+//      int dx[8] = {0,0,1,-1,1,-1,-1,1};          // direction for row
+//      int dy[8] = {1,-1,0,0,1,1,-1,-1};          // direction for col
+
 //     bool indirection(vector<vector<char>> &grid,int i,int j,int l,string word){
 //         int n = grid.size() , m = grid[0].size(),indx = 0;
 //         while(indx < word.length()){
@@ -1907,18 +1835,18 @@
 //     }
 //     bool check(vector<vector<char>> &grid,int i,int j,string &word){
 //         bool ans = false;
-        
+
 //         for(int l = 0; l < 8; l++){
 //             ans = ans || indirection(grid,i,j,l,word);
 //         }
-        
+
 //         return ans;
 //     }
 // 	vector<vector<int>>searchWord(vector<vector<char>>grid, string word){
 // 	    // Code here
 // 	    vector<vector<int>>ans;
 // 	    int n = grid.size() , m = grid[0].size();
-	    
+
 // 	    for(int i = 0; i < n; i++){
 // 	        for(int j = 0; j < m; j++){
 // 	            if(grid[i][j] == word[0]){
@@ -1928,24 +1856,22 @@
 // 	            }
 // 	        }
 // 	    }
-	    
+
 // 	    return ans;
 // 	}
-//🔸time complexity: O(N*M)*8*word.length()
-//🔸space complexity: O(N*N)
-
-
+// 🔸time complexity: O(N*M)*8*word.length()
+// 🔸space complexity: O(N*N)
 
 //                 //❓Question: Boyer Moore Algorithm for Pattern Searching
 
-// Pattern searching is an important problem in computer science. When we do search for a string in a notepad/word file, 
-// browser, or database, pattern searching algorithms are used to show the search results. 
-// A typical problem statement would be- 
-// Given a text txt[0..n-1] and a pattern pat[0..m-1] where n is the length of the text and m is 
-// the length of the pattern, write a function search(char pat[], char txt[]) that prints all occurrences 
-// of pat[] in txt[]. You may assume that n > m. 
+// Pattern searching is an important problem in computer science. When we do search for a string in a notepad/word file,
+// browser, or database, pattern searching algorithms are used to show the search results.
+// A typical problem statement would be-
+// Given a text txt[0..n-1] and a pattern pat[0..m-1] where n is the length of the text and m is
+// the length of the pattern, write a function search(char pat[], char txt[]) that prints all occurrences
+// of pat[] in txt[]. You may assume that n > m.
 
-// Examples: 
+// Examples:
 
 // Input:  txt[] = "THIS IS A TEST TEXT"
 //         pat[] = "TEST"
@@ -1957,52 +1883,52 @@
 //         Pattern found at index 9
 //         Pattern found at index 12
 
-//🔴approach :
+// 🔴approach :
 
 // #include <bits/stdc++.h>
 // using namespace std;
 // # define NO_OF_CHARS 256
- 
+
 // // The preprocessing function for Boyer Moore's bad character heuristic
 
 // void badCharHeuristic( string str, int size, int badchar[NO_OF_CHARS])
 // {
 //     int i;
- 
+
 //     // Initialize all occurrences as -1
 //     for (i = 0; i < NO_OF_CHARS; i++)
 //         badchar[i] = -1;
- 
+
 //     // Fill the actual value of last occurrence of a character
 //     for (i = 0; i < size; i++)
 //         badchar[(int) str[i]] = i;
 // }
- 
+
 // /* A pattern searching function that uses Bad Character Heuristic of Boyer Moore Algorithm */
 // void search( string txt, string pat)
 // {
 //     int m = pat.size();
 //     int n = txt.size();
- 
+
 //     int badchar[NO_OF_CHARS];
- 
+
 //     /* Fill the bad character array by calling the preprocessing function badCharHeuristic() for given pattern */
 //     badCharHeuristic(pat, m, badchar);
- 
+
 //     int s = 0; // s is shift of the pattern with respect to text
 //     while(s <= (n - m))
 //     {
 //         int j = m - 1;
- 
+
 //         /* Keep reducing index j of pattern while characters of pattern and text are matching at this shift s */
 //         while(j >= 0 && pat[j] == txt[s + j])
 //             j--;
- 
+
 //         /* If the pattern is present at current shift, then index j will become -1 after the above loop */
 //         if (j < 0)
 //         {
 //             cout << "pattern occurs at shift = " <<  s << endl;
- 
+
 //             /* Shift the pattern so that the next
 //             character in text aligns with the last
 //             occurrence of it in pattern.
@@ -2010,9 +1936,9 @@
 //             the case when pattern occurs at the end
 //             of text */
 //             s += (s + m < n)? m-badchar[txt[s + m]] : 1;
- 
+
 //         }
- 
+
 //         else
 //             /* Shift the pattern so that the bad character
 //             in text aligns with the last occurrence of
@@ -2025,7 +1951,7 @@
 //             s += max(1, j - badchar[txt[s + j]]);
 //     }
 // }
- 
+
 // /* Driver code */
 // int main()
 // {
@@ -2037,11 +1963,9 @@
 // 🔸Time Complexity : O(n x m)
 // 🔸Auxiliary Space: O(1)
 
-
-
 //                            //❓Question: Roman Number to Integer
 
-// Given a string in roman no format (s)  your task is to convert it to an integer . 
+// Given a string in roman no format (s)  your task is to convert it to an integer .
 // Various symbols and their values are given below.
 // I 1
 // V 5
@@ -2059,10 +1983,10 @@
 // Example 2:
 
 // Input:
-// s = III 
+// s = III
 // Output: 3
 // Your Task:
-// Complete the function romanToDecimal() which takes a string as input parameter and returns the equivalent decimal number. 
+// Complete the function romanToDecimal() which takes a string as input parameter and returns the equivalent decimal number.
 
 // Expected Time Complexity: O(|S|), |S| = length of string S.
 // Expected Auxiliary Space: O(1)
@@ -2070,9 +1994,9 @@
 // Constraints:
 // 1<=roman no range<=3999
 
-//🔴approach :
-// int romanToDecimal(string &str) {
-        
+// 🔴approach :
+//  int romanToDecimal(string &str) {
+
 //         unordered_map<char,int> mp;
 //         mp['I'] = 1;
 //         mp['V'] = 5;
@@ -2081,9 +2005,9 @@
 //         mp['C'] = 100;
 //         mp['D'] = 500;
 //         mp['M'] = 1000;
-        
+
 //         int ans = 0;
-        
+
 //         for(int i=0; i<str.length(); i++){
 //             if(mp[str[i]] < mp[str[i+1]]){
 //                 ans += mp[str[i+1]]-mp[str[i]];
@@ -2095,10 +2019,8 @@
 //         }
 //         return ans;
 //     }
-//🔸time complexity: O(N)
-//🔸space complexity: O(N)
-
-
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(N)
 
 //                      //❓Question: Longest Common Prefix
 
@@ -2114,7 +2036,6 @@
 // Input: strs = ["dog","racecar","car"]
 // Output: ""
 // Explanation: There is no common prefix among the input strings.
- 
 
 // Constraints:
 
@@ -2122,33 +2043,31 @@
 // 0 <= strs[i].length <= 200
 // strs[i] consists of only lowercase English letters.
 
-//🔴approach :
-//  string longestCommonPrefix(vector<string>& v) {
-        
+// 🔴approach :
+//   string longestCommonPrefix(vector<string>& v) {
+
 //         string ans="";
 //         sort(v.begin(),v.end());
 //         int n=v.size();
-        
+
 //         string first=v[0];
 //         string last=v[n-1];
-        
+
 //         for(int i=0; i<min(first.size(),last.size()); i++){
 //             if(first[i]!=last[i]){
 //                 return ans;
 //             }
 //             ans+=first[i];
 //         }
-//         return ans;   
+//         return ans;
 //     }
-//🔸time complexity: O(n log(n))
-//🔸time complexity: O(size of longest string)
-
-
+// 🔸time complexity: O(n log(n))
+// 🔸time complexity: O(size of longest string)
 
 //                         //❓Question: Min Number of Flips
 
-// Given a binary string, that is it contains only 0s and 1s. 
-// We need to make this string a sequence of alternate characters by flipping some of the bits, 
+// Given a binary string, that is it contains only 0s and 1s.
+// We need to make this string a sequence of alternate characters by flipping some of the bits,
 // our goal is to minimize the number of bits to be flipped.
 
 // Example 1:
@@ -2156,17 +2075,16 @@
 // Input:
 // S = "001"
 // Output: 1
-// Explanation: 
+// Explanation:
 // We can flip the 0th bit to 1 to have
 // 101.
-
 
 // Example 2:
 
 // Input:
-// S = "0001010111" 
+// S = "0001010111"
 // Output: 2
-// Explanation: We can flip the 1st and 8th bit 
+// Explanation: We can flip the 1st and 8th bit
 // bit to have "0101010101"
 // 101.
 
@@ -2179,23 +2097,21 @@
 // Constraints:
 // 1<=|S|<=105
 
-//🔴approach :
-// int minFlips (string s)
-// {
-//     int a=0,b=0,n=s.size();
-//         for(int i=0;i<n;i++)
-//         {
-//             s[i]=s[i]-'0';
-//             if((i%2)!=s[i]) a++;
-//             if((i+1)%2!=s[i]) b++;
-//         }
-//         return min(a,b);
+// 🔴approach :
+//  int minFlips (string s)
+//  {
+//      int a=0,b=0,n=s.size();
+//          for(int i=0;i<n;i++)
+//          {
+//              s[i]=s[i]-'0';
+//              if((i%2)!=s[i]) a++;
+//              if((i+1)%2!=s[i]) b++;
+//          }
+//          return min(a,b);
 
 // }
-//🔸time complexity: O(N)
-//🔸space complexity: O(N)
-
-
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(N)
 
 //                       //❓Question: Second Most Repeated string in a sequence
 
@@ -2208,12 +2124,12 @@
 // N = 6
 // arr[] = {aaa, bbb, ccc, bbb, aaa, aaa}
 // Output: bbb
-// Explanation: "bbb" is the second most 
+// Explanation: "bbb" is the second most
 // occurring string with frequency 2.
 
 // Example 2:
 
-// Input: 
+// Input:
 // N = 6
 // arr[] = {geek, for, geek, for, geek, aaa}
 // Output: for
@@ -2223,30 +2139,28 @@
 // Your Task:
 // You don't need to read input or print anything. Your task is to complete the function secFrequent() which takes the string array arr[] and its size N as inputs and returns the second most frequent string in the array.
 
-
 // Expected Time Complexity: O(N*max(|Si|).
 // Expected Auxiliary Space: O(N*max(|Si|).
-
 
 // Constraints:
 // 1<=N<=103
 
-//🔴approach:
-// string secFrequent (string arr[], int n)
-//     {
-//         //code here.
-//         unordered_map<string , int> mp;
-//         for( int i = 0 ;i < n ;i++){
-//             mp[arr[i]]++;
-//         }
-        
+// 🔴approach:
+//  string secFrequent (string arr[], int n)
+//      {
+//          //code here.
+//          unordered_map<string , int> mp;
+//          for( int i = 0 ;i < n ;i++){
+//              mp[arr[i]]++;
+//          }
+
 //         int maxOccr = 0;
 //         for( auto it = mp.begin() ; it != mp.end() ; it++){
 //             if(it->second > maxOccr){
 //                 maxOccr = it->second;
 //             }
 //         }
-        
+
 //         string ans = "";
 //         int secFre = INT_MIN;
 //         for( auto it : mp){
@@ -2254,14 +2168,12 @@
 //                 ans = it.first;
 //                 secFre = it.second;
 //             }
-            
+
 //         }
 //         return ans;
 //     }
-//🔸time complexity: O(N)
-//🔸space complexitY: O(1)
-
-
+// 🔸time complexity: O(N)
+// 🔸space complexitY: O(1)
 
 //                 //❓ QUestion: Minimum Swaps for bracket Balancing
 
@@ -2283,10 +2195,10 @@
 // Example 2:
 
 // Input : [[][]]
-// Output : 0 
+// Output : 0
 // Explanation:
 // String is already balanced.
- 
+
 // Your Task:
 // You don't need to read input or print anything. Your task is to complete the function minimumNumberOfSwaps() which takes the string S and return minimum number of operations required to balance the bracket sequence.
 
@@ -2296,12 +2208,12 @@
 // Constraints:
 // 1<=|S|<=100000
 
-//🔴approach:
-//  int minimumNumberOfSwaps(string S){
-//         // code here 
-//         int extra = 0;
-//         int ans = 0 ;
-        
+// 🔴approach:
+//   int minimumNumberOfSwaps(string S){
+//          // code here
+//          int extra = 0;
+//          int ans = 0 ;
+
 //         for(auto i:S){
 //             if( i== '['){
 //                 if(extra > 0) {
@@ -2313,13 +2225,11 @@
 //                 extra++;
 //             }
 //         }
-        
+
 //         return ans;
 //     }
-//🔸time complexity: O(N)
-//🔸space complexity: O(1)
-
-
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(1)
 
 //                          //❓Question: Longest common subsquence
 
@@ -2350,7 +2260,7 @@
 // Constraints:
 // 1<=size(str1),size(str2)<=103
 
-///🔴approach: 
+/// 🔴approach:
 
 // int lcs(int n, int m, string s1, string s2)
 //     {
@@ -2370,10 +2280,8 @@
 //         }
 //         return dp[n][m];
 //     }
-//🔸time complexity: O(n*m)
-//🔸space complexity: O(n*M)
-
-
+// 🔸time complexity: O(n*m)
+// 🔸space complexity: O(n*M)
 
 //                         //❓Question: Program to generate all possible IP address from given string
 
@@ -2390,10 +2298,10 @@
 
 // Input: "25505011535"
 // Output: []
-// Explanation: 
+// Explanation:
 // We cannot generate a valid IP
 // address with this string.
-// First, we will place 3 dots in the given string and then try out all the possible combinations for the 3 dots. 
+// First, we will place 3 dots in the given string and then try out all the possible combinations for the 3 dots.
 // Corner case for validity:
 
 // For string "25011255255"
@@ -2402,10 +2310,10 @@
 // allowed to change the string.
 // 250.11.255.255 is valid.
 
-//🔴approach :
-// #include <bits/stdc++.h>
-// using namespace std;
- 
+// 🔴approach :
+//  #include <bits/stdc++.h>
+//  using namespace std;
+
 // // Function checks whether IP digits are valid or not.
 // int is_valid(string ip)
 // {
@@ -2422,36 +2330,36 @@
 //         }
 //     }
 //     ips.push_back(ex);
- 
+
 //     // Checking for the corner cases
 //     // cout << ip << endl;
 //     for (int i = 0; i < ips.size(); i++) {
 //         // cout << ips[i] <<endl;
 //         if (ips[i].length() > 3 || stoi(ips[i]) < 0 || stoi(ips[i]) > 255)
 //             return 0;
- 
+
 //         if (ips[i].length() > 1 && stoi(ips[i]) == 0)
 //             return 0;
- 
+
 //         if (ips[i].length() > 1 && stoi(ips[i]) != 0 && ips[i][0] == '0')
 //             return 0;
 //     }
 //     return 1;
 // }
- 
+
 // // Function converts string to IP address
 // void convert(string ip)
 // {
 //     int l = ip.length();
- 
+
 //     // Check for string size
 //     if (l > 12 || l < 4) {
 //         cout << "Not Valid IP Address";
 //     }
- 
+
 //     string check = ip;
 //     vector<string> ans;
- 
+
 //     // Generating different combinations.
 //     for (int i = 1; i < l - 2; i++) {
 //         for (int j = i + 1; j < l - 1; j++) {
@@ -2459,8 +2367,8 @@
 //                 check = check.substr(0, k) + "." + check.substr(k);
 //                 check = check.substr(0, j) + "." + check.substr(j);
 //                 check = check.substr(0, i) + "." + check.substr(i);
- 
-//           // cout<< check <<endl; 
+
+//           // cout<< check <<endl;
 //           // Check for the validity of combination
 //                 if (is_valid(check)) {
 //                     ans.push_back(check);
@@ -2471,29 +2379,25 @@
 //         }
 //     }
 // }
- 
+
 // // Driver code
 // int main()
 // {
 //     string A = "25525511135";
 //     string B = "25505011535";
- 
+
 //     convert(A);
 //     convert(B);
- 
+
 //     return 0;
 // }
-
-
-
 
 //                  //❓Question: Generate IP address
 
 // Given a string S containing only digits, Your task is to complete the function genIp() which returns a vector containing all possible combinations of valid IPv4 IP addresses and takes only a string S as its only argument.
 // Note: Order doesn't matter. A valid IP address must be in the form of A.B.C.D, where A, B, C, and D are numbers from 0-255. The numbers cannot be 0 prefixed unless they are 0.
 
-
-// For string 11211 the IP address possible are 
+// For string 11211 the IP address possible are
 // 1.1.2.11
 // 1.1.21.1
 // 1.12.1.1
@@ -2522,13 +2426,12 @@
 // here, N = length of S.
 // S only contains digits(i.e. 0-9)
 
-
-//🔴approach:
-//  bool isValid(string s){
-//     int n = s.length();
-//     if(n==0 or n>3 or (s[0] == '0' and n > 1 ) or stoi(s) > 255) return false;
-//     else return true;
-//   }
+// 🔴approach:
+//   bool isValid(string s){
+//      int n = s.length();
+//      if(n==0 or n>3 or (s[0] == '0' and n > 1 ) or stoi(s) > 255) return false;
+//      else return true;
+//    }
 
 //     vector<string> genIp(string &s) {
 //         // Your code here
@@ -2550,17 +2453,14 @@
 //         }
 //         return ans;
 //     }
-//🔸time complexity: O(N*N*N)
-//🔸space complexity: O(N*N*N*N)
-
-
+// 🔸time complexity: O(N*N*N)
+// 🔸space complexity: O(N*N*N*N)
 
 //                      //❓Question: Smallest Distinct Window
 
 // Given a string 's'. The task is to find the smallest window length that contains all the characters of the given string at least one time.
 // For eg. A = aabcbcdbca, then the result would be 4 as of the smallest window will be dbca.
 
- 
 // Example 1:
 // Input : "AABBBCBBAC"
 // Output : 3
@@ -2570,13 +2470,13 @@
 // Input : "aaab"
 // Output : 2
 // Explanation : Sub-string -> "ab"
- 
+
 // Example 3:
 // Input : "GEEKSGEEKSFOR"
 // Output : 8
 // Explanation : Sub-string -> "GEEKSFOR"
- 
-// Your Task:  
+
+// Your Task:
 // You don't need to read input or print anything. Your task is to complete the function findSubString() which takes the string  S as input and returns the length of the smallest such window of the string.
 
 // Expected Time Complexity: O(256.N)
@@ -2586,40 +2486,38 @@
 // 1 ≤ |S| ≤ 105
 // String may contain both type of English Alphabets.
 
-//🔴approach:
-// int findSubString(string str)
-//     {
-//         unordered_map<char,int> visited;
-        
+// 🔴approach:
+//  int findSubString(string str)
+//      {
+//          unordered_map<char,int> visited;
+
 //         for(int i=0;i<str.length();i++){
 //             visited[str[i]]++;
 //         }
-        
+
 //         unordered_map<char,int> mp;
 //         int start=0;
 //         int end=0;
 //         int ans=str.length();
-        
+
 //         for(int i=0;i<str.length();i++){
-            
+
 //             mp[str[i]]++;
-            
+
 //             if(mp.size()<visited.size())
 //                 continue;
-                
+
 //             while(mp[str[start]]>1){
 //                 mp[str[start]]--;
 //                 start++;
 //             }
-            
+
 //             ans=min(ans,i-start+1);
 //         }
-//         return ans; 
+//         return ans;
 //     }
-//🔸time complexity: O(N)
-//🔸space complexity: O(N)
-
-
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(N)
 
 //                          //❓Question: Rearrange characters
 
@@ -2630,7 +2528,7 @@
 // Input : str = "geeksforgeeks"
 // Output: 1
 // Explanation: All the repeated characters of the
-// given string can be rearranged so that no 
+// given string can be rearranged so that no
 // adjacent characters in the string is equal.
 // Any correct rearrangement will show a output
 // of 1.
@@ -2645,42 +2543,42 @@
 // Your task :
 // You don't have to read input or print anything. Your task is to complete the functionrearrangeString() which takes the string as input and returns the modified string. If the string cannot be modified return "-1".
 // Note:The generatedoutput is 1 if the string is successfully rearranged and is 0 if rearranging is not possible.
- 
+
 // Expected Time Complexity : O(NlogN), N = length of String
 // Expected Auxiliary Space : O(number of english alphabets)
- 
+
 // Constraints :
 // 1 <= length of string <= 104
 
-//🔴appproach :
-// string rearrangeString(string str)
-//     {
-//         int n = str.size();
-//         unordered_map<char, int> um;
-        
+// 🔴appproach :
+//  string rearrangeString(string str)
+//      {
+//          int n = str.size();
+//          unordered_map<char, int> um;
+
 //         for(auto it:str){
 //             um[it]++;
 //         }
-        
+
 //         for(auto it:um){
 //             if(it.second > (n+1)/2) return "-1";
 //         }
-        
+
 //         string ans(n, 'i');
 //         int i = 0, j = 1;
 //         vector<pair<int, char>> v;
-        
+
 //         for(auto it:um){
 //             v.push_back({it.second, it.first});
 //         }
-        
+
 //         sort(v.rbegin(), v.rend());
-        
+
 //         for(auto it:v){
-            
+
 //             int times = it.first;
 //             char ch = it.second;
-            
+
 //             while(times)
 //             {
 //                 if(i < str.size()){
@@ -2696,10 +2594,8 @@
 //         }
 //         return ans;
 //     }
-//🔸Time Complexity : O(NlogN), N = length of String
-//🔸Auxiliary Space : O(number of english alphabets)
-
-
+// 🔸Time Complexity : O(NlogN), N = length of String
+// 🔸Auxiliary Space : O(number of english alphabets)
 
 //                     //❓Question: Minimum Characters to be added to make string a palindrome
 
@@ -2711,7 +2607,7 @@
 // Input:
 // S = "abc"
 // Output: 2
-// Explanation: 
+// Explanation:
 // Add 'b' and 'c' at front of above string to make it
 // palindrome : "cbabc"
 // Example 2:
@@ -2721,7 +2617,7 @@
 // Output: 1
 // Explanation: Add 'a' at front of above string
 // to make it palindrome : "aaacecaaa"
-// Your Task: 
+// Your Task:
 // You don't need to read input or print anything. Your task is to complete the function minChar() which takes a string S and returns an integer as output.
 
 // Expected Time Complexity: O(N)
@@ -2730,23 +2626,23 @@
 // Constraints:
 // 1 <= S.length <= 106
 
-//🔴approach:  
-// int minChar(string str){
-        
+// 🔴approach:
+//  int minChar(string str){
+
 //         string rev = str;
 //         reverse(rev.begin(), rev.end());
-        
+
 //         string st = str+"$"+rev;
-        
+
 //         int LPS[st.size()+1]={0};
 //         char s[st.size()+1];
-        
+
 //         for(int i=0; i<st.size(); i++){
 //             s[i+1]=st[i];
 //         }
-        
+
 //         int first=0, second=2;
-        
+
 //         while(second<=st.size()){
 //             if(s[first+1] == s[second])
 //             {
@@ -2765,28 +2661,25 @@
 //                 }
 //             }
 //         }
-        
+
 //         return str.size()-LPS[st.size()];
 //     }
-//🔸time complexity; O(N logN + 2N)
-//🔸space complexity: O(4N)
-
-
+// 🔸time complexity; O(N logN + 2N)
+// 🔸space complexity: O(4N)
 
 //                         //❓Question: Print Anagrams together
 
-// Given an array of strings, return all groups of strings that are anagrams. 
-// The groups must be created in order of their appearance in the original array. 
+// Given an array of strings, return all groups of strings that are anagrams.
+// The groups must be created in order of their appearance in the original array.
 // Look at the sample case for clarification.
 // Note: The final output will be in lexicographic order.
-
 
 // Example 1:
 // Input:
 // N = 5
 // words[] = {act,god,cat,dog,tac}
 // Output:
-// act cat tac 
+// act cat tac
 // god dog
 // Explanation:
 // There are 2 groups of
@@ -2797,7 +2690,7 @@
 // Input:
 // N = 3
 // words[] = {no,on,is}
-// Output: 
+// Output:
 // is
 // no on
 // Explanation:
@@ -2815,43 +2708,42 @@
 // 1<=N<=100
 // 1<=|S|<=10
 
-//🔴approach:
-//  vector<vector<string> > Anagrams(vector<string>& arr) {
-        
+// 🔴approach:
+//   vector<vector<string> > Anagrams(vector<string>& arr) {
+
 //         map<string, vector<string>> mp;
 //         for(int i=0; i<arr.size(); i++){
 //             string temp = arr[i] ;
 //             sort(temp.begin(), temp.end()) ;
 //             mp[temp].push_back(arr[i]) ;
 //         }
-        
+
 //         vector<vector<string>> ans(mp.size());
 //         int index = 0 ;
 //         for(auto x:mp) {
 //             auto v = x.second;
-            
+
 //             for(int i=0; i<v.size(); i++){
 //                 ans[index].push_back(v[i]) ;
 //             }
 //             index++ ;
 //         }
-        
+
 //         return ans ;
 //     }
-//🔸time complexity: O(N*MLog(m))
-//🔸space complexity: O(N+M)
-
+// 🔸time complexity: O(N*MLog(m))
+// 🔸space complexity: O(N+M)
 
 //                 //❓Question: Smallest window in a string  containing all the characters of another string
 
 // Given two strings S and P. Find the smallest window in the string S consisting of all the characters(including duplicates) of the string P.  Return "-1" in case there is no such window present. In case there are multiple such windows of same length, return the one with the least starting index.
-// Note : All characters are in Lowercase alphabets. 
+// Note : All characters are in Lowercase alphabets.
 
 // Example 1:
 // Input:
 // S = "timetopractice"
 // P = "toc"
-// Output: 
+// Output:
 // toprac
 // Explanation: "toprac" is the smallest
 // substring in which "toc" can be found.
@@ -2860,46 +2752,45 @@
 // Input:
 // S = "zoomlazapzo"
 // P = "oza"
-// Output: 
+// Output:
 // apzo
-// Explanation: "apzo" is the smallest 
+// Explanation: "apzo" is the smallest
 // substring in which "oza" can be found.
 // Your Task:
-// You don't need to read input or print anything. Your task is to complete the function smallestWindow() which takes two string S and P as input paramters and returns the smallest window in string S having all the characters of the string P. In case there are multiple such windows of same length, return the one with the least starting index. 
+// You don't need to read input or print anything. Your task is to complete the function smallestWindow() which takes two string S and P as input paramters and returns the smallest window in string S having all the characters of the string P. In case there are multiple such windows of same length, return the one with the least starting index.
 
 // Expected Time Complexity: O(|S|)
 // Expected Auxiliary Space: O(n) n = len(p) O
 
-// Constraints: 
+// Constraints:
 // 1 ≤ |S|, |P| ≤ 105
 
+// 🔴approach :
+//  string smallestWindow (string s, string p)
+//      {
+//          // Your code here
+//          int start_idx=0,j=0,len=INT_MAX;
+//          vector<int>v(26,0);
 
-//🔴approach :
-// string smallestWindow (string s, string p)
-//     {
-//         // Your code here
-//         int start_idx=0,j=0,len=INT_MAX;
-//         vector<int>v(26,0);
-       
 //         for(int i=0;i<p.size();i++){
 //             v[p[i]-'a']++;
 //         }
-        
+
 //         int need=0;
 //         for(int i=0;i<26;i++){
 //             if(v[i]!=0)
 //             need++;
 //         }
-        
+
 //         int have=0;
 //         vector<int>cur(26,0);
-       
+
 //         for(int i=0;i<s.size();i++){
 //             cur[s[i]-'a']++;
-            
+
 //             if(v[s[i]-'a']==cur[s[i]-'a'])
 //             have++;
-            
+
 //             while(have==need){
 //                 if(len > (i-j+1)){
 //                     len=i-j+1;
@@ -2915,10 +2806,8 @@
 //         string ans=s.substr(start_idx,len);
 //         return ans;
 //     }
-//🔸time complexity: O(S+P)
-//🔸space complexity: O(1)
-
-
+// 🔸time complexity: O(S+P)
+// 🔸space complexity: O(1)
 
 //                    //❓Question: Remove consecutive characters
 
@@ -2927,7 +2816,7 @@
 // Example 1:
 // Input:
 // S = aabb
-// Output:  ab 
+// Output:  ab
 // Explanation: 'a' at 2nd position is
 // appearing 2nd time consecutively.
 // Similiar explanation for b at
@@ -2941,23 +2830,23 @@
 // appearing 2nd time consecutively.
 // 'a' at fifth position is appearing
 // 2nd time consecutively.
- 
+
 // Your Task:
 // You dont need to read input or print anything. Complete the function removeConsecutiveCharacter() which accepts a string as input parameter and returns modified string.
- 
+
 // Expected Time Complexity: O(|S|).
 // Expected Auxiliary Space: O(|S|).
- 
+
 // Constraints:
 // 1<=|S|<=105
 // All characters are lowercase alphabets.
 
-//🔴approach :
-//  string removeConsecutiveCharacter(string S)
-//     {
-//         string temp;
-//         temp.push_back(S[0]);
-        
+// 🔴approach :
+//   string removeConsecutiveCharacter(string S)
+//      {
+//          string temp;
+//          temp.push_back(S[0]);
+
 //       for(int i=1;i<S.size();i++)
 //        {
 //           if(S[i-1]!=S[i]){
@@ -2966,10 +2855,8 @@
 //        }
 //        return temp;
 //     }
-//🔸time complexity: O(N)
-//🔸space complexity: O(N)
-
-
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(N)
 
 //                  //❓Question: Wildcard String matching
 
@@ -2982,7 +2869,7 @@
 // Input: wild = ge*ks
 //        pattern = geeks
 // Output: Yes
-// Explanation: Replace the '*' in wild string 
+// Explanation: Replace the '*' in wild string
 // with 'e' to obtain pattern "geeks".
 // Example 2:
 
@@ -2990,7 +2877,7 @@
 //        pattern = geeksforgeeks
 // Output: Yes
 // Explanation: Replace '?' and '*' in wild string with
-// 'e' and 'forgeeks' respectively to obtain pattern 
+// 'e' and 'forgeeks' respectively to obtain pattern
 // "geeksforgeeks"
 
 // Your Task:
@@ -3000,21 +2887,20 @@
 // Expected Auxiliary Space: O(length of wild string * length of pattern string)
 
 // Constraints:
-// 1<=length of the two string<=10^3 
+// 1<=length of the two string<=10^3
 
-//🔴approach:
-//  bool f(int i, int j, string wild, string pattern) {
-          
+// 🔴approach:
+//   bool f(int i, int j, string wild, string pattern) {
+
 //         if(j==pattern.size()) {
-            
+
 //             while(i<wild.size()) {
 //                 if(wild[i] != '*')  return false;
 //                 i++;
 //             }
 //             return true;
 //         }
-        
-        
+
 //         bool fl=false;
 
 //         if(wild[i]==pattern[j]||wild[i]=='?') {
@@ -3030,26 +2916,24 @@
 //             return false;
 //         }
 //     }
-    
+
 //     bool match(string wild, string pattern)
 //     {
 //         int n=wild.size();
 //         int m=pattern.size();
-        
-//         return f(0,0,wild,pattern);  
+
+//         return f(0,0,wild,pattern);
 //     }
-//🔸time complexity: O(N x (*+?))
-//🔸space compplexity: O(1)
-
-
+// 🔸time complexity: O(N x (*+?))
+// 🔸space compplexity: O(1)
 
 //                  //❓Question:Function to find Number of customers who could not get a computer
 
-// Write a function “runCustomerSimulation” that takes following two inputs 
+// Write a function “runCustomerSimulation” that takes following two inputs
 
-// An integer ‘n’: total number of computers in a cafe and a string: 
-// A sequence of uppercase letters ‘seq’: Letters in the sequence occur in pairs. The first occurrence indicates the arrival of a customer; the second indicates the departure of that same customer. 
-// A customer will be serviced if there is an unoccupied computer. No letter will occur more than two times. 
+// An integer ‘n’: total number of computers in a cafe and a string:
+// A sequence of uppercase letters ‘seq’: Letters in the sequence occur in pairs. The first occurrence indicates the arrival of a customer; the second indicates the departure of that same customer.
+// A customer will be serviced if there is an unoccupied computer. No letter will occur more than two times.
 // Customers who leave without using a computer always depart before customers who are currently using the computers. There are at most 20 computers per cafe.
 
 // For each set of input the function should output a number telling how many customers, if any walked away without using a computer. Return 0 if all the customers were able to use a computer.
@@ -3059,14 +2943,13 @@
 // runCustomerSimulation (1, “ABCBCA”) should return 2 as ‘B’ and ‘C’ were not able to get any computer.
 // runCustomerSimulation(1, “ABCBCADEED”) should return 3 as ‘B’, ‘C’ and ‘E’ were not able to get any computer.
 
+// 🔴approach :
+//  #include<iostream>
+//  #include<cstring>
+//  using namespace std;
 
-//🔴approach :
-// #include<iostream>
-// #include<cstring>
-// using namespace std;
- 
 // #define MAX_CHAR 26
- 
+
 // // n is number of computers in cafe.
 // // 'seq' is given sequence of customer entry, exit events
 // int runCustomerSimulation(int n, const char *seq)
@@ -3077,41 +2960,41 @@
 //     // seen[2] = 2, indicates that customer 'i' is in cafe and
 //     //             has occupied a computer.
 //     char seen[MAX_CHAR] = {0};
- 
+
 //     // Initialize result which is number of customers who could
 //     // not get any computer.
 //     int res = 0;
- 
+
 //     int occupied = 0; // To keep track of occupied computers
- 
+
 //     // Traverse the input sequence
 //     for (int i=0; seq[i]; i++)
 //     {
 //         // Find index of current character in seen[0...25]
 //         int ind = seq[i] - 'A';
- 
+
 //         // If First occurrence of 'seq[i]'
 //         if (seen[ind] == 0)
 //         {
 //             // set the current character as seen
 //             seen[ind] = 1;
- 
+
 //             // If number of occupied computers is less than
 //             // n, then assign a computer to new customer
 //             if (occupied < n)
 //             {
 //                 occupied++;
- 
+
 //                 // Set the current character as occupying a computer
 //                 seen[ind] = 2;
 //             }
- 
+
 //             // Else this customer cannot get a computer,
 //             // increment result
 //             else
 //                 res++;
 //         }
- 
+
 //         // If this is second occurrence of 'seq[i]'
 //         else
 //         {
@@ -3124,7 +3007,7 @@
 //     }
 //     return res;
 // }
- 
+
 // // Driver program
 // int main()
 // {
@@ -3135,9 +3018,8 @@
 //     cout << runCustomerSimulation(1, "ABCBCADEED") << endl;
 //     return 0;
 // }
-//🔸time complexity: O(N)
-//🔸space complexity: O(max_char)
-
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(max_char)
 
 //                  //❓Question: Transform String
 
@@ -3164,23 +3046,22 @@
 // A = "orGeeksFGeeks"
 // Pick 'F' and place it at the front.
 // A = "ForGeeksGeeks"
-// Your Task: 
+// Your Task:
 // You dont need to read input or print anything. Complete the function transform() which takes two strings A and B as input parameters and returns the minimum number of steps required to transform A into B. If transformation is not possible return -1.
 
-// Expected Time Complexity: O(N) where N is max(length of A, length of B) 
-// Expected Auxiliary Space: O(1)  
+// Expected Time Complexity: O(N) where N is max(length of A, length of B)
+// Expected Auxiliary Space: O(1)
 
 // Constraints:
 // 1<= A.length(), B.length() <= 104
 
+// 🔴approach:
+//  int transform (string A, string B)
+//      {
+//          int n = A.length() ;
+//          int m = B.length() ;
+//          if( n != m ) return -1;
 
-//🔴approach: 
-// int transform (string A, string B)
-//     {
-//         int n = A.length() ;
-//         int m = B.length() ;
-//         if( n != m ) return -1;
-         
 //         string temp = A;
 //         string temp1 = B;
 
@@ -3188,9 +3069,9 @@
 //         sort(temp1.begin(), temp1.end());
 
 //          if(temp != temp1) return -1;
-        
+
 //         int i = n-1, j = m-1, count = 0;
-        
+
 //         while(i >=0 && j >=0) {
 //             if(A[i] == B[j]) {
 //                 i--;
@@ -3203,42 +3084,40 @@
 //         }
 //         return count;
 //     }
-//🔸time complexity: O(N+m log n)
-//🔸space complexity: O(N + M)
+// 🔸time complexity: O(N+m log n)
+// 🔸space complexity: O(N + M)
 
-
-//🔴approach: Optmised
-// int transform (string A, string B)
-//     {
-//           //code here.
-//         unordered_map<char,int>unm;
-//         for(int i=0;i<A.length();i++){
-//             unm[A[i]]++;
-//         }
-//         for(int i=0;i<B.length();i++){
-//             unm[B[i]]--;
-//         }
-//         for(auto i:unm){
-//             if(i.second!=0)return -1;
-//         }
-//         int i=A.length()-1;
-//         int j=B.length()-1;
-//         int count=0;
-//         while(i>=0 && j>=0){
-//             if(A[i]==B[j]){
-//                 i--;
-//                 j--;
-//             }
-//             else{
-//                 count++;
-//                 i--;
-//             }
-//         }
-//         return count;
-//     }
-//🔸time complexity: O(N)
-//🔸space compleity: O(N+M)
-
+// 🔴approach: Optmised
+//  int transform (string A, string B)
+//      {
+//            //code here.
+//          unordered_map<char,int>unm;
+//          for(int i=0;i<A.length();i++){
+//              unm[A[i]]++;
+//          }
+//          for(int i=0;i<B.length();i++){
+//              unm[B[i]]--;
+//          }
+//          for(auto i:unm){
+//              if(i.second!=0)return -1;
+//          }
+//          int i=A.length()-1;
+//          int j=B.length()-1;
+//          int count=0;
+//          while(i>=0 && j>=0){
+//              if(A[i]==B[j]){
+//                  i--;
+//                  j--;
+//              }
+//              else{
+//                  count++;
+//                  i--;
+//              }
+//          }
+//          return count;
+//      }
+// 🔸time complexity: O(N)
+// 🔸space compleity: O(N+M)
 
 //               //❓Question: Isomorphic string
 
@@ -3275,18 +3154,17 @@
 // Constraints:
 // 1 <= |str1|, |str2| <= 2*104
 
+// 🔴approach:
+//  bool areIsomorphic(string str1, string str2)
+//      {
 
-//🔴approach:
-// bool areIsomorphic(string str1, string str2)
-//     {
-        
 //         int n = str1.length() ;
 //         int m = str2.length() ;
 //         if(n != m) return false;
-        
+
 //         int m1[256] = {0} ;
 //         int m2[256] = {0} ;
-        
+
 //         for(int i=0; i<n; i++){
 //             if( !m1[str1[i]] && !m2[str2[i]]) {
 //                 m1[str1[i]] = str2[i] ;
@@ -3296,18 +3174,17 @@
 //                 return false;
 //             }
 //         }
-        
+
 //         return true ;
 //     }
-//🔸time complexity: O(N)
-//🔸space complexity: O(no of different character)
-
+// 🔸time complexity: O(N)
+// 🔸space complexity: O(no of different character)
 
 //                     //❓QUestion: Recursively print all sentences that can be formed from list of word lists
 
-// Given a list of word lists How to print all sentences possible taking one word from a list at a time via recursion? 
+// Given a list of word lists How to print all sentences possible taking one word from a list at a time via recursion?
 
-// Example: 
+// Example:
 
 // Input: {{"you", "we"},
 //         {"have", "are"},
@@ -3325,23 +3202,23 @@
 //   we have drink
 //   we are sleep
 //   we are eat
-//   we are drink 
+//   we are drink
 
-//🔴approach:
-// #include <iostream>
-// #include <string>
- 
+// 🔴approach:
+//  #include <iostream>
+//  #include <string>
+
 // #define R 3
 // #define C 3
 
 // using namespace std;
- 
+
 // // A recursive function to print all possible sentences that can be formed from a list of word list
 // void printUtil(string arr[R][C], int m, int n, string output[R])
 // {
 //     // Add current word to output array
 //     output[m] = arr[m][n];
- 
+
 //     // If this is last word of current output sentence, then print the output sentence
 //     if (m==R-1)
 //     {
@@ -3350,19 +3227,19 @@
 //         cout << endl;
 //         return;
 //     }
- 
+
 //     // Recur for next row
 //     for (int i=0; i<C; i++)
 //        if (arr[m+1][i] != "")
 //           printUtil(arr, m+1, i, output);
 // }
- 
+
 // // A wrapper over printUtil()
 // void print(string arr[R][C])
 // {
 //    // Create an array to store sentence
 //    string output[R];
- 
+
 //    // Consider all words for first row as starting points and print all sentences
 //    for (int i=0; i<C; i++) {
 //      if (arr[0][i] != "") {
@@ -3370,27 +3247,24 @@
 //      }
 //    }
 // }
- 
+
 // // Driver program to test above functions
 // int main()
 // {
 //    string arr[R][C]  = {{"you", "we"},
 //                         {"have", "are"},
 //                         {"sleep", "eat", "drink"}};
- 
+
 //    print(arr);
- 
+
 //  return 0 ;
 // }
-//🔸time complexity: O(n^m)
-//🔸space complexity: O(m)
-
-
-
+// 🔸time complexity: O(n^m)
+// 🔸space complexity: O(m)
 
 //                   //❓Question:  Decoded String at Index
 
-// You are given an encoded string s. To decode the string to a tape, 
+// You are given an encoded string s. To decode the string to a tape,
 // the encoded string is read one character at a time and the following steps are taken:
 
 // If the character read is a letter, that letter is written onto the tape.
@@ -3414,7 +3288,6 @@
 // Output: "a"
 // Explanation: The decoded string is "a" repeated 8301530446056247680 times.
 // The 1st letter is "a".
- 
 
 // Constraints:
 // 2 <= s.length <= 100
@@ -3424,26 +3297,25 @@
 // It is guaranteed that k is less than or equal to the length of the decoded string.
 // The decoded string is guaranteed to have less than 263 letters.
 
+// 🔴 approach : brute force appraoch : TLE
+//      string decodeAtIndex(string s, int k) {
 
-//🔴 approach : brute force appraoch : TLE
-//     string decodeAtIndex(string s, int k) {
-         
 //         string ans = "" ;
 //         int index =  1;
 //         int temp ;
-        
+
 //         for(int i=0; i<s.length(); i++) {
-            
-//             if(isdigit(s[i])) 
+
+//             if(isdigit(s[i]))
 //             {
 //                 string tempResult = ans ;
-//                 temp = int(s[i])-48 ;        //convert string digit into integer digit 
+//                 temp = int(s[i])-48 ;        //convert string digit into integer digit
 //                 index = 1;
-//                 while(index < temp) 
+//                 while(index < temp)
 //                 {
-//                     for(int j=0; j<tempResult.length(); j++) 
-//                     { 
-//                        ans.push_back(tempResult[j]) ;  
+//                     for(int j=0; j<tempResult.length(); j++)
+//                     {
+//                        ans.push_back(tempResult[j]) ;
 //                     }
 //                  index++ ;
 //                 }
@@ -3453,21 +3325,20 @@
 //                 ans.push_back(s[i]) ;
 //             }
 //         }
-        
+
 //         string a ;
 //         a.push_back(ans[k-1]) ;
 //         return a ;
 //     }
-//🔸time complexity : O(N^2)
-//🔸space complexity: O(n)
-    
+// 🔸time complexity : O(N^2)
+// 🔸space complexity: O(n)
 
-//🔴optimised approach : using reverse and modulo :
-    
+// 🔴optimised approach : using reverse and modulo :
+
 //   string decodeAtIndex(string inputString, int k) {
-      
+
 //     long long decodedLength = 0;            // Total length of the decoded string
-      
+
 //     for (auto character : inputString) {
 //         if (isdigit(character)) {
 //                                             // If the character is a digit, update the decoded length accordingly
@@ -3487,28 +3358,26 @@
 //                                                     // If the character is a letter, check if it's the kth character
 //             if (k == 0 || decodedLength == k)
 //                 return string("") + inputString[i]; // Return the kth character as a string
-            
+
 //             decodedLength--;
 //         }
 //     }
 //     return "";                                        // Return an empty string if no character is found
 // }
-//🔸time complexity : O(2N)
-//🔸space complexity: O(n)
-
-
+// 🔸time complexity : O(2N)
+// 🔸space complexity: O(n)
 
 //                //❓Question : First non-repeating character in a stream
 
-// Given an input stream A of n characters consisting only of lower case alphabets. 
-// While reading characters from the stream, you have to tell which character has appeared 
-// only once in the stream upto that point. If there are many characters that have appeared only once, 
-// you have to tell which one of them was the first one to appear. If there is no such character 
+// Given an input stream A of n characters consisting only of lower case alphabets.
+// While reading characters from the stream, you have to tell which character has appeared
+// only once in the stream upto that point. If there are many characters that have appeared only once,
+// you have to tell which one of them was the first one to appear. If there is no such character
 // then append '#' to the answer.
 // NOTE:
 // 1. You need to find the answer for every i (0 <= i < n)
 // 2. In order to find the solution for every i you need to consider the string from starting position till ith position.
- 
+
 // Example 1:
 // Input: A = "aabc"
 // Output: "a#bb"
@@ -3518,7 +3387,7 @@
 // "a" - first non-repeating character is 'a'
 // "aa" - no non-repeating character so '#'
 // "aab" - first non-repeating character is 'b'
-// "aabc" - there are two non repeating characters 'b' and 'c', 
+// "aabc" - there are two non repeating characters 'b' and 'c',
 // first non-repeating character is 'b' because 'b' comes before 'c' in the stream.
 
 // Example 2:
@@ -3531,31 +3400,31 @@
 
 // Your Task:
 // You don't need to read or print anything. Your task is to complete the function FirstNonRepeating() which takes A as input parameter and returns a string after processing the input stream.
- 
+
 // Expected Time Complexity: O(n)
 // Expected Space Complexity: O(n)
- 
+
 // Constraints:
 // 1 <= n <= 105
 
-//🔴approach : 
-// string FirstNonRepeating(string A){
-		    
-// 		    queue<int> q; 
+// 🔴approach :
+//  string FirstNonRepeating(string A){
+
+// 		    queue<int> q;
 // 		    int arr[26] = {0} ;
-		    
+
 // 		    for(int i=0; i<A.size(); i++) {
-		        
+
 // 		        arr[A[i] - 'a']++ ;
-		        
+
 // 		        if(arr[A[i]-'a'] == 1) {
 // 		            q.push(A[i]) ;
 // 		        }
-		        
+
 // 		        while(!q.empty() && arr[q.front() - 'a'] != 1) {
 // 		            q.pop() ;
 // 		        }
-		        
+
 // 		        if(q.empty()) {
 // 		            A[i] = '#' ;
 // 		        }
@@ -3563,8 +3432,8 @@
 // 		            A[i] = q.front() ;
 // 		        }
 // 		    }
-		    
+
 // 		    return A ;
 // 		}
-//🔸time complexity : O(N)
-//🔸space complexity : O(N)
+// 🔸time complexity : O(N)
+// 🔸space complexity : O(N)
