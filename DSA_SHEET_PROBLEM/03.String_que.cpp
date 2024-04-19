@@ -692,7 +692,6 @@
 //     }
 
 // 	vector<string>find_permutation(string S){
-
 //         set<string>ans;
 //         solve(0,S,ans);
 //         vector<string>result(ans.begin(),ans.end());
