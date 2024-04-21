@@ -1,4 +1,299 @@
 
+// 🔴🔴 RECURSION 🔴🔴🔴 //
+
+//              //❓ Question: Write a recursion function to compute sum of list of numbers
+// Example 1:
+// Input:
+// n = 4
+// arr[] = {1, 2, 3, 4}
+// Output: 10
+// Explanation: 1 + 2 + 3 + 4 = 10.
+
+// Example 2:
+// Input:
+// n = 3
+// arr[] = {1, 3, 3}
+// Output: 7
+// Explanation: 1 + 3 + 3 = 7.
+
+// 🔴Approach : recursion
+//   int solve(int arr[], int n, int index){
+//       if(index == n){
+//           return 0;
+//       }
+
+//       int sum = arr[index] + solve(arr, n, index+1);
+
+//       return sum;
+//   }
+//   int sum(int arr[], int n) {
+//      return solve(arr, n, 0);
+//   }
+
+// 🔸Time complexity: O(N)
+// 🔸space complexity: O(N)
+//
+
+//
+//              // ❓Question: Write a program based on recursion to calculate the nth fibonacci number
+//
+// Given a positive integer n, find the nth fibonacci number.
+// Note: for the reference of this question take first fibonacci number to be 1.
+
+// Example 1:
+// Input:
+// n = 2
+// Output:
+// 1
+// Explanation:
+// 1 is the 2nd number of fibonacci series.
+
+// Example 2:
+// Input:
+// n = 5
+// Output:
+// 5
+// Explanation:
+// 5 is the 5th number of fibonacci series.
+// Your Task:
+// You dont need to read input or print anything. Complete the function nthFibonacci() which takes n as input parameter and returns nth fibonacci number.
+
+// Expected Time Complexity: O(2^n)
+// Expected Auxiliary Space: O(2^n)
+
+// Constraints:
+// 1<= n <=105
+
+// 🔴Approach :
+//  int solve(int n){
+//         if(n <= 0){
+//             return 0;
+//         }
+//         if(n == 1){
+//             return 1;
+//         }
+
+//         return solve(n-2) + solve(n-1);
+//     }
+//     int nthFibonacci(int n){
+//        if(n == 1 || n == 2) return 1;
+//        return solve(n);
+//     }
+//
+// 🔸Time complexity: O(N)
+// 🔸space complexity: O(N)
+//
+
+//
+//                  //❓Question: Write a program to print 1 to N without using any loops
+// You are given an integer N. Print numbers from 1 to N without the help of loops.
+
+// Examples:
+
+// Input: N = 5
+// Output: 1 2 3 4 5
+// Explanation: We have to print numbers from 1 to 5.
+
+// Input: N = 10
+// Output: 1 2 3 4 5 6 7 8 9 10
+// Explanation: We have to print numbers from 1 to 10.
+
+// 🔴approach :
+// #include <iostream>
+// using namespace std;
+
+// class Solution
+// {
+// public:
+//     void printN(int n) {
+//         if (n > 0) {
+//             printN(n - 1);
+//             cout << n << ", ";
+//         }
+//         return;
+//     }
+// };
+
+// int main(){
+//     cout << "Startin" << endl;
+
+//     int n = 10;
+//     Solution g;
+//     g.printN(n);
+
+//     return 0;
+// }
+// 🔸Time complexity: O(N)
+// 🔸space complexity: O(N)
+//
+
+//
+//              //❓Question: write a program to get the sum of digits of a number using recursion
+//
+// Given a number, we need to find sum of its digits using recursion.
+// Examples:
+// Input : 12345
+// Output : 15
+
+// Input : 45632
+// Output :20
+//
+// 🔴appraoch:
+// #include <iostream>
+// using namespace std;
+
+// 🔸approach 1:
+// int sum = 0;
+// int solve(int num)
+// {
+//     if (num <= 0)
+//     {
+//         return 0;
+//     }
+
+//     int digit = num % 10;
+//     sum += digit;
+//     solve(num /= 10);
+
+//     return sum;
+// }
+// 🔸approach 2:
+// int solve(int num)
+// {
+//     if (num <= 0) return 0;
+//     return (n%10 + solve(n/10));
+// }
+
+// int main()
+// {
+//     int num = 45632;
+//     cout << "In main" << endl;
+//     int result = solve(num);
+//     cout << "Sum of digits in " << num << " is " << result << endl;
+
+//     return 0;
+// }
+// 🔸Time complexity: O(LogN)
+// 🔸space complexity: O(LogN)
+//
+
+//
+//              //❓Question: write a program to get the length of a string using recursion
+// Given a string calculate length of the string using recursion.
+
+// Examples:
+// Input : str = "abcd"
+// Output :4
+
+// Input : str = "GEEKSFORGEEKS"
+// Output :13
+
+// 🔴appraoch :
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// int recLen(char* str)
+// {
+//    if(*str == '\0'){
+//     return 0;
+//    }
+//    else{
+//     return 1 + recLen(str+1);
+//    }
+// }
+
+// int main()
+// {
+//     char str[] = "GeeksforGeeks";
+//     cout<<recLen(str);
+//     return 0;
+// }
+// 🔸Time complexity: O(N)
+// 🔸space complexity: O(N)
+//
+
+//
+//                  //❓Question: Implement a recursive function to reverse a string
+//
+//  Write a recursive function to print the reverse of a given string
+// #include <iostream>
+// using namespace std;
+
+// void reverse(string &str, int left, int right)
+// {
+//     if (left > right)
+//     {
+//         return;
+//     }
+
+//     swap(str[right], str[left]);
+//     reverse(str, left + 1, right - 1);
+// }
+
+// int main()
+// {
+//     string a = "Pandorium";
+//     reverse(a, 0, a.length() - 1);
+//     cout << a << endl;
+//     return 0;
+// }
+// 🔸Time complexity: O(N)
+// 🔸space complexity: O(N)
+//
+
+//
+//                  //❓Question: Implement a recursive function to solve the tower of hanoi Problem
+//
+// Tower of Hanoi is a mathematical puzzle where we have three rods (A, B, and C) and N disks. Initially, all the disks are stacked in decreasing value of diameter i.e., the smallest disk is placed on the top and they are on rod A. The objective of the puzzle is to move the entire stack to another rod (here considered C), obeying the following simple rules:
+
+// Only one disk can be moved at a time.
+// Each move consists of taking the upper disk from one of the stacks and placing it on top of another stack i.e. a disk can only be moved if it is the uppermost disk on a stack.
+// No disk may be placed on top of a smaller disk.
+
+// Examples:
+// Input: 2
+// Output: Disk 1 moved from A to B
+// Disk 2 moved from A to C
+// Disk 1 moved from B to C
+
+// Input: 3
+// Output: Disk 1 moved from A to C
+// Disk 2 moved from A to B
+// Disk 1 moved from C to B
+// Disk 3 moved from A to C
+// Disk 1 moved from B to A
+// Disk 2 moved from B to C
+// Disk 1 moved from A to C
+
+// 🔴approach :
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// void towerOfHanoi(int n, char from_rod, char to_rod, char aux_rod)
+// {
+//     if (n == 0)
+//         return;
+
+//     towerOfHanoi(n - 1, from_rod, aux_rod, to_rod);
+
+//     cout << "Move disk " << n << " from rod " << from_rod
+//          << " to rod " << to_rod << endl;
+
+//     towerOfHanoi(n - 1, aux_rod, to_rod, from_rod);
+// }
+
+// int main()
+// {
+//     int N = 3;
+//     // A, B and C are names of rods
+//     towerOfHanoi(N, 'A', 'C', 'B');
+//     return 0;
+// }
+// 🔸Time complexity: O(2^N)
+// 🔸space complexity: O(N)
+//
+
+//
 // 🔴🔴🔴 BACKTRACKING 🔴🔴🔴
 
 //              ❓Question: Rat in a Maze Problem - I
