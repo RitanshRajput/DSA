@@ -295,8 +295,11 @@
 
 //
 //                                  🔴🔴🔴 BACKTRACKING 🔴🔴🔴
+//
 
-//              ❓Question: Rat in a Maze Problem - I
+//
+//                   ❓Question: Rat in a Maze Problem - I
+//
 
 // Consider a rat placed at (0, 0) in a square matrix of order N * N. It has
 // to reach the destination at (N - 1, N - 1). Find all possible paths that the
@@ -444,8 +447,11 @@
 // };
 // 🔸Time Complexity: O(3^n^2)
 // 🔸Space Complexity: O(Length of route)
+//
 
-//              ❓Question: N-Q Problem
+//
+//                            ❓Question: N-Q Problem
+//
 
 // The n-queens puzzle is the problem of placing n queens on a (n×n) chessboard such
 // that no two queens can attack each other.
@@ -597,7 +603,7 @@
 //             string word = dict[i];
 //             int wordLen = word.length();
             
-//             if(word == s.substr(index, wordLen)){
+//             if(word == s.substr(index, wordLen)) {
 //                 solve(curr+word+" ", n, dict, s, ans, index+wordLen);
 //             }
 //         }
@@ -843,7 +849,7 @@
 //
 
 //
-//                  ❓Question: m-colouring problem
+//                    ❓Question: m-colouring problem
 //
 // Given an undirected graph and an integer M. The task is to determine if the graph can be 
 // colored with at most M colors such that no two adjacent vertices of the graph are colored 
@@ -1000,3 +1006,157 @@
 //🔸Time complexity:  O(N*2^N)
 //🔸Space complexity: O(N* 2^N)
 //
+
+//
+//                          ❓Question: Partition Equal Subset Sum
+//
+// Given an array arr[] of size N, check if it can be partitioned into two parts 
+// such that the sum of elements in both parts is the same.
+
+// Example 1:
+// Input: N = 4
+// arr = {1, 5, 11, 5}
+// Output: YES
+// Explanation: 
+// The two parts are {1, 5, 5} and {11}.
+
+// Example 2:
+// Input: N = 3
+// arr = {1, 3, 5}
+// Output: NO
+// Explanation: This array can never be 
+// partitioned into two such parts.
+// Your Task:
+// You do not need to read input or print anything. Your task is to complete the function equalPartition() which takes the value N and the array as input parameters and returns 1 if the partition is possible. Otherwise, returns 0.
+
+// Expected Time Complexity: O(N*sum of elements)
+// Expected Auxiliary Space: O(sum of elements)
+
+// Constraints:
+// 1 ≤ N ≤ 100
+// 1 ≤ arr[i] ≤ 1000
+// N*sum of elements ≤ 5*106
+
+//🔴approach :
+// class Solution{
+// public:
+//       bool solve(int i,int N, int arr[],vector<vector<int>> &dp,int target) {
+//         if(i >= N || target < 0) {
+//             return 0;
+//         }    
+//         if(target == 0) {
+//             return 1;
+//         }
+//         if(dp[i][target] != -1) {
+//             return dp[i][target];
+//         }
+//         bool include = solve(i+1,N,arr,dp,target-arr[i]);
+//         bool exclude = solve(i+1,N,arr,dp,target);
+        
+//         return dp[i][target] = (include || exclude);
+//     }
+    
+//     int equalPartition(int N, int arr[]) {
+//         int sum = 0;
+//         for(int i=0;i<N;i++) {
+//             sum += arr[i];
+//         }
+//         if(sum%2 != 0) {
+//             return 0;
+//         }
+//         sum = sum/2;
+//         vector<vector<int>> dp(N,vector<int>(sum+1,-1));
+//         return solve(0,N,arr,dp,sum);
+//     }
+// };
+//🔸Time complexity:  O(2^N)
+//🔸Space complexity: O(N*sum)
+//
+
+//
+//                      ❓Question: Combination Sum
+//
+
+// Given an array of integers and a sum B, find all unique combinations in the array where 
+// the sum is equal to B. The same number may be chosen from the array any number of times to make B.
+// Note:
+//         1. All numbers will be positive integers.
+//         2. Elements in a combination (a1, a2, …, ak) must be in non-descending order. (ie, a1 ≤ a2 ≤ … ≤ ak).
+//         3. The combinations themselves must be sorted in ascending order.
+
+// Example 1:
+// Input:
+// N = 4
+// arr[] = {7,2,6,5}
+// B = 16
+// Output:
+// (2 2 2 2 2 2 2 2)
+// (2 2 2 2 2 6)
+// (2 2 2 5 5)
+// (2 2 5 7)
+// (2 2 6 6)
+// (2 7 7)
+// (5 5 6)
+
+// Example 2:
+// Input:
+// N = 11
+// arr[] = {6,5,7,1,8,2,9,9,7,7,9}
+// B = 6
+// Output:
+// (1 1 1 1 1 1)
+// (1 1 1 1 2)
+// (1 1 2 2)
+// (1 5)
+// (2 2 2)
+// (6)
+
+// Your Task:
+// Your task is to complete the function combinationSum() which takes the array A and a sum B as inputs and returns a list of list denoting the required combinations in the order specified in the problem description. The printing is done by the driver's code. If no set can be formed with the given set, then  "Empty" (without quotes) is printed.
+
+// Expected Time Complexity: O(X2 * 2N), where X is average of summation B/arri for every number in the array.
+// Expected Auxiliary Space: O(X * 2N)
+
+// Constraints:
+// 1 <= N <= 30
+// 1 <= A[i] <= 20
+// 1 <= B <= 100
+
+//🔴approach : 
+// class Solution {
+//   public:
+//    void solve(int i,int n,vector<int>&arr, int B, vector<vector<int>>& ans, vector<int>& ds) {
+//         if(i==n) {
+//             if(B==0){
+//                 ans.push_back(ds);
+//             }
+//             return;
+//         }
+//         // take
+//         if(arr[i]<=B) {
+//             ds.push_back(arr[i]);
+//             solve(i,n,arr,B-arr[i],ans,ds);
+//             ds.pop_back();
+//         }
+//         //notTake
+//         solve(i+1,n,arr,B,ans,ds);
+//     }
+    
+    
+//     vector<vector<int> > combinationSum(vector<int> &A, int B) {
+//         set<int>st(A.begin(),A.end());
+        
+//         vector<int>arr(st.begin(),st.end());
+        
+//         vector<int> ds;
+//         int n = arr.size();
+//         vector<vector<int>> ans;
+        
+//         solve(0,n,arr,B,ans,ds);
+//         return ans;
+//     }
+// };
+//🔸Time complexity:  O(2^N)
+//🔸Space complexity: O(2^N)
+//
+
