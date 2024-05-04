@@ -1532,3 +1532,183 @@
 //🔸 Time complexity : O(2^n*m)
 //🔸 Space complexity: O(N+M)
 //
+
+//
+//                      ❓Question: Partition Array to K subset
+//
+// Given an integer array a[ ] of N elements and an integer K, the task is to check if the array 
+// a[ ] could be divided into K non-empty subsets with equal sum of elements.
+// Note: All elements of this array should be part of exactly one partition.
+
+// Example 1:
+// Input: 
+// N = 5
+// a[] = {2,1,4,5,6}
+// K = 3
+// Output: 
+// 1
+// Explanation: we can divide above array 
+// into 3 parts with equal sum as (2, 4), 
+// (1, 5), (6)
+
+// Example 2:
+// Input: 
+// N = 5 
+// a[] = {2,1,5,5,6}
+// K = 3
+// Output: 
+// 0
+// Explanation: It is not possible to divide
+// above array into 3 parts with equal sum.
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function isKPartitionPossible() which takes the array a[], the size of the array N, and the value of K as inputs and returns true(same as 1) if possible, otherwise false(same as 0).
+
+// Expected Time Complexity: O(N*2N).
+// Expected Auxiliary Space: O(2N).
+
+// Constraints:
+// 1 ≤ K ≤ N ≤ 10
+// 1 ≤ a[i] ≤ 100
+
+//🔴approach : 
+// class Solution{
+//     int count = 0;
+    
+//     bool solve(int a[], int n, int index, int curr_sum, int target, int visit[]) {
+        
+//         if (index >= n) {
+//             return false;
+//         }
+        
+//         if (curr_sum > target) {
+//             return false;
+//         }
+        
+//         if (curr_sum == target) {
+//             count++;
+//             return true;
+//         }
+        
+//         for (int i = index; i < n; i++) {
+//             if (visit[i] == 1) continue;
+            
+//             visit[i] = 1;
+//             int completed = solve(a, n, index + 1, curr_sum + a[i], target, visit);
+            
+//             if (completed) return true;
+//             visit[i] = 0;
+//         }
+        
+//         return false;
+//     }
+//   public:
+//     bool isKPartitionPossible(int a[], int n, int k)
+//     {
+//         if (k == 1) return true;
+        
+//         int sum = accumulate(a, a + n, 0);
+//         int visit[n] = {0}; 
+        
+//         if (sum % k) return false;
+        
+//         sort(a, a + n, greater<int>());
+        
+//         for (int i = 0; i < k; i++) {
+//             solve(a, n, 0, 0, sum / k, visit);
+//         }
+        
+//         if (count == k) return true;
+//         return false;
+//     }
+// };
+
+
+//🔴explanation: using chatgpt
+
+// Recursive Function solve:
+// Start with index  0
+// At each index, try including the current element in the subset and recursively call solve for the next index.
+// Backtrack by excluding the current element from the subset and try the next element.
+
+// Dry Run:
+// Start with index 0
+// 0)
+// Include 6 
+// in the subset and recursively call solve for the next index. Start with index 1
+// 1)
+// Include 5 
+// in the subset and recursively call solve for the next index. Start with index 2
+// 2)
+// Include 4 
+// in the subset and recursively call solve for the next index.
+// Check if the current sum equals the target sum.
+// No more elements to include, return to the previous index.
+
+// Exclude 4
+// from the subset and try the next element.
+// No more elements to include, return to the previous index.
+// Exclude 5
+// from the subset and try the next element.
+// No more elements to include, return to the previous index.
+// Exclude 6
+// from the subset and try the next element.
+// No more elements to include, return to the previous index.
+
+// Final Result:
+// The count variable will hold the number of successful partitions. In this case, it will be incremented when a subset with sum equal to the target sum is found.
+// After the function execution, if the count matches k
+
+//🔸 Time complexity : O(k * n * 2^n) 
+//🔸 Space complexity: O(N)
+//
+
+//
+//                      ❓Question: Find the K-th Permutation Sequence of first N natural numbers
+//
+
+// Given two integers N and K, find the Kth permutation sequence of numbers from 1 to N without using STL function.
+// Note: Assume that the inputs are such that Kth permutation of N number is always possible.
+//
+// Examples: 
+// Input: N = 3, K = 4 
+// Output: 231 
+// Explanation: 
+// The ordered list of permutation sequence from integer 1 to 3 is : 123, 132, 213, 231, 312, 321. So, the 4th permutation sequence is “231”.
+
+// Input: N = 2, K = 1 
+// Output: 12 
+// Explanation: 
+// For n = 2, only 2 permutations are possible 12 21. So, the 1st permutation sequence is “12”. 
+
+//🔴approach :
+// void generate_permutations(string& str, int idx, vector<string>& result) {
+//     // base case
+//     if (idx == str.size()) {
+//         result.push_back(str);
+//         return;
+//     }
+//
+//     for (int i = idx; i < str.size(); i++) {
+//         swap(str[i], str[idx]);
+//         generate_permutations(str, idx + 1, result);
+//         swap(str[i], str[idx]);
+//     }
+// }
+// 
+//  string findKthPermutation(int n, int k) {
+//     string str = "";
+//     vector<string> result;
+//  
+//     for (int i = 1; i <= n; i++) {
+//         str.push_back(i + '0'); 
+//     }
+//  
+//     generate_permutations(str, 0, result);
+//     sort(result.begin(), result.end());
+//
+//    return result[k-1];
+//  }
+//
+//🔸 Time complexity : O((N! * N) + (N! * log N!)) 
+//🔸 Space complexity: O(N)
+//
