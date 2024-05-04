@@ -1160,3 +1160,375 @@
 //🔸Space complexity: O(2^N)
 //
 
+//
+//                      ❓ Question: Largest Number in K swaps
+//
+
+// Given a number K and string str of digits denoting a positive integer, build the largest number possible
+// by performing swap operations on the digits of str at most K times.
+
+// Example 1:
+// Input:
+// K = 4
+// str = "1234567"
+// Output:
+// 7654321
+// Explanation:
+// Three swaps can make the
+// input 1234567 to 7654321, swapping 1
+// with 7, 2 with 6 and finally 3 with 5
+
+// Example 2:
+// Input:
+// K = 3
+// str = "3435335"
+// Output:
+// 5543333
+// Explanation:
+// Three swaps can make the input
+// 3435335 to 5543333, swapping 3 
+// with 5, 4 with 5 and finally 3 with 4 
+
+// Your task:
+// You don't have to read input or print anything. Your task is to complete the function findMaximumNum() which takes the string and an integer as input and returns a string containing the largest number formed by perfoming the swap operation at most k times.
+
+// Expected Time Complexity: O(n!/(n-k)!) , where n = length of input string
+// Expected Auxiliary Space: O(n)
+
+// Constraints:
+// 1 ≤ |str| ≤ 30
+// 1 ≤ K ≤ 10
+
+//🔴approach : 
+// class Solution
+// {
+//     public:
+//    void solve(string str, int k,int ind,string& maxi) {
+       
+//         maxi = max(maxi,str);
+//         if (k == 0) return; 
+//         int n = str.length();
+        
+//         for (int i = ind; i < n-1; i++) {
+//             for (int j = i + 1; j < n; j++) {
+//                 if (str[i] < str[j]) {
+//                     swap(str[i], str[j]);
+//                     solve(str, k - 1,i+1,maxi); 
+//                     swap(str[i], str[j]);
+                    
+//                 }
+//             }
+//         }
+//     }
+//     string findMaximumNum(string str, int k)
+//     {
+//        string maxi = "";
+//        solve(str,k,0,maxi);
+//        return maxi;
+//     }
+// };
+//🔸Time complexity:  O(n-1!)
+//🔸Space complexity: O(N)
+//
+
+//🔴appraoch2: 
+// class Solution
+// {
+//     public:
+//     void solve(int ind,int k,string &nums, string& ans) {
+        
+//         int n=nums.size();
+        
+//         if(ind>=n || k<=0) {
+//             ans = max(ans,nums);
+//             return ;
+//         }
+        
+//         for(int i=ind+1; i<n && k>0; i++) {
+//             if(nums[ind]<nums[i]) {  
+//                 swap(nums[ind],nums[i]);
+//                 solve(ind+1,k-1,nums, ans);
+//                 swap(nums[i],nums[ind]);
+//             }
+//         }
+        
+//         solve(ind+1,k,nums, ans);   
+//     }
+    
+//     string findMaximumNum(string str, int k)
+//     {
+//         string ans = str;
+//         solve(0,k,str, ans);
+//         return ans;
+//     }
+// };
+//🔸Time complexity:  O(2^N) exponential
+//🔸Space complexity: O(N)
+//
+
+//
+//                          ❓Question: Permutations of a given string
+//
+// Given a string S. The task is to print all unique permutations of the given string that
+//  may contain dulplicates in lexicographically sorted order. 
+
+// Example 1:
+// Input: ABC
+// Output:
+// ABC ACB BAC BCA CAB CBA
+// Explanation:
+// Given string ABC has permutations in 6 
+// forms as ABC, ACB, BAC, BCA, CAB and CBA .
+
+// Example 2:
+// Input: ABSG
+// Output:
+// ABGS ABSG AGBS AGSB ASBG ASGB BAGS 
+// BASG BGAS BGSA BSAG BSGA GABS GASB 
+// GBAS GBSA GSAB GSBA SABG SAGB SBAG 
+// SBGA SGAB SGBA
+// Explanation:
+// Given string ABSG has 24 permutations.
+
+// Your Task:  
+// You don't need to read input or print anything. Your task is to complete the function find_permutation() which takes the string S as input parameter and returns a vector of string in lexicographical order.
+
+// Expected Time Complexity: O(n! * n)
+// Expected Space Complexity: O(n! * n)
+
+// Constraints:
+// 1 <= length of string <= 5
+
+//🔴approach : 
+// class Solution
+// {
+// 	public:
+// 	    void removeDuplicate(vector<string>& ans){
+// 	        vector<string> temp;
+// 	        temp.push_back(ans[0]);
+	        
+// 	        for(int i=1; i<ans.size(); i++){
+// 	            if(ans[i] != ans[i-1]){
+// 	                temp.push_back(ans[i]);
+// 	            }else{
+// 	                continue;
+// 	            }
+// 	        }
+	        
+// 	        ans.clear();
+	        
+// 	        for(string i: temp){
+// 	            ans.push_back(i);
+// 	        }
+// 	    }
+	
+// 	    void solve(int index, vector<string>& ans, string S){
+	        
+// 	        int n = S.size();
+// 	        if(index >= n) {
+// 	            ans.push_back(S);
+// 	            return;
+// 	        }
+	        
+// 	        for(int i=index; i<n; i++){
+// 	            swap(S[i], S[index]);
+// 	            solve(index+1, ans, S);
+// 	            swap(S[i], S[index]);
+// 	        }
+// 	    }
+	
+// 		vector<string>find_permutation(string S)
+// 		{
+// 		    vector<string> ans;
+// 		    solve(0, ans, S);
+// 		    sort(ans.begin(),ans.end());
+		    
+// 		    removeDuplicate(ans);
+		    
+// 		    return ans;
+// 		}
+// };
+//🔸Time complexity:  O(N!)   // O(Nlogn) + O(N!) == O(N!)
+//🔸Space complexity: O(N!)
+//
+
+//
+//                      ❓ Question: Longest Possible Route in a Matrix with Hurdles
+//
+// Given an M x N matrix, with a few hurdles arbitrarily placed, calculate the length of the longest possible 
+// route possible from source to a destination within the matrix. We are allowed to move to only adjacent 
+// cells which are not hurdles. The route cannot contain any diagonal moves and a location once visited
+// in a particular path cannot be visited again.
+
+// https://www.geeksforgeeks.org/longest-possible-route-in-a-matrix-with-hurdles/
+// For example, the longest path with no hurdles from source to destination 
+// is highlighted below. The length of the path is 24.
+
+//        (1)-1 1 1--1 1 1-1-1-1
+//            |   |  |   |     |
+//          1-1 0 1  1 0 1(1)0 1
+//          |     |  |   | |   |
+//          1-1-1-1  1-1-1 1-1-1
+
+
+
+// The idea is to use Backtracking. We start from the source cell of the matrix, move forward in all four allowed directions,
+// and recursively checks if they lead to the solution or not. If the destination is found, we update the value of the 
+// longest path else if none of the above solutions work we return false from our function.
+
+//🔴approach :
+
+// Function for finding the longest path
+// 'ans' is -1 if we can't reach
+// 'cur' is the number of steps we have traversed
+
+// int findLongestPath(vector<vector<int> >& mat, int i, int j, int di, int dj, int n, int m,  int cur = 0, int ans = -1)
+// {
+//     // If we reach the destination
+//     if (i == di && j == dj) {
+//         // If current path steps are more than previous path steps
+//         if (cur > ans) ans = cur;
+//
+//         return ans;
+//     }
+   
+//       //if the source or destination is a hurdle itself
+//       if(mat[i][j]==0 || mat[di][dj]==0) return;
+ 
+//     // Mark as visited
+//     mat[i][j] = 0;
+ 
+//     // Checking if we can reach the destination going right
+//     if (j != m - 1 && mat[i][j + 1] > 0)
+//         ans = findLongestPath(mat, i, j + 1, di, dj, n, m, cur + 1, ans);
+ 
+//     // Checking if we can reach the destination going down
+//     if (i != n - 1 && mat[i + 1][j] > 0)
+//         ans = findLongestPath(mat, i + 1, j, di, dj, n, m,  cur + 1, ans);
+ 
+//     // Checking if we can reach the destination going left
+//     if (j != 0 && mat[i][j - 1] > 0)
+//         ans = findLongestPath(mat, i, j - 1, di, dj, n, m, cur + 1, ans);
+ 
+//     // Checking if we can reach the destination going up
+//     if (i != 0 && mat[i - 1][j] > 0)
+//         ans = findLongestPath(mat, i - 1, j, di, dj, n, m,  cur + 1, ans);
+ 
+//     // Marking visited to backtrack
+//     mat[i][j] = 1;
+ 
+//     // Returning the answer we got so far
+//     return ans;
+// }
+ 
+// int main()
+// {
+//     // input matrix with hurdles shown with number 0
+//     int mat[R][C] = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+//                       { 1, 1, 0, 1, 1, 0, 1, 1, 0, 1 },
+//                       { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 } };
+ 
+//     // find longest path with source (0, 0) and destination (1, 7)
+//     findLongestPath(mat, 0, 0, 1, 7);
+ 
+//     return 0;
+// }
+//🔸Time complexity:  O(4^N)
+//🔸Space complexity: O(1)
+//
+
+//
+//                      ❓Question: Print all possible paths from top left to bottom right in matrix
+//
+
+// Given a 2D matrix of dimension m✕n, the task is to print all the possible paths 
+// from the top left corner to the bottom right corner in a 2D matrix with the constraints 
+// that from each cell you can either move to right or down only.
+
+// Examples : 
+// Input: [[1,2,3],
+// [4,5,6]]
+// Output: [[1,4,5,6],
+// [1,2,5,6],
+// [1,2,3,6]]
+
+// Examples :
+// Input: [[1,2],
+// [3,4]]
+// Output: [[1,2,4],
+// [1,3,4]]
+
+// Print all possible paths from top left to bottom right in matrix using Backtracking
+// Explore all the possible paths from a current cell using recursion and backtracking to reach bottom right cell.
+
+// Base cases: Check If the bottom right cell, print the current path.
+// Boundary cases: In case in we reach out of the matrix, return from it.
+// Otherwise, Include the current cell in the path
+// Make two recursive call:
+// Move right in the matrix
+// Move down in the matrix
+// Backtrack: Remove the current cell from the current path
+
+//🔴approach : 
+
+// Function to print the path taken to reach destination
+// void printPath(vector<int>& path)
+// {
+//     for (int i : path) {
+//         cout << i << ", ";
+//     }
+//     cout << endl;
+// }
+
+// // Function to find all possible path in matrix from top left cell to bottom right cell
+// void findPaths(vector<vector<int> >& arr, vector<int>& path, int i, int j, int M, int N) {
+
+//     // if the bottom right cell, print the path
+//     if (i == M - 1 && j == N - 1) {
+//         path.push_back(arr[i][j]);
+//         printPath(path);
+//         path.pop_back();
+//         return;
+//     }
+
+//     // Boundary cases: In case in we reach out of the matrix
+//     if (i < 0 || i >= M || j < 0 || j >= N) {
+//         return;
+//     }
+
+//     // Include the current cell in the path
+//     path.push_back(arr[i][j]);
+
+//     // Move right in the matrix
+//     if (j + 1 < N) {
+//         findPaths(arr, path, i, j + 1, M, N);
+//     }
+
+//     // Move down in the matrix
+//     if (i + 1 < M) {
+//         findPaths(arr, path, i + 1, j, M, N);
+//     }
+
+//     // Backtrack: Remove the current cell from the current path
+//     path.pop_back();
+// }
+
+
+// int main()
+// {
+//     vector<vector<int>> arr= { { 1, 2, 3 }, 
+//                                { 4, 5, 6 }, 
+//                                { 7, 8, 9 } 
+//                             };
+//     vector<int> path;
+//     int i = 0, j = 0;
+//     int M = arr.size();
+//     int N = arr[0].size();
+
+//     findPaths(arr, path, i, j, M, N);
+//     return 0;
+// }
+//
+//🔸 Time complexity : O(2^n*m)
+//🔸 Space complexity: O(N+M)
+//
