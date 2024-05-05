@@ -1029,3 +1029,245 @@
 //🔸Time complexity: O(N^2) 
 //🔸space complexity: O(N)  
 //
+
+//
+//                  ❓Question: Evaluation of Postfix Expression
+//  
+
+// Given string S representing a postfix expression, the task is to evaluate the expression and find the 
+// final value. Operators will only include the basic arithmetic operators like *, /, + and -.
+
+// Example 1:
+// Input: S = "231*+9-"
+// Output: -4
+// Explanation:
+// After solving the given expression, 
+// we have -4 as result.
+
+// Example 2:
+// Input: S = "123+*8-"
+// Output: -3
+// Explanation:
+// After solving the given postfix 
+// expression, we have -3 as result.
+
+// Your Task:
+// You do not need to read input or print anything. Complete the function evaluatePostfixExpression() that takes the string S denoting the expression as input parameter and returns the evaluated value.
+
+// Expected Time Complexity: O(|S|)
+// Expected Auixilliary Space: O(|S|)
+
+// Constraints:
+// 1 ≤ |S| ≤ 105
+// 0 ≤ |Si|≤ 9 (And given operators)
+
+//🔴approach :
+// class Solution
+// {
+//     public:
+//     //Function to evaluate a postfix expression.
+//     int evaluatePostfix(string S)
+//     {
+//         stack<int> st;
+        
+//         for(int i=0; i<S.length(); i++){
+//             if(S[i] >= '0' && S[i] <= '9'){
+//                 st.push(S[i] - '0');
+//             }
+//             else{
+//                 int a = st.top();
+//                 st.pop();
+//                 int b = st.top();
+//                 st.pop();
+                
+//                 switch(S[i]){
+//                     case '+': 
+//                     st.push(a+b);
+//                     break;
+                    
+//                     case '-':
+//                     st.push(b-a);
+//                     break;
+                    
+//                     case '*':
+//                     st.push(a*b);
+//                     break;
+                    
+//                     case '/':
+//                     st.push(b/a);
+//                     break;
+//                 }
+//             }
+//         }
+        
+//         return st.top();
+//     }
+//
+//🔸Time complexity: O(N) 
+//🔸space complexity: O(N)  
+//
+
+//
+//                      ❓Question: Add Element at the bottom of a stack without using any other DS
+//
+//Write a function to add a element in the bottom of the stack, without the use of any other Data structure.
+
+// Example:
+// Input 1:
+// stack= [1,2,3,4], k = 5;
+// output:
+// stack = [5,1, 2, 3, 4]
+
+//🔴appraoch :
+// class Solution {
+//     void addAtBottom(stack<int>& st, int k){
+//         stack<int> temp;
+
+//         while(!st.empty()){
+//             temp.push(st.top());
+//             st.pop();
+//         }
+
+//         st.push(key);
+
+//         while(!temp.empty()){
+//             st.push(temp.top());
+//             temp.pop();
+//         }
+//     }
+// };
+//
+//🔸Time complexity: O(N) 
+//🔸space complexity: O(1)  // auxilliary space
+//
+
+//
+//                      ❓Question: Reverse a Stack using Recursion
+//
+// You are given a stack St. You have to reverse the stack using recursion.
+
+// Example 1:
+// Input:
+// St = {3,2,1,7,6}
+// Output:
+// {6,7,1,2,3}
+// Explanation:
+// Input stack after reversing will look like the stack in the output.
+
+// Example 2:
+// Input:
+// St = {4,3,9,6}
+// Output:
+// {6,9,3,4}
+// Explanation:
+// Input stack after reversing will look like the stack in the output.
+// Your Task:
+
+// You don't need to read input or print anything. Your task is to complete the function Reverse() which takes the stack St as input and reverses the given stack.
+
+// Expected Time Complexity: O(N2)
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1 <= size of the stack <= 104
+// -109 <= Each element of the stack <= 109
+// Sum of N over all test cases doesn't exceeds 106
+// Array may contain duplicate elements. 
+
+//🔴appraoch : (Using Stack)
+// class Solution{
+// public:
+//     stack<int>ans;
+    
+//     void Reverse(stack<int> &st){
+       
+//        if(st.size()==0)return;
+        
+//         ans.push(st.top());
+//         st.pop();
+        
+//         Reverse(st);
+        
+//         st=ans;
+//     }
+// };
+//
+
+//🔴appraoch : (Using Queue)
+// class Solution{
+// public:
+//  queue<int>ans;
+//   void Reverse(stack<int> &St){
+//       if (!St.empty()){
+//           ans.push(St.top());
+//           St.pop();
+//       }
+//       else{
+//           return;
+//       }
+//
+//       Reverse(St);
+//    
+//       while (!ans.empty()){
+//           St.push(ans.front());
+//           ans.pop();
+//       }
+// };
+//
+//🔸Time complexity: O(N^2) 
+//🔸space complexity: O(N)
+//
+
+//
+//                  ❓Question: Sort a Stack using Recursion
+//
+// Given a stack, the task is to sort it such that the top of the stack has the greatest element.
+
+// Example 1:
+// Input:
+// Stack: 3 2 1
+// Output: 3 2 1
+
+// Example 2:
+// Input:
+// Stack: 11 2 32 3 41
+// Output: 41 32 11 3 2
+// Your Task: 
+// You don't have to read input or print anything. Your task is to complete the function sort() which sorts the elements present in the given stack. (The sorted stack is printed by the driver's code by popping the elements of the stack.)
+
+// Expected Time Complexity: O(N*N)
+// Expected Auxilliary Space: O(N) recursive.
+
+//🔴appraoch :
+// void insertSorted(stack<int> &s, int target){
+//     if(s.empty()){
+//         s.push(target);
+//         return;
+//     }
+    
+//     if(target >= s.top()){
+//         s.push(target);
+//         return;
+//     }
+    
+//     int temp = s.top();
+//     s.pop();
+//     insertSorted(s,target);
+//     s.push(temp);
+// }
+
+// void SortedStack :: sort()
+// {
+//     if(s.empty()){
+//        return;
+//     }
+   
+//    int target = s.top();
+//    s.pop();
+//    sort();
+//    insertSorted(s,target);
+// }
+//
+//🔸Time complexity: O(N^N) 
+//🔸space complexity: O(N)
+// 
