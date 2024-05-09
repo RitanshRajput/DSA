@@ -2708,42 +2708,148 @@
 
 
 //
-//                  ❓Question: 
+//                  ❓Question: First Non-repeating character in a stream
 //
-//
+// Given an input stream A of n characters consisting only of lower case alphabets. While reading 
+// characters from the stream, you have to tell which character has appeared only once in the stream 
+// upto that point. If there are many characters that have appeared only once, you have to tell 
+// which one of them was the first one to appear. If there is no such character then append '#' to the answer.
+// NOTE:
+// 1. You need to find the answer for every i (0 <= i < n)
+// 2. In order to find the solution for every i you need to consider the string from starting position till ith position.
+ 
+// Example 1:
+// Input: A = "aabc"
+// Output: "a#bb"
+// Explanation: For every ith character we will
+// consider the string from index 0 till index i first non
+// repeating character is as follow-
+// "a" - first non-repeating character is 'a'
+// "aa" - no non-repeating character so '#'
+// "aab" - first non-repeating character is 'b'
+// "aabc" - there are two non repeating characters 'b' and 'c', 
+// first non-repeating character is 'b' because 'b' comes before
+// 'c' in the stream.
 
+// Example 2:
+// Input: A = "zz"
+// Output: "z#"
+// Explanation: For every character first non
+// repeating character is as follow-
+// "z" - first non-repeating character is 'z'
+// "zz" - no non-repeating character so '#'
+ 
+// Your Task:
+// You don't need to read or print anything. Your task is to complete the function FirstNonRepeating() which takes A as input parameter and returns a string after processing the input stream.
+// Expected Time Complexity: O(n)
+// Expected Space Complexity: O(n)
+// Constraints:
+// 1 <= n <= 105
 
 //🔴approach :
-
+// class Solution {
+// 	public:
+// 		string FirstNonRepeating(string A){
+// 		    unordered_map<char, int> count;
+// 		    queue<int> q;
+// 		    string ans = "";
+// 		    int size = A.length();
+		    
+// 		    for(int i=0; i<size; i++){
+// 		        count[A[i]]++;
+// 		        q.push(A[i]);
+		        
+// 		        while(!q.empty()){
+// 		            if(count[q.front()] > 1){
+// 		                q.pop();
+// 		            }
+// 		            else{
+// 		                ans.push_back(q.front());
+// 		                break;
+// 		            }
+// 		        }
+		        
+// 		        if(q.empty()){
+// 		            ans.push_back('#');
+// 		        }
+// 		    }
 //
-//🔸Time complexity: O() 
-//🔸space complexity: O()
+// 		    return ans;
+// 		}
+// };
+//
+//🔸Time complexity: O(26*N) 
+//🔸space complexity: O(N)
 // 
 
 
 //
-//                  ❓Question: 
+//                  ❓Question: Help Classmates (next smaller element)
 //
-//
+// Professor X wants his students to help each other in the chemistry lab. He suggests that every 
+// student should help out a classmate who scored less marks than him in chemistry and whose roll 
+// number appears after him. But the students are lazy and they don't want to search too far. 
+// They each pick the first roll number after them that fits the criteria. Find the marks of 
+// the classmate that each student picks.
+// Note: one student may be selected by multiple classmates.
 
+// Example 1:
+// Input: N = 5, arr[] = {3, 8, 5, 2, 25}
+// Output: 2 5 2 -1 -1
+// Explanation: 
+// 1. Roll number 1 has 3 marks. The first person 
+// who has less marks than him is roll number 4, 
+// who has 2 marks.
+// 2. Roll number 2 has 8 marks, he helps student 
+// with 5 marks.
+// 3. Roll number 3 has 5 marks, he helps student 
+// with 2 marks.
+// 4. Roll number 4 and 5 can not pick anyone as 
+// no student with higher roll number has lesser 
+// marks than them. This is denoted by -1.
+// Output shows the marks of the weaker student that 
+// each roll number helps in order. ie- 2,5,2,-1,-1
+
+// Example 2:
+// Input: N = 4, a[] = {1, 2, 3, 4}
+// Output: -1 -1 -1 -1 
+// Explanation: As the marks ars in increasing order. 
+// None of the students can find a classmate who has 
+// a higher roll number and less marks than them.
+// Your Task:  
+// You don't need to read input or print anything. Complete the function help_classmate() which takes the array arr[] and size of array N as input parameters and returns a list of numbers. If a student is unable to find anyone then output is -1.
+
+// Expected Time Complexity: O(N)
+// Expected Auxiliary Space: O(N)
+
+// Constraints:
+// 1 ≤ N ≤ 5*105
 
 //🔴approach :
+// class Solution{
+    
+//     public:
+//     vector<int> help_classmate(vector<int> arr, int n) 
+//     { 
+//         vector<int> ans(n, 0);
+//         stack<int> st;
+//         st.push(-1);
+        
+//         for(int i=n-1; i>=0; i--){
+//             int curr = arr[i];
+//             while(st.top() >= curr){
+//                 st.pop();
+//             }
+            
+//             ans[i] = st.top();
+//             st.push(curr);
+//         }
+        
+//         return ans;
+//     } 
+// };
 
 //
-//🔸Time complexity: O() 
-//🔸space complexity: O()
-// 
-
-
-//
-//                  ❓Question: 
-//
-//
-
-
-//🔴approach :
-
-//
-//🔸Time complexity: O() 
-//🔸space complexity: O()
+//🔸Time complexity: O(N) 
+//🔸space complexity: O(N)
 // 
