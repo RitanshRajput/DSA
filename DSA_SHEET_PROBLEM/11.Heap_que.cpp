@@ -626,6 +626,409 @@
 //
 
 //
+//                      ❓Question: K-th Largest Sum Contiguous Subarray
+//
+// You are given an array Arr of size N. You have to find the K-th largest sum of contiguous 
+// subarray within the array elements. In other words, over all subarrays, find the 
+// subarray with k-th largest sum and return its sum of elements.
+
+// Example 1:
+// Input:
+// N = 3
+// K = 2
+// Arr = {3,2,1}
+// Output:
+// 5
+// Explanation:
+// The different subarray sums we can get from the array
+// are = {6,5,3,2,1}. Where 5 is the 2nd largest.
+ 
+// Example 2:
+// Input:
+// N = 4
+// K = 3
+// Arr = {2,6,4,1}
+// Output:
+// 11
+// Explanation:
+// The different subarray sums we can get from the array
+// are = {13,12,11,10,8,6,5,4,2,1}. Where 11 is the 3rd largest.
+ 
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function kthLargest() which takes the array Arr[] and its size N as inputs and returns the Kth largest subarray sum.
+// Expected Time Complexity: O(N2 * log K)
+// Expected Auxiliary Space: O(K)
+// Constraints:
+// 1 <= N <= 100
+// 1 <= K <= (N*(N+1))/2
+// -105 <= Arr[i] <= 105
+// Sum of N over all test cases doesn't exceed 1000.
+// Array may contain duplicate elements.
+
+//🔴Approach :
+// class Solution{
+// public:
+//     int kthLargest(vector<int> &arr,int N,int k){
+//         int sum=0;
+//         priority_queue<int,vector<int>,greater<int>> minHeap;
+        
+//         for(int i=0; i<N; i++){
+//             sum = 0;
+//             for(int j=i; j<N; j++){
+//                 sum += arr[j];
+                
+//                 if(minHeap.size() > k){
+//                     minHeap.pop();
+//                     minHeap.push(sum);
+//                 }
+//                 else{
+//                     minHeap.push(sum);
+//                 }
+//             }
+//         }
+        
+//         if(k == minHeap.size()) {
+//             return minHeap.top();
+//         }
+        
+//         minHeap.pop();
+//         return minHeap.top() ;
+        
+//     }
+// };
+//
+//🔸Time Complexity: O(N^2 * Log K)
+//🔸Space Complexity: O(K)
+//
+
+//
+//                      ❓Question: Reorganise String
+//
+// Given a string s, rearrange the characters of s so that any two adjacent characters are not the same.
+// Return any possible rearrangement of s or return "" if not possible.
+
+// Example 1:
+// Input: s = "aab"
+// Output: "aba"
+// Example 2:
+
+// Input: s = "aaab"
+// Output: ""
+ 
+// Constraints:
+// 1 <= s.length <= 500
+// s consists of lowercase English letters.
+
+//🔴Approach :
+// class Solution {
+// public:
+//     string reorganizeString(string S) {
+//         string res="";
+//         unordered_map<char,int> mp;
+//         priority_queue<pair<int,char>>pq;
+        
+//         for(auto s: S){
+//             mp[s]+=1;
+//         }
+        
+//         for(auto m: mp){
+//             pq.push(make_pair(m.second,m.first));
+//         }
+        
+//         while(pq.size()>1){
+//             auto top1= pq.top();
+//             pq.pop();
+//             auto top2 = pq.top();
+//             pq.pop();
+            
+//             res+=top1.second;
+//             res+=top2.second;
+            
+//             top1.first -=1;
+//             top2.first -= 1;
+            
+//             if(top1.first > 0){
+//                 pq.push(top1);
+//             }
+            
+//             if(top2.first > 0){
+//                 pq.push(top2);
+//             }
+//         }
+        
+//         if(!pq.empty()){
+//             if(pq.top().first > 1){
+//                 return "";
+//             }
+//             else{
+//                 res+=pq.top().second;
+//             }
+//         }
+        
+//         return res;
+//     }
+// };
+//
+//🔸Time Complexity: O(N * M log K)  // N  = string length, M = distinct character
+//🔸Space Complexity: O(N + M) 
+//
+
+//
+//                      ❓Question: Merge K sorted LinkedList
+//
+// Given K sorted linked lists of different sizes. The task is to merge them in such
+// a way that after merging they will be a single sorted linked list.
+
+// Example 1:
+// Input:
+// K = 4
+// value = {{1,2,3},{4 5},{5 6},{7,8}}
+// Output: 1 2 3 4 5 5 6 7 8
+// Explanation:
+// The test case has 4 sorted linked 
+// list of size 3, 2, 2, 2
+// 1st    list     1 -> 2-> 3
+// 2nd   list      4->5
+// 3rd    list      5->6
+// 4th    list      7->8
+// The merged list will be
+// 1->2->3->4->5->5->6->7->8.
+
+// Example 2:
+// Input:
+// K = 3
+// value = {{1,3},{4,5,6},{8}}
+// Output: 1 3 4 5 6 8
+// Explanation:
+// The test case has 3 sorted linked
+// list of size 2, 3, 1.
+// 1st list 1 -> 3
+// 2nd list 4 -> 5 -> 6
+// 3rd list 8
+// The merged list will be
+// 1->3->4->5->6->8.
+// Your Task:
+// The task is to complete the function mergeKList() which merges the K given lists into a sorted one. The printing is done automatically by the driver code.
+
+// Expected Time Complexity: O(nk Logk)
+// Expected Auxiliary Space: O(k)
+// Note: n is the maximum size of all the k link list
+
+// Constraints
+// 1 <= K <= 103
+
+//🔴Approach :
+
+// struct compare {
+//     bool operator()(Node* a, Node* b) {
+//         return a->data > b->data;
+//     }
+// };
+
+// class Solution{
+//   public:
+//     Node* mergeTwoList(Node* l1, Node* l2){
+//         if(!l1) return l2;
+//         if(!l2) return l1;
+        
+//         Node* dummy = new Node(0);
+//         Node* tail = dummy;
+        
+//         while(l1 && l2){
+//             if(l1->data < l2->data){
+//                 tail->next = l1;
+//                 l1 = l1->next;
+//             }
+//             else{
+//                 tail->next = l2;
+//                 l2 = l2->next;
+//             }
+            
+//             tail = tail->next;
+//         }
+        
+//         if(l1) tail->next = l1;
+//         if(l2) tail->next = l2;
+        
+//         Node* head = dummy->next;
+//         delete dummy;
+//         return head;
+//     }
+  
+//     //Function to merge K sorted linked list.
+//     Node* mergeKLists(Node *arr[], int K)
+//     {
+//         priority_queue<Node*, vector<Node*>, compare> minHeap;
+        
+//         for(int i=0; i<K; i++){
+//             if(arr[i] != NULL){
+//                 minHeap.push(arr[i]) ;
+//             }
+//         }
+        
+//         if(minHeap.empty()){
+//             return NULL;
+//         }
+        
+//         while(minHeap.size() > 1){
+//             Node* l1 = minHeap.top();
+//             minHeap.pop();
+//             Node* l2 = minHeap.top();
+//             minHeap.pop();
+            
+//             minHeap.push(mergeTwoList(l1, l2));
+//         }
+        
+//         return minHeap.top() ;
+//     }
+// };
+//
+//🔸Time Complexity: O(N * k log k)
+//🔸Space Complexity: O(log K)
+//
+
+//
+//                      ❓Question: Smallest Range in K list
+//
+// Given K sorted lists of integers, KSortedArray[] of size N each. The task is to find the 
+// smallest range that includes at least one element from each of the K lists. If more than 
+// one such range's are found, return the first such range found.
+
+// Example 1:
+// Input:
+// N = 5, K = 3
+// KSortedArray[][] = {{1 3 5 7 9},
+//                     {0 2 4 6 8},
+//                     {2 3 5 7 11}}
+// Output: 1 2
+// Explanation: K = 3
+// A:[1 3 5 7 9]
+// B:[0 2 4 6 8]
+// C:[2 3 5 7 11]
+// Smallest range is formed by number 1
+// present in first list and 2 is present
+// in both 2nd and 3rd list.
+
+// Example 2:
+// Input:
+// N = 4, K = 3
+// KSortedArray[][] = {{1 2 3 4},
+//                     {5 6 7 8},
+//                     {9 10 11 12}}
+// Output: 4 9
+// Your Task :
+
+// Complete the function findSmallestRange() that receives array , array size n and k as parameters and returns the output range (as a pair in cpp and array of size 2 in java and python)
+// Expected Time Complexity : O(n * k *log k)
+// Expected Auxilliary Space  : O(k)
+// Constraints:
+// 1 <= K,N <= 500
+// 0 <= a[ i ] <= 105
+
+//🔴Approach :
+// class Solution{
+//     public: 
+//     class node {
+//         public:
+//         int data;
+//         int row;
+//         int col;
+        
+//         // Constructor to initialize the node
+//         node(int d, int r, int c){
+//             data = d;
+//             row = r;
+//             col = c;
+//         }
+//     };
+    
+//     // Comparator class for the priority queue
+//     class compare {
+//         public:
+//         // Overloading the '()' operator for comparison
+//         bool operator()(node* a, node* b) {
+//             return a->data > b->data; // Min-heap based on data
+//         }
+//     };
+    
+//     // Method to find the smallest range
+//     pair<int,int> findSmallestRange(int KSortedArray[][N], int n, int k)
+//     {
+//           // Initialize variables
+//           int mini = INT_MAX, maxi=INT_MIN;
+//           priority_queue<node*, vector<node*>, compare > pq;
+          
+//           // Push the first element of each list into the priority queue
+//           for(int i=0; i<k; i++) {
+//               int element = KSortedArray[i][0];
+//               mini = min(mini,element);
+//               maxi = max(maxi,element);
+//               pq.push(new node(element,i,0));
+//           }
+          
+//           // Set the initial range
+//           int start = mini , end = maxi;
+          
+//           // Main loop to find the smallest range
+//           while(!pq.empty())
+//           {
+//               // Get the smallest element and its position
+//               node* temp = pq.top();
+//               pq.pop();
+//               mini = temp->data;
+              
+//               // Update the range if a smaller one is found
+//               if(maxi-mini < end - start)
+//               {
+//                   start = mini;
+//                   end = maxi;
+//               }
+              
+//               // Check for the next element in the same row
+//               if(temp -> col + 1 < n)
+//               {
+//                   // Update maxi and push the next element into the queue
+//                   maxi = max(maxi,KSortedArray[temp->row][temp->col + 1]);
+//                   pq.push(new node(KSortedArray[temp->row][temp->col + 1],
+//                   temp->row, temp -> col + 1));
+//               }
+//               else 
+//                 break; // Break if there is no next element
+//           }
+          
+//           // Return the smallest range found
+//           return {start,end};
+//     }
+// };
+
+//
+//🔸Time Complexity: O(N * k * logK)
+//🔸Space Complexity: O(K)
+//
+
+//
+//                      ❓Question:
+//
+
+//🔴Approach :
+
+//
+//🔸Time Complexity: O()
+//🔸Space Complexity: O()
+//
+
+//
+//                      ❓Question:
+//
+
+//🔴Approach :
+
+//
+//🔸Time Complexity: O()
+//🔸Space Complexity: O()
+//
+
+//
 //                      ❓Question:
 //
 
