@@ -483,25 +483,146 @@
 //
 
 //
-//                      ❓Question:
+//                      ❓Question: Merge K sorted Arrays
 //
+// Given K sorted arrays arranged in the form of a matrix of size K*K. The task is to merge them into one sorted array.
+
+// Example 1:
+// Input:
+// K = 3
+// arr[][] = {{1,2,3},{4,5,6},{7,8,9}}
+// Output: 1 2 3 4 5 6 7 8 9
+// Explanation:Above test case has 3 sorted
+// arrays of size 3, 3, 3
+// arr[][] = [[1, 2, 3],[4, 5, 6], 
+// [7, 8, 9]]
+// The merged list will be 
+// [1, 2, 3, 4, 5, 6, 7, 8, 9].
+
+// Example 2:
+// Input:
+// K = 4
+// arr[][]={{1,2,3,4},{2,2,3,4},
+//          {5,5,6,6},{7,8,9,9}}
+// Output:
+// 1 2 2 2 3 3 4 4 5 5 6 6 7 8 9 9 
+// Explanation: Above test case has 4 sorted
+// arrays of size 4, 4, 4, 4
+// arr[][] = [[1, 2, 2, 2], [3, 3, 4, 4],
+// [5, 5, 6, 6], [7, 8, 9, 9 ]]
+// The merged list will be 
+// [1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 
+// 6, 6, 7, 8, 9, 9].
+// Your Task:
+// You do not need to read input or print anything. Your task is to complete mergeKArrays() function which takes 2 arguments, an arr[K][K] 2D Matrix containing K sorted arrays and an integer K denoting the number of sorted arrays, as input and returns the merged sorted array ( as a pointer to the merged sorted arrays in cpp, as an ArrayList in java, and list in python)
+
+// Expected Time Complexity: O(K2*Log(K))
+// Expected Auxiliary Space: O(K2)
+
+// Constraints:
+// 1 <= K <= 100
 
 //🔴Approach :
+// class Solution
+// {
+//     public:
+//     //Function to merge k sorted arrays.
+//     vector<int> mergeKArrays(vector<vector<int>> arr, int K)
+//     {
+//         priority_queue<int, vector<int>, greater<int>> pq;  // min heap
+//         vector<int> ans;
+//         int row = arr.size();
+//         int col = arr[0].size();
+        
+//         for(int i=0; i<row; i++){
+//             for(int j=0; j<col; j++){
+//                 pq.push(arr[i][j]);
+//             }
+//         }
+        
+//         while(!pq.empty()){
+//             ans.push_back(pq.top());
+//             pq.pop();
+//         }
+        
+//         return ans;
+//     }
+// };
 
 //
-//🔸Time Complexity: O()
-//🔸Space Complexity: O()
+//🔸Time Complexity: O(row*col + logn)  
+//🔸Space Complexity: O(row*col)
 //
 
 //
-//                      ❓Question:
+//                      ❓Question: Merge two binary Max heaps
 //
+// Given two binary max heaps as arrays, merge the given heaps to form a new max heap.
+
+// Example 1:
+// Input  : 
+// n = 4 m = 3
+// a[] = {10, 5, 6, 2}, 
+// b[] = {12, 7, 9}
+// Output : 
+// {12, 10, 9, 2, 5, 7, 6}
+// Explanation :
+
+// Your Task:  
+// You don't need to read input or print anything. Your task is to complete the function mergeHeaps() which takes the array a[], b[], its size n and m, as inputs and return the merged max heap. Since there can be multiple solutions, therefore, to check for the correctness of your solution, your answer will be checked by the driver code and will return 1 if it is correct, else it returns 0.
+// Expected Time Complexity: O(n.Logn)
+// Expected Auxiliary Space: O(n + m)
+// Constraints:
+// 1 <= n, m <= 105
+// 1 <= a[i], b[i] <= 2*105
 
 //🔴Approach :
+// class Solution{
+//   public:
+//    void heapify(vector<int> &arr, int n, int i){
+//         int largest = i;
+//         int left = 2 * i + 1;
+//         int right = 2 * i + 2 ;
+        
+//         if(left < n && arr[largest] < arr[left]) {
+//             largest = left ;
+//         }
+//         if(right < n && arr[largest] < arr[right]) {
+//             largest =  right ;
+//         }
+        
+//         if(largest != i){
+//             swap( arr[largest], arr[i]) ;
+//             heapify(arr, n, largest) ;
+//         }
+//     }
+    
+    
+//     vector<int> mergeHeaps(vector<int> &a, vector<int> &b, int n, int m) {
+        
+//         //create a array and merge both array element into this one
+//         vector<int> ans ;
+        
+//         for(auto i:a){
+//             ans.push_back(i) ;
+//         }
+//         for(auto i:b){
+//             ans.push_back(i) ;
+//         }
+        
+//         // now create a heap using heapify 
+//         int size = ans.size() ;
+//         for( int i=size/2-1; i>=0; i--){
+//             heapify(ans, size, i) ;
+//         }
+        
+//         return ans ;
+//     }
+// };
 
 //
-//🔸Time Complexity: O()
-//🔸Space Complexity: O()
+//🔸Time Complexity: O(n* log n)
+//🔸Space Complexity: O(n+m)
 //
 
 //
