@@ -222,17 +222,17 @@
 //      void heapify(int arr[], int n, int i)  
 //     {
 //         int largest = i;
-//         int l =  2*i+1;
-//         int r= 2*i+2;
+//         int left =  2*i+1;
+//         int right= 2*i+2;
         
-//         if( l<n && arr[l]>arr[largest] )
+//         if( left < n && arr[left] > arr[largest] )
 //         {
-//             largest= l;
+//             largest= left;
 //         }
         
-//         if( r<n && arr[r]>arr[largest] )
+//         if( right < n && arr[right] > arr[largest] )
 //         {
-//             largest= r;
+//             largest= right;
 //         }
         
 //         if(largest!=i)
@@ -252,7 +252,6 @@
 //         }
         
 //         heapSort(arr,n);
-//         // for(int i=0;i<n;i++) cout<<arr[i];
 //     }
 
     
@@ -744,7 +743,7 @@
 //             res+=top1.second;
 //             res+=top2.second;
             
-//             top1.first -=1;
+//             top1.first -= 1;
 //             top2.first -= 1;
             
 //             if(top1.first > 0){
@@ -989,8 +988,7 @@
 //               {
 //                   // Update maxi and push the next element into the queue
 //                   maxi = max(maxi,KSortedArray[temp->row][temp->col + 1]);
-//                   pq.push(new node(KSortedArray[temp->row][temp->col + 1],
-//                   temp->row, temp -> col + 1));
+//                   pq.push(new node(KSortedArray[temp->row][temp->col + 1], temp->row, temp -> col + 1));
 //               }
 //               else 
 //                 break; // Break if there is no next element
@@ -1007,56 +1005,535 @@
 //
 
 //
-//                      ❓Question:
+//                      ❓Question: Find Median in a Stream
 //
+// Given an input stream of N integers. The task is to insert these numbers into a new stream 
+// and find the median of the stream formed by each insertion of X to the new stream.
+
+// Example 1:
+// Input:
+// N = 4
+// X[] = 5,15,1,3
+// Output:
+// 5
+// 10
+// 5
+// 4
+// Explanation:Flow in stream : 5, 15, 1, 3 
+// 5 goes to stream --> median 5 (5) 
+// 15 goes to stream --> median 10 (5,15) 
+// 1 goes to stream --> median 5 (5,15,1) 
+// 3 goes to stream --> median 4 (5,15,1 3) 
+
+// Example 2:
+// Input:
+// N = 3
+// X[] = 5,10,15
+// Output:
+// 5
+// 7.5
+// 10
+// Explanation:Flow in stream : 5, 10, 15
+// 5 goes to stream --> median 5 (5) 
+// 10 goes to stream --> median 7.5 (5,10) 
+// 15 goes to stream --> median 10 (5,10,15) 
+
+// Your Task:
+// You are required to complete the class Solution. 
+// It should have 2 data members to represent 2 heaps. 
+// It should have the following member functions:
+// insertHeap() which takes x as input and inserts it into the heap, the function should then call balanceHeaps() to balance the new heap.
+// balanceHeaps() does not take any arguments. It is supposed to balance the two heaps.
+// getMedian() does not take any arguments. It should return the current median of the stream.
+
+// Expected Time Complexity : O(nlogn)
+// Expected Auxilliary Space : O(n)
+ 
+// Constraints:
+// 1 <= N <= 106
+// 1 <= x <= 106
+ 
+//🔴Approach :
+// class Solution
+// {
+//     public:
+//     priority_queue<int> maxpq; 
+//     priority_queue<int, vector<int>, greater<int>> minpq;
+    
+//     void insertHeap(int &x)
+//     {
+//         if (maxpq.empty() || x <= maxpq.top()) {
+//             maxpq.push(x);
+//         } else {
+//             minpq.push(x);
+//         }
+        
+//         balanceHeaps();
+//     }
+    
+//     void balanceHeaps()
+//     {
+//         while (maxpq.size() > minpq.size() + 1) {
+//             int top = maxpq.top();
+//             maxpq.pop();
+//             minpq.push(top);
+//         }
+        
+//         while (minpq.size() > maxpq.size()) {
+//             int top = minpq.top();
+//             minpq.pop();
+//             maxpq.push(top);
+//         }
+//     }
+    
+//     double getMedian()
+//     {
+//         if (maxpq.size() == minpq.size()) {
+//             return (maxpq.top() + minpq.top()) / 2.0;
+//         } else {
+//             return maxpq.top();
+//         }
+//     }
+// };
+
+//
+//🔸Time Complexity: O(nlogn)
+//🔸Space Complexity: O(n)
+//
+
+//
+//                      ❓Question: Is Binary tree a Heap
+//
+// Given a binary tree. The task is to check whether the given tree follows the max heap property or not.
+// Note: Properties of a tree to be a max heap - Completeness and Value of node greater than or equal to its child.
+
+// Example 1:
+// Input:
+//       5
+//     /  \
+//    2    3
+// Output: 1
+// Explanation: The given tree follows max-heap property since 5,
+// is root and it is greater than both its children.
+
+// Example 2:
+// Input:
+//        10
+//      /   \
+//     20   30 
+//   /   \
+//  40   60
+// Output: 0
+
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function isHeap() which takes the root of Binary Tree as parameter returns True if the given binary tree is a heap else returns False.
+
+// Expected Time Complexity: O(N)
+// Expected Space Complexity: O(N)
+
+// Constraints:
+// 1 ≤ Number of nodes ≤ 100
+// 1 ≤ Data of a node ≤ 1000
+
+//🔴Approach :
+// class Solution {
+//   public:
+//   //total count 
+//   int countNode(struct Node* root) {
+//       if(root == NULL)
+//       return 0;
+      
+//       int ans = 1 + countNode(root -> left) + countNode(root -> right) ;
+//       return ans ;
+//   }
+  
+//   // is COmplete binary tree
+//   bool isCBT(struct Node* root, int index, int total) {
+//       if(root == NULL){
+//           return true ;
+//       }
+      
+//       if( index >= total) {
+//           return false;
+//       }
+//       else{
+//           bool left = isCBT(root -> left, 2*index+1, total) ;
+//           bool right = isCBT(root ->right, 2*index+2, total) ;
+          
+//           return (left && right) ;
+//       }
+//   }
+  
+//   // max order of the tree function 
+//   bool isMaxOrder(struct Node* root){
+//       if(root->left == NULL && root->right == NULL){
+//           return true ;
+//       }
+      
+//       if(root->right == NULL){
+//           return (root ->data > root -> left -> data) ;
+//       }
+//       else{
+//           bool left = isMaxOrder(root->left);
+//           bool right = isMaxOrder(root->right) ;
+          
+//           return( left && right &&
+//           (root -> data > root->left->data ) && (root -> data > root ->right-> data)) ;
+//       }
+//   }
+  
+//     bool isHeap(struct Node* tree) {
+//        int index = 0 ;
+//        int total = countNode(tree) ;
+       
+//        return (isCBT(tree, index, total) && isMaxOrder(tree)) ;
+//     }
+// };
+//
+//🔸Time Complexity: O(N)
+//🔸Space Complexity: O(N)
+//
+
+//
+//                      ❓Question: Minimum Cost of ropes
+//
+// There are given N ropes of different lengths, we need to connect these ropes into one rope. 
+// The cost to connect two ropes is equal to sum of their lengths.
+// The task is to connect the ropes with minimum cost. Given N size array arr[] contains the lengths of the ropes. 
+
+// Example 1:
+// Input:
+// n = 4
+// arr[] = {4, 3, 2, 6}
+// Output: 
+// 29
+// Explanation:
+// We can connect the ropes in following ways.
+// 1) First connect ropes of lengths 2 and 3.
+// Which makes the array {4, 5, 6}. Cost of
+// this operation 2+3 = 5. 
+// 2) Now connect ropes of lengths 4 and 5.
+// Which makes the array {9, 6}. Cost of
+// this operation 4+5 = 9.
+// 3) Finally connect the two ropes and all
+// ropes have connected. Cost of this 
+// operation 9+6 =15
+// Total cost for connecting all ropes is 5
+// + 9 + 15 = 29. This is the optimized cost
+// for connecting ropes. 
+// Other ways of connecting ropes would always 
+// have same or more cost. For example, if we 
+// connect 4 and 6 first (we get three rope of 3,
+// 2 and 10), then connect 10 and 3 (we get
+// two rope of 13 and 2). Finally we
+// connect 13 and 2. Total cost in this way
+// is 10 + 13 + 15 = 38.
+
+// Example 2:
+// Input:
+// n = 5
+// arr[] = {4, 2, 7, 6, 9}
+// Output: 
+// 62 
+// Explanation:
+// First, connect ropes 4 and 2, which makes
+// the array {6,7,6,9}. Cost of
+// this operation 4+2 = 6. Next, add ropes 
+// 6 and 6, which results in {12,7,9}. 
+// Cost of this operation 6+6 = 12.
+// Then, add 7 and 9, which makes the array {12,16}. 
+// Cost of this operation 7+9 = 16. And
+// finally, add these two which gives {28}.
+// Hence, the total cost is 6 + 12 + 16 + 
+// 28 = 62.
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function minCost() which takes an integer array arr[] and an integer n as arguments and returns the minimum cost.
+
+// Expected Time Complexity : O(nlogn)
+// Expected Auxilliary Space : O(n)
+
+// Constraints:
+// 1 ≤ N ≤ 200000
+// 1 ≤ arr[i] ≤ 106
+
+//🔴Approach :
+// class Solution
+// {
+//     public:
+//     long long minCost(long long arr[], long long n) {
+//         if(n<=1) return 0;
+//         priority_queue<long long, vector<long long>, greater<long long>> pq;
+
+//         for(long long i=0; i<n; i++){
+//             pq.push(arr[i]);
+//         }
+        
+//         long long cost = 0;
+        
+//         while(pq.size() > 1){
+//             long long a = pq.top();
+//             pq.pop();
+//             long long b = pq.top();
+//             pq.pop();
+            
+//             cost += a+b;
+            
+//             pq.push(a+b);
+//         }
+        
+//         return cost;
+//     }
+// };
+//
+//🔸Time Complexity: O(nLogN)
+//🔸Space Complexity: O(N)
+//
+
+
+//                   //❓Question: Convert BST to min heap
+
+// Given a binary search tree which is also a complete binary tree.
+// The problem is to convert the given BST into a Min Heap with the condition 
+// that all the values in the left subtree of a node should be less than 
+// all the values in the right subtree of the node.
+//  This condition is applied to all the nodes, in the resultant converted Min Heap. 
+
+// Examples: 
+
+// Input:            4
+//                 /   \
+//                2     6
+//              /  \   /  \
+//            1    3  5    7
+
+// Output:          1
+//                /   \
+//               2     5
+//             /  \   /  \
+//            3   4  6    7 
+// Explanation: The given BST has been transformed into a Min Heap. 
+// All the nodes in the Min Heap satisfies the given condition, that is,
+// values in the left subtree of a node should be less than the values in the right subtree of the node. 
+
+//🔴approach:
+// inorder(root, vector<int> in){
+//     //base case
+//       left call ;
+//       insert in vector ;
+//       right call ;
+// }
+
+// #include<iostream>
+// #include<vector>
+// using namespace std;
+
+// class Node{
+//     public:
+//     int data;
+//     Node* left ;
+//     Node* right; 
+
+//     Node(int d) {
+//         this -> data = d ;
+//         this -> left = NULL ;
+//         this -> right = NULL ;
+//     }
+// } ;
+
+// // inorder 
+// void inorder(Node* root, vector<int> &in) {
+//     //base case
+//     if(root == NULL){
+//         return ;
+//     }
+
+//     inorder(root -> left, in) ;
+//     in.push_back(root -> data) ;
+//     inorder(root ->right, in) ;
+// }
+
+// // preorder 
+// void PreOrder(Node* root, vector<int> &ans, int &index, int n){
+//     //base case
+//     if(root == NULL || index >= n){
+//        return ;
+//     }
+   
+//    root -> data = ans[index++] ;
+//    PreOrder(root -> left, ans, index, n) ;
+//    PreOrder(root -> right, ans, index, n) ;
+   
+// }
+
+// Node* convertBST(Node* root) {
+//     vector<int> ans; 
+//     inorder(root, ans) ;
+
+//     int n = ans.size() ;
+//     int index = 0 ;
+//     preOrder(root, ans, index, n);
+//     return root;
+// }
+//
+//🔸Time Complexity: O(N)
+//🔸Space Complexity: O(N)
+//
+
+//
+//                      ❓Question: Convert MinHeap to Maxheap
+//
+// Given an array representation of min Heap, convert it to max Heap.
+
+// Examples: 
+// Input: arr[] = {3, 5, 9, 6, 8, 20, 10, 12, 18, 9}
+
+//                3
+//             /     \
+//           5       9
+//         /   \    /  \
+//       6     8  20   10
+//     /  \   /
+//    12   18 9 
+// Output: arr[] = {20, 18, 10, 12, 9, 9, 3, 5, 6, 8}
+
+//            20
+//          /    \
+//        18      10
+//      /    \    /  \
+//    12      9  9    3
+//   /  \   /
+//  5    6 8 
+
+// Input: arr[] = {3, 4, 8, 11, 13}
+// Output:  arr[] = {13, 11, 8, 4, 3}
 
 //🔴Approach :
 
+// // to heapify a subtree with root at given index
+// void MaxHeapify(int arr[], int i, int N)
+// {
+//     int largest = i;
+//     int left = 2 * i + 1;
+//     int right = 2 * i + 2;
+ 
+//     if (left < N && arr[left] > arr[i]){
+//         largest = left;
+//     }
+//     if (right < N && arr[right] > arr[largest]) {
+//         largest = right;
+//     }
+//     if (largest != i) {
+//         swap(arr[i], arr[largest]);
+//         MaxHeapify(arr, largest, N);
+//     }
+// }
+ 
+// // This function basically builds max heap
+// void convertMaxHeap(int arr[], int N)
+// {
+//     // Start from bottommost and rightmost
+//     // internal node and heapify all internal
+//     // nodes in bottom up way
+//     for (int i = (N - 2) / 2; i >= 0; --i)
+//         MaxHeapify(arr, i, N);
+// }
 //
-//🔸Time Complexity: O()
-//🔸Space Complexity: O()
-//
-
-//
-//                      ❓Question:
-//
-
-//🔴Approach :
-
-//
-//🔸Time Complexity: O()
-//🔸Space Complexity: O()
-//
-
-//
-//                      ❓Question:
-//
-
-//🔴Approach :
-
-//
-//🔸Time Complexity: O()
-//🔸Space Complexity: O()
-//
-
-//
-//                      ❓Question:
-//
-
-//🔴Approach :
-
-//
-//🔸Time Complexity: O()
-//🔸Space Complexity: O()
+//🔸Time Complexity: O(N)
+//🔸Space Complexity: O(N)
 //
 
 //
-//                      ❓Question:
+//                      ❓Question: Minimum Sum
+//
+// Given an array Arr of size N such that each element is from the range 0 to 9. 
+// Find the minimum possible sum of two numbers formed using the elements of the array. 
+// All digits in the given array must be used to form the two numbers.
+
+// Example 1:
+// Input:
+// N = 6
+// Arr[] = {6, 8, 4, 5, 2, 3}
+// Output: 604
+// Explanation: The minimum sum is formed 
+// by numbers 358 and 246.
+
+// Example 2:
+// Input:
+// N = 5
+// Arr[] = {5, 3, 0, 7, 4}
+// Output: 82
+// Explanation: The minimum sum is 
+// formed by numbers 35 and 047.
+
+// Your Task:
+// You don't need to read input or print anything. Your task is to complete the function solve() which takes arr[] and n as input parameters and returns the minimum possible sum. As the number can be large, return string presentation of the number without leading zeroes.
+// Expected Time Complexity: O(N*logN)
+// Expected Auxiliary Space: O(N)
+// Constraints:
+// 1 ≤ N ≤ 107
+// 0 ≤ Arri ≤ 9
+
+//🔴Approach :  (using Heap gives TLE)
+// class Solution{   
+// public:
+//     string solve(int arr[], int n) {
+//      priority_queue<int, vector<int>, greater<int>> minHeap;
+    
+//     // Push all elements into the min-heap
+//     for(int i = 0; i < n; i++) {
+//         minHeap.push(arr[i]);
+//     }
+    
+//     long long first = 0, second = 0;
+    
+//     // Construct first and second numbers by alternately popping elements from the min-heap
+//     while(!minHeap.empty()) {
+//         first = first * 10 + minHeap.top();
+//         minHeap.pop();
+        
+//         if(!minHeap.empty()) {
+//             second = second * 10 + minHeap.top();
+//             minHeap.pop();
+//         }
+//     }
+    
+//     long long result = first + second;
+    
+//      return to_string(result);
+//     }
+// };
 //
 
-//🔴Approach :
+//🔴approach 2: 
+// class Solution{   
+// public:
+//     string solve(int arr[], int n) {
+//        sort(arr,arr+n);    
+//         string s1,s2;
+//         string ans;
+//         int i=n-1,j=n-2,carry=0;
+//         while(i>=0 or j>=0)
+//         {
+//             int sum=carry;
+//             if(i>=0)
+//                 sum += arr[i];
+//             if(j>=0)
+//                 sum += arr[j];
+//             carry = sum/10;
+//             if(sum)
+//                 ans.push_back(sum%10+'0');
+//             i-=2;
+//             j-=2;
+//         }
+//         //after addition carry is remain
+//         if(carry)
+//         ans.push_back('1');
+//         reverse(ans.begin(),ans.end());
+//         return ans==""?"0":ans;
 
-//
-//🔸Time Complexity: O()
-//🔸Space Complexity: O()
+//     }
+// };
+
+//🔸Time Complexity: O(N)
+//🔸Space Complexity: O(N)
 //
