@@ -4,7 +4,8 @@
 // Graph is a data structure that consists of the following two components: 
 
 // A finite set of vertices also called nodes.
-// A finite set of ordered pair of the form (u, v) called edge. The pair is ordered because (u, v) is not the same as (v, u) in the case of a directed graph(di-graph). The pair of the form (u, v) indicates that there is an edge from vertex u to vertex v. The edges may contain weight/value/cost.
+// A finite set of ordered pair of the form (u, v) called edge. The pair is ordered because (u, v) is not the same as (v, u) in the case of a directed graph(di-graph). 
+// The pair of the form (u, v) indicates that there is an edge from vertex u to vertex v. The edges may contain weight/value/cost.
 // Following is an example of an undirected graph with 5 vertices.
      
 //        [0]-----[1] 
@@ -123,8 +124,8 @@
 //         |  /     | /
 //        [4]------[3]
 //
-//   []  ==> Nodes
-//  | , --  ==> edges
+//   []  ==> Nodes / vertices
+//  | , --  ==> edges / arcs
 
 // graph is data structure which is combination of nodes and edges
 
@@ -356,8 +357,8 @@
 //     unordered_map< int, list<int>> adj ;
 
 //     void addEdge(int u, int v, bool direction) {
-//         // u => nodes 
-//         // v => edges
+//         // u => edges
+//         // v => nodes
 //         //direction 0 => undirected graph
 //         //direction 1 => directed graph 
 
