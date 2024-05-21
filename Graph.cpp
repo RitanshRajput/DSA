@@ -301,7 +301,6 @@
 //🔸space complexity: O(n^2)
 
 //🔴Implementation: of adjacecny matrix :
-
 // #include <bits/stdc++.h>
 // using namespace std;
  
@@ -317,8 +316,8 @@
 //         cin >> u >> v;
 //         adjMat[u][v] = 1;
 //         adjMat[v][u] = 1;
-//         // for a directed graph with an edge pointing from u
-//         // to v,we just assign adjMat[u][v] as 1
+//         // for a directed graph with an edge pointing from u to v,
+//         // we just assign adjMat[u][v] as 1
 //     }
  
 //     return 0;
@@ -326,9 +325,8 @@
 
 
 
-//      🔴 adjacency List :
-
-//    In adjacency list we list down all the nodes and then show which nodes are connected to them
+// 🔴 adjacency List :
+// In adjacency list we list down all the nodes and then show which nodes are connected to them
  
 // undirected graph:
 //          [0] ----- [1]
@@ -345,7 +343,6 @@
 
 
 //🔴🔴Implementation: of adjacency list
-
 //🔸🔸 Without Template 
 // #include<iostream>
 // #include<unordered_map>
@@ -627,7 +624,7 @@
 
 //     vector<int> ans[n] ;
 
-//   //answer array willl store all adjacent nodes corresponding on indexes
+//   //answer array will store all adjacent nodes corresponding on indexes
 //     for(int i=0; i<m; i++){         // m = no of edges
 //        int u = edges[i][0] ;
 //        int v = edges[i][1] ;
@@ -649,7 +646,7 @@
 //   for(int i=0; i<n; i++){             // n = no of nodes
 //       adj[i].push_back(i) ;
 
-//       //entering neighbours 
+//       // entering neighbours 
 //       for(int j=0; j<ans[i].size(); j++) {
 //          adj[i].push_back(ans[i][j]) ;
 //       }
