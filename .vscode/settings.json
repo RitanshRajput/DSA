@@ -5,6 +5,9 @@
     "functional": "cpp",
     "vector": "cpp",
     "iostream": "cpp",
-    "unordered_map": "cpp"
+    "unordered_map": "cpp",
+    "array": "cpp",
+    "deque": "cpp",
+    "initializer_list": "cpp"
   }
 }
