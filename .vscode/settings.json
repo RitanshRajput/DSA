@@ -8,6 +8,7 @@
     "unordered_map": "cpp",
     "array": "cpp",
     "deque": "cpp",
-    "initializer_list": "cpp"
+    "initializer_list": "cpp",
+    "limits": "cpp"
   }
 }
