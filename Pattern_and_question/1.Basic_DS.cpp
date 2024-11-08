@@ -287,6 +287,60 @@
 //     }
 // };
 
+// 🔴 Group Anagrams : https://leetcode.com/problems/group-anagrams/
+
+// class Solution {
+// public:
+//     vector<vector<string>> groupAnagrams(vector<string>& strs) {
+//         vector<vector<string>> ans;
+//         unordered_map<string, int> um;
+//         int id = 0;
+
+//         for (string s: strs) {
+//             string k = s;
+//             sort(k.begin(), k.end());
+
+//             if (um.find(k) != um.end()){
+//                 ans[um[k]].push_back(s);
+//             }
+//             else {
+//                 um[k] = id++;
+//                 ans.push_back({s});
+//             }
+//         }
+
+//         return ans;
+//     }
+// };
+
+// 🔴 Longest Palindromic Substring:   https://leetcode.com/problems/longest-palindromic-substring/
+// class Solution {
+// public:
+//     string checkPalindrome(string s, int left, int right){
+//         while(left >= 0 && right <s.length() && s[left] == s[right]){
+//             left--;
+//             right++;
+//         }
+
+//         return s.substr(left+1, right-left-1);
+//     }
+
+//     string longestPalindrome(string s) {
+//        string longestAns = "";
+
+//         for(int i=0; i<s.length(); i++){
+//             string odd = checkPalindrome(s, i, i);
+//             string even = checkPalindrome(s, i, i+1);
+
+//             if(odd.length() > longestAns.length()) longestAns = odd;
+//             if(even.length() > longestAns.length()) longestAns = even;
+
+//         }
+
+//         return longestAns;
+//     }
+// };
+
 //                          ❌❌❌❌❌ LINKEDIN LIST ❌❌❌❌❌
 // 🔥 EASY : 🔥🔥🔥🔥
 // 🔥 MEDIUM : 🔥🔥🔥🔥
