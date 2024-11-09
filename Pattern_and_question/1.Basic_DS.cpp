@@ -343,4 +343,205 @@
 
 //                          ❌❌❌❌❌ LINKEDIN LIST ❌❌❌❌❌
 // 🔥 EASY : 🔥🔥🔥🔥
+
+// 🔴🔴 Reverse the Linked List : https://leetcode.com/problems/reverse-linked-list/
+//  class Solution {
+//  public:
+// 🔴 Recursive Intuition:
+//     ListNode* solveRecursively(ListNode* prev, ListNode* curr){
+//         if(curr == NULL) return prev;
+
+//        ListNode* nxt = curr->next;
+//        curr->next = prev;
+
+//        return solveRecursively(curr, nxt);
+//    }
+//    ListNode* reverseList(ListNode* head) {
+//        return solveRecursively(NULL, head);
+//     }
+
+// 🔴Interative Intuition :
+//      ListNode* reverseList(ListNode* head) {
+//          ListNode* prev = NULL;
+//          ListNode* curr = head;
+//          ListNode* nxt = head;
+
+//         while(nxt != NULL && curr != NULL){
+//             nxt = curr->next;
+//             curr->next = prev;
+//             prev = curr;
+//             curr = nxt;
+//         }
+
+//         return prev;
+//     }
+// };
+
+// 🔴🔴 Linked List Cycle:  https://leetcode.com/problems/linked-list-cycle/
+
+// class Solution {
+// public:
+//     bool hasCycle(ListNode *head) {
+//         ListNode* fast = head;
+//         ListNode* slow = head;
+
+//         while(fast != NULL && fast->next != NULL){
+
+//             fast = fast->next->next;
+//             slow = slow->next;
+
+//             if(fast == slow) return true;
+//         }
+
+//         return false;
+//     }
+// };
+
+// 🔴🔴  Merge Two Sorted Linked List:  https://leetcode.com/problems/merge-two-sorted-lists/
+
+// 🔴Interative Intuition :
+// class Solution {
+// public:
+//     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+
+//         ListNode resultList(-1);
+//         ListNode* curr = &resultList;
+
+//         while(list1 != NULL && list2 != NULL){
+//             if(list1->val < list2->val){
+//                 curr->next = list1;
+//                 list1 = list1->next;
+//             }
+//             else{
+//                 curr->next = list2;
+//                 list2 = list2->next;
+//             }
+//             curr = curr->next;
+//         }
+
+//         if(list1 != NULL) curr->next = list1;
+//         else curr->next = list2;
+
+//         return resultList.next ;
+//     }
+// };
+
+// 🔴 Recursive Intuition:
+// Time Complexity : O(N+M)
+// Space Complexity : O(N)
+// class Solution {
+// public:
+//     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+//         if (list1 == NULL) return list2;
+//         if (list2 == NULL) return list1;
+
+//         if (list1->val < list2->val) {
+//             list1->next = mergeTwoLists(list1->next, list2);
+//             return list1;
+//         } else {
+//             list2->next = mergeTwoLists(list1, list2->next);
+//             return list2;
+//         }
+//     }
+// };
+
 // 🔥 MEDIUM : 🔥🔥🔥🔥
+
+// 🔴🔴 Remove Nth node from the End of List : https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+
+// class Solution {
+// public:
+// //🔴Intuition 3: (Recursive)
+//  ListNode* solve(ListNode* head, int n, int& count) {
+//         if (head == NULL) return NULL;
+//         head->next = solve(head->next, n, count);
+//         count++;
+//         if (count == n)  return head->next;
+
+//         return head;
+//     }
+
+//     ListNode* removeNthFromEnd(ListNode* head, int n) {
+//         int count = 0;
+//         ListNode* newHead = solve(head, n, count);
+//         return newHead == NULL ? head->next : newHead;
+//     }
+
+// //🔴Intuition 2: Iterative (Two Pointer)
+//       ListNode* removeNthFromEnd(ListNode* head, int n) {
+//         ListNode* first = head;
+//         ListNode* second = head;
+//         ListNode* temp = head;
+
+//         for(int i=0; i<n; i++){
+//             first = first->next;
+//         }
+
+//         if(first == NULL) return head->next;
+
+//         while(first->next != NULL){
+//             second = second->next;
+//             first = first->next;
+//         }
+
+//         ListNode* removeNode = second->next;
+//         second->next = second->next->next;
+
+//         delete removeNode;
+
+//         return head;
+//      }
+
+// // 🔴Intuition 1: (Iteratvie)
+//     ListNode* removeNthFromEnd(ListNode* head, int n) {
+//         int size = 0;
+//         ListNode* curr = head;
+
+//         while(curr != NULL){
+//             size++;
+//             curr = curr->next;
+//         }
+
+//         if(size == n ) return head->next;
+//         size = size- n;
+//         curr = head;
+
+//         while(size > 1) {
+//             curr = curr->next;
+//             size--;
+//         }
+//         curr->next = curr->next->next;
+
+//         return head;
+//     }
+// };
+
+// 🔴🔴 Add Two Numbers: https://leetcode.com/problems/add-two-numbers/
+
+// class Solution {
+// public:
+//     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+//         ListNode* dummy = new ListNode(0);
+//         ListNode* curr = dummy;
+//         int carry = 0;
+
+//         while(l1!=NULL || l2!=NULL || carry!=0)
+//         {
+//             int sum = carry;
+//             if(l1!=NULL)
+//             {
+//                 sum+=l1->val;
+//                 l1 = l1->next;
+//             }
+//             if(l2!=NULL)
+//             {
+//                 sum+= l2->val;
+//                 l2 = l2->next;
+//             }
+//             carry = sum/10;
+//             curr->next = new ListNode(sum%10);
+//             curr = curr->next;
+//         }
+//         return dummy->next;
+//     }
+// };
